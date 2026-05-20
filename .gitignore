@@ -1,0 +1,12 @@
+# Personal vocabulary data backups (created by Settings -> Export JSON)
+english-trainer-*.json
+
+# Claude Code worktree & job state
+.claude/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
