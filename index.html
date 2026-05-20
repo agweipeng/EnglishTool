@@ -18,6 +18,7 @@
     <button class="tab" data-view="stats">Stats</button>
     <button class="tab" data-view="settings">Settings</button>
   </nav>
+  <button class="sync-indicator hidden" id="syncIndicator" title="Sync status">●</button>
   <div class="streak" id="streakBadge">🔥 0</div>
 </header>
 
@@ -274,7 +275,29 @@
     </div>
 
     <div class="setting-block">
-      <h3>Sync Between Devices</h3>
+      <h3>Cloud Sync (GitHub Gist) ☁️</h3>
+      <p class="hint">Automatic two-way sync between devices via a private GitHub Gist. Create a fine-grained token at <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">github.com/settings/tokens</a> with permission <b>Gists: Read &amp; write</b> (nothing else needed).</p>
+      <div id="syncDisconnected">
+        <label>GitHub Token
+          <input type="password" id="gistToken" placeholder="github_pat_..." autocomplete="off" />
+        </label>
+        <div class="form-actions">
+          <button class="btn-primary" id="syncConnectBtn">🔗 Connect</button>
+        </div>
+        <p class="hint">The token is stored only on this device. With <b>Gists</b> scope it can only read/write your gists — nothing else in your GitHub account.</p>
+      </div>
+      <div id="syncConnected" class="hidden">
+        <p>Connected as <b id="syncUser">—</b>. Gist: <code id="syncGistId">—</code></p>
+        <p class="hint">Last synced: <span id="syncLastTime">—</span></p>
+        <div class="form-actions">
+          <button class="btn-primary" id="syncNowBtn">🔄 Sync Now</button>
+          <button class="btn-ghost" id="syncDisconnectBtn">Disconnect</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="setting-block">
+      <h3>Sync Between Devices (Manual Code)</h3>
       <p class="hint">Generate a sync code on one device, paste it on another. Useful for moving between phone and laptop without setting up cloud accounts.</p>
       <div class="form-actions">
         <button class="btn-primary" id="syncGenBtn">📋 Generate &amp; Copy Sync Code</button>
