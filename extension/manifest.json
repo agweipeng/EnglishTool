@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "English Trainer Quick-Capture",
+  "version": "0.1.0",
+  "description": "Highlight any English word on a webpage and send it to your English Trainer library.",
+  "permissions": ["contextMenus", "activeTab", "storage"],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_title": "English Trainer Quick-Capture",
+    "default_popup": "popup.html"
+  },
+  "options_page": "popup.html"
+}

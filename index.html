@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>English Vocabulary & Listening Trainer</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">📚 English Trainer</div>
+  <nav class="tabs">
+    <button class="tab active" data-view="learn">Learn</button>
+    <button class="tab" data-view="add">Add Word</button>
+    <button class="tab" data-view="library">Library</button>
+    <button class="tab" data-view="drill">Listening Drill</button>
+    <button class="tab" data-view="reading">Reading</button>
+    <button class="tab" data-view="stats">Stats</button>
+    <button class="tab" data-view="settings">Settings</button>
+  </nav>
+  <div class="streak" id="streakBadge">🔥 0</div>
+</header>
+
+<main id="app">
+
+  <!-- ============ LEARN VIEW ============ -->
+  <section class="view active" id="view-learn">
+    <div class="learn-header">
+      <div class="mode-switch">
+        <label>Mode:</label>
+        <select id="learnMode">
+          <option value="mixed">🎲 Mixed (recommended)</option>
+          <option value="meaning">📖 Meaning Recall</option>
+          <option value="listening">👂 Listening MCQ</option>
+          <option value="spelling">🔤 Spelling (Dictation)</option>
+          <option value="cloze">🎯 Sentence Cloze</option>
+          <option value="context">🧠 Context Card</option>
+        </select>
+      </div>
+      <div class="session-info">
+        <span id="sessionProgress">0 / 0</span>
+        <button id="endSession" class="btn-ghost">End Session</button>
+      </div>
+    </div>
+
+    <div id="emptyLearn" class="empty-state">
+      <h2>No words to learn yet 🌱</h2>
+      <p>Add some words first, or all your words are mastered.</p>
+      <button class="btn-primary" data-goto="add">+ Add a Word</button>
+    </div>
+
+    <div id="flashcard" class="flashcard hidden">
+      <div class="card-top">
+        <span class="level-pill" id="cardLevel">Level 0/5</span>
+        <div class="card-tts">
+          <button class="icon-btn" id="ttsBtn" title="Play audio">🔊</button>
+          <button class="icon-btn" id="ttsSlowBtn" title="Play slow">🐢</button>
+        </div>
+      </div>
+      <div class="card-body" id="cardBody"></div>
+      <div class="card-actions" id="cardActions"></div>
+    </div>
+  </section>
+
+  <!-- ============ ADD WORD VIEW ============ -->
+  <section class="view" id="view-add">
+    <h2>Add a New Word</h2>
+    <div class="form-grid">
+      <label>Word
+        <input type="text" id="newWord" placeholder="e.g. ephemeral" autocomplete="off" />
+      </label>
+      <label>Phonetic (optional)
+        <input type="text" id="newPhonetic" placeholder="/ɪˈfɛmərəl/" />
+      </label>
+      <div class="form-actions">
+        <button class="btn-primary" id="autoFillBtn">✨ Auto-fill from Dictionary</button>
+        <button class="btn-ghost" id="translateBtn">🌐 Translate to Chinese</button>
+      </div>
+      <label>English Definition
+        <textarea id="defEN" rows="2" placeholder="Lasting for a very short time..."></textarea>
+      </label>
+      <label>Chinese Meaning (中文释义)
+        <textarea id="defCN" rows="2" placeholder="短暂的；瞬息的"></textarea>
+      </label>
+
+      <div class="examples-section">
+        <div class="examples-header">
+          <h3>Example Sentences</h3>
+          <button class="btn-ghost" id="addExampleBtn">+ Add Example</button>
+        </div>
+        <div id="examplesList"></div>
+      </div>
+
+      <div id="enrichmentArea" class="enrichment-area"></div>
+
+      <label>Tags (comma separated)
+        <input type="text" id="newTags" placeholder="IELTS, movie, business" />
+      </label>
+
+      <div class="form-actions">
+        <button class="btn-primary" id="saveWordBtn">💾 Save Word</button>
+        <button class="btn-ghost" id="clearFormBtn">Clear</button>
+      </div>
+
+      <div class="bulk-import">
+        <h3>Extract from Transcript / Article</h3>
+        <p class="hint">Paste any English text below — the tool picks the uncommon vocabulary (skipping stopwords and words you already have).</p>
+        <textarea id="transcriptInput" rows="5" placeholder="Paste a paragraph, podcast transcript, article excerpt..."></textarea>
+        <button class="btn-ghost" id="transcriptExtractBtn">🔍 Extract Uncommon Words → Bulk Import</button>
+      </div>
+
+      <div class="bulk-import">
+        <h3>Or Bulk Import</h3>
+        <p class="hint">Paste one word per line. Auto-fill (definition + translation + synonyms + family + collocations) runs for each.</p>
+        <textarea id="bulkInput" rows="4" placeholder="ephemeral&#10;ubiquitous&#10;serendipity"></textarea>
+        <button class="btn-ghost" id="bulkImportBtn">📥 Import All</button>
+        <span id="bulkStatus" class="hint"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LIBRARY VIEW ============ -->
+  <section class="view" id="view-library">
+    <div class="library-header">
+      <h2>Word Library</h2>
+      <div class="library-filters">
+        <input type="search" id="librarySearch" placeholder="🔍 Search words..." />
+        <select id="libraryFilter">
+          <option value="all">All</option>
+          <option value="learning">Learning</option>
+          <option value="archived">Archived ⭐</option>
+          <option value="due">Due Today</option>
+          <option value="leech">Stubborn Words 🐛</option>
+        </select>
+      </div>
+    </div>
+    <div id="libraryList" class="library-list"></div>
+  </section>
+
+  <!-- ============ DRILL VIEW ============ -->
+  <section class="view" id="view-drill">
+    <h2>Listening Drill 🎧</h2>
+    <p class="hint">Play sentences back-to-back. Great for passive listening on commutes.</p>
+    <div class="drill-controls">
+      <label>Source:
+        <select id="drillSource">
+          <option value="all">All words</option>
+          <option value="learning">Learning only</option>
+          <option value="archived">Archived only</option>
+          <option value="due">Due today</option>
+        </select>
+      </label>
+      <label>Speed:
+        <select id="drillSpeed">
+          <option value="0.7">0.7x (slow)</option>
+          <option value="0.85">0.85x</option>
+          <option value="1" selected>1x (normal)</option>
+          <option value="1.15">1.15x</option>
+          <option value="1.3">1.3x (fast)</option>
+        </select>
+      </label>
+      <label>Pause (sec):
+        <input type="number" id="drillPause" value="1.5" min="0" max="10" step="0.5" />
+      </label>
+      <label>Repeat each:
+        <input type="number" id="drillRepeat" value="2" min="1" max="5" />
+      </label>
+      <label class="checkbox"><input type="checkbox" id="drillIncludeWord" checked /> Say word first</label>
+      <label class="checkbox"><input type="checkbox" id="drillShowCN" /> Show Chinese</label>
+    </div>
+    <div class="drill-actions">
+      <button class="btn-primary" id="drillStartBtn">▶ Start Drill</button>
+      <button class="btn-ghost" id="drillStopBtn">⏹ Stop</button>
+    </div>
+    <div class="drill-display" id="drillDisplay">
+      <div class="drill-word" id="drillWord">—</div>
+      <div class="drill-sentence" id="drillSentence"></div>
+      <div class="drill-cn" id="drillCN"></div>
+      <div class="drill-progress" id="drillProgress"></div>
+    </div>
+  </section>
+
+  <!-- ============ READING VIEW ============ -->
+  <section class="view" id="view-reading">
+    <h2>Spaced Reading 📖</h2>
+    <p class="hint">A reading passage built from your recent words' example sentences. Click any highlighted word to hear it.</p>
+    <div class="reading-controls">
+      <label>Source:
+        <select id="readingSource">
+          <option value="recent">Recent words</option>
+          <option value="due">Due today</option>
+          <option value="leech">Stubborn words 🐛</option>
+        </select>
+      </label>
+      <label>How many:
+        <select id="readingCount">
+          <option value="6">6</option>
+          <option value="12" selected>12</option>
+          <option value="20">20</option>
+        </select>
+      </label>
+      <label>Speed:
+        <select id="readingSpeed">
+          <option value="0.85">0.85x</option>
+          <option value="1" selected>1x</option>
+          <option value="1.15">1.15x</option>
+        </select>
+      </label>
+      <button class="btn-ghost" id="readingRefresh">🔄 Refresh</button>
+      <button class="btn-primary" id="readingPlayAll">▶ Play All</button>
+      <button class="btn-ghost" id="readingStop">⏹ Stop</button>
+    </div>
+    <div id="readingPassage" class="reading-passage"></div>
+  </section>
+
+  <!-- ============ STATS VIEW ============ -->
+  <section class="view" id="view-stats">
+    <h2>Your Progress</h2>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Total Words</div></div>
+      <div class="stat-card"><div class="stat-num" id="statLearning">0</div><div class="stat-label">Learning</div></div>
+      <div class="stat-card"><div class="stat-num" id="statArchived">0</div><div class="stat-label">Mastered ⭐</div></div>
+      <div class="stat-card"><div class="stat-num" id="statDue">0</div><div class="stat-label">Due Today</div></div>
+      <div class="stat-card"><div class="stat-num" id="statStreak">0</div><div class="stat-label">Day Streak 🔥</div></div>
+      <div class="stat-card"><div class="stat-num" id="statReviewed">0</div><div class="stat-label">Today's Reviews</div></div>
+      <div class="stat-card"><div class="stat-num" id="statLeeches">0</div><div class="stat-label">Stubborn 🐛</div></div>
+    </div>
+
+    <h3>Activity Heatmap (last 12 weeks)</h3>
+    <div id="heatmap" class="heatmap"></div>
+
+    <h3>Mastery Distribution (Level 0–5)</h3>
+    <canvas id="levelChart" width="600" height="180"></canvas>
+  </section>
+
+  <!-- ============ SETTINGS VIEW ============ -->
+  <section class="view" id="view-settings">
+    <h2>Settings</h2>
+
+    <div class="setting-block">
+      <h3>Voice</h3>
+      <label>TTS Voice:
+        <select id="voiceSelect"></select>
+      </label>
+      <label>Speech rate (normal): <span id="ttsRateVal">1.0</span>
+        <input type="range" id="ttsRate" min="0.5" max="1.5" step="0.05" value="1" />
+      </label>
+      <button class="btn-ghost" id="ttsTestBtn">🔊 Test voice</button>
+    </div>
+
+    <div class="setting-block">
+      <h3>Shadowing Practice 🎙️</h3>
+      <p class="hint">Record your voice and compare to native TTS.</p>
+      <label>Reference word/sentence:
+        <input type="text" id="shadowText" placeholder="Type or pick a word..." />
+      </label>
+      <div class="form-actions">
+        <button class="btn-ghost" id="shadowPlayRef">▶ Play Reference</button>
+        <button class="btn-primary" id="shadowStart">● Record</button>
+        <button class="btn-ghost" id="shadowStop" disabled>⏹ Stop</button>
+      </div>
+      <div id="shadowPlayback"></div>
+    </div>
+
+    <div class="setting-block">
+      <h3>Backup & Export</h3>
+      <div class="form-actions">
+        <button class="btn-ghost" id="exportJsonBtn">⬇ Export JSON</button>
+        <button class="btn-ghost" id="exportAnkiBtn">⬇ Export Anki CSV</button>
+        <label class="file-label btn-ghost">⬆ Import JSON
+          <input type="file" id="importJsonInput" accept="application/json" hidden />
+        </label>
+      </div>
+    </div>
+
+    <div class="setting-block">
+      <h3>Sync Between Devices</h3>
+      <p class="hint">Generate a sync code on one device, paste it on another. Useful for moving between phone and laptop without setting up cloud accounts.</p>
+      <div class="form-actions">
+        <button class="btn-primary" id="syncGenBtn">📋 Generate &amp; Copy Sync Code</button>
+      </div>
+      <textarea id="syncCodeOut" rows="3" placeholder="Generated code appears here..." readonly></textarea>
+      <p class="hint" style="margin-top:10px">Paste a code below to import on another device:</p>
+      <textarea id="syncCodeIn" rows="3" placeholder="Paste sync code here..."></textarea>
+      <div class="form-actions">
+        <button class="btn-ghost" id="syncApplyBtn">⬆ Apply Sync Code</button>
+      </div>
+      <p class="hint" style="margin-top:10px">
+        <b>True cloud sync</b> (auto-sync across devices) requires a backend like
+        Firebase or Supabase + sign-in. Not built in — the project is fully client-side.
+        See <code>README.md</code> for a setup outline if you want to add it.
+      </p>
+    </div>
+
+    <div class="setting-block">
+      <h3>Theme</h3>
+      <button class="btn-ghost" id="themeToggle">🌙 Toggle Dark/Light</button>
+    </div>
+
+    <div class="setting-block danger">
+      <h3>Danger Zone</h3>
+      <button class="btn-danger" id="resetAllBtn">⚠ Reset All Data</button>
+    </div>
+  </section>
+
+</main>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
