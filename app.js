@@ -14,6 +14,15 @@ const DAY_MS = 86400000;
 const SESSION_SIZE = 15;             // max cards per session
 const DICT_API = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
 const TRANSLATE_API = 'https://api.mymemory.translated.net/get';
+const DATAMUSE_API = 'https://api.datamuse.com/words';
+
+// Leech: 4+ wrong, or 6+ attempts with >40% wrong rate
+const LEECH_MIN_WRONG = 4;
+const LEECH_MIN_TOTAL = 6;
+const LEECH_WRONG_RATIO = 0.4;
+
+// ~80 most common stopwords for transcript extraction
+const STOPWORDS = new Set(('a an the and or but if then so because while when where what who whom whose why how that this these those is am are was were be been being have has had do does did doing will would shall should can could may might must of in on at to from for with by as into onto over under about against between through during before after above below up down out off near i you he she it we they me him her us them my your his its our their mine yours hers ours theirs not no yes than too very just only also even still yet already always never very much more most few less least some any all each every').split(' '));
 
 // ============ State ============
 let state = loadState();
@@ -137,7 +146,8 @@ function priorityScore(word) {
   const levelWeight = (MAX_LEVEL - word.level) * 10;
   const wrongWeight = (word.wrongCount || 0) * 2;
   const newBonus = (word.rightCount === 0 && word.wrongCount === 0) ? 15 : 0;
-  return levelWeight + overdueDays + wrongWeight + newBonus + Math.random() * 2;
+  const leechBoost = isLeech(word) ? 25 : 0;
+  return levelWeight + overdueDays + wrongWeight + newBonus + leechBoost + Math.random() * 2;
 }
 
 function pickSessionWords(limit = SESSION_SIZE) {
@@ -162,6 +172,7 @@ function showView(name) {
   if (name === 'learn') startSession();
   if (name === 'library') renderLibrary();
   if (name === 'stats') renderStats();
+  if (name === 'reading') renderReading();
 }
 
 // ============ TTS ============
@@ -242,6 +253,73 @@ async function translateToCN(text) {
   }
 }
 
+// ----- Datamuse enrichment (free, no API key) -----
+
+async function datamuseQuery(params) {
+  try {
+    const qs = new URLSearchParams(params).toString();
+    const r = await fetch(`${DATAMUSE_API}?${qs}`);
+    if (!r.ok) return [];
+    const data = await r.json();
+    return Array.isArray(data) ? data.map(x => x.word).filter(Boolean) : [];
+  } catch (e) {
+    console.warn('Datamuse failed', e);
+    return [];
+  }
+}
+
+function fetchSynonyms(word) { return datamuseQuery({ rel_syn: word, max: 6 }); }
+function fetchAntonyms(word) { return datamuseQuery({ rel_ant: word, max: 6 }); }
+
+async function fetchCollocations(word) {
+  const [before, after] = await Promise.all([
+    datamuseQuery({ rel_bgb: word, max: 4 }),
+    datamuseQuery({ rel_bga: word, max: 4 }),
+  ]);
+  return {
+    before: before.map(w => `${w} ${word}`),
+    after: after.map(w => `${word} ${w}`),
+  };
+}
+
+async function fetchWordFamily(word) {
+  // Derivationally related forms (rel_der) gives noun/verb/adj variants.
+  // Fallback to prefix search if rel_der returns nothing.
+  let words = await datamuseQuery({ rel_der: word, max: 8 });
+  if (words.length === 0 && word.length >= 4) {
+    const stem = word.slice(0, Math.max(4, word.length - 2));
+    words = await datamuseQuery({ sp: stem + '*', max: 12 });
+    words = words.filter(w => w !== word).slice(0, 8);
+  }
+  return words;
+}
+
+async function enrichWord(word) {
+  const [synonyms, antonyms, family, coll] = await Promise.all([
+    fetchSynonyms(word),
+    fetchAntonyms(word),
+    fetchWordFamily(word),
+    fetchCollocations(word),
+  ]);
+  return {
+    synonyms,
+    antonyms,
+    family,
+    collocations: [...coll.before, ...coll.after],
+  };
+}
+
+// ----- Leech detection -----
+
+function isLeech(word) {
+  const wrong = word.wrongCount || 0;
+  const right = word.rightCount || 0;
+  const total = wrong + right;
+  if (wrong >= LEECH_MIN_WRONG) return true;
+  if (total >= LEECH_MIN_TOTAL && wrong / total > LEECH_WRONG_RATIO) return true;
+  return false;
+}
+
 // ============ Add View ============
 function renderExamples(list = []) {
   const wrap = document.getElementById('examplesList');
@@ -288,7 +366,44 @@ async function autoFill() {
   }
   while (translated.length < 2) translated.push({ en: '', cn: '' });
   renderExamples(translated);
+  toast('Fetching synonyms, family, collocations...');
+  const enrichment = await enrichWord(word);
+  renderEnrichment(enrichment);
   toast('Auto-fill complete ✓');
+}
+
+function renderEnrichment(e) {
+  const wrap = document.getElementById('enrichmentArea');
+  if (!wrap) return;
+  wrap.dataset.synonyms = (e.synonyms || []).join('|');
+  wrap.dataset.antonyms = (e.antonyms || []).join('|');
+  wrap.dataset.family = (e.family || []).join('|');
+  wrap.dataset.collocations = (e.collocations || []).join('|');
+  wrap.innerHTML = `
+    ${chipBlock('Synonyms', e.synonyms)}
+    ${chipBlock('Antonyms', e.antonyms)}
+    ${chipBlock('Word Family', e.family)}
+    ${chipBlock('Collocations', e.collocations)}
+  `;
+}
+
+function chipBlock(label, list) {
+  if (!list || list.length === 0) return '';
+  return `<div class="chip-block">
+    <span class="chip-label">${label}:</span>
+    ${list.map(x => `<span class="chip">${escapeHTML(x)}</span>`).join('')}
+  </div>`;
+}
+
+function collectEnrichment() {
+  const wrap = document.getElementById('enrichmentArea');
+  const get = k => (wrap?.dataset[k] || '').split('|').filter(Boolean);
+  return {
+    synonyms: get('synonyms'),
+    antonyms: get('antonyms'),
+    family: get('family'),
+    collocations: get('collocations'),
+  };
 }
 
 async function translateDefOnly() {
@@ -304,11 +419,17 @@ function clearForm() {
     document.getElementById(id).value = '';
   });
   renderExamples([]);
+  const enr = document.getElementById('enrichmentArea');
+  if (enr) {
+    enr.innerHTML = '';
+    ['synonyms', 'antonyms', 'family', 'collocations'].forEach(k => delete enr.dataset[k]);
+  }
 }
 
 function saveWord() {
   const text = document.getElementById('newWord').value.trim();
   if (!text) { toast('Word is required'); return; }
+  const enrichment = collectEnrichment();
   const existing = state.words.find(w => w.text.toLowerCase() === text.toLowerCase());
   if (existing) {
     if (!confirm(`"${text}" already exists. Update it?`)) return;
@@ -318,6 +439,7 @@ function saveWord() {
       defCN: document.getElementById('defCN').value.trim(),
       examples: collectExamples(),
       tags: document.getElementById('newTags').value.split(',').map(s => s.trim()).filter(Boolean),
+      ...enrichment,
     });
   } else {
     state.words.push({
@@ -328,6 +450,10 @@ function saveWord() {
       defCN: document.getElementById('defCN').value.trim(),
       examples: collectExamples(),
       tags: document.getElementById('newTags').value.split(',').map(s => s.trim()).filter(Boolean),
+      synonyms: enrichment.synonyms,
+      antonyms: enrichment.antonyms,
+      family: enrichment.family,
+      collocations: enrichment.collocations,
       level: 0,
       ease: DEFAULT_EASE,
       interval: 1,
@@ -362,6 +488,7 @@ async function bulkImport() {
         examples.push({ en: ex.en, cn });
       }
     }
+    const enrichment = await enrichWord(w);
     state.words.push({
       id: uid(),
       text: w,
@@ -370,6 +497,10 @@ async function bulkImport() {
       defCN,
       examples,
       tags: [],
+      synonyms: enrichment.synonyms,
+      antonyms: enrichment.antonyms,
+      family: enrichment.family,
+      collocations: enrichment.collocations,
       level: 0, ease: DEFAULT_EASE, interval: 1,
       nextReview: nowMs(), rightCount: 0, wrongCount: 0,
       createdAt: new Date().toISOString(), archivedAt: null,
@@ -379,6 +510,30 @@ async function bulkImport() {
   }
   status.textContent = `✓ Imported ${added} new word(s)`;
   document.getElementById('bulkInput').value = '';
+}
+
+// Extract uncommon vocabulary from a pasted transcript paragraph.
+// Filters out stopwords, words already in library, words shorter than 3 chars,
+// and proper nouns (best-effort: words that only appear capitalized).
+function extractFromTranscript() {
+  const raw = document.getElementById('transcriptInput').value.trim();
+  if (!raw) { toast('Paste some text first'); return; }
+  const tokens = raw.toLowerCase().match(/[a-z][a-z'-]{2,}/g) || [];
+  const existing = new Set(state.words.map(w => w.text.toLowerCase()));
+  const freq = new Map();
+  tokens.forEach(t => {
+    if (STOPWORDS.has(t)) return;
+    if (existing.has(t)) return;
+    if (t.length < 4) return;
+    freq.set(t, (freq.get(t) || 0) + 1);
+  });
+  const ranked = [...freq.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 30)
+    .map(([w]) => w);
+  if (ranked.length === 0) { toast('No new words found'); return; }
+  document.getElementById('bulkInput').value = ranked.join('\n');
+  toast(`Found ${ranked.length} new word(s). Click "Import All" to add.`);
 }
 
 // ============ Learn Session ============
@@ -434,9 +589,12 @@ function showCard() {
 }
 
 function randomMode(word) {
-  const modes = ['meaning', 'listening', 'spelling', 'cloze'];
+  const modes = ['meaning', 'listening', 'spelling', 'cloze', 'context'];
   const hasExamples = word.examples && word.examples.length > 0;
-  const pool = hasExamples ? modes : modes.filter(m => m !== 'cloze');
+  const otherExamples = state.words.some(w => w.id !== word.id && (w.examples || []).some(e => e.en));
+  let pool = modes;
+  if (!hasExamples) pool = pool.filter(m => m !== 'cloze' && m !== 'context');
+  if (!otherExamples) pool = pool.filter(m => m !== 'context');
   return pool[Math.floor(Math.random() * pool.length)];
 }
 
@@ -450,6 +608,7 @@ function renderCard(word, mode) {
   else if (mode === 'listening') renderListeningCard(word, body, actions);
   else if (mode === 'spelling') renderSpellingCard(word, body, actions);
   else if (mode === 'cloze') renderClozeCard(word, body, actions);
+  else if (mode === 'context') renderContextCard(word, body, actions);
 }
 
 function ratingButtons(word) {
@@ -494,6 +653,10 @@ function renderMeaningCard(word, body, actions) {
           ${ex.cn ? `<div class="cn">${escapeHTML(ex.cn)}</div>` : ''}
         </div>
       `).join('')}
+      ${chipBlock('Synonyms', word.synonyms)}
+      ${chipBlock('Antonyms', word.antonyms)}
+      ${chipBlock('Word Family', word.family)}
+      ${chipBlock('Collocations', word.collocations)}
     `;
     speak(word.text);
     actions.innerHTML = ratingButtons(word);
@@ -611,6 +774,56 @@ function renderClozeCard(word, body, actions) {
   input.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
 }
 
+// --- Context Card: which sentence does this word belong in? ---
+function renderContextCard(word, body, actions) {
+  const ownEx = (word.examples || []).find(e => e.en);
+  if (!ownEx) return renderMeaningCard(word, body, actions);
+  const escWord = w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  // Build distractor sentences from OTHER words; blank out their key word
+  const otherSentences = state.words
+    .filter(w => w.id !== word.id)
+    .flatMap(w => (w.examples || [])
+      .filter(e => e.en)
+      .map(e => ({
+        text: e.en.replace(new RegExp('\\b' + escWord(w.text) + '\\w*', 'i'), '_____'),
+        cn: e.cn,
+      })))
+    .filter(s => s.text.includes('_____'));
+  const distractors = pickRandom(otherSentences, 2);
+  if (distractors.length < 2) return renderMeaningCard(word, body, actions);
+  const correctSentence = {
+    text: ownEx.en.replace(new RegExp('\\b' + escWord(word.text) + '\\w*', 'i'), '_____'),
+    cn: ownEx.cn,
+    correct: true,
+  };
+  const options = shuffle([correctSentence, ...distractors.map(d => ({ ...d, correct: false }))]);
+  body.innerHTML = `
+    <div class="word-display">${escapeHTML(word.text)}</div>
+    <div class="phonetic">${escapeHTML(word.phonetic || '')}</div>
+    <div class="phonetic" style="margin-top:6px">🎯 Which sentence does this word fit?</div>
+    <div class="mcq-options" style="margin-top:14px"></div>
+  `;
+  const optsEl = body.querySelector('.mcq-options');
+  options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'mcq-option';
+    btn.innerHTML = `<div>${escapeHTML(opt.text)}</div>${opt.cn ? `<div class="cn" style="margin-top:6px;color:var(--text-muted);font-size:13px">${escapeHTML(opt.cn)}</div>` : ''}`;
+    btn.addEventListener('click', () => {
+      optsEl.querySelectorAll('.mcq-option').forEach(b => b.disabled = true);
+      const correctIdx = options.findIndex(o => o.correct);
+      optsEl.children[correctIdx].classList.add('correct');
+      if (!opt.correct) btn.classList.add('wrong');
+      speak(word.text);
+      const head = opt.correct
+        ? `<div class="feedback ok" style="width:100%">✓ Correct</div>`
+        : `<div class="feedback bad" style="width:100%">✗ Right answer highlighted</div>`;
+      actions.innerHTML = head + ratingButtons(word);
+      attachRating(actions, word);
+    });
+    optsEl.appendChild(btn);
+  });
+}
+
 // ============ Library ============
 function renderLibrary() {
   const search = (document.getElementById('librarySearch').value || '').toLowerCase();
@@ -621,6 +834,7 @@ function renderLibrary() {
   if (filter === 'learning') items = items.filter(w => !w.archivedAt);
   else if (filter === 'archived') items = items.filter(w => w.archivedAt);
   else if (filter === 'due') items = items.filter(w => !w.archivedAt && (w.nextReview || 0) <= nowMs());
+  else if (filter === 'leech') items = items.filter(w => !w.archivedAt && isLeech(w));
   if (search) items = items.filter(w =>
     w.text.toLowerCase().includes(search)
     || (w.defEN || '').toLowerCase().includes(search)
@@ -635,10 +849,11 @@ function renderLibrary() {
   items.forEach(w => {
     const pct = Math.round((w.level / MAX_LEVEL) * 100);
     const row = document.createElement('div');
-    row.className = 'library-item' + (w.archivedAt ? ' archived' : '');
+    const leech = !w.archivedAt && isLeech(w);
+    row.className = 'library-item' + (w.archivedAt ? ' archived' : '') + (leech ? ' leech' : '');
     row.innerHTML = `
       <div class="word-info">
-        <div class="w">${escapeHTML(w.text)} ${w.archivedAt ? '⭐' : ''}</div>
+        <div class="w">${escapeHTML(w.text)} ${w.archivedAt ? '⭐' : ''}${leech ? ' 🐛' : ''}</div>
         <div class="d">${escapeHTML(w.defCN || w.defEN || '')}</div>
         <div>${(w.tags || []).map(t => `<span class="tag">${escapeHTML(t)}</span>`).join('')}</div>
       </div>
@@ -672,6 +887,12 @@ function handleLibAction(id, act) {
     document.getElementById('defCN').value = w.defCN || '';
     document.getElementById('newTags').value = (w.tags || []).join(', ');
     renderExamples(w.examples || []);
+    renderEnrichment({
+      synonyms: w.synonyms || [],
+      antonyms: w.antonyms || [],
+      family: w.family || [],
+      collocations: w.collocations || [],
+    });
     toast('Editing — save to update');
     return;
   }
@@ -731,18 +952,85 @@ function stopDrill() {
 }
 function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
+// ============ Spaced Reading ============
+// Build a "paragraph" from the user's recent active words using their example sentences,
+// with the target word highlighted. Click any word to hear it, or play the whole passage.
+
+let readingState = null;
+
+function renderReading() {
+  const N = parseInt(document.getElementById('readingCount')?.value || '12', 10);
+  const source = document.getElementById('readingSource')?.value || 'recent';
+  let pool = state.words.filter(w => !w.archivedAt && (w.examples || []).some(e => e.en));
+  if (source === 'leech') pool = pool.filter(isLeech);
+  else if (source === 'due') pool = pool.filter(w => (w.nextReview || 0) <= nowMs());
+  // newest first
+  pool = [...pool].sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+  const picked = pool.slice(0, N);
+  const wrap = document.getElementById('readingPassage');
+  if (!wrap) return;
+  if (picked.length === 0) {
+    wrap.innerHTML = `<p class="hint">No words with example sentences yet. Add some words first.</p>`;
+    readingState = null;
+    return;
+  }
+  readingState = { words: picked };
+  wrap.innerHTML = picked.map((w, idx) => {
+    const ex = w.examples.find(e => e.en);
+    const escWord = w.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const highlighted = escapeHTML(ex.en).replace(
+      new RegExp('\\b' + escWord + '\\w*', 'i'),
+      m => `<mark data-word="${escapeHTML(w.text)}">${m}</mark>`
+    );
+    return `
+      <div class="reading-sentence" data-idx="${idx}">
+        <div class="reading-en">${highlighted}</div>
+        ${ex.cn ? `<div class="reading-cn">${escapeHTML(ex.cn)}</div>` : ''}
+      </div>
+    `;
+  }).join('');
+  // Click any highlight to hear
+  wrap.querySelectorAll('mark').forEach(m => {
+    m.addEventListener('click', () => speak(m.dataset.word));
+  });
+}
+
+async function readingPlayAll() {
+  if (!readingState || !readingState.words.length) return;
+  const speed = parseFloat(document.getElementById('readingSpeed').value);
+  readingState.playing = true;
+  for (let i = 0; i < readingState.words.length; i++) {
+    if (!readingState.playing) break;
+    const w = readingState.words[i];
+    const ex = w.examples.find(e => e.en);
+    const el = document.querySelector(`.reading-sentence[data-idx="${i}"]`);
+    if (el) { el.classList.add('active'); el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+    await speak(ex.en, { rate: speed });
+    if (el) el.classList.remove('active');
+    await wait(400);
+  }
+  readingState.playing = false;
+}
+function readingStop() {
+  if (readingState) readingState.playing = false;
+  speechSynthesis.cancel();
+}
+
 // ============ Stats ============
 function renderStats() {
   const all = state.words;
   const learning = all.filter(w => !w.archivedAt);
   const archived = all.filter(w => w.archivedAt);
   const due = learning.filter(w => (w.nextReview || 0) <= nowMs());
+  const leeches = learning.filter(isLeech);
   document.getElementById('statTotal').textContent = all.length;
   document.getElementById('statLearning').textContent = learning.length;
   document.getElementById('statArchived').textContent = archived.length;
   document.getElementById('statDue').textContent = due.length;
   document.getElementById('statStreak').textContent = state.streak.current;
   document.getElementById('statReviewed').textContent = state.activity[todayKey()] || 0;
+  const leechEl = document.getElementById('statLeeches');
+  if (leechEl) leechEl.textContent = leeches.length;
   renderHeatmap();
   renderLevelChart();
 }
@@ -901,6 +1189,60 @@ function resetAll() {
   showView('learn');
 }
 
+// ============ Sync Code (cross-device paste sync) ============
+// A pragmatic sync without backend: encode state to a compact base64 string
+// the user can copy on one device and paste on another. For true cloud sync
+// (Firebase / Supabase), see the note in Settings.
+
+function generateSyncCode() {
+  try {
+    const json = JSON.stringify(state);
+    const b64 = btoa(unescape(encodeURIComponent(json)));
+    const ta = document.getElementById('syncCodeOut');
+    ta.value = b64;
+    ta.select();
+    navigator.clipboard?.writeText(b64);
+    toast('Sync code copied to clipboard');
+  } catch (e) {
+    toast('Failed to generate code');
+  }
+}
+
+function applySyncCode() {
+  const code = document.getElementById('syncCodeIn').value.trim();
+  if (!code) { toast('Paste a sync code first'); return; }
+  try {
+    const json = decodeURIComponent(escape(atob(code)));
+    const parsed = JSON.parse(json);
+    if (!parsed || !Array.isArray(parsed.words)) throw new Error('bad');
+    if (!confirm(`Replace local data with ${parsed.words.length} words from sync code?`)) return;
+    state = Object.assign(defaultState(), parsed);
+    saveState();
+    applyTheme();
+    document.getElementById('streakBadge').textContent = `🔥 ${state.streak.current || 0}`;
+    toast('Synced from code ✓');
+    showView('library');
+  } catch (e) {
+    toast('Invalid sync code');
+  }
+}
+
+// ============ URL param: ?add=<word> (used by browser extension) ============
+function handleUrlParams() {
+  const p = new URLSearchParams(location.search);
+  const w = p.get('add');
+  if (!w) return;
+  showView('add');
+  document.getElementById('newWord').value = w;
+  const sentence = p.get('sentence');
+  if (sentence) {
+    renderExamples([{ en: sentence, cn: '' }]);
+  }
+  toast(`Quick-add: "${w}"`);
+  // Clear the param so reloads don't re-trigger
+  history.replaceState(null, '', location.pathname);
+}
+
 // ============ Init ============
 function init() {
   applyTheme();
@@ -921,6 +1263,7 @@ function init() {
   document.getElementById('clearFormBtn').addEventListener('click', clearForm);
   document.getElementById('addExampleBtn').addEventListener('click', () => addExampleRow());
   document.getElementById('bulkImportBtn').addEventListener('click', bulkImport);
+  document.getElementById('transcriptExtractBtn').addEventListener('click', extractFromTranscript);
   renderExamples([]);
 
   // Learn
@@ -940,6 +1283,17 @@ function init() {
   // Drill
   document.getElementById('drillStartBtn').addEventListener('click', startDrill);
   document.getElementById('drillStopBtn').addEventListener('click', stopDrill);
+
+  // Reading
+  document.getElementById('readingRefresh').addEventListener('click', renderReading);
+  document.getElementById('readingPlayAll').addEventListener('click', readingPlayAll);
+  document.getElementById('readingStop').addEventListener('click', readingStop);
+  document.getElementById('readingSource').addEventListener('change', renderReading);
+  document.getElementById('readingCount').addEventListener('change', renderReading);
+
+  // Sync
+  document.getElementById('syncGenBtn').addEventListener('click', generateSyncCode);
+  document.getElementById('syncApplyBtn').addEventListener('click', applySyncCode);
 
   // Settings
   document.getElementById('voiceSelect').addEventListener('change', e => {
@@ -978,6 +1332,7 @@ function init() {
   });
 
   startSession();
+  handleUrlParams();
 }
 
 if (document.readyState === 'loading') {

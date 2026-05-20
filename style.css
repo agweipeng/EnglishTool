@@ -313,6 +313,49 @@ textarea { resize: vertical; min-height: 50px; }
   to { opacity: 1; transform: translate(-50%, 0); }
 }
 
+/* ============ Enrichment chips (synonyms / antonyms / family / collocations) ============ */
+.enrichment-area { display: flex; flex-direction: column; gap: 8px; }
+.chip-block {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 10px 12px;
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+}
+.chip-label { color: var(--text-muted); font-size: 12px; font-weight: 600; margin-right: 4px; }
+.chip {
+  background: var(--surface-2); border-radius: 999px;
+  padding: 3px 10px; font-size: 13px; color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* ============ Library leech marker ============ */
+.library-item.leech { border-left: 3px solid var(--warning); }
+
+/* ============ Reading view ============ */
+.reading-controls {
+  display: flex; gap: 10px; flex-wrap: wrap;
+  padding: 14px; background: var(--surface); border-radius: var(--radius);
+  border: 1px solid var(--border); margin-bottom: 16px;
+  align-items: end;
+}
+.reading-controls label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--text-muted); }
+.reading-passage {
+  background: var(--surface); padding: 24px;
+  border-radius: var(--radius); border: 1px solid var(--border);
+  font-size: 17px; line-height: 1.8;
+}
+.reading-sentence { padding: 8px 12px; border-radius: 6px; margin-bottom: 6px; transition: background 0.2s; }
+.reading-sentence.active { background: rgba(79, 124, 255, 0.12); }
+.reading-en mark {
+  background: rgba(255, 122, 89, 0.2); color: var(--text);
+  padding: 0 4px; border-radius: 4px;
+  cursor: pointer; font-weight: 600;
+}
+.reading-en mark:hover { background: rgba(255, 122, 89, 0.4); }
+.reading-cn { color: var(--text-muted); font-size: 14px; margin-top: 2px; }
+
+/* ============ Sync code textareas ============ */
+#syncCodeOut, #syncCodeIn { font-family: monospace; font-size: 12px; word-break: break-all; }
+
 /* ============ Responsive ============ */
 @media (max-width: 640px) {
   .topbar { flex-wrap: wrap; gap: 8px; }

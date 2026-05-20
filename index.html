@@ -14,6 +14,7 @@
     <button class="tab" data-view="add">Add Word</button>
     <button class="tab" data-view="library">Library</button>
     <button class="tab" data-view="drill">Listening Drill</button>
+    <button class="tab" data-view="reading">Reading</button>
     <button class="tab" data-view="stats">Stats</button>
     <button class="tab" data-view="settings">Settings</button>
   </nav>
@@ -33,6 +34,7 @@
           <option value="listening">👂 Listening MCQ</option>
           <option value="spelling">🔤 Spelling (Dictation)</option>
           <option value="cloze">🎯 Sentence Cloze</option>
+          <option value="context">🧠 Context Card</option>
         </select>
       </div>
       <div class="session-info">
@@ -89,6 +91,8 @@
         <div id="examplesList"></div>
       </div>
 
+      <div id="enrichmentArea" class="enrichment-area"></div>
+
       <label>Tags (comma separated)
         <input type="text" id="newTags" placeholder="IELTS, movie, business" />
       </label>
@@ -99,8 +103,15 @@
       </div>
 
       <div class="bulk-import">
+        <h3>Extract from Transcript / Article</h3>
+        <p class="hint">Paste any English text below — the tool picks the uncommon vocabulary (skipping stopwords and words you already have).</p>
+        <textarea id="transcriptInput" rows="5" placeholder="Paste a paragraph, podcast transcript, article excerpt..."></textarea>
+        <button class="btn-ghost" id="transcriptExtractBtn">🔍 Extract Uncommon Words → Bulk Import</button>
+      </div>
+
+      <div class="bulk-import">
         <h3>Or Bulk Import</h3>
-        <p class="hint">Paste one word per line. Auto-fill runs for each.</p>
+        <p class="hint">Paste one word per line. Auto-fill (definition + translation + synonyms + family + collocations) runs for each.</p>
         <textarea id="bulkInput" rows="4" placeholder="ephemeral&#10;ubiquitous&#10;serendipity"></textarea>
         <button class="btn-ghost" id="bulkImportBtn">📥 Import All</button>
         <span id="bulkStatus" class="hint"></span>
@@ -119,6 +130,7 @@
           <option value="learning">Learning</option>
           <option value="archived">Archived ⭐</option>
           <option value="due">Due Today</option>
+          <option value="leech">Stubborn Words 🐛</option>
         </select>
       </div>
     </div>
@@ -168,6 +180,39 @@
     </div>
   </section>
 
+  <!-- ============ READING VIEW ============ -->
+  <section class="view" id="view-reading">
+    <h2>Spaced Reading 📖</h2>
+    <p class="hint">A reading passage built from your recent words' example sentences. Click any highlighted word to hear it.</p>
+    <div class="reading-controls">
+      <label>Source:
+        <select id="readingSource">
+          <option value="recent">Recent words</option>
+          <option value="due">Due today</option>
+          <option value="leech">Stubborn words 🐛</option>
+        </select>
+      </label>
+      <label>How many:
+        <select id="readingCount">
+          <option value="6">6</option>
+          <option value="12" selected>12</option>
+          <option value="20">20</option>
+        </select>
+      </label>
+      <label>Speed:
+        <select id="readingSpeed">
+          <option value="0.85">0.85x</option>
+          <option value="1" selected>1x</option>
+          <option value="1.15">1.15x</option>
+        </select>
+      </label>
+      <button class="btn-ghost" id="readingRefresh">🔄 Refresh</button>
+      <button class="btn-primary" id="readingPlayAll">▶ Play All</button>
+      <button class="btn-ghost" id="readingStop">⏹ Stop</button>
+    </div>
+    <div id="readingPassage" class="reading-passage"></div>
+  </section>
+
   <!-- ============ STATS VIEW ============ -->
   <section class="view" id="view-stats">
     <h2>Your Progress</h2>
@@ -178,6 +223,7 @@
       <div class="stat-card"><div class="stat-num" id="statDue">0</div><div class="stat-label">Due Today</div></div>
       <div class="stat-card"><div class="stat-num" id="statStreak">0</div><div class="stat-label">Day Streak 🔥</div></div>
       <div class="stat-card"><div class="stat-num" id="statReviewed">0</div><div class="stat-label">Today's Reviews</div></div>
+      <div class="stat-card"><div class="stat-num" id="statLeeches">0</div><div class="stat-label">Stubborn 🐛</div></div>
     </div>
 
     <h3>Activity Heatmap (last 12 weeks)</h3>
@@ -225,6 +271,25 @@
           <input type="file" id="importJsonInput" accept="application/json" hidden />
         </label>
       </div>
+    </div>
+
+    <div class="setting-block">
+      <h3>Sync Between Devices</h3>
+      <p class="hint">Generate a sync code on one device, paste it on another. Useful for moving between phone and laptop without setting up cloud accounts.</p>
+      <div class="form-actions">
+        <button class="btn-primary" id="syncGenBtn">📋 Generate &amp; Copy Sync Code</button>
+      </div>
+      <textarea id="syncCodeOut" rows="3" placeholder="Generated code appears here..." readonly></textarea>
+      <p class="hint" style="margin-top:10px">Paste a code below to import on another device:</p>
+      <textarea id="syncCodeIn" rows="3" placeholder="Paste sync code here..."></textarea>
+      <div class="form-actions">
+        <button class="btn-ghost" id="syncApplyBtn">⬆ Apply Sync Code</button>
+      </div>
+      <p class="hint" style="margin-top:10px">
+        <b>True cloud sync</b> (auto-sync across devices) requires a backend like
+        Firebase or Supabase + sign-in. Not built in — the project is fully client-side.
+        See <code>README.md</code> for a setup outline if you want to add it.
+      </p>
     </div>
 
     <div class="setting-block">
