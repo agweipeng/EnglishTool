@@ -7,6 +7,9 @@
 
 // ============ Constants ============
 const STORAGE_KEY = 'englishTrainerData_v1';
+const SYNC_KEY = 'englishTrainerSync_v1';
+const GIST_FILE = 'english-trainer-data.json';
+const PUSH_DEBOUNCE_MS = 2500;
 const MAX_LEVEL = 5;                 // archive when level reaches this
 const DEFAULT_EASE = 2.5;
 const MIN_EASE = 1.3;
@@ -53,6 +56,192 @@ function loadState() {
 
 function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  schedulePush();
+}
+
+// ============ Sync config (local-only, never pushed to gist) ============
+
+function loadSyncConfig() {
+  try {
+    const raw = localStorage.getItem(SYNC_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch { return {}; }
+}
+function saveSyncConfig(cfg) {
+  localStorage.setItem(SYNC_KEY, JSON.stringify(cfg));
+}
+function clearSyncConfig() {
+  localStorage.removeItem(SYNC_KEY);
+}
+function isSyncConnected() {
+  const c = loadSyncConfig();
+  return !!(c.token && c.gistId);
+}
+
+// ============ GitHub Gist API ============
+
+function ghHeaders(token) {
+  return {
+    'Authorization': `Bearer ${token}`,
+    'Accept': 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28',
+  };
+}
+async function ghAuth(token) {
+  const r = await fetch('https://api.github.com/user', { headers: ghHeaders(token) });
+  return r.ok ? await r.json() : null;
+}
+async function ghFindGist(token) {
+  const r = await fetch('https://api.github.com/gists?per_page=100', { headers: ghHeaders(token) });
+  if (!r.ok) return null;
+  const list = await r.json();
+  return list.find(g => g.files && g.files[GIST_FILE]) || null;
+}
+async function ghCreateGist(token, content) {
+  const r = await fetch('https://api.github.com/gists', {
+    method: 'POST',
+    headers: ghHeaders(token),
+    body: JSON.stringify({
+      description: 'English Trainer sync data (do not edit by hand)',
+      public: false,
+      files: { [GIST_FILE]: { content } },
+    }),
+  });
+  return r.ok ? await r.json() : null;
+}
+async function ghGetGist(token, id) {
+  const r = await fetch(`https://api.github.com/gists/${id}`, { headers: ghHeaders(token) });
+  if (!r.ok) return null;
+  const data = await r.json();
+  return data.files?.[GIST_FILE]?.content || null;
+}
+async function ghUpdateGist(token, id, content) {
+  const r = await fetch(`https://api.github.com/gists/${id}`, {
+    method: 'PATCH',
+    headers: ghHeaders(token),
+    body: JSON.stringify({ files: { [GIST_FILE]: { content } } }),
+  });
+  return r.ok;
+}
+
+// ============ Merge logic (per-word updatedAt wins) ============
+
+function wordEditTs(w) { return w.updatedAt || w.createdAt || ''; }
+
+function mergeStates(local, remote) {
+  if (!remote || !Array.isArray(remote.words)) return local;
+  const byId = new Map();
+  for (const w of (local.words || [])) byId.set(w.id, w);
+  for (const w of remote.words) {
+    const cur = byId.get(w.id);
+    if (!cur) byId.set(w.id, w);
+    else if (wordEditTs(w) > wordEditTs(cur)) byId.set(w.id, w);
+  }
+  const activity = { ...(local.activity || {}) };
+  for (const [k, v] of Object.entries(remote.activity || {})) {
+    activity[k] = Math.max(activity[k] || 0, v);
+  }
+  const localLast = local.streak?.lastDay || '';
+  const remoteLast = remote.streak?.lastDay || '';
+  const streak = remoteLast > localLast ? remote.streak : local.streak;
+  return {
+    ...local,
+    words: [...byId.values()],
+    activity,
+    streak,
+  };
+}
+
+// ============ Sync orchestration ============
+
+function setSyncStatus(s) {
+  const el = document.getElementById('syncIndicator');
+  if (!el) return;
+  el.classList.remove('hidden', 'ok', 'syncing', 'error');
+  if (s === 'hidden') { el.classList.add('hidden'); return; }
+  el.classList.add(s);
+  el.title = ({
+    ok: 'Synced',
+    syncing: 'Syncing…',
+    error: 'Sync error (click to retry)',
+  })[s] || 'Sync';
+}
+
+async function connectSync(token) {
+  const t = (token || '').trim();
+  if (!t) return { error: 'Token is required' };
+  setSyncStatus('syncing');
+  const user = await ghAuth(t);
+  if (!user) { setSyncStatus('error'); return { error: 'Invalid token or insufficient scope' }; }
+  let gist = await ghFindGist(t);
+  if (!gist) {
+    gist = await ghCreateGist(t, JSON.stringify(state));
+    if (!gist) { setSyncStatus('error'); return { error: 'Failed to create gist' }; }
+  }
+  saveSyncConfig({ token: t, gistId: gist.id, user: user.login, lastSyncedAt: Date.now() });
+  await syncNow();
+  return { ok: true, user: user.login, gistId: gist.id };
+}
+
+async function syncNow() {
+  const cfg = loadSyncConfig();
+  if (!cfg.token || !cfg.gistId) return false;
+  setSyncStatus('syncing');
+  try {
+    const remoteJson = await ghGetGist(cfg.token, cfg.gistId);
+    if (remoteJson) {
+      try {
+        const remote = JSON.parse(remoteJson);
+        state = mergeStates(state, remote);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); // direct write, no re-push
+      } catch (e) { /* corrupt remote, will be overwritten by push */ }
+    }
+    const ok = await ghUpdateGist(cfg.token, cfg.gistId, JSON.stringify(state));
+    if (!ok) { setSyncStatus('error'); return false; }
+    cfg.lastSyncedAt = Date.now();
+    saveSyncConfig(cfg);
+    setSyncStatus('ok');
+    refreshActiveView();
+    return true;
+  } catch (e) {
+    setSyncStatus('error');
+    return false;
+  }
+}
+
+function disconnectSync() {
+  clearSyncConfig();
+  setSyncStatus('hidden');
+}
+
+// Debounced auto-push triggered by saveState()
+let pushTimer = null;
+function schedulePush() {
+  const cfg = loadSyncConfig();
+  if (!cfg.token || !cfg.gistId) return;
+  setSyncStatus('syncing');
+  clearTimeout(pushTimer);
+  pushTimer = setTimeout(async () => {
+    const ok = await ghUpdateGist(cfg.token, cfg.gistId, JSON.stringify(state));
+    if (ok) {
+      cfg.lastSyncedAt = Date.now();
+      saveSyncConfig(cfg);
+      setSyncStatus('ok');
+    } else {
+      setSyncStatus('error');
+    }
+  }, PUSH_DEBOUNCE_MS);
+}
+
+// Re-render whichever view is currently visible after a sync pull
+function refreshActiveView() {
+  const active = document.querySelector('.view.active');
+  if (!active) return;
+  const id = active.id.replace('view-', '');
+  if (id === 'library') renderLibrary();
+  else if (id === 'stats') renderStats();
+  else if (id === 'reading') renderReading();
+  // learn view: don't disrupt an in-progress card
 }
 
 // ============ Helpers ============
@@ -133,6 +322,7 @@ function applyRating(word, rating) {
       break;
   }
   word.nextReview = nowMs() + word.interval * DAY_MS;
+  word.updatedAt = new Date().toISOString();
 
   if (word.level >= MAX_LEVEL) {
     word.level = MAX_LEVEL;
@@ -431,6 +621,7 @@ function saveWord() {
   if (!text) { toast('Word is required'); return; }
   const enrichment = collectEnrichment();
   const existing = state.words.find(w => w.text.toLowerCase() === text.toLowerCase());
+  const nowIso = new Date().toISOString();
   if (existing) {
     if (!confirm(`"${text}" already exists. Update it?`)) return;
     Object.assign(existing, {
@@ -440,6 +631,7 @@ function saveWord() {
       examples: collectExamples(),
       tags: document.getElementById('newTags').value.split(',').map(s => s.trim()).filter(Boolean),
       ...enrichment,
+      updatedAt: nowIso,
     });
   } else {
     state.words.push({
@@ -460,7 +652,8 @@ function saveWord() {
       nextReview: nowMs(),
       rightCount: 0,
       wrongCount: 0,
-      createdAt: new Date().toISOString(),
+      createdAt: nowIso,
+      updatedAt: nowIso,
       archivedAt: null,
     });
   }
@@ -503,7 +696,9 @@ async function bulkImport() {
       collocations: enrichment.collocations,
       level: 0, ease: DEFAULT_EASE, interval: 1,
       nextReview: nowMs(), rightCount: 0, wrongCount: 0,
-      createdAt: new Date().toISOString(), archivedAt: null,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      archivedAt: null,
     });
     added++;
     saveState();
@@ -901,6 +1096,7 @@ function handleLibAction(id, act) {
     w.level = 0; w.interval = 1; w.ease = DEFAULT_EASE;
     w.rightCount = 0; w.wrongCount = 0;
     w.nextReview = nowMs(); w.archivedAt = null;
+    w.updatedAt = new Date().toISOString();
     saveState(); renderLibrary(); toast('Reset');
     return;
   }
@@ -1227,6 +1423,51 @@ function applySyncCode() {
   }
 }
 
+// ============ Gist sync UI handlers ============
+
+function renderSyncUI() {
+  const connected = isSyncConnected();
+  const disc = document.getElementById('syncDisconnected');
+  const conn = document.getElementById('syncConnected');
+  if (!disc || !conn) return;
+  if (connected) {
+    const cfg = loadSyncConfig();
+    disc.classList.add('hidden');
+    conn.classList.remove('hidden');
+    document.getElementById('syncUser').textContent = cfg.user || '?';
+    document.getElementById('syncGistId').textContent = (cfg.gistId || '').slice(0, 12) + '…';
+    document.getElementById('syncLastTime').textContent = cfg.lastSyncedAt
+      ? new Date(cfg.lastSyncedAt).toLocaleString()
+      : 'never';
+    setSyncStatus('ok');
+  } else {
+    disc.classList.remove('hidden');
+    conn.classList.add('hidden');
+    setSyncStatus('hidden');
+  }
+}
+
+async function handleConnectClick() {
+  const token = document.getElementById('gistToken').value.trim();
+  if (!token) { toast('Paste your GitHub token first'); return; }
+  const btn = document.getElementById('syncConnectBtn');
+  btn.disabled = true; btn.textContent = 'Connecting...';
+  const res = await connectSync(token);
+  btn.disabled = false; btn.textContent = '🔗 Connect';
+  if (res.error) { toast(res.error); return; }
+  document.getElementById('gistToken').value = '';
+  toast(`Connected as ${res.user} ✓`);
+  renderSyncUI();
+  refreshActiveView();
+}
+
+function handleDisconnectClick() {
+  if (!confirm('Disconnect from Gist sync? Local data is kept; the gist itself is not deleted.')) return;
+  disconnectSync();
+  renderSyncUI();
+  toast('Disconnected');
+}
+
 // ============ URL param: ?add=<word> (used by browser extension) ============
 function handleUrlParams() {
   const p = new URLSearchParams(location.search);
@@ -1291,9 +1532,28 @@ function init() {
   document.getElementById('readingSource').addEventListener('change', renderReading);
   document.getElementById('readingCount').addEventListener('change', renderReading);
 
-  // Sync
+  // Sync (manual code)
   document.getElementById('syncGenBtn').addEventListener('click', generateSyncCode);
   document.getElementById('syncApplyBtn').addEventListener('click', applySyncCode);
+
+  // Cloud sync (Gist)
+  document.getElementById('syncConnectBtn').addEventListener('click', handleConnectClick);
+  document.getElementById('syncDisconnectBtn').addEventListener('click', handleDisconnectClick);
+  document.getElementById('syncNowBtn').addEventListener('click', async () => {
+    const ok = await syncNow();
+    toast(ok ? 'Synced ✓' : 'Sync failed');
+    renderSyncUI();
+  });
+  document.getElementById('syncIndicator').addEventListener('click', async () => {
+    const ok = await syncNow();
+    if (!ok) toast('Sync failed — check token / network');
+    renderSyncUI();
+  });
+  renderSyncUI();
+  // Initial pull on app load if connected (non-blocking)
+  if (isSyncConnected()) {
+    syncNow().then(() => renderSyncUI());
+  }
 
   // Settings
   document.getElementById('voiceSelect').addEventListener('change', e => {
