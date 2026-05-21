@@ -69,6 +69,21 @@
   <section class="view" id="view-add">
     <h2>Add a New Word</h2>
     <div class="form-grid">
+      <div class="bulk-import">
+        <h3>Bulk Import</h3>
+        <p class="hint">Paste one word per line. Auto-fill (definition + translation + synonyms + family + collocations) runs for each.</p>
+        <textarea id="bulkInput" rows="4" placeholder="ephemeral&#10;ubiquitous&#10;serendipity"></textarea>
+        <button class="btn-ghost" id="bulkImportBtn">📥 Import All</button>
+        <span id="bulkStatus" class="hint"></span>
+      </div>
+
+      <div class="bulk-import">
+        <h3>Or Extract from Transcript / Article</h3>
+        <p class="hint">Paste any English text below — the tool picks the uncommon vocabulary (skipping stopwords and words you already have) and fills the Bulk Import textarea above.</p>
+        <textarea id="transcriptInput" rows="5" placeholder="Paste a paragraph, podcast transcript, article excerpt..."></textarea>
+        <button class="btn-ghost" id="transcriptExtractBtn">🔍 Extract Uncommon Words → Bulk Import</button>
+      </div>
+
       <label>Word
         <input type="text" id="newWord" placeholder="e.g. ephemeral" autocomplete="off" />
       </label>
@@ -105,20 +120,6 @@
         <button class="btn-ghost" id="clearFormBtn">Clear</button>
       </div>
 
-      <div class="bulk-import">
-        <h3>Extract from Transcript / Article</h3>
-        <p class="hint">Paste any English text below — the tool picks the uncommon vocabulary (skipping stopwords and words you already have).</p>
-        <textarea id="transcriptInput" rows="5" placeholder="Paste a paragraph, podcast transcript, article excerpt..."></textarea>
-        <button class="btn-ghost" id="transcriptExtractBtn">🔍 Extract Uncommon Words → Bulk Import</button>
-      </div>
-
-      <div class="bulk-import">
-        <h3>Or Bulk Import</h3>
-        <p class="hint">Paste one word per line. Auto-fill (definition + translation + synonyms + family + collocations) runs for each.</p>
-        <textarea id="bulkInput" rows="4" placeholder="ephemeral&#10;ubiquitous&#10;serendipity"></textarea>
-        <button class="btn-ghost" id="bulkImportBtn">📥 Import All</button>
-        <span id="bulkStatus" class="hint"></span>
-      </div>
     </div>
   </section>
 
