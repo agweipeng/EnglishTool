@@ -15,6 +15,7 @@
     <button class="tab" data-view="library">Library</button>
     <button class="tab" data-view="drill">Listening Drill</button>
     <button class="tab" data-view="reading">Reading</button>
+    <button class="tab" data-view="news">News 📰</button>
     <button class="tab" data-view="stats">Stats</button>
     <button class="tab" data-view="settings">Settings</button>
   </nav>
@@ -212,6 +213,38 @@
       <button class="btn-ghost" id="readingStop">⏹ Stop</button>
     </div>
     <div id="readingPassage" class="reading-passage"></div>
+  </section>
+
+  <!-- ============ NEWS VIEW (DailyNews) ============ -->
+  <section class="view" id="view-news">
+    <div class="news-header">
+      <h2>DailyNews — AI 📰</h2>
+      <div class="news-meta">
+        <span class="hint">Updated: <span id="newsLastUpdated">—</span></span>
+        <button class="btn-ghost" id="newsRefreshBtn">🔄 Refresh</button>
+      </div>
+    </div>
+    <p class="hint">Latest posts from Anthropic, OpenAI, Google AI / Gemini, and the most-starred AI repos on GitHub this week. Updated daily by a GitHub Action.</p>
+
+    <div class="news-section">
+      <h3>🤖 Anthropic</h3>
+      <div class="news-list" id="newsAnthropic"><p class="hint">Loading…</p></div>
+    </div>
+
+    <div class="news-section">
+      <h3>🔬 OpenAI</h3>
+      <div class="news-list" id="newsOpenAI"><p class="hint">Loading…</p></div>
+    </div>
+
+    <div class="news-section">
+      <h3>💎 Google AI / Gemini</h3>
+      <div class="news-list" id="newsGoogle"><p class="hint">Loading…</p></div>
+    </div>
+
+    <div class="news-section">
+      <h3>🐙 Trending AI Repos (GitHub, last 7 days)</h3>
+      <div class="news-list" id="newsGithub"><p class="hint">Loading…</p></div>
+    </div>
   </section>
 
   <!-- ============ STATS VIEW ============ -->
