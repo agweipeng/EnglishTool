@@ -475,8 +475,27 @@ textarea { resize: vertical; min-height: 50px; }
 
 /* ============ Responsive ============ */
 @media (max-width: 640px) {
-  .topbar { flex-wrap: wrap; gap: 8px; }
-  .tabs { order: 3; width: 100%; }
+  .topbar { flex-wrap: wrap; gap: 8px; padding: 10px 12px; }
+  .brand { font-size: 15px; }
+  .tabs {
+    order: 3;
+    flex: 0 0 100%;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 -12px;
+    padding: 0 12px 4px;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 13px;
+  }
   .word-display { font-size: 30px; }
   .mcq-options { grid-template-columns: 1fr; }
   .library-item { grid-template-columns: 1fr; }
