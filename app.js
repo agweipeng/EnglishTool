@@ -363,6 +363,7 @@ function showView(name) {
   if (name === 'library') renderLibrary();
   if (name === 'stats') renderStats();
   if (name === 'reading') renderReading();
+  if (name === 'news') loadNews();
 }
 
 // ============ TTS ============
@@ -1468,6 +1469,77 @@ function handleDisconnectClick() {
   toast('Disconnected');
 }
 
+// ============ DailyNews ============
+// Reads news.json (generated daily by .github/workflows/daily-news.yml).
+// Cached in-memory per session; refresh button re-fetches with cache-bust.
+
+let newsCache = null;
+
+async function loadNews(force = false) {
+  if (newsCache && !force) {
+    renderNews(newsCache);
+    return;
+  }
+  const containers = ['newsAnthropic', 'newsOpenAI', 'newsGoogle', 'newsGithub'];
+  containers.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = '<p class="hint">Loading…</p>';
+  });
+  try {
+    const bust = force ? `?t=${Date.now()}` : '';
+    const r = await fetch(`news.json${bust}`, { cache: 'no-cache' });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    newsCache = await r.json();
+    renderNews(newsCache);
+  } catch (e) {
+    document.getElementById('newsLastUpdated').textContent = 'never';
+    const msg = `<p class="hint">Couldn't load news. The first daily run hasn't happened yet, or no network. Trigger the workflow at <a href="https://github.com/agweipeng/EnglishTool/actions" target="_blank" rel="noopener">github.com/agweipeng/EnglishTool/actions</a> &rarr; "Daily News" &rarr; Run workflow.</p>`;
+    containers.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = msg;
+    });
+  }
+}
+
+function renderNews(data) {
+  const ts = data?.generatedAt ? new Date(data.generatedAt) : null;
+  document.getElementById('newsLastUpdated').textContent = ts
+    ? ts.toLocaleString()
+    : 'never';
+  const s = data?.sources || {};
+  renderNewsSection('newsAnthropic', s.anthropic, 'article');
+  renderNewsSection('newsOpenAI', s.openai, 'article');
+  renderNewsSection('newsGoogle', s.google, 'article');
+  renderNewsSection('newsGithub', s.github, 'repo');
+}
+
+function renderNewsSection(containerId, items, kind) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  if (!items || items.length === 0) {
+    el.innerHTML = '<p class="hint">No items yet.</p>';
+    return;
+  }
+  el.innerHTML = items.map(it => {
+    if (kind === 'repo') {
+      const stars = it.stars >= 1000 ? `${(it.stars / 1000).toFixed(1)}k` : (it.stars ?? '');
+      return `
+        <a class="news-card" href="${escapeHTML(it.url)}" target="_blank" rel="noopener">
+          <div class="news-card-title">${escapeHTML(it.name)} <span class="news-stars">★ ${stars}</span></div>
+          <div class="news-card-desc">${escapeHTML(it.description || '')}</div>
+          <div class="news-card-meta">${escapeHTML(it.language || '')}</div>
+        </a>
+      `;
+    }
+    return `
+      <a class="news-card" href="${escapeHTML(it.url)}" target="_blank" rel="noopener">
+        <div class="news-card-title">${escapeHTML(it.title)}</div>
+        <div class="news-card-meta">${escapeHTML(new URL(it.url).hostname)}</div>
+      </a>
+    `;
+  }).join('');
+}
+
 // ============ URL param: ?add=<word> (used by browser extension) ============
 function handleUrlParams() {
   const p = new URLSearchParams(location.search);
@@ -1524,6 +1596,9 @@ function init() {
   // Drill
   document.getElementById('drillStartBtn').addEventListener('click', startDrill);
   document.getElementById('drillStopBtn').addEventListener('click', stopDrill);
+
+  // News
+  document.getElementById('newsRefreshBtn').addEventListener('click', () => loadNews(true));
 
   // Reading
   document.getElementById('readingRefresh').addEventListener('click', renderReading);

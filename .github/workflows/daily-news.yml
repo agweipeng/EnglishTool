@@ -1,0 +1,42 @@
+name: Daily News
+
+on:
+  schedule:
+    # Runs daily at 06:00 UTC (14:00 SGT / China)
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-news
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch AI news
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/fetch-news.mjs
+
+      - name: Commit news.json if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet news.json; then
+            echo "news.json unchanged — skipping commit"
+            exit 0
+          fi
+          git add news.json
+          git commit -m "chore(news): refresh DailyNews $(date -u +'%Y-%m-%d')"
+          git pull --rebase
+          git push
