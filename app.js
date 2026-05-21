@@ -39,6 +39,7 @@ function defaultState() {
     settings: { voiceURI: null, rate: 1, theme: 'light' },
     activity: {},   // { 'YYYY-MM-DD': reviewCount }
     streak: { current: 0, lastDay: null },
+    journal: {},    // { 'YYYY-MM-DD': 'entry text' }
   };
 }
 
@@ -144,11 +145,17 @@ function mergeStates(local, remote) {
   const localLast = local.streak?.lastDay || '';
   const remoteLast = remote.streak?.lastDay || '';
   const streak = remoteLast > localLast ? remote.streak : local.streak;
+  // Journal: per-date conflict resolution — keep the longer entry (assumed newer/more complete)
+  const journal = { ...(local.journal || {}) };
+  for (const [date, text] of Object.entries(remote.journal || {})) {
+    if (!journal[date] || text.length > journal[date].length) journal[date] = text;
+  }
   return {
     ...local,
     words: [...byId.values()],
     activity,
     streak,
+    journal,
   };
 }
 
@@ -364,6 +371,7 @@ function showView(name) {
   if (name === 'stats') renderStats();
   if (name === 'reading') renderReading();
   if (name === 'news') loadNews();
+  if (name === 'journal') renderJournal();
 }
 
 // ============ TTS ============
@@ -1183,12 +1191,19 @@ function renderReading() {
       <div class="reading-sentence" data-idx="${idx}">
         <div class="reading-en">${highlighted}</div>
         ${ex.cn ? `<div class="reading-cn">${escapeHTML(ex.cn)}</div>` : ''}
+        <button class="mic-btn" data-mic-text="${escapeHTML(ex.en)}" title="Read aloud challenge">🎙️ Read aloud</button>
       </div>
     `;
   }).join('');
   // Click any highlight to hear
   wrap.querySelectorAll('mark').forEach(m => {
     m.addEventListener('click', () => speak(m.dataset.word));
+  });
+  wrap.querySelectorAll('.mic-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openReadAloud(btn.dataset.micText);
+    });
   });
 }
 
@@ -1520,7 +1535,7 @@ function renderNewsSection(containerId, items, kind) {
     el.innerHTML = '<p class="hint">No items yet.</p>';
     return;
   }
-  el.innerHTML = items.map(it => {
+  el.innerHTML = items.map((it, idx) => {
     if (kind === 'repo') {
       const stars = it.stars >= 1000 ? `${(it.stars / 1000).toFixed(1)}k` : (it.stars ?? '');
       return `
@@ -1532,12 +1547,243 @@ function renderNewsSection(containerId, items, kind) {
       `;
     }
     return `
-      <a class="news-card" href="${escapeHTML(it.url)}" target="_blank" rel="noopener">
-        <div class="news-card-title">${escapeHTML(it.title)}</div>
-        <div class="news-card-meta">${escapeHTML(new URL(it.url).hostname)}</div>
-      </a>
+      <div class="news-card-wrap">
+        <a class="news-card" href="${escapeHTML(it.url)}" target="_blank" rel="noopener">
+          <div class="news-card-title">${escapeHTML(it.title)}</div>
+          <div class="news-card-meta">${escapeHTML(new URL(it.url).hostname)}</div>
+        </a>
+        <button class="mic-btn" data-mic-text="${escapeHTML(it.title)}" title="Read aloud challenge">🎙️ Read aloud</button>
+      </div>
     `;
   }).join('');
+  el.querySelectorAll('.mic-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openReadAloud(btn.dataset.micText);
+    });
+  });
+}
+
+// ============ Journal ============
+
+const GRADE_PROMPT_PREFIX = `Please grade my English journal entry below. I'm a Chinese speaker working on vocabulary and natural writing. Provide:
+
+1. **Grammar & naturalness fixes** — list each issue: original sentence → corrected version → brief explanation (in Chinese if it helps).
+2. **Better word choices** — point out 2-3 places where a more sophisticated or natural word would fit.
+3. **3 new useful vocabulary words** related to what I wrote — with Chinese meaning + an example sentence each.
+4. **Overall rating** (1-10) and the single biggest thing I should focus on next.
+
+My entry`;
+
+function currentJournalDate() {
+  const el = document.getElementById('journalDate');
+  return (el && el.value) || todayKey();
+}
+
+function renderJournal() {
+  const dateEl = document.getElementById('journalDate');
+  if (!dateEl.value) dateEl.value = todayKey();
+  const date = dateEl.value;
+  const text = (state.journal && state.journal[date]) || '';
+  document.getElementById('journalText').value = text;
+  updateJournalCounts();
+  renderJournalHistory();
+}
+
+function updateJournalCounts() {
+  const t = document.getElementById('journalText').value;
+  const words = t.trim() ? t.trim().split(/\s+/).length : 0;
+  document.getElementById('journalWordCount').textContent = words;
+  document.getElementById('journalCharCount').textContent = t.length;
+}
+
+function saveJournalCurrent() {
+  const date = currentJournalDate();
+  const text = document.getElementById('journalText').value;
+  if (!state.journal) state.journal = {};
+  if (text.trim()) state.journal[date] = text;
+  else delete state.journal[date];
+  saveState();
+  renderJournalHistory();
+}
+
+function renderJournalHistory() {
+  const wrap = document.getElementById('journalHistory');
+  const entries = Object.entries(state.journal || {})
+    .filter(([, t]) => t && t.trim())
+    .sort((a, b) => b[0].localeCompare(a[0]))
+    .slice(0, 14);
+  if (entries.length === 0) {
+    wrap.innerHTML = `<p class="hint">No entries yet. Write your first one above.</p>`;
+    return;
+  }
+  wrap.innerHTML = entries.map(([date, text]) => {
+    const wordCount = text.trim().split(/\s+/).length;
+    const preview = text.slice(0, 140) + (text.length > 140 ? '…' : '');
+    return `
+      <div class="journal-entry" data-date="${escapeHTML(date)}">
+        <div class="journal-entry-date">${escapeHTML(date)}</div>
+        <div class="journal-entry-preview">${escapeHTML(preview)}</div>
+        <div class="journal-entry-words">${wordCount} words</div>
+      </div>
+    `;
+  }).join('');
+  wrap.querySelectorAll('.journal-entry').forEach(el => {
+    el.addEventListener('click', () => {
+      const d = el.dataset.date;
+      document.getElementById('journalDate').value = d;
+      renderJournal();
+    });
+  });
+}
+
+async function gradeJournalWithClaude() {
+  const text = document.getElementById('journalText').value.trim();
+  if (!text) { toast('Write something first'); return; }
+  const date = currentJournalDate();
+  const prompt = `${GRADE_PROMPT_PREFIX} (date: ${date}):\n\n${text}`;
+  try {
+    await navigator.clipboard.writeText(prompt);
+    toast('Prompt copied → opening claude.ai');
+    window.open('https://claude.ai/new', '_blank');
+  } catch (e) {
+    // Fallback: show prompt in a modal-ish prompt for manual copy
+    toast('Copy failed — see console for prompt');
+    console.log(prompt);
+  }
+}
+
+async function copyJournalOnly() {
+  const text = document.getElementById('journalText').value.trim();
+  if (!text) { toast('Nothing to copy'); return; }
+  try {
+    await navigator.clipboard.writeText(text);
+    toast('Entry copied');
+  } catch { toast('Copy failed'); }
+}
+
+function deleteCurrentJournal() {
+  const date = currentJournalDate();
+  if (!state.journal?.[date]) { toast('No entry to delete'); return; }
+  if (!confirm(`Delete journal entry for ${date}?`)) return;
+  delete state.journal[date];
+  document.getElementById('journalText').value = '';
+  saveState();
+  updateJournalCounts();
+  renderJournalHistory();
+  toast('Deleted');
+}
+
+// ============ Read Aloud Challenge ============
+// Browser-only: SpeechRecognition transcribes user speech, compared against target text.
+// Falls back gracefully if SpeechRecognition is unavailable (older Safari, Firefox).
+
+let recognition = null;
+let readAloudTargetText = '';
+
+function openReadAloud(target) {
+  readAloudTargetText = (target || '').trim();
+  document.getElementById('readAloudTarget').textContent = readAloudTargetText;
+  document.getElementById('readAloudResult').innerHTML = '';
+  const micBtn = document.getElementById('readAloudMicBtn');
+  micBtn.classList.remove('recording');
+  micBtn.textContent = '🎙️ Start';
+  document.getElementById('readAloudOverlay').classList.remove('hidden');
+}
+function closeReadAloud() {
+  document.getElementById('readAloudOverlay').classList.add('hidden');
+  stopReadAloud();
+}
+
+function startReadAloud() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) {
+    document.getElementById('readAloudResult').innerHTML =
+      `<p class="hint">⚠️ Speech recognition isn't supported in this browser. Try Chrome on Mac or Safari on iOS 14.5+.</p>`;
+    return;
+  }
+  const micBtn = document.getElementById('readAloudMicBtn');
+  if (recognition) { stopReadAloud(); return; }
+  recognition = new SR();
+  recognition.lang = 'en-US';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+  let finalSaid = '';
+  recognition.onresult = (e) => {
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      if (e.results[i].isFinal) finalSaid += e.results[i][0].transcript + ' ';
+    }
+  };
+  recognition.onerror = (e) => {
+    document.getElementById('readAloudResult').innerHTML =
+      `<p class="hint">Mic error: ${escapeHTML(e.error || 'unknown')}</p>`;
+    stopReadAloud();
+  };
+  recognition.onend = () => {
+    recognition = null;
+    micBtn.classList.remove('recording');
+    micBtn.textContent = '🎙️ Start';
+    showReadAloudResult(finalSaid.trim());
+  };
+  micBtn.classList.add('recording');
+  micBtn.textContent = '⏹ Stop';
+  recognition.start();
+}
+function stopReadAloud() {
+  if (recognition) {
+    try { recognition.stop(); } catch {}
+  }
+}
+
+function normalize(s) {
+  return s.toLowerCase().replace(/[^a-z0-9'\s]/g, '').split(/\s+/).filter(Boolean);
+}
+
+// Longest Common Subsequence based word-diff: returns aligned arrays
+function diffWords(target, said) {
+  const a = target, b = said;
+  const m = a.length, n = b.length;
+  const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+  for (let i = m - 1; i >= 0; i--) {
+    for (let j = n - 1; j >= 0; j--) {
+      dp[i][j] = a[i] === b[j] ? dp[i+1][j+1] + 1 : Math.max(dp[i+1][j], dp[i][j+1]);
+    }
+  }
+  const result = [];
+  let i = 0, j = 0;
+  while (i < m && j < n) {
+    if (a[i] === b[j]) { result.push({ word: a[i], kind: 'ok' }); i++; j++; }
+    else if (dp[i+1][j] >= dp[i][j+1]) { result.push({ word: a[i], kind: 'miss' }); i++; }
+    else { result.push({ word: b[j], kind: 'added' }); j++; }
+  }
+  while (i < m) result.push({ word: a[i++], kind: 'miss' });
+  while (j < n) result.push({ word: b[j++], kind: 'added' });
+  return result;
+}
+
+function showReadAloudResult(said) {
+  const target = normalize(readAloudTargetText);
+  const saidWords = normalize(said);
+  if (saidWords.length === 0) {
+    document.getElementById('readAloudResult').innerHTML =
+      `<p class="hint">No speech detected. Try again — make sure your mic is on.</p>`;
+    return;
+  }
+  const diff = diffWords(target, saidWords);
+  const matches = diff.filter(d => d.kind === 'ok').length;
+  const accuracy = Math.round((matches / target.length) * 100);
+  const accClass = accuracy >= 85 ? 'good' : accuracy >= 60 ? 'mid' : 'bad';
+  const diffHtml = diff.map(d =>
+    `<span class="${d.kind}">${escapeHTML(d.word)}</span>`
+  ).join(' ');
+  document.getElementById('readAloudResult').innerHTML = `
+    <div class="read-aloud-result">
+      <div class="read-aloud-accuracy ${accClass}">${accuracy}% accuracy</div>
+      <div class="read-aloud-diff">${diffHtml}</div>
+      <div class="read-aloud-said">You said: "${escapeHTML(said)}"</div>
+    </div>
+  `;
 }
 
 // ============ URL param: ?add=<word> (used by browser extension) ============
@@ -1599,6 +1845,29 @@ function init() {
 
   // News
   document.getElementById('newsRefreshBtn').addEventListener('click', () => loadNews(true));
+
+  // Journal
+  document.getElementById('journalDate').addEventListener('change', renderJournal);
+  document.getElementById('journalText').addEventListener('input', () => {
+    updateJournalCounts();
+    // Debounced autosave: 1s after last keystroke
+    clearTimeout(window._journalSaveTimer);
+    window._journalSaveTimer = setTimeout(saveJournalCurrent, 1000);
+  });
+  document.getElementById('journalGradeBtn').addEventListener('click', () => {
+    saveJournalCurrent();
+    gradeJournalWithClaude();
+  });
+  document.getElementById('journalCopyBtn').addEventListener('click', copyJournalOnly);
+  document.getElementById('journalDeleteBtn').addEventListener('click', deleteCurrentJournal);
+
+  // Read-aloud modal
+  document.getElementById('readAloudMicBtn').addEventListener('click', startReadAloud);
+  document.getElementById('readAloudTtsBtn').addEventListener('click', () => speak(readAloudTargetText));
+  document.getElementById('readAloudCloseBtn').addEventListener('click', closeReadAloud);
+  document.getElementById('readAloudOverlay').addEventListener('click', (e) => {
+    if (e.target.id === 'readAloudOverlay') closeReadAloud();
+  });
 
   // Reading
   document.getElementById('readingRefresh').addEventListener('click', renderReading);

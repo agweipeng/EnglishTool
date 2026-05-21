@@ -378,6 +378,73 @@ textarea { resize: vertical; min-height: 50px; }
   .news-list { grid-template-columns: 1fr; }
 }
 
+/* ============ Journal ============ */
+.journal-form { background: var(--surface); padding: 16px; border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 20px; }
+.journal-meta { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+.journal-meta input[type="date"] { padding: 6px 8px; }
+.journal-counts { color: var(--text-muted); font-size: 13px; }
+#journalText { width: 100%; font-size: 15px; line-height: 1.6; min-height: 200px; }
+.journal-history { display: flex; flex-direction: column; gap: 8px; }
+.journal-entry {
+  background: var(--surface); padding: 12px 14px;
+  border-radius: var(--radius); border: 1px solid var(--border);
+  cursor: pointer; transition: border-color 0.15s;
+}
+.journal-entry:hover { border-color: var(--primary); }
+.journal-entry-date { font-weight: 600; font-size: 13px; color: var(--text-muted); }
+.journal-entry-preview { font-size: 14px; margin-top: 4px; color: var(--text); }
+.journal-entry-words { color: var(--text-muted); font-size: 11px; margin-top: 4px; }
+
+/* ============ Read-aloud modal ============ */
+.read-aloud-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.15s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.read-aloud-modal {
+  background: var(--surface); border-radius: 14px;
+  padding: 22px; max-width: 600px; width: 100%;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  max-height: 90vh; overflow-y: auto;
+}
+.read-aloud-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.read-aloud-head h3 { margin: 0; }
+.read-aloud-target {
+  background: var(--surface-2); padding: 14px 16px;
+  border-radius: var(--radius); margin: 14px 0;
+  font-size: 17px; line-height: 1.5; font-weight: 500;
+}
+#readAloudMicBtn.recording {
+  background: var(--danger); color: white;
+  animation: pulse 1s infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+.read-aloud-result {
+  margin-top: 14px; padding: 12px 14px;
+  background: var(--surface-2); border-radius: var(--radius);
+}
+.read-aloud-accuracy { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+.read-aloud-accuracy.good { color: var(--success); }
+.read-aloud-accuracy.mid  { color: var(--warning); }
+.read-aloud-accuracy.bad  { color: var(--danger); }
+.read-aloud-diff { font-size: 15px; line-height: 1.6; }
+.read-aloud-diff .ok    { color: var(--text); }
+.read-aloud-diff .miss  { color: var(--danger); text-decoration: line-through; }
+.read-aloud-diff .added { color: var(--warning); }
+.read-aloud-said { color: var(--text-muted); font-size: 13px; margin-top: 8px; }
+
+/* Mic button on news / reading items */
+.mic-btn {
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: 999px; padding: 4px 10px; font-size: 12px;
+  cursor: pointer; color: var(--text-muted);
+}
+.mic-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
 /* ============ Sync indicator (top bar) ============ */
 .sync-indicator {
   width: 22px; height: 22px; border-radius: 50%;
