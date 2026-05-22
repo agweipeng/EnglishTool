@@ -1809,6 +1809,8 @@ function init() {
   loadVoices();
 
   document.querySelectorAll('.tab').forEach(t => {
+    // Anchor tabs (e.g. Digests → external static page) navigate via href; don't route through showView
+    if (t.tagName === 'A') return;
     t.addEventListener('click', () => showView(t.dataset.view));
   });
   document.querySelectorAll('[data-goto]').forEach(el => {
