@@ -41,7 +41,7 @@ cat > "$DIGEST_FILE" <<HTML
 </style>
 </head>
 <body>
-<p><a href="../../">← all digests</a></p>
+<p><a href="../">← all digests</a></p>
 <h1>${TITLE}</h1>
 <div class="meta">${DATE}</div>
 <hr>
