@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-21T09:51:25.852Z",
+  "generatedAt": "2026-05-22T09:36:54.283Z",
   "sources": {
     "anthropic": [
       {
@@ -71,10 +71,6 @@
     ],
     "google": [
       {
-        "title": "AI Impact Summit 2026: How we’re partnering to make AI work for everyone An overview of Google’s…",
-        "url": "https://blog.google/innovation-and-ai/technology/ai/ai-impact-summit-2026-india/"
-      },
-      {
         "title": "The Gemini app becomes more agentic, delivering proactive, 24/7 help",
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app/"
       },
@@ -101,6 +97,10 @@
       {
         "title": "View more from Google Research",
         "url": "https://blog.google/innovation-and-ai/technology/research/"
+      },
+      {
+        "title": "Introducing Managed Agents in the Gemini API",
+        "url": "https://blog.google/innovation-and-ai/technology/developers-tools/managed-agents-gemini-api/"
       }
     ],
     "github": [
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 187940,
+        "stars": 188340,
         "language": "JavaScript",
         "updatedAt": "2026-05-20T03:25:40Z"
       },
@@ -116,89 +116,89 @@
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 184443,
+        "stars": 184449,
         "language": "Python",
-        "updatedAt": "2026-05-21T09:42:28Z"
+        "updatedAt": "2026-05-22T09:34:33Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi-K2.5, GLM-5, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 171853,
+        "stars": 171996,
         "language": "Go",
-        "updatedAt": "2026-05-21T04:31:42Z"
+        "updatedAt": "2026-05-21T20:19:03Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 162612,
+        "stars": 162658,
         "language": "HTML",
-        "updatedAt": "2026-05-21T04:34:02Z"
-      },
-      {
-        "name": "huggingface/transformers",
-        "url": "https://github.com/huggingface/transformers",
-        "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 160829,
-        "language": "Python",
-        "updatedAt": "2026-05-21T09:51:10Z"
+        "updatedAt": "2026-05-22T04:30:45Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 160528,
+        "stars": 162274,
         "language": "Python",
-        "updatedAt": "2026-05-21T07:58:57Z"
+        "updatedAt": "2026-05-22T08:27:54Z"
+      },
+      {
+        "name": "huggingface/transformers",
+        "url": "https://github.com/huggingface/transformers",
+        "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
+        "stars": 160865,
+        "language": "Python",
+        "updatedAt": "2026-05-22T09:25:46Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 155797,
+        "stars": 155822,
         "language": "JavaScript",
-        "updatedAt": "2026-05-18T12:16:37Z"
+        "updatedAt": "2026-05-21T14:36:11Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Production-ready platform for agentic workflow development.",
-        "stars": 142129,
+        "stars": 142247,
         "language": "TypeScript",
-        "updatedAt": "2026-05-21T09:38:57Z"
+        "updatedAt": "2026-05-22T09:32:03Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 138048,
+        "stars": 138188,
         "language": "Python",
-        "updatedAt": "2026-05-21T09:41:44Z"
+        "updatedAt": "2026-05-21T18:44:22Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 137274,
+        "stars": 137369,
         "language": "Python",
-        "updatedAt": "2026-05-21T06:38:55Z"
+        "updatedAt": "2026-05-22T09:07:11Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "🔥 Search, scrape, and clean the web for AI agents.",
-        "stars": 122504,
+        "stars": 122866,
         "language": "TypeScript",
-        "updatedAt": "2026-05-21T09:07:02Z"
+        "updatedAt": "2026-05-22T07:23:40Z"
       },
       {
-        "name": "infiniflow/ragflow",
-        "url": "https://github.com/infiniflow/ragflow",
-        "description": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs",
-        "stars": 80967,
+        "name": "Shubhamsaboo/awesome-llm-apps",
+        "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+        "description": "100+ AI Agent & RAG apps you can actually run — clone, customize, ship.",
+        "stars": 111391,
         "language": "Python",
-        "updatedAt": "2026-05-21T07:37:41Z"
+        "updatedAt": "2026-05-21T21:39:26Z"
       }
     ]
   }
