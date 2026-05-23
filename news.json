@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-22T09:36:54.283Z",
+  "generatedAt": "2026-05-23T08:25:21.065Z",
   "sources": {
     "anthropic": [
       {
@@ -37,6 +37,10 @@
     ],
     "openai": [
       {
+        "title": "OpenAI named a Leader in enterprise coding agents by Gartner AI Adoption May 22, 2026",
+        "url": "https://openai.com/index/gartner-2026-agentic-coding-leader/"
+      },
+      {
         "title": "An OpenAI model has disproved a central conjecture in discrete geometry Research May 20, 2026",
         "url": "https://openai.com/index/model-disproves-discrete-geometry-conjecture/"
       },
@@ -63,10 +67,6 @@
       {
         "title": "Building a safe, effective sandbox to enable Codex on Windows Engineering May 13, 2026",
         "url": "https://openai.com/index/building-codex-windows-sandbox/"
-      },
-      {
-        "title": "Our response to the TanStack npm supply chain attack Company May 13, 2026",
-        "url": "https://openai.com/index/our-response-to-the-tanstack-npm-supply-chain-attack/"
       }
     ],
     "google": [
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 188340,
+        "stars": 188667,
         "language": "JavaScript",
         "updatedAt": "2026-05-20T03:25:40Z"
       },
@@ -116,89 +116,89 @@
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 184449,
+        "stars": 184466,
         "language": "Python",
-        "updatedAt": "2026-05-22T09:34:33Z"
+        "updatedAt": "2026-05-23T08:21:13Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi-K2.5, GLM-5, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 171996,
+        "stars": 172080,
         "language": "Go",
-        "updatedAt": "2026-05-21T20:19:03Z"
-      },
-      {
-        "name": "f/prompts.chat",
-        "url": "https://github.com/f/prompts.chat",
-        "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 162658,
-        "language": "HTML",
-        "updatedAt": "2026-05-22T04:30:45Z"
+        "updatedAt": "2026-05-22T16:47:04Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 162274,
+        "stars": 163579,
         "language": "Python",
-        "updatedAt": "2026-05-22T08:27:54Z"
+        "updatedAt": "2026-05-23T07:17:09Z"
+      },
+      {
+        "name": "f/prompts.chat",
+        "url": "https://github.com/f/prompts.chat",
+        "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
+        "stars": 162695,
+        "language": "HTML",
+        "updatedAt": "2026-05-23T04:20:42Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 160865,
+        "stars": 160896,
         "language": "Python",
-        "updatedAt": "2026-05-22T09:25:46Z"
+        "updatedAt": "2026-05-22T19:58:10Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 155822,
+        "stars": 155832,
         "language": "JavaScript",
-        "updatedAt": "2026-05-21T14:36:11Z"
+        "updatedAt": "2026-05-22T13:39:41Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Production-ready platform for agentic workflow development.",
-        "stars": 142247,
+        "stars": 142309,
         "language": "TypeScript",
-        "updatedAt": "2026-05-22T09:32:03Z"
+        "updatedAt": "2026-05-23T06:37:18Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 138188,
+        "stars": 138302,
         "language": "Python",
-        "updatedAt": "2026-05-21T18:44:22Z"
+        "updatedAt": "2026-05-22T09:54:31Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 137369,
+        "stars": 137444,
         "language": "Python",
-        "updatedAt": "2026-05-22T09:07:11Z"
+        "updatedAt": "2026-05-23T04:30:21Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "🔥 Search, scrape, and clean the web for AI agents.",
-        "stars": 122866,
+        "stars": 123178,
         "language": "TypeScript",
-        "updatedAt": "2026-05-22T07:23:40Z"
+        "updatedAt": "2026-05-23T07:03:32Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agent & RAG apps you can actually run — clone, customize, ship.",
-        "stars": 111391,
+        "stars": 111517,
         "language": "Python",
-        "updatedAt": "2026-05-21T21:39:26Z"
+        "updatedAt": "2026-05-23T04:24:14Z"
       }
     ]
   }
