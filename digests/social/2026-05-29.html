@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Social Feeds Digest — 2026-05-29</title>
+<style>
+body{font-family:monospace;max-width:860px;margin:40px auto;padding:0 20px;background:#0d1117;color:#c9d1d9}
+h1{color:#58a6ff;border-bottom:1px solid #30363d;padding-bottom:.5em}
+pre{white-space:pre-wrap;line-height:1.6;font-size:14px}
+a{color:#58a6ff}
+</style>
+</head>
+<body>
+<h1>Social Feeds Digest</h1>
+<p><a href="../../index.html">← All Digests</a> &nbsp;|&nbsp; 2026-05-29</p>
+<pre>Social Feeds Digest — 2026-05-29
+════════════════════════════════════════════════════
+
+REDDIT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Signal-to-noise today: High in AI/agent clusters, low elsewhere.
+
+[★★ AI AGENTS] r/hermesagent
+Hermes Agent v0.15.0 "Velocity Release" — the biggest update yet.
+Multi-agent Kanban platform, swarm topology, orchestrator auto-decomposition,
+worktree-per-task isolation, per-task model overrides, session_search 4500x
+faster, cold-start -76% code reduction, promptware/brainworm defense,
+Bitwarden secrets, OpenHands skill, skill bundles, Deliverable file-upload mode.
+This is the most feature-complete local agent framework currently active.
+
+[★ AI AGENTS/INFRA] r/hermesagent
+Cost reality check: User burned $10 in 1 hour with DeepSeek-V4 on OpenRouter
+(19.8M tokens). The "98% cheaper than Claude" narrative collapses at agentic
+token volumes — tool call loops consume tokens at a rate no one budgets for.
+
+[★ AI AGENTS/INFRA] r/hermesagent
+Hybrid local/cloud Hermes stack built at $3/month:
+DeepSeek-V4-Flash + Radicale CalDAV + Flatnotes + SearXNG+Firecrawl +
+Groq Whisper (free STT) + edge-tts (free TTS) + Telegram gateway.
+Full autonomous agent stack for near-zero cost if you own the hardware.
+
+[★ AI/LLM] r/ClaudeAI
+"Introducing Claude Opus 4.8" — image post, announcement on 2026-05-28.
+See Zhihu section below for feature breakdown.
+
+[★ AI/LLM] r/codex
+GPT-5.5 silently routed to GPT5-MINI; users being billed at GPT-5.5 rates.
+OpenAI has not publicly acknowledged the routing. Watch this space.
+
+[★ AI TOOLS] r/CodexHacks
+"grab" — terminal tool for LLM-assisted repo debugging (ripgrep-based).
+Recursive function indexing lets the AI emit its own extraction commands,
+expanding context incrementally rather than paste-and-pray.
+Repo: github.com/johnsellin93/grab
+
+[★ AI AGENTS] r/aicuriosity
+Google + Kaggle: Free 5-Day AI Agents Intensive Course (3 days ago).
+
+[★ AI AGENTS] r/openclaw
+"OpenClaw Best Practices: What Actually Works After Running It Daily"
+(382 upvotes, 80 comments) — AI agent framework getting real-world traction.
+"Does OpenClaw actually do anything for you guys?" (348 upvotes, 607 comments)
+
+[MACRO/CHINA] r/China_irl
+"2026年一季度全部省份盈余为负" — All Chinese provinces running fiscal
+deficits in Q1 2026. First time in recent memory for some provinces.
+
+[MACRO/CHINA] r/China_irl
+"中国崩溃论很扯，但未来10年依然是垃圾时间" (317 upvotes, 553 comments)
+High-engagement thread: "China collapse thesis is wrong, but the next 10 years
+are still 'trash time'" — structural stagnation without outright collapse.
+
+[MINOR] r/cscareerquestionsEU
+HFTs — Optiver, Jump Trading, HRT, etc. (25 upvotes, 31 comments)
+Career-focused EU thread; nothing operationally new.
+
+Noise: r/indonesia, r/SingaporeEats, r/AskReddit, r/TaylorSwift,
+r/netflix, r/smeSingapore, r/Cinephiles, r/SMRTRabak, r/vibecoding.
+
+────────────────────────────────────────
+
+ZHIHU
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Signal-to-noise today: High — quant + AI topics dominating the feed.
+
+[★★ QUANT] Jane Street Blotto Challenge
+"JaneStreet 这道最新的题目 Blotto Challenge 应该怎么做？"
+697 agrees · 123 comments · 826 reposts — widely circulating in quant community.
+One top commenter: "再次验证了我不适合做量化" (confirms I'm not cut out for quant).
+High engagement suggests this is an active recruiting puzzle.
+
+[★★ AI/LLM] Claude Opus 4.8 — Chinese community analysis
+Feature breakdown: "Dynamic context" — when a task is too large for one
+conversation, Claude now scripts the orchestration process itself, enabling
+multi-session autonomous workflows. Described as "让Claude把编排过程写成脚本"
+(have Claude write the orchestration as a script). This is the key new capability.
+
+[★ AI/FINTECH] Robinhood AI Agent trading accounts
+New Robinhood feature: users can open a dedicated sub-account for an AI agent,
+fund it with a set amount, and let the agent autonomously buy/sell stocks.
+First major retail broker to productize AI-agent-as-trader. Interesting regulatory
+and liability questions ahead.
+
+[★ QUANT/OPTIONS] Delta hedging thread
+"delta hedging是赚gamma战胜theta的钱吗？"
+Top answer from 303总督: frames it as non-first-order exposure — entering options
+vs delta-1 is specifically about capturing non-linear terms. Standard but well-argued.
+
+[★ MACRO] US stock crash probability
+"2026年你认为美股有多大可能崩盘？为什么？"
+130 agrees — options-data respondent: Dec-2026 530/520 put spread priced at $0.36,
+implying ~3.6% market-implied probability of crash to those levels.
+
+[★ ML] Reinforcement learning mathematics
+"从数学的角度来说，强化学习究竟是在干什么？" (298 agrees, 587 reposts)
+Popular: top answer frames RL as a "global narrative disaster" — fragmentation
+across learning/control/planning communities prevents unified mathematical grounding.
+
+[★ HFT] C++ low-latency skills
+"C++高频交易或者低延迟需要学习什么技能?"
+Respondent notes: internet leg is 20ms+ one-way, making it the dominant latency
+source for non-co-located strategies. Jitter management flagged as underrated.
+
+[MACRO/CRYPTO] Tether + Georgia stablecoin
+Tether + Georgian government launching GEL₮ (Georgian Lari-pegged stablecoin).
+Sovereign currency tokenization expanding beyond obvious markets.
+
+Noise: insurance product reviews, Singapore lifestyle, mobile plan deals,
+China cultural/political threads, AI education anxiety pieces.
+
+────────────────────────────────────────
+
+QUORA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Signal-to-noise today: Very low. Feed is dominated by evergreen viral content,
+not fresh signal. Nothing actionable for HFT/quant/macro audience.
+
+Geopolitical note: Iran/Houthi thread — "Iran's real secret weapon lies in Yemen:
+Bab el-Mandeb control, closed it in 2023, stated reopening is 'an option.'"
+Relevant if tracking oil/shipping risk (strait closure = Red Sea disruption repeat).
+
+Citrini Research archive post surfaced: "THE 2028 GLOBAL INTELLIGENCE CRISIS"
+(9.2K upvotes, 1.8K saves) — macro/strategic theme, but old content.
+
+────────────────────────────────────────
+
+SUBSTACK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Signal-to-noise today: Low. Feed showing mostly lifestyle/culture creators.
+No macro, quant, or fintech newsletter content visible.
+
+[AI/GOVERNANCE] Ted Gioia (1d ago)
+YouTube will now automatically label AI-generated content.
+"A big victory in the battle for transparency." — consumer platform governance signal.
+
+[MEDIA/BUSINESS] Hamish McKenzie (Substack founder, 1d)
+"If you're not paid by your audience, you're paid by someone else who wants
+something else." — reiterates Substack's independence-from-advertisers thesis.
+
+Noise: race/politics commentary, gardening, food recipes, relationship advice,
+fundraising posts, general lifestyle content.
+
+════════════════════════════════════════════════════
+
+CROSS-PLATFORM READ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Shared themes today:
+
+1. Claude Opus 4.8 launch (Reddit + Zhihu)
+   Both platforms confirming the announcement. Zhihu's quant/tech community
+   immediately focused on the "Dynamic context / self-scripting orchestration"
+   feature as the key capability shift — not a raw benchmark story, a workflow story.
+
+2. AI agent infrastructure going mainstream (Reddit)
+   Hermes v0.15.0, OpenClaw traction, Robinhood AI agent accounts, Google/Kaggle
+   free course — the tooling layer is consolidating and reaching broader audiences.
+
+3. LLM cost reality (Reddit)
+   Agentic token burn rates destroy the "cheap model" thesis. Anyone building
+   multi-turn tool-calling pipelines is hitting this wall.
+
+4. China fiscal stress (Reddit + Zhihu)
+   All-province deficit in Q1 2026 + "trash time decade" narrative both trending.
+   Consistent with Pettis's demand-side diagnosis (seen in yesterday's X monitor).
+
+5. Jane Street Blotto Challenge (Zhihu)
+   Extremely high engagement in quant circles — likely an active recruiting signal.
+
+Where the actionable signal is:
+→ Hermes v0.15.0 release notes (AI agent infra)
+→ Robinhood AI agent trading account (regulatory/market microstructure implication)
+→ Jane Street Blotto Challenge (quant recruiting signal)
+→ Claude Opus 4.8 Dynamic Context feature (agent orchestration capability)
+→ All-China Q1 fiscal deficit (macro positioning input)</pre>
+</body>
+</html>
