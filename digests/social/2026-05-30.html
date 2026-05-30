@@ -1,0 +1,201 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Social Feeds Digest — 2026-05-30</title>
+<style>body{font-family:monospace;max-width:860px;margin:40px auto;padding:0 20px;background:#0d1117;color:#c9d1d9}h1{color:#58a6ff;border-bottom:1px solid #30363d;padding-bottom:.5em}pre{white-space:pre-wrap;line-height:1.6;font-size:14px}a{color:#58a6ff}</style>
+</head><body><h1>Social Feeds Digest</h1>
+<p><a href="../../index.html">← All Digests</a> &nbsp;|&nbsp; 2026-05-30</p>
+<pre>SOCIAL FEEDS DIGEST — 2026-05-30
+════════════════════════════════════════════════════════════
+
+REDDIT
+──────
+High signal today from r/hermesagent, r/ClaudeCode, r/codex. Majority of feed
+is noise (Singapore lifestyle, Taiwan/Korea local news, TaylorSwift, Indonesia).
+
+TOP POSTS:
+
+[r/hermesagent] Hermes Agent v0.15.0 — The Velocity Release (1d ago)
+Dateline May 28. 1,302 commits, 747 merged PRs across this cycle. Headlines:
+- Kanban grew into real multi-agent platform: orchestrator auto-decomposition,
+  swarm topology (root → parallel workers → gated verifier → synthesizer),
+  per-task model overrides, scheduled start times, worktree-per-task.
+- Agent conversation loop refactored: -76% code, 14 cohesive modules. Cold
+  start: 47% fewer per-turn function calls, another second shaved.
+- session_search rebuilt: no LLM, 4,500× faster, free. Old version cost $0.30/
+  call and took ~30 seconds.
+- Promptware/Brainworm defense: prompt injection blocked at 3 chokepoints —
+  tool output, recalled memory, stored skills. 15 new C2 patterns.
+- Bitwarden Secrets Manager integration: one bootstrap token replaces all API
+  keys in ~/.hermes/.env.
+- xAI deep integration: web search plugin, proxy upstream (SuperGrok OAuth),
+  model retirement detection, auto_speech_tags for TTS.
+★ AGENT SIGNAL: This is the benchmark release for agentic infrastructure.
+  Multi-agent swarm with typed topology, promptware defense, and sub-second
+  cold start sets the bar for production agent frameworks.
+
+[r/hermesagent] Burned through $10 in an hour (1d ago)
+User switched from Claude Pro to DeepSeek v4 pro via OpenRouter. Hermes
+burned 19.8M tokens in 1 hour. Key insight: Hermes is verbose by design.
+Cheap-per-token models aren't always cheaper — token count inflates to
+compensate for weaker in-context compression. Claude's $20/mo plan handles
+the same workload within limits.
+
+[r/hermesagent] Docker vs host install for Hermes (7h ago)
+Active debate on whether to run Hermes on host (full file system access,
+better UX) vs Docker (isolation, security). No consensus yet.
+
+[r/ClaudeCode] Introducing Claude Opus 4.8 (1d ago)
+New model launched. Separately, r/ClaudeCode has "Opus 4.8 distilled Qwen?"
+speculation thread — community suspects Anthropic is using Qwen distillation
+for cost-efficient frontier-class performance. Story to watch.
+
+[r/codex] "Big updates coming today" + "Expecting GPT-5.6 in 2-4 hours"
+(21h + 10h ago) — OpenAI Codex update teased; community tracking pattern of
+model releases. As of fetch time, no confirmation.
+
+[r/codex] "CCBot — C&C Claude Code, Codex, and Gemini CLI from phone via
+Telegram" (3mo, 2 upvotes) — surfaced as suggested. Simple Telegram bot that
+routes to multiple coding agents. Relevant for multi-agent tooling.
+
+[r/ClaudeAI] Spent 1,156,308,524 input tokens in May (15h ago)
+Detailed token cost breakdown from a founder running AI SEO agents:
+- Opus 4.7 ships new tokenizer: generates ~35% more tokens for same input
+  vs Opus 4.6 — effective cost increase even at same price/token.
+- Anthropic changed prompt cache TTL: 60 min → 5 min in early 2026.
+  For many workloads this silently increased costs 30–60%.
+- Output tokens are 5× price of input. Returning IDs instead of full text
+  cut output costs ~60%.
+- JSON is a "token pig" — 2× tokens vs plain text for same data.
+★ QUANT SIGNAL: Cache TTL reduction is critical for any high-frequency
+  LLM pipeline. Audit cache hit rates now.
+
+[r/openclaw] "OpenClaw Best Practices: What Actually Works After Running
+It Daily" (3mo, 382 upvotes, 80 comments) — surfaced as suggested. High
+engagement thread on production OpenClaw patterns.
+
+[r/wallstreetbets] "Officially hit 7 figures" + "SOLD EVERYTHING!" — Typical
+WSB post cycle: brag followed by panic. No market structure signal.
+
+[r/cscareerquestionsEU] "HFTs — Optiver, Jump Trading, HRT, etc." (2y ago,
+25 upvotes) — Old suggested thread on breaking into HFT in Europe. Noise.
+
+Signal/Noise ratio: ~6 signal posts out of ~30 visible. Above average day
+due to Hermes v0.15.0 and Opus 4.8 news.
+
+════════════════════════════════════════════════════════════
+
+ZHIHU 知乎
+──────────
+Heavy quant + AI infrastructure day. Highest signal platform today.
+
+TOP POSTS:
+
+★ [真剑圣] 趋势跟踪策略的奥卡姆最优性 — Occam's Razor Optimality of
+  Trend-Following (26 upvotes)
+  Review of Grebenkov & Serror (2014). Argues trend-following is the simplest
+  model that is also statistically optimal — Occam's Razor applied to alpha.
+  Signal: Academic grounding for CTA/momentum strategies. Good reference.
+
+★★ [everCheer] Agent驱动的因子挖掘，迭代与反思 (21 upvotes, running 3 weeks)
+  Agent-driven factor mining system: 536 factors produced in 3 weeks, 27 live
+  in strategy, connected to BN live data, model simulation running 1 week.
+  Signal: Production-grade quant agent at scale. Real PnL connection.
+
+★★ [真剑圣] 量化投研Agent开发要义: Research Memory (27 upvotes)
+  "The critical question is no longer 'can it answer' but 'can it remember
+  how it failed last time'." Covers building persistent Research Memory for
+  quant agents — how to store, retrieve, and apply failed-experiment history.
+  Signal: Directly addresses the #1 failure mode of quant LLM agents.
+
+★★ [亦文亦武] 以拓扑排序Wave并行构建微秒级因子DAG计算引擎
+  Topological-sort Wave parallel DAG engine for microsecond factor computation.
+  Problem: SMA(5) and SMA(20) both need close rolling window — naive impl
+  scans twice. Solution: DAG with Wave-level parallel execution. 50+ factors
+  computed at microsecond latency without redundant data scans.
+  Signal: Production HFT factor infra. DAG + topo-sort for factor dependency
+  resolution is the right architecture for real-time alpha computation.
+
+[十五] 量化交易的本质完完全全就是统计学吗？ (906 upvotes)
+  Rich debate: Is quant trading "just statistics"? Argues it starts with
+  intuition, becomes statistics, then game theory vs other players.
+
+[阿甘法则] 波动率才是利润的来源 (80 upvotes)
+  "Volatility is the source of profit, direction is just surface."
+  Professional traders manage volatility, retail traders guess direction.
+
+[DeepTech深科技] Alex Gerko profile — math PhD → XTX Markets →
+  £1B+ UK "tax king." Built quant empire with AI on Iceland geothermal compute.
+
+[Zeurd] 突然有点理解LeCun为什么喷LLM了 (589 upvotes)
+  Triggered by GPT-5.5's performance. Author starts understanding LeCun's
+  critique of LLMs after reading papers. Productive AI debate.
+
+[大卫在东京] 被字节腾讯阿里裁员以后再也不说话了 (1万 upvotes)
+  Why laid-off Big Tech workers go silent. Cultural/psychological read on
+  Chinese tech talent market. Background signal on labor market stress.
+
+Signal/Noise ratio: 7-8 signal posts out of ~15. Exceptional day.
+
+════════════════════════════════════════════════════════════
+
+QUORA
+─────
+Pure evergreen noise today. No temporal signal, no HFT/quant/AI content.
+Top suggestions: China politics, American morning showers, wealth/investment
+evergreens. Skip.
+
+Signal/Noise: 0/10.
+
+════════════════════════════════════════════════════════════
+
+SUBSTACK
+────────
+Low-signal but a few notable reads:
+
+[Le Shrub] "Wall of Supply" — r/Reminiscences of a Shrub Operator
+  233 upvotes, 118 comments. Market structure post on supply zone dynamics.
+  One of the few trading-focused substacks with real practitioner voice.
+
+[Alap Shah] "The Global Intelligence Crisis · Part Three" (Mar 25)
+  Series on geopolitical intelligence fragmentation. 1,141 upvotes, 1,314.
+  Background reading on geopolitical risk for macro positioning.
+
+[Ted Gioia] "The same people force-feeding AI on you are building rockets
+  that blow up on launch." (9h ago) — Blue Origin explosion. Sharp critique of
+  tech-bro credentialism. Culturally notable but not actionable.
+
+[Hamish McKenzie] On Substack's "warm internet" thesis — internet does not
+  have to be a place that makes us feel worse. Platform positioning essay.
+
+Signal/Noise: 2/8. Weak day on Substack.
+
+════════════════════════════════════════════════════════════
+
+CROSS-PLATFORM READ — 2026-05-30
+─────────────────────────────────
+Shared theme: AI agent infrastructure reaching production maturity — and
+the cost/reliability reckoning that comes with it.
+
+1. AGENT INFRASTRUCTURE IS PRODUCTION-GRADE NOW.
+   Hermes v0.15.0 (multi-agent swarm, promptware defense, 4500× faster search)
+   and Claude Opus 4.8 launch both signal that agentic AI is no longer demo-
+   ware. The frameworks are mature enough that cost and security are the new
+   frontiers, not capability.
+
+2. QUANT AGENT WAVE IN CHINESE CIRCLES (Zhihu is the source).
+   Three independent Zhihu posts in one day: Agent-driven factor mining (536
+   factors, 27 live), Research Memory for quant LLM agents, and microsecond
+   DAG factor engines. This is a coordinated maturation wave — Chinese quant
+   shops are productionizing agent-based alpha research. This is 6-12 months
+   ahead of what English-language forums are discussing.
+
+3. TOKEN ECONOMICS ARE NOW MATERIAL INFRASTRUCTURE COSTS.
+   Anthropic's cache TTL cut (60min→5min) silently raised production costs
+   30-60%. Opus 4.7's new tokenizer adds 35% more tokens. For any HFT-adjacent
+   LLM pipeline, token cost is now a first-class engineering constraint.
+
+WHERE THE ACTIONABLE SIGNAL IS:
+- Hermes v0.15.0 release notes (promptware defense + swarm topology): read now
+- Zhihu's DAG factor engine post: translate and prototype
+- Research Memory for quant agents (真剑圣): architecture worth implementing
+- Audit Claude API cache hit rates if running production pipelines</pre></body></html>
