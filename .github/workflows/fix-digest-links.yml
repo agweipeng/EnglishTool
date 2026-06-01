@@ -1,43 +1,49 @@
-name: Fix Digest Index Links
+name: Build Digest Index
 
 # The external digest publisher (stratbrain machines) overwrites
-# digests/index.html with links like href="digests/<slug>/<date>.html".
-# Because the index is served at /EnglishTool/digests/, that doubles the
-# path (/digests/digests/...) and 404s. This workflow strips the
-# redundant prefix automatically on every push that touches the index.
+# digests/index.html with only the latest issue per category, and with
+# links like href="digests/<slug>/<date>.html" that double the path
+# (/digests/digests/...) and 404 when served at /EnglishTool/digests/.
+#
+# This workflow regenerates digests/index.html from every dated file on
+# disk: ALL issues per category, newest first, with correct relative
+# links. Runs on any push under digests/ and commits if the index changed.
 #
 # Loop-safe: a push made with the default GITHUB_TOKEN does NOT trigger
-# another workflow run, so the auto-fix commit cannot recurse.
+# another workflow run, so the regeneration commit cannot recurse.
 
 on:
   push:
     branches: [main]
     paths:
-      - 'digests/index.html'
+      - 'digests/**'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: fix-digest-links
+  group: build-digest-index
   cancel-in-progress: false
 
 jobs:
-  fix:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Strip redundant digests/ prefix
-        run: sed -i 's|href="digests/|href="|g' digests/index.html
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Rebuild digest archive index (all days)
+        run: node scripts/build-digest-index.mjs
       - name: Commit if changed
         run: |
           if git diff --quiet digests/index.html; then
-            echo "Index links already correct — nothing to fix."
+            echo "Index already up to date — nothing to commit."
             exit 0
           fi
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add digests/index.html
-          git commit -m "fix(digests): auto-strip doubled digests/ prefix in index links"
+          git commit -m "chore(digests): rebuild archive index with all issues"
           git push
