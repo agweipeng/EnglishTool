@@ -1057,8 +1057,10 @@ function renderLibrary() {
     row.className = 'library-item' + (w.archivedAt ? ' archived' : '') + (leech ? ' leech' : '');
     row.innerHTML = `
       <div class="word-info">
-        <div class="w">${escapeHTML(w.text)} ${w.archivedAt ? '⭐' : ''}${leech ? ' 🐛' : ''}</div>
-        <div class="d">${escapeHTML(w.defCN || w.defEN || '')}</div>
+        <div class="w">${escapeHTML(w.text)}${w.phonetic ? ` <span class="ph">${escapeHTML(w.phonetic)}</span>` : ''} ${w.archivedAt ? '⭐' : ''}${leech ? ' 🐛' : ''}</div>
+        ${w.defEN ? `<div class="d d-en">${escapeHTML(w.defEN)}</div>` : ''}
+        ${w.defCN ? `<div class="d d-cn">${escapeHTML(w.defCN)}</div>` : ''}
+        ${!w.defEN && !w.defCN ? `<div class="d">(no definition)</div>` : ''}
         <div>${(w.tags || []).map(t => `<span class="tag">${escapeHTML(t)}</span>`).join('')}</div>
       </div>
       <div>
