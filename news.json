@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-11T10:44:56.925Z",
+  "generatedAt": "2026-06-12T10:21:07.706Z",
   "sources": {
     "anthropic": [
       {
@@ -7,16 +7,20 @@
         "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5"
       },
       {
+        "title": "Announcements Jun 11, 2026 Introducing Claude Corps We’re launching Claude Corps, a national…",
+        "url": "https://www.anthropic.com/news/claude-corps"
+      },
+      {
         "title": "Announcements Jun 2, 2026 Expanding Project Glasswing We’re extending Project Glasswing to…",
         "url": "https://www.anthropic.com/news/expanding-project-glasswing"
       },
       {
-        "title": "Product May 28, 2026 Introducing Claude Opus 4.8 An upgrade to our Opus class of models, with…",
-        "url": "https://www.anthropic.com/news/claude-opus-4-8"
-      },
-      {
         "title": "Announcements May 25, 2026 Anthropic co-founder Chris Olah's remarks on Pope Leo XIV's encyclical…",
         "url": "https://www.anthropic.com/news/chris-olah-pope-leo-encyclical"
+      },
+      {
+        "title": "Jun 11, 2026 Announcements DXC will integrate Claude into the systems banks, airlines, and other…",
+        "url": "https://www.anthropic.com/news/dxc-anthropic-alliance"
       },
       {
         "title": "Jun 3, 2026 Announcements Introducing the Services Track and Partner Hub of the Claude Partner…",
@@ -29,16 +33,16 @@
       {
         "title": "Jun 1, 2026 Announcements Anthropic confidentially submits draft S-1 to the SEC",
         "url": "https://www.anthropic.com/news/confidential-draft-s1-sec"
-      },
-      {
-        "title": "May 28, 2026 Announcements Anthropic raises $65B in Series H funding at $965B post-money valuation",
-        "url": "https://www.anthropic.com/news/series-h"
       }
     ],
     "openai": [
       {
         "title": "How an astrophysicist uses Codex to help simulate black holes Applied AI Jun 11, 2026",
         "url": "https://openai.com/index/using-codex-to-simulate-black-holes/"
+      },
+      {
+        "title": "OpenAI to acquire Ona Company Jun 11, 2026",
+        "url": "https://openai.com/index/openai-to-acquire-ona/"
       },
       {
         "title": "Access OpenAI models and Codex through your Oracle cloud commitment Company Jun 10, 2026",
@@ -63,10 +67,6 @@
       {
         "title": "Introducing new capabilities to GPT-Rosalind Product Jun 3, 2026",
         "url": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind/"
-      },
-      {
-        "title": "Codex for every role, tool, and workflow Product Jun 2, 2026",
-        "url": "https://openai.com/index/codex-for-every-role-tool-workflow/"
       }
     ],
     "google": [
@@ -108,55 +108,55 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 213083,
+        "stars": 213892,
         "language": "JavaScript",
-        "updatedAt": "2026-06-11T05:44:59Z"
+        "updatedAt": "2026-06-11T20:24:32Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 190489,
+        "stars": 191488,
         "language": "Python",
-        "updatedAt": "2026-06-11T10:32:14Z"
+        "updatedAt": "2026-06-12T10:13:34Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 184886,
+        "stars": 184902,
         "language": "Python",
-        "updatedAt": "2026-06-11T10:26:53Z"
+        "updatedAt": "2026-06-12T09:49:48Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi-K2.6, GLM-5.1, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 173840,
+        "stars": 173928,
         "language": "Go",
-        "updatedAt": "2026-06-11T02:15:17Z"
+        "updatedAt": "2026-06-12T07:49:07Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 163563,
+        "stars": 163612,
         "language": "HTML",
-        "updatedAt": "2026-06-11T04:35:31Z"
+        "updatedAt": "2026-06-12T04:35:13Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 161488,
+        "stars": 161530,
         "language": "Python",
-        "updatedAt": "2026-06-11T10:43:34Z"
+        "updatedAt": "2026-06-12T09:59:18Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 156309,
+        "stars": 156334,
         "language": "JavaScript",
         "updatedAt": "2026-06-11T01:20:03Z"
       },
@@ -164,15 +164,15 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Production-ready platform for agentic workflow development.",
-        "stars": 144837,
+        "stars": 144945,
         "language": "TypeScript",
-        "updatedAt": "2026-06-11T10:41:31Z"
+        "updatedAt": "2026-06-12T09:56:35Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 141067,
+        "stars": 141185,
         "language": "Python",
         "updatedAt": "2026-06-11T00:29:43Z"
       },
@@ -180,25 +180,25 @@
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 139024,
+        "stars": 139110,
         "language": "Python",
-        "updatedAt": "2026-06-11T07:50:24Z"
+        "updatedAt": "2026-06-12T09:25:07Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The API to search, scrape, and interact with the web at scale. 🔥",
-        "stars": 131330,
+        "stars": 131715,
         "language": "TypeScript",
-        "updatedAt": "2026-06-11T09:10:23Z"
+        "updatedAt": "2026-06-12T08:46:22Z"
       },
       {
         "name": "infiniflow/ragflow",
         "url": "https://github.com/infiniflow/ragflow",
         "description": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs",
-        "stars": 82452,
+        "stars": 82540,
         "language": "Python",
-        "updatedAt": "2026-06-11T10:34:27Z"
+        "updatedAt": "2026-06-12T10:18:55Z"
       }
     ]
   }
