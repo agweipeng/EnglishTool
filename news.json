@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-21T09:56:21.732Z",
+  "generatedAt": "2026-06-22T12:15:47.724Z",
   "sources": {
     "anthropic": [
       {
@@ -37,6 +37,10 @@
     ],
     "openai": [
       {
+        "title": "Samsung Electronics brings ChatGPT and Codex to employees Company Jun 21, 2026",
+        "url": "https://openai.com/index/samsung-electronics-chatgpt-codex-deployment/"
+      },
+      {
         "title": "New usage analytics and updated spend controls for enterprises Product Jun 18, 2026",
         "url": "https://openai.com/index/chatgpt-enterprise-spend-controls/"
       },
@@ -63,10 +67,6 @@
       {
         "title": "Introducing the OpenAI Partner Network Product Jun 14, 2026",
         "url": "https://openai.com/index/introducing-openai-partner-network/"
-      },
-      {
-        "title": "New OpenAI Academy courses for the next era of work AI Adoption Jun 12, 2026",
-        "url": "https://openai.com/index/academy-courses-applying-ai-at-work/"
       }
     ],
     "google": [
@@ -108,55 +108,55 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 219010,
+        "stars": 219637,
         "language": "JavaScript",
-        "updatedAt": "2026-06-21T00:49:17Z"
+        "updatedAt": "2026-06-22T04:55:54Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 198572,
+        "stars": 199554,
         "language": "Python",
-        "updatedAt": "2026-06-21T08:41:16Z"
+        "updatedAt": "2026-06-22T12:03:11Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 185047,
+        "stars": 185071,
         "language": "Python",
-        "updatedAt": "2026-06-20T23:50:26Z"
+        "updatedAt": "2026-06-22T11:58:59Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi-K2.6, GLM-5.1, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 174626,
+        "stars": 174721,
         "language": "Go",
-        "updatedAt": "2026-06-21T00:24:07Z"
+        "updatedAt": "2026-06-22T05:20:34Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 163998,
+        "stars": 164077,
         "language": "HTML",
-        "updatedAt": "2026-06-21T04:36:05Z"
+        "updatedAt": "2026-06-22T04:37:38Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 161766,
+        "stars": 161796,
         "language": "Python",
-        "updatedAt": "2026-06-21T09:51:40Z"
+        "updatedAt": "2026-06-22T11:21:28Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 156498,
+        "stars": 156529,
         "language": "JavaScript",
         "updatedAt": "2026-06-17T07:06:40Z"
       },
@@ -164,15 +164,15 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Production-ready platform for agentic workflow development.",
-        "stars": 146011,
+        "stars": 146137,
         "language": "TypeScript",
-        "updatedAt": "2026-06-21T08:41:35Z"
+        "updatedAt": "2026-06-22T12:08:44Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 142473,
+        "stars": 142600,
         "language": "Python",
         "updatedAt": "2026-06-19T23:43:24Z"
       },
@@ -180,25 +180,25 @@
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 139788,
+        "stars": 139870,
         "language": "Python",
-        "updatedAt": "2026-06-21T09:16:11Z"
+        "updatedAt": "2026-06-22T10:02:01Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The API to search, scrape, and interact with the web at scale. 🔥",
-        "stars": 135997,
+        "stars": 136641,
         "language": "TypeScript",
-        "updatedAt": "2026-06-21T07:47:48Z"
+        "updatedAt": "2026-06-22T11:30:56Z"
       },
       {
-        "name": "Shubhamsaboo/awesome-llm-apps",
-        "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
-        "description": "100+ AI Agent & RAG apps you can actually run — clone, customize, ship.",
-        "stars": 115201,
+        "name": "TauricResearch/TradingAgents",
+        "url": "https://github.com/TauricResearch/TradingAgents",
+        "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+        "stars": 87929,
         "language": "Python",
-        "updatedAt": "2026-06-15T01:00:09Z"
+        "updatedAt": "2026-06-22T02:05:09Z"
       }
     ]
   }
