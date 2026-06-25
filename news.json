@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-24T09:38:39.696Z",
+  "generatedAt": "2026-06-25T09:30:25.896Z",
   "sources": {
     "anthropic": [
       {
@@ -37,6 +37,14 @@
     ],
     "openai": [
       {
+        "title": "How agents are transforming work Company Jun 25, 2026",
+        "url": "https://openai.com/index/how-agents-are-transforming-work/"
+      },
+      {
+        "title": "OpenAI and Broadcom unveil LLM-optimized inference chip Company Jun 24, 2026",
+        "url": "https://openai.com/index/openai-broadcom-jalapeno-inference-chip/"
+      },
+      {
         "title": "How GPT-5 helped immunologist Derya Unutmaz solve a 3-year-old mystery Applied AI Jun 23, 2026",
         "url": "https://openai.com/index/gpt-5-immunology-mystery/"
       },
@@ -59,14 +67,6 @@
       {
         "title": "New usage analytics and updated spend controls for enterprises Product Jun 18, 2026",
         "url": "https://openai.com/index/chatgpt-enterprise-spend-controls/"
-      },
-      {
-        "title": "Improving health intelligence in ChatGPT Product Jun 18, 2026",
-        "url": "https://openai.com/index/improving-health-intelligence-in-chatgpt/"
-      },
-      {
-        "title": "Using AI to help physicians diagnose rare genetic diseases affecting children Applied AI Jun 18,…",
-        "url": "https://openai.com/index/diagnose-rare-childhood-diseases/"
       }
     ],
     "google": [
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 220845,
+        "stars": 221403,
         "language": "JavaScript",
         "updatedAt": "2026-06-22T04:55:54Z"
       },
@@ -116,79 +116,79 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 201446,
+        "stars": 202548,
         "language": "Python",
-        "updatedAt": "2026-06-24T09:36:27Z"
+        "updatedAt": "2026-06-25T08:46:54Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 185142,
+        "stars": 185158,
         "language": "Python",
-        "updatedAt": "2026-06-24T09:38:26Z"
+        "updatedAt": "2026-06-25T07:58:37Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi-K2.6, GLM-5.1, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 174827,
+        "stars": 174886,
         "language": "Go",
-        "updatedAt": "2026-06-24T01:22:55Z"
+        "updatedAt": "2026-06-25T00:22:09Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 164236,
+        "stars": 164321,
         "language": "HTML",
-        "updatedAt": "2026-06-24T04:30:12Z"
+        "updatedAt": "2026-06-25T04:29:38Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 161861,
+        "stars": 161902,
         "language": "Python",
-        "updatedAt": "2026-06-24T09:01:31Z"
+        "updatedAt": "2026-06-25T09:28:37Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Production-ready platform for agentic workflow development.",
-        "stars": 146404,
+        "stars": 146524,
         "language": "TypeScript",
-        "updatedAt": "2026-06-24T09:36:42Z"
+        "updatedAt": "2026-06-25T09:29:14Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 142820,
+        "stars": 142942,
         "language": "Python",
-        "updatedAt": "2026-06-23T21:35:46Z"
+        "updatedAt": "2026-06-25T02:31:46Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 140069,
+        "stars": 140158,
         "language": "Python",
-        "updatedAt": "2026-06-23T16:26:27Z"
+        "updatedAt": "2026-06-24T23:12:22Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The API to search, scrape, and interact with the web at scale. 🔥",
-        "stars": 138378,
+        "stars": 138883,
         "language": "TypeScript",
-        "updatedAt": "2026-06-24T07:21:03Z"
+        "updatedAt": "2026-06-25T09:08:38Z"
       },
       {
         "name": "TauricResearch/TradingAgents",
         "url": "https://github.com/TauricResearch/TradingAgents",
         "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
-        "stars": 88270,
+        "stars": 88432,
         "language": "Python",
         "updatedAt": "2026-06-22T02:05:09Z"
       },
@@ -196,9 +196,9 @@
         "name": "thedotmack/claude-mem",
         "url": "https://github.com/thedotmack/claude-mem",
         "description": "Persistent Context Across Sessions for Every Agent –  Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More",
-        "stars": 84024,
+        "stars": 84199,
         "language": "JavaScript",
-        "updatedAt": "2026-06-22T22:33:58Z"
+        "updatedAt": "2026-06-24T23:34:38Z"
       }
     ]
   }
