@@ -1,30 +1,30 @@
 {
-  "generatedAt": "2026-06-30T09:47:17.447Z",
+  "generatedAt": "2026-07-01T09:57:12.120Z",
   "sources": {
     "anthropic": [
       {
-        "title": "Statement on the US government directive to suspend access to Fable 5 and Mythos 5 Announcements…",
-        "url": "https://www.anthropic.com/news/fable-mythos-access"
+        "title": "Redeploying Fable 5 Announcements Jun 30, 2026 Fable 5 returns globally July 1. We're also…",
+        "url": "https://www.anthropic.com/news/redeploying-fable-5"
+      },
+      {
+        "title": "Product Jun 30, 2026 Introducing Claude Sonnet 5 Sonnet 5 delivers frontier performance across…",
+        "url": "https://www.anthropic.com/news/claude-sonnet-5"
+      },
+      {
+        "title": "Announcements Jun 30, 2026 Claude Science, an AI workbench for scientists, is now available Claude…",
+        "url": "https://www.anthropic.com/news/claude-science-ai-workbench"
       },
       {
         "title": "Product Jun 23, 2026 Introducing Claude Tag Claude Tag is a new way for teams to work with Claude.",
         "url": "https://www.anthropic.com/news/introducing-claude-tag"
       },
       {
-        "title": "Announcements Jun 11, 2026 Introducing Claude Corps We’re launching Claude Corps, a national…",
-        "url": "https://www.anthropic.com/news/claude-corps"
-      },
-      {
-        "title": "Announcements Jun 2, 2026 Expanding Project Glasswing We’re extending Project Glasswing to…",
-        "url": "https://www.anthropic.com/news/expanding-project-glasswing"
-      },
-      {
-        "title": "Product May 28, 2026 Introducing Claude Opus 4.8 An upgrade to our Opus class of models, with…",
-        "url": "https://www.anthropic.com/news/claude-opus-4-8"
-      },
-      {
         "title": "Jun 17, 2026 Announcements Anthropic opens Seoul office and announces new partnerships across the…",
         "url": "https://www.anthropic.com/news/seoul-office-partnerships-korean-ai-ecosystem"
+      },
+      {
+        "title": "Jun 12, 2026 Announcements Statement on the US government directive to suspend access to Fable 5…",
+        "url": "https://www.anthropic.com/news/fable-mythos-access"
       },
       {
         "title": "Jun 12, 2026 Announcements Results from the first Anthropic Public Record",
@@ -36,6 +36,14 @@
       }
     ],
     "openai": [
+      {
+        "title": "Introducing GeneBench-Pro Research Jun 30, 2026",
+        "url": "https://openai.com/index/introducing-genebench-pro/"
+      },
+      {
+        "title": "Core dump epidemiology: fixing an 18-year-old bug Engineering Jun 30, 2026",
+        "url": "https://openai.com/index/core-dump-epidemiology-data-infrastructure-bug/"
+      },
       {
         "title": "How HP is scaling early AI wins across the enterprise Company Jun 28, 2026",
         "url": "https://openai.com/index/hp-frontier-partnership/"
@@ -59,17 +67,13 @@
       {
         "title": "Daybreak: Tools for securing every organization in the world Security Jun 22, 2026",
         "url": "https://openai.com/index/daybreak-securing-the-world/"
-      },
-      {
-        "title": "Patch the Planet: a Daybreak initiative to support open source maintainers Security Jun 22, 2026",
-        "url": "https://openai.com/index/patch-the-planet/"
-      },
-      {
-        "title": "Codex-Maxxing for Long-Running Work AI Adoption Jun 22, 2026",
-        "url": "https://openai.com/index/codex-maxxing-long-running-work/"
       }
     ],
     "google": [
+      {
+        "title": "Gemini Spark updates: macOS launch, connected apps and more",
+        "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-spark-updates-june-2026/"
+      },
       {
         "title": "The Gemini app is bringing personalized image creation to more users.",
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/personal-intelligence-nano-banana-us-expansion/"
@@ -77,10 +81,6 @@
       {
         "title": "5 ways to learn with study notebooks in the Gemini app",
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-study-notebooks/"
-      },
-      {
-        "title": "Save time and grow your business with new Gemini tools",
-        "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-features-for-businesses/"
       },
       {
         "title": "Towards a world where no one is surprised by a natural disaster",
@@ -108,55 +108,55 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 223671,
+        "stars": 224347,
         "language": "JavaScript",
-        "updatedAt": "2026-06-30T02:44:52Z"
+        "updatedAt": "2026-07-01T00:43:50Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 206066,
+        "stars": 206829,
         "language": "Python",
-        "updatedAt": "2026-06-30T09:45:28Z"
+        "updatedAt": "2026-07-01T09:55:02Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 185224,
+        "stars": 185222,
         "language": "Python",
-        "updatedAt": "2026-06-30T09:36:56Z"
+        "updatedAt": "2026-07-01T09:28:08Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi-K2.6, GLM-5.1, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 175171,
+        "stars": 175212,
         "language": "Go",
-        "updatedAt": "2026-06-30T04:15:10Z"
+        "updatedAt": "2026-07-01T01:39:17Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 164552,
+        "stars": 164584,
         "language": "HTML",
-        "updatedAt": "2026-06-30T04:30:17Z"
+        "updatedAt": "2026-07-01T04:36:18Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 162045,
+        "stars": 162067,
         "language": "Python",
-        "updatedAt": "2026-06-30T09:43:19Z"
+        "updatedAt": "2026-07-01T09:43:46Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 156712,
+        "stars": 156728,
         "language": "JavaScript",
         "updatedAt": "2026-06-28T22:50:31Z"
       },
@@ -164,41 +164,41 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Production-ready platform for agentic workflow development.",
-        "stars": 147093,
+        "stars": 147217,
         "language": "TypeScript",
-        "updatedAt": "2026-06-30T09:44:33Z"
+        "updatedAt": "2026-07-01T09:56:49Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 143517,
+        "stars": 143660,
         "language": "Python",
-        "updatedAt": "2026-06-30T02:31:50Z"
+        "updatedAt": "2026-07-01T08:41:05Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The API to search, scrape, and interact with the web at scale. 🔥",
-        "stars": 141779,
+        "stars": 142454,
         "language": "TypeScript",
-        "updatedAt": "2026-06-30T07:27:42Z"
+        "updatedAt": "2026-07-01T07:40:07Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 140560,
+        "stars": 140632,
         "language": "Python",
-        "updatedAt": "2026-06-29T19:47:27Z"
+        "updatedAt": "2026-07-01T08:16:23Z"
       },
       {
         "name": "thedotmack/claude-mem",
         "url": "https://github.com/thedotmack/claude-mem",
         "description": "Persistent Context Across Sessions for Every Agent –  Captures everything your agent does during sessions, compresses it with AI, and injects relevant context back into future sessions. Works with Claude Code, OpenClaw, Codex, Gemini, Hermes, Copilot, OpenCode + More",
-        "stars": 85128,
+        "stars": 85299,
         "language": "JavaScript",
-        "updatedAt": "2026-06-30T02:52:42Z"
+        "updatedAt": "2026-07-01T04:52:44Z"
       }
     ]
   }
