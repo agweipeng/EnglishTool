@@ -1,9 +1,13 @@
 {
-  "generatedAt": "2026-07-24T08:32:44.415Z",
+  "generatedAt": "2026-07-25T08:12:01.207Z",
   "sources": {
     "anthropic": [
       {
-        "title": "Inviting hard questions Announcements Jul 9, 2026 We’re asking the public for their hardest…",
+        "title": "Introducing Claude Opus 5 Product Jul 24, 2026 Opus 5 is a step change improvement for the Opus…",
+        "url": "https://www.anthropic.com/news/claude-opus-5"
+      },
+      {
+        "title": "Announcements Jul 9, 2026 Inviting hard questions We’re asking the public for their hardest…",
         "url": "https://www.anthropic.com/news/hard-questions"
       },
       {
@@ -13,10 +17,6 @@
       {
         "title": "Product Jun 30, 2026 Introducing Claude Sonnet 5 Sonnet 5 delivers frontier performance across…",
         "url": "https://www.anthropic.com/news/claude-sonnet-5"
-      },
-      {
-        "title": "Announcements Jun 30, 2026 Claude Science, an AI workbench for scientists, is now available Claude…",
-        "url": "https://www.anthropic.com/news/claude-science-ai-workbench"
       },
       {
         "title": "Jul 22, 2026 Economic Research A research agenda for the Economic Futures Research Fund",
@@ -108,55 +108,55 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 232672,
+        "stars": 233009,
         "language": "JavaScript",
-        "updatedAt": "2026-07-24T08:13:12Z"
+        "updatedAt": "2026-07-25T00:58:36Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 219703,
+        "stars": 220157,
         "language": "Python",
-        "updatedAt": "2026-07-24T08:20:06Z"
+        "updatedAt": "2026-07-25T06:30:24Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 185664,
+        "stars": 185680,
         "language": "Python",
-        "updatedAt": "2026-07-24T07:51:18Z"
+        "updatedAt": "2026-07-25T03:31:09Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi-K2.6, GLM-5.2, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 176767,
+        "stars": 176830,
         "language": "Go",
-        "updatedAt": "2026-07-24T00:46:12Z"
+        "updatedAt": "2026-07-25T01:26:22Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 166276,
+        "stars": 166328,
         "language": "HTML",
-        "updatedAt": "2026-07-24T04:06:04Z"
+        "updatedAt": "2026-07-25T04:04:54Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 162916,
+        "stars": 162959,
         "language": "Python",
-        "updatedAt": "2026-07-24T07:52:20Z"
+        "updatedAt": "2026-07-25T08:10:10Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 157268,
+        "stars": 157288,
         "language": "JavaScript",
         "updatedAt": "2026-07-21T22:56:32Z"
       },
@@ -164,39 +164,39 @@
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The API to search, scrape, and interact with the web at scale. 🔥",
-        "stars": 155277,
+        "stars": 155702,
         "language": "TypeScript",
-        "updatedAt": "2026-07-24T06:57:53Z"
+        "updatedAt": "2026-07-25T06:53:11Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 150063,
+        "stars": 150169,
         "language": "TypeScript",
-        "updatedAt": "2026-07-24T08:28:13Z"
+        "updatedAt": "2026-07-25T07:38:29Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 146550,
+        "stars": 146663,
         "language": "Python",
-        "updatedAt": "2026-07-24T06:45:37Z"
+        "updatedAt": "2026-07-24T22:59:54Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 142488,
+        "stars": 142561,
         "language": "Python",
-        "updatedAt": "2026-07-23T20:31:27Z"
+        "updatedAt": "2026-07-24T21:55:42Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 127096,
+        "stars": 127460,
         "language": "Python",
         "updatedAt": "2026-07-23T08:12:10Z"
       }
