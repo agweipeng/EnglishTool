@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-29T08:46:29.251Z",
+  "generatedAt": "2026-07-30T08:33:32.515Z",
   "sources": {
     "anthropic": [
       {
@@ -37,6 +37,18 @@
     ],
     "openai": [
       {
+        "title": "How enabling two settings tripled our scores on the ARC-AGI-3 benchmark Research Jul 29, 2026",
+        "url": "https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores/"
+      },
+      {
+        "title": "Accelerating scientific discovery with ChatGPT for Academic Researchers Company Jul 29, 2026",
+        "url": "https://openai.com/index/chatgpt-for-academic-researchers/"
+      },
+      {
+        "title": "How GPT-5.6 fuses frontier intelligence with frontier efficiency Engineering Jul 29, 2026",
+        "url": "https://openai.com/index/gpt-5-6-frontier-intelligence-efficiency/"
+      },
+      {
         "title": "Scientific computing in the age of agentic AI Publication Jul 28, 2026",
         "url": "https://openai.com/index/scientific-computing-agentic-ai/"
       },
@@ -55,21 +67,13 @@
       {
         "title": "Introducing OpenAI Presence Product Jul 22, 2026",
         "url": "https://openai.com/index/introducing-openai-presence/"
-      },
-      {
-        "title": "Introducing the ChatGPT for small business program AI Adoption Jul 21, 2026",
-        "url": "https://openai.com/index/introducing-chatgpt-small-business-program/"
-      },
-      {
-        "title": "OpenAI and Hugging Face address security incident Security Jul 21, 2026",
-        "url": "https://openai.com/index/hugging-face-model-evaluation-security-incident/"
-      },
-      {
-        "title": "David Vélez and Robin Vince join OpenAI boards Company Jul 21, 2026",
-        "url": "https://openai.com/index/david-velez-robin-vince-join-openai-boards/"
       }
     ],
     "google": [
+      {
+        "title": "Gemini for macOS adds new natural language capabilities",
+        "url": "https://blog.google/innovation-and-ai/products/gemini-app/speak-naturally-gemini-app-mac-os/"
+      },
       {
         "title": "How Gemini is speaking the language of Southeast Asia",
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-southeast-asia-report-2026/"
@@ -77,10 +81,6 @@
       {
         "title": "Gemini’s new study notebooks help you learn with personalized lessons, practice quizzes and a…",
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/how-to-make-gemini-study-notebooks/"
-      },
-      {
-        "title": "Gemini Spark updates: macOS launch, connected apps and more",
-        "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-spark-updates-june-2026/"
       },
       {
         "title": "Understanding the AI economy",
@@ -108,63 +108,63 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 235140,
+        "stars": 235857,
         "language": "JavaScript",
-        "updatedAt": "2026-07-29T01:37:41Z"
+        "updatedAt": "2026-07-29T18:11:01Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 222074,
+        "stars": 222543,
         "language": "Python",
-        "updatedAt": "2026-07-29T08:42:18Z"
+        "updatedAt": "2026-07-30T08:20:01Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 185745,
+        "stars": 185748,
         "language": "Python",
-        "updatedAt": "2026-07-29T08:44:14Z"
+        "updatedAt": "2026-07-30T06:35:29Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi-K2.6, GLM-5.2, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 177171,
+        "stars": 177272,
         "language": "Go",
-        "updatedAt": "2026-07-29T02:06:29Z"
+        "updatedAt": "2026-07-29T23:25:38Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 166497,
+        "stars": 166517,
         "language": "HTML",
-        "updatedAt": "2026-07-29T04:05:58Z"
+        "updatedAt": "2026-07-30T04:04:17Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 163099,
+        "stars": 163154,
         "language": "Python",
-        "updatedAt": "2026-07-29T08:43:41Z"
+        "updatedAt": "2026-07-30T08:30:01Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The API to search, scrape, and interact with the web at scale. 🔥",
-        "stars": 157681,
+        "stars": 158057,
         "language": "TypeScript",
-        "updatedAt": "2026-07-29T07:01:38Z"
+        "updatedAt": "2026-07-30T06:59:49Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 157379,
+        "stars": 157386,
         "language": "JavaScript",
         "updatedAt": "2026-07-28T07:12:34Z"
       },
@@ -172,15 +172,15 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 150659,
+        "stars": 150778,
         "language": "TypeScript",
-        "updatedAt": "2026-07-29T08:37:21Z"
+        "updatedAt": "2026-07-30T08:32:54Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 147174,
+        "stars": 147295,
         "language": "Python",
         "updatedAt": "2026-07-27T23:39:39Z"
       },
@@ -188,17 +188,17 @@
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 142852,
+        "stars": 142968,
         "language": "Python",
         "updatedAt": "2026-07-29T00:59:10Z"
       },
       {
-        "name": "Shubhamsaboo/awesome-llm-apps",
-        "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
-        "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 128622,
+        "name": "Graphify-Labs/graphify",
+        "url": "https://github.com/Graphify-Labs/graphify",
+        "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
+        "stars": 98709,
         "language": "Python",
-        "updatedAt": "2026-07-23T08:12:10Z"
+        "updatedAt": "2026-07-29T16:34:47Z"
       }
     ]
   }
