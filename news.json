@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-30T08:33:32.515Z",
+  "generatedAt": "2026-07-31T08:55:06.758Z",
   "sources": {
     "anthropic": [
       {
@@ -19,6 +19,10 @@
         "url": "https://www.anthropic.com/news/claude-sonnet-5"
       },
       {
+        "title": "Jul 30, 2026 Frontier Red Team Investigating three real-world incidents in our cybersecurity…",
+        "url": "https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals"
+      },
+      {
         "title": "Jul 27, 2026 Announcements Our position on open-weights models",
         "url": "https://www.anthropic.com/news/position-open-weights-models"
       },
@@ -29,13 +33,13 @@
       {
         "title": "Jul 22, 2026 Economic Research A research agenda for the Economic Futures Research Fund",
         "url": "https://www.anthropic.com/news/economic-futures-research-fund-agenda"
-      },
-      {
-        "title": "Jul 22, 2026 Product Ask Claude about the Anthropic Economic Index",
-        "url": "https://www.anthropic.com/news/anthropic-economic-index-connector"
       }
     ],
     "openai": [
+      {
+        "title": "Advancing the price-performance frontier with GPT 5.6 Product Jul 30, 2026",
+        "url": "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/"
+      },
       {
         "title": "How enabling two settings tripled our scores on the ARC-AGI-3 benchmark Research Jul 29, 2026",
         "url": "https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores/"
@@ -63,13 +67,13 @@
       {
         "title": "How news organizations use AI to advance their vital missions Company Jul 22, 2026",
         "url": "https://openai.com/index/how-news-organizations-are-using-ai/"
-      },
-      {
-        "title": "Introducing OpenAI Presence Product Jul 22, 2026",
-        "url": "https://openai.com/index/introducing-openai-presence/"
       }
     ],
     "google": [
+      {
+        "title": "Gemini Spark now integrates with Chrome",
+        "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-spark-updates-july-2026/"
+      },
       {
         "title": "Gemini for macOS adds new natural language capabilities",
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/speak-naturally-gemini-app-mac-os/"
@@ -77,10 +81,6 @@
       {
         "title": "How Gemini is speaking the language of Southeast Asia",
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-southeast-asia-report-2026/"
-      },
-      {
-        "title": "Gemini’s new study notebooks help you learn with personalized lessons, practice quizzes and a…",
-        "url": "https://blog.google/innovation-and-ai/products/gemini-app/how-to-make-gemini-study-notebooks/"
       },
       {
         "title": "Understanding the AI economy",
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 235857,
+        "stars": 236432,
         "language": "JavaScript",
         "updatedAt": "2026-07-29T18:11:01Z"
       },
@@ -116,55 +116,55 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 222543,
+        "stars": 223114,
         "language": "Python",
-        "updatedAt": "2026-07-30T08:20:01Z"
+        "updatedAt": "2026-07-31T08:52:39Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 185748,
+        "stars": 185747,
         "language": "Python",
-        "updatedAt": "2026-07-30T06:35:29Z"
+        "updatedAt": "2026-07-31T08:22:19Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi-K2.6, GLM-5.2, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 177272,
+        "stars": 177381,
         "language": "Go",
-        "updatedAt": "2026-07-29T23:25:38Z"
+        "updatedAt": "2026-07-31T00:23:30Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 166517,
+        "stars": 166549,
         "language": "HTML",
-        "updatedAt": "2026-07-30T04:04:17Z"
+        "updatedAt": "2026-07-31T04:11:40Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 163154,
+        "stars": 163197,
         "language": "Python",
-        "updatedAt": "2026-07-30T08:30:01Z"
+        "updatedAt": "2026-07-31T08:53:24Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The API to search, scrape, and interact with the web at scale. 🔥",
-        "stars": 158057,
+        "stars": 158494,
         "language": "TypeScript",
-        "updatedAt": "2026-07-30T06:59:49Z"
+        "updatedAt": "2026-07-31T08:25:46Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 157386,
+        "stars": 157408,
         "language": "JavaScript",
         "updatedAt": "2026-07-28T07:12:34Z"
       },
@@ -172,15 +172,15 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 150778,
+        "stars": 150881,
         "language": "TypeScript",
-        "updatedAt": "2026-07-30T08:32:54Z"
+        "updatedAt": "2026-07-31T08:52:49Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 147295,
+        "stars": 147413,
         "language": "Python",
         "updatedAt": "2026-07-27T23:39:39Z"
       },
@@ -188,17 +188,17 @@
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 142968,
+        "stars": 143070,
         "language": "Python",
-        "updatedAt": "2026-07-29T00:59:10Z"
+        "updatedAt": "2026-07-30T22:20:37Z"
       },
       {
-        "name": "Graphify-Labs/graphify",
-        "url": "https://github.com/Graphify-Labs/graphify",
-        "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 98709,
+        "name": "Shubhamsaboo/awesome-llm-apps",
+        "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+        "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
+        "stars": 129201,
         "language": "Python",
-        "updatedAt": "2026-07-29T16:34:47Z"
+        "updatedAt": "2026-07-31T01:19:04Z"
       }
     ]
   }
