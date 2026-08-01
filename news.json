@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-31T08:55:06.758Z",
+  "generatedAt": "2026-08-01T08:26:22.302Z",
   "sources": {
     "anthropic": [
       {
@@ -37,6 +37,10 @@
     ],
     "openai": [
       {
+        "title": "Building abundant intelligence Company Jul 31, 2026",
+        "url": "https://openai.com/index/building-abundant-intelligence/"
+      },
+      {
         "title": "Advancing the price-performance frontier with GPT 5.6 Product Jul 30, 2026",
         "url": "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/"
       },
@@ -63,13 +67,13 @@
       {
         "title": "Launching Health in ChatGPT Product Jul 23, 2026",
         "url": "https://openai.com/index/health-in-chatgpt/"
-      },
-      {
-        "title": "How news organizations use AI to advance their vital missions Company Jul 22, 2026",
-        "url": "https://openai.com/index/how-news-organizations-are-using-ai/"
       }
     ],
     "google": [
+      {
+        "title": "Find out what’s new in the Gemini app in July's Gemini Drop.",
+        "url": "https://blog.google/products-and-platforms/products/gemini/gemini-drop-july-2026/"
+      },
       {
         "title": "Gemini Spark now integrates with Chrome",
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-spark-updates-july-2026/"
@@ -77,10 +81,6 @@
       {
         "title": "Gemini for macOS adds new natural language capabilities",
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/speak-naturally-gemini-app-mac-os/"
-      },
-      {
-        "title": "How Gemini is speaking the language of Southeast Asia",
-        "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-southeast-asia-report-2026/"
       },
       {
         "title": "Understanding the AI economy",
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 236432,
+        "stars": 236709,
         "language": "JavaScript",
         "updatedAt": "2026-07-29T18:11:01Z"
       },
@@ -116,55 +116,55 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 223114,
+        "stars": 223575,
         "language": "Python",
-        "updatedAt": "2026-07-31T08:52:39Z"
+        "updatedAt": "2026-08-01T07:58:05Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 185747,
+        "stars": 185748,
         "language": "Python",
-        "updatedAt": "2026-07-31T08:22:19Z"
+        "updatedAt": "2026-08-01T07:29:45Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi-K2.6, GLM-5.2, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 177381,
+        "stars": 177474,
         "language": "Go",
-        "updatedAt": "2026-07-31T00:23:30Z"
+        "updatedAt": "2026-07-31T23:59:29Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 166549,
+        "stars": 166590,
         "language": "HTML",
-        "updatedAt": "2026-07-31T04:11:40Z"
+        "updatedAt": "2026-08-01T04:10:51Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 163197,
+        "stars": 163216,
         "language": "Python",
-        "updatedAt": "2026-07-31T08:53:24Z"
+        "updatedAt": "2026-08-01T07:43:59Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The API to search, scrape, and interact with the web at scale. 🔥",
-        "stars": 158494,
+        "stars": 158817,
         "language": "TypeScript",
-        "updatedAt": "2026-07-31T08:25:46Z"
+        "updatedAt": "2026-08-01T06:56:03Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 157408,
+        "stars": 157422,
         "language": "JavaScript",
         "updatedAt": "2026-07-28T07:12:34Z"
       },
@@ -172,31 +172,31 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 150881,
+        "stars": 150957,
         "language": "TypeScript",
-        "updatedAt": "2026-07-31T08:52:49Z"
+        "updatedAt": "2026-08-01T07:56:49Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 147413,
+        "stars": 147497,
         "language": "Python",
-        "updatedAt": "2026-07-27T23:39:39Z"
+        "updatedAt": "2026-08-01T07:57:17Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 143070,
+        "stars": 143148,
         "language": "Python",
-        "updatedAt": "2026-07-30T22:20:37Z"
+        "updatedAt": "2026-08-01T08:09:02Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 129201,
+        "stars": 129437,
         "language": "Python",
         "updatedAt": "2026-07-31T01:19:04Z"
       }
