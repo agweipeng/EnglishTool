@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-06T08:43:20.265Z",
+  "generatedAt": "2026-08-07T07:21:47.703Z",
   "sources": {
     "anthropic": [
       {
@@ -19,6 +19,10 @@
         "url": "https://www.anthropic.com/news/claude-sonnet-5"
       },
       {
+        "title": "Aug 7, 2026 Product Improving Fable 5's biology safeguards",
+        "url": "https://www.anthropic.com/news/improving-fable-5-s-biology-safeguards"
+      },
+      {
         "title": "Aug 4, 2026 Announcements Mariano-Florentino (Tino) Cuéllar to join Anthropic as Chief Global…",
         "url": "https://www.anthropic.com/news/tino-cuellar"
       },
@@ -29,13 +33,21 @@
       {
         "title": "Jul 27, 2026 Announcements Our position on open-weights models",
         "url": "https://www.anthropic.com/news/position-open-weights-models"
-      },
-      {
-        "title": "Jul 27, 2026 Announcements Cognizant and Anthropic expand their partnership to bring Claude to…",
-        "url": "https://www.anthropic.com/news/cognizant-anthropic"
       }
     ],
     "openai": [
+      {
+        "title": "Improving GPT‑5.6 Sol in ChatGPT—and expanding access to GPT-5.6 Luna for free users Product Aug 6,…",
+        "url": "https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt/"
+      },
+      {
+        "title": "OpenAI and APA advance responsible AI for youth Company Aug 6, 2026",
+        "url": "https://openai.com/index/openai-and-apa-partner-to-advance-responsible-ai/"
+      },
+      {
+        "title": "How the world is putting ChatGPT to work Company Aug 6, 2026",
+        "url": "https://openai.com/index/how-the-world-is-putting-chatgpt-to-work/"
+      },
       {
         "title": "Third-party cyber evaluations involving OpenAI models Security Aug 4, 2026",
         "url": "https://openai.com/index/third-party-cyber-evaluations-involving-openai-models/"
@@ -55,18 +67,6 @@
       {
         "title": "Building abundant intelligence Company Jul 31, 2026",
         "url": "https://openai.com/index/building-abundant-intelligence/"
-      },
-      {
-        "title": "Advancing the price-performance frontier with GPT 5.6 Product Jul 30, 2026",
-        "url": "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/"
-      },
-      {
-        "title": "How enabling two settings tripled our scores on the ARC-AGI-3 benchmark Research Jul 29, 2026",
-        "url": "https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores/"
-      },
-      {
-        "title": "Accelerating scientific discovery with ChatGPT for Academic Researchers Company Jul 29, 2026",
-        "url": "https://openai.com/index/chatgpt-for-academic-researchers/"
       }
     ],
     "google": [
@@ -108,79 +108,79 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 238122,
+        "stars": 238387,
         "language": "JavaScript",
-        "updatedAt": "2026-08-05T22:17:10Z"
+        "updatedAt": "2026-08-06T21:42:23Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 226288,
+        "stars": 226754,
         "language": "Python",
-        "updatedAt": "2026-08-06T05:40:54Z"
+        "updatedAt": "2026-08-07T06:59:27Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 185844,
+        "stars": 186126,
         "language": "Python",
-        "updatedAt": "2026-08-06T08:11:51Z"
+        "updatedAt": "2026-08-07T06:57:31Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi-K2.6, GLM-5.2, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 177892,
+        "stars": 177966,
         "language": "Go",
-        "updatedAt": "2026-08-05T23:31:59Z"
+        "updatedAt": "2026-08-07T04:56:13Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 166803,
+        "stars": 166831,
         "language": "HTML",
-        "updatedAt": "2026-08-06T04:05:09Z"
+        "updatedAt": "2026-08-07T04:00:22Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 163396,
+        "stars": 163427,
         "language": "Python",
-        "updatedAt": "2026-08-06T08:35:44Z"
+        "updatedAt": "2026-08-07T06:57:25Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The context API to search, scrape, and interact with the web at scale. 🔥",
-        "stars": 161955,
+        "stars": 162523,
         "language": "TypeScript",
-        "updatedAt": "2026-08-06T07:51:05Z"
+        "updatedAt": "2026-08-07T06:29:16Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 157566,
+        "stars": 157594,
         "language": "JavaScript",
-        "updatedAt": "2026-08-04T10:57:59Z"
+        "updatedAt": "2026-08-06T23:39:32Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 151518,
+        "stars": 151648,
         "language": "TypeScript",
-        "updatedAt": "2026-08-06T08:41:18Z"
+        "updatedAt": "2026-08-07T07:17:08Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 148007,
+        "stars": 148102,
         "language": "Python",
         "updatedAt": "2026-08-05T20:05:47Z"
       },
@@ -188,15 +188,15 @@
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 143534,
+        "stars": 143597,
         "language": "Python",
-        "updatedAt": "2026-08-06T02:02:19Z"
+        "updatedAt": "2026-08-07T04:20:39Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 130944,
+        "stars": 131179,
         "language": "Python",
         "updatedAt": "2026-08-03T03:30:58Z"
       }
