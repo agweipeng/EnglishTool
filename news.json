@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-07T07:21:47.703Z",
+  "generatedAt": "2026-08-08T06:59:17.924Z",
   "sources": {
     "anthropic": [
       {
@@ -37,6 +37,10 @@
     ],
     "openai": [
       {
+        "title": "Responding to the next frontier of critical cyber capabilities Security Aug 7, 2026",
+        "url": "https://openai.com/index/responding-next-frontier-critical-cyber-capabilities/"
+      },
+      {
         "title": "Improving GPT‑5.6 Sol in ChatGPT—and expanding access to GPT-5.6 Luna for free users Product Aug 6,…",
         "url": "https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt/"
       },
@@ -63,10 +67,6 @@
       {
         "title": "Continuous voice interaction with GPT Live Engineering Aug 3, 2026",
         "url": "https://openai.com/index/continuous-voice-interaction-with-gpt-live/"
-      },
-      {
-        "title": "Building abundant intelligence Company Jul 31, 2026",
-        "url": "https://openai.com/index/building-abundant-intelligence/"
       }
     ],
     "google": [
@@ -108,95 +108,95 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 238387,
+        "stars": 238642,
         "language": "JavaScript",
-        "updatedAt": "2026-08-06T21:42:23Z"
+        "updatedAt": "2026-08-08T00:11:29Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 226754,
+        "stars": 227184,
         "language": "Python",
-        "updatedAt": "2026-08-07T06:59:27Z"
+        "updatedAt": "2026-08-08T06:45:04Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 186126,
+        "stars": 186384,
         "language": "Python",
-        "updatedAt": "2026-08-07T06:57:31Z"
+        "updatedAt": "2026-08-08T03:51:58Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi-K2.6, GLM-5.2, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 177966,
+        "stars": 178035,
         "language": "Go",
-        "updatedAt": "2026-08-07T04:56:13Z"
+        "updatedAt": "2026-08-08T05:04:18Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 166831,
+        "stars": 166872,
         "language": "HTML",
-        "updatedAt": "2026-08-07T04:00:22Z"
+        "updatedAt": "2026-08-08T03:33:46Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 163427,
+        "stars": 163462,
         "language": "Python",
-        "updatedAt": "2026-08-07T06:57:25Z"
+        "updatedAt": "2026-08-07T22:40:53Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The context API to search, scrape, and interact with the web at scale. 🔥",
-        "stars": 162523,
+        "stars": 163023,
         "language": "TypeScript",
-        "updatedAt": "2026-08-07T06:29:16Z"
+        "updatedAt": "2026-08-08T06:18:59Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 157594,
+        "stars": 157613,
         "language": "JavaScript",
-        "updatedAt": "2026-08-06T23:39:32Z"
+        "updatedAt": "2026-08-08T06:58:19Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 151648,
+        "stars": 151752,
         "language": "TypeScript",
-        "updatedAt": "2026-08-07T07:17:08Z"
+        "updatedAt": "2026-08-08T06:55:43Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 148102,
+        "stars": 148196,
         "language": "Python",
-        "updatedAt": "2026-08-05T20:05:47Z"
+        "updatedAt": "2026-08-07T07:24:21Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 143597,
+        "stars": 143670,
         "language": "Python",
-        "updatedAt": "2026-08-07T04:20:39Z"
+        "updatedAt": "2026-08-08T02:29:49Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 131179,
+        "stars": 131386,
         "language": "Python",
         "updatedAt": "2026-08-03T03:30:58Z"
       }
