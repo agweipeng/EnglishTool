@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-31T13:10:11.349Z",
+  "generatedAt": "2026-09-01T11:22:47.717Z",
   "sources": {
     "anthropic": [
       {
@@ -19,6 +19,10 @@
         "url": "https://www.anthropic.com/news/claude-sonnet-5"
       },
       {
+        "title": "Aug 31, 2026 Improving our alignment and security efforts",
+        "url": "https://www.anthropic.com/news/improving-alignment-security-efforts"
+      },
+      {
         "title": "Aug 27, 2026 Announcements Expanding our support for scientists",
         "url": "https://www.anthropic.com/news/expanding-support-for-scientists"
       },
@@ -29,13 +33,13 @@
       {
         "title": "Aug 7, 2026 Product Improving Fable 5's biology safeguards",
         "url": "https://www.anthropic.com/news/improving-fable-5-s-biology-safeguards"
-      },
-      {
-        "title": "Aug 4, 2026 Announcements Mariano-Florentino (Tino) Cuéllar to join Anthropic as Chief Global…",
-        "url": "https://www.anthropic.com/news/tino-cuellar"
       }
     ],
     "openai": [
+      {
+        "title": "OpenAI supports California’s bill to advance youth AI safety Company Aug 31, 2026",
+        "url": "https://openai.com/index/supporting-california-bill-advance-ai-youth-safety/"
+      },
       {
         "title": "A milestone in expanding access to AI Product Aug 31, 2026",
         "url": "https://openai.com/index/expanding-access-to-ai-with-chatgpt-ads/"
@@ -63,10 +67,6 @@
       {
         "title": "Learning never stops: How AI makes learning continuous Product Aug 26, 2026",
         "url": "https://openai.com/index/learning-never-stops/"
-      },
-      {
-        "title": "The Hugging Face incident and the road ahead Security Aug 26, 2026",
-        "url": "https://openai.com/index/hugging-face-incident-and-the-road-ahead/"
       }
     ],
     "google": [
@@ -99,8 +99,8 @@
         "url": "https://blog.google/innovation-and-ai/technology/research/"
       },
       {
-        "title": "Gemini Omni 1.1 Flash lets you build with more control",
-        "url": "https://blog.google/innovation-and-ai/technology/developers-tools/build-with-gemini-omni-1-1-flash/"
+        "title": "Pairing Google Antigravity with Gemini 3.7 Flash solves notable multi-agent math and engineering…",
+        "url": "https://blog.google/innovation-and-ai/technology/developers-tools/antigravity-teamwork-multi-agent/"
       }
     ],
     "github": [
@@ -108,63 +108,63 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 244958,
+        "stars": 245499,
         "language": "JavaScript",
-        "updatedAt": "2026-08-31T04:58:53Z"
+        "updatedAt": "2026-08-31T22:18:39Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 238783,
+        "stars": 239264,
         "language": "Python",
-        "updatedAt": "2026-08-31T13:02:36Z"
+        "updatedAt": "2026-09-01T10:57:20Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187029,
+        "stars": 187050,
         "language": "Python",
-        "updatedAt": "2026-08-31T13:08:05Z"
+        "updatedAt": "2026-09-01T06:12:11Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi-K2.6, GLM-5.2, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 179826,
+        "stars": 179880,
         "language": "Go",
-        "updatedAt": "2026-08-29T03:47:58Z"
+        "updatedAt": "2026-09-01T00:12:46Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The context API to search, scrape, and interact with the web at scale. 🔥",
-        "stars": 174659,
+        "stars": 175048,
         "language": "TypeScript",
-        "updatedAt": "2026-08-31T12:49:16Z"
+        "updatedAt": "2026-09-01T11:04:42Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 168310,
+        "stars": 168381,
         "language": "HTML",
-        "updatedAt": "2026-08-31T03:19:24Z"
+        "updatedAt": "2026-09-01T03:19:49Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 164658,
+        "stars": 164689,
         "language": "Python",
-        "updatedAt": "2026-08-31T13:00:15Z"
+        "updatedAt": "2026-09-01T11:15:43Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 158146,
+        "stars": 158182,
         "language": "JavaScript",
         "updatedAt": "2026-08-28T08:06:36Z"
       },
@@ -172,31 +172,31 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 153992,
+        "stars": 154082,
         "language": "TypeScript",
-        "updatedAt": "2026-08-31T12:27:21Z"
+        "updatedAt": "2026-09-01T10:31:53Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 150484,
+        "stars": 150564,
         "language": "Python",
-        "updatedAt": "2026-08-31T05:53:31Z"
+        "updatedAt": "2026-09-01T02:20:26Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 145344,
+        "stars": 145419,
         "language": "Python",
-        "updatedAt": "2026-08-31T08:19:33Z"
+        "updatedAt": "2026-09-01T09:15:22Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 135375,
+        "stars": 135519,
         "language": "Python",
         "updatedAt": "2026-08-31T04:54:57Z"
       }
