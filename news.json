@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T10:55:34.765Z",
+  "generatedAt": "2026-09-09T10:59:53.385Z",
   "sources": {
     "anthropic": [
       {
@@ -37,36 +37,36 @@
     ],
     "openai": [
       {
+        "title": "How GPT-5.6 Sol helps run quantum computing experiments Applied AI Sep 8, 2026",
+        "url": "https://openai.com/index/codex-quantum-computing-experiments/"
+      },
+      {
+        "title": "The Work Now Within Reach Company Sep 8, 2026",
+        "url": "https://openai.com/index/the-work-now-within-reach/"
+      },
+      {
+        "title": "Introducing ChatGPT Images 2.5 Product Sep 8, 2026",
+        "url": "https://openai.com/index/introducing-chatgpt-images-2-5/"
+      },
+      {
+        "title": "An OpenAI model proposes a solution to the Navier–Stokes problem Research Sep 8, 2026",
+        "url": "https://openai.com/index/navier-stokes-solution/"
+      },
+      {
+        "title": "Funding grants for new research into AI and teen development Safety Sep 8, 2026",
+        "url": "https://openai.com/index/teen-development-research-grants/"
+      },
+      {
+        "title": "Supporting journalism from classrooms to newsrooms Company Sep 8, 2026",
+        "url": "https://openai.com/index/supporting-journalism-from-classrooms-to-newsrooms/"
+      },
+      {
         "title": "An Alien Mind Safety Sep 6, 2026",
         "url": "https://openai.com/index/an-alien-mind/"
       },
       {
         "title": "Research acceleration: The view inside OpenAI Research Sep 6, 2026",
         "url": "https://openai.com/index/research-acceleration-view-inside-openai/"
-      },
-      {
-        "title": "Daybreak for Frontline Defenders Security Sep 3, 2026",
-        "url": "https://openai.com/index/daybreak-for-frontline-defenders/"
-      },
-      {
-        "title": "GPT-6 Astra: A new generation of intelligence Research Sep 3, 2026",
-        "url": "https://openai.com/index/gpt-6-astra/"
-      },
-      {
-        "title": "Safety overview: GPT-6 Astra Safety Sep 3, 2026",
-        "url": "https://openai.com/index/safety-overview-gpt-6-astra/"
-      },
-      {
-        "title": "How AI-native companies turn workflows into operating capability AI Adoption Sep 1, 2026",
-        "url": "https://openai.com/index/ai-native-company-workflows/"
-      },
-      {
-        "title": "Path to Astra: critical capabilities and frontier safeguards Safety Sep 1, 2026",
-        "url": "https://openai.com/index/path-to-astra/"
-      },
-      {
-        "title": "ChatGPT can now connect to healthcare sources Product Sep 1, 2026",
-        "url": "https://openai.com/index/chatgpt-connects-health-records-and-healthcare-sources/"
       }
     ],
     "google": [
@@ -108,63 +108,63 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 253551,
+        "stars": 254711,
         "language": "JavaScript",
-        "updatedAt": "2026-09-07T22:36:32Z"
+        "updatedAt": "2026-09-09T07:58:39Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 243228,
+        "stars": 243646,
         "language": "Python",
-        "updatedAt": "2026-09-08T10:47:46Z"
+        "updatedAt": "2026-09-09T10:55:02Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187195,
+        "stars": 187219,
         "language": "Python",
-        "updatedAt": "2026-09-08T10:51:51Z"
+        "updatedAt": "2026-09-09T10:54:26Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi-K2.6, GLM-5.2, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 180450,
+        "stars": 180504,
         "language": "Go",
-        "updatedAt": "2026-09-07T19:23:38Z"
+        "updatedAt": "2026-09-09T00:30:49Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The context API to search, scrape, and interact with the web at scale. 🔥",
-        "stars": 177831,
+        "stars": 178179,
         "language": "TypeScript",
-        "updatedAt": "2026-09-08T06:51:34Z"
+        "updatedAt": "2026-09-09T06:26:28Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 169638,
+        "stars": 169756,
         "language": "HTML",
-        "updatedAt": "2026-09-06T03:17:52Z"
+        "updatedAt": "2026-09-09T10:27:05Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 164981,
+        "stars": 165027,
         "language": "Python",
-        "updatedAt": "2026-09-08T10:47:43Z"
+        "updatedAt": "2026-09-09T10:57:07Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 158369,
+        "stars": 158396,
         "language": "JavaScript",
         "updatedAt": "2026-09-05T12:30:20Z"
       },
@@ -172,31 +172,31 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 154962,
+        "stars": 155178,
         "language": "TypeScript",
-        "updatedAt": "2026-09-08T10:45:52Z"
+        "updatedAt": "2026-09-09T10:42:08Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 151303,
+        "stars": 151423,
         "language": "Python",
-        "updatedAt": "2026-09-08T05:45:36Z"
+        "updatedAt": "2026-09-09T03:18:49Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 145925,
+        "stars": 145996,
         "language": "Python",
-        "updatedAt": "2026-09-08T08:37:32Z"
+        "updatedAt": "2026-09-09T08:30:27Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 136610,
+        "stars": 136775,
         "language": "Python",
         "updatedAt": "2026-09-08T05:33:57Z"
       }
