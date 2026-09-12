@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-11T10:55:14.632Z",
+  "generatedAt": "2026-09-12T10:22:19.281Z",
   "sources": {
     "anthropic": [
       {
@@ -37,6 +37,10 @@
     ],
     "openai": [
       {
+        "title": "Rapidly scaling online storage to serve over 1 billion ChatGPT users Engineering Sep 11, 2026",
+        "url": "https://openai.com/index/scaling-storage-one-billion-users-part-one/"
+      },
+      {
         "title": "How a researcher uses Codex and ChatGPT to search for new antimicrobial molecules Applied AI Sep…",
         "url": "https://openai.com/index/using-codex-chatgpt-to-search-for-new-antimicrobials/"
       },
@@ -63,10 +67,6 @@
       {
         "title": "Paul Christiano joins OpenAI Foundation Board Company Sep 9, 2026",
         "url": "https://openai.com/index/paul-christiano-joins-openai-foundation-board/"
-      },
-      {
-        "title": "How GPT-5.6 Sol helps run quantum computing experiments Applied AI Sep 8, 2026",
-        "url": "https://openai.com/index/codex-quantum-computing-experiments/"
       }
     ],
     "google": [
@@ -108,47 +108,47 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 256168,
+        "stars": 256758,
         "language": "JavaScript",
-        "updatedAt": "2026-09-10T20:57:26Z"
+        "updatedAt": "2026-09-12T09:52:30Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 244398,
+        "stars": 244743,
         "language": "Python",
-        "updatedAt": "2026-09-11T10:48:25Z"
+        "updatedAt": "2026-09-12T10:06:06Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187255,
+        "stars": 187277,
         "language": "Python",
-        "updatedAt": "2026-09-11T10:54:30Z"
+        "updatedAt": "2026-09-12T10:20:56Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi-K2.6, GLM-5.2, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 180647,
+        "stars": 180718,
         "language": "Go",
-        "updatedAt": "2026-09-11T06:09:40Z"
+        "updatedAt": "2026-09-11T21:44:45Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The context API to search, scrape, and interact with the web at scale. 🔥",
-        "stars": 178989,
+        "stars": 179364,
         "language": "TypeScript",
-        "updatedAt": "2026-09-11T10:46:18Z"
+        "updatedAt": "2026-09-12T06:22:51Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 169946,
+        "stars": 170063,
         "language": "HTML",
         "updatedAt": "2026-09-09T10:27:05Z"
       },
@@ -156,31 +156,23 @@
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 165108,
+        "stars": 165155,
         "language": "Python",
-        "updatedAt": "2026-09-11T10:49:44Z"
-      },
-      {
-        "name": "Snailclimb/JavaGuide",
-        "url": "https://github.com/Snailclimb/JavaGuide",
-        "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 158448,
-        "language": "JavaScript",
-        "updatedAt": "2026-09-05T12:30:20Z"
+        "updatedAt": "2026-09-12T10:17:31Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 155408,
+        "stars": 155493,
         "language": "TypeScript",
-        "updatedAt": "2026-09-11T10:33:19Z"
+        "updatedAt": "2026-09-12T05:10:52Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 151610,
+        "stars": 151724,
         "language": "Python",
         "updatedAt": "2026-09-10T23:05:38Z"
       },
@@ -188,17 +180,25 @@
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 146115,
+        "stars": 146180,
         "language": "Python",
-        "updatedAt": "2026-09-11T08:28:30Z"
+        "updatedAt": "2026-09-12T08:27:03Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 137101,
+        "stars": 137321,
         "language": "Python",
-        "updatedAt": "2026-09-11T01:23:03Z"
+        "updatedAt": "2026-09-12T03:45:58Z"
+      },
+      {
+        "name": "Graphify-Labs/graphify",
+        "url": "https://github.com/Graphify-Labs/graphify",
+        "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
+        "stars": 117102,
+        "language": "Python",
+        "updatedAt": "2026-09-10T22:35:09Z"
       }
     ]
   }
