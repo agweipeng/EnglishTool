@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T11:24:45.043Z",
+  "generatedAt": "2026-09-16T11:09:56.608Z",
   "sources": {
     "anthropic": [
       {
@@ -71,6 +71,10 @@
     ],
     "google": [
       {
+        "title": "4 ways to tackle household chores with Gemini",
+        "url": "https://blog.google/innovation-and-ai/products/gemini-app/household-chores-tips/"
+      },
+      {
         "title": "The Gemini app is now available for Windows",
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-app-now-on-windows/"
       },
@@ -79,8 +83,8 @@
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/better-tracks-lyria-gemini/"
       },
       {
-        "title": "Turn your voice into action with new productivity features in Gemini Live",
-        "url": "https://blog.google/innovation-and-ai/products/gemini-app/productivity-features-gemini-live/"
+        "title": "Ask a Scientist: How can researchers use AI to spot a wildfire?",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/wildfire-tracking-ai/"
       },
       {
         "title": "Mapping global methane emissions from space with deep learning",
@@ -91,16 +95,12 @@
         "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/contrail-avoidance-ultra-long-haul-flights/"
       },
       {
-        "title": "5 amazing visuals show how the male fruit fly’s brain map is advancing neuroscience",
-        "url": "https://blog.google/innovation-and-ai/technology/research/male-fruit-fly-brain-map/"
-      },
-      {
         "title": "View more from Google Research",
         "url": "https://blog.google/innovation-and-ai/technology/research/"
       },
       {
-        "title": "DevFest 2026: Come Build with Us",
-        "url": "https://blog.google/innovation-and-ai/technology/developers-tools/devfest2026/"
+        "title": "Build real-time voice applications with Gemini 3.8 Live and 3.5 Transcribe",
+        "url": "https://blog.google/innovation-and-ai/technology/developers-tools/build-real-time-voice-applications-gemini-audio/"
       }
     ],
     "github": [
@@ -108,97 +108,97 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 258709,
+        "stars": 259682,
         "language": "JavaScript",
-        "updatedAt": "2026-09-15T05:42:28Z"
+        "updatedAt": "2026-09-15T19:33:00Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 245688,
+        "stars": 246025,
         "language": "Python",
-        "updatedAt": "2026-09-15T11:24:36Z"
+        "updatedAt": "2026-09-16T10:51:13Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187360,
+        "stars": 187380,
         "language": "Python",
-        "updatedAt": "2026-09-15T11:22:18Z"
+        "updatedAt": "2026-09-16T10:56:01Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 181019,
+        "stars": 181112,
         "language": "Go",
-        "updatedAt": "2026-09-15T06:32:32Z"
+        "updatedAt": "2026-09-16T00:37:09Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The context API to search, scrape, and interact with the web at scale. 🔥",
-        "stars": 180617,
+        "stars": 181086,
         "language": "TypeScript",
-        "updatedAt": "2026-09-15T11:10:17Z"
-      },
-      {
-        "name": "f/prompts.chat",
-        "url": "https://github.com/f/prompts.chat",
-        "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 170392,
-        "language": "HTML",
-        "updatedAt": "2026-09-09T10:27:05Z"
+        "updatedAt": "2026-09-16T11:05:45Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 166159,
+        "stars": 166239,
         "language": "Python",
-        "updatedAt": "2026-09-15T11:19:02Z"
+        "updatedAt": "2026-09-16T11:06:05Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 155796,
+        "stars": 155927,
         "language": "TypeScript",
-        "updatedAt": "2026-09-15T11:04:19Z"
+        "updatedAt": "2026-09-16T08:01:27Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 152119,
+        "stars": 152260,
         "language": "Python",
-        "updatedAt": "2026-09-14T21:57:14Z"
+        "updatedAt": "2026-09-16T04:34:26Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 146365,
+        "stars": 146436,
         "language": "Python",
-        "updatedAt": "2026-09-15T08:31:17Z"
+        "updatedAt": "2026-09-16T08:33:01Z"
+      },
+      {
+        "name": "DietrichGebert/ponytail",
+        "url": "https://github.com/DietrichGebert/ponytail",
+        "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
+        "stars": 139879,
+        "language": "JavaScript",
+        "updatedAt": "2026-09-14T14:34:56Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 138283,
+        "stars": 138430,
         "language": "Python",
-        "updatedAt": "2026-09-14T08:06:38Z"
+        "updatedAt": "2026-09-16T04:08:39Z"
       },
       {
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 116877,
+        "stars": 118184,
         "language": "Python",
-        "updatedAt": "2026-09-12T21:24:20Z"
+        "updatedAt": "2026-09-15T17:58:19Z"
       }
     ]
   }
