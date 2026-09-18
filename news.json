@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T11:18:40.606Z",
+  "generatedAt": "2026-09-18T10:52:38.546Z",
   "sources": {
     "anthropic": [
       {
@@ -7,16 +7,16 @@
         "url": "https://www.anthropic.com/news/improving-alignment-security-efforts"
       },
       {
-        "title": "Announcements Aug 27, 2026 Previewing the Model Hardware Standard We’re opening a research preview…",
-        "url": "https://www.anthropic.com/news/model-hardware-standard-research-preview"
-      },
-      {
-        "title": "Product Jul 24, 2026 Introducing Claude Opus 5 Opus 5 is a step change improvement for the Opus…",
-        "url": "https://www.anthropic.com/news/claude-opus-5"
+        "title": "Sep 17, 2026 Announcements Introducing the Life Sciences Verification Program",
+        "url": "https://www.anthropic.com/news/life-sciences-verification-program"
       },
       {
         "title": "Sep 1, 2026 Announcements Developing Enterprise Frontier Safeguards with our customers",
         "url": "https://www.anthropic.com/news/enterprise-frontier-safeguards"
+      },
+      {
+        "title": "Aug 27, 2026 Announcements Previewing the Model Hardware Standard",
+        "url": "https://www.anthropic.com/news/model-hardware-standard-research-preview"
       },
       {
         "title": "Aug 27, 2026 Announcements Expanding our support for scientists",
@@ -36,6 +36,10 @@
       }
     ],
     "openai": [
+      {
+        "title": "Introducing Astra for Law Company Sep 17, 2026",
+        "url": "https://openai.com/index/astra-for-law/"
+      },
       {
         "title": "Reimagining advertising with AI Product Sep 16, 2026",
         "url": "https://openai.com/index/reimagining-advertising-with-ai/"
@@ -63,10 +67,6 @@
       {
         "title": "Introducing ChatGPT for Financial Services Product Sep 10, 2026",
         "url": "https://openai.com/index/introducing-chatgpt-financial-services/"
-      },
-      {
-        "title": "Build more natural voice experiences with GPT‑Live‑1 in the API Product Sep 10, 2026",
-        "url": "https://openai.com/index/introducing-gpt-live-1-in-the-api/"
       }
     ],
     "google": [
@@ -108,79 +108,79 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 260777,
+        "stars": 261497,
         "language": "JavaScript",
-        "updatedAt": "2026-09-17T04:37:23Z"
+        "updatedAt": "2026-09-17T18:04:07Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 246367,
+        "stars": 246730,
         "language": "Python",
-        "updatedAt": "2026-09-17T11:08:10Z"
+        "updatedAt": "2026-09-18T10:52:35Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187400,
+        "stars": 187426,
         "language": "Python",
-        "updatedAt": "2026-09-17T11:15:42Z"
+        "updatedAt": "2026-09-18T10:44:55Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The web data API to search, scrape, and interact at scale. 🔥",
-        "stars": 181485,
+        "stars": 181833,
         "language": "TypeScript",
-        "updatedAt": "2026-09-17T09:09:12Z"
+        "updatedAt": "2026-09-18T10:10:58Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 181238,
+        "stars": 181198,
         "language": "Go",
-        "updatedAt": "2026-09-17T01:33:20Z"
+        "updatedAt": "2026-09-17T23:54:24Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 166288,
+        "stars": 166283,
         "language": "Python",
-        "updatedAt": "2026-09-17T11:15:30Z"
+        "updatedAt": "2026-09-18T10:50:51Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 156092,
+        "stars": 156262,
         "language": "TypeScript",
-        "updatedAt": "2026-09-17T11:12:45Z"
+        "updatedAt": "2026-09-18T10:50:01Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 152348,
+        "stars": 152455,
         "language": "Python",
-        "updatedAt": "2026-09-17T02:47:38Z"
+        "updatedAt": "2026-09-18T00:11:06Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 146511,
+        "stars": 146584,
         "language": "Python",
-        "updatedAt": "2026-09-17T09:32:19Z"
+        "updatedAt": "2026-09-18T08:32:25Z"
       },
       {
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 140917,
+        "stars": 141701,
         "language": "JavaScript",
         "updatedAt": "2026-09-14T14:34:56Z"
       },
@@ -188,7 +188,7 @@
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 138599,
+        "stars": 138777,
         "language": "Python",
         "updatedAt": "2026-09-16T04:08:39Z"
       },
@@ -196,7 +196,7 @@
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 118795,
+        "stars": 119193,
         "language": "Python",
         "updatedAt": "2026-09-16T19:41:40Z"
       }
