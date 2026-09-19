@@ -1,10 +1,14 @@
 {
-  "generatedAt": "2026-09-18T10:52:38.546Z",
+  "generatedAt": "2026-09-19T10:35:22.696Z",
   "sources": {
     "anthropic": [
       {
         "title": "Announcements Aug 31, 2026 Improving our alignment and security efforts On July 30, we reported…",
         "url": "https://www.anthropic.com/news/improving-alignment-security-efforts"
+      },
+      {
+        "title": "Sep 18, 2026 Announcements Partnering with Accenture on embedded evaluation",
+        "url": "https://www.anthropic.com/news/accenture-embedded-evaluation"
       },
       {
         "title": "Sep 17, 2026 Announcements Introducing the Life Sciences Verification Program",
@@ -29,13 +33,13 @@
       {
         "title": "Aug 14, 2026 Announcements How Claude’s text watermark works",
         "url": "https://www.anthropic.com/news/claude-text-watermark"
-      },
-      {
-        "title": "Aug 7, 2026 Product Improving Fable 5's biology safeguards",
-        "url": "https://www.anthropic.com/news/improving-fable-5-s-biology-safeguards"
       }
     ],
     "openai": [
+      {
+        "title": "Introducing the Australian Youth Safety Blueprint Company Sep 18, 2026",
+        "url": "https://openai.com/index/australian-youth-safety-blueprint/"
+      },
       {
         "title": "Introducing Astra for Law Company Sep 17, 2026",
         "url": "https://openai.com/index/astra-for-law/"
@@ -63,13 +67,13 @@
       {
         "title": "Now everyone can put data to work Product Sep 10, 2026",
         "url": "https://openai.com/index/put-data-to-work/"
-      },
-      {
-        "title": "Introducing ChatGPT for Financial Services Product Sep 10, 2026",
-        "url": "https://openai.com/index/introducing-chatgpt-financial-services/"
       }
     ],
     "google": [
+      {
+        "title": "Building AI to accelerate science and improve lives The true measure of AI is who it helps. Here’s…",
+        "url": "https://blog.google/innovation-and-ai/technology/ai/ai-applications-science-people/"
+      },
       {
         "title": "4 ways to tackle household chores with Gemini",
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/household-chores-tips/"
@@ -97,10 +101,6 @@
       {
         "title": "View more from Google Research",
         "url": "https://blog.google/innovation-and-ai/technology/research/"
-      },
-      {
-        "title": "Build real-time voice applications with Gemini 3.8 Live and 3.5 Transcribe",
-        "url": "https://blog.google/innovation-and-ai/technology/developers-tools/build-real-time-voice-applications-gemini-audio/"
       }
     ],
     "github": [
@@ -108,79 +108,87 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 261497,
+        "stars": 262440,
         "language": "JavaScript",
-        "updatedAt": "2026-09-17T18:04:07Z"
+        "updatedAt": "2026-09-19T06:58:33Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 246730,
+        "stars": 247015,
         "language": "Python",
-        "updatedAt": "2026-09-18T10:52:35Z"
+        "updatedAt": "2026-09-19T10:34:17Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187426,
+        "stars": 187439,
         "language": "Python",
-        "updatedAt": "2026-09-18T10:44:55Z"
+        "updatedAt": "2026-09-19T09:48:05Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The web data API to search, scrape, and interact at scale. 🔥",
-        "stars": 181833,
+        "stars": 182109,
         "language": "TypeScript",
-        "updatedAt": "2026-09-18T10:10:58Z"
+        "updatedAt": "2026-09-19T07:08:02Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 181198,
+        "stars": 181260,
         "language": "Go",
-        "updatedAt": "2026-09-17T23:54:24Z"
+        "updatedAt": "2026-09-19T04:40:29Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 166283,
+        "stars": 166322,
         "language": "Python",
-        "updatedAt": "2026-09-18T10:50:51Z"
+        "updatedAt": "2026-09-19T04:26:47Z"
+      },
+      {
+        "name": "Snailclimb/JavaGuide",
+        "url": "https://github.com/Snailclimb/JavaGuide",
+        "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
+        "stars": 158683,
+        "language": "JavaScript",
+        "updatedAt": "2026-09-19T06:29:38Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 156262,
+        "stars": 156409,
         "language": "TypeScript",
-        "updatedAt": "2026-09-18T10:50:01Z"
+        "updatedAt": "2026-09-19T10:30:07Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 152455,
+        "stars": 152525,
         "language": "Python",
-        "updatedAt": "2026-09-18T00:11:06Z"
+        "updatedAt": "2026-09-19T03:54:10Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 146584,
+        "stars": 146652,
         "language": "Python",
-        "updatedAt": "2026-09-18T08:32:25Z"
+        "updatedAt": "2026-09-19T08:59:52Z"
       },
       {
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 141701,
+        "stars": 142263,
         "language": "JavaScript",
         "updatedAt": "2026-09-14T14:34:56Z"
       },
@@ -188,17 +196,9 @@
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 138777,
+        "stars": 138903,
         "language": "Python",
-        "updatedAt": "2026-09-16T04:08:39Z"
-      },
-      {
-        "name": "Graphify-Labs/graphify",
-        "url": "https://github.com/Graphify-Labs/graphify",
-        "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 119193,
-        "language": "Python",
-        "updatedAt": "2026-09-16T19:41:40Z"
+        "updatedAt": "2026-09-19T07:54:25Z"
       }
     ]
   }
