@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-21T12:24:34.451Z",
+  "generatedAt": "2026-09-22T11:14:49.189Z",
   "sources": {
     "anthropic": [
       {
@@ -37,6 +37,14 @@
     ],
     "openai": [
       {
+        "title": "Advisory group on mathematics and artificial intelligence Company Sep 21, 2026",
+        "url": "https://openai.com/index/advisory-group-on-mathematics-and-ai/"
+      },
+      {
+        "title": "Expanding OpenAI Academy with new learning paths Company Sep 21, 2026",
+        "url": "https://openai.com/index/expanding-openai-academy-with-new-learning-paths/"
+      },
+      {
         "title": "Introducing the Australian Youth Safety Blueprint Company Sep 18, 2026",
         "url": "https://openai.com/index/australian-youth-safety-blueprint/"
       },
@@ -59,14 +67,6 @@
       {
         "title": "Rapidly scaling online storage to serve over 1 billion ChatGPT users Engineering Sep 11, 2026",
         "url": "https://openai.com/index/scaling-storage-one-billion-users-part-one/"
-      },
-      {
-        "title": "How a researcher uses Codex and ChatGPT to search for new antimicrobial molecules Applied AI Sep…",
-        "url": "https://openai.com/index/using-codex-chatgpt-to-search-for-new-antimicrobials/"
-      },
-      {
-        "title": "Now everyone can put data to work Product Sep 10, 2026",
-        "url": "https://openai.com/index/put-data-to-work/"
       }
     ],
     "google": [
@@ -108,97 +108,97 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 264333,
+        "stars": 265024,
         "language": "JavaScript",
-        "updatedAt": "2026-09-21T04:55:15Z"
+        "updatedAt": "2026-09-21T19:00:51Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 247644,
+        "stars": 247944,
         "language": "Python",
-        "updatedAt": "2026-09-21T12:06:47Z"
+        "updatedAt": "2026-09-22T11:05:37Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187473,
+        "stars": 187484,
         "language": "Python",
-        "updatedAt": "2026-09-21T12:14:12Z"
+        "updatedAt": "2026-09-22T10:52:41Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The web data API to search, scrape, and interact at scale. 🔥",
-        "stars": 182785,
+        "stars": 183146,
         "language": "TypeScript",
-        "updatedAt": "2026-09-21T10:54:29Z"
+        "updatedAt": "2026-09-22T06:26:06Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 181359,
+        "stars": 181450,
         "language": "Go",
-        "updatedAt": "2026-09-19T20:41:40Z"
+        "updatedAt": "2026-09-21T23:34:50Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 166458,
+        "stars": 166512,
         "language": "Python",
-        "updatedAt": "2026-09-21T12:20:04Z"
+        "updatedAt": "2026-09-22T11:12:34Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 158767,
+        "stars": 158793,
         "language": "JavaScript",
-        "updatedAt": "2026-09-20T05:27:51Z"
+        "updatedAt": "2026-09-22T09:58:35Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 156712,
+        "stars": 156847,
         "language": "TypeScript",
-        "updatedAt": "2026-09-21T12:23:39Z"
+        "updatedAt": "2026-09-22T11:12:34Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 152694,
+        "stars": 152791,
         "language": "Python",
-        "updatedAt": "2026-09-21T12:15:12Z"
+        "updatedAt": "2026-09-21T19:25:21Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 146785,
+        "stars": 146855,
         "language": "Python",
-        "updatedAt": "2026-09-21T08:56:46Z"
+        "updatedAt": "2026-09-22T08:33:01Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 139255,
+        "stars": 139387,
         "language": "Python",
-        "updatedAt": "2026-09-20T18:48:37Z"
+        "updatedAt": "2026-09-22T07:39:59Z"
       },
       {
         "name": "harry0703/MoneyPrinterTurbo",
         "url": "https://github.com/harry0703/MoneyPrinterTurbo",
         "description": "利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
-        "stars": 124917,
+        "stars": 125051,
         "language": "Python",
-        "updatedAt": "2026-09-20T13:57:25Z"
+        "updatedAt": "2026-09-21T12:52:09Z"
       }
     ]
   }
