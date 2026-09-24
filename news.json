@@ -1,14 +1,10 @@
 {
-  "generatedAt": "2026-09-23T11:07:30.829Z",
+  "generatedAt": "2026-09-24T11:23:59.652Z",
   "sources": {
     "anthropic": [
       {
-        "title": "Announcements Aug 31, 2026 Improving our alignment and security efforts On July 30, we reported…",
-        "url": "https://www.anthropic.com/news/improving-alignment-security-efforts"
-      },
-      {
-        "title": "Announcements Aug 27, 2026 Previewing the Model Hardware Standard We’re opening a research preview…",
-        "url": "https://www.anthropic.com/news/model-hardware-standard-research-preview"
+        "title": "Sep 23, 2026 Science Claude discovers a novel enzyme system with CRISPR-like repeats",
+        "url": "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
       },
       {
         "title": "Sep 18, 2026 Announcements Partnering with Accenture on embedded evaluation",
@@ -23,19 +19,39 @@
         "url": "https://www.anthropic.com/news/enterprise-frontier-safeguards"
       },
       {
+        "title": "Aug 31, 2026 Announcements Improving our alignment and security efforts",
+        "url": "https://www.anthropic.com/news/improving-alignment-security-efforts"
+      },
+      {
+        "title": "Aug 27, 2026 Announcements Previewing the Model Hardware Standard",
+        "url": "https://www.anthropic.com/news/model-hardware-standard-research-preview"
+      },
+      {
         "title": "Aug 27, 2026 Announcements Expanding our support for scientists",
         "url": "https://www.anthropic.com/news/expanding-support-for-scientists"
       },
       {
         "title": "Aug 25, 2026 Announcements Funding better evaluations of AI’s impact on wellbeing",
         "url": "https://www.anthropic.com/news/wellbeing-research-grants"
-      },
-      {
-        "title": "Aug 14, 2026 Announcements How Claude’s text watermark works",
-        "url": "https://www.anthropic.com/news/claude-text-watermark"
       }
     ],
     "openai": [
+      {
+        "title": "Two years of OpenAI Academy Company Sep 23, 2026",
+        "url": "https://openai.com/index/two-years-of-openai-academy/"
+      },
+      {
+        "title": "Sam Altman’s remarks at the United Nations Security Council Global Affairs Sep 23, 2026",
+        "url": "https://openai.com/index/sam-altman-un-security-council-remarks/"
+      },
+      {
+        "title": "ChatGPT Ads expands to Southeast Asia and Taiwan Product Sep 23, 2026",
+        "url": "https://openai.com/index/chatgpt-ads-expands-southeast-asia-taiwan/"
+      },
+      {
+        "title": "Airbnb expands access to GPT-6 Astra Company Sep 23, 2026",
+        "url": "https://openai.com/index/airbnb-gpt-6-astra/"
+      },
       {
         "title": "Better prompt caching for GPT-6 Product Sep 22, 2026",
         "url": "https://openai.com/index/better-prompt-caching-for-gpt-6/"
@@ -51,28 +67,16 @@
       {
         "title": "Advisory group on mathematics and artificial intelligence Company Sep 21, 2026",
         "url": "https://openai.com/index/advisory-group-on-mathematics-and-ai/"
-      },
-      {
-        "title": "Expanding OpenAI Academy with new learning paths Company Sep 21, 2026",
-        "url": "https://openai.com/index/expanding-openai-academy-with-new-learning-paths/"
-      },
-      {
-        "title": "Introducing the Australian Youth Safety Blueprint Company Sep 18, 2026",
-        "url": "https://openai.com/index/australian-youth-safety-blueprint/"
-      },
-      {
-        "title": "Introducing Astra for Law Company Sep 17, 2026",
-        "url": "https://openai.com/index/astra-for-law/"
-      },
-      {
-        "title": "Reimagining advertising with AI Product Sep 16, 2026",
-        "url": "https://openai.com/index/reimagining-advertising-with-ai/"
       }
     ],
     "google": [
       {
         "title": "Building AI to accelerate science and improve lives The true measure of AI is who it helps. Here’s…",
         "url": "https://blog.google/innovation-and-ai/technology/ai/ai-applications-science-people/"
+      },
+      {
+        "title": "A new wave of Connected Apps is rolling out to Gemini.",
+        "url": "https://blog.google/innovation-and-ai/products/gemini-app/new-connected-apps-gemini/"
       },
       {
         "title": "4 ways to tackle household chores with Gemini",
@@ -83,8 +87,8 @@
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-app-now-on-windows/"
       },
       {
-        "title": "Create your best tracks yet with Lyria 3.5 in Gemini.",
-        "url": "https://blog.google/innovation-and-ai/products/gemini-app/better-tracks-lyria-gemini/"
+        "title": "Google Beam expands with new regions, partners, and customers",
+        "url": "https://blog.google/innovation-and-ai/technology/research/google-beam-expansion/"
       },
       {
         "title": "Ask a Scientist: How can researchers use AI to spot a wildfire?",
@@ -93,10 +97,6 @@
       {
         "title": "Mapping global methane emissions from space with deep learning",
         "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/mapping-global-methane-emissions-from-space/"
-      },
-      {
-        "title": "Our new contrail avoidance trial in Asia-Pacific",
-        "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/contrail-avoidance-ultra-long-haul-flights/"
       },
       {
         "title": "View more from Google Research",
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 265788,
+        "stars": 266442,
         "language": "JavaScript",
         "updatedAt": "2026-09-22T23:09:59Z"
       },
@@ -116,47 +116,47 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 248248,
+        "stars": 248568,
         "language": "Python",
-        "updatedAt": "2026-09-23T11:04:47Z"
+        "updatedAt": "2026-09-24T11:23:46Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187505,
+        "stars": 187521,
         "language": "Python",
-        "updatedAt": "2026-09-23T11:04:46Z"
+        "updatedAt": "2026-09-24T11:20:33Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The web data API to search, scrape, and interact at scale. 🔥",
-        "stars": 183600,
+        "stars": 184069,
         "language": "TypeScript",
-        "updatedAt": "2026-09-23T11:03:27Z"
+        "updatedAt": "2026-09-24T11:22:30Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 181511,
+        "stars": 181574,
         "language": "Go",
-        "updatedAt": "2026-09-23T07:56:56Z"
+        "updatedAt": "2026-09-24T03:46:00Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 166559,
+        "stars": 166588,
         "language": "Python",
-        "updatedAt": "2026-09-23T10:19:03Z"
+        "updatedAt": "2026-09-24T11:07:55Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 158832,
+        "stars": 158850,
         "language": "JavaScript",
         "updatedAt": "2026-09-22T09:58:35Z"
       },
@@ -164,31 +164,31 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 156950,
+        "stars": 157056,
         "language": "TypeScript",
-        "updatedAt": "2026-09-23T11:04:32Z"
+        "updatedAt": "2026-09-24T11:10:34Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 152890,
+        "stars": 152987,
         "language": "Python",
-        "updatedAt": "2026-09-22T20:57:10Z"
+        "updatedAt": "2026-09-24T04:15:30Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 146918,
+        "stars": 146979,
         "language": "Python",
-        "updatedAt": "2026-09-23T09:02:49Z"
+        "updatedAt": "2026-09-24T10:51:37Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 139508,
+        "stars": 139609,
         "language": "Python",
         "updatedAt": "2026-09-23T05:24:46Z"
       },
@@ -196,9 +196,9 @@
         "name": "harry0703/MoneyPrinterTurbo",
         "url": "https://github.com/harry0703/MoneyPrinterTurbo",
         "description": "利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
-        "stars": 125276,
+        "stars": 125444,
         "language": "Python",
-        "updatedAt": "2026-09-21T12:52:09Z"
+        "updatedAt": "2026-09-24T09:16:08Z"
       }
     ]
   }
