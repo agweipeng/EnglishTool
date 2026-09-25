@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T11:23:59.652Z",
+  "generatedAt": "2026-09-25T11:29:54.604Z",
   "sources": {
     "anthropic": [
       {
@@ -87,16 +87,16 @@
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-app-now-on-windows/"
       },
       {
+        "title": "Behind Project Suncatcher, our moonshot to put AI in space",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/google-project-suncatcher-facts/"
+      },
+      {
         "title": "Google Beam expands with new regions, partners, and customers",
         "url": "https://blog.google/innovation-and-ai/technology/research/google-beam-expansion/"
       },
       {
         "title": "Ask a Scientist: How can researchers use AI to spot a wildfire?",
         "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/wildfire-tracking-ai/"
-      },
-      {
-        "title": "Mapping global methane emissions from space with deep learning",
-        "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/mapping-global-methane-emissions-from-space/"
       },
       {
         "title": "View more from Google Research",
@@ -108,55 +108,55 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 266442,
+        "stars": 267188,
         "language": "JavaScript",
-        "updatedAt": "2026-09-22T23:09:59Z"
+        "updatedAt": "2026-09-24T16:52:48Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 248568,
+        "stars": 248827,
         "language": "Python",
-        "updatedAt": "2026-09-24T11:23:46Z"
+        "updatedAt": "2026-09-25T11:14:59Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187521,
+        "stars": 187545,
         "language": "Python",
-        "updatedAt": "2026-09-24T11:20:33Z"
+        "updatedAt": "2026-09-25T11:24:54Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "The web data API to search, scrape, and interact at scale. 🔥",
-        "stars": 184069,
+        "stars": 184501,
         "language": "TypeScript",
-        "updatedAt": "2026-09-24T11:22:30Z"
+        "updatedAt": "2026-09-25T11:25:40Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 181574,
+        "stars": 181672,
         "language": "Go",
-        "updatedAt": "2026-09-24T03:46:00Z"
+        "updatedAt": "2026-09-25T02:27:55Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 166588,
+        "stars": 166631,
         "language": "Python",
-        "updatedAt": "2026-09-24T11:07:55Z"
+        "updatedAt": "2026-09-25T11:19:00Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 158850,
+        "stars": 158869,
         "language": "JavaScript",
         "updatedAt": "2026-09-22T09:58:35Z"
       },
@@ -164,39 +164,39 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 157056,
+        "stars": 157171,
         "language": "TypeScript",
-        "updatedAt": "2026-09-24T11:10:34Z"
+        "updatedAt": "2026-09-25T11:06:17Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 152987,
+        "stars": 153126,
         "language": "Python",
-        "updatedAt": "2026-09-24T04:15:30Z"
+        "updatedAt": "2026-09-25T05:06:56Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 146979,
+        "stars": 147035,
         "language": "Python",
-        "updatedAt": "2026-09-24T10:51:37Z"
+        "updatedAt": "2026-09-25T09:02:10Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 139609,
+        "stars": 139713,
         "language": "Python",
-        "updatedAt": "2026-09-23T05:24:46Z"
+        "updatedAt": "2026-09-25T02:36:57Z"
       },
       {
         "name": "harry0703/MoneyPrinterTurbo",
         "url": "https://github.com/harry0703/MoneyPrinterTurbo",
         "description": "利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
-        "stars": 125444,
+        "stars": 125617,
         "language": "Python",
         "updatedAt": "2026-09-24T09:16:08Z"
       }
