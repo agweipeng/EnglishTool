@@ -1,7 +1,11 @@
 {
-  "generatedAt": "2026-09-30T12:12:15.181Z",
+  "generatedAt": "2026-10-01T12:46:35.308Z",
   "sources": {
     "anthropic": [
+      {
+        "title": "Oct 1, 2026 Announcements Barclays scales Claude to upgrade operations and improve client experience",
+        "url": "https://www.anthropic.com/news/barclays-scales-claude"
+      },
       {
         "title": "Sep 23, 2026 Science Claude discovers a novel enzyme system with CRISPR-like repeats",
         "url": "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
@@ -29,13 +33,13 @@
       {
         "title": "Aug 27, 2026 Announcements Expanding our support for scientists",
         "url": "https://www.anthropic.com/news/expanding-support-for-scientists"
-      },
-      {
-        "title": "Aug 25, 2026 Announcements Funding better evaluations of AI’s impact on wellbeing",
-        "url": "https://www.anthropic.com/news/wellbeing-research-grants"
       }
     ],
     "openai": [
+      {
+        "title": "Disrupting a coordinated model-distillation campaign Security Sep 30, 2026",
+        "url": "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign/"
+      },
       {
         "title": "DevDay 2026 Recap Company Sep 29, 2026",
         "url": "https://openai.com/index/devday-2026-recap/"
@@ -63,10 +67,6 @@
       {
         "title": "Two years of OpenAI Academy Company Sep 23, 2026",
         "url": "https://openai.com/index/two-years-of-openai-academy/"
-      },
-      {
-        "title": "Sam Altman’s remarks at the United Nations Security Council Global Affairs Sep 23, 2026",
-        "url": "https://openai.com/index/sam-altman-un-security-council-remarks/"
       }
     ],
     "google": [
@@ -87,16 +87,16 @@
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-app-now-on-windows/"
       },
       {
+        "title": "Google's AI ranks #1 for predicting flu hospitalizations.",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/google-science-ai-flu-forecasts/"
+      },
+      {
         "title": "Behind Project Suncatcher, our moonshot to put AI in space",
         "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/google-project-suncatcher-facts/"
       },
       {
         "title": "Google Beam expands with new regions, partners, and customers",
         "url": "https://blog.google/innovation-and-ai/technology/research/google-beam-expansion/"
-      },
-      {
-        "title": "Ask a Scientist: How can researchers use AI to spot a wildfire?",
-        "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/wildfire-tracking-ai/"
       },
       {
         "title": "View more from Google Research",
@@ -108,97 +108,97 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 269918,
+        "stars": 270433,
         "language": "JavaScript",
-        "updatedAt": "2026-09-30T01:24:05Z"
+        "updatedAt": "2026-09-30T18:45:04Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 250225,
+        "stars": 250482,
         "language": "Python",
-        "updatedAt": "2026-09-30T12:06:32Z"
+        "updatedAt": "2026-10-01T12:37:33Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187620,
+        "stars": 187632,
         "language": "Python",
-        "updatedAt": "2026-09-30T12:11:22Z"
+        "updatedAt": "2026-10-01T12:38:50Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "🔥 Supercharge your AI agents with data from the web and beyond. A web data API to search, scrape, and access more sources.",
-        "stars": 186895,
+        "stars": 187389,
         "language": "TypeScript",
-        "updatedAt": "2026-09-30T08:18:50Z"
+        "updatedAt": "2026-10-01T11:38:43Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 181948,
+        "stars": 181998,
         "language": "Go",
-        "updatedAt": "2026-09-30T02:33:25Z"
+        "updatedAt": "2026-10-01T12:24:26Z"
+      },
+      {
+        "name": "f/prompts.chat",
+        "url": "https://github.com/f/prompts.chat",
+        "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
+        "stars": 171784,
+        "language": "HTML",
+        "updatedAt": "2026-10-01T09:59:16Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 166849,
+        "stars": 166883,
         "language": "Python",
-        "updatedAt": "2026-09-30T12:10:05Z"
+        "updatedAt": "2026-10-01T12:39:47Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 157570,
+        "stars": 157653,
         "language": "TypeScript",
-        "updatedAt": "2026-09-30T11:41:35Z"
+        "updatedAt": "2026-10-01T12:34:24Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 153618,
+        "stars": 153705,
         "language": "Python",
-        "updatedAt": "2026-09-29T16:25:29Z"
+        "updatedAt": "2026-10-01T04:38:23Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 147311,
+        "stars": 147349,
         "language": "Python",
-        "updatedAt": "2026-09-30T08:33:03Z"
+        "updatedAt": "2026-10-01T09:16:18Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 140327,
+        "stars": 140461,
         "language": "Python",
-        "updatedAt": "2026-09-29T04:56:53Z"
-      },
-      {
-        "name": "harry0703/MoneyPrinterTurbo",
-        "url": "https://github.com/harry0703/MoneyPrinterTurbo",
-        "description": "利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.",
-        "stars": 127251,
-        "language": "Python",
-        "updatedAt": "2026-09-30T07:06:53Z"
+        "updatedAt": "2026-09-30T20:31:22Z"
       },
       {
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 122638,
+        "stars": 122940,
         "language": "Python",
-        "updatedAt": "2026-09-29T18:42:58Z"
+        "updatedAt": "2026-09-30T19:53:37Z"
       }
     ]
   }
