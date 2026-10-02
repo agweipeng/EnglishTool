@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-01T12:46:35.308Z",
+  "generatedAt": "2026-10-02T12:10:24.634Z",
   "sources": {
     "anthropic": [
       {
@@ -37,6 +37,14 @@
     ],
     "openai": [
       {
+        "title": "The eternal complement Intelligence Age Oct 1, 2026",
+        "url": "https://openai.com/index/the-eternal-complement/"
+      },
+      {
+        "title": "How Albertsons Companies is reimagining retail from the inside out Company Oct 1, 2026",
+        "url": "https://openai.com/index/albertsons-reimagining-retail/"
+      },
+      {
         "title": "Disrupting a coordinated model-distillation campaign Security Sep 30, 2026",
         "url": "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign/"
       },
@@ -59,20 +67,16 @@
       {
         "title": "How we will do better for Australia Company Sep 28, 2026",
         "url": "https://openai.com/index/how-we-will-do-better-for-australia/"
-      },
-      {
-        "title": "Lenfest grows landmark program with OpenAI support Company Sep 28, 2026",
-        "url": "https://openai.com/index/lenfest-ai-collaborative-expansion/"
-      },
-      {
-        "title": "Two years of OpenAI Academy Company Sep 23, 2026",
-        "url": "https://openai.com/index/two-years-of-openai-academy/"
       }
     ],
     "google": [
       {
         "title": "Building AI to accelerate science and improve lives The true measure of AI is who it helps. Here’s…",
         "url": "https://blog.google/innovation-and-ai/technology/ai/ai-applications-science-people/"
+      },
+      {
+        "title": "Guided Vision in Gemini Live: built for accessibility",
+        "url": "https://blog.google/innovation-and-ai/products/gemini-app/guided-vision-gemini-live/"
       },
       {
         "title": "A new wave of Connected Apps is rolling out to Gemini.",
@@ -83,8 +87,8 @@
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/household-chores-tips/"
       },
       {
-        "title": "The Gemini app is now available for Windows",
-        "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-app-now-on-windows/"
+        "title": "Our Project Suncatcher prototype satellite is in orbit.",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/project-suncatcher-prototype/"
       },
       {
         "title": "Google's AI ranks #1 for predicting flu hospitalizations.",
@@ -93,10 +97,6 @@
       {
         "title": "Behind Project Suncatcher, our moonshot to put AI in space",
         "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/google-project-suncatcher-facts/"
-      },
-      {
-        "title": "Google Beam expands with new regions, partners, and customers",
-        "url": "https://blog.google/innovation-and-ai/technology/research/google-beam-expansion/"
       },
       {
         "title": "View more from Google Research",
@@ -108,47 +108,47 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 270433,
+        "stars": 270942,
         "language": "JavaScript",
-        "updatedAt": "2026-09-30T18:45:04Z"
+        "updatedAt": "2026-10-02T02:01:14Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 250482,
+        "stars": 250691,
         "language": "Python",
-        "updatedAt": "2026-10-01T12:37:33Z"
-      },
-      {
-        "name": "Significant-Gravitas/AutoGPT",
-        "url": "https://github.com/Significant-Gravitas/AutoGPT",
-        "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187632,
-        "language": "Python",
-        "updatedAt": "2026-10-01T12:38:50Z"
+        "updatedAt": "2026-10-02T12:10:10Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "🔥 Supercharge your AI agents with data from the web and beyond. A web data API to search, scrape, and access more sources.",
-        "stars": 187389,
+        "stars": 187759,
         "language": "TypeScript",
-        "updatedAt": "2026-10-01T11:38:43Z"
+        "updatedAt": "2026-10-02T08:58:41Z"
+      },
+      {
+        "name": "Significant-Gravitas/AutoGPT",
+        "url": "https://github.com/Significant-Gravitas/AutoGPT",
+        "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
+        "stars": 187655,
+        "language": "Python",
+        "updatedAt": "2026-10-02T12:03:58Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 181998,
+        "stars": 182050,
         "language": "Go",
-        "updatedAt": "2026-10-01T12:24:26Z"
+        "updatedAt": "2026-10-02T06:12:46Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 171784,
+        "stars": 171859,
         "language": "HTML",
         "updatedAt": "2026-10-01T09:59:16Z"
       },
@@ -156,49 +156,49 @@
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 166883,
+        "stars": 166905,
         "language": "Python",
-        "updatedAt": "2026-10-01T12:39:47Z"
+        "updatedAt": "2026-10-02T11:59:20Z"
+      },
+      {
+        "name": "Snailclimb/JavaGuide",
+        "url": "https://github.com/Snailclimb/JavaGuide",
+        "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
+        "stars": 159006,
+        "language": "JavaScript",
+        "updatedAt": "2026-10-02T00:38:41Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 157653,
+        "stars": 157731,
         "language": "TypeScript",
-        "updatedAt": "2026-10-01T12:34:24Z"
+        "updatedAt": "2026-10-02T12:07:40Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 153705,
+        "stars": 153800,
         "language": "Python",
-        "updatedAt": "2026-10-01T04:38:23Z"
+        "updatedAt": "2026-10-02T04:50:55Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 147349,
+        "stars": 147383,
         "language": "Python",
-        "updatedAt": "2026-10-01T09:16:18Z"
+        "updatedAt": "2026-10-02T08:35:17Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 140461,
+        "stars": 140541,
         "language": "Python",
         "updatedAt": "2026-09-30T20:31:22Z"
-      },
-      {
-        "name": "Graphify-Labs/graphify",
-        "url": "https://github.com/Graphify-Labs/graphify",
-        "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 122940,
-        "language": "Python",
-        "updatedAt": "2026-09-30T19:53:37Z"
       }
     ]
   }
