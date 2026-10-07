@@ -1,7 +1,11 @@
 {
-  "generatedAt": "2026-10-06T13:03:31.312Z",
+  "generatedAt": "2026-10-07T12:57:53.516Z",
   "sources": {
     "anthropic": [
+      {
+        "title": "Announcements Oct 6, 2026 Expanding the Cyber Verification Program We’re launching a new, expanded…",
+        "url": "https://www.anthropic.com/news/cyber-verification-program"
+      },
       {
         "title": "Oct 2, 2026 Announcements Anthropic invests $100 million to train 10,000 engineers and tackle the…",
         "url": "https://www.anthropic.com/news/claude-frontier-academy"
@@ -29,13 +33,17 @@
       {
         "title": "Aug 31, 2026 Announcements Improving our alignment and security efforts",
         "url": "https://www.anthropic.com/news/improving-alignment-security-efforts"
-      },
-      {
-        "title": "Aug 27, 2026 Announcements Previewing the Model Hardware Standard",
-        "url": "https://www.anthropic.com/news/model-hardware-standard-research-preview"
       }
     ],
     "openai": [
+      {
+        "title": "Sharing AI progress in mathematics Research Oct 6, 2026",
+        "url": "https://openai.com/index/sharing-ai-progress-in-mathematics/"
+      },
+      {
+        "title": "Atlassian and OpenAI expand their partnership Company Oct 6, 2026",
+        "url": "https://openai.com/index/atlassian-partnership/"
+      },
       {
         "title": "Our approach to EU text provenance rules Safety Oct 5, 2026",
         "url": "https://openai.com/index/eu-text-provenance/"
@@ -59,14 +67,6 @@
       {
         "title": "Disrupting a coordinated model-distillation campaign Security Sep 30, 2026",
         "url": "https://openai.com/index/disrupting-a-coordinated-model-distillation-campaign/"
-      },
-      {
-        "title": "DevDay 2026 Recap Company Sep 29, 2026",
-        "url": "https://openai.com/index/devday-2026-recap/"
-      },
-      {
-        "title": "Introducing GPT-6.1 Sol Product Sep 29, 2026",
-        "url": "https://openai.com/index/introducing-gpt-6-1-sol/"
       }
     ],
     "google": [
@@ -87,16 +87,16 @@
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/household-chores-tips/"
       },
       {
+        "title": "Ask a Scientist: How are researchers using AI to help pregnant women access ultrasounds?",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/blind-sweep-ultrasounds-ai/"
+      },
+      {
         "title": "Our Project Suncatcher prototype satellite is in orbit.",
         "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/project-suncatcher-prototype/"
       },
       {
         "title": "Google's AI ranks #1 for predicting flu hospitalizations.",
         "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/google-science-ai-flu-forecasts/"
-      },
-      {
-        "title": "Behind Project Suncatcher, our moonshot to put AI in space",
-        "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/google-project-suncatcher-facts/"
       },
       {
         "title": "View more from Google Research",
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 273980,
+        "stars": 274588,
         "language": "JavaScript",
         "updatedAt": "2026-10-05T04:55:16Z"
       },
@@ -116,39 +116,39 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 251582,
+        "stars": 251817,
         "language": "Python",
-        "updatedAt": "2026-10-06T13:01:21Z"
+        "updatedAt": "2026-10-07T12:52:27Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 189073,
+        "stars": 189354,
         "language": "TypeScript",
-        "updatedAt": "2026-10-06T12:14:50Z"
+        "updatedAt": "2026-10-07T11:21:04Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187674,
+        "stars": 187680,
         "language": "Python",
-        "updatedAt": "2026-10-06T12:23:47Z"
+        "updatedAt": "2026-10-07T12:52:10Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 182336,
+        "stars": 182453,
         "language": "Go",
-        "updatedAt": "2026-10-06T02:02:41Z"
+        "updatedAt": "2026-10-07T04:39:34Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 172140,
+        "stars": 172252,
         "language": "HTML",
         "updatedAt": "2026-10-03T08:12:28Z"
       },
@@ -156,15 +156,15 @@
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 166998,
+        "stars": 167018,
         "language": "Python",
-        "updatedAt": "2026-10-06T12:31:10Z"
+        "updatedAt": "2026-10-07T12:26:50Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 159046,
+        "stars": 159059,
         "language": "JavaScript",
         "updatedAt": "2026-10-03T23:36:32Z"
       },
@@ -172,15 +172,15 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 157950,
+        "stars": 158000,
         "language": "TypeScript",
-        "updatedAt": "2026-10-06T12:40:43Z"
+        "updatedAt": "2026-10-07T10:36:11Z"
       },
       {
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 156438,
+        "stars": 157256,
         "language": "JavaScript",
         "updatedAt": "2026-10-05T20:46:39Z"
       },
@@ -188,17 +188,17 @@
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 154071,
+        "stars": 154126,
         "language": "Python",
-        "updatedAt": "2026-10-06T12:41:35Z"
+        "updatedAt": "2026-10-07T12:38:01Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 147495,
+        "stars": 147525,
         "language": "Python",
-        "updatedAt": "2026-10-06T11:32:41Z"
+        "updatedAt": "2026-10-07T12:26:36Z"
       }
     ]
   }
