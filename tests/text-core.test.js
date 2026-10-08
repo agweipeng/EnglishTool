@@ -327,3 +327,47 @@ test('buildRoleplayPrompt works without target words', () => {
   assert.ok(p.includes('Scenario: Small talk'));
   assert.ok(!p.includes('\n- '));
 });
+
+// Shaped like https://en.wiktionary.org/api/rest_v1/page/definition/woods
+const WIKTIONARY_WOODS = {
+  en: [
+    { partOfSpeech: 'Noun', language: 'English', definitions: [
+      { definition: '<span class="form-of-definition use-with-mention"><a href="/wiki/Appendix:Glossary#plural">plural</a> of <span class="form-of-definition-link"><a href="/wiki/wood" title="wood">wood</a></span></span>' },
+    ] },
+    { partOfSpeech: 'Noun', language: 'English', definitions: [
+      { definition: '<span class="usage-label-sense"></span> A dense collection of trees, smaller than a <a href="/wiki/forest" title="forest">forest</a>.',
+        examples: ['We walked through the <b>woods</b> &amp; fields.'] },
+      { definition: 'A second, rarer sense.' },
+    ] },
+    { partOfSpeech: 'Verb', language: 'English', definitions: [
+      { definition: '<span class="form-of-definition">third-person singular of <a title="wood">wood</a></span>' },
+    ] },
+  ],
+  fr: [{ partOfSpeech: 'Noun', language: 'French', definitions: [{ definition: 'Not English.' }] }],
+};
+
+test('parseWiktionary keeps real English definitions as plain text', () => {
+  const dict = TC.parseWiktionary(WIKTIONARY_WOODS);
+  assert.equal(dict.defEN, 'A dense collection of trees, smaller than a forest.');
+  assert.deepEqual(dict.examples, [{ en: 'We walked through the woods & fields.', cn: '' }]);
+  assert.equal(dict.phonetic, '');
+});
+
+test('parseWiktionary joins the first sense of up to two parts of speech', () => {
+  const dict = TC.parseWiktionary({ en: [
+    { partOfSpeech: 'Verb', definitions: [{ definition: 'To move <i>swiftly</i>.' }, { definition: 'Ignored.' }] },
+    { partOfSpeech: 'Noun', definitions: [{ definition: 'An act of running.' }] },
+    { partOfSpeech: 'Adjective', definitions: [{ definition: 'Third part of speech.' }] },
+  ] });
+  assert.equal(dict.defEN, 'To move swiftly. • An act of running.');
+});
+
+test('parseWiktionary returns null when there are only inflection pointers or no English entry', () => {
+  const formOnly = { en: [{ partOfSpeech: 'Verb', definitions: [
+    { definition: '<span class="form-of-definition">simple past of <a title="glimmer">glimmer</a></span>' },
+  ] }] };
+  assert.equal(TC.parseWiktionary(formOnly), null);
+  assert.equal(TC.parseWiktionary({ fr: [] }), null);
+  assert.equal(TC.parseWiktionary(null), null);
+  assert.equal(TC.parseWiktionary({ en: 'bad' }), null);
+});

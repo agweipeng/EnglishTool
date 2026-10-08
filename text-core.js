@@ -426,6 +426,45 @@
     ].join('\n');
   }
 
+  // ---------- Wiktionary definitions ----------
+  // Parses https://en.wiktionary.org/api/rest_v1/page/definition/<word> into the same
+  // shape as the Free Dictionary lookup. Definitions arrive as HTML; inflection
+  // pointers ("plural of wood") are skipped so the base word's lookup wins instead.
+  const MAX_WIKTIONARY_SENSES = 2;
+  const MAX_WIKTIONARY_EXAMPLES = 3;
+  const HTML_ENTITIES = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ' };
+
+  function htmlToText(html) {
+    return String(html || '')
+      .replace(/<[^>]*>/g, '')
+      .replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, (m, code) => {
+        if (code[0] !== '#') return HTML_ENTITIES[code.toLowerCase()] || m;
+        const n = code[1].toLowerCase() === 'x' ? parseInt(code.slice(2), 16) : parseInt(code.slice(1), 10);
+        return Number.isFinite(n) ? String.fromCodePoint(n) : m;
+      })
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function parseWiktionary(data) {
+    const entries = data && Array.isArray(data.en) ? data.en : [];
+    const senses = [];
+    const examples = [];
+    for (const entry of entries) {
+      const defs = (entry && Array.isArray(entry.definitions) ? entry.definitions : [])
+        .filter(d => d && !/form-of-definition/.test(d.definition || ''));
+      const first = defs.map(d => ({ text: htmlToText(d.definition), d })).find(x => x.text);
+      if (!first) continue;
+      if (senses.length < MAX_WIKTIONARY_SENSES) senses.push(first.text);
+      for (const ex of first.d.examples || []) {
+        const en = htmlToText(ex);
+        if (en && examples.length < MAX_WIKTIONARY_EXAMPLES) examples.push({ en, cn: '' });
+      }
+    }
+    if (!senses.length) return null;
+    return { phonetic: '', defEN: senses.join(' • '), examples };
+  }
+
   const TextCore = Object.freeze({
     STOPWORDS,
     normalizeWords,
@@ -446,6 +485,7 @@
     applyKnownChange,
     mergeKnown,
     buildRoleplayPrompt,
+    parseWiktionary,
   });
 
   if (typeof module !== 'undefined' && module.exports) module.exports = TextCore;
