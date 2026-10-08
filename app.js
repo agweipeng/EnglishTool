@@ -17,6 +17,8 @@ const DAY_MS = 86400000;
 const SESSION_SIZE = 15;             // max cards per session
 const MAX_EXAMPLES = 3;              // example sentences kept per word
 const DICT_API = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
+const WIKTIONARY_API = 'https://en.wiktionary.org/api/rest_v1/page/definition/';
+const DICT_TIMEOUT_MS = 5000;  // give up on a dictionary that hasn't answered by then
 const TRANSLATE_API = 'https://api.mymemory.translated.net/get';
 const DATAMUSE_API = 'https://api.datamuse.com/words';
 
@@ -416,11 +418,45 @@ function speak(text, opts = {}) {
 }
 
 // ============ External APIs ============
+// Asks both dictionaries at once and uses the first real answer. Free Dictionary is
+// built from Wiktionary, so Wiktionary's "no entry" is final; Free Dictionary is only
+// waited for when Wiktionary can't be reached. Timeouts stop a broken service from
+// holding up a lookup.
 async function fetchDictionary(word) {
+  const key = encodeURIComponent(word.trim().toLowerCase());
+  const wiki = fetchWiktionary(key);
+  const free = fetchFreeDictionary(key);
+  const first = await Promise.race([wiki, free.then(dict => dict || wiki)]);
+  return first !== undefined ? first : free;
+}
+
+// null when the word has no entry (404); throws on other failures and timeouts
+async function fetchJson(url, timeoutMs) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const r = await fetch(DICT_API + encodeURIComponent(word.trim().toLowerCase()));
-    if (!r.ok) return null;
-    const data = await r.json();
+    const r = await fetch(url, { signal: controller.signal });
+    if (r.status === 404) return null;
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    return await r.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// The parsed entry, null when Wiktionary has none, or undefined when it couldn't be reached
+async function fetchWiktionary(key) {
+  try {
+    return TextCore.parseWiktionary(await fetchJson(WIKTIONARY_API + key, DICT_TIMEOUT_MS));
+  } catch (e) {
+    console.warn('Wiktionary fetch failed', e);
+    return undefined;
+  }
+}
+
+async function fetchFreeDictionary(key) {
+  try {
+    const data = await fetchJson(DICT_API + key, DICT_TIMEOUT_MS);
     if (!Array.isArray(data) || !data[0]) return null;
     const entry = data[0];
     const phonetic = entry.phonetic

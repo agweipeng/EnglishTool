@@ -238,6 +238,18 @@ test('a slow lookup never overwrites a newer panel or reopens a closed one', asy
   assert.equal(h.element('readerPanel').classList.contains('hidden'), true);
 });
 
+test('looks up every form of a word at once instead of one after another', async () => {
+  const h = readerHarness();
+  const asked = [];
+  // Never resolves: a sequential lookup would only ever ask for the first form
+  h.context.fetchDictionary = w => { asked.push(w); return new Promise(() => {}); };
+  h.run('openBookChapter("wizard-of-oz", 0)');
+  h.run(`openWordPanel(${pieceIndex(h, 'prairies')})`);
+  await settleAll();
+  assert.ok(asked.includes('prairies'));
+  assert.ok(asked.includes('prairie'));
+});
+
 test('clearing the draft retains the book bookmark for resuming later', () => {
   const h = readerHarness();
   h.run('openBookChapter("wizard-of-oz", 3); clearReader()');

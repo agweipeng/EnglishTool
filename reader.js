@@ -424,12 +424,14 @@ function closeReaderPanel() {
 // Headword to save: the word as written if the dictionary knows it, otherwise the
 // first base form it knows ("glimmered" → "glimmer"). Base forms are tried after the
 // surface form because candidates like "hop" (from "hoping") can be real but wrong words.
+// All forms are requested at once; checking them in order keeps that priority.
 async function resolveHeadword(surface) {
   if (TextCore.isPhrase(surface)) return { text: surface.trim(), dict: undefined };
   const forms = TextCore.baseForms(surface).slice(0, MAX_HEADWORD_LOOKUPS);
-  for (const form of forms) {
-    const dict = await fetchDictionary(form);
-    if (dict) return { text: form, dict };
+  const lookups = forms.map(form => fetchDictionary(form));
+  for (let i = 0; i < forms.length; i++) {
+    const dict = await lookups[i];
+    if (dict) return { text: forms[i], dict };
   }
   return { text: forms[0], dict: null };
 }
