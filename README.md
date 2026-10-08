@@ -18,14 +18,19 @@ python3 -m http.server 8000
 - **Add words** with phonetic, EN definition, CN meaning (中文释义), example sentences (EN + CN), tags
 - **Auto-fill** from [Free Dictionary API](https://dictionaryapi.dev), Chinese translation via [MyMemory](https://mymemory.translated.net), and **synonyms / antonyms / word family / collocations** from [Datamuse](https://www.datamuse.com/api/) — all free, no API key
 - **Bulk import** — paste a list of words, auto-fill + enrichment runs for each
-- **Transcript extraction** — paste a podcast transcript / article paragraph, the tool picks the uncommon vocabulary you don't already have
-- **5 learn modes** powered by a modified SM-2 spaced-repetition algorithm:
+- **Transcript extraction** — paste a podcast transcript / article paragraph, the tool picks the uncommon vocabulary you don't already have (skipping words you've marked known, including inflected forms)
+- **Book Reader 📕** — paste a chapter of the novel you're reading and see your **coverage %** (≈98% known = comfortable reading). Unknown words are underlined; click one to add it with **the book's own sentence** as its example (tagged with the book title), or mark it known. Select several words to add a **phrase**. "I know all the rest" calibrates your known-word list in one click. Names are detected and excluded.
+- **7 learn modes** powered by a modified SM-2 spaced-repetition algorithm:
   - 📖 Meaning Recall — see word, recall meaning, self-rate
   - 👂 Listening MCQ — hear sentence, pick correct meaning
   - 🔤 Spelling (Dictation) — hear word, type it
   - 🎯 Sentence Cloze — fill the blank in an example
   - 🧠 Context Card — pick which sentence the word fits in
+  - ✍️ Sentence Dictation — hear a whole sentence (no text shown), type it, get a word-by-word diff and accuracy %
+  - 🗣️ Say it in English — see the Chinese meaning, **say** the English word or phrase (speech recognition) or type it
   - 🎲 Mixed mode (recommended) — randomly picks one per card
+- **Phrase cards 💬** — click a collocation chip (shown after revealing a meaning) to turn it into its own card; filter phrases in the Library
+- **Conversation Practice 🗣️** (Journal tab) — copies a role-play prompt for claude.ai built from your newest, stubborn and phrase cards; use claude.ai voice mode to speak, type `END` for corrections
 - **Auto-archive at level 5** — pass a word 5 times and it's moved out of active review
 - **Unknown-first + Leech-first selection** — low-level / new / overdue / often-wrong words get more chances; "stubborn words" (4+ wrong or >40% miss rate) get a big priority boost and are surfaced separately
 - **Spaced Reading 📖** — a paragraph view built from your recent words' example sentences with click-to-hear highlights and Play-All
@@ -48,10 +53,20 @@ For now, use **Settings → Sync Code** to move data between devices manually (o
 
 ## Data
 
-All data lives in `localStorage` under the key `englishTrainerData_v1`. Use **Settings → Export JSON** to back up.
+All data lives in `localStorage` under the key `englishTrainerData_v1` (words, activity, streak, journal, and `known` — your known-word list, which syncs and merges as a union). The Book Reader keeps the last pasted text per device under `englishTrainerReader_v1` (not synced). Use **Settings → Export JSON** to back up.
 
 ## Files
 
 - `index.html` — UI shell
 - `style.css` — theme tokens and layout
+- `text-core.js` — pure text logic (word forms, coverage analysis, sentence splitting, dictation scoring, speech matching, role-play prompt); no DOM, shared with the tests
 - `app.js` — SRS engine, TTS, views, API calls
+- `reader.js` — Book Reader view and known-word actions
+- `practice-modes.js` — Sentence Dictation, Say-it-in-English, phrase cards, Conversation Practice
+- `tests/` — unit tests for `text-core.js`
+
+## Tests
+
+```bash
+node --test
+```
