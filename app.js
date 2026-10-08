@@ -15,6 +15,7 @@ const DEFAULT_EASE = 2.5;
 const MIN_EASE = 1.3;
 const DAY_MS = 86400000;
 const SESSION_SIZE = 15;             // max cards per session
+const MAX_EXAMPLES = 3;              // example sentences kept per word
 const DICT_API = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
 const TRANSLATE_API = 'https://api.mymemory.translated.net/get';
 const DATAMUSE_API = 'https://api.datamuse.com/words';
@@ -23,9 +24,6 @@ const DATAMUSE_API = 'https://api.datamuse.com/words';
 const LEECH_MIN_WRONG = 4;
 const LEECH_MIN_TOTAL = 6;
 const LEECH_WRONG_RATIO = 0.4;
-
-// ~80 most common stopwords for transcript extraction
-const STOPWORDS = new Set(('a an the and or but if then so because while when where what who whom whose why how that this these those is am are was were be been being have has had do does did doing will would shall should can could may might must of in on at to from for with by as into onto over under about against between through during before after above below up down out off near i you he she it we they me him her us them my your his its our their mine yours hers ours theirs not no yes than too very just only also even still yet already always never very much more most few less least some any all each every').split(' '));
 
 // ============ State ============
 let state = loadState();
@@ -40,6 +38,8 @@ function defaultState() {
     activity: {},   // { 'YYYY-MM-DD': reviewCount }
     streak: { current: 0, lastDay: null },
     journal: {},    // { 'YYYY-MM-DD': 'entry text' }
+    known: [],      // lowercase words the user already knows (Book Reader)
+    knownLog: {},   // { word: { known, ts } } — un-marks, so sync doesn't resurrect them
   };
 }
 
@@ -150,12 +150,16 @@ function mergeStates(local, remote) {
   for (const [date, text] of Object.entries(remote.journal || {})) {
     if (!journal[date] || text.length > journal[date].length) journal[date] = text;
   }
+  // Known words: union, except words whose newest log entry is an un-mark
+  const { known, knownLog } = TextCore.mergeKnown(local, remote);
   return {
     ...local,
     words: [...byId.values()],
     activity,
     streak,
     journal,
+    known,
+    knownLog,
   };
 }
 
@@ -248,6 +252,7 @@ function refreshActiveView() {
   if (id === 'library') renderLibrary();
   else if (id === 'stats') renderStats();
   else if (id === 'reading') renderReading();
+  else if (id === 'reader') refreshReaderStatuses();
   // learn view: don't disrupt an in-progress card
 }
 
@@ -370,8 +375,9 @@ function showView(name) {
   if (name === 'library') renderLibrary();
   if (name === 'stats') renderStats();
   if (name === 'reading') renderReading();
+  if (name === 'reader') renderReader();
   if (name === 'news') loadNews();
-  if (name === 'journal') renderJournal();
+  if (name === 'journal') { renderJournal(); renderRoleplayWords(); }
 }
 
 // ============ TTS ============
@@ -444,8 +450,11 @@ async function translateToCN(text) {
   try {
     const url = `${TRANSLATE_API}?q=${encodeURIComponent(text)}&langpair=en|zh-CN`;
     const r = await fetch(url);
+    if (!r.ok) return '';
     const data = await r.json();
-    return data?.responseData?.translatedText || '';
+    const translated = data?.responseData?.translatedText || '';
+    // MyMemory answers 200 with a warning text once the daily quota is used up
+    return /^MYMEMORY WARNING/i.test(translated) ? '' : translated;
   } catch (e) {
     console.warn('Translate failed', e);
     return '';
@@ -519,6 +528,89 @@ function isLeech(word) {
   return false;
 }
 
+// ----- Known words (Book Reader) -----
+// "Known" = marked known in the reader, or mastered (archived) in the library.
+
+function knownWordSet() {
+  const archived = state.words.filter(w => w.archivedAt).map(w => w.text.toLowerCase());
+  return new Set([...(state.known || []), ...archived]);
+}
+
+function learningWordSet() {
+  return new Set(state.words.filter(w => !w.archivedAt).map(w => w.text.toLowerCase()));
+}
+
+function setKnown(words, isKnown) {
+  const next = TextCore.applyKnownChange(state, words, isKnown, new Date().toISOString());
+  state.known = next.known;
+  state.knownLog = next.knownLog;
+  saveState();
+}
+
+function markKnown(words) { setKnown(words, true); }
+function unmarkKnown(words) { setKnown(words, false); }
+
+// Escaped sentence with the word (any inflected form) wrapped by `wrap(matchText)`;
+// null when the sentence doesn't contain the word.
+function markWordHTML(sentence, word, wrap) {
+  const parts = TextCore.splitAtWord(sentence, word);
+  if (!parts) return null;
+  return escapeHTML(parts.before) + wrap(parts.match) + escapeHTML(parts.after);
+}
+
+// Plain-text sentence with the word blanked out, or null when it isn't found
+function blankWord(sentence, word) {
+  const parts = TextCore.splitAtWord(sentence, word);
+  return parts ? `${parts.before}_____${parts.after}` : null;
+}
+
+// Copy a prompt, then open claude.ai. The tab is opened synchronously inside the
+// click so Safari doesn't block it as a pop-up.
+function copyAndOpenClaude(text, successMsg) {
+  const copying = navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject(new Error('no clipboard'));
+  window.open('https://claude.ai/new', '_blank', 'noopener');
+  return copying
+    .then(() => toast(successMsg, 3000))
+    .catch(e => {
+      console.warn('Clipboard write failed', e);
+      toast('Copy failed — your browser blocked clipboard access');
+    });
+}
+
+// ----- Shared word-entry builders -----
+
+// A fresh library entry with default SRS fields
+function newWordEntry(fields) {
+  const nowIso = new Date().toISOString();
+  return {
+    id: uid(),
+    phonetic: '', defEN: '', defCN: '', examples: [], tags: [],
+    synonyms: [], antonyms: [], family: [], collocations: [],
+    ...fields,
+    level: 0, ease: DEFAULT_EASE, interval: 1,
+    nextReview: nowMs(), rightCount: 0, wrongCount: 0,
+    createdAt: nowIso, updatedAt: nowIso, archivedAt: null,
+  };
+}
+
+// Dictionary + Chinese translation + Datamuse enrichment for a word or phrase.
+// Pass `dict` when the dictionary entry was already fetched (null = none found).
+async function lookupWordFields(text, dict) {
+  const data = dict === undefined ? await fetchDictionary(text) : dict;
+  const defCN = await translateToCN(data?.defEN || text);
+  const examples = [];
+  for (const ex of data?.examples || []) {
+    examples.push({ en: ex.en, cn: await translateToCN(ex.en) });
+  }
+  const enrichment = TextCore.isPhrase(text) ? {} : await enrichWord(text);
+  return { phonetic: data?.phonetic || '', defEN: data?.defEN || '', defCN, examples, ...enrichment };
+}
+
+function findWordByText(text) {
+  const key = text.trim().toLowerCase();
+  return state.words.find(w => w.text.toLowerCase() === key) || null;
+}
+
 // ============ Add View ============
 function renderExamples(list = []) {
   const wrap = document.getElementById('examplesList');
@@ -586,11 +678,15 @@ function renderEnrichment(e) {
   `;
 }
 
-function chipBlock(label, list) {
+// opts.addableFrom: source word id — chips become "+ add as phrase card" buttons
+function chipBlock(label, list, opts = {}) {
   if (!list || list.length === 0) return '';
+  const chip = x => opts.addableFrom
+    ? `<button class="chip chip-add" data-phrase="${escapeHTML(x)}" data-source="${escapeHTML(opts.addableFrom)}" title="Add as a phrase card">＋ ${escapeHTML(x)}</button>`
+    : `<span class="chip">${escapeHTML(x)}</span>`;
   return `<div class="chip-block">
     <span class="chip-label">${label}:</span>
-    ${list.map(x => `<span class="chip">${escapeHTML(x)}</span>`).join('')}
+    ${list.map(chip).join('')}
   </div>`;
 }
 
@@ -643,28 +739,15 @@ function saveWord() {
       updatedAt: nowIso,
     });
   } else {
-    state.words.push({
-      id: uid(),
+    state.words.push(newWordEntry({
       text,
       phonetic: document.getElementById('newPhonetic').value.trim(),
       defEN: document.getElementById('defEN').value.trim(),
       defCN: document.getElementById('defCN').value.trim(),
       examples: collectExamples(),
       tags: document.getElementById('newTags').value.split(',').map(s => s.trim()).filter(Boolean),
-      synonyms: enrichment.synonyms,
-      antonyms: enrichment.antonyms,
-      family: enrichment.family,
-      collocations: enrichment.collocations,
-      level: 0,
-      ease: DEFAULT_EASE,
-      interval: 1,
-      nextReview: nowMs(),
-      rightCount: 0,
-      wrongCount: 0,
-      createdAt: nowIso,
-      updatedAt: nowIso,
-      archivedAt: null,
-    });
+      ...enrichment,
+    }));
   }
   saveState();
   toast(`✓ Saved "${text}"`);
@@ -680,35 +763,8 @@ async function bulkImport() {
   for (let i = 0; i < words.length; i++) {
     const w = words[i];
     status.textContent = `Processing ${i + 1}/${words.length}: ${w}...`;
-    if (state.words.find(x => x.text.toLowerCase() === w.toLowerCase())) continue;
-    const data = await fetchDictionary(w);
-    const defCN = data ? await translateToCN(data.defEN || '') : '';
-    const examples = [];
-    if (data) {
-      for (const ex of data.examples) {
-        const cn = await translateToCN(ex.en);
-        examples.push({ en: ex.en, cn });
-      }
-    }
-    const enrichment = await enrichWord(w);
-    state.words.push({
-      id: uid(),
-      text: w,
-      phonetic: data?.phonetic || '',
-      defEN: data?.defEN || '',
-      defCN,
-      examples,
-      tags: [],
-      synonyms: enrichment.synonyms,
-      antonyms: enrichment.antonyms,
-      family: enrichment.family,
-      collocations: enrichment.collocations,
-      level: 0, ease: DEFAULT_EASE, interval: 1,
-      nextReview: nowMs(), rightCount: 0, wrongCount: 0,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      archivedAt: null,
-    });
+    if (findWordByText(w)) continue;
+    state.words.push(newWordEntry({ text: w, ...(await lookupWordFields(w)) }));
     added++;
     saveState();
   }
@@ -717,17 +773,16 @@ async function bulkImport() {
 }
 
 // Extract uncommon vocabulary from a pasted transcript paragraph.
-// Filters out stopwords, words already in library, words shorter than 3 chars,
-// and proper nouns (best-effort: words that only appear capitalized).
+// Filters out stopwords, words already in the library or marked known
+// (including inflected forms like "walked" for "walk"), and words shorter than 4 chars.
 function extractFromTranscript() {
   const raw = document.getElementById('transcriptInput').value.trim();
   if (!raw) { toast('Paste some text first'); return; }
   const tokens = raw.toLowerCase().match(/[a-z][a-z'-]{2,}/g) || [];
-  const existing = new Set(state.words.map(w => w.text.toLowerCase()));
+  const skip = new Set([...knownWordSet(), ...learningWordSet()]);
   const freq = new Map();
   tokens.forEach(t => {
-    if (STOPWORDS.has(t)) return;
-    if (existing.has(t)) return;
+    if (TextCore.isKnownForm(t, skip)) return;
     if (t.length < 4) return;
     freq.set(t, (freq.get(t) || 0) + 1);
   });
@@ -793,26 +848,33 @@ function showCard() {
 }
 
 function randomMode(word) {
-  const modes = ['meaning', 'listening', 'spelling', 'cloze', 'context'];
-  const hasExamples = word.examples && word.examples.length > 0;
+  const modes = ['meaning', 'listening', 'spelling', 'cloze', 'context', 'dictation', 'production'];
+  const hasExamples = (word.examples || []).some(e => e.en);
   const otherExamples = state.words.some(w => w.id !== word.id && (w.examples || []).some(e => e.en));
   let pool = modes;
-  if (!hasExamples) pool = pool.filter(m => m !== 'cloze' && m !== 'context');
+  if (!hasExamples) pool = pool.filter(m => m !== 'cloze' && m !== 'context' && m !== 'dictation');
   if (!otherExamples) pool = pool.filter(m => m !== 'context');
+  if (!word.defCN && !word.defEN) pool = pool.filter(m => m !== 'production');
   return pool[Math.floor(Math.random() * pool.length)];
 }
+
+// Modes whose answer the card's word-TTS buttons would give away
+const MODES_WITHOUT_WORD_TTS = new Set(['dictation', 'production']);
 
 function renderCard(word, mode) {
   const body = document.getElementById('cardBody');
   const actions = document.getElementById('cardActions');
   body.innerHTML = '';
   actions.innerHTML = '';
+  document.querySelector('.card-tts').classList.toggle('hidden', MODES_WITHOUT_WORD_TTS.has(mode));
 
   if (mode === 'meaning') renderMeaningCard(word, body, actions);
   else if (mode === 'listening') renderListeningCard(word, body, actions);
   else if (mode === 'spelling') renderSpellingCard(word, body, actions);
   else if (mode === 'cloze') renderClozeCard(word, body, actions);
   else if (mode === 'context') renderContextCard(word, body, actions);
+  else if (mode === 'dictation') renderDictationCard(word, body, actions);
+  else if (mode === 'production') renderProductionCard(word, body, actions);
 }
 
 function ratingButtons(word) {
@@ -860,7 +922,7 @@ function renderMeaningCard(word, body, actions) {
       ${chipBlock('Synonyms', word.synonyms)}
       ${chipBlock('Antonyms', word.antonyms)}
       ${chipBlock('Word Family', word.family)}
-      ${chipBlock('Collocations', word.collocations)}
+      ${chipBlock('Collocations', word.collocations, { addableFrom: word.id })}
     `;
     speak(word.text);
     actions.innerHTML = ratingButtons(word);
@@ -947,11 +1009,10 @@ function renderSpellingCard(word, body, actions) {
 
 // --- Cloze ---
 function renderClozeCard(word, body, actions) {
-  const ex = (word.examples || [])[0];
-  if (!ex || !ex.en) return renderMeaningCard(word, body, actions);
-  const escWord = word.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const pattern = new RegExp('\\b' + escWord + '\\w*', 'i');
-  const blanked = escapeHTML(ex.en).replace(pattern, '<span class="cloze-blank">_____</span>');
+  // First example that actually contains the word (in any form) — otherwise the answer would show
+  const ex = (word.examples || []).find(e => e.en && TextCore.splitAtWord(e.en, word.text));
+  if (!ex) return renderMeaningCard(word, body, actions);
+  const blanked = markWordHTML(ex.en, word.text, () => '<span class="cloze-blank">_____</span>');
   body.innerHTML = `
     <div class="phonetic">🎯 Fill in the blank</div>
     <div class="example" style="margin-top:14px;font-size:18px">${blanked}</div>
@@ -980,23 +1041,19 @@ function renderClozeCard(word, body, actions) {
 
 // --- Context Card: which sentence does this word belong in? ---
 function renderContextCard(word, body, actions) {
-  const ownEx = (word.examples || []).find(e => e.en);
+  const ownEx = (word.examples || []).find(e => e.en && blankWord(e.en, word.text));
   if (!ownEx) return renderMeaningCard(word, body, actions);
-  const escWord = w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   // Build distractor sentences from OTHER words; blank out their key word
   const otherSentences = state.words
     .filter(w => w.id !== word.id)
     .flatMap(w => (w.examples || [])
       .filter(e => e.en)
-      .map(e => ({
-        text: e.en.replace(new RegExp('\\b' + escWord(w.text) + '\\w*', 'i'), '_____'),
-        cn: e.cn,
-      })))
-    .filter(s => s.text.includes('_____'));
+      .map(e => ({ text: blankWord(e.en, w.text), cn: e.cn })))
+    .filter(s => s.text);
   const distractors = pickRandom(otherSentences, 2);
   if (distractors.length < 2) return renderMeaningCard(word, body, actions);
   const correctSentence = {
-    text: ownEx.en.replace(new RegExp('\\b' + escWord(word.text) + '\\w*', 'i'), '_____'),
+    text: blankWord(ownEx.en, word.text),
     cn: ownEx.cn,
     correct: true,
   };
@@ -1039,6 +1096,7 @@ function renderLibrary() {
   else if (filter === 'archived') items = items.filter(w => w.archivedAt);
   else if (filter === 'due') items = items.filter(w => !w.archivedAt && (w.nextReview || 0) <= nowMs());
   else if (filter === 'leech') items = items.filter(w => !w.archivedAt && isLeech(w));
+  else if (filter === 'phrase') items = items.filter(w => TextCore.isPhrase(w.text));
   if (search) items = items.filter(w =>
     w.text.toLowerCase().includes(search)
     || (w.defEN || '').toLowerCase().includes(search)
@@ -1184,11 +1242,8 @@ function renderReading() {
   readingState = { words: picked };
   wrap.innerHTML = picked.map((w, idx) => {
     const ex = w.examples.find(e => e.en);
-    const escWord = w.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const highlighted = escapeHTML(ex.en).replace(
-      new RegExp('\\b' + escWord + '\\w*', 'i'),
-      m => `<mark data-word="${escapeHTML(w.text)}">${m}</mark>`
-    );
+    const highlighted = markWordHTML(ex.en, w.text, m => `<mark data-word="${escapeHTML(w.text)}">${escapeHTML(m)}</mark>`)
+      || escapeHTML(ex.en);
     return `
       <div class="reading-sentence" data-idx="${idx}">
         <div class="reading-en">${highlighted}</div>
@@ -1245,6 +1300,8 @@ function renderStats() {
   document.getElementById('statReviewed').textContent = state.activity[todayKey()] || 0;
   const leechEl = document.getElementById('statLeeches');
   if (leechEl) leechEl.textContent = leeches.length;
+  const knownEl = document.getElementById('statKnown');
+  if (knownEl) knownEl.textContent = knownWordSet().size;
   renderHeatmap();
   renderLevelChart();
 }
@@ -1366,6 +1423,7 @@ function importJSON(file) {
     try {
       const parsed = JSON.parse(reader.result);
       if (!parsed || !Array.isArray(parsed.words)) throw new Error('Invalid file');
+      if (parsed.known !== undefined && !Array.isArray(parsed.known)) throw new Error('Invalid known-word list');
       if (!confirm(`Import ${parsed.words.length} words? This will merge with existing data.`)) return;
       const byText = new Map(state.words.map(w => [w.text.toLowerCase(), w]));
       parsed.words.forEach(w => {
@@ -1374,6 +1432,9 @@ function importJSON(file) {
       Object.entries(parsed.activity || {}).forEach(([k, v]) => {
         state.activity[k] = Math.max(state.activity[k] || 0, v);
       });
+      const mergedKnown = TextCore.mergeKnown(state, parsed);
+      state.known = mergedKnown.known;
+      state.knownLog = mergedKnown.knownLog;
       saveState();
       toast(`Imported ${parsed.words.length} words`);
       renderLibrary();
@@ -1645,15 +1706,7 @@ async function gradeJournalWithClaude() {
   if (!text) { toast('Write something first'); return; }
   const date = currentJournalDate();
   const prompt = `${GRADE_PROMPT_PREFIX} (date: ${date}):\n\n${text}`;
-  try {
-    await navigator.clipboard.writeText(prompt);
-    toast('Prompt copied → opening claude.ai');
-    window.open('https://claude.ai/new', '_blank');
-  } catch (e) {
-    // Fallback: show prompt in a modal-ish prompt for manual copy
-    toast('Copy failed — see console for prompt');
-    console.log(prompt);
-  }
+  await copyAndOpenClaude(prompt, 'Prompt copied → paste it into claude.ai');
 }
 
 async function copyJournalOnly() {
@@ -1738,41 +1791,15 @@ function stopReadAloud() {
   }
 }
 
-function normalize(s) {
-  return s.toLowerCase().replace(/[^a-z0-9'\s]/g, '').split(/\s+/).filter(Boolean);
-}
-
-// Longest Common Subsequence based word-diff: returns aligned arrays
-function diffWords(target, said) {
-  const a = target, b = said;
-  const m = a.length, n = b.length;
-  const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
-  for (let i = m - 1; i >= 0; i--) {
-    for (let j = n - 1; j >= 0; j--) {
-      dp[i][j] = a[i] === b[j] ? dp[i+1][j+1] + 1 : Math.max(dp[i+1][j], dp[i][j+1]);
-    }
-  }
-  const result = [];
-  let i = 0, j = 0;
-  while (i < m && j < n) {
-    if (a[i] === b[j]) { result.push({ word: a[i], kind: 'ok' }); i++; j++; }
-    else if (dp[i+1][j] >= dp[i][j+1]) { result.push({ word: a[i], kind: 'miss' }); i++; }
-    else { result.push({ word: b[j], kind: 'added' }); j++; }
-  }
-  while (i < m) result.push({ word: a[i++], kind: 'miss' });
-  while (j < n) result.push({ word: b[j++], kind: 'added' });
-  return result;
-}
-
 function showReadAloudResult(said) {
-  const target = normalize(readAloudTargetText);
-  const saidWords = normalize(said);
+  const target = TextCore.normalizeWords(readAloudTargetText);
+  const saidWords = TextCore.normalizeWords(said);
   if (saidWords.length === 0) {
     document.getElementById('readAloudResult').innerHTML =
       `<p class="hint">No speech detected. Try again — make sure your mic is on.</p>`;
     return;
   }
-  const diff = diffWords(target, saidWords);
+  const diff = TextCore.diffWords(target, saidWords);
   const matches = diff.filter(d => d.kind === 'ok').length;
   const accuracy = Math.round((matches / target.length) * 100);
   const accClass = accuracy >= 85 ? 'good' : accuracy >= 60 ? 'mid' : 'bad';

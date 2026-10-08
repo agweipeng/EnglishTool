@@ -15,6 +15,7 @@
     <button class="tab" data-view="library">Library</button>
     <button class="tab" data-view="drill">Listening Drill</button>
     <button class="tab" data-view="reading">Reading</button>
+    <button class="tab" data-view="reader">Book Reader 📕</button>
     <button class="tab" data-view="news">News 📰</button>
     <a class="tab" href="digests/" target="_blank" rel="noopener">Digests 📚</a>
     <button class="tab" data-view="journal">Journal ✍️</button>
@@ -39,6 +40,8 @@
           <option value="spelling">🔤 Spelling (Dictation)</option>
           <option value="cloze">🎯 Sentence Cloze</option>
           <option value="context">🧠 Context Card</option>
+          <option value="dictation">✍️ Sentence Dictation</option>
+          <option value="production">🗣️ Say it in English</option>
         </select>
       </div>
       <div class="session-info">
@@ -136,6 +139,7 @@
           <option value="archived">Archived ⭐</option>
           <option value="due">Due Today</option>
           <option value="leech">Stubborn Words 🐛</option>
+          <option value="phrase">Phrases 💬</option>
         </select>
       </div>
     </div>
@@ -218,6 +222,26 @@
     <div id="readingPassage" class="reading-passage"></div>
   </section>
 
+  <!-- ============ BOOK READER VIEW ============ -->
+  <section class="view" id="view-reader">
+    <h2>Book Reader 📕</h2>
+    <p class="hint">Paste a chapter or a few pages of the novel you're reading. Unknown words are underlined — click one to see its sentence and add it with that sentence as the example. Select several words to add a phrase.</p>
+    <div class="reader-input">
+      <input type="text" id="readerTitle" placeholder="Book title (optional — used as a tag)" />
+      <textarea id="readerInput" rows="6" placeholder="Paste text from your novel here…"></textarea>
+      <div class="form-actions">
+        <button class="btn-primary" id="readerAnalyzeBtn">📖 Analyze</button>
+        <button class="btn-ghost" id="readerClearBtn">Clear</button>
+      </div>
+    </div>
+    <div id="readerStats" class="reader-stats"></div>
+    <div class="reader-layout">
+      <div id="readerPassage" class="reader-passage hidden"></div>
+      <div id="readerUnknown" class="reader-unknown"></div>
+    </div>
+    <div id="readerPanel" class="reader-panel hidden"></div>
+  </section>
+
   <!-- ============ NEWS VIEW (DailyNews) ============ -->
   <section class="view" id="view-news">
     <div class="news-header">
@@ -271,6 +295,23 @@
       </div>
     </div>
 
+    <div class="setting-block roleplay-block">
+      <h3>🗣️ Conversation Practice</h3>
+      <p class="hint">Practise a real conversation with Claude that steers you to use the words you're learning. Paste the prompt into claude.ai — use its voice mode to speak out loud — and type <b>END</b> to get feedback.</p>
+      <div class="roleplay-controls">
+        <label>Scenario
+          <select id="roleplayScenario"></select>
+        </label>
+        <label>…or your own situation
+          <input type="text" id="roleplayCustom" placeholder="e.g. returning a faulty phone to a shop" />
+        </label>
+      </div>
+      <div id="roleplayWords" class="hint roleplay-words"></div>
+      <div class="form-actions">
+        <button class="btn-primary" id="roleplayBtn">📋 Copy role-play prompt → claude.ai</button>
+      </div>
+    </div>
+
     <h3>Recent Entries</h3>
     <div class="journal-history" id="journalHistory"></div>
   </section>
@@ -303,6 +344,7 @@
       <div class="stat-card"><div class="stat-num" id="statStreak">0</div><div class="stat-label">Day Streak 🔥</div></div>
       <div class="stat-card"><div class="stat-num" id="statReviewed">0</div><div class="stat-label">Today's Reviews</div></div>
       <div class="stat-card"><div class="stat-num" id="statLeeches">0</div><div class="stat-label">Stubborn 🐛</div></div>
+      <div class="stat-card"><div class="stat-num" id="statKnown">0</div><div class="stat-label">Known Words 📕</div></div>
     </div>
 
     <h3>Activity Heatmap (last 12 weeks)</h3>
@@ -408,6 +450,9 @@
 
 <div id="toast" class="toast hidden"></div>
 
+<script src="text-core.js"></script>
 <script src="app.js"></script>
+<script src="reader.js"></script>
+<script src="practice-modes.js"></script>
 </body>
 </html>

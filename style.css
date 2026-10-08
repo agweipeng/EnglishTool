@@ -478,6 +478,77 @@ textarea { resize: vertical; min-height: 50px; }
 /* ============ Sync code textareas ============ */
 #syncCodeOut, #syncCodeIn { font-family: monospace; font-size: 12px; word-break: break-all; }
 
+/* ============ Book Reader ============ */
+.reader-input {
+  display: flex; flex-direction: column; gap: 10px;
+  padding: 14px; background: var(--surface); border-radius: var(--radius);
+  border: 1px solid var(--border); margin-bottom: 16px;
+}
+.reader-input textarea { width: 100%; }
+.reader-stats { margin-bottom: 16px; }
+.coverage-bar {
+  display: flex; height: 10px; border-radius: 999px; overflow: hidden;
+  background: rgba(228, 77, 77, 0.35); margin-bottom: 8px;
+}
+.cov-known { background: var(--success); }
+.cov-learning { background: var(--warning); }
+.coverage-text { font-size: 15px; }
+.reader-layout { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 16px; align-items: start; }
+.reader-passage {
+  background: var(--surface); padding: 24px;
+  border-radius: var(--radius); border: 1px solid var(--border);
+  font-size: 18px; line-height: 1.85; white-space: pre-wrap;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+.rw { cursor: pointer; border-radius: 3px; }
+.rw:hover { background: rgba(79, 124, 255, 0.12); }
+.rw-unknown { text-decoration: underline dotted var(--danger); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.rw-learning { background: rgba(240, 164, 41, 0.22); }
+.reader-unknown {
+  position: sticky; top: 12px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 12px; max-height: 80vh; overflow-y: auto;
+}
+.reader-unknown:empty { display: none; }
+.reader-unknown-head { display: flex; flex-direction: column; gap: 8px; margin-bottom: 8px; }
+.reader-unknown-head h3 { margin: 0; font-size: 15px; }
+.reader-unknown-row { display: flex; align-items: center; gap: 6px; padding: 4px 0; border-bottom: 1px solid var(--border); }
+.ru-word {
+  flex: 1; text-align: left; background: none; border: none; padding: 0;
+  font: inherit; font-weight: 600; color: var(--text); cursor: pointer;
+}
+.ru-count { color: var(--text-muted); font-size: 12px; }
+.ru-btn { padding: 3px 8px; font-size: 12px; }
+.reader-panel {
+  position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%);
+  width: min(560px, calc(100% - 32px)); z-index: 150;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 14px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  padding: 14px 16px;
+}
+.rp-head { display: flex; align-items: center; gap: 8px; }
+.rp-title { font-size: 20px; }
+.rp-close { margin-left: auto; }
+.rp-sentence {
+  background: var(--surface-2); padding: 10px 12px; border-radius: 8px;
+  margin: 10px 0 6px; font-family: Georgia, 'Times New Roman', serif; line-height: 1.5;
+}
+.rp-actions { margin-top: 10px; }
+
+/* ============ Practice modes (dictation / production / phrases) ============ */
+.practice-center { justify-content: center; margin-bottom: 10px; }
+.dictation-input { max-width: 600px; font-size: 17px; text-align: left; }
+.practice-feedback { width: 100%; max-width: 600px; margin-top: 8px; }
+.practice-feedback .example { margin-left: auto; margin-right: auto; }
+.production-prompt { font-size: 24px; font-weight: 600; margin: 4px 0 10px; }
+.chip-add { cursor: pointer; font: inherit; font-size: 13px; }
+.chip-add:hover:not(:disabled) { border-color: var(--primary); color: var(--primary); }
+.chip-add:disabled { opacity: 0.7; cursor: default; }
+.roleplay-block { margin-bottom: 20px; }
+.roleplay-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.roleplay-controls label { display: flex; flex-direction: column; gap: 4px; }
+.roleplay-words { margin: 8px 0 10px; line-height: 2; }
+
 /* ============ Responsive ============ */
 @media (max-width: 640px) {
   .topbar { flex-wrap: wrap; gap: 8px; padding: 10px 12px; }
@@ -505,4 +576,8 @@ textarea { resize: vertical; min-height: 50px; }
   .mcq-options { grid-template-columns: 1fr; }
   .library-item { grid-template-columns: 1fr; }
   .library-item .progress-bar { width: 100%; }
+  .reader-layout { grid-template-columns: 1fr; }
+  .reader-unknown { position: static; max-height: none; }
+  .reader-passage { padding: 16px; font-size: 17px; }
+  .roleplay-controls { grid-template-columns: 1fr; }
 }
