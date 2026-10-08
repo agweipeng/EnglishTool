@@ -1,0 +1,33 @@
+{
+  "id": "sherlock-holmes",
+  "title": "The Adventures of Sherlock Holmes",
+  "titleCN": "福尔摩斯冒险史",
+  "author": "Arthur Conan Doyle",
+  "published": 1892,
+  "language": "en",
+  "genre": "Mystery",
+  "readingStage": "Later challenge",
+  "readingOrder": 5,
+  "sectionType": "story",
+  "expectedSections": 12,
+  "sourceUrl": "https://www.gutenberg.org/ebooks/1661",
+  "license": "Project Gutenberg edition; retain the complete license in source.txt. Listed as public domain in the USA by the source.",
+  "recommendation": "Twelve separate mysteries: practise explaining events, clues, and your reasoning.",
+  "parser": {
+    "headingPattern": "^([IVXLCDM]+)\\. ([A-Z][^\\n]+)\\n"
+  },
+  "sectionIds": [
+    "a-scandal-in-bohemia",
+    "the-red-headed-league",
+    "a-case-of-identity",
+    "the-boscombe-valley-mystery",
+    "the-five-orange-pips",
+    "the-man-with-the-twisted-lip",
+    "the-adventure-of-the-blue-carbuncle",
+    "the-adventure-of-the-speckled-band",
+    "the-adventure-of-the-engineer-s-thumb",
+    "the-adventure-of-the-noble-bachelor",
+    "the-adventure-of-the-beryl-coronet",
+    "the-adventure-of-the-copper-beeches"
+  ]
+}

@@ -380,6 +380,7 @@ function showView(name) {
   if (name === 'reader') renderReader();
   if (name === 'news') loadNews();
   if (name === 'journal') { renderJournal(); renderRoleplayWords(); }
+  if (typeof syncReaderURL === 'function') syncReaderURL();
 }
 
 // ============ TTS ============
@@ -1432,7 +1433,9 @@ function shadowStop() {
 
 // ============ Export / Import ============
 function exportJSON() {
-  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  if (typeof saveBookPosition === 'function') saveBookPosition();
+  const readingProgress = ReaderProgress.createStore(localStorage).snapshot();
+  const blob = new Blob([JSON.stringify({ ...state, readingProgress }, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = `english-trainer-${todayKey()}.json`;
@@ -1460,10 +1463,17 @@ function importJSON(file) {
       const parsed = JSON.parse(reader.result);
       if (!parsed || !Array.isArray(parsed.words)) throw new Error('Invalid file');
       if (parsed.known !== undefined && !Array.isArray(parsed.known)) throw new Error('Invalid known-word list');
-      if (!confirm(`Import ${parsed.words.length} words? This will merge with existing data.`)) return;
+      if (parsed.words.some(w => !w || typeof w.text !== 'string' || !w.text.trim())) throw new Error('Invalid word');
+      if (parsed.readingProgress !== undefined) ReaderProgress.validateSnapshot(parsed.readingProgress);
+      if (!confirm(`Import ${parsed.words.length} words${parsed.readingProgress ? ' and reading bookmarks' : ''}? This will merge with existing data.`)) return;
+      if (parsed.readingProgress) {
+        ReaderProgress.createStore(localStorage).merge(parsed.readingProgress);
+        if (typeof onReaderProgressImported === 'function') onReaderProgressImported();
+      }
       const byText = new Map(state.words.map(w => [w.text.toLowerCase(), w]));
       parsed.words.forEach(w => {
-        if (!byText.has(w.text.toLowerCase())) state.words.push(w);
+        const key = w.text.toLowerCase();
+        if (!byText.has(key)) { state.words.push(w); byText.set(key, w); }
       });
       Object.entries(parsed.activity || {}).forEach(([k, v]) => {
         state.activity[k] = Math.max(state.activity[k] || 0, v);
@@ -1475,7 +1485,7 @@ function importJSON(file) {
       toast(`Imported ${parsed.words.length} words`);
       renderLibrary();
     } catch (e) {
-      toast('Import failed — invalid file');
+      toast(e.name === 'QuotaExceededError' ? 'Import failed — browser storage is full' : 'Import failed — invalid file');
     }
   };
   reader.readAsText(file);

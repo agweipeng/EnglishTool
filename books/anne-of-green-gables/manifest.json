@@ -1,0 +1,327 @@
+{
+  "schemaVersion": 1,
+  "id": "anne-of-green-gables",
+  "title": "Anne of Green Gables",
+  "titleCN": "绿山墙的安妮",
+  "author": "L. M. Montgomery",
+  "published": 1908,
+  "language": "en",
+  "genre": "Growing up",
+  "readingStage": "Later step",
+  "readingOrder": 4,
+  "sectionType": "chapter",
+  "sourceUrl": "https://www.gutenberg.org/ebooks/45",
+  "license": "Project Gutenberg edition; retain the complete license in source.txt. Listed as public domain in the USA by the source.",
+  "recommendation": "Richer descriptions and lively conversations about friendship and everyday life.",
+  "version": "46e5d59b9630639a",
+  "sourceFile": "books/anne-of-green-gables/source.txt",
+  "sourceHash": "e80cb784a669cd6b3f71ed663aeb26cf4b2207225686ed8ab3567c52e663eda5",
+  "introduction": "",
+  "wordCount": 103002,
+  "chapters": [
+    {
+      "id": "mrs-rachel-lynde-is-surprised",
+      "number": 1,
+      "title": "Mrs. Rachel Lynde Is Surprised",
+      "wordCount": 2870,
+      "version": "d144165e6f55d3b7",
+      "path": "books/anne-of-green-gables/chapters/mrs-rachel-lynde-is-surprised.json"
+    },
+    {
+      "id": "matthew-cuthbert-is-surprised",
+      "number": 2,
+      "title": "Matthew Cuthbert Is Surprised",
+      "wordCount": 4979,
+      "version": "37a9fb2cc8e57bd8",
+      "path": "books/anne-of-green-gables/chapters/matthew-cuthbert-is-surprised.json"
+    },
+    {
+      "id": "marilla-cuthbert-is-surprised",
+      "number": 3,
+      "title": "Marilla Cuthbert Is Surprised",
+      "wordCount": 2181,
+      "version": "3452c5071921fb5d",
+      "path": "books/anne-of-green-gables/chapters/marilla-cuthbert-is-surprised.json"
+    },
+    {
+      "id": "morning-at-green-gables",
+      "number": 4,
+      "title": "Morning at Green Gables",
+      "wordCount": 2305,
+      "version": "4a1ff3a04cc0c9cb",
+      "path": "books/anne-of-green-gables/chapters/morning-at-green-gables.json"
+    },
+    {
+      "id": "anne-s-history",
+      "number": 5,
+      "title": "Anne’s History",
+      "wordCount": 2121,
+      "version": "35d36c69519d9b92",
+      "path": "books/anne-of-green-gables/chapters/anne-s-history.json"
+    },
+    {
+      "id": "marilla-makes-up-her-mind",
+      "number": 6,
+      "title": "Marilla Makes Up Her Mind",
+      "wordCount": 1933,
+      "version": "761ea213151a3b63",
+      "path": "books/anne-of-green-gables/chapters/marilla-makes-up-her-mind.json"
+    },
+    {
+      "id": "anne-says-her-prayers",
+      "number": 7,
+      "title": "Anne Says Her Prayers",
+      "wordCount": 1203,
+      "version": "caa9796f206995b1",
+      "path": "books/anne-of-green-gables/chapters/anne-says-her-prayers.json"
+    },
+    {
+      "id": "anne-s-bringing-up-is-begun",
+      "number": 8,
+      "title": "Anne’s Bringing-Up Is Begun",
+      "wordCount": 2938,
+      "version": "410bc0273f4f9d70",
+      "path": "books/anne-of-green-gables/chapters/anne-s-bringing-up-is-begun.json"
+    },
+    {
+      "id": "mrs-rachel-lynde-is-properly-horrified",
+      "number": 9,
+      "title": "Mrs. Rachel Lynde Is Properly Horrified",
+      "wordCount": 2407,
+      "version": "7317e19e5e43aea9",
+      "path": "books/anne-of-green-gables/chapters/mrs-rachel-lynde-is-properly-horrified.json"
+    },
+    {
+      "id": "anne-s-apology",
+      "number": 10,
+      "title": "Anne’s Apology",
+      "wordCount": 2479,
+      "version": "8fdf15109acbc42c",
+      "path": "books/anne-of-green-gables/chapters/anne-s-apology.json"
+    },
+    {
+      "id": "anne-s-impressions-of-sunday-school",
+      "number": 11,
+      "title": "Anne’s Impressions of Sunday-School",
+      "wordCount": 1784,
+      "version": "9897a17b8c1b1582",
+      "path": "books/anne-of-green-gables/chapters/anne-s-impressions-of-sunday-school.json"
+    },
+    {
+      "id": "a-solemn-vow-and-promise",
+      "number": 12,
+      "title": "A Solemn Vow and Promise",
+      "wordCount": 2026,
+      "version": "a1cbe26f20870eec",
+      "path": "books/anne-of-green-gables/chapters/a-solemn-vow-and-promise.json"
+    },
+    {
+      "id": "the-delights-of-anticipation",
+      "number": 13,
+      "title": "The Delights of Anticipation",
+      "wordCount": 1846,
+      "version": "d3a0560b02d8c679",
+      "path": "books/anne-of-green-gables/chapters/the-delights-of-anticipation.json"
+    },
+    {
+      "id": "anne-s-confession",
+      "number": 14,
+      "title": "Anne’s Confession",
+      "wordCount": 3055,
+      "version": "d11c80b9c293b637",
+      "path": "books/anne-of-green-gables/chapters/anne-s-confession.json"
+    },
+    {
+      "id": "a-tempest-in-the-school-teapot",
+      "number": 15,
+      "title": "A Tempest in the School Teapot",
+      "wordCount": 5281,
+      "version": "6ac754d375399a28",
+      "path": "books/anne-of-green-gables/chapters/a-tempest-in-the-school-teapot.json"
+    },
+    {
+      "id": "diana-is-invited-to-tea-with-tragic-results",
+      "number": 16,
+      "title": "Diana Is Invited to Tea with Tragic Results",
+      "wordCount": 4017,
+      "version": "a2ad9f2ff480020c",
+      "path": "books/anne-of-green-gables/chapters/diana-is-invited-to-tea-with-tragic-results.json"
+    },
+    {
+      "id": "a-new-interest-in-life",
+      "number": 17,
+      "title": "A New Interest in Life",
+      "wordCount": 2031,
+      "version": "01a8acc242cbf815",
+      "path": "books/anne-of-green-gables/chapters/a-new-interest-in-life.json"
+    },
+    {
+      "id": "anne-to-the-rescue",
+      "number": 18,
+      "title": "Anne to the Rescue",
+      "wordCount": 3444,
+      "version": "fa09a31fc1a5881b",
+      "path": "books/anne-of-green-gables/chapters/anne-to-the-rescue.json"
+    },
+    {
+      "id": "a-concert-a-catastrophe-and-a-confession",
+      "number": 19,
+      "title": "A Concert, a Catastrophe, and a Confession",
+      "wordCount": 4042,
+      "version": "7d57cfc8dbf9f55e",
+      "path": "books/anne-of-green-gables/chapters/a-concert-a-catastrophe-and-a-confession.json"
+    },
+    {
+      "id": "a-good-imagination-gone-wrong",
+      "number": 20,
+      "title": "A Good Imagination Gone Wrong",
+      "wordCount": 2244,
+      "version": "e4c8d37bfeb8a8db",
+      "path": "books/anne-of-green-gables/chapters/a-good-imagination-gone-wrong.json"
+    },
+    {
+      "id": "a-new-departure-in-flavorings",
+      "number": 21,
+      "title": "A New Departure in Flavorings",
+      "wordCount": 3656,
+      "version": "29756fd635c99eeb",
+      "path": "books/anne-of-green-gables/chapters/a-new-departure-in-flavorings.json"
+    },
+    {
+      "id": "anne-is-invited-out-to-tea",
+      "number": 22,
+      "title": "Anne Is Invited Out to Tea",
+      "wordCount": 1493,
+      "version": "3ae8c45505b2376c",
+      "path": "books/anne-of-green-gables/chapters/anne-is-invited-out-to-tea.json"
+    },
+    {
+      "id": "anne-comes-to-grief-in-an-affair-of-honor",
+      "number": 23,
+      "title": "Anne Comes to Grief in an Affair of Honor",
+      "wordCount": 2333,
+      "version": "517d378b0bd99d4e",
+      "path": "books/anne-of-green-gables/chapters/anne-comes-to-grief-in-an-affair-of-honor.json"
+    },
+    {
+      "id": "miss-stacy-and-her-pupils-get-up-a-concert",
+      "number": 24,
+      "title": "Miss Stacy and Her Pupils Get Up a Concert",
+      "wordCount": 1540,
+      "version": "c1310b8cc45cc1bf",
+      "path": "books/anne-of-green-gables/chapters/miss-stacy-and-her-pupils-get-up-a-concert.json"
+    },
+    {
+      "id": "matthew-insists-on-puffed-sleeves",
+      "number": 25,
+      "title": "Matthew Insists on Puffed Sleeves",
+      "wordCount": 3493,
+      "version": "1da7d8c065c0130f",
+      "path": "books/anne-of-green-gables/chapters/matthew-insists-on-puffed-sleeves.json"
+    },
+    {
+      "id": "the-story-club-is-formed",
+      "number": 26,
+      "title": "The Story Club Is Formed",
+      "wordCount": 2663,
+      "version": "e3792f378ec225f5",
+      "path": "books/anne-of-green-gables/chapters/the-story-club-is-formed.json"
+    },
+    {
+      "id": "vanity-and-vexation-of-spirit",
+      "number": 27,
+      "title": "Vanity and Vexation of Spirit",
+      "wordCount": 2539,
+      "version": "7d89d7f4b8e434e4",
+      "path": "books/anne-of-green-gables/chapters/vanity-and-vexation-of-spirit.json"
+    },
+    {
+      "id": "an-unfortunate-lily-maid",
+      "number": 28,
+      "title": "An Unfortunate Lily Maid",
+      "wordCount": 2852,
+      "version": "5a06ab3fd4423af4",
+      "path": "books/anne-of-green-gables/chapters/an-unfortunate-lily-maid.json"
+    },
+    {
+      "id": "an-epoch-in-anne-s-life",
+      "number": 29,
+      "title": "An Epoch in Anne’s Life",
+      "wordCount": 3221,
+      "version": "94d2a5aca2769233",
+      "path": "books/anne-of-green-gables/chapters/an-epoch-in-anne-s-life.json"
+    },
+    {
+      "id": "the-queen-s-class-is-organized",
+      "number": 30,
+      "title": "The Queen’s Class Is Organized",
+      "wordCount": 4315,
+      "version": "9d34a5e44767a1fd",
+      "path": "books/anne-of-green-gables/chapters/the-queen-s-class-is-organized.json"
+    },
+    {
+      "id": "where-the-brook-and-river-meet",
+      "number": 31,
+      "title": "Where the Brook and River Meet",
+      "wordCount": 2277,
+      "version": "d56032e5efe41ea4",
+      "path": "books/anne-of-green-gables/chapters/where-the-brook-and-river-meet.json"
+    },
+    {
+      "id": "the-pass-list-is-out",
+      "number": 32,
+      "title": "The Pass List Is Out",
+      "wordCount": 2702,
+      "version": "c59a0e4c27fac2df",
+      "path": "books/anne-of-green-gables/chapters/the-pass-list-is-out.json"
+    },
+    {
+      "id": "the-hotel-concert",
+      "number": 33,
+      "title": "The Hotel Concert",
+      "wordCount": 3356,
+      "version": "607eedf8343b9751",
+      "path": "books/anne-of-green-gables/chapters/the-hotel-concert.json"
+    },
+    {
+      "id": "a-queen-s-girl",
+      "number": 34,
+      "title": "A Queen’s Girl",
+      "wordCount": 2527,
+      "version": "4ea87f9a7157f3b0",
+      "path": "books/anne-of-green-gables/chapters/a-queen-s-girl.json"
+    },
+    {
+      "id": "the-winter-at-queen-s",
+      "number": 35,
+      "title": "The Winter at Queen’s",
+      "wordCount": 1640,
+      "version": "41996e4e5c56d008",
+      "path": "books/anne-of-green-gables/chapters/the-winter-at-queen-s.json"
+    },
+    {
+      "id": "the-glory-and-the-dream",
+      "number": 36,
+      "title": "The Glory and the Dream",
+      "wordCount": 1930,
+      "version": "8bd2e75e2e09730a",
+      "path": "books/anne-of-green-gables/chapters/the-glory-and-the-dream.json"
+    },
+    {
+      "id": "the-reaper-whose-name-is-death",
+      "number": 37,
+      "title": "The Reaper Whose Name Is Death",
+      "wordCount": 2352,
+      "version": "5fa273306d5f5770",
+      "path": "books/anne-of-green-gables/chapters/the-reaper-whose-name-is-death.json"
+    },
+    {
+      "id": "the-bend-in-the-road",
+      "number": 38,
+      "title": "The Bend in the Road",
+      "wordCount": 2927,
+      "version": "ec7867364f897e90",
+      "path": "books/anne-of-green-gables/chapters/the-bend-in-the-road.json"
+    }
+  ]
+}

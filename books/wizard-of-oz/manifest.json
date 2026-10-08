@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "id": "wizard-of-oz",
+  "title": "The Wonderful Wizard of Oz",
+  "titleCN": "绿野仙踪",
+  "author": "L. Frank Baum",
+  "published": 1900,
+  "language": "en",
+  "genre": "Adventure",
+  "readingStage": "Start here",
+  "readingOrder": 1,
+  "sectionType": "chapter",
+  "sourceUrl": "https://www.gutenberg.org/ebooks/55",
+  "license": "Project Gutenberg edition; retain the complete license in source.txt. Listed as public domain in the USA by the source.",
+  "recommendation": "Start here: a concrete adventure with dialogue. Some vocabulary is old-fashioned.",
+  "version": "305678c3ea998dcf",
+  "sourceFile": "books/wizard-of-oz/source.txt",
+  "sourceHash": "b0b430562073de8fc7b5d12d50b734b314534c87076e8143f4af8a5ba900e2f7",
+  "introduction": "Folklore, legends, myths and fairy tales have followed childhood through the ages, for every healthy youngster has a wholesome and instinctive love for stories fantastic, marvelous and manifestly unreal. The winged fairies of Grimm and Andersen have brought more happiness to childish hearts than all other human creations.\n\nYet the old time fairy tale, having served for generations, may now be classed as “historical” in the children’s library; for the time has come for a series of newer “wonder tales” in which the stereotyped genie, dwarf and fairy are eliminated, together with all the horrible and blood-curdling incidents devised by their authors to point a fearsome moral to each tale. Modern education includes morality; therefore the modern child seeks only entertainment in its wonder tales and gladly dispenses with all disagreeable incident.\n\nHaving this thought in mind, the story of “The Wonderful Wizard of Oz” was written solely to please children of today. It aspires to being a modernized fairy tale, in which the wonderment and joy are retained and the heartaches and nightmares are left out.\n\nL. Frank Baum Chicago, April, 1900.",
+  "wordCount": 39226,
+  "chapters": [
+    {
+      "id": "the-cyclone",
+      "number": 1,
+      "title": "The Cyclone",
+      "wordCount": 1142,
+      "version": "1d8c591969dd338f",
+      "path": "books/wizard-of-oz/chapters/the-cyclone.json"
+    },
+    {
+      "id": "the-council-with-the-munchkins",
+      "number": 2,
+      "title": "The Council with the Munchkins",
+      "wordCount": 2005,
+      "version": "e2cbfaed9ccf3450",
+      "path": "books/wizard-of-oz/chapters/the-council-with-the-munchkins.json"
+    },
+    {
+      "id": "how-dorothy-saved-the-scarecrow",
+      "number": 3,
+      "title": "How Dorothy Saved the Scarecrow",
+      "wordCount": 1958,
+      "version": "1e2e1a8da786c01c",
+      "path": "books/wizard-of-oz/chapters/how-dorothy-saved-the-scarecrow.json"
+    },
+    {
+      "id": "the-road-through-the-forest",
+      "number": 4,
+      "title": "The Road Through the Forest",
+      "wordCount": 1434,
+      "version": "ffea9d9a0ff93a50",
+      "path": "books/wizard-of-oz/chapters/the-road-through-the-forest.json"
+    },
+    {
+      "id": "the-rescue-of-the-tin-woodman",
+      "number": 5,
+      "title": "The Rescue of the Tin Woodman",
+      "wordCount": 2063,
+      "version": "68f7ad4fa50c6ffc",
+      "path": "books/wizard-of-oz/chapters/the-rescue-of-the-tin-woodman.json"
+    },
+    {
+      "id": "the-cowardly-lion",
+      "number": 6,
+      "title": "The Cowardly Lion",
+      "wordCount": 1500,
+      "version": "1536c6b458ef67c2",
+      "path": "books/wizard-of-oz/chapters/the-cowardly-lion.json"
+    },
+    {
+      "id": "the-journey-to-the-great-oz",
+      "number": 7,
+      "title": "The Journey to the Great Oz",
+      "wordCount": 1799,
+      "version": "bb2abede13f49413",
+      "path": "books/wizard-of-oz/chapters/the-journey-to-the-great-oz.json"
+    },
+    {
+      "id": "the-deadly-poppy-field",
+      "number": 8,
+      "title": "The Deadly Poppy Field",
+      "wordCount": 1932,
+      "version": "856d48baacd1210d",
+      "path": "books/wizard-of-oz/chapters/the-deadly-poppy-field.json"
+    },
+    {
+      "id": "the-queen-of-the-field-mice",
+      "number": 9,
+      "title": "The Queen of the Field Mice",
+      "wordCount": 1386,
+      "version": "126e0c6ed87a85e4",
+      "path": "books/wizard-of-oz/chapters/the-queen-of-the-field-mice.json"
+    },
+    {
+      "id": "the-guardian-of-the-gate",
+      "number": 10,
+      "title": "The Guardian of the Gate",
+      "wordCount": 1952,
+      "version": "567ede33ba3f0ad6",
+      "path": "books/wizard-of-oz/chapters/the-guardian-of-the-gate.json"
+    },
+    {
+      "id": "the-wonderful-city-of-oz",
+      "number": 11,
+      "title": "The Wonderful City of Oz",
+      "wordCount": 3611,
+      "version": "5710a2887418ad81",
+      "path": "books/wizard-of-oz/chapters/the-wonderful-city-of-oz.json"
+    },
+    {
+      "id": "the-search-for-the-wicked-witch",
+      "number": 12,
+      "title": "The Search for the Wicked Witch",
+      "wordCount": 3676,
+      "version": "4bce9fe34fd12201",
+      "path": "books/wizard-of-oz/chapters/the-search-for-the-wicked-witch.json"
+    },
+    {
+      "id": "the-rescue",
+      "number": 13,
+      "title": "The Rescue",
+      "wordCount": 1192,
+      "version": "ee21dd6d6d09abed",
+      "path": "books/wizard-of-oz/chapters/the-rescue.json"
+    },
+    {
+      "id": "the-winged-monkeys",
+      "number": 14,
+      "title": "The Winged Monkeys",
+      "wordCount": 1894,
+      "version": "e3b0f17e464d809a",
+      "path": "books/wizard-of-oz/chapters/the-winged-monkeys.json"
+    },
+    {
+      "id": "the-discovery-of-oz-the-terrible",
+      "number": 15,
+      "title": "The Discovery of Oz, the Terrible",
+      "wordCount": 2761,
+      "version": "612d3de7a832b443",
+      "path": "books/wizard-of-oz/chapters/the-discovery-of-oz-the-terrible.json"
+    },
+    {
+      "id": "the-magic-art-of-the-great-humbug",
+      "number": 16,
+      "title": "The Magic Art of the Great Humbug",
+      "wordCount": 924,
+      "version": "cdcb0b4ddfad95fe",
+      "path": "books/wizard-of-oz/chapters/the-magic-art-of-the-great-humbug.json"
+    },
+    {
+      "id": "how-the-balloon-was-launched",
+      "number": 17,
+      "title": "How the Balloon Was Launched",
+      "wordCount": 1153,
+      "version": "9cb6b48e6cdcedc3",
+      "path": "books/wizard-of-oz/chapters/how-the-balloon-was-launched.json"
+    },
+    {
+      "id": "away-to-the-south",
+      "number": 18,
+      "title": "Away to the South",
+      "wordCount": 1166,
+      "version": "24489e3e82f12fba",
+      "path": "books/wizard-of-oz/chapters/away-to-the-south.json"
+    },
+    {
+      "id": "attacked-by-the-fighting-trees",
+      "number": 19,
+      "title": "Attacked by the Fighting Trees",
+      "wordCount": 1014,
+      "version": "a19158d1e30ee778",
+      "path": "books/wizard-of-oz/chapters/attacked-by-the-fighting-trees.json"
+    },
+    {
+      "id": "the-dainty-china-country",
+      "number": 20,
+      "title": "The Dainty China Country",
+      "wordCount": 1505,
+      "version": "cd59ffdcaec7a1cb",
+      "path": "books/wizard-of-oz/chapters/the-dainty-china-country.json"
+    },
+    {
+      "id": "the-lion-becomes-the-king-of-beasts",
+      "number": 21,
+      "title": "The Lion Becomes the King of Beasts",
+      "wordCount": 893,
+      "version": "5c64743d9d1ee1f0",
+      "path": "books/wizard-of-oz/chapters/the-lion-becomes-the-king-of-beasts.json"
+    },
+    {
+      "id": "the-country-of-the-quadlings",
+      "number": 22,
+      "title": "The Country of the Quadlings",
+      "wordCount": 937,
+      "version": "f32f7264b64b25e7",
+      "path": "books/wizard-of-oz/chapters/the-country-of-the-quadlings.json"
+    },
+    {
+      "id": "glinda-the-good-witch-grants-dorothy-s-wish",
+      "number": 23,
+      "title": "Glinda the Good Witch Grants Dorothy’s Wish",
+      "wordCount": 1255,
+      "version": "95239f3354a99865",
+      "path": "books/wizard-of-oz/chapters/glinda-the-good-witch-grants-dorothy-s-wish.json"
+    },
+    {
+      "id": "home-again",
+      "number": 24,
+      "title": "Home Again",
+      "wordCount": 74,
+      "version": "c1214e2379c09e58",
+      "path": "books/wizard-of-oz/chapters/home-again.json"
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "id": "secret-garden",
+  "title": "The Secret Garden",
+  "titleCN": "秘密花园",
+  "author": "Frances Hodgson Burnett",
+  "published": 1911,
+  "language": "en",
+  "genre": "Family & nature",
+  "readingStage": "Early choice",
+  "readingOrder": 3,
+  "sectionType": "chapter",
+  "sourceUrl": "https://www.gutenberg.org/ebooks/113",
+  "license": "Project Gutenberg edition; retain the complete license in source.txt. Listed as public domain in the USA by the source.",
+  "recommendation": "A clear story about feelings, friendship, and change. Some dialogue uses Yorkshire dialect.",
+  "version": "64a1fa6ac9e1977d",
+  "sourceFile": "books/secret-garden/source.txt",
+  "sourceHash": "5400b33f2c137b5267411903056211d091895d9de65983b486e3f811a9fe75c0",
+  "introduction": "",
+  "wordCount": 81084,
+  "chapters": [
+    {
+      "id": "there-is-no-one-left",
+      "number": 1,
+      "title": "There Is No One Left",
+      "wordCount": 1908,
+      "version": "8f0e25314e4c2df5",
+      "path": "books/secret-garden/chapters/there-is-no-one-left.json"
+    },
+    {
+      "id": "mistress-mary-quite-contrary",
+      "number": 2,
+      "title": "Mistress Mary Quite Contrary",
+      "wordCount": 2709,
+      "version": "b57235bd70e59b4c",
+      "path": "books/secret-garden/chapters/mistress-mary-quite-contrary.json"
+    },
+    {
+      "id": "across-the-moor",
+      "number": 3,
+      "title": "Across the Moor",
+      "wordCount": 1470,
+      "version": "dc5ce74de1b1c15a",
+      "path": "books/secret-garden/chapters/across-the-moor.json"
+    },
+    {
+      "id": "martha",
+      "number": 4,
+      "title": "Martha",
+      "wordCount": 5334,
+      "version": "4f1ce7aa33bccd78",
+      "path": "books/secret-garden/chapters/martha.json"
+    },
+    {
+      "id": "the-cry-in-the-corridor",
+      "number": 5,
+      "title": "The Cry in the Corridor",
+      "wordCount": 2241,
+      "version": "adb6b0d4c255e55e",
+      "path": "books/secret-garden/chapters/the-cry-in-the-corridor.json"
+    },
+    {
+      "id": "there-was-someone-crying-there-was",
+      "number": 6,
+      "title": "“There Was Someone Crying—There Was!”",
+      "wordCount": 2274,
+      "version": "ea50705d466ff04d",
+      "path": "books/secret-garden/chapters/there-was-someone-crying-there-was.json"
+    },
+    {
+      "id": "the-key-to-the-garden",
+      "number": 7,
+      "title": "The Key to the Garden",
+      "wordCount": 2006,
+      "version": "b9a3b37e3a7fd66e",
+      "path": "books/secret-garden/chapters/the-key-to-the-garden.json"
+    },
+    {
+      "id": "the-robin-who-showed-the-way",
+      "number": 8,
+      "title": "The Robin Who Showed the Way",
+      "wordCount": 2736,
+      "version": "cb013faa15ca5784",
+      "path": "books/secret-garden/chapters/the-robin-who-showed-the-way.json"
+    },
+    {
+      "id": "the-strangest-house-anyone-ever-lived-in",
+      "number": 9,
+      "title": "The Strangest House Anyone Ever Lived In",
+      "wordCount": 3131,
+      "version": "dc02f80f5d4614ad",
+      "path": "books/secret-garden/chapters/the-strangest-house-anyone-ever-lived-in.json"
+    },
+    {
+      "id": "dickon",
+      "number": 10,
+      "title": "Dickon",
+      "wordCount": 3760,
+      "version": "4c3a1b7c83571090",
+      "path": "books/secret-garden/chapters/dickon.json"
+    },
+    {
+      "id": "the-nest-of-the-missel-thrush",
+      "number": 11,
+      "title": "The Nest of the Missel Thrush",
+      "wordCount": 2464,
+      "version": "1bdd07df8d46975e",
+      "path": "books/secret-garden/chapters/the-nest-of-the-missel-thrush.json"
+    },
+    {
+      "id": "might-i-have-a-bit-of-earth",
+      "number": 12,
+      "title": "“Might I Have a Bit of Earth?”",
+      "wordCount": 2593,
+      "version": "de2e8553453ecdcd",
+      "path": "books/secret-garden/chapters/might-i-have-a-bit-of-earth.json"
+    },
+    {
+      "id": "i-am-colin",
+      "number": 13,
+      "title": "“I Am Colin”",
+      "wordCount": 4221,
+      "version": "26ec40570493aa24",
+      "path": "books/secret-garden/chapters/i-am-colin.json"
+    },
+    {
+      "id": "a-young-rajah",
+      "number": 14,
+      "title": "A Young Rajah",
+      "wordCount": 3708,
+      "version": "9b9449aff6a213e6",
+      "path": "books/secret-garden/chapters/a-young-rajah.json"
+    },
+    {
+      "id": "nest-building",
+      "number": 15,
+      "title": "Nest Building",
+      "wordCount": 3931,
+      "version": "5bb5ca802a55289e",
+      "path": "books/secret-garden/chapters/nest-building.json"
+    },
+    {
+      "id": "i-won-t-said-mary",
+      "number": 16,
+      "title": "“I Won’t!” Said Mary",
+      "wordCount": 2380,
+      "version": "ccf164041ef3dcd2",
+      "path": "books/secret-garden/chapters/i-won-t-said-mary.json"
+    },
+    {
+      "id": "a-tantrum",
+      "number": 17,
+      "title": "A Tantrum",
+      "wordCount": 2328,
+      "version": "79eee22258553cce",
+      "path": "books/secret-garden/chapters/a-tantrum.json"
+    },
+    {
+      "id": "tha-munnot-waste-no-time",
+      "number": 18,
+      "title": "“Tha’ Munnot Waste No Time”",
+      "wordCount": 2216,
+      "version": "9a5fd772e2265151",
+      "path": "books/secret-garden/chapters/tha-munnot-waste-no-time.json"
+    },
+    {
+      "id": "it-has-come",
+      "number": 19,
+      "title": "“It Has Come!”",
+      "wordCount": 3544,
+      "version": "377e8ad2ffeaafca",
+      "path": "books/secret-garden/chapters/it-has-come.json"
+    },
+    {
+      "id": "i-shall-live-forever-and-ever-and-ever",
+      "number": 20,
+      "title": "“I Shall Live Forever—And Ever—And Ever!”",
+      "wordCount": 2550,
+      "version": "894f1af6cf1a4e2e",
+      "path": "books/secret-garden/chapters/i-shall-live-forever-and-ever-and-ever.json"
+    },
+    {
+      "id": "ben-weatherstaff",
+      "number": 21,
+      "title": "Ben Weatherstaff",
+      "wordCount": 3285,
+      "version": "46072891165a23cc",
+      "path": "books/secret-garden/chapters/ben-weatherstaff.json"
+    },
+    {
+      "id": "when-the-sun-went-down",
+      "number": 22,
+      "title": "When the Sun Went Down",
+      "wordCount": 1628,
+      "version": "44ce5621e1268092",
+      "path": "books/secret-garden/chapters/when-the-sun-went-down.json"
+    },
+    {
+      "id": "magic",
+      "number": 23,
+      "title": "Magic",
+      "wordCount": 4047,
+      "version": "43f47816c34071fd",
+      "path": "books/secret-garden/chapters/magic.json"
+    },
+    {
+      "id": "let-them-laugh",
+      "number": 24,
+      "title": "“Let Them Laugh”",
+      "wordCount": 3947,
+      "version": "d49d8129fea503c6",
+      "path": "books/secret-garden/chapters/let-them-laugh.json"
+    },
+    {
+      "id": "the-curtain",
+      "number": 25,
+      "title": "The Curtain",
+      "wordCount": 2408,
+      "version": "c438478588c4784f",
+      "path": "books/secret-garden/chapters/the-curtain.json"
+    },
+    {
+      "id": "it-s-mother",
+      "number": 26,
+      "title": "“It’s Mother!”",
+      "wordCount": 3080,
+      "version": "cf0e0a2e575127d4",
+      "path": "books/secret-garden/chapters/it-s-mother.json"
+    },
+    {
+      "id": "in-the-garden",
+      "number": 27,
+      "title": "In the Garden",
+      "wordCount": 5185,
+      "version": "8ff29381dd583af8",
+      "path": "books/secret-garden/chapters/in-the-garden.json"
+    }
+  ]
+}
