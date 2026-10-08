@@ -568,3 +568,41 @@ test('a chapter that finishes loading on another tab does not add the book link'
   await h.run('openBookChapter("sherlock-holmes", 0)');
   assert.equal(new URL(h.context.location.href).searchParams.get('book'), null);
 });
+
+function readingSelection(h, text, prefix = '', endInside = true) {
+  const start = { inside: true }, end = { inside: endInside };
+  h.element('readerPassage').contains = node => node.inside;
+  h.browserWindow.getSelection = () => ({ isCollapsed: false, rangeCount: 1, anchorNode: end,
+    toString: () => text, getRangeAt: () => ({ startContainer: start, startOffset: 0, endContainer: end }) });
+  h.context.document.createRange = () => ({ selectNodeContents() {}, setEnd() {}, toString: () => prefix });
+}
+
+test('paragraph selections are recognized and short phrases still use the phrase panel', async () => {
+  const h = readerHarness();
+  await h.run('openBookChapter("wizard-of-oz", 0)');
+  readingSelection(h, book.chapters[0].text.split('\n\n')[0]);
+  assert.equal(h.run('selectedReadingText().kind'), 'paragraph');
+  readingSelection(h, 'great Kansas prairies', 'Dorothy lived in the midst of the ');
+  assert.equal(h.run('selectedPhrase().phrase'), 'great Kansas prairies');
+  assert.equal(h.run('selectedPhrase().offset'), 'Dorothy lived in the midst of the '.length);
+  readingSelection(h, 'A king had a garden.');
+  assert.equal(h.run('selectedReadingText().kind'), 'paragraph');
+});
+
+test('a selection reaching outside the passage is rejected', async () => {
+  const h = readerHarness();
+  await h.run('openBookChapter("wizard-of-oz", 0)');
+  readingSelection(h, 'A selected paragraph crossing into the sidebar.', '', false);
+  assert.equal(h.run('selectedReadingText()'), null);
+});
+
+test('short selections with an abbreviation or a name stay phrases instead of starting AI analysis', async () => {
+  const h = readerHarness();
+  await h.run('openBookChapter("wizard-of-oz", 0)');
+  for (const text of ['Aunt Em.', 'Mrs. Rachel', 'Mrs. Rachel Lynde lived', 'Oh, no!']) {
+    readingSelection(h, text);
+    assert.equal(h.run('selectedReadingText().kind'), 'phrase', text);
+  }
+  readingSelection(h, 'Toto was not gray. He was a little black dog.');
+  assert.equal(h.run('selectedReadingText().kind'), 'paragraph');
+});

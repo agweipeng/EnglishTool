@@ -615,3 +615,29 @@ textarea { resize: vertical; min-height: 50px; }
 .reader-shelf-card { display: flex; flex-direction: column; gap: 6px; border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
 .reader-shelf-card button { margin-top: auto; align-self: flex-start; }
 #readerLoadStatus:empty { display: none; }
+
+/* Paragraph explanations follow the same reading flow as the original passage. */
+.paragraph-dialog { color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 18px; padding: 24px; width: min(760px, calc(100vw - 32px)); max-height: calc(100vh - 32px); box-sizing: border-box; overflow-y: auto; }
+.paragraph-dialog::backdrop { background: rgba(20, 27, 45, .45); }
+.paragraph-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.paragraph-header h2 { font-size: 20px; margin: 0; }
+.paragraph-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin: 20px 0; padding: 4px; border-radius: 12px; background: var(--surface-2); }
+.paragraph-tabs button { color: var(--text-muted); background: transparent; border: 0; padding: 10px 6px; border-radius: 9px; font: inherit; font-size: 14px; cursor: pointer; }
+.paragraph-tabs button[aria-selected="true"] { color: white; background: var(--primary); }
+.paragraph-original, .paragraph-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; margin: 14px 0; }
+.paragraph-original summary, .paragraph-paste summary { cursor: pointer; color: var(--text-muted); }
+#paragraphOriginal { white-space: pre-wrap; font-family: Georgia, 'Times New Roman', serif; font-size: 18px; line-height: 1.8; }
+.paragraph-card h4 { margin: 0 0 10px; font-size: 18px; }
+.paragraph-card p { line-height: 1.7; margin: 8px 0; }
+.paragraph-cn { color: var(--text-muted); }
+.paragraph-card blockquote { border-left: 3px solid var(--border); margin: 12px 0; padding-left: 12px; line-height: 1.7; }
+.paragraph-label { display: inline-block; color: var(--primary); background: var(--surface-2); border-radius: 5px; padding: 4px 8px; font-size: 13px; }
+.paragraph-part { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+.paragraph-paste { margin-top: 18px; }
+.paragraph-paste label { display: block; margin: 12px 0 6px; font-size: 13px; color: var(--text-muted); }
+.paragraph-paste textarea { width: 100%; box-sizing: border-box; margin-bottom: 8px; }
+.local-ai-auto { display: flex; align-items: center; gap: 8px; margin: 18px 0; }
+.local-ai-auto input { width: auto; }
+#localAIModel, #localAIProvider { display: block; width: 100%; margin-top: 8px; }
+#readerLocalAIBtn { margin-bottom: 14px; }
+@media (max-width: 640px) { .paragraph-dialog { padding: 16px; } .paragraph-tabs button { font-size: 12px; } .paragraph-original, .paragraph-card { padding: 14px; } }

@@ -1,0 +1,28 @@
+{
+  "passage": "A certain king had a beautiful garden, and in the garden stood a tree which bore golden apples. These apples were always counted, and about the time when they began to grow ripe it was found that every night one of them was gone. The king became very angry at this, and ordered the gardener to keep watch all night under the tree.",
+  "analysis": {
+    "simplified": {"en": "A king had a beautiful garden with a tree that grew golden apples. People counted the apples regularly. When the apples started to become ripe, they noticed that one disappeared every night. The king was very angry and told the gardener to watch the tree all night.", "cn": "一位国王有一个美丽的花园，园中有一棵结金苹果的树。人们定期清点苹果。当苹果开始成熟时，他们发现每晚都会少一个。国王十分生气，命令园丁整夜看守这棵树。"},
+    "mainPoint": {"en": "Golden apples are disappearing, so the king orders the gardener to watch the tree at night.", "cn": "金苹果不断失踪，因此国王命令园丁在夜间看守这棵树。"},
+    "words": [
+      {"text": "bore", "meaning": {"en": "Produced fruit; the past tense of bear in this context.", "cn": "结出果实；在这里是 bear 的过去式。"}, "example": "in the garden stood a tree which bore golden apples"},
+      {"text": "ripe", "meaning": {"en": "Fully grown and ready to eat, especially fruit.", "cn": "成熟的、可以食用的，尤其用于描述水果。"}, "example": "they began to grow ripe"}
+    ],
+    "phrases": [
+      {"text": "keep watch", "meaning": {"en": "Stay alert and look out for anything unusual.", "cn": "保持警觉，留意任何异常情况。"}, "example": "ordered the gardener to keep watch all night under the tree"}
+    ],
+    "sentences": [
+      {"original": "A certain king had a beautiful garden, and in the garden stood a tree which bore golden apples.", "core": {"en": "A king had a garden. A tree stood in the garden.", "cn": "国王有一个花园。花园里有一棵树。"}, "parts": [
+        {"text": "in the garden stood a tree", "explanation": {"en": "The place comes first, followed by the verb stood and the subject a tree. The usual order is: A tree stood in the garden.", "cn": "地点放在句首，后面依次是动词 stood 和主语 a tree。通常语序是：A tree stood in the garden。这是地点状语引起的倒装。"}},
+        {"text": "which bore golden apples", "explanation": {"en": "A relative clause describing the tree. Which refers to the tree; bore means produced fruit.", "cn": "这是修饰 tree 的定语从句。which 指代这棵树，bore 表示结出果实。"}}
+      ]},
+      {"original": "These apples were always counted, and about the time when they began to grow ripe it was found that every night one of them was gone.", "core": {"en": "People counted the apples. People discovered that an apple was missing every night.", "cn": "人们清点苹果。人们发现每晚都会少一个苹果。"}, "parts": [
+        {"text": "were always counted", "explanation": {"en": "A past passive form: were plus the past participle counted. The apples receive the action.", "cn": "这是过去时的被动语态：were 加过去分词 counted。苹果是动作的承受者。"}},
+        {"text": "when they began to grow ripe", "explanation": {"en": "A clause describing the time. Grow ripe means become ripe, with ripe describing the apples' changing state.", "cn": "这个从句说明时间。grow ripe 表示变得成熟，ripe 描述苹果逐渐变化的状态。"}}
+      ]},
+      {"original": "The king became very angry at this, and ordered the gardener to keep watch all night under the tree.", "core": {"en": "The king became angry. He ordered the gardener to watch the tree.", "cn": "国王生气了。他命令园丁看守这棵树。"}, "parts": [
+        {"text": "ordered the gardener to keep watch", "explanation": {"en": "Order someone to do something: the gardener is the person who must carry out the action.", "cn": "order someone to do something 表示命令某人做某事：园丁是必须执行动作的人。"}}
+      ]}
+    ],
+    "speaking": {"en": "Retell what happened in three sentences. What would you do if you were the gardener?", "cn": "用三句话复述发生的事情。如果你是园丁，你会怎么做？"}
+  }
+}
