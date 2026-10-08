@@ -167,6 +167,77 @@ test('the end-of-chapter button opens the next chapter and stops at the last one
   assert.match(h.element('readerNextChapterEnd').textContent, /finished/i);
 });
 
+// ---------- word panel: English definitions ----------
+
+const settle = () => new Promise(r => setImmediate(r));
+async function settleAll() { for (let i = 0; i < 6; i++) await settle(); }
+function pieceIndex(h, word) {
+  return h.run(`reader.analysis.pieces.findIndex(p => p.text === ${JSON.stringify(word)})`);
+}
+
+test('clicking an unknown word shows its English definition from the dictionary', async () => {
+  const h = readerHarness();
+  const asked = [];
+  h.context.fetchDictionary = async w => {
+    asked.push(w);
+    return w === 'prairie' ? { phonetic: '/ˈprɛəri/', defEN: 'A large open area of grassland.', examples: [] } : null;
+  };
+  h.run('openBookChapter("wizard-of-oz", 0)');
+  h.run(`openWordPanel(${pieceIndex(h, 'prairies')})`);
+  assert.match(h.element('readerPanel').innerHTML, /Looking up/);
+  await settleAll();
+  const html = h.element('readerPanel').innerHTML;
+  assert.match(html, /A large open area of grassland\./);
+  assert.match(html, /prairie/);
+  assert.match(html, /ˈprɛəri/);
+  // The lookup is cached: opening the same word again does not fetch again
+  const fetches = asked.length;
+  h.run(`openWordPanel(${pieceIndex(h, 'prairies')})`);
+  await settleAll();
+  assert.equal(asked.length, fetches);
+});
+
+test('a word in the library shows its saved English and Chinese meanings without a lookup', async () => {
+  const h = readerHarness();
+  let fetched = false;
+  h.context.fetchDictionary = async () => { fetched = true; return null; };
+  h.context.state.words = [{ text: 'prairie', defEN: 'Open grassland.', defCN: '大草原', level: 1 }];
+  h.run('openBookChapter("wizard-of-oz", 0)');
+  h.run(`openWordPanel(${pieceIndex(h, 'prairies')})`);
+  await settleAll();
+  const html = h.element('readerPanel').innerHTML;
+  assert.match(html, /Open grassland\./);
+  assert.match(html, /大草原/);
+  assert.equal(fetched, false);
+});
+
+test('a missing dictionary entry shows a clear message', async () => {
+  const h = readerHarness();
+  h.context.fetchDictionary = async () => null;
+  h.run('openBookChapter("wizard-of-oz", 0)');
+  h.run(`openWordPanel(${pieceIndex(h, 'prairies')})`);
+  await settleAll();
+  assert.match(h.element('readerPanel').innerHTML, /No dictionary entry/);
+});
+
+test('a slow lookup never overwrites a newer panel or reopens a closed one', async () => {
+  const h = readerHarness();
+  let release;
+  h.context.fetchDictionary = w => (w.startsWith('prair')
+    ? new Promise(r => { release = () => r({ phonetic: '', defEN: 'STALE DEFINITION', examples: [] }); })
+    : Promise.resolve({ phonetic: '', defEN: 'Fresh definition.', examples: [] }));
+  h.run('openBookChapter("wizard-of-oz", 0)');
+  h.run(`openWordPanel(${pieceIndex(h, 'prairies')})`);
+  h.run(`openWordPanel(${pieceIndex(h, 'Kansas')})`);
+  await settleAll();
+  release();
+  await settleAll();
+  assert.doesNotMatch(h.element('readerPanel').innerHTML, /STALE DEFINITION/);
+  h.run(`openWordPanel(${pieceIndex(h, 'prairies')}); closeReaderPanel()`);
+  await settleAll();
+  assert.equal(h.element('readerPanel').classList.contains('hidden'), true);
+});
+
 test('clearing the draft retains the book bookmark for resuming later', () => {
   const h = readerHarness();
   h.run('openBookChapter("wizard-of-oz", 3); clearReader()');

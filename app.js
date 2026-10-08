@@ -779,7 +779,7 @@ function extractFromTranscript() {
   const raw = document.getElementById('transcriptInput').value.trim();
   if (!raw) { toast('Paste some text first'); return; }
   const tokens = raw.toLowerCase().match(/[a-z][a-z'-]{2,}/g) || [];
-  const skip = new Set([...knownWordSet(), ...learningWordSet()]);
+  const skip = TextCore.expandForms([...knownWordSet(), ...learningWordSet()]);
   const freq = new Map();
   tokens.forEach(t => {
     if (TextCore.isKnownForm(t, skip)) return;

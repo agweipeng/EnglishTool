@@ -318,7 +318,37 @@ function panelButtons(status, key, sentence) {
   return '';
 }
 
-function showPanel({ title, sentence, status, actionsHtml }) {
+// ---------- Word definitions ----------
+
+// Each lookup is a few network calls, so remember results for the session.
+// Failed lookups are not cached: the reader may just have been offline.
+const definitionCache = new Map();
+// Bumped whenever the panel changes, so a slow lookup can't overwrite a newer panel
+let panelLookupSeq = 0;
+
+function lookupDefinition(surface) {
+  const key = surface.toLowerCase();
+  if (!definitionCache.has(key)) {
+    const pending = resolveHeadword(surface)
+      .catch(() => ({ text: surface, dict: null }))
+      .then(result => {
+        if (!result.dict) definitionCache.delete(key);
+        return result;
+      });
+    definitionCache.set(key, pending);
+  }
+  return definitionCache.get(key);
+}
+
+function definitionHtml({ headword, phonetic, defEN, defCN }) {
+  return `<div class="rp-def">
+      ${headword || phonetic ? `<div class="rp-headword">${escapeHTML(headword || '')} ${escapeHTML(phonetic || '')}</div>` : ''}
+      ${defEN ? `<div class="rp-def-en">${escapeHTML(defEN)}</div>` : ''}
+      ${defCN ? `<div class="rp-def-cn">${escapeHTML(defCN)}</div>` : ''}
+    </div>`;
+}
+
+function showPanel({ title, sentence, status, actionsHtml, definition = '' }) {
   const panel = document.getElementById('readerPanel');
   panel.innerHTML = `
     <div class="rp-head">
@@ -326,6 +356,7 @@ function showPanel({ title, sentence, status, actionsHtml }) {
       <button class="icon-btn" data-act="say" data-text="${escapeHTML(title)}" title="Hear it">🔊</button>
       <button class="icon-btn rp-close" data-act="close" title="Close">✕</button>
     </div>
+    ${definition}
     ${sentence ? `<div class="rp-sentence">${escapeHTML(sentence)}
       <button class="icon-btn" data-act="say" data-text="${escapeHTML(sentence)}" title="Hear the sentence">🔊</button></div>` : ''}
     <div class="hint">${escapeHTML(status)}</div>
@@ -337,15 +368,42 @@ function openWordPanel(pieceIndex) {
   const p = reader.analysis.pieces[pieceIndex];
   if (!p || !p.isWord) return;
   const sentence = TextCore.sentenceAt(reader.text, p.start);
-  showPanel({
+  const seq = ++panelLookupSeq;
+  const render = definition => showPanel({
     title: p.text,
     sentence,
     status: statusLine(p.status, p.key),
     actionsHtml: panelButtons(p.status, p.key, sentence),
+    definition,
+  });
+
+  const entry = libraryEntryFor(p.key);
+  if (entry && (entry.defEN || entry.defCN)) {
+    return render(definitionHtml({
+      headword: entry.text !== p.key ? entry.text : '',
+      phonetic: entry.phonetic,
+      defEN: entry.defEN,
+      defCN: entry.defCN,
+    }));
+  }
+  if (p.status === 'stop' || p.status === 'proper') return render('');
+
+  render('<div class="rp-def hint">Looking up the meaning…</div>');
+  lookupDefinition(p.text).then(({ text, dict }) => {
+    const panel = document.getElementById('readerPanel');
+    if (seq !== panelLookupSeq || panel.classList.contains('hidden')) return;
+    render(dict && dict.defEN
+      ? definitionHtml({
+        headword: text !== p.key ? text : '',
+        phonetic: dict.phonetic,
+        defEN: dict.defEN,
+      })
+      : '<div class="rp-def hint">No dictionary entry found — it may be offline, or a rare/old word.</div>');
   });
 }
 
 function openPhrasePanel(phrase, offset) {
+  panelLookupSeq++;
   const sentence = offset >= 0 ? TextCore.sentenceAt(reader.text, offset) : '';
   const inLibrary = findWordByText(phrase);
   showPanel({
@@ -357,6 +415,7 @@ function openPhrasePanel(phrase, offset) {
 }
 
 function closeReaderPanel() {
+  panelLookupSeq++;
   document.getElementById('readerPanel').classList.add('hidden');
 }
 
@@ -379,7 +438,7 @@ async function learnFromReader(surface, sentence, btn) {
   if (btn) btn.disabled = true;
   toast(`Looking up "${surface}"…`);
   try {
-    const { text, dict } = await resolveHeadword(surface);
+    const { text, dict } = await lookupDefinition(surface);
     if (findWordByText(text)) { toast(`"${text}" is already in your library`); return; }
     const fields = await lookupWordFields(text, dict);
     const bookExample = sentence ? [{ en: sentence, cn: await translateToCN(sentence) }] : [];
@@ -425,7 +484,7 @@ function handleReaderAction(btn) {
     return learnFromReader(text, sentence, btn);
   }
   if (act === 'know') { markKnown([text]); closeReaderPanel(); return refreshReaderStatuses(); }
-  if (act === 'unknow') { unmarkKnown(TextCore.baseForms(text)); closeReaderPanel(); return refreshReaderStatuses(); }
+  if (act === 'unknow') { unmarkKnown(TextCore.relatedKnownWords(text, state.known)); closeReaderPanel(); return refreshReaderStatuses(); }
 }
 
 // ---------- Phrase selection (mouse drag or touch long-press) ----------

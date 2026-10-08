@@ -259,6 +259,37 @@ test('mergeKnown tolerates missing or malformed fields', () => {
   assert.deepEqual(merged, { known: [], knownLog: {} });
 });
 
+// ---------- word families (one "known" click covers all forms) ----------
+
+test('expandForms adds base forms but drops stems shorter than 3 letters', () => {
+  const forms = TC.expandForms(['walked', 'used']);
+  assert.ok(forms.has('walked') && forms.has('walk'));
+  assert.ok(forms.has('used') && forms.has('use'));
+  assert.ok(!forms.has('us'));
+});
+
+test('analyzeText treats other forms of a known word as known', () => {
+  const r = TC.analyzeText('She was walking. He walks home.', { known: new Set(['walked']), learning: new Set() });
+  assert.equal(r.pieces.find(p => p.text === 'walking').status, 'known');
+  assert.equal(r.pieces.find(p => p.text === 'walks').status, 'known');
+});
+
+test('analyzeText treats other forms of a learning word as learning', () => {
+  const r = TC.analyzeText('The light glimmered.', { known: new Set(), learning: new Set(['glimmering']) });
+  assert.equal(r.pieces.find(p => p.text === 'glimmered').status, 'learning');
+});
+
+test('analyzeText does not let short junk stems join unrelated words', () => {
+  // "seed" → stem "se"; "sees" → stem "se" too, but they are different words
+  const r = TC.analyzeText('He sees it.', { known: new Set(['seed']), learning: new Set() });
+  assert.equal(r.pieces.find(p => p.text === 'sees').status, 'unknown');
+});
+
+test('relatedKnownWords finds every stored form of the same word', () => {
+  assert.deepEqual(TC.relatedKnownWords('walking', ['walked', 'walk', 'lake']), ['walked', 'walk']);
+  assert.deepEqual(TC.relatedKnownWords('sees', ['seed']), []);
+});
+
 // ---------- isPhrase ----------
 
 test('isPhrase is true for multi-word entries only', () => {

@@ -546,8 +546,13 @@ textarea { resize: vertical; min-height: 50px; }
   background: var(--surface); border: 1px solid var(--border);
   border-radius: 14px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
   padding: 14px 16px;
+  max-height: 60vh; overflow-y: auto;
 }
 .rp-head { display: flex; align-items: center; gap: 8px; }
+.rp-def { margin: 8px 0 4px; line-height: 1.5; }
+.rp-headword { color: var(--text-muted); font-size: 13px; margin-bottom: 2px; }
+.rp-def-en { font-size: 15px; }
+.rp-def-cn { color: var(--text-muted); font-size: 14px; margin-top: 2px; }
 .rp-title { font-size: 20px; }
 .rp-close { margin-left: auto; }
 .rp-sentence {

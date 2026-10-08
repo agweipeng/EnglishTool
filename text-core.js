@@ -151,6 +151,28 @@
     return !!core && STOPWORDS.has(core);
   }
 
+  // ---------- Word families ----------
+  // Knowing "walked" should also cover "walk", "walking" and "walks". Two words are
+  // in the same family when their base forms overlap. Stems under 3 letters are
+  // ignored: "seed" and "sees" both reduce to "se" but are different words.
+  const MIN_FAMILY_FORM = 3;
+
+  function familyForms(word) {
+    return baseForms(word).filter((f, i) => i === 0 || f.length >= MIN_FAMILY_FORM);
+  }
+
+  function expandForms(words) {
+    const out = new Set();
+    for (const w of words || []) familyForms(w).forEach(f => out.add(f));
+    return out;
+  }
+
+  // Stored known words that belong to the same family as `token` (for un-marking)
+  function relatedKnownWords(token, knownList) {
+    const forms = new Set(familyForms(token));
+    return cleanKnown(knownList).filter(k => familyForms(k).some(f => forms.has(f)));
+  }
+
   function isKnownForm(token, knownSet) {
     if (isFunctionWord(token)) return true;
     return baseForms(token).some(f => knownSet.has(f));
@@ -273,8 +295,9 @@
    *   coveragePct:number, learningPct:number, unknownPct:number, unknown: Array<{word:string, count:number}> }}
    */
   function analyzeText(text, sets) {
-    const known = (sets && sets.known) || new Set();
-    const learning = (sets && sets.learning) || new Set();
+    // Whole word families count: knowing "walked" covers "walking" too
+    const known = expandForms(sets && sets.known);
+    const learning = expandForms(sets && sets.learning);
     const pieces = tokenizeText(text);
     const properNouns = findProperNouns(pieces);
     const statusCache = new Map();
@@ -282,7 +305,7 @@
     const classify = key => {
       if (isFunctionWord(key)) return 'stop';
       if (properNouns.has(properKey(key))) return 'proper';
-      const forms = baseForms(key);
+      const forms = familyForms(key);
       if (forms.some(f => learning.has(f))) return 'learning';
       if (forms.some(f => known.has(f))) return 'known';
       return 'unknown';
@@ -411,6 +434,8 @@
     baseForms,
     isFunctionWord,
     isKnownForm,
+    expandForms,
+    relatedKnownWords,
     tokenizeText,
     splitSentences,
     sentenceAt,
