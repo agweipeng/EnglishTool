@@ -1,6 +1,6 @@
 # English Vocabulary & Listening Trainer
 
-A pure HTML/JS vocabulary trainer focused on building vocabulary and improving listening skills. Runs entirely in the browser — no install, no backend.
+A HTML/JS vocabulary trainer focused on building vocabulary and improving listening skills. Core features run entirely in the browser. Optional local AI uses a small Python server to connect Ollama or LM Studio.
 
 ## Quick start
 
@@ -44,7 +44,7 @@ python3 -m http.server 8000
 
 ## Cloud sync
 
-This project is fully client-side and stores data in `localStorage`. For true automatic cross-device sync you would need a backend with auth. Two reasonable paths if you want to add it:
+Learning data stays in the browser's `localStorage`. For true automatic cross-device sync you would need a backend with auth. Two reasonable paths if you want to add it:
 
 1. **Firebase** — create a free Firebase project, enable Email or Google sign-in + Firestore. Replace the `loadState/saveState` functions in `app.js` with calls to `firestore.collection('users/{uid}/data').doc('state')`. Adds ~5 KB of SDK; one config object you'd paste into a new `firebase-config.js`.
 2. **Supabase** — same idea, Postgres-based, generous free tier. Replace storage layer with `supabase.from('state').upsert(...)`.
@@ -97,6 +97,42 @@ HTTP reading fetches a manifest and one chapter at a time. Successful requests a
 
 This release supports curated Gutenberg TXT imports through the command above. Personal TXT/EPUB upload, IndexedDB storage, and service-worker offline caching remain future work. The paste-text reader is still available.
 
+## Paragraph explanations · 段落解析
+
+Select a complete sentence or paragraph in the Book Reader (up to 6,000 characters; local AI analyzes up to 1,200 characters, because a small local model needs about 1–2 minutes per 1,000 characters — use Claude for longer passages). A short selection such as "Aunt Em." or "Mrs. Rachel" still opens the phrase popup. The analysis panel has three views: **Simpler English**, **Key expressions**, and **Sentence structure**, with English followed by corresponding Chinese. It also offers passage read-aloud, a speaking prompt, and **Learn** buttons that save a word or phrase with its contextual meaning and original example into your existing review library. Short phrase selections retain the existing phrase popup.
+
+The current working flow uses **Analyze with Claude**: it copies a structured tutoring prompt and opens Claude. Paste the prompt there, then copy Claude's complete reply into **Bring the AI response back → Show analysis**. The tool checks the response format and source quotations before displaying it. Explanations stay open for the current selection and are not saved; vocabulary cards are saved normally.
+
+For automatic analysis with **Ollama**:
+
+1. Start Ollama with an installed local chat model (`ollama list` shows your models; `ollama serve` starts the service if it is not already running). The default port is **11434**. [Official chat API](https://docs.ollama.com/api/chat) · [Structured output support](https://docs.ollama.com/capabilities/structured-outputs).
+2. From the EnglishTool folder, run `python3 scripts/serve-local-ai.py` (Python 3.9+), then open `http://127.0.0.1:8000`.
+3. In **Book Reader → Local AI · 本地 AI**, select **Ollama**, click **Check connection**, choose an installed chat model, then click **Use this model**.
+4. With **Analyze when I select a passage** enabled, select a sentence or paragraph to start analysis automatically. Uncheck it for manual analysis.
+
+Ollama requests use its native streaming `/api/chat` endpoint with a JSON schema, thinking disabled, a 16K requested context, and an 8K output limit; an answer may take up to 5 minutes, and the panel shows the elapsed time. The analysis covers up to 10 sentences with up to 4 grammar notes each, to keep local answers fast. Only installed local chat models are listed and allowed for inference; cloud and embedding-only models are excluded. The reader supplies learning-card examples directly from the selected source sentences, preserving the book's exact wording; definitions and explanations come from the model. Small models often shorten a sentence or add "…"; such quotes are matched back to the book's exact text, and anything that can't be found in the passage is left out instead of discarding the whole analysis. No model download or Ollama configuration changes are performed by EnglishTool. Custom Ollama port: `python3 scripts/serve-local-ai.py --ollama-port 11435`.
+
+For automatic analysis with **LM Studio**:
+
+1. Load a chat/instruction model in LM Studio that supports structured JSON output. In its **Developer** tab, start the local server on port **1234**. [Official server guide](https://lmstudio.ai/docs/developer/core/server) · [Structured output support](https://lmstudio.ai/docs/developer/openai-compat/structured-output).
+2. From the EnglishTool folder, run `python3 scripts/serve-local-ai.py` (Python 3.9+), then open `http://127.0.0.1:8000`. This replaces the plain static server for local AI use.
+3. In **Book Reader → Local AI · 本地 AI**, select **LM Studio**, click **Check connection**, choose your chat model, and click **Use this model**.
+4. Select a sentence or paragraph. With **Analyze when I select a passage** enabled, analysis starts automatically. Uncheck it to use **Analyze here** manually.
+
+The local server serves the app and forwards only model-list and chat requests to the selected service on this computer. It binds to `127.0.0.1`, requires the app's own origin, and does not require CORS or network-sharing changes. Prompts go to your local model; the provider, model choice and automatic-analysis preference are saved in this browser. Existing LM Studio settings migrate automatically. If LM Studio authentication is enabled, set `LM_STUDIO_API_TOKEN` in the server's environment; tokens are never stored in the browser or sent to Ollama. Custom ports: `python3 scripts/serve-local-ai.py --port 8001 --lmstudio-port 1235`.
+
+Opening `index.html` directly, using the plain static server, or using the hosted static site retains the Claude workflow; automatic local AI requires the local server above. Loading a model may take time. Missing servers, authentication problems, unsupported structured output, incomplete replies and outdated responses are handled without displaying partial analysis. Closing the panel cancels the request, and for Ollama the local server also stops the model's current answer.
+
+在 Book Reader 中选中完整句子或段落（最多 6,000 个字符；本地 AI 最多解析 1,200 个字符，因为小型本地模型每 1,000 个字符约需 1–2 分钟，更长的段落请使用 Claude），即可打开解析面板。面板包含**简化版**、**重点**和**结构拆解**，英文后附对应中文，还提供原文听读、口语练习问题，以及**加入学习**按钮，用于把词汇或短语的语境释义和原文例句保存到现有复习词库中。较短的短语选择仍使用原有短语弹窗。
+
+Claude 流程仍可使用：点击**使用 Claude 解析**，复制提示词并打开 Claude；把提示词粘贴到 Claude，再将其完整回复粘贴到**粘贴 AI 回复 → 显示解析**。工具会检查回复格式及原文引用。解析只保留在当前选段的面板中，不会持久保存；词汇卡片会正常保存。
+
+使用 **Ollama 自动解析**：启动 Ollama 并准备好已安装的本地聊天模型（默认端口 11434）；在 EnglishTool 文件夹运行 `python3 scripts/serve-local-ai.py`，打开 `http://127.0.0.1:8000`；点击 **Book Reader → 本地 AI**，选择 **Ollama → 检查连接 → 选择模型 → 使用此模型**。启用**选中段落后自动解析**后，选中句子或段落即可开始解析。工具只允许使用已安装的本地聊天模型，排除云端和仅用于嵌入的模型。词汇卡片的例句直接取自所选原文，模型负责释义和解析。小模型常会截短句子或加上“…”，工具会把这些引用对应回原文的准确文字，无法在段落中找到的内容会被略去，而不是丢弃整份解析。解析面板会显示已用时间。工具不会下载模型或更改 Ollama 配置。
+
+使用 **LM Studio 自动解析**：先加载支持结构化 JSON 输出的聊天模型，在 Developer 页面启动本地服务器（默认端口 1234）；使用相同的 EnglishTool 启动命令和地址；点击 **Book Reader → 本地 AI**，选择 **LM Studio → 检查连接 → 选择模型 → 使用此模型**。关闭自动解析选项后，可点击**在工具内解析**手动开始。
+
+本地服务器只监听本机地址，并只向所选本地服务转发模型列表和聊天请求，不需要修改 CORS 或网络共享设置。提示词发送给本地模型；浏览器仅保存服务选择、模型选择和自动解析偏好。已有 LM Studio 设置会自动迁移。若 LM Studio 启用了认证，请在服务器环境中设置 `LM_STUDIO_API_TOKEN`，令牌不会保存在浏览器中，也不会发送给 Ollama。直接打开 HTML、普通静态服务器和静态托管网站仍可使用 Claude 流程；自动本地解析需要上述本地服务器。关闭面板会取消请求；使用 Ollama 时，本地服务器也会停止模型当前的生成。
+
 ## Files
 
 - `index.html` — UI shell
@@ -104,6 +140,9 @@ This release supports curated Gutenberg TXT imports through the command above. P
 - `text-core.js` — pure text logic (word forms, coverage analysis, sentence splitting, dictation scoring, speech matching, role-play prompt); no DOM, shared with the tests
 - `app.js` — SRS engine, TTS, views, API calls
 - `reader.js` — Book Reader view and known-word actions
+- `paragraph-core.js` / `paragraph-reader.js` — bilingual passage prompts, response validation and analysis panel
+- `local-ai.js` / `local-ai-settings.js` — local AI transport, provider/model selection and automatic-analysis preferences
+- `scripts/serve-local-ai.py` — loopback-only app server and Ollama/LM Studio proxy
 - `books/catalog.json` / `catalog.js` — metadata-only bookshelf
 - `books/<book-id>/` — source, metadata, manifest, chapter files, direct-file fallback
 - `book-repository.js` — generic chapter loader, validation and session cache
@@ -117,4 +156,5 @@ This release supports curated Gutenberg TXT imports through the command above. P
 
 ```bash
 node --test
+python3 -m unittest discover -s tests -p 'test_local_ai_server.py'
 ```

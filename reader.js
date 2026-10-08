@@ -525,6 +525,7 @@ function openPhrasePanel(phrase, offset) {
 function closeReaderPanel() {
   panelLookupSeq++;
   document.getElementById('readerPanel').classList.add('hidden');
+  if (typeof closeParagraphAnalysis === 'function') closeParagraphAnalysis();
 }
 
 // ---------- Actions ----------
@@ -601,30 +602,52 @@ function handleReaderAction(btn) {
 
 // ---------- Phrase selection (mouse drag or touch long-press) ----------
 
-function selectedPhrase() {
+function selectedReadingText() {
   const sel = window.getSelection();
-  if (!sel || sel.isCollapsed || !reader) return null;
+  if (!sel || sel.isCollapsed || !sel.rangeCount || !reader) return null;
   const passage = document.getElementById('readerPassage');
-  if (!passage.contains(sel.anchorNode)) return null;
-  const phrase = sel.toString().replace(/\s+/g, ' ').replace(/^[^A-Za-z]+|[^A-Za-z]+$/g, '');
-  const wordCount = phrase ? phrase.split(' ').length : 0;
-  if (wordCount < 2 || wordCount > MAX_PHRASE_WORDS) return null;
-  const node = sel.anchorNode.nodeType === Node.ELEMENT_NODE ? sel.anchorNode : sel.anchorNode.parentElement;
-  const span = node && node.closest('.rw');
-  const offset = span ? reader.analysis.pieces[span.dataset.i].start : reader.text.indexOf(phrase);
-  return { phrase, offset };
+  const range = sel.getRangeAt(0);
+  if (!passage.contains(range.startContainer) || !passage.contains(range.endContainer)) return null;
+  const text = sel.toString().trim();
+  const count = (text.match(/[A-Za-z]+(?:['’][A-Za-z]+)*/g) || []).length;
+  if (count < 2) return null;
+  const prefix = document.createRange();
+  prefix.selectNodeContents(passage);
+  prefix.setEnd(range.startContainer, range.startOffset);
+  const offset = prefix.toString().length;
+  const isParagraph = count > MAX_PHRASE_WORDS || (count >= MIN_SENTENCE_WORDS && endsASentence(text));
+  return { text, offset, kind: isParagraph ? 'paragraph' : 'phrase' };
+}
+
+// "Aunt Em." or "Mrs. Rachel" are phrases; "Toto was not gray." is a sentence
+const MIN_SENTENCE_WORDS = 4;
+const TITLE_ABBREVIATION = /^(?:Mr|Mrs|Ms|Dr|St|Mt|Jr|Sr)\.$/i;
+function endsASentence(text) {
+  return text.split(/\s+/).some(token => /[.!?]["”’')]*$/.test(token)
+    && !TITLE_ABBREVIATION.test(token.replace(/^["“‘'(]+/, '')));
+}
+
+function selectedPhrase() {
+  const picked = selectedReadingText();
+  if (!picked || picked.kind !== 'phrase') return null;
+  return { phrase: picked.text.replace(/\s+/g, ' ').replace(/^[^A-Za-z]+|[^A-Za-z]+$/g, ''), offset: picked.offset };
 }
 
 function onSelectionChange() {
   clearTimeout(selectionTimer);
   selectionTimer = setTimeout(() => {
-    const picked = selectedPhrase();
-    if (picked) openPhrasePanel(picked.phrase, picked.offset);
+    if (document.getElementById('readerAnalysisDialog')?.open) return;
+    const picked = selectedReadingText();
+    if (picked?.kind === 'paragraph' && typeof openParagraphAnalysis === 'function') openParagraphAnalysis(picked.text);
+    else if (picked?.kind === 'phrase') {
+      const phrase = selectedPhrase();
+      openPhrasePanel(phrase.phrase, phrase.offset);
+    }
   }, SELECTION_DEBOUNCE_MS);
 }
 
 function onPassageClick(e) {
-  if (selectedPhrase()) return;   // a phrase selection is handled by onSelectionChange
+  if (selectedReadingText()) return;   // selections are handled by onSelectionChange
   const span = e.target.closest('.rw');
   if (span) openWordPanel(Number(span.dataset.i));
 }

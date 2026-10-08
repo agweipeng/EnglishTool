@@ -10,3 +10,6 @@ english-trainer-*.json
 # Editor
 .vscode/
 .idea/
+
+# Python local server and test caches
+__pycache__/
