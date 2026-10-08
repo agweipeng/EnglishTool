@@ -1,0 +1,35 @@
+{
+  "id": "railway-children",
+  "title": "The Railway Children",
+  "titleCN": "铁路少年",
+  "author": "E. Nesbit",
+  "published": 1906,
+  "language": "en",
+  "genre": "Family",
+  "readingStage": "Try next",
+  "readingOrder": 2,
+  "sectionType": "chapter",
+  "expectedSections": 14,
+  "sourceUrl": "https://www.gutenberg.org/ebooks/1874",
+  "license": "Project Gutenberg edition; retain the complete license in source.txt. Listed as public domain in the USA by the source.",
+  "recommendation": "Family life and conversations give you practical topics to retell and discuss.",
+  "parser": {
+    "headingPattern": "^Chapter ([IVXLCDM]+)\\. ([^\\n]+)\\n"
+  },
+  "sectionIds": [
+    "the-beginning-of-things",
+    "peter-s-coal-mine",
+    "the-old-gentleman",
+    "the-engine-burglar",
+    "prisoners-and-captives",
+    "saviours-of-the-train",
+    "for-valour",
+    "the-amateur-firemen",
+    "the-pride-of-perks",
+    "the-terrible-secret",
+    "the-hound-in-the-red-jersey",
+    "what-bobbie-brought-home",
+    "the-hound-s-grandfather",
+    "the-end"
+  ]
+}

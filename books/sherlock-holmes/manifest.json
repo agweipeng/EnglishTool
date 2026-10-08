@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "id": "sherlock-holmes",
+  "title": "The Adventures of Sherlock Holmes",
+  "titleCN": "福尔摩斯冒险史",
+  "author": "Arthur Conan Doyle",
+  "published": 1892,
+  "language": "en",
+  "genre": "Mystery",
+  "readingStage": "Later challenge",
+  "readingOrder": 5,
+  "sectionType": "story",
+  "sourceUrl": "https://www.gutenberg.org/ebooks/1661",
+  "license": "Project Gutenberg edition; retain the complete license in source.txt. Listed as public domain in the USA by the source.",
+  "recommendation": "Twelve separate mysteries: practise explaining events, clues, and your reasoning.",
+  "version": "eb4b76595195be7a",
+  "sourceFile": "books/sherlock-holmes/source.txt",
+  "sourceHash": "51bf912e17919195e50cfa25458a6660ef35e00a5f44598b221196285c2220a5",
+  "introduction": "",
+  "wordCount": 105143,
+  "chapters": [
+    {
+      "id": "a-scandal-in-bohemia",
+      "number": 1,
+      "title": "A Scandal in Bohemia",
+      "wordCount": 8602,
+      "version": "9447842934748f04",
+      "path": "books/sherlock-holmes/chapters/a-scandal-in-bohemia.json"
+    },
+    {
+      "id": "the-red-headed-league",
+      "number": 2,
+      "title": "The Red-Headed League",
+      "wordCount": 9194,
+      "version": "666c3e32b9802894",
+      "path": "books/sherlock-holmes/chapters/the-red-headed-league.json"
+    },
+    {
+      "id": "a-case-of-identity",
+      "number": 3,
+      "title": "A Case of Identity",
+      "wordCount": 7019,
+      "version": "9f900ef1cd0dfffe",
+      "path": "books/sherlock-holmes/chapters/a-case-of-identity.json"
+    },
+    {
+      "id": "the-boscombe-valley-mystery",
+      "number": 4,
+      "title": "The Boscombe Valley Mystery",
+      "wordCount": 9685,
+      "version": "b2b6d57be7c4bedf",
+      "path": "books/sherlock-holmes/chapters/the-boscombe-valley-mystery.json"
+    },
+    {
+      "id": "the-five-orange-pips",
+      "number": 5,
+      "title": "The Five Orange Pips",
+      "wordCount": 7368,
+      "version": "ee68ced1166e1926",
+      "path": "books/sherlock-holmes/chapters/the-five-orange-pips.json"
+    },
+    {
+      "id": "the-man-with-the-twisted-lip",
+      "number": 6,
+      "title": "The Man with the Twisted Lip",
+      "wordCount": 9278,
+      "version": "62ced02d6097b8fa",
+      "path": "books/sherlock-holmes/chapters/the-man-with-the-twisted-lip.json"
+    },
+    {
+      "id": "the-adventure-of-the-blue-carbuncle",
+      "number": 7,
+      "title": "The Adventure of the Blue Carbuncle",
+      "wordCount": 7878,
+      "version": "a5afb1dc80118e81",
+      "path": "books/sherlock-holmes/chapters/the-adventure-of-the-blue-carbuncle.json"
+    },
+    {
+      "id": "the-adventure-of-the-speckled-band",
+      "number": 8,
+      "title": "The Adventure of the Speckled Band",
+      "wordCount": 9882,
+      "version": "fd3c553b57276402",
+      "path": "books/sherlock-holmes/chapters/the-adventure-of-the-speckled-band.json"
+    },
+    {
+      "id": "the-adventure-of-the-engineer-s-thumb",
+      "number": 9,
+      "title": "The Adventure of the Engineer’s Thumb",
+      "wordCount": 8345,
+      "version": "2640f9dd4ad14692",
+      "path": "books/sherlock-holmes/chapters/the-adventure-of-the-engineer-s-thumb.json"
+    },
+    {
+      "id": "the-adventure-of-the-noble-bachelor",
+      "number": 10,
+      "title": "The Adventure of the Noble Bachelor",
+      "wordCount": 8171,
+      "version": "9761e92d2cb0210a",
+      "path": "books/sherlock-holmes/chapters/the-adventure-of-the-noble-bachelor.json"
+    },
+    {
+      "id": "the-adventure-of-the-beryl-coronet",
+      "number": 11,
+      "title": "The Adventure of the Beryl Coronet",
+      "wordCount": 9728,
+      "version": "6703a2a3d84aa8f0",
+      "path": "books/sherlock-holmes/chapters/the-adventure-of-the-beryl-coronet.json"
+    },
+    {
+      "id": "the-adventure-of-the-copper-beeches",
+      "number": 12,
+      "title": "The Adventure of the Copper Beeches",
+      "wordCount": 9993,
+      "version": "15c149aa89b29596",
+      "path": "books/sherlock-holmes/chapters/the-adventure-of-the-copper-beeches.json"
+    }
+  ]
+}

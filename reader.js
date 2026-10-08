@@ -12,7 +12,6 @@
 'use strict';
 
 const READER_STORAGE_KEY = 'englishTrainerReader_v1';   // per-device draft: { text, title }
-const READER_BOOKMARK_KEY = 'englishTrainerBookmarks_v1'; // bundled book positions, per device
 const MAX_READER_CHARS = 200000;
 const MAX_PHRASE_WORDS = 8;
 const MAX_HEADWORD_LOOKUPS = 4;     // dictionary attempts per word (walked → walk …)
@@ -28,35 +27,48 @@ let readerChapterIndex = 0;
 let readerBookmarkTimer = null;
 let restoringReaderBookmark = false;
 
-function readerBooks() { return window.BookLibrary || []; }
+const readerProgress = ReaderProgress.createStore(localStorage);
+let activeReaderBook = null;
+let activeReaderChapter = null;
+let readerOpenSequence = 0;
+let readerLoading = false;
+let readerFailedRequest = null;
+
+function readerBooks() { return window.BookRepository.listBooks(); }
 function readerBookById(id) { return readerBooks().find(book => book.id === id); }
-
-function loadBookBookmarks() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(READER_BOOKMARK_KEY));
-    return saved && typeof saved === 'object' && !Array.isArray(saved) ? saved : {};
-  } catch { return {}; }
+function availableReaderBookId(preferred) {
+  return readerBookById(preferred)?.id || readerBookById(window.BookCatalog.recommendedBookId)?.id || readerBooks()[0]?.id || '';
 }
-
-function bookBookmark(book) {
-  const saved = loadBookBookmarks()[book.id] || {};
-  const chapterIndex = Number.isInteger(saved.chapterIndex)
-    ? Math.max(0, Math.min(book.chapters.length - 1, saved.chapterIndex)) : 0;
-  const scrollRatio = Number.isFinite(saved.scrollRatio)
-    ? Math.max(0, Math.min(1, saved.scrollRatio)) : 0;
-  return { chapterIndex, scrollRatio };
+function readerViewActive() {
+  return document.getElementById('view-reader').classList.contains('active');
 }
-
-function writeBookBookmark(bookId, chapterIndex, scrollRatio) {
+// The book link stays in the address only while the Reader tab is open, so reloading
+// on another tab stays on that tab.
+function updateReaderURL(bookId) {
+  if (!window.history?.replaceState || !location.href) return;
   try {
-    const bookmarks = loadBookBookmarks();
-    bookmarks[bookId] = { chapterIndex, scrollRatio, updatedAt: new Date().toISOString() };
-    localStorage.setItem(READER_BOOKMARK_KEY, JSON.stringify(bookmarks));
-    return true;
-  } catch (e) {
-    console.warn('Book bookmark not saved', e);
-    return false;
-  }
+    const url = new URL(location.href);
+    if (bookId && readerViewActive()) url.searchParams.set('book', bookId);
+    else url.searchParams.delete('book');
+    window.history.replaceState(window.history.state, '', url.href);
+  } catch (error) { console.warn('Could not update the reader URL', error); }
+}
+// Called on every tab change. On the Reader tab with no book open yet, the address
+// is left alone: renderReader may still be opening the book it names.
+function syncReaderURL() {
+  if (!readerViewActive()) updateReaderURL('');
+  else if (readerBookId) updateReaderURL(readerBookId);
+}
+function loadBookBookmarks() { return readerProgress.bookmarks(); }
+function bookBookmark(book) { return readerProgress.get(book); }
+
+function writeBookBookmark(bookId, chapterIndex, scrollRatio, anchor = {}) {
+  const chapter = activeReaderBook?.id === bookId ? activeReaderBook.chapters[chapterIndex] : null;
+  return readerProgress.write(bookId, {
+    characterOffset: anchor.characterOffset, anchor: anchor.anchor,
+    chapterId: chapter?.id || '', chapterIndex, scrollRatio,
+    chapterVersion: chapter?.version || '', updatedAt: new Date().toISOString(),
+  });
 }
 
 function readerScrollGeometry() {
@@ -67,87 +79,170 @@ function readerScrollGeometry() {
   return { top, rect, distance };
 }
 
+function visibleReaderAnchor(top) {
+  const spans = document.querySelectorAll('#readerPassage .rw');
+  let low = 0, high = spans.length;
+  while (low < high) {
+    const middle = Math.floor((low + high) / 2);
+    if (spans[middle].getBoundingClientRect().bottom <= top) low = middle + 1;
+    else high = middle;
+  }
+  const piece = spans[low] && reader.analysis.pieces[spans[low].dataset.i];
+  return piece ? { characterOffset: piece.start, anchor: reader.text.slice(piece.start, piece.start + 80) } : {};
+}
+
 function saveBookPosition() {
-  if (!readerBookId || !reader || restoringReaderBookmark
+  if (!readerBookId || !reader || restoringReaderBookmark || readerLoading
     || !document.getElementById('view-reader').classList.contains('active')) return;
   const { top, rect, distance } = readerScrollGeometry();
-  // Only record while reading inside the chapter text. Above it sit the bookshelf,
-  // chapter list and paste box — looking at those must not reset the bookmark.
+  // Browsing controls above the passage must not reset a reading bookmark.
   if (rect.top > top) return;
   const ratio = distance ? Math.max(0, Math.min(1, (top - rect.top) / distance)) : 0;
-  const saved = writeBookBookmark(readerBookId, readerChapterIndex, ratio);
-  updateBookProgress(saved);
+  updateBookProgress(writeBookBookmark(readerBookId, readerChapterIndex, ratio, visibleReaderAnchor(top)));
 }
 
 function updateBookProgress(saved = true) {
-  const book = readerBookById(readerBookId);
-  if (!book) return;
+  const book = activeReaderBook;
+  if (!book || !readerBookId) return;
   const chapter = book.chapters[readerChapterIndex];
-  const words = chapter.text.match(/[A-Za-z]+(?:['’][A-Za-z]+)*/g)?.length || 0;
+  const label = book.sectionType === 'story' ? 'Story' : 'Chapter';
   const progress = document.getElementById('readerBookProgress');
-  const text =
-    `Chapter ${chapter.number} of ${book.chapters.length} · ${words.toLocaleString()} words · `
+  const text = `${label} ${readerChapterIndex + 1} of ${book.chapters.length} · ${chapter.wordCount.toLocaleString()} words · `
     + (saved ? 'Bookmark saved in this browser' : 'Bookmark could not be saved in this browser');
   if (progress.textContent !== text) progress.textContent = text;
 }
 
+function renderBookshelf() {
+  const bookmarks = loadBookBookmarks();
+  document.getElementById('readerShelf').innerHTML = readerBooks().map(book => {
+    const saved = bookmarks[book.id];
+    const section = book.sectionType === 'story' ? 'stories' : 'chapters';
+    const position = saved ? 'Resume reading' : 'Start reading';
+    return `<article class="reader-shelf-card"><b>${escapeHTML(book.title)}</b>
+      <span>${escapeHTML(book.titleCN)} · ${escapeHTML(book.author)}</span>
+      <span class="hint">${escapeHTML(book.readingStage)} · ${escapeHTML(book.genre)} · ${book.sectionCount} ${section}</span>
+      <p class="hint">${escapeHTML(book.recommendation)}</p>
+      <button class="btn-ghost" data-book-id="${escapeHTML(book.id)}">${position} →</button></article>`;
+  }).join('');
+}
+
+function setReaderLoading(loading) {
+  readerLoading = loading;
+  document.getElementById('readerPassage').setAttribute('aria-busy', String(loading));
+  ['readerPrevChapter', 'readerNextChapter', 'readerNextChapterEnd', 'readerChapter'].forEach(id => {
+    document.getElementById(id).disabled = loading;
+  });
+  if (!loading) renderBookControls();
+}
+
 function renderBookControls() {
-  const book = readerBookById(readerBookId);
+  const book = readerBookId ? activeReaderBook : null;
   const controls = document.getElementById('readerBookControls');
   const heading = document.getElementById('readerChapterHeading');
   controls.classList.toggle('hidden', !book);
   heading.classList.toggle('hidden', !book);
   document.getElementById('readerChapterEnd').classList.toggle('hidden', !book);
   document.getElementById('readerBook').value = book?.id || '';
-  document.getElementById('readerResumeBtn').textContent = book ? '📖 Resume reading' : '📖 Read recommended book';
+  const last = readerBookById(readerProgress.lastBook().id)?.id;
+  document.getElementById('readerResumeBtn').textContent = last ? '📖 Resume last book' : '📖 Read recommended book';
   if (!book) return;
+  const label = book.sectionType === 'story' ? 'Story' : 'Chapter';
   document.getElementById('readerBookAdvice').textContent = `${book.title} (${book.titleCN}) — ${book.author}. ${book.recommendation}`;
+  document.getElementById('readerChapterLabel').textContent = label;
   const chapterSelect = document.getElementById('readerChapter');
-  chapterSelect.innerHTML = book.chapters.map((chapter, index) =>
-    `<option value="${index}">${chapter.number}. ${escapeHTML(chapter.title)}</option>`).join('');
-  chapterSelect.value = String(readerChapterIndex);
-  heading.textContent = `Chapter ${book.chapters[readerChapterIndex].number}: ${book.chapters[readerChapterIndex].title}`;
-  document.getElementById('readerPrevChapter').disabled = readerChapterIndex === 0;
-  document.getElementById('readerNextChapter').disabled = readerChapterIndex === book.chapters.length - 1;
+  chapterSelect.innerHTML = book.chapters.map(chapter =>
+    `<option value="${escapeHTML(chapter.id)}">${chapter.number}. ${escapeHTML(chapter.title)}</option>`).join('');
+  chapterSelect.value = book.chapters[readerChapterIndex].id;
+  heading.textContent = `${label} ${readerChapterIndex + 1}: ${book.chapters[readerChapterIndex].title}`;
+  document.getElementById('readerPrevChapter').disabled = readerLoading || readerChapterIndex === 0;
+  document.getElementById('readerNextChapter').disabled = readerLoading || readerChapterIndex === book.chapters.length - 1;
+  chapterSelect.disabled = readerLoading;
   const next = book.chapters[readerChapterIndex + 1];
   const endBtn = document.getElementById('readerNextChapterEnd');
-  endBtn.disabled = !next;
-  endBtn.textContent = next ? `Next: Chapter ${next.number} — ${next.title} →` : '🎉 You finished the book!';
+  endBtn.disabled = readerLoading || !next;
+  endBtn.textContent = next ? `Next: ${label} ${readerChapterIndex + 2} — ${next.title} →` : '🎉 You finished the book!';
   document.getElementById('readerBookIntro').textContent = book.introduction;
+  document.getElementById('readerBookIntroDetails').classList.toggle('hidden', !book.introduction);
   document.getElementById('readerBookSource').href = book.sourceUrl;
   document.getElementById('readerBookFullText').href = book.sourceFile;
 }
 
-function openBookChapter(bookId, chapterIndex, restore = false) {
-  const book = readerBookById(bookId);
-  if (!book) { toast('This book is not in the bookshelf'); return; }
-  // Preserve the previous location before changing the chapter or book.
+function restoreReadingPosition(bookmark, ratio) {
+  const { top, rect, distance } = readerScrollGeometry();
+  let offset = bookmark.characterOffset;
+  if (bookmark.chapterVersion !== activeReaderChapter.version) {
+    offset = bookmark.anchor ? reader.text.indexOf(bookmark.anchor) : -1;
+  }
+  if (Number.isInteger(offset) && offset >= 0) {
+    const span = [...document.querySelectorAll('#readerPassage .rw')]
+      .find(span => reader.analysis.pieces[span.dataset.i].start >= offset);
+    if (span) { window.scrollTo({ top: window.scrollY + span.getBoundingClientRect().top - top }); return; }
+  }
+  window.scrollTo({ top: ratio > 0 ? window.scrollY + rect.top - top + ratio * distance : 0 });
+}
+
+async function openBookChapter(bookId, chapterIdOrIndex, restore = false) {
+  if (!readerBookById(bookId)) { toast('This book is not in the bookshelf'); return; }
   clearTimeout(readerBookmarkTimer);
   saveBookPosition();
-  const bookmark = bookBookmark(book);
-  const index = chapterIndex === undefined ? bookmark.chapterIndex : chapterIndex;
-  if (!Number.isInteger(index) || index < 0 || index >= book.chapters.length) return;
-  const ratio = restore && index === bookmark.chapterIndex ? bookmark.scrollRatio : 0;
-  readerBookId = book.id;
-  readerChapterIndex = index;
-  restoringReaderBookmark = true;
-  document.getElementById('readerInput').value = book.chapters[index].text;
-  document.getElementById('readerTitle').value = book.title;
-  document.getElementById('readerPaste').open = false;
-  analyzeReaderText();
-  renderBookControls();
-  updateBookProgress(writeBookBookmark(book.id, index, ratio));
-  requestAnimationFrame(() => {
-    try {
-      const { top, rect, distance } = readerScrollGeometry();
-      // Default scroll behaviour jumps instantly (the stylesheet sets no smooth scrolling)
-      window.scrollTo({ top: ratio > 0 ? window.scrollY + rect.top - top + ratio * distance : 0 });
-    } catch (e) {
-      console.warn('Could not restore the reading position', e);
-    } finally {
-      restoringReaderBookmark = false;   // never leave bookmark saving switched off
+  const sequence = ++readerOpenSequence;
+  closeReaderPanel();
+  setReaderLoading(true);
+  document.getElementById('readerBook').value = bookId;
+  const status = document.getElementById('readerLoadStatus');
+  status.textContent = 'Loading your chapter…';
+  document.getElementById('readerRetryBtn').classList.add('hidden');
+  try {
+    const book = await window.BookRepository.getBook(bookId);
+    if (sequence !== readerOpenSequence) return;
+    const bookmark = bookBookmark(book);
+    const index = chapterIdOrIndex === undefined ? bookmark.chapterIndex :
+      typeof chapterIdOrIndex === 'string' ? book.chapters.findIndex(c => c.id === chapterIdOrIndex) : chapterIdOrIndex;
+    if (!Number.isInteger(index) || index < 0 || index >= book.chapters.length) throw new Error('This chapter is not in the book');
+    const chapter = await window.BookRepository.getChapter(bookId, book.chapters[index].id);
+    if (sequence !== readerOpenSequence) return;
+    const shouldRestore = restore && chapter.id === bookmark.chapterId;
+    const ratio = shouldRestore ? bookmark.scrollRatio : 0;
+    readerBookId = book.id;
+    readerChapterIndex = index;
+    activeReaderBook = book;
+    activeReaderChapter = chapter;
+    restoringReaderBookmark = true;
+    document.getElementById('readerInput').value = chapter.text;
+    document.getElementById('readerTitle').value = book.title;
+    document.getElementById('readerPaste').open = false;
+    analyzeReaderText(true);
+    readerProgress.remember(book.id);
+    updateReaderURL(book.id);
+    setReaderLoading(false);
+    const restoredAnchor = shouldRestore ? { ...bookmark } : {};
+    if (shouldRestore && bookmark.chapterVersion !== chapter.version) {
+      const offset = bookmark.anchor ? chapter.text.indexOf(bookmark.anchor) : -1;
+      restoredAnchor.characterOffset = offset < 0 ? null : offset;
     }
-  });
+    updateBookProgress(writeBookBookmark(book.id, index, ratio, restoredAnchor));
+    renderBookshelf();
+    status.textContent = '';
+    readerFailedRequest = null;
+    requestAnimationFrame(() => {
+      if (sequence !== readerOpenSequence) return;
+      try {
+        if (document.getElementById('view-reader').classList.contains('active')) {
+          restoreReadingPosition(shouldRestore ? bookmark : {}, ratio);
+        }
+      }
+      catch (error) { console.warn('Could not restore the reading position', error); }
+      finally { restoringReaderBookmark = false; }
+    });
+  } catch (error) {
+    if (sequence !== readerOpenSequence) return;
+    restoringReaderBookmark = false;
+    setReaderLoading(false);
+    readerFailedRequest = { bookId, chapterIdOrIndex, restore };
+    status.textContent = 'Could not load this chapter. Check the local book files and try again.';
+    document.getElementById('readerRetryBtn').classList.remove('hidden');
+    console.warn('Book loading failed', error);
+  }
 }
 
 // ---------- Draft persistence (per device, never synced) ----------
@@ -162,7 +257,9 @@ function loadReaderDraft() {
 
 function saveReaderDraft(text, title) {
   try {
-    localStorage.setItem(READER_STORAGE_KEY, JSON.stringify({ text, title, bookId: readerBookId, chapterIndex: readerChapterIndex }));
+    localStorage.setItem(READER_STORAGE_KEY, JSON.stringify(readerBookId
+      ? { bookId: readerBookId, chapterId: activeReaderChapter.id, chapterIndex: readerChapterIndex }
+      : { text, title }));
   } catch (e) {
     console.warn('Reader draft not saved', e);
   }
@@ -174,29 +271,39 @@ function analyzeWithVocabulary(text) {
   return TextCore.analyzeText(text, { known: knownWordSet(), learning: learningWordSet() });
 }
 
-function renderReader() {
+async function renderReader() {
+  renderBookshelf();
   const input = document.getElementById('readerInput');
-  if (!input.value) {
+  if (!input.value && !readerLoading) {
     const draft = loadReaderDraft();
-    const book = readerBookById(draft.bookId);
-    if (book && Number.isInteger(draft.chapterIndex)
-      && book.chapters[draft.chapterIndex]?.text === draft.text) {
-      openBookChapter(book.id, draft.chapterIndex, true);
-      return;
-    }
-    input.value = draft.text || '';
-    document.getElementById('readerTitle').value = draft.title || '';
-    document.getElementById('readerPaste').open = !!draft.text;
-    if (!input.value && readerBooks().length) {
-      openBookChapter(readerBooks()[0].id, undefined, true);
+    const queryBook = readerBookById(new URLSearchParams(location.search).get('book'))?.id;
+    const bookId = queryBook || readerBookById(draft.bookId)?.id
+      || availableReaderBookId(readerProgress.lastBook().id);
+    if (!queryBook && !draft.bookId && draft.text) {
+      input.value = draft.text;
+      document.getElementById('readerTitle').value = draft.title || '';
+      document.getElementById('readerPaste').open = true;
+    } else if (bookId) {
+      const legacyIndex = draft.bookId === bookId && !loadBookBookmarks()[bookId]
+        && Number.isInteger(draft.chapterIndex)
+        ? Math.max(0, Math.min(readerBookById(bookId).sectionCount - 1, draft.chapterIndex)) : undefined;
+      await openBookChapter(bookId, legacyIndex, true);
       return;
     }
   }
-  if (reader && reader.text === input.value) refreshReaderStatuses();   // keeps an open panel
-  else if (input.value.trim()) analyzeReaderText();
+  if (reader && reader.text === input.value) refreshReaderStatuses();
+  else if (input.value.trim() && !readerLoading) analyzeReaderText();
 }
 
-function analyzeReaderText() {
+function analyzeReaderText(fromBook = false) {
+  if (fromBook !== true) {
+    ++readerOpenSequence;
+    restoringReaderBookmark = false;
+    setReaderLoading(false);
+    document.getElementById('readerLoadStatus').textContent = '';
+    document.getElementById('readerRetryBtn').classList.add('hidden');
+    readerFailedRequest = null;
+  }
   const text = document.getElementById('readerInput').value;
   const title = document.getElementById('readerTitle').value.trim();
   if (!text.trim()) { toast('Paste a chapter or page first'); return; }
@@ -204,12 +311,13 @@ function analyzeReaderText() {
     toast(`Too long — paste up to ${MAX_READER_CHARS.toLocaleString()} characters at a time`, 3000);
     return;
   }
-  const book = readerBookById(readerBookId);
-  if (book && book.chapters[readerChapterIndex]?.text !== text) {
+  const book = activeReaderBook;
+  if (readerBookId && book && activeReaderChapter?.text !== text) {
     saveBookPosition();
     readerBookId = '';
     renderBookControls();
   }
+  if (!readerBookId) updateReaderURL('');
   saveReaderDraft(text, title);
   reader = { text, title, analysis: analyzeWithVocabulary(text) };
   renderReaderPassage();
@@ -437,6 +545,8 @@ async function resolveHeadword(surface) {
 }
 
 async function learnFromReader(surface, sentence, btn) {
+  const sourceTitle = reader?.title;
+  const sourceReader = reader;
   if (btn) btn.disabled = true;
   toast(`Looking up "${surface}"…`);
   try {
@@ -444,7 +554,7 @@ async function learnFromReader(surface, sentence, btn) {
     if (findWordByText(text)) { toast(`"${text}" is already in your library`); return; }
     const fields = await lookupWordFields(text, dict);
     const bookExample = sentence ? [{ en: sentence, cn: await translateToCN(sentence) }] : [];
-    const tags = reader && reader.title ? [reader.title] : [];
+    const tags = sourceTitle ? [sourceTitle] : [];
     // Re-check: the same word may have been added while the lookups were running
     if (findWordByText(text)) { toast(`"${text}" is already in your library`); return; }
     state.words.push(newWordEntry({
@@ -457,7 +567,7 @@ async function learnFromReader(surface, sentence, btn) {
     toast(fields.defEN || fields.defCN
       ? `✓ Added "${text}" with the book's sentence`
       : `Added "${text}", but the dictionary lookup failed — add its meaning in the Library`, 3500);
-    closeReaderPanel();
+    if (reader === sourceReader) closeReaderPanel();
     refreshReaderStatuses();
   } catch (e) {
     console.warn('Reader add failed', e);
@@ -521,7 +631,13 @@ function onPassageClick(e) {
 
 function clearReader() {
   saveBookPosition();
+  ++readerOpenSequence;
+  restoringReaderBookmark = false;
+  setReaderLoading(false);
+  document.getElementById('readerLoadStatus').textContent = '';
+  document.getElementById('readerRetryBtn').classList.add('hidden');
   readerBookId = '';
+  updateReaderURL('');
   renderBookControls();
   document.getElementById('readerPaste').open = true;
   document.getElementById('readerInput').value = '';
@@ -535,7 +651,47 @@ function clearReader() {
   reader = null;
 }
 
+// Discard stale bundled text after a backup merge, without saving it over the
+// imported bookmark. Keep personal pasted text and cancel older asynchronous loads.
+function onReaderProgressImported() {
+  const bundled = readerBookId || loadReaderDraft().bookId;
+  clearTimeout(readerBookmarkTimer);
+  ++readerOpenSequence;
+  restoringReaderBookmark = false;
+  readerFailedRequest = null;
+  if (bundled) {
+    readerBookId = '';
+    activeReaderBook = null;
+    activeReaderChapter = null;
+    reader = null;
+    document.getElementById('readerInput').value = '';
+    document.getElementById('readerTitle').value = '';
+    document.getElementById('readerPassage').innerHTML = '';
+    document.getElementById('readerPassage').classList.add('hidden');
+    document.getElementById('readerStats').innerHTML = '';
+    document.getElementById('readerUnknown').innerHTML = '';
+    saveReaderDraft('', '');
+    updateReaderURL(availableReaderBookId(readerProgress.lastBook().id));
+  }
+  setReaderLoading(false);
+  document.getElementById('readerLoadStatus').textContent = '';
+  document.getElementById('readerRetryBtn').classList.add('hidden');
+  closeReaderPanel();
+  renderBookshelf();
+}
+
 function initReader() {
+  renderBookshelf();
+  document.getElementById('readerShelf').addEventListener('click', e => {
+    const button = e.target.closest('[data-book-id]');
+    if (button) openBookChapter(button.dataset.bookId, undefined, true);
+  });
+  document.getElementById('readerRetryBtn').addEventListener('click', () => {
+    if (readerFailedRequest) {
+      const { bookId, chapterIdOrIndex, restore } = readerFailedRequest;
+      openBookChapter(bookId, chapterIdOrIndex, restore);
+    }
+  });
   const bookSelect = document.getElementById('readerBook');
   bookSelect.innerHTML += readerBooks().map(book =>
     `<option value="${escapeHTML(book.id)}">${escapeHTML(book.title)} (${escapeHTML(book.titleCN)})</option>`).join('');
@@ -543,10 +699,10 @@ function initReader() {
     if (bookSelect.value) openBookChapter(bookSelect.value, undefined, true);
   });
   document.getElementById('readerResumeBtn').addEventListener('click', () => {
-    const id = readerBookId || readerBooks()[0]?.id;
-    if (id) openBookChapter(id, undefined, true);
+    const id = availableReaderBookId(readerProgress.lastBook().id);
+    if (id) return openBookChapter(id, undefined, true);
   });
-  document.getElementById('readerChapter').addEventListener('change', e => openBookChapter(readerBookId, Number(e.target.value)));
+  document.getElementById('readerChapter').addEventListener('change', e => openBookChapter(readerBookId, e.target.value));
   document.getElementById('readerPrevChapter').addEventListener('click', () => openBookChapter(readerBookId, readerChapterIndex - 1));
   document.getElementById('readerNextChapter').addEventListener('click', () => openBookChapter(readerBookId, readerChapterIndex + 1));
   document.getElementById('readerNextChapterEnd').addEventListener('click', () => openBookChapter(readerBookId, readerChapterIndex + 1));
@@ -573,7 +729,7 @@ function initReader() {
   if (readerBookById(bookId)) {
     // Route after app.js has finished its normal initialization.
     showView('reader');
-    if (readerBookId !== bookId) openBookChapter(bookId, undefined, true);
+    // renderReader handles the requested book without launching a second load.
   }
 }
 

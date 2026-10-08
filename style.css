@@ -607,3 +607,11 @@ textarea { resize: vertical; min-height: 50px; }
   .reader-passage { padding: 16px; font-size: 17px; }
   .roleplay-controls { grid-template-columns: 1fr; }
 }
+
+/* A metadata-only shelf; chapter text is loaded after selection. */
+.reader-shelf { margin: 12px 0; }
+.reader-shelf summary { cursor: pointer; }
+.reader-shelf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 12px; margin-top: 12px; }
+.reader-shelf-card { display: flex; flex-direction: column; gap: 6px; border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+.reader-shelf-card button { margin-top: auto; align-self: flex-start; }
+#readerLoadStatus:empty { display: none; }

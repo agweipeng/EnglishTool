@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "id": "railway-children",
+  "title": "The Railway Children",
+  "titleCN": "铁路少年",
+  "author": "E. Nesbit",
+  "published": 1906,
+  "language": "en",
+  "genre": "Family",
+  "readingStage": "Try next",
+  "readingOrder": 2,
+  "sectionType": "chapter",
+  "sourceUrl": "https://www.gutenberg.org/ebooks/1874",
+  "license": "Project Gutenberg edition; retain the complete license in source.txt. Listed as public domain in the USA by the source.",
+  "recommendation": "Family life and conversations give you practical topics to retell and discuss.",
+  "version": "55a8201d75e5d76a",
+  "sourceFile": "books/railway-children/source.txt",
+  "sourceHash": "d1f3a0bb583641c9d2e2ceffdc98b4f778708f800f0751ec52455b438149f452",
+  "introduction": "",
+  "wordCount": 60017,
+  "chapters": [
+    {
+      "id": "the-beginning-of-things",
+      "number": 1,
+      "title": "The Beginning of Things",
+      "wordCount": 4147,
+      "version": "33313f0a62e59926",
+      "path": "books/railway-children/chapters/the-beginning-of-things.json"
+    },
+    {
+      "id": "peter-s-coal-mine",
+      "number": 2,
+      "title": "Peter's Coal-Mine",
+      "wordCount": 5213,
+      "version": "badcb4a749153d96",
+      "path": "books/railway-children/chapters/peter-s-coal-mine.json"
+    },
+    {
+      "id": "the-old-gentleman",
+      "number": 3,
+      "title": "The Old Gentleman",
+      "wordCount": 4652,
+      "version": "42684f58dcbea9d7",
+      "path": "books/railway-children/chapters/the-old-gentleman.json"
+    },
+    {
+      "id": "the-engine-burglar",
+      "number": 4,
+      "title": "The Engine-Burglar",
+      "wordCount": 5166,
+      "version": "4f8bd0d86dba6d36",
+      "path": "books/railway-children/chapters/the-engine-burglar.json"
+    },
+    {
+      "id": "prisoners-and-captives",
+      "number": 5,
+      "title": "Prisoners and Captives",
+      "wordCount": 3650,
+      "version": "1b515e8292a2b9d7",
+      "path": "books/railway-children/chapters/prisoners-and-captives.json"
+    },
+    {
+      "id": "saviours-of-the-train",
+      "number": 6,
+      "title": "Saviours of the Train",
+      "wordCount": 3851,
+      "version": "be98a5820da1a65f",
+      "path": "books/railway-children/chapters/saviours-of-the-train.json"
+    },
+    {
+      "id": "for-valour",
+      "number": 7,
+      "title": "For Valour",
+      "wordCount": 4546,
+      "version": "38acc4e7c0824bf6",
+      "path": "books/railway-children/chapters/for-valour.json"
+    },
+    {
+      "id": "the-amateur-firemen",
+      "number": 8,
+      "title": "The Amateur Firemen",
+      "wordCount": 3993,
+      "version": "d6740a6ad1db4f3a",
+      "path": "books/railway-children/chapters/the-amateur-firemen.json"
+    },
+    {
+      "id": "the-pride-of-perks",
+      "number": 9,
+      "title": "The Pride of Perks",
+      "wordCount": 4397,
+      "version": "6e17089ee42fe491",
+      "path": "books/railway-children/chapters/the-pride-of-perks.json"
+    },
+    {
+      "id": "the-terrible-secret",
+      "number": 10,
+      "title": "The Terrible Secret",
+      "wordCount": 3801,
+      "version": "6e16418023db9138",
+      "path": "books/railway-children/chapters/the-terrible-secret.json"
+    },
+    {
+      "id": "the-hound-in-the-red-jersey",
+      "number": 11,
+      "title": "The Hound in the Red Jersey",
+      "wordCount": 4910,
+      "version": "ed179b01b855e0d1",
+      "path": "books/railway-children/chapters/the-hound-in-the-red-jersey.json"
+    },
+    {
+      "id": "what-bobbie-brought-home",
+      "number": 12,
+      "title": "What Bobbie Brought Home",
+      "wordCount": 3750,
+      "version": "1e6e144d71a700d7",
+      "path": "books/railway-children/chapters/what-bobbie-brought-home.json"
+    },
+    {
+      "id": "the-hound-s-grandfather",
+      "number": 13,
+      "title": "The Hound's Grandfather",
+      "wordCount": 4200,
+      "version": "1f24d3ee12a7deea",
+      "path": "books/railway-children/chapters/the-hound-s-grandfather.json"
+    },
+    {
+      "id": "the-end",
+      "number": 14,
+      "title": "The End",
+      "wordCount": 3741,
+      "version": "995ba93f3d345ce3",
+      "path": "books/railway-children/chapters/the-end.json"
+    }
+  ]
+}

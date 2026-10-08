@@ -232,16 +232,19 @@
         <button class="btn-primary" id="readerResumeBtn">📖 Read recommended book</button>
       </div>
       <p id="readerBookAdvice" class="hint">Recommended: The Wonderful Wizard of Oz (绿野仙踪) by L. Frank Baum. A concrete adventure to read and retell.</p>
+      <details class="reader-shelf"><summary>Browse books · 浏览书库</summary><div id="readerShelf" class="reader-shelf-grid"></div></details>
+      <p id="readerLoadStatus" class="hint" role="status" aria-live="polite"></p>
+      <button id="readerRetryBtn" class="btn-ghost hidden">Try again</button>
       <div id="readerBookControls" class="hidden">
         <div class="reader-chapter-nav">
           <button class="btn-ghost" id="readerPrevChapter">← Previous</button>
-          <label class="sr-only" for="readerChapter">Chapter</label>
+          <label id="readerChapterLabel" class="sr-only" for="readerChapter">Chapter</label>
           <select id="readerChapter"></select>
           <button class="btn-ghost" id="readerNextChapter">Next →</button>
         </div>
         <p id="readerBookProgress" class="hint" aria-live="polite"></p>
         <p class="hint">Read for the story. Afterward, retell what happened in your own words for 90 seconds.</p>
-        <details class="reader-book-intro"><summary>Author’s introduction</summary><div id="readerBookIntro"></div></details>
+        <details id="readerBookIntroDetails" class="reader-book-intro"><summary>Author’s introduction</summary><div id="readerBookIntro"></div></details>
         <p class="hint"><a id="readerBookSource" target="_blank" rel="noopener">Book source</a> · <a id="readerBookFullText" target="_blank" rel="noopener">Original text &amp; license</a></p>
       </div>
     </div>
@@ -264,7 +267,7 @@
       <div id="readerUnknown" class="reader-unknown"></div>
     </div>
     <div id="readerChapterEnd" class="reader-chapter-end hidden">
-      <p class="hint">Finished the chapter? Retell what happened in your own words for 90 seconds, then carry on.</p>
+      <p class="hint">Pause and speak for 90 seconds: What happened? Why did a character act that way? What would you do next? Then continue reading.</p>
       <button class="btn-primary" id="readerNextChapterEnd">Next chapter →</button>
     </div>
     <div id="readerPanel" class="reader-panel hidden"></div>
@@ -479,8 +482,10 @@
 <div id="toast" class="toast hidden"></div>
 
 <script src="text-core.js"></script>
+<script src="reader-progress.js"></script>
 <script src="app.js"></script>
-<script src="books/library.js"></script>
+<script src="books/catalog.js"></script>
+<script src="book-repository.js"></script>
 <script src="reader.js"></script>
 <script src="practice-modes.js"></script>
 </body>
