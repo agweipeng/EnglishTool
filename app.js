@@ -1737,6 +1737,23 @@ function deleteCurrentJournal() {
 let recognition = null;
 let readAloudTargetText = '';
 
+// Plain-language explanations for SpeechRecognition error codes
+const SPEECH_ERROR_MESSAGES = {
+  'not-allowed': 'Microphone access is blocked. Allow the microphone for this site in your browser settings (iPhone: Settings → Apps → Safari → Microphone), then try again.',
+  'service-not-allowed': 'Speech recognition is turned off. On iPhone/iPad, turn on Settings → General → Keyboard → Enable Dictation, then try again.',
+  'network': 'The speech-recognition service could not be reached. Chrome sends your audio to Google — if Google is blocked on your network, try Safari or Edge.',
+  'audio-capture': 'No microphone was found. Check that one is connected and not in use by another app.',
+  'language-not-supported': 'English speech recognition is not available in this browser.',
+  'unsupported': 'Speech recognition is not supported in this browser. Try Chrome, Edge, or Safari on iOS 14.5+.',
+};
+
+function speechErrorMessage(code) {
+  return SPEECH_ERROR_MESSAGES[code] || `Speech recognition failed (${code || 'unknown error'}). Please try again.`;
+}
+
+// Errors that just mean "nothing was heard" or "stopped" — not worth a warning
+const BENIGN_SPEECH_ERRORS = new Set(['no-speech', 'aborted']);
+
 function openReadAloud(target) {
   readAloudTargetText = (target || '').trim();
   document.getElementById('readAloudTarget').textContent = readAloudTargetText;
@@ -1751,39 +1768,56 @@ function closeReadAloud() {
   stopReadAloud();
 }
 
+function showReadAloudWarning(code) {
+  document.getElementById('readAloudResult').innerHTML =
+    `<p class="hint">⚠️ ${escapeHTML(speechErrorMessage(code))}</p>`;
+}
+
 function startReadAloud() {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) {
-    document.getElementById('readAloudResult').innerHTML =
-      `<p class="hint">⚠️ Speech recognition isn't supported in this browser. Try Chrome on Mac or Safari on iOS 14.5+.</p>`;
-    return;
-  }
+  if (!SR) { showReadAloudWarning('unsupported'); return; }
   const micBtn = document.getElementById('readAloudMicBtn');
   if (recognition) { stopReadAloud(); return; }
-  recognition = new SR();
-  recognition.lang = 'en-US';
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
-  let finalSaid = '';
-  recognition.onresult = (e) => {
-    for (let i = e.resultIndex; i < e.results.length; i++) {
-      if (e.results[i].isFinal) finalSaid += e.results[i][0].transcript + ' ';
-    }
-  };
-  recognition.onerror = (e) => {
-    document.getElementById('readAloudResult').innerHTML =
-      `<p class="hint">Mic error: ${escapeHTML(e.error || 'unknown')}</p>`;
-    stopReadAloud();
-  };
-  recognition.onend = () => {
+  const resultEl = document.getElementById('readAloudResult');
+  const resetButton = () => {
     recognition = null;
     micBtn.classList.remove('recording');
     micBtn.textContent = '🎙️ Start';
-    showReadAloudResult(finalSaid.trim());
   };
+  speechSynthesis.cancel();   // don't let the reference audio be transcribed
+  recognition = new SR();
+  recognition.lang = 'en-US';
+  recognition.continuous = true;       // keep listening through pauses until Stop
+  recognition.interimResults = true;   // show words live while reading
+  recognition.maxAlternatives = 1;
+  let said = '';
+  let errorCode = null;
+  recognition.onresult = (e) => {
+    // e.results holds the whole session (final + in-progress), so rebuild from it
+    said = Array.from(e.results, r => r[0].transcript.trim()).join(' ').trim();
+    resultEl.innerHTML = `<p class="hint">Hearing: “${escapeHTML(said)}”</p>`;
+  };
+  // Remember the error; onend always follows and must not overwrite it
+  recognition.onerror = (e) => { errorCode = e.error; };
+  recognition.onend = () => {
+    resetButton();
+    if (errorCode && !BENIGN_SPEECH_ERRORS.has(errorCode) && !said) {
+      showReadAloudWarning(errorCode);
+      return;
+    }
+    showReadAloudResult(said);
+  };
+  try {
+    recognition.start();
+  } catch (e) {
+    console.warn('Speech recognition failed to start', e);
+    resetButton();
+    showReadAloudWarning(e.name || 'start-failed');
+    return;
+  }
   micBtn.classList.add('recording');
   micBtn.textContent = '⏹ Stop';
-  recognition.start();
+  resultEl.innerHTML = '<p class="hint">Listening… read the text aloud, then press Stop.</p>';
 }
 function stopReadAloud() {
   if (recognition) {
