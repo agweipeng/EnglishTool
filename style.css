@@ -479,6 +479,27 @@ textarea { resize: vertical; min-height: 50px; }
 #syncCodeOut, #syncCodeIn { font-family: monospace; font-size: 12px; word-break: break-all; }
 
 /* ============ Book Reader ============ */
+.reader-books {
+  padding: 16px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 16px;
+}
+.reader-books-heading, .reader-chapter-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.reader-books-heading label { font-weight: 600; }
+.reader-books-heading select, .reader-chapter-nav select { flex: 1; min-width: 160px; max-width: 100%; }
+.reader-chapter-nav { margin-top: 12px; }
+.reader-books .hint { margin-top: 10px; }
+.reader-book-intro { margin-top: 10px; }
+.reader-book-intro div { white-space: pre-wrap; line-height: 1.7; margin: 10px 0; }
+.reader-paste { margin-bottom: 18px; }
+.reader-chapter-end {
+  margin-top: 16px; padding: 18px 16px; text-align: center;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+}
+.reader-chapter-end .hint { margin: 0 0 12px; }
+.reader-chapter-end button { max-width: 100%; white-space: normal; }
+.reader-paste summary, .reader-book-intro summary { cursor: pointer; color: var(--primary); }
+.reader-paste > .hint { margin: 10px 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .reader-input {
   display: flex; flex-direction: column; gap: 10px;
   padding: 14px; background: var(--surface); border-radius: var(--radius);

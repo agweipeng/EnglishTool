@@ -225,6 +225,28 @@
   <!-- ============ BOOK READER VIEW ============ -->
   <section class="view" id="view-reader">
     <h2>Book Reader 📕</h2>
+    <div class="reader-books">
+      <div class="reader-books-heading">
+        <label for="readerBook">Your bookshelf</label>
+        <select id="readerBook"><option value="">Choose a book…</option></select>
+        <button class="btn-primary" id="readerResumeBtn">📖 Read recommended book</button>
+      </div>
+      <p id="readerBookAdvice" class="hint">Recommended: The Wonderful Wizard of Oz (绿野仙踪) by L. Frank Baum. A concrete adventure to read and retell.</p>
+      <div id="readerBookControls" class="hidden">
+        <div class="reader-chapter-nav">
+          <button class="btn-ghost" id="readerPrevChapter">← Previous</button>
+          <label class="sr-only" for="readerChapter">Chapter</label>
+          <select id="readerChapter"></select>
+          <button class="btn-ghost" id="readerNextChapter">Next →</button>
+        </div>
+        <p id="readerBookProgress" class="hint" aria-live="polite"></p>
+        <p class="hint">Read for the story. Afterward, retell what happened in your own words for 90 seconds.</p>
+        <details class="reader-book-intro"><summary>Author’s introduction</summary><div id="readerBookIntro"></div></details>
+        <p class="hint"><a id="readerBookSource" target="_blank" rel="noopener">Book source</a> · <a id="readerBookFullText" target="_blank" rel="noopener">Original text &amp; license</a></p>
+      </div>
+    </div>
+    <details class="reader-paste" id="readerPaste">
+    <summary>Or paste your own text</summary>
     <p class="hint">Paste a chapter or a few pages of the novel you're reading. Unknown words are underlined — click one to see its sentence and add it with that sentence as the example. Select several words to add a phrase.</p>
     <div class="reader-input">
       <input type="text" id="readerTitle" placeholder="Book title (optional — used as a tag)" />
@@ -234,10 +256,16 @@
         <button class="btn-ghost" id="readerClearBtn">Clear</button>
       </div>
     </div>
+    </details>
+    <h3 id="readerChapterHeading" class="hidden"></h3>
     <div id="readerStats" class="reader-stats"></div>
     <div class="reader-layout">
       <div id="readerPassage" class="reader-passage hidden"></div>
       <div id="readerUnknown" class="reader-unknown"></div>
+    </div>
+    <div id="readerChapterEnd" class="reader-chapter-end hidden">
+      <p class="hint">Finished the chapter? Retell what happened in your own words for 90 seconds, then carry on.</p>
+      <button class="btn-primary" id="readerNextChapterEnd">Next chapter →</button>
     </div>
     <div id="readerPanel" class="reader-panel hidden"></div>
   </section>
@@ -452,6 +480,7 @@
 
 <script src="text-core.js"></script>
 <script src="app.js"></script>
+<script src="books/library.js"></script>
 <script src="reader.js"></script>
 <script src="practice-modes.js"></script>
 </body>

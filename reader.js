@@ -12,6 +12,7 @@
 'use strict';
 
 const READER_STORAGE_KEY = 'englishTrainerReader_v1';   // per-device draft: { text, title }
+const READER_BOOKMARK_KEY = 'englishTrainerBookmarks_v1'; // bundled book positions, per device
 const MAX_READER_CHARS = 200000;
 const MAX_PHRASE_WORDS = 8;
 const MAX_HEADWORD_LOOKUPS = 4;     // dictionary attempts per word (walked → walk …)
@@ -22,6 +23,132 @@ const COVERAGE_READABLE = 95;
 
 let reader = null;   // { text, title, analysis } for the current passage
 let selectionTimer = null;
+let readerBookId = '';
+let readerChapterIndex = 0;
+let readerBookmarkTimer = null;
+let restoringReaderBookmark = false;
+
+function readerBooks() { return window.BookLibrary || []; }
+function readerBookById(id) { return readerBooks().find(book => book.id === id); }
+
+function loadBookBookmarks() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(READER_BOOKMARK_KEY));
+    return saved && typeof saved === 'object' && !Array.isArray(saved) ? saved : {};
+  } catch { return {}; }
+}
+
+function bookBookmark(book) {
+  const saved = loadBookBookmarks()[book.id] || {};
+  const chapterIndex = Number.isInteger(saved.chapterIndex)
+    ? Math.max(0, Math.min(book.chapters.length - 1, saved.chapterIndex)) : 0;
+  const scrollRatio = Number.isFinite(saved.scrollRatio)
+    ? Math.max(0, Math.min(1, saved.scrollRatio)) : 0;
+  return { chapterIndex, scrollRatio };
+}
+
+function writeBookBookmark(bookId, chapterIndex, scrollRatio) {
+  try {
+    const bookmarks = loadBookBookmarks();
+    bookmarks[bookId] = { chapterIndex, scrollRatio, updatedAt: new Date().toISOString() };
+    localStorage.setItem(READER_BOOKMARK_KEY, JSON.stringify(bookmarks));
+    return true;
+  } catch (e) {
+    console.warn('Book bookmark not saved', e);
+    return false;
+  }
+}
+
+function readerScrollGeometry() {
+  const passage = document.getElementById('readerPassage');
+  const top = (document.querySelector('.topbar')?.getBoundingClientRect().height || 0) + 12;
+  const rect = passage.getBoundingClientRect();
+  const distance = Math.max(0, rect.height - Math.max(1, window.innerHeight - top));
+  return { top, rect, distance };
+}
+
+function saveBookPosition() {
+  if (!readerBookId || !reader || restoringReaderBookmark
+    || !document.getElementById('view-reader').classList.contains('active')) return;
+  const { top, rect, distance } = readerScrollGeometry();
+  // Only record while reading inside the chapter text. Above it sit the bookshelf,
+  // chapter list and paste box — looking at those must not reset the bookmark.
+  if (rect.top > top) return;
+  const ratio = distance ? Math.max(0, Math.min(1, (top - rect.top) / distance)) : 0;
+  const saved = writeBookBookmark(readerBookId, readerChapterIndex, ratio);
+  updateBookProgress(saved);
+}
+
+function updateBookProgress(saved = true) {
+  const book = readerBookById(readerBookId);
+  if (!book) return;
+  const chapter = book.chapters[readerChapterIndex];
+  const words = chapter.text.match(/[A-Za-z]+(?:['’][A-Za-z]+)*/g)?.length || 0;
+  const progress = document.getElementById('readerBookProgress');
+  const text =
+    `Chapter ${chapter.number} of ${book.chapters.length} · ${words.toLocaleString()} words · `
+    + (saved ? 'Bookmark saved in this browser' : 'Bookmark could not be saved in this browser');
+  if (progress.textContent !== text) progress.textContent = text;
+}
+
+function renderBookControls() {
+  const book = readerBookById(readerBookId);
+  const controls = document.getElementById('readerBookControls');
+  const heading = document.getElementById('readerChapterHeading');
+  controls.classList.toggle('hidden', !book);
+  heading.classList.toggle('hidden', !book);
+  document.getElementById('readerChapterEnd').classList.toggle('hidden', !book);
+  document.getElementById('readerBook').value = book?.id || '';
+  document.getElementById('readerResumeBtn').textContent = book ? '📖 Resume reading' : '📖 Read recommended book';
+  if (!book) return;
+  document.getElementById('readerBookAdvice').textContent = `${book.title} (${book.titleCN}) — ${book.author}. ${book.recommendation}`;
+  const chapterSelect = document.getElementById('readerChapter');
+  chapterSelect.innerHTML = book.chapters.map((chapter, index) =>
+    `<option value="${index}">${chapter.number}. ${escapeHTML(chapter.title)}</option>`).join('');
+  chapterSelect.value = String(readerChapterIndex);
+  heading.textContent = `Chapter ${book.chapters[readerChapterIndex].number}: ${book.chapters[readerChapterIndex].title}`;
+  document.getElementById('readerPrevChapter').disabled = readerChapterIndex === 0;
+  document.getElementById('readerNextChapter').disabled = readerChapterIndex === book.chapters.length - 1;
+  const next = book.chapters[readerChapterIndex + 1];
+  const endBtn = document.getElementById('readerNextChapterEnd');
+  endBtn.disabled = !next;
+  endBtn.textContent = next ? `Next: Chapter ${next.number} — ${next.title} →` : '🎉 You finished the book!';
+  document.getElementById('readerBookIntro').textContent = book.introduction;
+  document.getElementById('readerBookSource').href = book.sourceUrl;
+  document.getElementById('readerBookFullText').href = book.sourceFile;
+}
+
+function openBookChapter(bookId, chapterIndex, restore = false) {
+  const book = readerBookById(bookId);
+  if (!book) { toast('This book is not in the bookshelf'); return; }
+  // Preserve the previous location before changing the chapter or book.
+  clearTimeout(readerBookmarkTimer);
+  saveBookPosition();
+  const bookmark = bookBookmark(book);
+  const index = chapterIndex === undefined ? bookmark.chapterIndex : chapterIndex;
+  if (!Number.isInteger(index) || index < 0 || index >= book.chapters.length) return;
+  const ratio = restore && index === bookmark.chapterIndex ? bookmark.scrollRatio : 0;
+  readerBookId = book.id;
+  readerChapterIndex = index;
+  restoringReaderBookmark = true;
+  document.getElementById('readerInput').value = book.chapters[index].text;
+  document.getElementById('readerTitle').value = book.title;
+  document.getElementById('readerPaste').open = false;
+  analyzeReaderText();
+  renderBookControls();
+  updateBookProgress(writeBookBookmark(book.id, index, ratio));
+  requestAnimationFrame(() => {
+    try {
+      const { top, rect, distance } = readerScrollGeometry();
+      // Default scroll behaviour jumps instantly (the stylesheet sets no smooth scrolling)
+      window.scrollTo({ top: ratio > 0 ? window.scrollY + rect.top - top + ratio * distance : 0 });
+    } catch (e) {
+      console.warn('Could not restore the reading position', e);
+    } finally {
+      restoringReaderBookmark = false;   // never leave bookmark saving switched off
+    }
+  });
+}
 
 // ---------- Draft persistence (per device, never synced) ----------
 
@@ -35,7 +162,7 @@ function loadReaderDraft() {
 
 function saveReaderDraft(text, title) {
   try {
-    localStorage.setItem(READER_STORAGE_KEY, JSON.stringify({ text, title }));
+    localStorage.setItem(READER_STORAGE_KEY, JSON.stringify({ text, title, bookId: readerBookId, chapterIndex: readerChapterIndex }));
   } catch (e) {
     console.warn('Reader draft not saved', e);
   }
@@ -51,8 +178,19 @@ function renderReader() {
   const input = document.getElementById('readerInput');
   if (!input.value) {
     const draft = loadReaderDraft();
+    const book = readerBookById(draft.bookId);
+    if (book && Number.isInteger(draft.chapterIndex)
+      && book.chapters[draft.chapterIndex]?.text === draft.text) {
+      openBookChapter(book.id, draft.chapterIndex, true);
+      return;
+    }
     input.value = draft.text || '';
     document.getElementById('readerTitle').value = draft.title || '';
+    document.getElementById('readerPaste').open = !!draft.text;
+    if (!input.value && readerBooks().length) {
+      openBookChapter(readerBooks()[0].id, undefined, true);
+      return;
+    }
   }
   if (reader && reader.text === input.value) refreshReaderStatuses();   // keeps an open panel
   else if (input.value.trim()) analyzeReaderText();
@@ -65,6 +203,12 @@ function analyzeReaderText() {
   if (text.length > MAX_READER_CHARS) {
     toast(`Too long — paste up to ${MAX_READER_CHARS.toLocaleString()} characters at a time`, 3000);
     return;
+  }
+  const book = readerBookById(readerBookId);
+  if (book && book.chapters[readerChapterIndex]?.text !== text) {
+    saveBookPosition();
+    readerBookId = '';
+    renderBookControls();
   }
   saveReaderDraft(text, title);
   reader = { text, title, analysis: analyzeWithVocabulary(text) };
@@ -315,6 +459,10 @@ function onPassageClick(e) {
 }
 
 function clearReader() {
+  saveBookPosition();
+  readerBookId = '';
+  renderBookControls();
+  document.getElementById('readerPaste').open = true;
   document.getElementById('readerInput').value = '';
   document.getElementById('readerTitle').value = '';
   document.getElementById('readerPassage').innerHTML = '';
@@ -327,6 +475,29 @@ function clearReader() {
 }
 
 function initReader() {
+  const bookSelect = document.getElementById('readerBook');
+  bookSelect.innerHTML += readerBooks().map(book =>
+    `<option value="${escapeHTML(book.id)}">${escapeHTML(book.title)} (${escapeHTML(book.titleCN)})</option>`).join('');
+  bookSelect.addEventListener('change', () => {
+    if (bookSelect.value) openBookChapter(bookSelect.value, undefined, true);
+  });
+  document.getElementById('readerResumeBtn').addEventListener('click', () => {
+    const id = readerBookId || readerBooks()[0]?.id;
+    if (id) openBookChapter(id, undefined, true);
+  });
+  document.getElementById('readerChapter').addEventListener('change', e => openBookChapter(readerBookId, Number(e.target.value)));
+  document.getElementById('readerPrevChapter').addEventListener('click', () => openBookChapter(readerBookId, readerChapterIndex - 1));
+  document.getElementById('readerNextChapter').addEventListener('click', () => openBookChapter(readerBookId, readerChapterIndex + 1));
+  document.getElementById('readerNextChapterEnd').addEventListener('click', () => openBookChapter(readerBookId, readerChapterIndex + 1));
+  window.addEventListener('scroll', () => {
+    clearTimeout(readerBookmarkTimer);
+    readerBookmarkTimer = setTimeout(saveBookPosition, 180);
+  }, { passive: true });
+  window.addEventListener('pagehide', saveBookPosition);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) saveBookPosition(); });
+  document.addEventListener('click', e => {
+    if (e.target.closest('.tab[data-view]')) saveBookPosition();
+  }, true);
   document.getElementById('readerAnalyzeBtn').addEventListener('click', analyzeReaderText);
   document.getElementById('readerClearBtn').addEventListener('click', clearReader);
   document.getElementById('readerPassage').addEventListener('click', onPassageClick);
@@ -337,6 +508,12 @@ function initReader() {
     });
   });
   document.addEventListener('selectionchange', onSelectionChange);
+  const bookId = new URLSearchParams(location.search).get('book');
+  if (readerBookById(bookId)) {
+    // Route after app.js has finished its normal initialization.
+    showView('reader');
+    if (readerBookId !== bookId) openBookChapter(bookId, undefined, true);
+  }
 }
 
 if (document.readyState === 'loading') {
