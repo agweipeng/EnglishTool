@@ -92,7 +92,7 @@ function hasSpeechRecognition() {
 function listenOnce() {
   return new Promise((resolve, reject) => {
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SR) { reject(new Error('speech recognition is not supported in this browser')); return; }
+    if (!SR) { reject(new Error('unsupported')); return; }   // message = error code for speechErrorMessage()
     speechSynthesis.cancel();
     const rec = new SR();
     rec.lang = 'en-US';
@@ -164,7 +164,7 @@ function renderProductionCard(word, body, actions) {
         reveal({ said: heard[0], correct: TextCore.containsSpokenTarget(word.text, heard) });
         return;
       }
-      toast(error ? `Mic error: ${error.message}` : 'No speech heard — try again');
+      toast(error ? speechErrorMessage(error.message) : 'No speech heard — try again', error ? 6000 : 1800);
       micBtn.disabled = false;
       micBtn.textContent = '🎙️ Speak';
     });
