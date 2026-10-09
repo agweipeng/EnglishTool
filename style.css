@@ -83,6 +83,7 @@ p { margin: 6px 0; }
   transition: all 0.15s; font-weight: 500;
 }
 .btn-primary { background: var(--primary); color: white; }
+a.btn-primary, a.btn-ghost { display: inline-block; text-decoration: none; }   /* chat links styled as buttons */
 .btn-primary:hover { background: var(--primary-hover); }
 .btn-ghost {
   background: var(--surface); color: var(--text);
