@@ -120,6 +120,7 @@ function initLocalAISettings() {
   document.getElementById('readerLocalAIBtn').addEventListener('click', openLocalAISettings);
   document.getElementById('localAIClose').addEventListener('click', closeLocalAISettings);
   document.getElementById('localAIDialog').addEventListener('cancel', closeLocalAISettings);
+  closeOnBackdropClick(document.getElementById('localAIDialog'), closeLocalAISettings);
   document.getElementById('localAICheck').addEventListener('click', checkLocalAIConnection);
   document.getElementById('localAIProvider').addEventListener('change', () => {
     localAICheckRequest?.abort(); localAICheckRequest = null; localAIAvailableModels = [];

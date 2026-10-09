@@ -104,7 +104,7 @@ function uiHarness() {
     reader: { text: fixture.passage, title: 'The Golden Bird' }, readerBookId: '', activeReaderChapter: { title: 'Old bundled chapter' },
     state: { words: [] }, ParagraphCore: core, AbortController, console, selectionTimer: null, clearTimeout() {},
     setInterval: () => 1, clearInterval() {},
-    closeReaderPanel() {}, escapeHTML: text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),
+    closeReaderPanel() {}, closeOnBackdropClick() {}, escapeHTML: text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),
     findWordByText: word => context.state.words.find(w => w.text.toLowerCase() === word.toLowerCase()),
     newWordEntry: fields => ({ id: 'saved', ...fields }), refreshReaderStatuses() {}, saveState() {}, toast() {}, speak() {},
   });
@@ -282,4 +282,12 @@ test('the analysis knows what kind of material the passage comes from, and the s
     updatedAt: '2026-10-09T01:00:00.000Z', result: core.validateResponse(fixture.analysis, fixture.passage) };
   h.run('showSavedAnalysis(entry)');
   assert.equal(h.run('paragraphContext.kind'), 'news', 'Re-analysing a saved passage uses its original kind');
+});
+
+test('a reply copied from ChatGPT or Claude with a sentence around the JSON still shows', () => {
+  const json = JSON.stringify(fixture.analysis);
+  for (const reply of [`Here is the analysis:\n\n\`\`\`json\n${json}\n\`\`\`\n\nLet me know if you want more examples!`, `Sure! ${json} Hope this helps.`]) {
+    assert.equal(core.validateResponse(reply, fixture.passage).words[0].text, 'bore');
+  }
+  assert.throws(() => core.validateResponse('Sorry, I cannot help with that.', fixture.passage));
 });

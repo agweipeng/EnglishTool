@@ -89,11 +89,25 @@ Passage: ${JSON.stringify(text.trim())}`;
 
   // Unusable pieces of a reply are dropped rather than failing the whole analysis,
   // so nothing outside the passage is ever shown and the rest is still useful.
+  // Chat replies often wrap the JSON in a code block or a sentence ("Here is the analysis: …");
+  // fall back to the outermost {…} when the whole reply isn't JSON
+  function parseReplyJSON(reply) {
+    const trimmed = reply.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
+    try {
+      return JSON.parse(trimmed);
+    } catch (error) {
+      const start = reply.indexOf('{');
+      const end = reply.lastIndexOf('}');
+      if (start < 0 || end <= start) throw error;
+      return JSON.parse(reply.slice(start, end + 1));
+    }
+  }
+
   function validateResponse(raw, passage) {
     let input = raw;
     if (typeof input === 'string') {
       if (input.length > 60000) throw new Error('The AI response is too long.');
-      input = JSON.parse(input.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, ''));
+      input = parseReplyJSON(input);
     }
     const text = (value, max = 4000) => (typeof value === 'string' && value.trim() && value.length <= max ? value.trim() : null);
     const bilingual = value => {

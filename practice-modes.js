@@ -3,7 +3,7 @@
    - Sentence Dictation card: hear a whole sentence, type it
    - Spoken Production card: see the Chinese, say the English
    - Phrase cards from collocation chips
-   - Conversation role-play prompt for claude.ai
+   - Conversation role-play prompt for Claude or ChatGPT
    Depends on text-core.js (TextCore) and app.js globals:
    state, saveState, speak, toast, escapeHTML, ratingButtons,
    attachRating, renderSpellingCard, renderMeaningCard, isLeech,
@@ -207,7 +207,7 @@ async function addPhraseCard(phrase, sourceId, btn) {
   }
 }
 
-// ============ Conversation role-play (claude.ai) ============
+// ============ Conversation role-play (Claude or ChatGPT) ============
 
 // A few stubborn words, a few phrases, then the newest active words
 function pickRoleplayWords() {
@@ -227,17 +227,19 @@ function renderRoleplayWords() {
     : 'Add some words first — the role-play will steer you to use them.';
 }
 
-function copyRoleplayPrompt() {
+function copyRoleplayPrompt(service) {
   const custom = document.getElementById('roleplayCustom').value.trim();
   const scenario = custom || document.getElementById('roleplayScenario').value;
   const prompt = TextCore.buildRoleplayPrompt({ scenario, words: pickRoleplayWords() });
-  return copyAndOpenClaude(prompt, 'Prompt copied → paste it into claude.ai (try voice mode!)');
+  return copyAndOpenChat(service, prompt, `Prompt copied → paste it into ${AI_CHATS[service].name} (try voice mode!)`);
 }
 
 function initPracticeModes() {
   const select = document.getElementById('roleplayScenario');
   select.innerHTML = ROLEPLAY_SCENARIOS.map(s => `<option>${escapeHTML(s)}</option>`).join('');
-  document.getElementById('roleplayBtn').addEventListener('click', copyRoleplayPrompt);
+  document.querySelectorAll('[data-roleplay-chat]').forEach(button => {
+    button.addEventListener('click', () => copyRoleplayPrompt(button.dataset.roleplayChat));
+  });
   document.addEventListener('click', e => {
     const chip = e.target.closest('.chip-add');
     if (chip && !chip.disabled) addPhraseCard(chip.dataset.phrase, chip.dataset.source, chip);

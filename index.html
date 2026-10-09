@@ -17,7 +17,6 @@
     <button class="tab" data-view="reading">Reading</button>
     <button class="tab" data-view="reader">Reader 📖</button>
     <button class="tab" data-view="analyses">Analyses 📝</button>
-    <button class="tab" data-view="news">News 📰</button>
     <a class="tab" href="digests/" target="_blank" rel="noopener">Digests 📚</a>
     <button class="tab" data-view="journal">Journal ✍️</button>
     <button class="tab" data-view="stats">Stats</button>
@@ -238,6 +237,15 @@
       <details class="reader-shelf"><summary>Modern English: news &amp; articles · 现代英语：新闻与文章</summary>
         <p class="hint">Fresh articles from The Conversation every day, plus easier VOA Learning English news with audio. Click any word or select a passage, just like in the books.</p>
         <div id="readerNewsShelf" class="reader-shelf-grid"></div></details>
+      <details class="reader-shelf" id="readerAINewsShelf"><summary>AI news today · 今日 AI 新闻</summary>
+        <p class="hint">Daily headlines from Anthropic, OpenAI and Google. These articles are copyrighted, so only links are kept here: choose <b>Paste to read</b> to open the article, copy its text, and paste it into the reader for word lookups and AI analysis (it is read as news). Save it to your materials to keep it.
+          / 每日 Anthropic、OpenAI、Google 新闻标题。文章受版权保护，这里只保存链接：点击 <b>Paste to read</b> 打开原文，复制正文并粘贴到阅读器，即可查词和 AI 解析。</p>
+        <p class="hint">Updated: <span id="newsLastUpdated">—</span> <button class="btn-ghost" id="newsRefreshBtn">🔄 Refresh</button></p>
+        <div class="news-section"><h3>🤖 Anthropic</h3><div class="news-list" id="newsAnthropic"></div></div>
+        <div class="news-section"><h3>🔬 OpenAI</h3><div class="news-list" id="newsOpenAI"></div></div>
+        <div class="news-section"><h3>💎 Google AI / Gemini</h3><div class="news-list" id="newsGoogle"></div></div>
+        <div class="news-section"><h3>🐙 Trending AI repos (GitHub, last 7 days)</h3><div class="news-list" id="newsGithub"></div></div>
+      </details>
       <p id="readerLoadStatus" class="hint" role="status" aria-live="polite"></p>
       <button id="readerRetryBtn" class="btn-ghost hidden">Try again</button>
       <div id="readerBookControls" class="hidden">
@@ -335,10 +343,10 @@
       <button id="paragraphTab-structure" role="tab" data-paragraph-tab="structure" aria-controls="paragraphContent" aria-selected="false">Sentence structure<br><span lang="zh-CN">结构拆解</span></button>
     </div>
     <details class="paragraph-original" open><summary>Original passage / 原文</summary><p id="paragraphOriginal"></p><button id="paragraphListen" class="btn-ghost">🔊 Listen / 听读</button></details>
-    <div class="form-actions"><button id="paragraphGenerate" class="btn-primary">Analyze here / 在工具内解析</button><button id="paragraphLocalAI" class="btn-ghost">Local AI settings / 本地 AI 设置</button><button id="paragraphClaude" class="btn-ghost">Analyze with Claude ↗ / 使用 Claude 解析</button></div>
+    <div class="form-actions"><button id="paragraphGenerate" class="btn-primary">Analyze here / 在工具内解析</button><button id="paragraphLocalAI" class="btn-ghost">Local AI settings / 本地 AI 设置</button><button class="btn-ghost" data-paragraph-chat="claude">Analyze with Claude ↗ / 使用 Claude 解析</button><button class="btn-ghost" data-paragraph-chat="chatgpt">Analyze with ChatGPT ↗ / 使用 ChatGPT 解析</button></div>
     <p id="paragraphStatus" class="hint" role="status" aria-live="polite"></p>
     <div id="paragraphContent" role="tabpanel" tabindex="0" aria-labelledby="paragraphTab-simplified"></div>
-    <details class="paragraph-paste"><summary>Bring the AI response back / 粘贴 AI 回复</summary><label for="paragraphResponse">Paste the complete reply to the copied prompt. / 粘贴针对已复制提示词的完整回复。</label><textarea id="paragraphResponse" rows="4"></textarea><button id="paragraphPasteBtn" class="btn-primary">Show analysis / 显示解析</button></details>
+    <details class="paragraph-paste"><summary>Bring the AI response back / 粘贴 AI 回复</summary><label for="paragraphResponse">Paste the complete reply from Claude or ChatGPT to the copied prompt. / 粘贴 Claude 或 ChatGPT 针对已复制提示词的完整回复。</label><textarea id="paragraphResponse" rows="4"></textarea><button id="paragraphPasteBtn" class="btn-primary">Show analysis / 显示解析</button></details>
   </dialog>
   <dialog id="localAIDialog" class="paragraph-dialog" aria-labelledby="localAIHeading">
     <header class="paragraph-header"><h2 id="localAIHeading">Local AI · 本地 AI</h2><button id="localAIClose" class="icon-btn" aria-label="Close settings / 关闭设置">✕</button></header>
@@ -352,42 +360,10 @@
     <div class="form-actions"><button id="localAIUse" class="btn-primary" disabled>Use this model / 使用此模型</button><button id="localAIDisconnect" class="btn-ghost">Disconnect / 断开连接</button></div>
   </dialog>
 
-  <!-- ============ NEWS VIEW (DailyNews) ============ -->
-  <section class="view" id="view-news">
-    <div class="news-header">
-      <h2>DailyNews — AI 📰</h2>
-      <div class="news-meta">
-        <span class="hint">Updated: <span id="newsLastUpdated">—</span></span>
-        <button class="btn-ghost" id="newsRefreshBtn">🔄 Refresh</button>
-      </div>
-    </div>
-    <p class="hint">Latest posts from Anthropic, OpenAI, Google AI / Gemini, and the most-starred AI repos on GitHub this week. Updated daily by a GitHub Action.</p>
-
-    <div class="news-section">
-      <h3>🤖 Anthropic</h3>
-      <div class="news-list" id="newsAnthropic"><p class="hint">Loading…</p></div>
-    </div>
-
-    <div class="news-section">
-      <h3>🔬 OpenAI</h3>
-      <div class="news-list" id="newsOpenAI"><p class="hint">Loading…</p></div>
-    </div>
-
-    <div class="news-section">
-      <h3>💎 Google AI / Gemini</h3>
-      <div class="news-list" id="newsGoogle"><p class="hint">Loading…</p></div>
-    </div>
-
-    <div class="news-section">
-      <h3>🐙 Trending AI Repos (GitHub, last 7 days)</h3>
-      <div class="news-list" id="newsGithub"><p class="hint">Loading…</p></div>
-    </div>
-  </section>
-
   <!-- ============ JOURNAL VIEW ============ -->
   <section class="view" id="view-journal">
     <h2>Journal ✍️</h2>
-    <p class="hint">Write 3+ sentences in English daily. Use words from your library — activation matters more than collection. Click <b>Grade with Claude</b> when done and paste into <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> for feedback.</p>
+    <p class="hint">Write 3+ sentences in English daily. Use words from your library — activation matters more than collection. When done, choose <b>Grade with Claude</b> or <b>Grade with ChatGPT</b>: the prompt is copied and the site opens. Paste it there, then paste the reply into <b>AI feedback</b> below to keep it with the day's entry. / 写完后选择用 Claude 或 ChatGPT 批改，再把回复粘贴到下方的 AI 批改框中保存。</p>
 
     <div class="journal-form">
       <div class="journal-meta">
@@ -399,15 +375,30 @@
       </div>
       <textarea id="journalText" rows="12" placeholder="What happened today? What did you learn? Try to use 2-3 words from your library..."></textarea>
       <div class="form-actions">
-        <button class="btn-primary" id="journalGradeBtn">📋 Grade with Claude →</button>
+        <button class="btn-primary" data-journal-grade="claude">📋 Grade with Claude →</button>
+        <button class="btn-primary" data-journal-grade="chatgpt">📋 Grade with ChatGPT →</button>
         <button class="btn-ghost" id="journalCopyBtn">📄 Copy Entry Only</button>
         <button class="btn-ghost" id="journalDeleteBtn">🗑️ Delete</button>
+      </div>
+      <div class="journal-feedback">
+        <div class="journal-feedback-head">
+          <label for="journalFeedback"><b>AI feedback · AI 批改</b></label>
+          <label>From / 来自
+            <select id="journalFeedbackSource">
+              <option value="claude">Claude</option>
+              <option value="chatgpt">ChatGPT</option>
+              <option value="other">Other / 其他</option>
+            </select>
+          </label>
+          <span id="journalFeedbackStatus" class="hint" role="status" aria-live="polite"></span>
+        </div>
+        <textarea id="journalFeedback" rows="10" placeholder="Paste the whole reply from Claude or ChatGPT here. It is saved with this day's entry and syncs with your learning data. / 把 Claude 或 ChatGPT 的完整回复粘贴到这里，会与当天日记一起保存和同步。"></textarea>
       </div>
     </div>
 
     <div class="setting-block roleplay-block">
       <h3>🗣️ Conversation Practice</h3>
-      <p class="hint">Practise a real conversation with Claude that steers you to use the words you're learning. Paste the prompt into claude.ai — use its voice mode to speak out loud — and type <b>END</b> to get feedback.</p>
+      <p class="hint">Practise a real conversation with Claude or ChatGPT that steers you to use the words you're learning. Paste the prompt there — use voice mode to speak out loud — and type <b>END</b> to get feedback.</p>
       <div class="roleplay-controls">
         <label>Scenario
           <select id="roleplayScenario"></select>
@@ -418,7 +409,8 @@
       </div>
       <div id="roleplayWords" class="hint roleplay-words"></div>
       <div class="form-actions">
-        <button class="btn-primary" id="roleplayBtn">📋 Copy role-play prompt → claude.ai</button>
+        <button class="btn-primary" data-roleplay-chat="claude">📋 Copy role-play prompt → Claude</button>
+        <button class="btn-primary" data-roleplay-chat="chatgpt">📋 Copy role-play prompt → ChatGPT</button>
       </div>
     </div>
 
@@ -571,13 +563,16 @@
 <script src="synced-list.js"></script>
 <script src="analysis-store.js"></script>
 <script src="material-store.js"></script>
+<script src="journal-feedback-store.js"></script>
 <script src="app.js"></script>
 <script src="storage-meter.js"></script>
 <script src="books/catalog.js"></script>
 <script src="book-repository.js"></script>
 <script src="paragraph-core.js"></script>
+<script src="outside-click.js"></script>
 <script src="reader.js"></script>
 <script src="materials-view.js"></script>
+<script src="ai-news.js"></script>
 <script src="local-ai.js"></script>
 <script src="local-ai-settings.js"></script>
 <script src="paragraph-reader.js"></script>

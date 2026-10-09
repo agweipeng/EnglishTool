@@ -40,6 +40,7 @@ function defaultState() {
     activity: {},   // { 'YYYY-MM-DD': reviewCount }
     streak: { current: 0, lastDay: null },
     journal: {},    // { 'YYYY-MM-DD': 'entry text' }
+    journalFeedback: {},  // { 'YYYY-MM-DD': { text, source, updatedAt } } — pasted AI replies (journal-feedback-store.js)
     known: [],      // lowercase words the user already knows (Book Reader)
     knownLog: {},   // { word: { known, ts } } — un-marks, so sync doesn't resurrect them
     analyses: [],   // saved AI passage analyses (see analysis-store.js)
@@ -174,6 +175,7 @@ function mergeStates(local, remote) {
     knownLog,
     analyses: AnalysisStore.merge(local.analyses, remote.analyses),
     materials: MaterialStore.merge(local.materials, remote.materials),
+    journalFeedback: JournalFeedbackStore.merge(local.journalFeedback, remote.journalFeedback),
   };
 }
 
@@ -420,7 +422,6 @@ function showView(name) {
   if (name === 'reading') renderReading();
   if (name === 'reader') renderReader();
   if (name === 'analyses' && typeof renderAnalysesView === 'function') renderAnalysesView();
-  if (name === 'news') loadNews();
   if (name === 'settings' && typeof renderStorageMeter === 'function') renderStorageMeter();
   if (name === 'journal') { renderJournal(); renderRoleplayWords(); }
   if (typeof syncReaderURL === 'function') syncReaderURL();
@@ -644,11 +645,17 @@ function blankWord(sentence, word) {
   return parts ? `${parts.before}_____${parts.after}` : null;
 }
 
-// Copy a prompt, then open claude.ai. The tab is opened synchronously inside the
+// Chat sites a prompt can be pasted into; the reply can be brought back the same way from either
+const AI_CHATS = {
+  claude: { name: 'Claude', url: 'https://claude.ai/new' },
+  chatgpt: { name: 'ChatGPT', url: 'https://chatgpt.com/' },
+};
+
+// Copy a prompt, then open the chat site. The tab is opened synchronously inside the
 // click so Safari doesn't block it as a pop-up.
-function copyAndOpenClaude(text, successMsg) {
+function copyAndOpenChat(service, text, successMsg = `Prompt copied → paste it into ${AI_CHATS[service].name}. / 提示词已复制，请粘贴到 ${AI_CHATS[service].name}。`) {
   const copying = navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject(new Error('no clipboard'));
-  window.open('https://claude.ai/new', '_blank', 'noopener');
+  window.open(AI_CHATS[service].url, '_blank', 'noopener');
   return copying
     .then(() => toast(successMsg, 3000))
     .catch(e => {
@@ -1532,6 +1539,7 @@ function importJSON(file) {
       state.knownLog = mergedKnown.knownLog;
       state.analyses = AnalysisStore.merge(state.analyses, parsed.analyses);
       state.materials = MaterialStore.merge(state.materials, parsed.materials);
+      state.journalFeedback = JournalFeedbackStore.merge(state.journalFeedback, parsed.journalFeedback);
       saveState();
       if (typeof renderReadingMaterials === 'function') renderReadingMaterials();
       toast(`Imported ${parsed.words.length} words`);
@@ -1645,87 +1653,6 @@ function handleDisconnectClick() {
   toast('Disconnected');
 }
 
-// ============ DailyNews ============
-// Reads news.json (generated daily by .github/workflows/daily-news.yml).
-// Cached in-memory per session; refresh button re-fetches with cache-bust.
-
-let newsCache = null;
-
-async function loadNews(force = false) {
-  if (newsCache && !force) {
-    renderNews(newsCache);
-    return;
-  }
-  const containers = ['newsAnthropic', 'newsOpenAI', 'newsGoogle', 'newsGithub'];
-  containers.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.innerHTML = '<p class="hint">Loading…</p>';
-  });
-  try {
-    const bust = force ? `?t=${Date.now()}` : '';
-    const r = await fetch(`news.json${bust}`, { cache: 'no-cache' });
-    if (!r.ok) throw new Error(`HTTP ${r.status}`);
-    newsCache = await r.json();
-    renderNews(newsCache);
-  } catch (e) {
-    document.getElementById('newsLastUpdated').textContent = 'never';
-    const msg = `<p class="hint">Couldn't load news. The first daily run hasn't happened yet, or no network. Trigger the workflow at <a href="https://github.com/agweipeng/EnglishTool/actions" target="_blank" rel="noopener">github.com/agweipeng/EnglishTool/actions</a> &rarr; "Daily News" &rarr; Run workflow.</p>`;
-    containers.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = msg;
-    });
-  }
-}
-
-function renderNews(data) {
-  const ts = data?.generatedAt ? new Date(data.generatedAt) : null;
-  document.getElementById('newsLastUpdated').textContent = ts
-    ? ts.toLocaleString()
-    : 'never';
-  const s = data?.sources || {};
-  renderNewsSection('newsAnthropic', s.anthropic, 'article');
-  renderNewsSection('newsOpenAI', s.openai, 'article');
-  renderNewsSection('newsGoogle', s.google, 'article');
-  renderNewsSection('newsGithub', s.github, 'repo');
-}
-
-function renderNewsSection(containerId, items, kind) {
-  const el = document.getElementById(containerId);
-  if (!el) return;
-  if (!items || items.length === 0) {
-    el.innerHTML = '<p class="hint">No items yet.</p>';
-    return;
-  }
-  el.innerHTML = items.map((it, idx) => {
-    if (kind === 'repo') {
-      const stars = it.stars >= 1000 ? `${(it.stars / 1000).toFixed(1)}k` : (it.stars ?? '');
-      return `
-        <a class="news-card" href="${escapeHTML(it.url)}" target="_blank" rel="noopener">
-          <div class="news-card-title">${escapeHTML(it.name)} <span class="news-stars">★ ${stars}</span></div>
-          <div class="news-card-desc">${escapeHTML(it.description || '')}</div>
-          <div class="news-card-meta">${escapeHTML(it.language || '')}</div>
-        </a>
-      `;
-    }
-    return `
-      <div class="news-card-wrap">
-        <a class="news-card" href="${escapeHTML(it.url)}" target="_blank" rel="noopener">
-          <div class="news-card-title">${escapeHTML(it.title)}</div>
-          <div class="news-card-meta">${escapeHTML(new URL(it.url).hostname)}</div>
-        </a>
-        <button class="mic-btn" data-mic-text="${escapeHTML(it.title)}" title="Read aloud challenge">🎙️ Read aloud</button>
-      </div>
-    `;
-  }).join('');
-  el.querySelectorAll('.mic-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      openReadAloud(btn.dataset.micText);
-    });
-  });
-}
-
 // ============ Journal ============
 
 const GRADE_PROMPT_PREFIX = `Please grade my English journal entry below. I'm a Chinese speaker working on vocabulary and natural writing. Provide:
@@ -1749,6 +1676,7 @@ function renderJournal() {
   const text = (state.journal && state.journal[date]) || '';
   document.getElementById('journalText').value = text;
   updateJournalCounts();
+  renderJournalFeedback();
   renderJournalHistory();
 }
 
@@ -1782,11 +1710,12 @@ function renderJournalHistory() {
   wrap.innerHTML = entries.map(([date, text]) => {
     const wordCount = text.trim().split(/\s+/).length;
     const preview = text.slice(0, 140) + (text.length > 140 ? '…' : '');
+    const feedback = JournalFeedbackStore.get(state.journalFeedback, date);
     return `
       <div class="journal-entry" data-date="${escapeHTML(date)}">
         <div class="journal-entry-date">${escapeHTML(date)}</div>
         <div class="journal-entry-preview">${escapeHTML(preview)}</div>
-        <div class="journal-entry-words">${wordCount} words</div>
+        <div class="journal-entry-words">${wordCount} words${feedback ? ` · 💬 ${escapeHTML(AI_CHATS[feedback.source]?.name || 'AI')} feedback` : ''}</div>
       </div>
     `;
   }).join('');
@@ -1799,12 +1728,73 @@ function renderJournalHistory() {
   });
 }
 
-async function gradeJournalWithClaude() {
+async function gradeJournal(service) {
   const text = document.getElementById('journalText').value.trim();
   if (!text) { toast('Write something first'); return; }
   const date = currentJournalDate();
   const prompt = `${GRADE_PROMPT_PREFIX} (date: ${date}):\n\n${text}`;
-  await copyAndOpenClaude(prompt, 'Prompt copied → paste it into claude.ai');
+  // The reply box expects this service's answer unless a reply is already saved
+  lastJournalGradeService = service;
+  if (!document.getElementById('journalFeedback').value.trim()) document.getElementById('journalFeedbackSource').value = service;
+  await copyAndOpenChat(service, prompt,
+    `Prompt copied → paste it into ${AI_CHATS[service].name}, then paste the reply below. / 提示词已复制，请粘贴到 ${AI_CHATS[service].name}，再把回复粘贴到下方。`);
+}
+
+// ----- Pasted AI replies (state.journalFeedback), saved per day a moment after typing stops -----
+const JOURNAL_FEEDBACK_SAVE_MS = 800;
+let journalFeedbackTimer = null;
+let pendingJournalFeedback = null;   // { date, text, source } waiting to be saved
+let lastJournalGradeService = 'claude';
+
+// Saves any reply still waiting first, so switching days or reopening an entry never shows or loses stale text
+function renderJournalFeedback() {
+  commitJournalFeedback();
+  const entry = JournalFeedbackStore.get(state.journalFeedback, currentJournalDate());
+  document.getElementById('journalFeedback').value = entry?.text || '';
+  document.getElementById('journalFeedbackSource').value = entry?.source || lastJournalGradeService;
+  document.getElementById('journalFeedbackStatus').textContent = entry
+    ? `Saved ${new Date(entry.updatedAt).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })} · 已保存` : '';
+}
+
+// The date is taken now, so switching days before the save can't move the reply to another day
+function scheduleJournalFeedbackSave() {
+  pendingJournalFeedback = {
+    date: currentJournalDate(),
+    text: document.getElementById('journalFeedback').value,
+    source: document.getElementById('journalFeedbackSource').value,
+  };
+  document.getElementById('journalFeedbackStatus').textContent = 'Saving… / 保存中…';
+  clearTimeout(journalFeedbackTimer);
+  journalFeedbackTimer = setTimeout(commitJournalFeedback, JOURNAL_FEEDBACK_SAVE_MS);
+}
+
+function commitJournalFeedback() {
+  clearTimeout(journalFeedbackTimer);
+  const pending = pendingJournalFeedback;
+  pendingJournalFeedback = null;
+  if (!pending) return;
+  const status = document.getElementById('journalFeedbackStatus');
+  const current = JournalFeedbackStore.get(state.journalFeedback, pending.date);
+  const unchanged = (current?.text || '') === pending.text.trim() && (!current || current.source === pending.source);
+  if (unchanged) { status.textContent = current ? 'Saved · 已保存' : ''; return; }
+  if (pending.text.trim().length > JournalFeedbackStore.MAX_FEEDBACK_CHARS) {
+    status.textContent = `Too long to save — keep it under ${JournalFeedbackStore.MAX_FEEDBACK_CHARS.toLocaleString()} characters. / 内容过长，无法保存。`;
+    return;
+  }
+  const previous = state.journalFeedback;
+  state.journalFeedback = JournalFeedbackStore.set(previous, pending.date, pending, new Date().toISOString());
+  try {
+    saveState();
+  } catch (error) {
+    console.error('Journal feedback could not be saved', error);
+    state.journalFeedback = previous;
+    status.textContent = error.name === 'QuotaExceededError'
+      ? 'Could not save — browser storage is full (see Settings → Storage). / 无法保存：浏览器存储空间已满。'
+      : 'Could not save the reply. / 无法保存回复。';
+    return;
+  }
+  if (pending.date === currentJournalDate()) status.textContent = pending.text.trim() ? 'Saved · 已保存' : 'Reply cleared · 已清除';
+  renderJournalHistory();
 }
 
 async function copyJournalOnly() {
@@ -1819,9 +1809,14 @@ async function copyJournalOnly() {
 function deleteCurrentJournal() {
   const date = currentJournalDate();
   if (!state.journal?.[date]) { toast('No entry to delete'); return; }
-  if (!confirm(`Delete journal entry for ${date}?`)) return;
+  const feedback = JournalFeedbackStore.get(state.journalFeedback, date);
+  if (!confirm(`Delete journal entry for ${date}${feedback ? ' and its AI feedback' : ''}?`)) return;
   delete state.journal[date];
   document.getElementById('journalText').value = '';
+  pendingJournalFeedback = null;
+  clearTimeout(journalFeedbackTimer);
+  if (feedback) state.journalFeedback = JournalFeedbackStore.set(state.journalFeedback, date, { text: '', source: feedback.source }, new Date().toISOString());
+  renderJournalFeedback();
   saveState();
   updateJournalCounts();
   renderJournalHistory();
@@ -2006,21 +2001,22 @@ function init() {
   document.getElementById('drillStartBtn').addEventListener('click', startDrill);
   document.getElementById('drillStopBtn').addEventListener('click', stopDrill);
 
-  // News
-  document.getElementById('newsRefreshBtn').addEventListener('click', () => loadNews(true));
-
   // Journal
   document.getElementById('journalDate').addEventListener('change', renderJournal);
+  window.addEventListener('pagehide', commitJournalFeedback);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) commitJournalFeedback(); });
   document.getElementById('journalText').addEventListener('input', () => {
     updateJournalCounts();
     // Debounced autosave: 1s after last keystroke
     clearTimeout(window._journalSaveTimer);
     window._journalSaveTimer = setTimeout(saveJournalCurrent, 1000);
   });
-  document.getElementById('journalGradeBtn').addEventListener('click', () => {
+  document.querySelectorAll('[data-journal-grade]').forEach(button => button.addEventListener('click', () => {
     saveJournalCurrent();
-    gradeJournalWithClaude();
-  });
+    gradeJournal(button.dataset.journalGrade);
+  }));
+  document.getElementById('journalFeedback').addEventListener('input', scheduleJournalFeedbackSave);
+  document.getElementById('journalFeedbackSource').addEventListener('change', scheduleJournalFeedbackSave);
   document.getElementById('journalCopyBtn').addEventListener('click', copyJournalOnly);
   document.getElementById('journalDeleteBtn').addEventListener('click', deleteCurrentJournal);
 
