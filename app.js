@@ -62,6 +62,7 @@ function loadState() {
 function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   schedulePush();
+  if (typeof renderStorageMeter === 'function' && document.getElementById('view-settings')?.classList?.contains('active')) renderStorageMeter();
 }
 
 // ============ Sync config (local-only, never pushed to gist) ============
@@ -270,6 +271,7 @@ function refreshActiveView() {
     if (typeof renderReadingMaterials === 'function') renderReadingMaterials();
   }
   else if (id === 'analyses' && typeof renderAnalysesView === 'function') renderAnalysesView();
+  else if (id === 'settings' && typeof renderStorageMeter === 'function') renderStorageMeter();
   // learn view: don't disrupt an in-progress card
 }
 
@@ -395,6 +397,7 @@ function showView(name) {
   if (name === 'reader') renderReader();
   if (name === 'analyses' && typeof renderAnalysesView === 'function') renderAnalysesView();
   if (name === 'news') loadNews();
+  if (name === 'settings' && typeof renderStorageMeter === 'function') renderStorageMeter();
   if (name === 'journal') { renderJournal(); renderRoleplayWords(); }
   if (typeof syncReaderURL === 'function') syncReaderURL();
 }

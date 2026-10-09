@@ -521,6 +521,11 @@ textarea { resize: vertical; min-height: 50px; }
 .cov-known { background: var(--success); }
 .cov-learning { background: var(--warning); }
 .coverage-text { font-size: 15px; }
+.storage-bar { height: 10px; border-radius: 999px; overflow: hidden; background: var(--border, rgba(127, 127, 127, 0.25)); margin-bottom: 8px; }
+.storage-bar span { display: block; height: 100%; background: var(--success); }
+.storage-bar.storage-warn span { background: var(--warning); }
+.storage-bar.storage-high span { background: var(--danger); }
+.storage-advice { color: var(--danger); font-size: 14px; }
 .reader-layout { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 16px; align-items: start; }
 .reader-passage {
   background: var(--surface); padding: 24px;
