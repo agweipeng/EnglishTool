@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "id": "mysterious-affair-at-styles",
+  "title": "The Mysterious Affair at Styles",
+  "titleCN": "斯泰尔斯庄园奇案",
+  "author": "Agatha Christie",
+  "published": 1920,
+  "language": "en",
+  "genre": "Mystery",
+  "readingStage": "Modern English",
+  "readingOrder": 7,
+  "sectionType": "chapter",
+  "sourceUrl": "https://www.gutenberg.org/ebooks/863",
+  "license": "Project Gutenberg edition; retain the complete license in source.txt. Listed as public domain in the USA by the source; it may still be under copyright in countries with life-plus-70-year terms.",
+  "recommendation": "Agatha Christie's first Poirot mystery: lots of natural dialogue, questions and explanations — good for conversation English.",
+  "version": "cdaf52f08e9ab47e",
+  "sourceFile": "books/mysterious-affair-at-styles/source.txt",
+  "sourceHash": "25a1dbefea6a51c6e1fb015e7a2bed3d7c43af74823ea92df5ec358e9bea07a3",
+  "introduction": "",
+  "wordCount": 57101,
+  "chapters": [
+    {
+      "id": "i-go-to-styles",
+      "number": 1,
+      "title": "I Go to Styles",
+      "wordCount": 4062,
+      "version": "bc9cac24eb7ed76c",
+      "path": "books/mysterious-affair-at-styles/chapters/i-go-to-styles.json"
+    },
+    {
+      "id": "the-16th-and-17th-of-july",
+      "number": 2,
+      "title": "The 16th and 17th of July",
+      "wordCount": 2633,
+      "version": "55c7682aa653c16f",
+      "path": "books/mysterious-affair-at-styles/chapters/the-16th-and-17th-of-july.json"
+    },
+    {
+      "id": "the-night-of-the-tragedy",
+      "number": 3,
+      "title": "The Night of the Tragedy",
+      "wordCount": 2192,
+      "version": "a1ab280e03ab39a0",
+      "path": "books/mysterious-affair-at-styles/chapters/the-night-of-the-tragedy.json"
+    },
+    {
+      "id": "poirot-investigates",
+      "number": 4,
+      "title": "Poirot Investigates",
+      "wordCount": 6149,
+      "version": "6e4bff9512418164",
+      "path": "books/mysterious-affair-at-styles/chapters/poirot-investigates.json"
+    },
+    {
+      "id": "it-isn-t-strychnine-is-it",
+      "number": 5,
+      "title": "“It Isn’t Strychnine, Is It?”",
+      "wordCount": 8046,
+      "version": "c43c7739bda54932",
+      "path": "books/mysterious-affair-at-styles/chapters/it-isn-t-strychnine-is-it.json"
+    },
+    {
+      "id": "the-inquest",
+      "number": 6,
+      "title": "The Inquest",
+      "wordCount": 3652,
+      "version": "cc3a65fc293bda88",
+      "path": "books/mysterious-affair-at-styles/chapters/the-inquest.json"
+    },
+    {
+      "id": "poirot-pays-his-debts",
+      "number": 7,
+      "title": "Poirot Pays His Debts",
+      "wordCount": 3604,
+      "version": "68982ccd12282305",
+      "path": "books/mysterious-affair-at-styles/chapters/poirot-pays-his-debts.json"
+    },
+    {
+      "id": "fresh-suspicions",
+      "number": 8,
+      "title": "Fresh Suspicions",
+      "wordCount": 5023,
+      "version": "ecfb73eff7383998",
+      "path": "books/mysterious-affair-at-styles/chapters/fresh-suspicions.json"
+    },
+    {
+      "id": "dr-bauerstein",
+      "number": 9,
+      "title": "Dr. Bauerstein",
+      "wordCount": 3998,
+      "version": "4bdab17199370dd9",
+      "path": "books/mysterious-affair-at-styles/chapters/dr-bauerstein.json"
+    },
+    {
+      "id": "the-arrest",
+      "number": 10,
+      "title": "The Arrest",
+      "wordCount": 4709,
+      "version": "a44355420f5db684",
+      "path": "books/mysterious-affair-at-styles/chapters/the-arrest.json"
+    },
+    {
+      "id": "the-case-for-the-prosecution",
+      "number": 11,
+      "title": "The Case for the Prosecution",
+      "wordCount": 5426,
+      "version": "9f711e4e80ab497e",
+      "path": "books/mysterious-affair-at-styles/chapters/the-case-for-the-prosecution.json"
+    },
+    {
+      "id": "the-last-link",
+      "number": 12,
+      "title": "The Last Link",
+      "wordCount": 3423,
+      "version": "c32c6a09a059ddf7",
+      "path": "books/mysterious-affair-at-styles/chapters/the-last-link.json"
+    },
+    {
+      "id": "poirot-explains",
+      "number": 13,
+      "title": "Poirot Explains",
+      "wordCount": 4184,
+      "version": "e3f6ed11bd8f945d",
+      "path": "books/mysterious-affair-at-styles/chapters/poirot-explains.json"
+    }
+  ]
+}

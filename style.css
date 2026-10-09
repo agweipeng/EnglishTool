@@ -506,6 +506,13 @@ textarea { resize: vertical; min-height: 50px; }
   border: 1px solid var(--border); margin-bottom: 16px;
 }
 .reader-input textarea { width: 100%; }
+.reader-material-fields { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.reader-material-fields label { color: var(--text-muted); font-size: 13px; }
+.reader-material-fields select { min-width: 150px; }
+.reader-material-fields input { flex: 1; min-width: min(240px, 100%); }
+.reader-material-card .reader-material-meta { color: var(--text-muted); font-size: 12px; }
+.reader-material-card .reader-material-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+.reader-material-card .reader-material-actions button { margin-top: 0; }
 .reader-stats { margin-bottom: 16px; }
 .coverage-bar {
   display: flex; height: 10px; border-radius: 999px; overflow: hidden;

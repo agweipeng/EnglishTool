@@ -32,7 +32,7 @@
       return cached(book.manifestPath, manifest => manifest?.schemaVersion === 1 && manifest.id === id
         && typeof manifest.title === 'string' && manifest.title.trim().length > 0
         && typeof manifest.author === 'string' && typeof manifest.introduction === 'string'
-        && ['chapter', 'story'].includes(manifest.sectionType) && versionOK(manifest.version)
+        && ['chapter', 'story', 'article'].includes(manifest.sectionType) && versionOK(manifest.version)
         && Array.isArray(manifest.chapters) && manifest.chapters.length === book.sectionCount && manifest.chapters.length > 0
         && new Set(manifest.chapters.map(c => c.id)).size === manifest.chapters.length
         && manifest.chapters.every(c => idOK(c?.id) && c.path === `books/${id}/chapters/${c.id}.json`

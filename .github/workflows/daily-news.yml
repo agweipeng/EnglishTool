@@ -28,15 +28,21 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/fetch-news.mjs
 
-      - name: Commit news.json if changed
+      # New articles from The Conversation (CC BY-ND) for the Reader. A failure keeps
+      # yesterday's articles and must not stop the AI news update.
+      - name: Fetch Reader articles
+        continue-on-error: true
+        run: node scripts/import-news.mjs conversation
+
+      - name: Commit news if changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet news.json; then
-            echo "news.json unchanged — skipping commit"
+          git add news.json books/the-conversation books/catalog.json books/catalog.js
+          if git diff --cached --quiet; then
+            echo "News unchanged — skipping commit"
             exit 0
           fi
-          git add news.json
-          git commit -m "chore(news): refresh DailyNews $(date -u +'%Y-%m-%d')"
+          git commit -m "chore(news): refresh DailyNews and Reader articles $(date -u +'%Y-%m-%d')"
           git pull --rebase
           git push

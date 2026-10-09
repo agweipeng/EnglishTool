@@ -12,12 +12,12 @@ const store = (memory = new Map()) => createStore({ getItem: k => memory.get(k) 
 
 test('every bundled package preserves all story words and retains the full source license', async () => {
   const { parseBook, hash } = await import('../scripts/book-import-core.mjs');
-  const required = { 'wizard-of-oz': 24, 'railway-children': 14, 'secret-garden': 27, 'anne-of-green-gables': 38, 'sherlock-holmes': 12 };
+  const required = { 'wizard-of-oz': 24, 'railway-children': 14, 'secret-garden': 27, 'anne-of-green-gables': 38, 'sherlock-holmes': 12, 'great-gatsby': 9, 'mysterious-affair-at-styles': 13 };
   for (const [id, count] of Object.entries(required)) {
     assert.equal(catalog.books.find(book => book.id === id)?.sectionCount, count);
   }
   assert.ok(catalog.books.every(book => !('text' in book) && !('chapters' in book) && !('introduction' in book)), 'Catalog stays metadata-only as books are added');
-  for (const book of catalog.books) {
+  for (const book of catalog.books.filter(book => book.kind !== 'news')) {
     const source = fs.readFileSync(path.join(__dirname, '..', book.sourceFile), 'utf8');
     const metadata = resource(`books/${book.id}/metadata.json`);
     const manifest = resource(book.manifestPath);
@@ -41,6 +41,28 @@ test('every bundled package preserves all story words and retains the full sourc
     vm.runInNewContext(fs.readFileSync(path.join(__dirname, `../books/${book.id}/file-data.js`), 'utf8'), { window });
     assert.equal(JSON.stringify(window.BookResources[book.manifestPath]), JSON.stringify(manifest));
     chapters.forEach((chapter, i) => assert.equal(window.BookResources[manifest.chapters[i].path].text, chapter.text));
+  }
+});
+
+test('every bundled news package is complete, credited and loads like a book', async () => {
+  const { hash } = await import('../scripts/book-import-core.mjs');
+  const news = catalog.books.filter(book => book.kind === 'news');
+  assert.deepEqual(news.map(book => book.id).sort(), ['the-conversation', 'voa-learning-english']);
+  const repository = create({ catalog, loadJSON: async p => resource(p) });
+  for (const book of news) {
+    assert.ok(book.license && book.credit && /^https:\/\//.test(book.sourceUrl), `${book.id}: license, credit and source`);
+    const manifest = await repository.getBook(book.id);
+    const window = {};
+    vm.runInNewContext(fs.readFileSync(path.join(__dirname, `../books/${book.id}/file-data.js`), 'utf8'), { window });
+    assert.equal(JSON.stringify(window.BookResources[book.manifestPath]), JSON.stringify(manifest));
+    for (const entry of manifest.chapters) {
+      const chapter = await repository.getChapter(book.id, entry.id);
+      assert.equal(chapter.version, hash(chapter.text).slice(0, 16), entry.id);
+      assert.ok(/^https:\/\//.test(chapter.url) && Number.isFinite(Date.parse(chapter.published)), `${entry.id}: link and date`);
+      assert.equal(window.BookResources[entry.path].text, chapter.text);
+    }
+    const files = fs.readdirSync(path.join(__dirname, `../books/${book.id}/chapters`));
+    assert.equal(files.length, manifest.chapters.length, `${book.id}: no leftover article files`);
   }
 });
 
@@ -191,6 +213,17 @@ test('importer drops Gutenberg italic underscores without losing words', async (
     'She is always the woman, an affaire de cœur.\n\nI did.');
 });
 
+test('importer names untitled numbered chapters, such as The Great Gatsby', async () => {
+  const { parseBook } = await import('../scripts/book-import-core.mjs');
+  const body = ['I', 'II'].map(n => `\n                 ${n}\n\n${'In my younger and more vulnerable years. '.repeat(5)}\n`).join('');
+  const source = `Title\n*** START OF THE PROJECT GUTENBERG EBOOK X ***\nContents\n\nI\nII\n${body}\n*** END OF THE PROJECT GUTENBERG EBOOK X ***\n`;
+  const metadata = { id: 'untitled', title: 'Untitled', author: 'A', sectionType: 'chapter', expectedSections: 2,
+    sourceUrl: 'https://example.org', license: 'PD', parser: { headingPattern: '^ {10,}([IVXLCDM]+)\\n', untitledSections: true } };
+  assert.deepEqual(parseBook(source, metadata).chapters.map(c => [c.id, c.title]), [['chapter-1', 'Chapter 1'], ['chapter-2', 'Chapter 2']]);
+  const { untitledSections, ...titledOnly } = metadata.parser;
+  assert.throws(() => parseBook(source, { ...metadata, parser: titledOnly }), /Missing or out-of-order/, 'Titles stay required unless the book opts out');
+});
+
 test('importer gives section titles consistent title case without a trailing full stop', async () => {
   const { tidyTitle } = await import('../scripts/book-import-core.mjs');
   assert.equal(tidyTitle('A SCANDAL IN BOHEMIA'), 'A Scandal in Bohemia');
@@ -200,6 +233,8 @@ test('importer gives section titles consistent title case without a trailing ful
   assert.equal(tidyTitle('“THERE WAS SOMEONE CRYING—THERE WAS!”'), '“There Was Someone Crying—There Was!”');
   assert.equal(tidyTitle('The beginning of things.'), 'The Beginning of Things');
   assert.equal(tidyTitle("Peter's coal-mine."), "Peter's Coal-Mine");
+  assert.equal(tidyTitle('THE 16TH AND 17TH OF JULY'), 'The 16th and 17th of July');
+  assert.equal(tidyTitle('DR. BAUERSTEIN'), 'Dr. Bauerstein');
   // Titles that are already tidy stay exactly as they are
   assert.equal(tidyTitle('Mrs. Rachel Lynde Is Surprised'), 'Mrs. Rachel Lynde Is Surprised');
   assert.equal(tidyTitle('How Dorothy Saved the Scarecrow'), 'How Dorothy Saved the Scarecrow');
