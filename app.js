@@ -208,25 +208,49 @@ async function connectSync(token) {
   return { ok: true, user: user.login, gistId: gist.id };
 }
 
-async function syncNow() {
-  const cfg = loadSyncConfig();
-  if (!cfg.token || !cfg.gistId) return false;
+// One round: read the gist, merge it into this device, and push only if the gist is missing something.
+// A failed read throws, so nothing is pushed over data we could not see.
+async function pullMergePush(cfg) {
+  const remoteJson = await ghGetGist(cfg.token, cfg.gistId);
+  let remoteChanged = false;
+  if (remoteJson) {
+    try {
+      const before = JSON.stringify(state);
+      const merged = mergeStates(state, JSON.parse(remoteJson));
+      const after = JSON.stringify(merged);
+      if (after !== before) {
+        state = merged;
+        localStorage.setItem(STORAGE_KEY, after); // direct write, no re-push
+        remoteChanged = true;
+      }
+    } catch (e) { /* corrupt remote, will be overwritten by push */ }
+  }
+  const content = JSON.stringify(state);
+  const ok = content === remoteJson || await ghUpdateGist(cfg.token, cfg.gistId, content);
+  return { ok, remoteChanged };
+}
+
+// Only one sync runs at a time. A save during a sync asks for one more round afterwards,
+// so its change is merged and pushed too.
+let syncRun = null;
+let syncAgain = false;
+
+async function runSyncRounds(cfg) {
   setSyncStatus('syncing');
   try {
-    const remoteJson = await ghGetGist(cfg.token, cfg.gistId);
-    if (remoteJson) {
-      try {
-        const remote = JSON.parse(remoteJson);
-        state = mergeStates(state, remote);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); // direct write, no re-push
-      } catch (e) { /* corrupt remote, will be overwritten by push */ }
-    }
-    const ok = await ghUpdateGist(cfg.token, cfg.gistId, JSON.stringify(state));
+    let ok = true;
+    let remoteChanged = false;
+    do {
+      syncAgain = false;
+      const round = await pullMergePush(cfg);
+      ok = round.ok;
+      remoteChanged = remoteChanged || round.remoteChanged;
+    } while (ok && syncAgain);
     if (!ok) { setSyncStatus('error'); return false; }
     cfg.lastSyncedAt = Date.now();
     saveSyncConfig(cfg);
     setSyncStatus('ok');
-    refreshActiveView();
+    if (remoteChanged) refreshActiveView();
     return true;
   } catch (e) {
     setSyncStatus('error');
@@ -234,28 +258,28 @@ async function syncNow() {
   }
 }
 
+async function syncNow() {
+  const cfg = loadSyncConfig();
+  if (!cfg.token || !cfg.gistId) return false;
+  if (syncRun) { syncAgain = true; return syncRun; }
+  syncRun = runSyncRounds(cfg).finally(() => { syncRun = null; });
+  return syncRun;
+}
+
 function disconnectSync() {
   clearSyncConfig();
   setSyncStatus('hidden');
 }
 
-// Debounced auto-push triggered by saveState()
+// Debounced auto-sync triggered by saveState(). It merges the gist first, like Sync now,
+// so a push from this device never replaces what another device saved in the meantime.
 let pushTimer = null;
 function schedulePush() {
   const cfg = loadSyncConfig();
   if (!cfg.token || !cfg.gistId) return;
   setSyncStatus('syncing');
   clearTimeout(pushTimer);
-  pushTimer = setTimeout(async () => {
-    const ok = await ghUpdateGist(cfg.token, cfg.gistId, JSON.stringify(state));
-    if (ok) {
-      cfg.lastSyncedAt = Date.now();
-      saveSyncConfig(cfg);
-      setSyncStatus('ok');
-    } else {
-      setSyncStatus('error');
-    }
-  }, PUSH_DEBOUNCE_MS);
+  pushTimer = setTimeout(() => syncNow(), PUSH_DEBOUNCE_MS);
 }
 
 // Re-render whichever view is currently visible after a sync pull
