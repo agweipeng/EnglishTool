@@ -1,0 +1,31 @@
+{
+  "id": "great-gatsby",
+  "title": "The Great Gatsby",
+  "titleCN": "了不起的盖茨比",
+  "author": "F. Scott Fitzgerald",
+  "published": 1925,
+  "language": "en",
+  "genre": "Modern classic",
+  "readingStage": "Modern English",
+  "readingOrder": 6,
+  "sectionType": "chapter",
+  "expectedSections": 9,
+  "sourceUrl": "https://www.gutenberg.org/ebooks/64317",
+  "license": "Project Gutenberg edition; retain the complete license in source.txt. Listed as public domain in the USA by the source.",
+  "recommendation": "1920s American English: parties, money and modern city life. Rich descriptions; read a chapter, then retell it.",
+  "parser": {
+    "headingPattern": "^ {20,}([IVXLCDM]+)\\n",
+    "untitledSections": true
+  },
+  "sectionIds": [
+    "chapter-1",
+    "chapter-2",
+    "chapter-3",
+    "chapter-4",
+    "chapter-5",
+    "chapter-6",
+    "chapter-7",
+    "chapter-8",
+    "chapter-9"
+  ]
+}

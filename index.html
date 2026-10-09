@@ -15,7 +15,7 @@
     <button class="tab" data-view="library">Library</button>
     <button class="tab" data-view="drill">Listening Drill</button>
     <button class="tab" data-view="reading">Reading</button>
-    <button class="tab" data-view="reader">Book Reader 📕</button>
+    <button class="tab" data-view="reader">Reader 📖</button>
     <button class="tab" data-view="analyses">Analyses 📝</button>
     <button class="tab" data-view="news">News 📰</button>
     <a class="tab" href="digests/" target="_blank" rel="noopener">Digests 📚</a>
@@ -225,7 +225,7 @@
 
   <!-- ============ BOOK READER VIEW ============ -->
   <section class="view" id="view-reader">
-    <h2>Book Reader 📕</h2>
+    <h2>Reader 📖</h2>
     <button id="readerLocalAIBtn" class="btn-ghost">Local AI · 本地 AI</button>
     <div class="reader-books">
       <div class="reader-books-heading">
@@ -235,6 +235,9 @@
       </div>
       <p id="readerBookAdvice" class="hint">Recommended: The Wonderful Wizard of Oz (绿野仙踪) by L. Frank Baum. A concrete adventure to read and retell.</p>
       <details class="reader-shelf"><summary>Browse books · 浏览书库</summary><div id="readerShelf" class="reader-shelf-grid"></div></details>
+      <details class="reader-shelf"><summary>Modern English: news &amp; articles · 现代英语：新闻与文章</summary>
+        <p class="hint">Fresh articles from The Conversation every day, plus easier VOA Learning English news with audio. Click any word or select a passage, just like in the books.</p>
+        <div id="readerNewsShelf" class="reader-shelf-grid"></div></details>
       <p id="readerLoadStatus" class="hint" role="status" aria-live="polite"></p>
       <button id="readerRetryBtn" class="btn-ghost hidden">Try again</button>
       <div id="readerBookControls" class="hidden">
@@ -245,19 +248,41 @@
           <button class="btn-ghost" id="readerNextChapter">Next →</button>
         </div>
         <p id="readerBookProgress" class="hint" aria-live="polite"></p>
-        <p class="hint">Read for the story. Afterward, retell what happened in your own words for 90 seconds.</p>
+        <p id="readerRetellHint" class="hint">Read for the story. Afterward, retell what happened in your own words for 90 seconds.</p>
+        <p id="readerArticleCredit" class="hint hidden"></p>
         <details id="readerBookIntroDetails" class="reader-book-intro"><summary>Author’s introduction</summary><div id="readerBookIntro"></div></details>
-        <p class="hint"><a id="readerBookSource" target="_blank" rel="noopener">Book source</a> · <a id="readerBookFullText" target="_blank" rel="noopener">Original text &amp; license</a></p>
+        <p id="readerBookLinks" class="hint"><a id="readerBookSource" target="_blank" rel="noopener">Book source</a> · <a id="readerBookFullText" target="_blank" rel="noopener">Original text &amp; license</a></p>
       </div>
     </div>
+    <details class="reader-shelf reader-materials" id="readerMaterialsShelf">
+      <summary>My reading materials · 我的阅读材料</summary>
+      <p class="hint">Keep transcripts and articles you find elsewhere, then open them in the same reader. They are private to you and sync and back up with your learning data.</p>
+      <p class="hint">BBC Learning English: open an episode of
+        <a href="https://www.bbc.co.uk/learningenglish/english/features/6-minute-english" target="_blank" rel="noopener">6 Minute English ↗</a> or
+        <a href="https://www.bbc.co.uk/learningenglish/english/features/the-english-we-speak" target="_blank" rel="noopener">The English We Speak ↗</a>,
+        copy its transcript, then paste it below with the episode title, type <b>Conversation</b> and the episode link, and choose <b>Save to materials</b>.
+        / 打开 BBC 节目，复制文字稿，粘贴到下方并保存。</p>
+      <div id="readerMaterialsList" class="reader-shelf-grid"></div>
+    </details>
     <details class="reader-paste" id="readerPaste">
     <summary>Or paste your own text</summary>
-    <p class="hint">Paste a chapter or a few pages of the novel you're reading. Unknown words are underlined — click one to see its sentence and add it with that sentence as the example. Select several words to add a phrase.</p>
+    <p class="hint">Paste a book passage, news article, or conversation transcript. Save it to your materials shelf to keep it for later. Unknown words are underlined — click one to see its sentence and add it with that sentence as the example. Select several words to add a phrase.</p>
     <div class="reader-input">
-      <input type="text" id="readerTitle" placeholder="Book title (optional — used as a tag)" />
-      <textarea id="readerInput" rows="6" placeholder="Paste text from your novel here…"></textarea>
+      <input type="text" id="readerTitle" placeholder="Title (book, article, or episode)" />
+      <div class="reader-material-fields">
+        <label for="readerMaterialType">Type</label>
+        <select id="readerMaterialType">
+          <option value="book">Book</option>
+          <option value="news">News</option>
+          <option value="conversation">Conversation</option>
+          <option value="other">Other</option>
+        </select>
+        <input type="url" id="readerMaterialSource" placeholder="Source link (optional)" aria-label="Source link (optional)" />
+      </div>
+      <textarea id="readerInput" rows="6" placeholder="Paste an article, episode transcript, or book passage…"></textarea>
       <div class="form-actions">
-        <button class="btn-primary" id="readerAnalyzeBtn">📖 Analyze</button>
+        <button class="btn-primary" id="readerAnalyzeBtn">📖 Read / Analyze</button>
+        <button class="btn-ghost" id="readerSaveMaterialBtn">Save to materials</button>
         <button class="btn-ghost" id="readerClearBtn">Clear</button>
       </div>
     </div>
@@ -524,12 +549,15 @@
 
 <script src="text-core.js"></script>
 <script src="reader-progress.js"></script>
+<script src="synced-list.js"></script>
 <script src="analysis-store.js"></script>
+<script src="material-store.js"></script>
 <script src="app.js"></script>
 <script src="books/catalog.js"></script>
 <script src="book-repository.js"></script>
 <script src="paragraph-core.js"></script>
 <script src="reader.js"></script>
+<script src="materials-view.js"></script>
 <script src="local-ai.js"></script>
 <script src="local-ai-settings.js"></script>
 <script src="paragraph-reader.js"></script>

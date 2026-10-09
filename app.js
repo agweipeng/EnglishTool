@@ -43,6 +43,7 @@ function defaultState() {
     known: [],      // lowercase words the user already knows (Book Reader)
     knownLog: {},   // { word: { known, ts } } — un-marks, so sync doesn't resurrect them
     analyses: [],   // saved AI passage analyses (see analysis-store.js)
+    materials: [],  // saved transcripts and articles for the Reader (see material-store.js)
   };
 }
 
@@ -114,10 +115,17 @@ async function ghCreateGist(token, content) {
   return r.ok ? await r.json() : null;
 }
 async function ghGetGist(token, id) {
+  // A failed read must stop the sync: treating it as "no remote data" would overwrite the other devices
   const r = await fetch(`https://api.github.com/gists/${id}`, { headers: ghHeaders(token) });
-  if (!r.ok) return null;
+  if (!r.ok) throw new Error(`Could not read the sync gist (${r.status})`);
   const data = await r.json();
-  return data.files?.[GIST_FILE]?.content || null;
+  const file = data.files?.[GIST_FILE];
+  if (!file) return null;
+  if (!file.truncated) return file.content || null;
+  // The API cuts files over 1 MB short; the full text is at raw_url
+  const raw = await fetch(file.raw_url);
+  if (!raw.ok) throw new Error(`Could not read the full sync file (${raw.status})`);
+  return raw.text();
 }
 async function ghUpdateGist(token, id, content) {
   const r = await fetch(`https://api.github.com/gists/${id}`, {
@@ -164,6 +172,7 @@ function mergeStates(local, remote) {
     known,
     knownLog,
     analyses: AnalysisStore.merge(local.analyses, remote.analyses),
+    materials: MaterialStore.merge(local.materials, remote.materials),
   };
 }
 
@@ -256,7 +265,10 @@ function refreshActiveView() {
   if (id === 'library') renderLibrary();
   else if (id === 'stats') renderStats();
   else if (id === 'reading') renderReading();
-  else if (id === 'reader') refreshReaderStatuses();
+  else if (id === 'reader') {
+    refreshReaderStatuses();
+    if (typeof renderReadingMaterials === 'function') renderReadingMaterials();
+  }
   else if (id === 'analyses' && typeof renderAnalysesView === 'function') renderAnalysesView();
   // learn view: don't disrupt an in-progress card
 }
@@ -1470,8 +1482,11 @@ function importJSON(file) {
       if (parsed.words.some(w => !w || typeof w.text !== 'string' || !w.text.trim())) throw new Error('Invalid word');
       if (parsed.readingProgress !== undefined) ReaderProgress.validateSnapshot(parsed.readingProgress);
       if (parsed.analyses !== undefined && !Array.isArray(parsed.analyses)) throw new Error('Invalid saved analyses');
+      if (parsed.materials !== undefined && !Array.isArray(parsed.materials)) throw new Error('Invalid reading materials');
       const analysisCount = AnalysisStore.visible(parsed.analyses).length;
-      const extras = [parsed.readingProgress ? 'reading bookmarks' : '', analysisCount ? `${analysisCount} saved analyses` : ''].filter(Boolean);
+      const materialCount = MaterialStore.visible(parsed.materials).length;
+      const extras = [parsed.readingProgress ? 'reading bookmarks' : '', analysisCount ? `${analysisCount} saved analyses` : '',
+        materialCount ? `${materialCount} reading materials` : ''].filter(Boolean);
       if (!confirm(`Import ${parsed.words.length} words${extras.length ? ` and ${extras.join(' and ')}` : ''}? This will merge with existing data.`)) return;
       if (parsed.readingProgress) {
         ReaderProgress.createStore(localStorage).merge(parsed.readingProgress);
@@ -1489,7 +1504,9 @@ function importJSON(file) {
       state.known = mergedKnown.known;
       state.knownLog = mergedKnown.knownLog;
       state.analyses = AnalysisStore.merge(state.analyses, parsed.analyses);
+      state.materials = MaterialStore.merge(state.materials, parsed.materials);
       saveState();
+      if (typeof renderReadingMaterials === 'function') renderReadingMaterials();
       toast(`Imported ${parsed.words.length} words`);
       renderLibrary();
     } catch (e) {

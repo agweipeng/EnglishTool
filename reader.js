@@ -101,29 +101,57 @@ function saveBookPosition() {
   updateBookProgress(writeBookBookmark(readerBookId, readerChapterIndex, ratio, visibleReaderAnchor(top)));
 }
 
+// Books have chapters or stories; news packages (The Conversation, VOA) have articles
+function sectionNames(book) {
+  if (book.sectionType === 'article') return { one: 'Article', many: 'articles' };
+  return book.sectionType === 'story' ? { one: 'Story', many: 'stories' } : { one: 'Chapter', many: 'chapters' };
+}
+const isNewsPackage = book => book?.kind === 'news';
+const safeLink = url => (/^https:\/\//.test(url || '') ? escapeHTML(url) : '');
+
+// Untitled chapters (The Great Gatsby) are called "Chapter 1"; don't repeat that as a title
+const namesChapter = (label, number, title) => !!title && title !== `${label} ${number}`;
+
+function formatArticleDate(iso) {
+  const date = new Date(iso);
+  return Number.isNaN(date.getTime()) ? '' : date.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+// Author, date and the credit the source's license asks for, with links to the original and its audio
+function articleCreditHtml(book, chapter) {
+  const details = [chapter.author && `By ${chapter.author}`, chapter.category, formatArticleDate(chapter.published)]
+    .filter(Boolean).map(escapeHTML).join(' · ');
+  const link = (url, text) => (safeLink(url) ? ` <a href="${safeLink(url)}" target="_blank" rel="noopener">${text}</a>` : '');
+  return `${details}<br>${escapeHTML(book.credit || '')}${link(chapter.url, 'Read the original ↗')}`
+    + `${link(chapter.audioUrl, '· 🔊 Listen to the audio ↗')}${link(book.licenseUrl, '· License ↗')}`;
+}
+
 function updateBookProgress(saved = true) {
   const book = activeReaderBook;
   if (!book || !readerBookId) return;
   const chapter = book.chapters[readerChapterIndex];
-  const label = book.sectionType === 'story' ? 'Story' : 'Chapter';
+  const label = sectionNames(book).one;
   const progress = document.getElementById('readerBookProgress');
   const text = `${label} ${readerChapterIndex + 1} of ${book.chapters.length} · ${chapter.wordCount.toLocaleString()} words · `
     + (saved ? 'Bookmark saved in this browser' : 'Bookmark could not be saved in this browser');
   if (progress.textContent !== text) progress.textContent = text;
 }
 
+function shelfCard(book, saved) {
+  const latest = isNewsPackage(book) && book.latestArticle ? ` · latest ${formatArticleDate(book.latestArticle)}` : '';
+  const position = saved ? 'Resume reading' : 'Start reading';
+  return `<article class="reader-shelf-card"><b>${escapeHTML(book.title)}</b>
+    <span>${escapeHTML(book.titleCN)} · ${escapeHTML(book.author)}</span>
+    <span class="hint">${escapeHTML(book.readingStage)} · ${escapeHTML(book.genre)} · ${book.sectionCount} ${sectionNames(book).many}${escapeHTML(latest)}</span>
+    <p class="hint">${escapeHTML(book.recommendation)}</p>
+    <button class="btn-ghost" data-book-id="${escapeHTML(book.id)}">${position} →</button></article>`;
+}
+
 function renderBookshelf() {
   const bookmarks = loadBookBookmarks();
-  document.getElementById('readerShelf').innerHTML = readerBooks().map(book => {
-    const saved = bookmarks[book.id];
-    const section = book.sectionType === 'story' ? 'stories' : 'chapters';
-    const position = saved ? 'Resume reading' : 'Start reading';
-    return `<article class="reader-shelf-card"><b>${escapeHTML(book.title)}</b>
-      <span>${escapeHTML(book.titleCN)} · ${escapeHTML(book.author)}</span>
-      <span class="hint">${escapeHTML(book.readingStage)} · ${escapeHTML(book.genre)} · ${book.sectionCount} ${section}</span>
-      <p class="hint">${escapeHTML(book.recommendation)}</p>
-      <button class="btn-ghost" data-book-id="${escapeHTML(book.id)}">${position} →</button></article>`;
-  }).join('');
+  const cards = books => books.map(book => shelfCard(book, bookmarks[book.id])).join('');
+  document.getElementById('readerShelf').innerHTML = cards(readerBooks().filter(book => !isNewsPackage(book)));
+  document.getElementById('readerNewsShelf').innerHTML = cards(readerBooks().filter(isNewsPackage));
 }
 
 function setReaderLoading(loading) {
@@ -146,23 +174,35 @@ function renderBookControls() {
   const last = readerBookById(readerProgress.lastBook().id)?.id;
   document.getElementById('readerResumeBtn').textContent = last ? '📖 Resume last book' : '📖 Read recommended book';
   if (!book) return;
-  const label = book.sectionType === 'story' ? 'Story' : 'Chapter';
+  const label = sectionNames(book).one;
+  const news = isNewsPackage(book);
   document.getElementById('readerBookAdvice').textContent = `${book.title} (${book.titleCN}) — ${book.author}. ${book.recommendation}`;
   document.getElementById('readerChapterLabel').textContent = label;
   const chapterSelect = document.getElementById('readerChapter');
   chapterSelect.innerHTML = book.chapters.map(chapter =>
-    `<option value="${escapeHTML(chapter.id)}">${chapter.number}. ${escapeHTML(chapter.title)}</option>`).join('');
+    `<option value="${escapeHTML(chapter.id)}">${escapeHTML(namesChapter(label, chapter.number, chapter.title) ? `${chapter.number}. ${chapter.title}` : `${label} ${chapter.number}`)}</option>`).join('');
   chapterSelect.value = book.chapters[readerChapterIndex].id;
-  heading.textContent = `${label} ${readerChapterIndex + 1}: ${book.chapters[readerChapterIndex].title}`;
+  const current = book.chapters[readerChapterIndex];
+  heading.textContent = `${label} ${readerChapterIndex + 1}${namesChapter(label, readerChapterIndex + 1, current.title) ? `: ${current.title}` : ''}`;
   document.getElementById('readerPrevChapter').disabled = readerLoading || readerChapterIndex === 0;
   document.getElementById('readerNextChapter').disabled = readerLoading || readerChapterIndex === book.chapters.length - 1;
   chapterSelect.disabled = readerLoading;
   const next = book.chapters[readerChapterIndex + 1];
   const endBtn = document.getElementById('readerNextChapterEnd');
   endBtn.disabled = readerLoading || !next;
-  endBtn.textContent = next ? `Next: ${label} ${readerChapterIndex + 2} — ${next.title} →` : '🎉 You finished the book!';
+  const nextTitle = next && namesChapter(label, readerChapterIndex + 2, next.title) ? ` — ${next.title}` : '';
+  endBtn.textContent = next ? `Next: ${label} ${readerChapterIndex + 2}${nextTitle} →`
+    : news ? '🎉 You have read every article here!' : '🎉 You finished the book!';
   document.getElementById('readerBookIntro').textContent = book.introduction;
   document.getElementById('readerBookIntroDetails').classList.toggle('hidden', !book.introduction);
+  document.getElementById('readerRetellHint').textContent = news
+    ? 'Read for the main idea. Afterward, explain it in your own words for 90 seconds, and say whether you agree.'
+    : 'Read for the story. Afterward, retell what happened in your own words for 90 seconds.';
+  document.getElementById('readerBookLinks').classList.toggle('hidden', news);
+  const credit = document.getElementById('readerArticleCredit');
+  credit.classList.toggle('hidden', !news);
+  credit.innerHTML = news ? articleCreditHtml(book, book.chapters[readerChapterIndex]) : '';
+  if (news) return;
   document.getElementById('readerBookSource').href = book.sourceUrl;
   document.getElementById('readerBookFullText').href = book.sourceFile;
 }
@@ -273,6 +313,8 @@ function analyzeWithVocabulary(text) {
 
 async function renderReader() {
   renderBookshelf();
+  // state may have been replaced (Sync Code, reset), so redraw the saved materials too
+  if (typeof renderReadingMaterials === 'function') renderReadingMaterials();
   const input = document.getElementById('readerInput');
   if (!input.value && !readerLoading) {
     const draft = loadReaderDraft();
@@ -665,6 +707,8 @@ function clearReader() {
   document.getElementById('readerPaste').open = true;
   document.getElementById('readerInput').value = '';
   document.getElementById('readerTitle').value = '';
+  document.getElementById('readerMaterialType').value = 'book';
+  document.getElementById('readerMaterialSource').value = '';
   document.getElementById('readerPassage').innerHTML = '';
   document.getElementById('readerPassage').classList.add('hidden');
   document.getElementById('readerStats').innerHTML = '';
@@ -705,10 +749,10 @@ function onReaderProgressImported() {
 
 function initReader() {
   renderBookshelf();
-  document.getElementById('readerShelf').addEventListener('click', e => {
+  ['readerShelf', 'readerNewsShelf'].forEach(id => document.getElementById(id).addEventListener('click', e => {
     const button = e.target.closest('[data-book-id]');
     if (button) openBookChapter(button.dataset.bookId, undefined, true);
-  });
+  }));
   document.getElementById('readerRetryBtn').addEventListener('click', () => {
     if (readerFailedRequest) {
       const { bookId, chapterIdOrIndex, restore } = readerFailedRequest;
@@ -716,8 +760,10 @@ function initReader() {
     }
   });
   const bookSelect = document.getElementById('readerBook');
-  bookSelect.innerHTML += readerBooks().map(book =>
+  const options = books => books.map(book =>
     `<option value="${escapeHTML(book.id)}">${escapeHTML(book.title)} (${escapeHTML(book.titleCN)})</option>`).join('');
+  bookSelect.innerHTML += `<optgroup label="Books">${options(readerBooks().filter(book => !isNewsPackage(book)))}</optgroup>`
+    + `<optgroup label="News &amp; articles">${options(readerBooks().filter(isNewsPackage))}</optgroup>`;
   bookSelect.addEventListener('change', () => {
     if (bookSelect.value) openBookChapter(bookSelect.value, undefined, true);
   });

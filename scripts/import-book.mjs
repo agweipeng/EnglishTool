@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { parseBook } from './book-import-core.mjs';
@@ -12,19 +12,27 @@ export function importBook(sourceFile, metadataFile) {
   // Validate the complete input before writing any generated assets.
   const { source, manifest, chapters } = parseBook(readFileSync(sourceFile, 'utf8'), metadata);
   const directory = join(BOOKS, metadata.id);
-  mkdirSync(join(directory, 'chapters'), { recursive: true });
+  mkdirSync(directory, { recursive: true });
   writeFileSync(join(directory, 'source.txt'), source);
   writeFileSync(join(directory, 'metadata.json'), json({ ...metadata, sectionIds: chapters.map(c => c.id) }));
+  writePackage(manifest, chapters);
+  console.log(`${metadata.title}: ${chapters.length} ${metadata.sectionType === 'story' ? 'stories' : 'chapters'}, ${manifest.wordCount.toLocaleString()} words`);
+}
+// Writes the manifest, one file per section, and the direct-file fallback. Shared with news packages,
+// whose old articles must disappear, so the chapters folder is rebuilt from scratch.
+export function writePackage(manifest, chapters) {
+  const directory = join(BOOKS, manifest.id);
+  rmSync(join(directory, 'chapters'), { recursive: true, force: true });
+  mkdirSync(join(directory, 'chapters'), { recursive: true });
   writeFileSync(join(directory, 'manifest.json'), json(manifest));
-  const resources = { [`books/${metadata.id}/manifest.json`]: manifest };
+  const resources = { [`books/${manifest.id}/manifest.json`]: manifest };
   chapters.forEach(chapter => {
-    const path = `books/${metadata.id}/chapters/${chapter.id}.json`;
+    const path = `books/${manifest.id}/chapters/${chapter.id}.json`;
     writeFileSync(join(ROOT, path), json(chapter));
     resources[path] = chapter;
   });
   // Direct file opening cannot fetch JSON. Load this package only when selected.
   writeFileSync(join(directory, 'file-data.js'), `// Generated direct-file fallback; loaded on demand.\n(function(root){Object.assign(root.BookResources||(root.BookResources=Object.create(null)),${JSON.stringify(resources)});})(window);\n`);
-  console.log(`${metadata.title}: ${chapters.length} ${metadata.sectionType === 'story' ? 'stories' : 'chapters'}, ${manifest.wordCount.toLocaleString()} words`);
 }
 export function buildCatalog() {
   const books = readdirSync(BOOKS, { withFileTypes: true }).filter(entry => entry.isDirectory())
@@ -36,13 +44,21 @@ export function buildCatalog() {
   writeFileSync(join(BOOKS, 'catalog.json'), json(catalog));
   writeFileSync(join(BOOKS, 'catalog.js'), `// Generated metadata only: no book text.\n(function(root){const catalog=${json(catalog)};if(typeof module!=='undefined'&&module.exports)module.exports=catalog;else root.BookCatalog=catalog;})(typeof window!=='undefined'?window:globalThis);\n`);
 }
-const args = process.argv.slice(2);
-if (args.includes('--all')) {
+// Rebuilds every Gutenberg book (news packages have no metadata.json) and the catalog
+export function rebuildAll() {
   for (const entry of readdirSync(BOOKS, { withFileTypes: true })) {
     const directory = join(BOOKS, entry.name);
     if (entry.isDirectory() && existsSync(join(directory, 'metadata.json'))) importBook(join(directory, 'source.txt'), join(directory, 'metadata.json'));
   }
   buildCatalog();
+}
+// Other scripts import these functions; only a direct run reads the command line.
+const isDirectRun = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+const args = isDirectRun ? process.argv.slice(2) : null;
+if (!args) {
+  // Imported as a module
+} else if (args.includes('--all')) {
+  rebuildAll();
 } else if (args.includes('--source') && args.includes('--metadata')) {
   importBook(resolve(args[args.indexOf('--source') + 1]), resolve(args[args.indexOf('--metadata') + 1]));
   buildCatalog();

@@ -1,0 +1,34 @@
+{
+  "id": "mysterious-affair-at-styles",
+  "title": "The Mysterious Affair at Styles",
+  "titleCN": "斯泰尔斯庄园奇案",
+  "author": "Agatha Christie",
+  "published": 1920,
+  "language": "en",
+  "genre": "Mystery",
+  "readingStage": "Modern English",
+  "readingOrder": 7,
+  "sectionType": "chapter",
+  "expectedSections": 13,
+  "sourceUrl": "https://www.gutenberg.org/ebooks/863",
+  "license": "Project Gutenberg edition; retain the complete license in source.txt. Listed as public domain in the USA by the source; it may still be under copyright in countries with life-plus-70-year terms.",
+  "recommendation": "Agatha Christie's first Poirot mystery: lots of natural dialogue, questions and explanations — good for conversation English.",
+  "parser": {
+    "headingPattern": "^CHAPTER ([IVXLCDM]+)\\.\\n([^\\n]+)\\n"
+  },
+  "sectionIds": [
+    "i-go-to-styles",
+    "the-16th-and-17th-of-july",
+    "the-night-of-the-tragedy",
+    "poirot-investigates",
+    "it-isn-t-strychnine-is-it",
+    "the-inquest",
+    "poirot-pays-his-debts",
+    "fresh-suspicions",
+    "dr-bauerstein",
+    "the-arrest",
+    "the-case-for-the-prosecution",
+    "the-last-link",
+    "poirot-explains"
+  ]
+}

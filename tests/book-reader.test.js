@@ -8,6 +8,7 @@ const TextCore = require('../text-core.js');
 const catalog = require('../books/catalog.js');
 const ReaderProgress = require('../reader-progress.js');
 const AnalysisStore = require('../analysis-store.js');
+const MaterialStore = require('../material-store.js');
 const Repository = require('../book-repository.js');
 const path = require('node:path');
 const readResource = resource => JSON.parse(fs.readFileSync(path.join(__dirname, '..', resource), 'utf8'));
@@ -54,7 +55,7 @@ function readerHarness(memory = new Map()) {
     scrollTo({ top }) { this.scrollY = top; },
   };
   const context = vm.createContext({
-    window: browserWindow, location: { search: '' }, TextCore, ReaderProgress, AnalysisStore,
+    window: browserWindow, location: { search: '' }, TextCore, ReaderProgress, AnalysisStore, MaterialStore,
     state: { words: [], known: [] }, knownWordSet: () => new Set(), learningWordSet: () => new Set(),
     document: {
       readyState: 'loading', addEventListener() {}, getElementById: element, querySelectorAll: () => [],

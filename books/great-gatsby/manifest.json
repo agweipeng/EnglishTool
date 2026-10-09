@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "id": "great-gatsby",
+  "title": "The Great Gatsby",
+  "titleCN": "了不起的盖茨比",
+  "author": "F. Scott Fitzgerald",
+  "published": 1925,
+  "language": "en",
+  "genre": "Modern classic",
+  "readingStage": "Modern English",
+  "readingOrder": 6,
+  "sectionType": "chapter",
+  "sourceUrl": "https://www.gutenberg.org/ebooks/64317",
+  "license": "Project Gutenberg edition; retain the complete license in source.txt. Listed as public domain in the USA by the source.",
+  "recommendation": "1920s American English: parties, money and modern city life. Rich descriptions; read a chapter, then retell it.",
+  "version": "bb2c99c752c5d253",
+  "sourceFile": "books/great-gatsby/source.txt",
+  "sourceHash": "0043e860b1091a2d3dbd7d186201258e05259f8ee44adc69b330264362b282b5",
+  "introduction": "",
+  "wordCount": 48617,
+  "chapters": [
+    {
+      "id": "chapter-1",
+      "number": 1,
+      "title": "Chapter 1",
+      "wordCount": 5969,
+      "version": "e18f148e1a4c37a9",
+      "path": "books/great-gatsby/chapters/chapter-1.json"
+    },
+    {
+      "id": "chapter-2",
+      "number": 2,
+      "title": "Chapter 2",
+      "wordCount": 4312,
+      "version": "c88bbfd8975bfda9",
+      "path": "books/great-gatsby/chapters/chapter-2.json"
+    },
+    {
+      "id": "chapter-3",
+      "number": 3,
+      "title": "Chapter 3",
+      "wordCount": 5793,
+      "version": "b6830f0fe1e12a07",
+      "path": "books/great-gatsby/chapters/chapter-3.json"
+    },
+    {
+      "id": "chapter-4",
+      "number": 4,
+      "title": "Chapter 4",
+      "wordCount": 5503,
+      "version": "f14a9c319d9cd658",
+      "path": "books/great-gatsby/chapters/chapter-4.json"
+    },
+    {
+      "id": "chapter-5",
+      "number": 5,
+      "title": "Chapter 5",
+      "wordCount": 4287,
+      "version": "7ff88b9272c93421",
+      "path": "books/great-gatsby/chapters/chapter-5.json"
+    },
+    {
+      "id": "chapter-6",
+      "number": 6,
+      "title": "Chapter 6",
+      "wordCount": 4075,
+      "version": "5460677bf721f9da",
+      "path": "books/great-gatsby/chapters/chapter-6.json"
+    },
+    {
+      "id": "chapter-7",
+      "number": 7,
+      "title": "Chapter 7",
+      "wordCount": 8846,
+      "version": "1232638642e738d5",
+      "path": "books/great-gatsby/chapters/chapter-7.json"
+    },
+    {
+      "id": "chapter-8",
+      "number": 8,
+      "title": "Chapter 8",
+      "wordCount": 4590,
+      "version": "da9e62381cb1d73f",
+      "path": "books/great-gatsby/chapters/chapter-8.json"
+    },
+    {
+      "id": "chapter-9",
+      "number": 9,
+      "title": "Chapter 9",
+      "wordCount": 5242,
+      "version": "70839ee41eee306a",
+      "path": "books/great-gatsby/chapters/chapter-9.json"
+    }
+  ]
+}

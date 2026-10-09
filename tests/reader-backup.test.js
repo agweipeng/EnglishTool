@@ -6,6 +6,7 @@ const vm = require('node:vm');
 const TextCore = require('../text-core.js');
 const ReaderProgress = require('../reader-progress.js');
 const AnalysisStore = require('../analysis-store.js');
+const MaterialStore = require('../material-store.js');
 
 function harness(initialWords = []) {
   const memory = new Map();
@@ -13,7 +14,7 @@ function harness(initialWords = []) {
   const saved = [];
   let blob;
   const context = vm.createContext({
-    state: { words: initialWords, known: [], activity: {} }, TextCore, ReaderProgress, AnalysisStore, Blob,
+    state: { words: initialWords, known: [], activity: {} }, TextCore, ReaderProgress, AnalysisStore, MaterialStore, Blob,
     localStorage: { getItem: k => memory.get(k), setItem: (k,v) => memory.set(k,v) },
     URL: { createObjectURL: value => { blob = value; return 'blob:backup'; } },
     document: { createElement: () => ({ click() {} }) },
@@ -73,5 +74,23 @@ test('saved AI analyses travel in JSON backups, and a malformed list is rejected
   third.context.backupFile = JSON.stringify({ words: [], analyses: 'not a list' });
   third.run('importJSON(backupFile)');
   assert.deepEqual(third.context.state.analyses, []);
+  assert.match(third.messages.at(-1), /invalid file/);
+});
+
+test('saved reading materials such as BBC transcripts travel in JSON backups', async () => {
+  const first = harness();
+  first.context.state.materials = [MaterialStore.createEntry({ title: '6 Minute English: Sleep', type: 'conversation',
+    sourceUrl: 'https://www.bbc.co.uk/learningenglish/english/features/6-minute-english', text: 'Neil: Hello. Beth: Hi.' }, '2026-10-09T01:00:00.000Z', 'm1')];
+  first.run('exportJSON()');
+  const second = harness();
+  second.context.state.materials = [];
+  second.context.backupFile = await first.blob().text();
+  second.run('importJSON(backupFile)');
+  assert.deepEqual(MaterialStore.visible(second.context.state.materials).map(m => m.title), ['6 Minute English: Sleep']);
+  const third = harness();
+  third.context.state.materials = [];
+  third.context.backupFile = JSON.stringify({ words: [], materials: { title: 'not a list' } });
+  third.run('importJSON(backupFile)');
+  assert.deepEqual(third.context.state.materials, []);
   assert.match(third.messages.at(-1), /invalid file/);
 });

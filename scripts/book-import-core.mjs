@@ -21,7 +21,8 @@ export function tidyTitle(raw) {
   return words.map((word, i) => {
     const isInner = i > 0 && i < words.length - 1;
     if (isInner && SMALL_TITLE_WORDS.has(word.toLowerCase())) return word.toLowerCase();
-    return word.replace(/(^[^\p{L}]*|[-–—])(\p{Ll})/gu, (m, before, letter) => before + letter.toUpperCase());
+    // Ordinals stay lowercase: "16th", not "16Th"
+    return word.replace(/(^[^\p{L}\p{N}]*|[-–—])(\p{Ll})/gu, (m, before, letter) => before + letter.toUpperCase());
   }).join(' ');
 }
 function romanNumber(value) {
@@ -48,8 +49,10 @@ export function parseBook(rawSource, metadata) {
   const ids = new Set();
   const chapters = headings.map((heading, index) => {
     const number = /^\d+$/.test(heading[1]) ? Number(heading[1]) : romanNumber(heading[1] || '');
-    if (number !== index + 1 || !heading[2]?.trim()) throw new Error(`Missing or out-of-order section ${index + 1}`);
-    const title = tidyTitle(heading[2]);
+    const hasTitle = !!heading[2]?.trim();
+    if (number !== index + 1 || (!hasTitle && !metadata.parser.untitledSections)) throw new Error(`Missing or out-of-order section ${index + 1}`);
+    // Some novels (The Great Gatsby) number their chapters without naming them
+    const title = hasTitle ? tidyTitle(heading[2]) : `Chapter ${number}`;
     const id = metadata.sectionIds?.[index] || title.toLowerCase().normalize('NFKD')
       .replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     if (!validId(id) || ids.has(id)) throw new Error(`Invalid or duplicate section ID: ${id}`);
