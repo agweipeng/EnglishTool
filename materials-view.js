@@ -75,20 +75,22 @@ function readLink(id, protocols, message) {
   }
 }
 
+// Returns true when the material was saved
 function saveCurrentReadingMaterial() {
   const form = readMaterialForm();
-  if (!form) return;
+  if (!form) return false;
   if (MaterialStore.isFull(state.materials, form.title)) {
     toast(`Your shelf is full (${MaterialStore.MAX_MATERIALS}). Delete a material you've finished first.`, 4000);
-    return;
+    return false;
   }
   const titleKey = form.title.toLocaleLowerCase();
   const isUpdate = MaterialStore.visible(state.materials).some(item => item.title.toLocaleLowerCase() === titleKey);
   const entry = MaterialStore.createEntry(form, new Date().toISOString(), uid());
-  if (!commitMaterials(MaterialStore.upsert(state.materials, entry), 'Could not save this material — browser storage may be full.')) return;
+  if (!commitMaterials(MaterialStore.upsert(state.materials, entry), 'Could not save this material — browser storage may be full.')) return false;
   renderReadingMaterials();
   document.getElementById('readerMaterialsShelf').open = true;
   toast(isUpdate ? 'Reading material updated' : 'Reading material saved');
+  return true;
 }
 
 function openReadingMaterial(item) {

@@ -359,6 +359,11 @@ textarea { resize: vertical; min-height: 50px; }
 .reading-cn { color: var(--text-muted); font-size: 14px; margin-top: 2px; }
 
 /* ============ DailyNews ============ */
+.news-header {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px; margin-bottom: 6px;
+}
+.news-meta { display: flex; gap: 10px; align-items: center; }
 .news-section { margin: 20px 0; }
 .news-section h3 { margin-bottom: 10px; }
 .news-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -528,6 +533,10 @@ textarea { resize: vertical; min-height: 50px; }
 .storage-bar.storage-warn span { background: var(--warning); }
 .storage-bar.storage-high span { background: var(--danger); }
 .storage-advice { color: var(--danger); font-size: 14px; }
+.reader-import { margin: 12px 0; padding: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.reader-import-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.reader-import-row input { flex: 1; min-width: min(260px, 100%); }
+.reader-import .hint { margin: 6px 0 0; }
 .reader-audio {
   display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 12px;
   background: var(--surface); padding: 12px; border-radius: var(--radius); border: 1px solid var(--border);
