@@ -107,6 +107,32 @@ function sectionNames(book) {
   return book.sectionType === 'story' ? { one: 'Story', many: 'stories' } : { one: 'Chapter', many: 'chapters' };
 }
 const isNewsPackage = book => book?.kind === 'news';
+
+// What kind of text is in the reader, so the AI analysis can focus on what matters for it.
+// Pasted text uses the Type chosen on the paste form (set automatically when a saved material opens).
+function currentReadingKind() {
+  if (readerBookId) return isNewsPackage(activeReaderBook) ? 'news' : 'book';
+  return document.getElementById('readerMaterialType')?.value || 'other';
+}
+
+// The reader's audio player, for listening and shadowing: VOA articles and saved transcripts with an audio link.
+// readerAudioText is the text the audio belongs to, so pasting something new hides it.
+let readerAudioText = '';
+function setReaderAudio(url, text = '') {
+  const player = document.getElementById('readerAudioPlayer');
+  const src = /^https:\/\//.test(url || '') ? url : '';
+  readerAudioText = src ? text.trim() : '';
+  if ((player.getAttribute('src') || '') !== src) {
+    player.pause();
+    if (src) player.setAttribute('src', src);
+    else player.removeAttribute('src');
+    player.load();
+  }
+  const rate = Number(document.getElementById('readerAudioRate').value) || 1;
+  player.defaultPlaybackRate = rate;
+  player.playbackRate = rate;
+  document.getElementById('readerAudio').classList.toggle('hidden', !src);
+}
 const safeLink = url => (/^https:\/\//.test(url || '') ? escapeHTML(url) : '');
 
 // Untitled chapters (The Great Gatsby) are called "Chapter 1"; don't repeat that as a title
@@ -123,7 +149,7 @@ function articleCreditHtml(book, chapter) {
     .filter(Boolean).map(escapeHTML).join(' · ');
   const link = (url, text) => (safeLink(url) ? ` <a href="${safeLink(url)}" target="_blank" rel="noopener">${text}</a>` : '');
   return `${details}<br>${escapeHTML(book.credit || '')}${link(chapter.url, 'Read the original ↗')}`
-    + `${link(chapter.audioUrl, '· 🔊 Listen to the audio ↗')}${link(book.licenseUrl, '· License ↗')}`;
+    + `${link(book.licenseUrl, '· License ↗')}`;
 }
 
 function updateBookProgress(saved = true) {
@@ -202,6 +228,7 @@ function renderBookControls() {
   const credit = document.getElementById('readerArticleCredit');
   credit.classList.toggle('hidden', !news);
   credit.innerHTML = news ? articleCreditHtml(book, book.chapters[readerChapterIndex]) : '';
+  setReaderAudio(news ? book.chapters[readerChapterIndex].audioUrl : '');
   if (news) return;
   document.getElementById('readerBookSource').href = book.sourceUrl;
   document.getElementById('readerBookFullText').href = book.sourceFile;
@@ -348,6 +375,7 @@ function analyzeReaderText(fromBook = false) {
   }
   const text = document.getElementById('readerInput').value;
   const title = document.getElementById('readerTitle').value.trim();
+  if (fromBook !== true && text.trim() !== readerAudioText) setReaderAudio('');
   if (!text.trim()) { toast('Paste a chapter or page first'); return; }
   if (text.length > MAX_READER_CHARS) {
     toast(`Too long — paste up to ${MAX_READER_CHARS.toLocaleString()} characters at a time`, 3000);
@@ -709,6 +737,8 @@ function clearReader() {
   document.getElementById('readerTitle').value = '';
   document.getElementById('readerMaterialType').value = 'book';
   document.getElementById('readerMaterialSource').value = '';
+  document.getElementById('readerMaterialAudio').value = '';
+  setReaderAudio('');
   document.getElementById('readerPassage').innerHTML = '';
   document.getElementById('readerPassage').classList.add('hidden');
   document.getElementById('readerStats').innerHTML = '';
@@ -770,6 +800,10 @@ function initReader() {
   document.getElementById('readerResumeBtn').addEventListener('click', () => {
     const id = availableReaderBookId(readerProgress.lastBook().id);
     if (id) return openBookChapter(id, undefined, true);
+  });
+  document.getElementById('readerAudioRate').addEventListener('change', () => {
+    const player = document.getElementById('readerAudioPlayer');
+    player.defaultPlaybackRate = player.playbackRate = Number(document.getElementById('readerAudioRate').value) || 1;
   });
   document.getElementById('readerChapter').addEventListener('change', e => openBookChapter(readerBookId, e.target.value));
   document.getElementById('readerPrevChapter').addEventListener('click', () => openBookChapter(readerBookId, readerChapterIndex - 1));

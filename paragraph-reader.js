@@ -20,9 +20,11 @@ function openParagraphAnalysis(text) {
   if (text.length > ParagraphCore.MAX_CHARS) { toast('Select a shorter passage — up to 6,000 characters. / 请选中较短的段落。', 3500); return; }
   closeReaderPanel();
   const inBook = !!readerBookId;
+  // Book, news or conversation: the AI explains each kind of material differently
+  const kind = typeof currentReadingKind === 'function' ? currentReadingKind() : 'book';
   showParagraphDialog({
     text, title: reader.title, chapter: inBook ? activeReaderChapter?.title || '' : '',
-    bookId: inBook ? readerBookId : '', chapterId: inBook ? activeReaderChapter?.id || '' : '',
+    bookId: inBook ? readerBookId : '', chapterId: inBook ? activeReaderChapter?.id || '' : '', kind,
   }, null, readyStatus(text));
   if (window.autoParagraphAI === true && canAnalyzeHere(text)) generateParagraphAnalysis();
 }
@@ -36,8 +38,8 @@ function showSavedAnalysis(entry) {
     toast('This saved analysis is damaged and cannot be shown. / 这条已保存的解析已损坏，无法显示。', 3500);
     return;
   }
-  const { text, title, chapter, bookId, chapterId } = entry;
-  showParagraphDialog({ text, title, chapter, bookId, chapterId }, result,
+  const { text, title, chapter, bookId, chapterId, kind = 'book' } = entry;
+  showParagraphDialog({ text, title, chapter, bookId, chapterId, kind }, result,
     `Saved analysis${entry.model ? ` · ${entry.model}` : ''}. / 已保存的解析。`);
 }
 

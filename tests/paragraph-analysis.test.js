@@ -244,3 +244,42 @@ test('a saved analysis reopens without asking the model again', () => {
   h.run('closeParagraphAnalysis(); showSavedAnalysis(broken)');
   assert.equal(h.element('readerAnalysisDialog').open, false, 'A damaged saved analysis is not shown');
 });
+
+test('the prompt matches the material: novels avoid spoilers, news looks for the claim, conversation for spoken English', () => {
+  const book = core.buildPrompt({ text: fixture.passage, title: 'The Golden Bird', kind: 'book' });
+  assert.match(book, /Do not reveal later events/);
+  assert.equal(core.buildPrompt({ text: fixture.passage, title: 'The Golden Bird' }), book, 'Books stay the default');
+  const news = core.buildPrompt({ text: fixture.passage, title: 'The Conversation', kind: 'news' });
+  assert.match(news, /main claim/);
+  assert.match(news, /stance/);
+  assert.doesNotMatch(news, /Do not reveal later events|original novels/);
+  const talk = core.buildPrompt({ text: fixture.passage, title: '6 Minute English', kind: 'conversation' });
+  assert.match(talk, /spoken English/);
+  assert.match(talk, /reply/);
+  assert.doesNotMatch(talk, /Do not reveal later events/);
+  const other = core.buildPrompt({ text: fixture.passage, kind: 'something else' });
+  assert.doesNotMatch(other, /Do not reveal later events|main claim|spoken English/);
+  for (const prompt of [book, news, talk, other]) {
+    assert.match(prompt, /"simplified":\{"en"/, 'Every kind asks for the same JSON, so validation is unchanged');
+    assert.ok(prompt.endsWith(JSON.stringify(fixture.passage)));
+  }
+  assert.match(news, /Source labels: \{"title":"The Conversation","chapter":"","kind":"news"\}/);
+});
+
+test('the analysis knows what kind of material the passage comes from, and the saved analysis keeps it', async () => {
+  const h = uiHarness();
+  const saved = [];
+  h.context.saveAnalysis = (context, result, model) => { saved.push(context); return true; };
+  h.context.currentReadingKind = () => 'conversation';
+  h.context.window.requestParagraphAI = async ({ prompt }) => { h.context.lastPrompt = prompt; return fixture.analysis; };
+  h.context.selectedPassage = fixture.passage;
+  h.run('openParagraphAnalysis(selectedPassage)');
+  assert.equal(h.run('paragraphContext.kind'), 'conversation');
+  await h.run('generateParagraphAnalysis()');
+  assert.match(h.context.lastPrompt, /spoken English/);
+  assert.equal(saved[0].kind, 'conversation');
+  h.context.entry = { id: 'a1', text: fixture.passage, title: 'BBC', chapter: '', bookId: '', chapterId: '', model: '', kind: 'news',
+    updatedAt: '2026-10-09T01:00:00.000Z', result: core.validateResponse(fixture.analysis, fixture.passage) };
+  h.run('showSavedAnalysis(entry)');
+  assert.equal(h.run('paragraphContext.kind'), 'news', 'Re-analysing a saved passage uses its original kind');
+});

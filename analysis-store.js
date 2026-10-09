@@ -6,8 +6,8 @@
   const isText = value => typeof value === 'string';
   const normalize = text => String(text || '').replace(/\s+/g, ' ').trim();
 
-  function createEntry({ text, title = '', chapter = '', bookId = '', chapterId = '', model = '', result }, now, id) {
-    return { id, createdAt: now, updatedAt: now, text: text.trim(), title, chapter, bookId, chapterId, model, result };
+  function createEntry({ text, title = '', chapter = '', bookId = '', chapterId = '', kind = 'book', model = '', result }, now, id) {
+    return { id, createdAt: now, updatedAt: now, text: text.trim(), title, chapter, bookId, chapterId, kind, model, result };
   }
 
   // A live analysis needs its passage and a result object; tombstones and malformed entries are handled by SyncedList

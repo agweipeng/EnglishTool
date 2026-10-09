@@ -526,6 +526,13 @@ textarea { resize: vertical; min-height: 50px; }
 .storage-bar.storage-warn span { background: var(--warning); }
 .storage-bar.storage-high span { background: var(--danger); }
 .storage-advice { color: var(--danger); font-size: 14px; }
+.reader-audio {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 12px;
+  background: var(--surface); padding: 12px; border-radius: var(--radius); border: 1px solid var(--border);
+}
+.reader-audio audio { flex: 1; min-width: min(280px, 100%); }
+.reader-audio label { color: var(--text-muted); font-size: 13px; }
+.reader-audio .hint { flex-basis: 100%; margin: 0; }
 .reader-layout { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 16px; align-items: start; }
 .reader-passage {
   background: var(--surface); padding: 24px;
