@@ -1,4 +1,5 @@
-/* Local model transport through the optional same-origin local server. */
+/* Local model transport: through the optional same-origin local server, or — on the
+   hosted site, where that server doesn't exist — straight to Ollama on this computer. */
 (function (root) {
   'use strict';
   const core = typeof module !== 'undefined' && module.exports ? require('./paragraph-core.js') : root.ParagraphCore;
@@ -18,8 +19,13 @@
     missing: 'Start EnglishTool with scripts/serve-local-ai.py to connect local AI. / 请使用 scripts/serve-local-ai.py 启动 EnglishTool，以连接本地 AI。',
     invalid: 'The local model returned an incomplete reply. Try again. / 本地模型返回了不完整的回复，请重试。',
     model: 'This local chat model is no longer installed. Check the connection and choose an available model. / 此本地聊天模型已不可用，请检查连接并选择可用模型。',
+    direct: 'Could not reach Ollama on this computer. Check that Ollama is running, that this site is allowed (OLLAMA_ORIGINS, then restart Ollama), and that the browser may access your local network. / 无法连接本机的 Ollama。请确认 Ollama 正在运行、已允许本网站（设置 OLLAMA_ORIGINS 后重启 Ollama），并允许浏览器访问本地网络。',
   };
   function fail(message) { const error = new Error(message); error.name = 'LocalAIError'; return error; }
+  const defaultFetch = () => root.fetch.bind(root);
+
+  // ---------- Through scripts/serve-local-ai.py ----------
+
   async function fetchJSON(path, options, fetchImpl) {
     let response;
     try { response = await fetchImpl(path, options); }
@@ -30,26 +36,102 @@
     if (!response.ok) throw fail(messages[body?.error?.code] || messages.upstream);
     return body;
   }
-  async function models({ signal, provider = 'lmstudio', fetchImpl = root.fetch.bind(root) } = {}) {
+  async function proxyModels(provider, signal, fetchImpl) {
     const body = await fetchJSON(provider === 'ollama' ? '/local-ai/models?provider=ollama' : '/local-ai/models', { signal }, fetchImpl);
     if (!Array.isArray(body?.data)) throw fail(messages.invalid);
-    return [...new Set(body.data.filter(model => typeof model?.id === 'string' && model.id.trim()).map(model => model.id))];
+    return body.data.filter(model => typeof model?.id === 'string' && model.id.trim()).map(model => model.id);
   }
-  function request(model, { provider = 'lmstudio', fetchImpl = root.fetch.bind(root) } = {}) {
-    return async ({ prompt, signal }) => {
-      const body = await fetchJSON('/local-ai/chat', { method: 'POST', signal,
-        headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model, provider,
-          messages: [{ role: 'user', content: prompt }], stream: false, temperature: 0.2, max_tokens: 8192,
-          response_format: { type: 'json_schema', json_schema: { name: 'reading_analysis', strict: true, schema } },
-        }) }, fetchImpl);
-      const choice = body?.choices?.[0];
-      if (choice?.finish_reason === 'length') throw fail(messages.invalid);
-      const content = choice?.message?.content;
-      if (typeof content !== 'string' || !content.trim()) throw fail(messages.invalid);
-      return content;
-    };
+  async function proxyChat(model, provider, prompt, signal, fetchImpl) {
+    const body = await fetchJSON('/local-ai/chat', { method: 'POST', signal,
+      headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model, provider,
+        messages: [{ role: 'user', content: prompt }], stream: false, temperature: 0.2, max_tokens: 8192,
+        response_format: { type: 'json_schema', json_schema: { name: 'reading_analysis', strict: true, schema } },
+      }) }, fetchImpl);
+    const choice = body?.choices?.[0];
+    if (choice?.finish_reason === 'length') throw fail(messages.invalid);
+    const content = choice?.message?.content;
+    if (typeof content !== 'string' || !content.trim()) throw fail(messages.invalid);
+    return content;
   }
-  const api = { models, request, schema };
+
+  // ---------- Straight to Ollama (hosted site) ----------
+  // Needs a one-time OLLAMA_ORIGINS setting so Ollama accepts this site.
+
+  const OLLAMA_URL = 'http://127.0.0.1:11434';
+  const CHAT_DEADLINE_MS = 300000;
+  const LOOPBACK_HOSTS = new Set(['localhost', '127.0.0.1', '[::1]']);
+
+  // Pages served by serve-local-ai.py (loopback) keep using it
+  function usesDirectOllama(location = root.location) {
+    return !!location && /^https?:$/.test(location.protocol) && !LOOPBACK_HOSTS.has(location.hostname);
+  }
+
+  async function ollamaFetch(path, options, fetchImpl) {
+    let response;
+    try { response = await fetchImpl(OLLAMA_URL + path, options); }
+    catch (error) { if (error.name === 'AbortError') throw error; throw fail(messages.direct); }
+    if (response.status === 403) throw fail(messages.direct);
+    if (!response.ok) throw fail(messages.upstream);
+    return response;
+  }
+
+  // Same rule as the local server: installed local chat models only, never cloud ones
+  async function ollamaModels(signal, fetchImpl) {
+    const response = await ollamaFetch('/api/tags', { signal }, fetchImpl);
+    let body;
+    try { body = await response.json(); } catch { throw fail(messages.invalid); }
+    if (!Array.isArray(body?.models)) throw fail(messages.invalid);
+    return body.models.filter(model => typeof model?.name === 'string' && model.name.trim()
+      && !model.remote_host && !model.remote_model && !/[-:]cloud$/.test(model.name)
+      && (!model.capabilities?.length || model.capabilities.includes('completion'))).map(model => model.name);
+  }
+
+  async function ollamaAnswer(response) {
+    let body;
+    try { body = await response.json(); } catch { throw fail(messages.invalid); }
+    const content = body?.message?.content;
+    if (body?.done !== true || body.done_reason === 'length' || typeof content !== 'string' || !content.trim()) {
+      throw fail(messages.invalid);
+    }
+    return content;
+  }
+
+  // Asks for one complete answer rather than a stream: if a tab stopped reading a
+  // stream (e.g. a frozen background tab), Ollama would stall for every later request.
+  async function ollamaChat(model, prompt, signal, fetchImpl) {
+    if (!(await ollamaModels(signal, fetchImpl)).includes(model)) throw fail(messages.model);
+    // Aborting the fetch closes the connection, which makes Ollama stop generating
+    const controller = new AbortController();
+    const forwardAbort = () => controller.abort();
+    signal?.addEventListener('abort', forwardAbort);
+    const deadline = setTimeout(() => controller.abort(), CHAT_DEADLINE_MS);
+    try {
+      const response = await ollamaFetch('/api/chat', { method: 'POST', signal: controller.signal,
+        headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model,
+          messages: [{ role: 'user', content: prompt }], stream: false, think: false, format: schema,
+          options: { temperature: 0.2, num_ctx: 16384, num_predict: 8192 } }) }, fetchImpl);
+      return await ollamaAnswer(response);
+    } catch (error) {
+      if (error.name === 'AbortError' && !signal?.aborted) throw fail(messages.timeout);
+      throw error;
+    } finally {
+      clearTimeout(deadline);
+      signal?.removeEventListener('abort', forwardAbort);
+    }
+  }
+
+  // ---------- Public API ----------
+
+  async function models({ signal, provider = 'lmstudio', direct = usesDirectOllama(), fetchImpl = defaultFetch() } = {}) {
+    const ids = direct && provider === 'ollama' ? await ollamaModels(signal, fetchImpl) : await proxyModels(provider, signal, fetchImpl);
+    return [...new Set(ids)];
+  }
+  function request(model, { provider = 'lmstudio', direct = usesDirectOllama(), fetchImpl = defaultFetch() } = {}) {
+    return ({ prompt, signal }) => (direct && provider === 'ollama'
+      ? ollamaChat(model, prompt, signal, fetchImpl)
+      : proxyChat(model, provider, prompt, signal, fetchImpl));
+  }
+  const api = { models, request, schema, usesDirectOllama };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.LocalAI = api;
 })(typeof window !== 'undefined' ? window : globalThis);

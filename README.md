@@ -121,7 +121,15 @@ For automatic analysis with **LM Studio**:
 
 The local server serves the app and forwards only model-list and chat requests to the selected service on this computer. It binds to `127.0.0.1`, requires the app's own origin, and does not require CORS or network-sharing changes. Prompts go to your local model; the provider, model choice and automatic-analysis preference are saved in this browser. Existing LM Studio settings migrate automatically. If LM Studio authentication is enabled, set `LM_STUDIO_API_TOKEN` in the server's environment; tokens are never stored in the browser or sent to Ollama. Custom ports: `python3 scripts/serve-local-ai.py --port 8001 --lmstudio-port 1235`.
 
-Opening `index.html` directly, using the plain static server, or using the hosted static site retains the Claude workflow; automatic local AI requires the local server above. Loading a model may take time. Missing servers, authentication problems, unsupported structured output, incomplete replies and outdated responses are handled without displaying partial analysis. Closing the panel cancels the request, and for Ollama the local server also stops the model's current answer.
+Opening `index.html` directly or using the plain static server retains the Claude workflow; automatic local AI there requires the local server above.
+
+**Ollama on the hosted site** (https://agweipeng.github.io/EnglishTool/): the page connects straight to Ollama on the same computer, so no Python server is needed. Allow the site once in Terminal, then quit and reopen Ollama:
+
+```bash
+launchctl setenv OLLAMA_ORIGINS "https://agweipeng.github.io"
+```
+
+Use Chrome or Edge on that computer and allow local network access if the browser asks. Never set `OLLAMA_ORIGINS` to `*`, which would let any website use your Ollama. `launchctl setenv` lasts until you restart the Mac. This does not work on a phone, because Ollama only listens on the computer itself; LM Studio still needs the local server. Loading a model may take time. Missing servers, authentication problems, unsupported structured output, incomplete replies and outdated responses are handled without displaying partial analysis. Closing the panel cancels the request, and for Ollama the local server also stops the model's current answer.
 
 在 Book Reader 中选中完整句子或段落（最多 6,000 个字符；本地 AI 最多解析 1,200 个字符，因为小型本地模型每 1,000 个字符约需 1–2 分钟，更长的段落请使用 Claude），即可打开解析面板。面板包含**简化版**、**重点**和**结构拆解**，英文后附对应中文，还提供原文听读、口语练习问题，以及**加入学习**按钮，用于把词汇或短语的语境释义和原文例句保存到现有复习词库中。较短的短语选择仍使用原有短语弹窗。
 
@@ -131,7 +139,7 @@ Claude 流程仍可使用：点击**使用 Claude 解析**，复制提示词并�
 
 使用 **LM Studio 自动解析**：先加载支持结构化 JSON 输出的聊天模型，在 Developer 页面启动本地服务器（默认端口 1234）；使用相同的 EnglishTool 启动命令和地址；点击 **Book Reader → 本地 AI**，选择 **LM Studio → 检查连接 → 选择模型 → 使用此模型**。关闭自动解析选项后，可点击**在工具内解析**手动开始。
 
-本地服务器只监听本机地址，并只向所选本地服务转发模型列表和聊天请求，不需要修改 CORS 或网络共享设置。提示词发送给本地模型；浏览器仅保存服务选择、模型选择和自动解析偏好。已有 LM Studio 设置会自动迁移。若 LM Studio 启用了认证，请在服务器环境中设置 `LM_STUDIO_API_TOKEN`，令牌不会保存在浏览器中，也不会发送给 Ollama。直接打开 HTML、普通静态服务器和静态托管网站仍可使用 Claude 流程；自动本地解析需要上述本地服务器。关闭面板会取消请求；使用 Ollama 时，本地服务器也会停止模型当前的生成。
+本地服务器只监听本机地址，并只向所选本地服务转发模型列表和聊天请求，不需要修改 CORS 或网络共享设置。提示词发送给本地模型；浏览器仅保存服务选择、模型选择和自动解析偏好。已有 LM Studio 设置会自动迁移。若 LM Studio 启用了认证，请在服务器环境中设置 `LM_STUDIO_API_TOKEN`，令牌不会保存在浏览器中，也不会发送给 Ollama。直接打开 HTML 和普通静态服务器仍可使用 Claude 流程；在这些方式下，自动本地解析需要上述本地服务器。**在线网站使用 Ollama**：页面会直接连接同一台电脑上的 Ollama，不需要 Python 服务器。请在终端中运行一次 `launchctl setenv OLLAMA_ORIGINS "https://agweipeng.github.io"`，然后退出并重新打开 Ollama；请在这台电脑上使用 Chrome 或 Edge，如有提示请允许访问本地网络。不要把 `OLLAMA_ORIGINS` 设为 `*`，否则任何网站都能使用你的 Ollama。该设置在重启 Mac 前有效。手机上无法使用，因为 Ollama 只在电脑本机上监听；LM Studio 仍需使用本地服务器。关闭面板会取消请求；使用 Ollama 时，本地服务器也会停止模型当前的生成。
 
 ## Files
 

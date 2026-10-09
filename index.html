@@ -290,7 +290,7 @@
       <header class="paragraph-header"><h2 id="localAIHeading">Local AI · 本地 AI</h2><button id="localAIClose" class="icon-btn" aria-label="Close settings / 关闭设置">✕</button></header>
       <p>Start Ollama or LM Studio with a local chat model. Then check the connection here.<br><span lang="zh-CN">启动 Ollama 或 LM Studio 并准备好本地聊天模型，然后在这里检查连接。</span></p>
       <label for="localAIProvider">Service / 服务</label><select id="localAIProvider"><option value="ollama">Ollama</option><option value="lmstudio">LM Studio</option></select>
-      <p class="hint">For local AI, start EnglishTool with <code>python3 scripts/serve-local-ai.py</code>, then open <code>http://127.0.0.1:8000</code>.<br><span lang="zh-CN">使用上述命令启动 EnglishTool，然后打开上述地址，即可连接本地 AI。</span></p>
+      <p id="localAIHint" class="hint">For local AI, start EnglishTool with <code>python3 scripts/serve-local-ai.py</code>, then open <code>http://127.0.0.1:8000</code>.<br><span lang="zh-CN">使用上述命令启动 EnglishTool，然后打开上述地址，即可连接本地 AI。</span></p>
       <button id="localAICheck" class="btn-ghost">Check connection / 检查连接</button>
       <p id="localAIStatus" role="status" aria-live="polite" class="hint"></p>
       <label for="localAIModel">Chat model / 聊天模型</label><select id="localAIModel"><option value="">Choose a model / 选择模型</option></select>

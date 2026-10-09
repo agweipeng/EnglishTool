@@ -40,11 +40,29 @@ function openLocalAISettings() {
   document.getElementById('localAIStatus').textContent = 'Check the connection to list your models. / 检查连接以列出你的模型。';
   document.getElementById('localAICheck').disabled = false;
   document.getElementById('localAIUse').disabled = true;
+  const hint = localAISetupHint();
+  if (hint) document.getElementById('localAIHint').textContent = hint;
   document.getElementById('localAIDialog').showModal();
+}
+
+// On the hosted site the browser talks to Ollama itself, so the setup differs from the
+// page's default instructions for scripts/serve-local-ai.py.
+function localAISetupHint() {
+  if (!LocalAI.usesDirectOllama()) return null;
+  const origin = window.location.origin;
+  return 'On this website, EnglishTool connects straight to Ollama on this computer. Use Chrome or Edge and allow local network access if asked. '
+    + `Allow this site once in Terminal: launchctl setenv OLLAMA_ORIGINS "${origin}" — then quit and reopen Ollama. LM Studio needs the local server. / `
+    + '在本网站上，EnglishTool 会直接连接本机的 Ollama。请使用 Chrome 或 Edge，如有提示请允许访问本地网络。'
+    + `请在终端中运行一次：launchctl setenv OLLAMA_ORIGINS "${origin}"，然后退出并重新打开 Ollama。LM Studio 需要使用本地服务器。`;
 }
 
 async function checkLocalAIConnection() {
   localAICheckRequest?.abort();
+  if (document.getElementById('localAIProvider').value === 'lmstudio' && LocalAI.usesDirectOllama()) {
+    localAICheckRequest = null;
+    document.getElementById('localAIStatus').textContent = 'On this website, choose Ollama. LM Studio works when you start EnglishTool with scripts/serve-local-ai.py. / 在本网站上请选择 Ollama；LM Studio 需要通过 scripts/serve-local-ai.py 启动 EnglishTool 才能使用。';
+    return;
+  }
   const controller = new AbortController();
   localAICheckRequest = controller;
   localAIAvailableModels = [];

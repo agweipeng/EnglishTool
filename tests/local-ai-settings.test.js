@@ -15,7 +15,7 @@ function harness() {
   const context = vm.createContext({window:{},reader:{},paragraphContext:{text:'Test passage'},
     document:{readyState:'loading',addEventListener(){},getElementById:element,createElement:()=>({})},
     localStorage:{getItem:key=>saved.get(key),setItem:(key,value)=>saved.set(key,value),removeItem:key=>saved.delete(key)},
-    AbortController,setTimeout,clearTimeout,LocalAI:{request:()=>async()=>({}),models:async()=>['chat-model']},
+    AbortController,setTimeout,clearTimeout,LocalAI:{request:()=>async()=>({}),models:async()=>['chat-model'],usesDirectOllama:()=>false},
     closeParagraphAnalysis:()=>element('readerAnalysisDialog').open=false,openParagraphAnalysis(){},toast(){},
   });
   const run = code => vm.runInContext(code, context);
@@ -76,4 +76,25 @@ test('saved Ollama model and automatic analysis remain configured after reload',
   assert.equal(h.run('localAIConfig.provider'),'ollama');
   assert.equal(h.context.window.autoParagraphAI,true);
   assert.equal(h.element('readerLocalAIBtn').textContent,'✓ Ollama · 本地 AI');
+});
+
+test('on the hosted site the dialog explains the one-time Ollama setup for this exact site', () => {
+  const h = harness();
+  h.context.LocalAI.usesDirectOllama = () => true;
+  h.context.window.location = { origin: 'https://agweipeng.github.io' };
+  h.run('openLocalAISettings()');
+  assert.match(h.element('localAIHint').textContent, /launchctl setenv OLLAMA_ORIGINS "https:\/\/agweipeng\.github\.io"/);
+});
+
+test('LM Studio on the hosted site points to the local server instead of failing silently', async () => {
+  const h = harness();
+  let asked = false;
+  h.context.LocalAI.usesDirectOllama = () => true;
+  h.context.LocalAI.models = async () => { asked = true; return ['chat-model']; };
+  h.context.window.location = { origin: 'https://agweipeng.github.io' };
+  h.run('openLocalAISettings()');
+  h.element('localAIProvider').value = 'lmstudio';
+  await h.run('checkLocalAIConnection()');
+  assert.equal(asked, false);
+  assert.match(h.element('localAIStatus').textContent, /choose Ollama/);
 });
