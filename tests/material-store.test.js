@@ -13,7 +13,7 @@ const material = (id, now, overrides = {}) => store.createEntry({ title: '6 Minu
 test('a saved transcript keeps its title, type, source link and text', () => {
   const saved = material('m1', T1, { title: '  6 Minute English: Sleep  ', text: `  ${transcript}  ` });
   assert.deepEqual(saved, { id: 'm1', createdAt: T1, updatedAt: T1, title: '6 Minute English: Sleep', type: 'conversation',
-    sourceUrl: 'https://www.bbc.co.uk/learningenglish/english/features/6-minute-english', text: transcript });
+    sourceUrl: 'https://www.bbc.co.uk/learningenglish/english/features/6-minute-english', audioUrl: '', text: transcript });
   assert.equal(material('m2', T1, { type: 'podcast' }).type, 'other', 'Unknown types fall back to Other');
 });
 
@@ -48,4 +48,14 @@ test('the shelf reports when it is full instead of silently dropping old materia
   assert.equal(store.isFull(list, 'A new episode'), true);
   assert.equal(store.isFull(list, 'episode 3'), false, 'Updating an existing title is still allowed');
   assert.equal(store.isFull(store.remove(list, 'm0', T2), 'A new episode'), false);
+});
+
+test('a saved transcript can keep a link to its audio, which must be https', () => {
+  const withAudio = material('m1', T1, { audioUrl: 'https://downloads.bbc.co.uk/learningenglish/features/6min/episode.mp3' });
+  assert.equal(withAudio.audioUrl, 'https://downloads.bbc.co.uk/learningenglish/features/6min/episode.mp3');
+  assert.equal(material('m2', T1).audioUrl, '', 'Audio is optional');
+  const oldEntry = { ...material('old', T1) };
+  delete oldEntry.audioUrl;
+  const merged = store.merge([oldEntry], [{ ...material('bad', T1), audioUrl: 'http://example.com/a.mp3' }, { ...material('js', T1), audioUrl: 'javascript:alert(1)' }]);
+  assert.deepEqual(merged.map(m => m.id), ['old'], 'Older materials without audio still load; unsafe audio links are ignored');
 });

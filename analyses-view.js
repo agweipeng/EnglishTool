@@ -3,14 +3,16 @@
 'use strict';
 
 const ANALYSIS_PREVIEW_CHARS = 220;
-const PASSAGE_ANCHOR_CHARS = 60;   // enough of the passage to find it again in the chapter
+const PASSAGE_ANCHOR_CHARS = 60;
+// Books need no label; other kinds of material are named on the card
+const ANALYSIS_KIND_NAMES = { news: 'News / 新闻', conversation: 'Conversation / 对话', other: 'Other / 其他' };   // enough of the passage to find it again in the chapter
 let analysesQuery = '';
 
 // Saves (or replaces) the analysis of a passage. Returns false if storage is full.
 function saveAnalysis(context, result, model) {
   const entry = AnalysisStore.createEntry({
     text: context.text, title: context.title || '', chapter: context.chapter || '',
-    bookId: context.bookId || '', chapterId: context.chapterId || '', model: model || '', result,
+    bookId: context.bookId || '', chapterId: context.chapterId || '', kind: context.kind || 'book', model: model || '', result,
   }, new Date().toISOString(), uid());
   const previous = state.analyses;
   state.analyses = AnalysisStore.upsert(previous, entry);
@@ -27,7 +29,8 @@ function saveAnalysis(context, result, model) {
 
 function analysisCard(entry) {
   const where = [entry.title, entry.chapter].filter(Boolean).join(' · ') || 'Your own text / 自己粘贴的文本';
-  const meta = [where, new Date(entry.updatedAt).toLocaleString(), entry.model].filter(Boolean).join(' · ');
+  const kindName = ANALYSIS_KIND_NAMES[entry.kind] || '';
+  const meta = [where, kindName, new Date(entry.updatedAt).toLocaleString(), entry.model].filter(Boolean).join(' · ');
   const preview = entry.text.length > ANALYSIS_PREVIEW_CHARS ? `${entry.text.slice(0, ANALYSIS_PREVIEW_CHARS)}…` : entry.text;
   const main = entry.result.mainPoint || {};
   const canOpenBook = entry.bookId && typeof readerBookById === 'function' && readerBookById(entry.bookId);

@@ -19,7 +19,7 @@ python3 -m http.server 8000
 - **Auto-fill** from [Wiktionary](https://en.wiktionary.org) and the [Free Dictionary API](https://dictionaryapi.dev) (both asked at once, first answer wins, with a 5-second timeout), Chinese translation via [MyMemory](https://mymemory.translated.net), and **synonyms / antonyms / word family / collocations** from [Datamuse](https://www.datamuse.com/api/) — all free, no API key
 - **Bulk import** — paste a list of words, auto-fill + enrichment runs for each
 - **Transcript extraction** — paste a podcast transcript / article paragraph, the tool picks the uncommon vocabulary you don't already have (skipping words you've marked known, including inflected forms)
-- **Reader 📖** — includes seven complete original books (137 chapters and stories, from *The Wonderful Wizard of Oz* to 1920s modern English in *The Great Gatsby* and Agatha Christie's first Poirot mystery), a browsable shelf with reading guidance, chapter navigation, and separate bookmarks. **Modern English news**: fresh articles from *The Conversation* every day and easier *VOA Learning English* lessons with audio, read in the same reader. Save up to 50 of your own transcripts or articles (for example **BBC Learning English** episodes) on the **My reading materials** shelf, with an optional source link; they sync and back up with your learning data. See your **coverage %** (an estimate based on your known-word list). Unknown words are underlined; click any word to see its **English definition** (looked up from the dictionary, or your own meaning if it's in your library), then add it with its original sentence as the example or mark it known. Marking one form known covers the whole word family. Select several words to add a **phrase**. Names are detected and excluded.
+- **Reader 📖** — includes seven complete original books (137 chapters and stories, from *The Wonderful Wizard of Oz* to early 20th-century English in *The Great Gatsby* and Agatha Christie's first Poirot mystery), a browsable shelf with reading guidance, chapter navigation, and separate bookmarks. **Modern English news**: fresh articles from *The Conversation* every day and easier *VOA Learning English* lessons with a built-in audio player (0.75×–1× speed) for listening and shadowing, read in the same reader. Save up to 50 of your own transcripts or articles (for example **BBC Learning English** episodes) on the **My reading materials** shelf, with an optional source link and an optional https audio link (such as the episode's MP3) that plays above the text; they sync and back up with your learning data. See your **coverage %** (an estimate based on your known-word list). Unknown words are underlined; click any word to see its **English definition** (looked up from the dictionary, or your own meaning if it's in your library), then add it with its original sentence as the example or mark it known. Marking one form known covers the whole word family. Select several words to add a **phrase**. Names are detected and excluded.
 - **Analyses 📝** — every AI passage analysis from the Reader is saved here so you can search it, reopen it, or jump back to the passage later
 - **7 learn modes** powered by a modified SM-2 spaced-repetition algorithm:
   - 📖 Meaning Recall — see word, recall meaning, self-rate
@@ -69,8 +69,8 @@ The shelf contains complete Project Gutenberg editions, with full source text an
 | [The Secret Garden](https://www.gutenberg.org/ebooks/113) · 秘密花园 | 27 chapters | Early choice; some dialect |
 | [Anne of Green Gables](https://www.gutenberg.org/ebooks/45) · 绿山墙的安妮 | 38 chapters | Later step |
 | [The Adventures of Sherlock Holmes](https://www.gutenberg.org/ebooks/1661) · 福尔摩斯冒险史 | 12 stories | Later challenge |
-| [The Great Gatsby](https://www.gutenberg.org/ebooks/64317) · 了不起的盖茨比 | 9 chapters | Modern English (1925) |
-| [The Mysterious Affair at Styles](https://www.gutenberg.org/ebooks/863) · 斯泰尔斯庄园奇案 | 13 chapters | Modern English (1920); lots of dialogue |
+| [The Great Gatsby](https://www.gutenberg.org/ebooks/64317) · 了不起的盖茨比 | 9 chapters | Early 20th-century English (1925) |
+| [The Mysterious Affair at Styles](https://www.gutenberg.org/ebooks/863) · 斯泰尔斯庄园奇案 | 13 chapters | Early 20th-century English (1920); lots of dialogue |
 
 *The Mysterious Affair at Styles* is public domain in the USA, where this site is hosted; it may still be under copyright in countries with life-plus-70-year terms.
 
@@ -85,7 +85,7 @@ Two openly licensed news sources are bundled as Reader packages (one article per
 | [The Conversation](https://theconversation.com/global) | Newest 30, refreshed daily by the **Daily News** GitHub Action | [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/): article text republished unchanged with author credit and a link; images and embedded media are left out, and articles with tables or sidebars are skipped so no text is dropped |
 | [VOA Learning English](https://learningenglish.voanews.com) | 41 lessons and articles from early 2025, with audio links | Public domain (U.S. government work). VOA stopped publishing new lessons in March 2025. Only articles with a VOA Learning English byline are kept; stories adapted from AP, Reuters or AFP reports are skipped, because only VOA's own writing is public domain |
 
-Each article shows its author, date, credit line and links to the original (and to VOA's audio). To refresh them by hand:
+Each article shows its author, date, credit line and a link to the original; VOA lessons play their audio in the reader's player. To refresh them by hand:
 
 ```bash
 node scripts/import-news.mjs conversation
@@ -94,7 +94,7 @@ node scripts/import-news.mjs voa
 
 The importer keeps the newest articles, removes old article files, leaves the package unchanged if a feed fails, and only rewrites it when something changed. **BBC Learning English** transcripts are BBC copyright, so they are not bundled or republished here: paste them into **My reading materials**, where they stay private to you.
 
-**现代英语阅读**：在 Reader 中打开 **Modern English: news & articles**，可以阅读每天更新的 *The Conversation* 文章（大学学者为大众撰写的地道英语，CC BY-ND 4.0 授权，正文文字原样转载并注明作者和出处，不含图片和嵌入媒体），以及较简单、带音频的 *VOA Learning English* 课程（公有领域；VOA 自 2025 年 3 月起停止更新）。BBC Learning English 的文字稿受 BBC 版权保护，不能放进公开网站：请复制文字稿，粘贴到 **My reading materials**（我的阅读材料）保存，这些材料只属于你自己，并会随学习数据一起同步和备份。
+**现代英语阅读**：在 Reader 中打开 **Modern English: news & articles**，可以阅读每天更新的 *The Conversation* 文章（大学学者为大众撰写的地道英语，CC BY-ND 4.0 授权，正文文字原样转载并注明作者和出处，不含图片和嵌入媒体），以及较简单、带音频的 *VOA Learning English* 课程（公有领域；VOA 自 2025 年 3 月起停止更新）。VOA 课程可在阅读器内的播放器中收听（可调 0.75×–1× 语速），适合边听边读和跟读；保存的材料也可附上 https 音频链接（如 BBC 节目的 MP3）。BBC Learning English 的文字稿受 BBC 版权保护，不能放进公开网站：请复制文字稿，粘贴到 **My reading materials**（我的阅读材料）保存，这些材料只属于你自己，并会随学习数据一起同步和备份。
 
 ## Add future books
 
@@ -127,6 +127,8 @@ This release supports curated Gutenberg TXT imports through the command above. P
 Select a complete sentence or paragraph in the Reader (up to 6,000 characters; local AI analyzes up to 1,200 characters, because a small local model needs about 1–2 minutes per 1,000 characters — use Claude for longer passages). A short selection such as "Aunt Em." or "Mrs. Rachel" still opens the phrase popup. The analysis panel has three views: **Simpler English**, **Key expressions**, and **Sentence structure**, with English followed by corresponding Chinese. It also offers passage read-aloud, a speaking prompt, and **Learn** buttons that save a word or phrase with its contextual meaning and original example into your existing review library. Short phrase selections retain the existing phrase popup.
 
 The current working flow uses **Analyze with Claude**: it copies a structured tutoring prompt and opens Claude. Paste the prompt there, then copy Claude's complete reply into **Bring the AI response back → Show analysis**. The tool checks the response format and source quotations before displaying it. Vocabulary cards are saved normally.
+
+**Type-aware analysis** — the prompt adapts to what you are reading. Books avoid spoilers and end with a retelling question. News explains the writer's main claim, key details and stance without adding facts, and asks you to sum it up or give your view. Conversations (such as BBC transcripts) favour natural spoken expressions, idioms and phrasal verbs, explain what the speakers mean and their tone, and ask you to reply as you would in a real conversation. Bundled news uses the news guide automatically; pasted text uses the **Type** you choose; saved analyses show their type. / 解析会按材料类型调整：小说不剧透，新闻提炼作者观点，对话侧重口语表达，并给出相应的练习问题。
 
 **Analyses tab 📝** — every finished analysis (from Ollama, LM Studio or a pasted Claude reply) is saved automatically in the **Analyses** tab, newest first, with its book, chapter, date and model. Search by passage, book, chapter or explanation; **Open** shows the full analysis again without asking the model, **Open in book** jumps back to the passage in its chapter, and **Delete** removes it. Analysing the same passage again replaces the older analysis. Saved analyses are part of your learning data, so they are included in Export/Import JSON, Sync Code and cloud sync; a deletion also syncs to your other devices.
 

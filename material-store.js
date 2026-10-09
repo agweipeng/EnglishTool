@@ -11,14 +11,17 @@
   const isText = value => typeof value === 'string';
   const titleKey = title => String(title || '').trim().toLocaleLowerCase();
 
-  function createEntry({ title, type, sourceUrl = '', text }, now, id) {
+  function createEntry({ title, type, sourceUrl = '', audioUrl = '', text }, now, id) {
     return { id, createdAt: now, updatedAt: now, title: title.trim(), type: TYPES.includes(type) ? type : 'other',
-      sourceUrl, text: text.trim() };
+      sourceUrl, audioUrl, text: text.trim() };
   }
+  // Audio plays inside the https site, so only https links; materials saved before audio existed have none
+  const isAudioLink = url => url === undefined || url === '' || (isText(url) && /^https:\/\//.test(url));
 
   const list = SyncedList.create(entry => isText(entry.title) && !!entry.title.trim()
     && isText(entry.text) && !!entry.text.trim() && entry.text.length <= MAX_MATERIAL_CHARS
-    && TYPES.includes(entry.type) && isText(entry.sourceUrl) && (!entry.sourceUrl || /^https?:\/\//.test(entry.sourceUrl)));
+    && TYPES.includes(entry.type) && isText(entry.sourceUrl) && (!entry.sourceUrl || /^https?:\/\//.test(entry.sourceUrl))
+    && isAudioLink(entry.audioUrl));
 
   // Saving a title that is already on the shelf updates that material
   const upsert = (entries, entry) => list.upsert(entries, entry, (a, b) => titleKey(a.title) === titleKey(b.title));

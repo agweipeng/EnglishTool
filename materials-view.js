@@ -30,9 +30,10 @@ function renderReadingMaterials() {
   container.innerHTML = materials.map(item => {
     const words = item.text.split(/\s+/).filter(Boolean).length;
     const source = /^https?:\/\//.test(item.sourceUrl) ? `<a href="${escapeHTML(item.sourceUrl)}" target="_blank" rel="noopener">Source ↗</a>` : '';
+    const audio = item.audioUrl ? ' · 🔊 Audio' : '';
     return `<article class="reader-shelf-card reader-material-card" data-material-id="${escapeHTML(item.id)}">
       <b>${escapeHTML(item.title)}</b>
-      <span class="reader-material-meta">${MATERIAL_TYPE_NAMES[item.type]} · ${words.toLocaleString()} words</span>
+      <span class="reader-material-meta">${MATERIAL_TYPE_NAMES[item.type]} · ${words.toLocaleString()} words${audio}</span>
       ${source}
       <div class="reader-material-actions">
         <button class="btn-primary" data-material-act="open">Open in Reader</button>
@@ -53,19 +54,25 @@ function readMaterialForm() {
     toast(`Too long — save up to ${MaterialStore.MAX_MATERIAL_CHARS.toLocaleString()} characters at a time`, 3500);
     return null;
   }
-  const sourceValue = document.getElementById('readerMaterialSource').value.trim();
-  let sourceUrl = '';
-  if (sourceValue) {
-    try {
-      const url = new URL(sourceValue);
-      if (!['http:', 'https:'].includes(url.protocol)) throw new Error('Unsupported URL');
-      sourceUrl = url.href;
-    } catch {
-      toast('Enter a valid http or https source link');
-      return null;
-    }
+  const sourceUrl = readLink('readerMaterialSource', ['http:', 'https:'], 'Enter a valid http or https source link');
+  // Audio must be https: the site is https, so browsers won't play an http file inside it
+  const audioUrl = readLink('readerMaterialAudio', ['https:'], 'Enter a valid https audio link (for BBC, the episode’s MP3 download link)');
+  if (sourceUrl === null || audioUrl === null) return null;
+  return { title, type: document.getElementById('readerMaterialType').value, sourceUrl, audioUrl, text };
+}
+
+// An optional link field: '' when empty, the normalised URL when valid, null (after a message) when not
+function readLink(id, protocols, message) {
+  const value = document.getElementById(id).value.trim();
+  if (!value) return '';
+  try {
+    const url = new URL(value);
+    if (!protocols.includes(url.protocol)) throw new Error('Unsupported URL');
+    return url.href;
+  } catch {
+    toast(message, 3500);
+    return null;
   }
-  return { title, type: document.getElementById('readerMaterialType').value, sourceUrl, text };
 }
 
 function saveCurrentReadingMaterial() {
@@ -89,8 +96,10 @@ function openReadingMaterial(item) {
   document.getElementById('readerTitle').value = item.title;
   document.getElementById('readerMaterialType').value = item.type;
   document.getElementById('readerMaterialSource').value = item.sourceUrl;
+  document.getElementById('readerMaterialAudio').value = item.audioUrl || '';
   document.getElementById('readerInput').value = item.text;
   analyzeReaderText();
+  setReaderAudio(item.audioUrl || '', item.text);
   document.getElementById('readerPaste').open = false;
 }
 

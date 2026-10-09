@@ -37,13 +37,16 @@ function readerHarness(memory = new Map()) {
   function element(id) {
     if (!elements.has(id)) {
       const classes = new Set(id === 'view-reader' ? ['active'] : []);
+      const attributes = new Map();
       elements.set(id, {
         value: '', innerHTML: '', textContent: '', disabled: false, open: false,
         classList: {
           add: c => classes.add(c), remove: c => classes.delete(c), contains: c => classes.has(c),
           toggle(c, force) { if (force) classes.add(c); else classes.delete(c); },
         },
-        setAttribute() {},
+        setAttribute(name, value) { attributes.set(name, String(value)); },
+        getAttribute: name => attributes.get(name) ?? null, removeAttribute: name => attributes.delete(name),
+        pause() {}, load() {},
         addEventListener(name, handler) { events.set(`${id}:${name}`, handler); },
         getBoundingClientRect: () => ({ top: 700 - browserWindow.scrollY, height: 4000 }),
       });
@@ -607,4 +610,27 @@ test('short selections with an abbreviation or a name stay phrases instead of st
   }
   readingSelection(h, 'Toto was not gray. He was a little black dog.');
   assert.equal(h.run('selectedReadingText().kind'), 'paragraph');
+});
+
+test('VOA articles play their audio in the reader; books, new pasted text and unsafe links hide the player', async () => {
+  const h = readerHarness();
+  const voa = books.find(b => b.id === 'voa-learning-english');
+  assert.match(voa.chapters[0].audioUrl, /^https:\/\/voa-audio\.voanews\.eu\//);
+  await h.run("openBookChapter('voa-learning-english', 0)");
+  assert.equal(h.element('readerAudio').classList.contains('hidden'), false);
+  assert.equal(h.element('readerAudioPlayer').getAttribute('src'), voa.chapters[0].audioUrl);
+  assert.doesNotMatch(h.element('readerArticleCredit').innerHTML, /Listen to the audio/, 'The player replaces the separate audio link');
+  await h.run("openBookChapter('wizard-of-oz', 0)");
+  assert.equal(h.element('readerAudio').classList.contains('hidden'), true);
+  assert.equal(h.element('readerAudioPlayer').getAttribute('src'), null);
+  h.run("clearReader(); readerInput = document.getElementById('readerInput'); readerInput.value = 'Neil: Hello. Beth: Hi there.'; analyzeReaderText()");
+  h.run("setReaderAudio('https://downloads.bbc.co.uk/learningenglish/a.mp3', 'Neil: Hello. Beth: Hi there.')");
+  assert.equal(h.element('readerAudio').classList.contains('hidden'), false);
+  h.run("analyzeReaderText()");
+  assert.equal(h.element('readerAudio').classList.contains('hidden'), false, 'Re-reading the same transcript keeps its audio');
+  h.element('readerInput').value = 'A different article.';
+  h.run("analyzeReaderText()");
+  assert.equal(h.element('readerAudio').classList.contains('hidden'), true, 'New pasted text does not inherit the old audio');
+  h.run("setReaderAudio('javascript:alert(1)', 'x')");
+  assert.equal(h.element('readerAudio').classList.contains('hidden'), true);
 });

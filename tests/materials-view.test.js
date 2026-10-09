@@ -21,15 +21,17 @@ function harness() {
     uid: () => `id${++ids}`, toast: message => calls.toasts.push(message), confirm: () => calls.confirm,
     saveState() { calls.saveState++; },
     clearReader() { calls.cleared++; },
+    setReaderAudio: (url, text) => { calls.audio = { url, text }; },
     analyzeReaderText() { calls.analyzed.push(element('readerInput').value); },
   });
   const run = code => vm.runInContext(code, sandbox);
   run(fs.readFileSync(require.resolve('../materials-view.js'), 'utf8'));
-  const fill = (title, text, { type = 'conversation', source = '' } = {}) => {
+  const fill = (title, text, { type = 'conversation', source = '', audio = '' } = {}) => {
     element('readerTitle').value = title;
     element('readerInput').value = text;
     element('readerMaterialType').value = type;
     element('readerMaterialSource').value = source;
+    element('readerMaterialAudio').value = audio;
   };
   const click = (act, id) => run(`onMaterialsClick({ target: { closest: () => ({ dataset: { materialAct: '${act}' }, closest: () => ({ dataset: { materialId: '${id}' } }) }) } })`);
   return { sandbox, run, element, calls, fill, click };
@@ -98,4 +100,21 @@ test('cards open the material in the reader or delete it with a sync tombstone',
   assert.deepEqual(MaterialStore.visible(h.sandbox.state.materials), []);
   assert.equal(h.sandbox.state.materials[0].deleted, true);
   assert.match(h.element('readerMaterialsList').innerHTML, /No saved materials yet/);
+});
+
+test('a transcript saved with its audio link plays that audio when opened', () => {
+  const h = harness();
+  const mp3 = 'https://downloads.bbc.co.uk/learningenglish/features/6min/episode.mp3';
+  h.fill('6 Minute English: Alcohol', 'Neil: Hello. Beth: Hi.', { audio: mp3 });
+  h.run('saveCurrentReadingMaterial()');
+  const [saved] = MaterialStore.visible(h.sandbox.state.materials);
+  assert.equal(saved.audioUrl, mp3);
+  assert.match(h.element('readerMaterialsList').innerHTML, /🔊/);
+  h.click('open', saved.id);
+  assert.deepEqual({ ...h.calls.audio }, { url: mp3, text: 'Neil: Hello. Beth: Hi.' });
+  assert.equal(h.element('readerMaterialAudio').value, mp3);
+  h.fill('No audio', 'Text.', { audio: 'http://example.com/a.mp3' });
+  h.run('saveCurrentReadingMaterial()');
+  assert.equal(MaterialStore.visible(h.sandbox.state.materials).length, 1, 'Audio links must be https so they play on the https site');
+  assert.match(h.calls.toasts.at(-1), /audio link/);
 });

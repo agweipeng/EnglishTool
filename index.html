@@ -261,7 +261,8 @@
         <a href="https://www.bbc.co.uk/learningenglish/english/features/6-minute-english" target="_blank" rel="noopener">6 Minute English ↗</a> or
         <a href="https://www.bbc.co.uk/learningenglish/english/features/the-english-we-speak" target="_blank" rel="noopener">The English We Speak ↗</a>,
         copy its transcript, then paste it below with the episode title, type <b>Conversation</b> and the episode link, and choose <b>Save to materials</b>.
-        / 打开 BBC 节目，复制文字稿，粘贴到下方并保存。</p>
+        To listen while you read, also paste the episode’s MP3 link (right-click <b>Download</b> on the episode page → Copy link) as the audio link.
+        / 打开 BBC 节目，复制文字稿，粘贴到下方并保存；如需边听边读，可再粘贴节目的 MP3 下载链接作为音频链接。</p>
       <div id="readerMaterialsList" class="reader-shelf-grid"></div>
     </details>
     <details class="reader-paste" id="readerPaste">
@@ -278,6 +279,7 @@
           <option value="other">Other</option>
         </select>
         <input type="url" id="readerMaterialSource" placeholder="Source link (optional)" aria-label="Source link (optional)" />
+        <input type="url" id="readerMaterialAudio" placeholder="Audio link (optional, https .mp3)" aria-label="Audio link (optional, https MP3)" />
       </div>
       <textarea id="readerInput" rows="6" placeholder="Paste an article, episode transcript, or book passage…"></textarea>
       <div class="form-actions">
@@ -290,6 +292,17 @@
     <h3 id="readerChapterHeading" class="hidden"></h3>
     <p class="hint">Select a sentence or paragraph for AI analysis. / 选中句子或段落，查看 AI 解析。</p>
     <div id="readerStats" class="reader-stats"></div>
+    <div id="readerAudio" class="reader-audio hidden">
+      <audio id="readerAudioPlayer" controls preload="none"></audio>
+      <label>Speed / 语速
+        <select id="readerAudioRate">
+          <option value="0.75">0.75×</option>
+          <option value="0.9">0.9×</option>
+          <option value="1" selected>1×</option>
+        </select>
+      </label>
+      <p class="hint">Listen while you read, then pause and repeat each sentence aloud (shadowing). / 边听边读，然后暂停并跟读每个句子。</p>
+    </div>
     <div class="reader-layout">
       <div id="readerPassage" class="reader-passage hidden"></div>
       <div id="readerUnknown" class="reader-unknown"></div>
