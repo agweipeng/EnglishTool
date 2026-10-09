@@ -42,6 +42,7 @@ function defaultState() {
     journal: {},    // { 'YYYY-MM-DD': 'entry text' }
     known: [],      // lowercase words the user already knows (Book Reader)
     knownLog: {},   // { word: { known, ts } } — un-marks, so sync doesn't resurrect them
+    analyses: [],   // saved AI passage analyses (see analysis-store.js)
   };
 }
 
@@ -162,6 +163,7 @@ function mergeStates(local, remote) {
     journal,
     known,
     knownLog,
+    analyses: AnalysisStore.merge(local.analyses, remote.analyses),
   };
 }
 
@@ -255,6 +257,7 @@ function refreshActiveView() {
   else if (id === 'stats') renderStats();
   else if (id === 'reading') renderReading();
   else if (id === 'reader') refreshReaderStatuses();
+  else if (id === 'analyses' && typeof renderAnalysesView === 'function') renderAnalysesView();
   // learn view: don't disrupt an in-progress card
 }
 
@@ -378,6 +381,7 @@ function showView(name) {
   if (name === 'stats') renderStats();
   if (name === 'reading') renderReading();
   if (name === 'reader') renderReader();
+  if (name === 'analyses' && typeof renderAnalysesView === 'function') renderAnalysesView();
   if (name === 'news') loadNews();
   if (name === 'journal') { renderJournal(); renderRoleplayWords(); }
   if (typeof syncReaderURL === 'function') syncReaderURL();
@@ -1465,7 +1469,10 @@ function importJSON(file) {
       if (parsed.known !== undefined && !Array.isArray(parsed.known)) throw new Error('Invalid known-word list');
       if (parsed.words.some(w => !w || typeof w.text !== 'string' || !w.text.trim())) throw new Error('Invalid word');
       if (parsed.readingProgress !== undefined) ReaderProgress.validateSnapshot(parsed.readingProgress);
-      if (!confirm(`Import ${parsed.words.length} words${parsed.readingProgress ? ' and reading bookmarks' : ''}? This will merge with existing data.`)) return;
+      if (parsed.analyses !== undefined && !Array.isArray(parsed.analyses)) throw new Error('Invalid saved analyses');
+      const analysisCount = AnalysisStore.visible(parsed.analyses).length;
+      const extras = [parsed.readingProgress ? 'reading bookmarks' : '', analysisCount ? `${analysisCount} saved analyses` : ''].filter(Boolean);
+      if (!confirm(`Import ${parsed.words.length} words${extras.length ? ` and ${extras.join(' and ')}` : ''}? This will merge with existing data.`)) return;
       if (parsed.readingProgress) {
         ReaderProgress.createStore(localStorage).merge(parsed.readingProgress);
         if (typeof onReaderProgressImported === 'function') onReaderProgressImported();
@@ -1481,6 +1488,7 @@ function importJSON(file) {
       const mergedKnown = TextCore.mergeKnown(state, parsed);
       state.known = mergedKnown.known;
       state.knownLog = mergedKnown.knownLog;
+      state.analyses = AnalysisStore.merge(state.analyses, parsed.analyses);
       saveState();
       toast(`Imported ${parsed.words.length} words`);
       renderLibrary();

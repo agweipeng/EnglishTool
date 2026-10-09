@@ -20,6 +20,7 @@ python3 -m http.server 8000
 - **Bulk import** — paste a list of words, auto-fill + enrichment runs for each
 - **Transcript extraction** — paste a podcast transcript / article paragraph, the tool picks the uncommon vocabulary you don't already have (skipping words you've marked known, including inflected forms)
 - **Book Reader 📕** — includes five complete original books (115 chapters and stories), a browsable shelf with reading guidance, chapter navigation, and separate bookmarks that resume each book at your saved chapter and text position in this browser — scrolling back up to the chapter controls doesn't reset it. You can also paste your own text and see your **coverage %** (an estimate based on your known-word list). Unknown words are underlined; click any word to see its **English definition** (looked up from the dictionary, or your own meaning if it's in your library), then add it with **the book's own sentence** as its example (tagged with the book title), or mark it known. Marking one form known covers the whole word family: knowing "walked" also counts "walk", "walking" and "walks". Select several words to add a **phrase**. "I know all the rest" calibrates your known-word list in one click. Names are detected and excluded.
+- **Analyses 📝** — every AI passage analysis from the Book Reader is saved here so you can search it, reopen it, or jump back to the passage later
 - **7 learn modes** powered by a modified SM-2 spaced-repetition algorithm:
   - 📖 Meaning Recall — see word, recall meaning, self-rate
   - 👂 Listening MCQ — hear sentence, pick correct meaning
@@ -53,7 +54,7 @@ For now, use **Settings → Sync Code** to move data between devices manually (o
 
 ## Data
 
-Learning data lives in `localStorage` under the key `englishTrainerData_v1` (words, activity, streak, journal, and `known` — your known-word list). The Book Reader keeps a pasted-text draft or bundled-book reference under `englishTrainerReader_v1`, per-book positions under `englishTrainerBookmarks_v1`, and the last opened book under `englishTrainerLastBook_v1`. Bookmarks use stable chapter IDs, a text offset/excerpt, chapter version, and a scroll-percentage fallback. Legacy Wizard of Oz bookmarks migrate automatically. **Settings → Export JSON** includes reading progress alongside learning data; importing merges bookmarks using their timestamps and accepts older backups without reader data. After restoring a backup, the reader discards outdated bundled text and resumes the merged bookmark; personal pasted text is preserved. Pasted drafts and book content are not included in backups. Reader progress remains per-device and is not included in Sync Code or cloud sync. All book files are bundled locally; HTTP loads only the selected manifest and chapter. Opening `index.html` directly loads only the selected book’s compatibility package.
+Learning data lives in `localStorage` under the key `englishTrainerData_v1` (words, activity, streak, journal, `known` — your known-word list, and `analyses` — saved passage analyses; deleted ones leave a small marker so sync doesn't bring them back). The Book Reader keeps a pasted-text draft or bundled-book reference under `englishTrainerReader_v1`, per-book positions under `englishTrainerBookmarks_v1`, and the last opened book under `englishTrainerLastBook_v1`. Bookmarks use stable chapter IDs, a text offset/excerpt, chapter version, and a scroll-percentage fallback. Legacy Wizard of Oz bookmarks migrate automatically. **Settings → Export JSON** includes reading progress alongside learning data; importing merges bookmarks using their timestamps and accepts older backups without reader data. After restoring a backup, the reader discards outdated bundled text and resumes the merged bookmark; personal pasted text is preserved. Pasted drafts and book content are not included in backups. Reader progress remains per-device and is not included in Sync Code or cloud sync. All book files are bundled locally; HTTP loads only the selected manifest and chapter. Opening `index.html` directly loads only the selected book’s compatibility package.
 
 ## Start reading
 
@@ -101,7 +102,9 @@ This release supports curated Gutenberg TXT imports through the command above. P
 
 Select a complete sentence or paragraph in the Book Reader (up to 6,000 characters; local AI analyzes up to 1,200 characters, because a small local model needs about 1–2 minutes per 1,000 characters — use Claude for longer passages). A short selection such as "Aunt Em." or "Mrs. Rachel" still opens the phrase popup. The analysis panel has three views: **Simpler English**, **Key expressions**, and **Sentence structure**, with English followed by corresponding Chinese. It also offers passage read-aloud, a speaking prompt, and **Learn** buttons that save a word or phrase with its contextual meaning and original example into your existing review library. Short phrase selections retain the existing phrase popup.
 
-The current working flow uses **Analyze with Claude**: it copies a structured tutoring prompt and opens Claude. Paste the prompt there, then copy Claude's complete reply into **Bring the AI response back → Show analysis**. The tool checks the response format and source quotations before displaying it. Explanations stay open for the current selection and are not saved; vocabulary cards are saved normally.
+The current working flow uses **Analyze with Claude**: it copies a structured tutoring prompt and opens Claude. Paste the prompt there, then copy Claude's complete reply into **Bring the AI response back → Show analysis**. The tool checks the response format and source quotations before displaying it. Vocabulary cards are saved normally.
+
+**Analyses tab 📝** — every finished analysis (from Ollama, LM Studio or a pasted Claude reply) is saved automatically in the **Analyses** tab, newest first, with its book, chapter, date and model. Search by passage, book, chapter or explanation; **Open** shows the full analysis again without asking the model, **Open in book** jumps back to the passage in its chapter, and **Delete** removes it. Analysing the same passage again replaces the older analysis. Saved analyses are part of your learning data, so they are included in Export/Import JSON, Sync Code and cloud sync; a deletion also syncs to your other devices.
 
 For automatic analysis with **Ollama**:
 
@@ -133,7 +136,9 @@ Use Chrome or Edge on that computer and allow local network access if the browse
 
 在 Book Reader 中选中完整句子或段落（最多 6,000 个字符；本地 AI 最多解析 1,200 个字符，因为小型本地模型每 1,000 个字符约需 1–2 分钟，更长的段落请使用 Claude），即可打开解析面板。面板包含**简化版**、**重点**和**结构拆解**，英文后附对应中文，还提供原文听读、口语练习问题，以及**加入学习**按钮，用于把词汇或短语的语境释义和原文例句保存到现有复习词库中。较短的短语选择仍使用原有短语弹窗。
 
-Claude 流程仍可使用：点击**使用 Claude 解析**，复制提示词并打开 Claude；把提示词粘贴到 Claude，再将其完整回复粘贴到**粘贴 AI 回复 → 显示解析**。工具会检查回复格式及原文引用。解析只保留在当前选段的面板中，不会持久保存；词汇卡片会正常保存。
+Claude 流程仍可使用：点击**使用 Claude 解析**，复制提示词并打开 Claude；把提示词粘贴到 Claude，再将其完整回复粘贴到**粘贴 AI 回复 → 显示解析**。工具会检查回复格式及原文引用。词汇卡片会正常保存。
+
+**解析标签页 📝**：每次完成的解析（来自 Ollama、LM Studio 或粘贴的 Claude 回复）都会自动保存在 **Analyses** 标签页中，按时间从新到旧排列，并记录书名、章节、日期和模型。可按原文、书名、章节或解析内容搜索；**查看**会重新显示完整解析而无需再次调用模型，**回到原书**会跳转到该段落所在章节，**删除**可移除解析。再次解析同一段落会替换旧的解析。已保存的解析属于学习数据，会包含在 JSON 导出/导入、Sync Code 和云同步中；删除操作也会同步到其他设备。
 
 使用 **Ollama 自动解析**：启动 Ollama 并准备好已安装的本地聊天模型（默认端口 11434）；在 EnglishTool 文件夹运行 `python3 scripts/serve-local-ai.py`，打开 `http://127.0.0.1:8000`；点击 **Book Reader → 本地 AI**，选择 **Ollama → 检查连接 → 选择模型 → 使用此模型**。启用**选中段落后自动解析**后，选中句子或段落即可开始解析。工具只允许使用已安装的本地聊天模型，排除云端和仅用于嵌入的模型。词汇卡片的例句直接取自所选原文，模型负责释义和解析。小模型常会截短句子或加上“…”，工具会把这些引用对应回原文的准确文字，无法在段落中找到的内容会被略去，而不是丢弃整份解析。解析面板会显示已用时间。工具不会下载模型或更改 Ollama 配置。
 
@@ -149,6 +154,7 @@ Claude 流程仍可使用：点击**使用 Claude 解析**，复制提示词并�
 - `app.js` — SRS engine, TTS, views, API calls
 - `reader.js` — Book Reader view and known-word actions
 - `paragraph-core.js` / `paragraph-reader.js` — bilingual passage prompts, response validation and analysis panel
+- `analysis-store.js` / `analyses-view.js` — saved analyses (save, replace, delete, device merge, search) and the Analyses tab
 - `local-ai.js` / `local-ai-settings.js` — local AI transport, provider/model selection and automatic-analysis preferences
 - `scripts/serve-local-ai.py` — loopback-only app server and Ollama/LM Studio proxy
 - `books/catalog.json` / `catalog.js` — metadata-only bookshelf
