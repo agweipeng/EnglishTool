@@ -1,6 +1,6 @@
-/* Reader → AI news today: daily headlines from news.json (written by .github/workflows/daily-news.yml).
-   The articles are copyrighted, so only links are stored; "Paste to read" opens the original and gets the
-   reader ready for its text, which then gets word lookups and AI analysis like any news article. */
+/* News tab: daily AI headlines from news.json (written by .github/workflows/daily-news.yml).
+   The articles are copyrighted, so the repository only stores links; "Import to Reader" fetches an
+   article for you (article-import.js) into your private reading materials for word lookups and AI analysis. */
 'use strict';
 
 const AI_NEWS_SECTIONS = [
@@ -58,7 +58,7 @@ function articleCard(item, key) {
         <div class="news-card-meta">${escapeHTML(newsHost(item.url))} ↗</div>
       </a>
       <div class="news-card-actions">
-        <button class="btn-ghost" data-news-paste="${escapeHTML(key)}" title="Open the article, then paste its text into the reader">📋 Paste to read</button>
+        <button class="btn-ghost" data-news-import="${escapeHTML(key)}" title="Read this article in the Reader with word lookups and AI analysis">📥 Import to Reader</button>
         <button class="mic-btn" data-mic-text="${escapeHTML(item.title)}" title="Read aloud challenge">🎙️ Read aloud</button>
       </div>
     </div>`;
@@ -73,27 +73,11 @@ function repoCard(repo) {
     </a>`;
 }
 
-// Opens the original (first, inside the click, so it isn't blocked as a pop-up) and fills in the paste form as news
-function prepareNewsPaste(item) {
-  window.open(item.url, '_blank', 'noopener');
-  if (document.getElementById('readerInput').value.trim()
-    && !confirm('Replace the text in the reader with this article? Save it to your materials first if you want to keep it. / 用这篇文章替换阅读器中的文字吗？')) return;
-  clearReader();
-  document.getElementById('readerTitle').value = item.title;
-  document.getElementById('readerMaterialType').value = 'news';
-  document.getElementById('readerMaterialSource').value = item.url;
-  document.getElementById('readerPaste').open = true;
-  const input = document.getElementById('readerInput');
-  input.scrollIntoView({ block: 'center' });
-  input.focus();
-  toast('Copy the article text from the page that just opened, paste it here, then choose Read / Analyze. / 从刚打开的网页复制文章正文，粘贴到这里，然后点击 Read / Analyze。', 6000);
-}
-
 function onAINewsClick(event) {
-  const paste = event.target.closest('[data-news-paste]');
-  if (paste) {
-    const item = aiNewsItems.get(paste.dataset.newsPaste);
-    if (item) prepareNewsPaste(item);
+  const importButton = event.target.closest('[data-news-import]');
+  if (importButton) {
+    const item = aiNewsItems.get(importButton.dataset.newsImport);
+    if (item) importArticleFromLink(item.url, { openReader: true });
     return;
   }
   const mic = event.target.closest('[data-mic-text]');
@@ -103,10 +87,9 @@ function onAINewsClick(event) {
   }
 }
 
+// The News tab loads its headlines when shown (showView in app.js calls loadAINews)
 function initAINews() {
-  const shelf = document.getElementById('readerAINewsShelf');
-  shelf.addEventListener('toggle', () => { if (shelf.open) loadAINews(); });
-  shelf.addEventListener('click', onAINewsClick);
+  document.getElementById('view-news').addEventListener('click', onAINewsClick);
   document.getElementById('newsRefreshBtn').addEventListener('click', () => loadAINews(true));
 }
 

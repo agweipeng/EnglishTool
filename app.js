@@ -422,6 +422,7 @@ function showView(name) {
   if (name === 'reading') renderReading();
   if (name === 'reader') renderReader();
   if (name === 'analyses' && typeof renderAnalysesView === 'function') renderAnalysesView();
+  if (name === 'news' && typeof loadAINews === 'function') loadAINews();
   if (name === 'settings' && typeof renderStorageMeter === 'function') renderStorageMeter();
   if (name === 'journal') { renderJournal(); renderRoleplayWords(); }
   if (typeof syncReaderURL === 'function') syncReaderURL();

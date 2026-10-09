@@ -17,6 +17,7 @@
     <button class="tab" data-view="reading">Reading</button>
     <button class="tab" data-view="reader">Reader 📖</button>
     <button class="tab" data-view="analyses">Analyses 📝</button>
+    <button class="tab" data-view="news">News 📰</button>
     <a class="tab" href="digests/" target="_blank" rel="noopener">Digests 📚</a>
     <button class="tab" data-view="journal">Journal ✍️</button>
     <button class="tab" data-view="stats">Stats</button>
@@ -237,15 +238,16 @@
       <details class="reader-shelf"><summary>Modern English: news &amp; articles · 现代英语：新闻与文章</summary>
         <p class="hint">Fresh articles from The Conversation every day, plus easier VOA Learning English news with audio. Click any word or select a passage, just like in the books.</p>
         <div id="readerNewsShelf" class="reader-shelf-grid"></div></details>
-      <details class="reader-shelf" id="readerAINewsShelf"><summary>AI news today · 今日 AI 新闻</summary>
-        <p class="hint">Daily headlines from Anthropic, OpenAI and Google. These articles are copyrighted, so only links are kept here: choose <b>Paste to read</b> to open the article, copy its text, and paste it into the reader for word lookups and AI analysis (it is read as news). Save it to your materials to keep it.
-          / 每日 Anthropic、OpenAI、Google 新闻标题。文章受版权保护，这里只保存链接：点击 <b>Paste to read</b> 打开原文，复制正文并粘贴到阅读器，即可查词和 AI 解析。</p>
-        <p class="hint">Updated: <span id="newsLastUpdated">—</span> <button class="btn-ghost" id="newsRefreshBtn">🔄 Refresh</button></p>
-        <div class="news-section"><h3>🤖 Anthropic</h3><div class="news-list" id="newsAnthropic"></div></div>
-        <div class="news-section"><h3>🔬 OpenAI</h3><div class="news-list" id="newsOpenAI"></div></div>
-        <div class="news-section"><h3>💎 Google AI / Gemini</h3><div class="news-list" id="newsGoogle"></div></div>
-        <div class="news-section"><h3>🐙 Trending AI repos (GitHub, last 7 days)</h3><div class="news-list" id="newsGithub"></div></div>
-      </details>
+      <div class="reader-import">
+        <label for="readerImportUrl"><b>Import an article from a link · 从链接导入文章</b></label>
+        <div class="reader-import-row">
+          <input type="url" id="readerImportUrl" placeholder="https://… (news article, blog post or transcript page)" autocomplete="off" />
+          <button class="btn-primary" id="readerImportBtn">📥 Import</button>
+        </div>
+        <p id="readerImportStatus" class="hint" role="status" aria-live="polite"></p>
+        <p class="hint">The page is read through the free Jina Reader service (only the link is sent, never your learning data), opened here as news, and saved privately to My reading materials. Pages behind a login or paywall can’t be imported — copy and paste those instead.
+          / 网页通过免费的 Jina Reader 服务读取（只发送链接，不发送学习数据），以新闻类型打开，并私下保存到“我的阅读材料”。需要登录或付费的网页无法导入，请复制粘贴正文。</p>
+      </div>
       <p id="readerLoadStatus" class="hint" role="status" aria-live="polite"></p>
       <button id="readerRetryBtn" class="btn-ghost hidden">Try again</button>
       <div id="readerBookControls" class="hidden">
@@ -359,6 +361,38 @@
     <label class="local-ai-auto"><input id="localAIAuto" type="checkbox" checked> Analyze when I select a passage / 选中段落后自动解析</label>
     <div class="form-actions"><button id="localAIUse" class="btn-primary" disabled>Use this model / 使用此模型</button><button id="localAIDisconnect" class="btn-ghost">Disconnect / 断开连接</button></div>
   </dialog>
+
+  <!-- ============ NEWS VIEW (DailyNews) ============ -->
+  <section class="view" id="view-news">
+    <div class="news-header">
+      <h2>DailyNews — AI 📰</h2>
+      <div class="news-meta">
+        <span class="hint">Updated: <span id="newsLastUpdated">—</span></span>
+        <button class="btn-ghost" id="newsRefreshBtn">🔄 Refresh</button>
+      </div>
+    </div>
+    <p class="hint">Latest posts from Anthropic, OpenAI, Google AI / Gemini, and the most-starred AI repos on GitHub this week. Updated daily by a GitHub Action. Choose <b>📥 Import to Reader</b> on a post to read it in the Reader with word lookups and AI analysis. / 点击 <b>📥 Import to Reader</b>，即可在阅读器中查词并进行 AI 解析。</p>
+
+    <div class="news-section">
+      <h3>🤖 Anthropic</h3>
+      <div class="news-list" id="newsAnthropic"><p class="hint">Loading…</p></div>
+    </div>
+
+    <div class="news-section">
+      <h3>🔬 OpenAI</h3>
+      <div class="news-list" id="newsOpenAI"><p class="hint">Loading…</p></div>
+    </div>
+
+    <div class="news-section">
+      <h3>💎 Google AI / Gemini</h3>
+      <div class="news-list" id="newsGoogle"><p class="hint">Loading…</p></div>
+    </div>
+
+    <div class="news-section">
+      <h3>🐙 Trending AI Repos (GitHub, last 7 days)</h3>
+      <div class="news-list" id="newsGithub"><p class="hint">Loading…</p></div>
+    </div>
+  </section>
 
   <!-- ============ JOURNAL VIEW ============ -->
   <section class="view" id="view-journal">
@@ -572,6 +606,8 @@
 <script src="outside-click.js"></script>
 <script src="reader.js"></script>
 <script src="materials-view.js"></script>
+<script src="article-import-core.js"></script>
+<script src="article-import.js"></script>
 <script src="ai-news.js"></script>
 <script src="local-ai.js"></script>
 <script src="local-ai-settings.js"></script>
