@@ -6,11 +6,12 @@ const vm = require('node:vm');
 const TextCore = require('../text-core.js');
 const AnalysisStore = require('../analysis-store.js');
 const MaterialStore = require('../material-store.js');
+const JournalFeedbackStore = require('../journal-feedback-store.js');
 
 const word = (id, text, updatedAt) => ({ id, text, updatedAt });
 // Same shape as defaultState() in app.js
 const data = (words, known = []) => ({ words, settings: { voiceURI: null, rate: 1, theme: 'light' }, activity: {},
-  streak: { current: 0, lastDay: null }, journal: {}, known, knownLog: {}, analyses: [], materials: [] });
+  streak: { current: 0, lastDay: null }, journal: {}, journalFeedback: {}, known, knownLog: {}, analyses: [], materials: [] });
 
 // A fake gist server: GET returns the stored file, PATCH replaces it. `gate` lets a test hold a GET open.
 function gistServer(initial) {
@@ -40,7 +41,7 @@ function harness(localState, server) {
   const timers = [];
   const calls = { refresh: 0 };
   const context = vm.createContext({
-    state: localState, TextCore, AnalysisStore, MaterialStore, JSON, Date, Math, Map, Object, Array, Promise, Error,
+    state: localState, TextCore, AnalysisStore, MaterialStore, JournalFeedbackStore, JSON, Date, Math, Map, Object, Array, Promise, Error,
     STORAGE_KEY: 'englishTrainerData_v1', SYNC_KEY: 'englishTrainerSync_v1', GIST_FILE: 'english-trainer-data.json', PUSH_DEBOUNCE_MS: 2500,
     localStorage: { getItem: k => memory.get(k) ?? null, setItem: (k, v) => memory.set(k, v), removeItem: k => memory.delete(k) },
     document: { getElementById: () => null },
@@ -102,4 +103,17 @@ test('a save during a running sync waits for it and then syncs once more, never 
   assert.equal(server.maxActive, 1, 'Requests never overlap');
   assert.equal(server.gets, 2, 'The save during the sync caused exactly one more round');
   assert.deepEqual(JSON.parse(server.content).words.map(w => w.text), ['first', 'second']);
+});
+
+test('journal replies from Claude or ChatGPT sync too, newest edit winning for each day', async () => {
+  const phone = { ...data([]), journalFeedback: {
+    '2026-10-08': { text: 'Phone reply', source: 'chatgpt', updatedAt: '2026-10-09T02:00:00Z' },
+    '2026-10-09': { text: 'Only on phone', source: 'claude', updatedAt: '2026-10-09T01:00:00Z' } } };
+  const mac = { ...data([]), journalFeedback: { '2026-10-08': { text: 'Older mac reply', source: 'claude', updatedAt: '2026-10-09T01:00:00Z' } } };
+  const server = gistServer(phone);
+  const h = harness(mac, server);
+  assert.equal(await h.run('syncNow()'), true);
+  const merged = h.context.state.journalFeedback;
+  assert.deepEqual(Object.keys(merged).sort(), ['2026-10-08', '2026-10-09']);
+  assert.equal(merged['2026-10-08'].text, 'Phone reply');
 });

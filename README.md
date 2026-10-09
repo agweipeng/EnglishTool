@@ -21,6 +21,7 @@ python3 -m http.server 8000
 - **Transcript extraction** — paste a podcast transcript / article paragraph, the tool picks the uncommon vocabulary you don't already have (skipping words you've marked known, including inflected forms)
 - **Reader 📖** — includes seven complete original books (137 chapters and stories, from *The Wonderful Wizard of Oz* to early 20th-century English in *The Great Gatsby* and Agatha Christie's first Poirot mystery), a browsable shelf with reading guidance, chapter navigation, and separate bookmarks. **Modern English news**: fresh articles from *The Conversation* every day and easier *VOA Learning English* lessons with a built-in audio player (0.75×–1× speed) for listening and shadowing, read in the same reader. Save up to 50 of your own transcripts or articles (for example **BBC Learning English** episodes) on the **My reading materials** shelf, with an optional source link and an optional https audio link (such as the episode's MP3) that plays above the text; they sync and back up with your learning data. See your **coverage %** (an estimate based on your known-word list). Unknown words are underlined; click any word to see its **English definition** (looked up from the dictionary, or your own meaning if it's in your library), then add it with its original sentence as the example or mark it known. Marking one form known covers the whole word family. Select several words to add a **phrase**. Names are detected and excluded.
 - **Analyses 📝** — every AI passage analysis from the Reader is saved here so you can search it, reopen it, or jump back to the passage later
+- Pop-up windows (word cards, AI analysis, Local AI settings, Read Aloud) close when you click outside them
 - **7 learn modes** powered by a modified SM-2 spaced-repetition algorithm:
   - 📖 Meaning Recall — see word, recall meaning, self-rate
   - 👂 Listening MCQ — hear sentence, pick correct meaning
@@ -31,7 +32,8 @@ python3 -m http.server 8000
   - 🗣️ Say it in English — see the Chinese meaning, **say** the English word or phrase (speech recognition) or type it
   - 🎲 Mixed mode (recommended) — randomly picks one per card
 - **Phrase cards 💬** — click a collocation chip (shown after revealing a meaning) to turn it into its own card; filter phrases in the Library
-- **Conversation Practice 🗣️** (Journal tab) — copies a role-play prompt for claude.ai built from your newest, stubborn and phrase cards; use claude.ai voice mode to speak, type `END` for corrections
+- **Journal ✍️** — write a few sentences each day, then **Grade with Claude** or **Grade with ChatGPT** (the prompt is copied and the site opens). Paste the reply into **AI feedback** under the entry: it is saved with that day, marked in Recent Entries, and syncs and backs up with your learning data
+- **Conversation Practice 🗣️** (Journal tab) — copies a role-play prompt for Claude or ChatGPT built from your newest, stubborn and phrase cards; use voice mode to speak, type `END` for corrections
 - **Auto-archive at level 5** — pass a word 5 times and it's moved out of active review
 - **Unknown-first + Leech-first selection** — low-level / new / overdue / often-wrong words get more chances; "stubborn words" (4+ wrong or >40% miss rate) get a big priority boost and are surfaced separately
 - **Spaced Reading 📖** — a paragraph view built from your recent words' example sentences with click-to-hear highlights and Play-All
@@ -54,7 +56,7 @@ For now, use **Settings → Sync Code** to move data between devices manually (o
 
 ## Data
 
-Learning data lives in `localStorage` under the key `englishTrainerData_v1` (words, activity, streak, journal, `known` — your known-word list, `analyses` — saved passage analyses, and `materials` — saved transcripts and articles; deleted analyses and materials leave a small marker so sync doesn't bring them back). Saved materials are included in Export/Import JSON, Sync Code and cloud sync; each is limited to 60,000 characters to keep sync small. Browsers allow about 5 MB of `localStorage` per site, and the cloud-sync file is the same data: **Settings → Storage** shows how much is used, split into words and progress, saved analyses and reading materials, and warns from about 3 MB. Gist files over 1 MB are read in full through their `raw_url`. Every sync, including the automatic one a few seconds after each save, reads and merges the gist before pushing, so devices never overwrite each other's changes; a failed read stops the sync instead of pushing. The Reader keeps the current pasted-text draft under `englishTrainerReader_v1`, per-book positions under `englishTrainerBookmarks_v1`, and the last opened book under `englishTrainerLastBook_v1`; reader progress stays in this browser and is not included in Sync Code or cloud sync. Bookmarks use stable chapter IDs, a text offset/excerpt, chapter version, and a scroll-percentage fallback. Legacy Wizard of Oz bookmarks migrate automatically. **Settings → Export JSON** includes reading progress alongside learning data; importing merges bookmarks using their timestamps and accepts older backups without reader data. All book files are bundled locally; HTTP loads only the selected manifest and chapter. Opening `index.html` directly loads only the selected book’s compatibility package.
+Learning data lives in `localStorage` under the key `englishTrainerData_v1` (words, activity, streak, journal, `known` — your known-word list, `analyses` — saved passage analyses, `materials` — saved transcripts and articles, and `journalFeedback` — pasted Claude/ChatGPT replies to journal entries, newest edit winning per day when devices sync; deleted analyses and materials leave a small marker so sync doesn't bring them back). Saved materials are included in Export/Import JSON, Sync Code and cloud sync; each is limited to 60,000 characters to keep sync small. Browsers allow about 5 MB of `localStorage` per site, and the cloud-sync file is the same data: **Settings → Storage** shows how much is used, split into words and progress, saved analyses and reading materials, and warns from about 3 MB. Gist files over 1 MB are read in full through their `raw_url`. Every sync, including the automatic one a few seconds after each save, reads and merges the gist before pushing, so devices never overwrite each other's changes; a failed read stops the sync instead of pushing. The Reader keeps the current pasted-text draft under `englishTrainerReader_v1`, per-book positions under `englishTrainerBookmarks_v1`, and the last opened book under `englishTrainerLastBook_v1`; reader progress stays in this browser and is not included in Sync Code or cloud sync. Bookmarks use stable chapter IDs, a text offset/excerpt, chapter version, and a scroll-percentage fallback. Legacy Wizard of Oz bookmarks migrate automatically. **Settings → Export JSON** includes reading progress alongside learning data; importing merges bookmarks using their timestamps and accepts older backups without reader data. All book files are bundled locally; HTTP loads only the selected manifest and chapter. Opening `index.html` directly loads only the selected book’s compatibility package.
 
 ## Start reading
 
@@ -92,9 +94,11 @@ node scripts/import-news.mjs conversation
 node scripts/import-news.mjs voa
 ```
 
-The importer keeps the newest articles, removes old article files, leaves the package unchanged if a feed fails, and only rewrites it when something changed. **BBC Learning English** transcripts are BBC copyright, so they are not bundled or republished here: paste them into **My reading materials**, where they stay private to you.
+The importer keeps the newest articles, removes old article files, leaves the package unchanged if a feed fails, and only rewrites it when something changed.
 
-**现代英语阅读**：在 Reader 中打开 **Modern English: news & articles**，可以阅读每天更新的 *The Conversation* 文章（大学学者为大众撰写的地道英语，CC BY-ND 4.0 授权，正文文字原样转载并注明作者和出处，不含图片和嵌入媒体），以及较简单、带音频的 *VOA Learning English* 课程（公有领域；VOA 自 2025 年 3 月起停止更新）。VOA 课程可在阅读器内的播放器中收听（可调 0.75×–1× 语速），适合边听边读和跟读；保存的材料也可附上 https 音频链接（如 BBC 节目的 MP3）。BBC Learning English 的文字稿受 BBC 版权保护，不能放进公开网站：请复制文字稿，粘贴到 **My reading materials**（我的阅读材料）保存，这些材料只属于你自己，并会随学习数据一起同步和备份。
+**AI news today** (in the Reader, formerly the News tab) lists daily headlines from Anthropic, OpenAI and Google AI plus trending AI repositories, from `news.json` written by the same GitHub Action (`scripts/fetch-news.mjs`). These articles are copyrighted, so only the links are stored. **Paste to read** opens the article and prepares the reader (title, type *News*, source link): copy the article text, paste it, and choose **Read / Analyze** to get word lookups and news-style AI analysis; **Save to materials** keeps it. **BBC Learning English** transcripts are BBC copyright, so they are not bundled or republished here: paste them into **My reading materials**, where they stay private to you.
+
+**现代英语阅读**：在 Reader 中打开 **Modern English: news & articles**，可以阅读每天更新的 *The Conversation* 文章（大学学者为大众撰写的地道英语，CC BY-ND 4.0 授权，正文文字原样转载并注明作者和出处，不含图片和嵌入媒体），以及较简单、带音频的 *VOA Learning English* 课程（公有领域；VOA 自 2025 年 3 月起停止更新）。VOA 课程可在阅读器内的播放器中收听（可调 0.75×–1× 语速），适合边听边读和跟读；保存的材料也可附上 https 音频链接（如 BBC 节目的 MP3）。Reader 中的 **AI news today**（原 News 标签页）列出 Anthropic、OpenAI、Google 的每日新闻标题：点击 **Paste to read** 打开原文，复制正文并粘贴，即可查词和按新闻类型做 AI 解析。BBC Learning English 的文字稿受 BBC 版权保护，不能放进公开网站：请复制文字稿，粘贴到 **My reading materials**（我的阅读材料）保存，这些材料只属于你自己，并会随学习数据一起同步和备份。
 
 ## Add future books
 
@@ -124,13 +128,13 @@ This release supports curated Gutenberg TXT imports through the command above. P
 
 ## Paragraph explanations · 段落解析
 
-Select a complete sentence or paragraph in the Reader (up to 6,000 characters; local AI analyzes up to 1,200 characters, because a small local model needs about 1–2 minutes per 1,000 characters — use Claude for longer passages). A short selection such as "Aunt Em." or "Mrs. Rachel" still opens the phrase popup. The analysis panel has three views: **Simpler English**, **Key expressions**, and **Sentence structure**, with English followed by corresponding Chinese. It also offers passage read-aloud, a speaking prompt, and **Learn** buttons that save a word or phrase with its contextual meaning and original example into your existing review library. Short phrase selections retain the existing phrase popup.
+Select a complete sentence or paragraph in the Reader (up to 6,000 characters; local AI analyzes up to 1,200 characters, because a small local model needs about 1–2 minutes per 1,000 characters — use Claude or ChatGPT for longer passages). A short selection such as "Aunt Em." or "Mrs. Rachel" still opens the phrase popup. The analysis panel has three views: **Simpler English**, **Key expressions**, and **Sentence structure**, with English followed by corresponding Chinese. It also offers passage read-aloud, a speaking prompt, and **Learn** buttons that save a word or phrase with its contextual meaning and original example into your existing review library. Short phrase selections retain the existing phrase popup.
 
-The current working flow uses **Analyze with Claude**: it copies a structured tutoring prompt and opens Claude. Paste the prompt there, then copy Claude's complete reply into **Bring the AI response back → Show analysis**. The tool checks the response format and source quotations before displaying it. Vocabulary cards are saved normally.
+Without local AI, use **Analyze with Claude** or **Analyze with ChatGPT**: it copies a structured tutoring prompt and opens claude.ai or chatgpt.com. Paste the prompt there, then copy the complete reply into **Bring the AI response back → Show analysis**. A reply with a sentence or code block around the JSON is accepted. The tool checks the response format and source quotations before displaying it. Vocabulary cards are saved normally.
 
 **Type-aware analysis** — the prompt adapts to what you are reading. Books avoid spoilers and end with a retelling question. News explains the writer's main claim, key details and stance without adding facts, and asks you to sum it up or give your view. Conversations (such as BBC transcripts) favour natural spoken expressions, idioms and phrasal verbs, explain what the speakers mean and their tone, and ask you to reply as you would in a real conversation. Bundled news uses the news guide automatically; pasted text uses the **Type** you choose; saved analyses show their type. / 解析会按材料类型调整：小说不剧透，新闻提炼作者观点，对话侧重口语表达，并给出相应的练习问题。
 
-**Analyses tab 📝** — every finished analysis (from Ollama, LM Studio or a pasted Claude reply) is saved automatically in the **Analyses** tab, newest first, with its book, chapter, date and model. Search by passage, book, chapter or explanation; **Open** shows the full analysis again without asking the model, **Open in book** jumps back to the passage in its chapter, and **Delete** removes it. Analysing the same passage again replaces the older analysis. Saved analyses are part of your learning data, so they are included in Export/Import JSON, Sync Code and cloud sync; a deletion also syncs to your other devices.
+**Analyses tab 📝** — every finished analysis (from Ollama, LM Studio or a pasted Claude or ChatGPT reply) is saved automatically in the **Analyses** tab, newest first, with its book, chapter, date and model. Search by passage, book, chapter or explanation; **Open** shows the full analysis again without asking the model, **Open in book** jumps back to the passage in its chapter, and **Delete** removes it. Analysing the same passage again replaces the older analysis. Saved analyses are part of your learning data, so they are included in Export/Import JSON, Sync Code and cloud sync; a deletion also syncs to your other devices.
 
 For automatic analysis with **Ollama**:
 
@@ -150,7 +154,7 @@ For automatic analysis with **LM Studio**:
 
 The local server serves the app and forwards only model-list and chat requests to the selected service on this computer. It binds to `127.0.0.1`, requires the app's own origin, and does not require CORS or network-sharing changes. Prompts go to your local model; the provider, model choice and automatic-analysis preference are saved in this browser. Existing LM Studio settings migrate automatically. If LM Studio authentication is enabled, set `LM_STUDIO_API_TOKEN` in the server's environment; tokens are never stored in the browser or sent to Ollama. Custom ports: `python3 scripts/serve-local-ai.py --port 8001 --lmstudio-port 1235`.
 
-Opening `index.html` directly or using the plain static server retains the Claude workflow; automatic local AI there requires the local server above.
+Opening `index.html` directly or using the plain static server retains the Claude and ChatGPT workflow; automatic local AI there requires the local server above.
 
 **Ollama on the hosted site** (https://agweipeng.github.io/EnglishTool/): the page connects straight to Ollama on the same computer, so no Python server is needed. Allow the site once in Terminal, then quit and reopen Ollama:
 
@@ -160,11 +164,11 @@ launchctl setenv OLLAMA_ORIGINS "https://agweipeng.github.io"
 
 Use Chrome or Edge on that computer and allow local network access if the browser asks. Never set `OLLAMA_ORIGINS` to `*`, which would let any website use your Ollama. `launchctl setenv` lasts until you restart the Mac. This does not work on a phone, because Ollama only listens on the computer itself; LM Studio still needs the local server. Loading a model may take time. Missing servers, authentication problems, unsupported structured output, incomplete replies and outdated responses are handled without displaying partial analysis. Closing the panel cancels the request, and for Ollama the local server also stops the model's current answer.
 
-在 Reader 中选中完整句子或段落（最多 6,000 个字符；本地 AI 最多解析 1,200 个字符，因为小型本地模型每 1,000 个字符约需 1–2 分钟，更长的段落请使用 Claude），即可打开解析面板。面板包含**简化版**、**重点**和**结构拆解**，英文后附对应中文，还提供原文听读、口语练习问题，以及**加入学习**按钮，用于把词汇或短语的语境释义和原文例句保存到现有复习词库中。较短的短语选择仍使用原有短语弹窗。
+在 Reader 中选中完整句子或段落（最多 6,000 个字符；本地 AI 最多解析 1,200 个字符，因为小型本地模型每 1,000 个字符约需 1–2 分钟，更长的段落请使用 Claude 或 ChatGPT），即可打开解析面板。面板包含**简化版**、**重点**和**结构拆解**，英文后附对应中文，还提供原文听读、口语练习问题，以及**加入学习**按钮，用于把词汇或短语的语境释义和原文例句保存到现有复习词库中。较短的短语选择仍使用原有短语弹窗。
 
-Claude 流程仍可使用：点击**使用 Claude 解析**，复制提示词并打开 Claude；把提示词粘贴到 Claude，再将其完整回复粘贴到**粘贴 AI 回复 → 显示解析**。工具会检查回复格式及原文引用。词汇卡片会正常保存。
+没有本地 AI 时，可点击**使用 Claude 解析**或**使用 ChatGPT 解析**，复制提示词并打开 claude.ai 或 chatgpt.com；把提示词粘贴过去，再将其完整回复粘贴到**粘贴 AI 回复 → 显示解析**。工具会检查回复格式及原文引用。词汇卡片会正常保存。
 
-**解析标签页 📝**：每次完成的解析（来自 Ollama、LM Studio 或粘贴的 Claude 回复）都会自动保存在 **Analyses** 标签页中，按时间从新到旧排列，并记录书名、章节、日期和模型。可按原文、书名、章节或解析内容搜索；**查看**会重新显示完整解析而无需再次调用模型，**回到原书**会跳转到该段落所在章节，**删除**可移除解析。再次解析同一段落会替换旧的解析。已保存的解析属于学习数据，会包含在 JSON 导出/导入、Sync Code 和云同步中；删除操作也会同步到其他设备。
+**解析标签页 📝**：每次完成的解析（来自 Ollama、LM Studio 或粘贴的 Claude / ChatGPT 回复）都会自动保存在 **Analyses** 标签页中，按时间从新到旧排列，并记录书名、章节、日期和模型。可按原文、书名、章节或解析内容搜索；**查看**会重新显示完整解析而无需再次调用模型，**回到原书**会跳转到该段落所在章节，**删除**可移除解析。再次解析同一段落会替换旧的解析。已保存的解析属于学习数据，会包含在 JSON 导出/导入、Sync Code 和云同步中；删除操作也会同步到其他设备。
 
 使用 **Ollama 自动解析**：启动 Ollama 并准备好已安装的本地聊天模型（默认端口 11434）；在 EnglishTool 文件夹运行 `python3 scripts/serve-local-ai.py`，打开 `http://127.0.0.1:8000`；点击 **Reader → 本地 AI**，选择 **Ollama → 检查连接 → 选择模型 → 使用此模型**。启用**选中段落后自动解析**后，选中句子或段落即可开始解析。工具只允许使用已安装的本地聊天模型，排除云端和仅用于嵌入的模型。词汇卡片的例句直接取自所选原文，模型负责释义和解析。小模型常会截短句子或加上“…”，工具会把这些引用对应回原文的准确文字，无法在段落中找到的内容会被略去，而不是丢弃整份解析。解析面板会显示已用时间。工具不会下载模型或更改 Ollama 配置。
 
@@ -181,6 +185,9 @@ Claude 流程仍可使用：点击**使用 Claude 解析**，复制提示词并�
 - `reader.js` — Reader view, book and news shelves, and known-word actions
 - `synced-list.js` — shared rules for lists that sync between devices (newer change wins, deletions leave a marker)
 - `material-store.js` / `materials-view.js` — saved transcripts and articles (My reading materials)
+- `ai-news.js` — Reader → AI news today (headlines from `news.json`, Paste to read)
+- `journal-feedback-store.js` — pasted Claude/ChatGPT replies to journal entries (save, clear, device merge)
+- `outside-click.js` — closing pop-ups by clicking outside them
 - `storage-meter.js` — Settings → Storage: how much browser space the learning data uses
 - `paragraph-core.js` / `paragraph-reader.js` — bilingual passage prompts, response validation and analysis panel
 - `analysis-store.js` / `analyses-view.js` — saved analyses (save, replace, delete, device merge, search) and the Analyses tab

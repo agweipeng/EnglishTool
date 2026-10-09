@@ -821,6 +821,9 @@ function initReader() {
   document.getElementById('readerAnalyzeBtn').addEventListener('click', analyzeReaderText);
   document.getElementById('readerClearBtn').addEventListener('click', clearReader);
   document.getElementById('readerPassage').addEventListener('click', onPassageClick);
+  // The word card closes on a click elsewhere; clicks on words, word buttons and fresh selections open or update it instead
+  closeOnClickAway(document.getElementById('readerPanel'), closeReaderPanel,
+    event => !!event.target.closest?.('.rw, [data-act]') || !!selectedReadingText());
   ['readerUnknown', 'readerPanel'].forEach(id => {
     document.getElementById(id).addEventListener('click', e => {
       const btn = e.target.closest('[data-act]');

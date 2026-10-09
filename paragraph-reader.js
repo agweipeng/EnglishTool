@@ -59,10 +59,10 @@ function showParagraphDialog(context, result, status) {
 function readyStatus(text) {
   const limit = ParagraphCore.LOCAL_MAX_CHARS.toLocaleString();
   if (typeof window.requestParagraphAI !== 'function') {
-    return 'An AI connection is needed for analysis here. You can also use Claude and bring the response back. / 工具内解析需要连接 AI；也可以使用 Claude，再把回复粘贴回来。';
+    return 'An AI connection is needed for analysis here. You can also use Claude or ChatGPT and bring the response back. / 工具内解析需要连接 AI；也可以使用 Claude 或 ChatGPT，再把回复粘贴回来。';
   }
   return canAnalyzeHere(text) ? 'Ready to analyze your selection. / 可以开始解析所选段落。'
-    : `Local AI handles up to ${limit} characters in reasonable time. Select a shorter passage, or use Claude. / 本地 AI 适合最多 ${limit} 个字符的段落，请选中较短的段落，或使用 Claude。`;
+    : `Local AI handles up to ${limit} characters in reasonable time. Select a shorter passage, or use Claude or ChatGPT. / 本地 AI 适合最多 ${limit} 个字符的段落，请选中较短的段落，或使用 Claude 或 ChatGPT。`;
 }
 
 // Saves a finished analysis to the Analyses tab; returns the status message to show
@@ -75,7 +75,7 @@ function localModelName() {
   return typeof localAIConfig !== 'undefined' && localAIConfig ? localAIConfig.model : '';
 }
 
-// Local models are slow, so longer passages are left to Claude
+// Local models are slow, so longer passages are left to Claude or ChatGPT
 function canAnalyzeHere(text) {
   return typeof window.requestParagraphAI === 'function' && text.length <= ParagraphCore.LOCAL_MAX_CHARS;
 }
@@ -193,9 +193,14 @@ function initParagraphAnalysis() {
   dialog.addEventListener('cancel', closeParagraphAnalysis);
   document.getElementById('paragraphGenerate').addEventListener('click', generateParagraphAnalysis);
   document.getElementById('paragraphLocalAI').addEventListener('click', openLocalAISettings);
-  document.getElementById('paragraphClaude').addEventListener('click', () => {
-    if (paragraphContext) copyAndOpenClaude(ParagraphCore.buildPrompt(paragraphContext), 'Prompt copied → paste it into Claude. / 提示词已复制，请粘贴到 Claude。');
-  });
+  document.querySelectorAll('[data-paragraph-chat]').forEach(button => button.addEventListener('click', () => {
+    const service = button.dataset.paragraphChat;
+    if (paragraphContext) {
+      copyAndOpenChat(service, ParagraphCore.buildPrompt(paragraphContext),
+        `Prompt copied → paste it into ${AI_CHATS[service].name}, then bring the reply back below. / 提示词已复制，请粘贴到 ${AI_CHATS[service].name}，再把回复粘贴回来。`);
+    }
+  }));
+  closeOnBackdropClick(dialog, closeParagraphAnalysis);
   document.getElementById('paragraphPasteBtn').addEventListener('click', pasteParagraphAnalysis);
   document.getElementById('paragraphListen').addEventListener('click', () => { if (paragraphContext) speak(paragraphContext.text); });
   document.getElementById('paragraphContent').addEventListener('click', event => {

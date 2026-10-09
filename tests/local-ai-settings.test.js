@@ -16,7 +16,7 @@ function harness() {
     document:{readyState:'loading',addEventListener(){},getElementById:element,createElement:()=>({})},
     localStorage:{getItem:key=>saved.get(key),setItem:(key,value)=>saved.set(key,value),removeItem:key=>saved.delete(key)},
     AbortController,setTimeout,clearTimeout,LocalAI:{request:()=>async()=>({}),models:async()=>['chat-model'],usesDirectOllama:()=>false},
-    closeParagraphAnalysis:()=>element('readerAnalysisDialog').open=false,openParagraphAnalysis(){},toast(){},
+    closeParagraphAnalysis:()=>element('readerAnalysisDialog').open=false,closeOnBackdropClick(){},openParagraphAnalysis(){},toast(){},
   });
   const run = code => vm.runInContext(code, context);
   run(fs.readFileSync(require.resolve('../local-ai-settings.js'),'utf8'));

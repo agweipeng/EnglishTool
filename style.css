@@ -359,11 +359,6 @@ textarea { resize: vertical; min-height: 50px; }
 .reading-cn { color: var(--text-muted); font-size: 14px; margin-top: 2px; }
 
 /* ============ DailyNews ============ */
-.news-header {
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 12px; margin-bottom: 6px;
-}
-.news-meta { display: flex; gap: 10px; align-items: center; }
 .news-section { margin: 20px 0; }
 .news-section h3 { margin-bottom: 10px; }
 .news-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -379,6 +374,9 @@ textarea { resize: vertical; min-height: 50px; }
 .news-card-desc { color: var(--text); font-size: 13px; line-height: 1.4; opacity: 0.85; }
 .news-card-meta { color: var(--text-muted); font-size: 11px; }
 .news-stars { color: var(--warning); font-weight: 600; font-size: 12px; margin-left: 6px; }
+.news-card-wrap { display: flex; flex-direction: column; gap: 6px; }
+.news-card-actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.news-card-actions .btn-ghost { padding: 4px 10px; font-size: 12px; }
 @media (max-width: 640px) {
   .news-list { grid-template-columns: 1fr; }
 }
@@ -398,6 +396,10 @@ textarea { resize: vertical; min-height: 50px; }
 .journal-entry:hover { border-color: var(--primary); }
 .journal-entry-date { font-weight: 600; font-size: 13px; color: var(--text-muted); }
 .journal-entry-preview { font-size: 14px; margin-top: 4px; color: var(--text); }
+.journal-feedback { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); }
+.journal-feedback-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-bottom: 8px; }
+.journal-feedback-head label { font-size: 14px; }
+#journalFeedback { width: 100%; font-size: 14px; line-height: 1.6; min-height: 180px; }
 .journal-entry-words { color: var(--text-muted); font-size: 11px; margin-top: 4px; }
 
 /* ============ Read-aloud modal ============ */

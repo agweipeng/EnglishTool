@@ -7,6 +7,7 @@ const TextCore = require('../text-core.js');
 const ReaderProgress = require('../reader-progress.js');
 const AnalysisStore = require('../analysis-store.js');
 const MaterialStore = require('../material-store.js');
+const JournalFeedbackStore = require('../journal-feedback-store.js');
 
 function harness(initialWords = []) {
   const memory = new Map();
@@ -14,7 +15,7 @@ function harness(initialWords = []) {
   const saved = [];
   let blob;
   const context = vm.createContext({
-    state: { words: initialWords, known: [], activity: {} }, TextCore, ReaderProgress, AnalysisStore, MaterialStore, Blob,
+    state: { words: initialWords, known: [], activity: {} }, TextCore, ReaderProgress, AnalysisStore, MaterialStore, JournalFeedbackStore, Blob,
     localStorage: { getItem: k => memory.get(k), setItem: (k,v) => memory.set(k,v) },
     URL: { createObjectURL: value => { blob = value; return 'blob:backup'; } },
     document: { createElement: () => ({ click() {} }) },
