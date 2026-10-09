@@ -646,25 +646,6 @@ function blankWord(sentence, word) {
   return parts ? `${parts.before}_____${parts.after}` : null;
 }
 
-// Chat sites a prompt can be pasted into; the reply can be brought back the same way from either
-const AI_CHATS = {
-  claude: { name: 'Claude', url: 'https://claude.ai/new' },
-  chatgpt: { name: 'ChatGPT', url: 'https://chatgpt.com/' },
-};
-
-// Copy a prompt, then open the chat site. The tab is opened synchronously inside the
-// click so Safari doesn't block it as a pop-up.
-function copyAndOpenChat(service, text, successMsg = `Prompt copied → paste it into ${AI_CHATS[service].name}. / 提示词已复制，请粘贴到 ${AI_CHATS[service].name}。`) {
-  const copying = navigator.clipboard ? navigator.clipboard.writeText(text) : Promise.reject(new Error('no clipboard'));
-  window.open(AI_CHATS[service].url, '_blank', 'noopener');
-  return copying
-    .then(() => toast(successMsg, 3000))
-    .catch(e => {
-      console.warn('Clipboard write failed', e);
-      toast('Copy failed — your browser blocked clipboard access');
-    });
-}
-
 // ----- Shared word-entry builders -----
 
 // A fresh library entry with default SRS fields
@@ -1729,15 +1710,16 @@ function renderJournalHistory() {
   });
 }
 
-async function gradeJournal(service) {
+// Runs inside the tap on a "Grade with …" link; the link itself opens the chat (or the ChatGPT app on iPhone)
+function gradeJournal(service, event) {
   const text = document.getElementById('journalText').value.trim();
-  if (!text) { toast('Write something first'); return; }
+  if (!text) { event?.preventDefault(); toast('Write something first'); return; }
   const date = currentJournalDate();
   const prompt = `${GRADE_PROMPT_PREFIX} (date: ${date}):\n\n${text}`;
   // The reply box expects this service's answer unless a reply is already saved
   lastJournalGradeService = service;
   if (!document.getElementById('journalFeedback').value.trim()) document.getElementById('journalFeedbackSource').value = service;
-  await copyAndOpenChat(service, prompt,
+  copyChatPrompt(service, prompt,
     `Prompt copied → paste it into ${AI_CHATS[service].name}, then paste the reply below. / 提示词已复制，请粘贴到 ${AI_CHATS[service].name}，再把回复粘贴到下方。`);
 }
 
@@ -2012,9 +1994,9 @@ function init() {
     clearTimeout(window._journalSaveTimer);
     window._journalSaveTimer = setTimeout(saveJournalCurrent, 1000);
   });
-  document.querySelectorAll('[data-journal-grade]').forEach(button => button.addEventListener('click', () => {
+  document.querySelectorAll('[data-chat-for="journal"]').forEach(link => link.addEventListener('click', event => {
     saveJournalCurrent();
-    gradeJournal(button.dataset.journalGrade);
+    gradeJournal(link.dataset.chat, event);
   }));
   document.getElementById('journalFeedback').addEventListener('input', scheduleJournalFeedbackSave);
   document.getElementById('journalFeedbackSource').addEventListener('change', scheduleJournalFeedbackSave);

@@ -231,14 +231,15 @@ function copyRoleplayPrompt(service) {
   const custom = document.getElementById('roleplayCustom').value.trim();
   const scenario = custom || document.getElementById('roleplayScenario').value;
   const prompt = TextCore.buildRoleplayPrompt({ scenario, words: pickRoleplayWords() });
-  return copyAndOpenChat(service, prompt, `Prompt copied → paste it into ${AI_CHATS[service].name} (try voice mode!)`);
+  return copyChatPrompt(service, prompt, `Prompt copied → paste it into ${AI_CHATS[service].name} (try voice mode!)`);
 }
 
 function initPracticeModes() {
   const select = document.getElementById('roleplayScenario');
   select.innerHTML = ROLEPLAY_SCENARIOS.map(s => `<option>${escapeHTML(s)}</option>`).join('');
-  document.querySelectorAll('[data-roleplay-chat]').forEach(button => {
-    button.addEventListener('click', () => copyRoleplayPrompt(button.dataset.roleplayChat));
+  // Links: the tap copies the prompt and the link opens the chat (the ChatGPT app on iPhone)
+  document.querySelectorAll('[data-chat-for="roleplay"]').forEach(link => {
+    link.addEventListener('click', () => copyRoleplayPrompt(link.dataset.chat));
   });
   document.addEventListener('click', e => {
     const chip = e.target.closest('.chip-add');

@@ -193,12 +193,12 @@ function initParagraphAnalysis() {
   dialog.addEventListener('cancel', closeParagraphAnalysis);
   document.getElementById('paragraphGenerate').addEventListener('click', generateParagraphAnalysis);
   document.getElementById('paragraphLocalAI').addEventListener('click', openLocalAISettings);
-  document.querySelectorAll('[data-paragraph-chat]').forEach(button => button.addEventListener('click', () => {
-    const service = button.dataset.paragraphChat;
-    if (paragraphContext) {
-      copyAndOpenChat(service, ParagraphCore.buildPrompt(paragraphContext),
-        `Prompt copied → paste it into ${AI_CHATS[service].name}, then bring the reply back below. / 提示词已复制，请粘贴到 ${AI_CHATS[service].name}，再把回复粘贴回来。`);
-    }
+  // Links: the tap copies the prompt and the link opens the chat (the ChatGPT app on iPhone)
+  document.querySelectorAll('[data-chat-for="paragraph"]').forEach(link => link.addEventListener('click', event => {
+    const service = link.dataset.chat;
+    if (!paragraphContext) { event.preventDefault(); return; }
+    copyChatPrompt(service, ParagraphCore.buildPrompt(paragraphContext),
+      `Prompt copied → paste it into ${AI_CHATS[service].name}, then bring the reply back below. / 提示词已复制，请粘贴到 ${AI_CHATS[service].name}，再把回复粘贴回来。`);
   }));
   closeOnBackdropClick(dialog, closeParagraphAnalysis);
   document.getElementById('paragraphPasteBtn').addEventListener('click', pasteParagraphAnalysis);
