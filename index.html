@@ -16,6 +16,7 @@
     <button class="tab" data-view="drill">Listening Drill</button>
     <button class="tab" data-view="reading">Reading</button>
     <button class="tab" data-view="reader">Book Reader 📕</button>
+    <button class="tab" data-view="analyses">Analyses 📝</button>
     <button class="tab" data-view="news">News 📰</button>
     <a class="tab" href="digests/" target="_blank" rel="noopener">Digests 📚</a>
     <button class="tab" data-view="journal">Journal ✍️</button>
@@ -273,31 +274,45 @@
       <button class="btn-primary" id="readerNextChapterEnd">Next chapter →</button>
     </div>
     <div id="readerPanel" class="reader-panel hidden"></div>
-    <dialog id="readerAnalysisDialog" class="paragraph-dialog" aria-labelledby="paragraphHeading">
-      <header class="paragraph-header"><h2 id="paragraphHeading">AI analysis / AI 解析</h2><button id="paragraphClose" class="icon-btn" aria-label="Close analysis / 关闭解析">✕</button></header>
-      <div class="paragraph-tabs" role="tablist" aria-label="Analysis views / 解析视图">
-        <button id="paragraphTab-simplified" role="tab" data-paragraph-tab="simplified" aria-controls="paragraphContent" aria-selected="true">Simpler English<br><span lang="zh-CN">简化版</span></button>
-        <button id="paragraphTab-highlights" role="tab" data-paragraph-tab="highlights" aria-controls="paragraphContent" aria-selected="false">Key expressions<br><span lang="zh-CN">重点</span></button>
-        <button id="paragraphTab-structure" role="tab" data-paragraph-tab="structure" aria-controls="paragraphContent" aria-selected="false">Sentence structure<br><span lang="zh-CN">结构拆解</span></button>
-      </div>
-      <details class="paragraph-original" open><summary>Original passage / 原文</summary><p id="paragraphOriginal"></p><button id="paragraphListen" class="btn-ghost">🔊 Listen / 听读</button></details>
-      <div class="form-actions"><button id="paragraphGenerate" class="btn-primary">Analyze here / 在工具内解析</button><button id="paragraphLocalAI" class="btn-ghost">Local AI settings / 本地 AI 设置</button><button id="paragraphClaude" class="btn-ghost">Analyze with Claude ↗ / 使用 Claude 解析</button></div>
-      <p id="paragraphStatus" class="hint" role="status" aria-live="polite"></p>
-      <div id="paragraphContent" role="tabpanel" tabindex="0" aria-labelledby="paragraphTab-simplified"></div>
-      <details class="paragraph-paste"><summary>Bring the AI response back / 粘贴 AI 回复</summary><label for="paragraphResponse">Paste the complete reply to the copied prompt. / 粘贴针对已复制提示词的完整回复。</label><textarea id="paragraphResponse" rows="4"></textarea><button id="paragraphPasteBtn" class="btn-primary">Show analysis / 显示解析</button></details>
-    </dialog>
-    <dialog id="localAIDialog" class="paragraph-dialog" aria-labelledby="localAIHeading">
-      <header class="paragraph-header"><h2 id="localAIHeading">Local AI · 本地 AI</h2><button id="localAIClose" class="icon-btn" aria-label="Close settings / 关闭设置">✕</button></header>
-      <p>Start Ollama or LM Studio with a local chat model. Then check the connection here.<br><span lang="zh-CN">启动 Ollama 或 LM Studio 并准备好本地聊天模型，然后在这里检查连接。</span></p>
-      <label for="localAIProvider">Service / 服务</label><select id="localAIProvider"><option value="ollama">Ollama</option><option value="lmstudio">LM Studio</option></select>
-      <p id="localAIHint" class="hint">For local AI, start EnglishTool with <code>python3 scripts/serve-local-ai.py</code>, then open <code>http://127.0.0.1:8000</code>.<br><span lang="zh-CN">使用上述命令启动 EnglishTool，然后打开上述地址，即可连接本地 AI。</span></p>
-      <button id="localAICheck" class="btn-ghost">Check connection / 检查连接</button>
-      <p id="localAIStatus" role="status" aria-live="polite" class="hint"></p>
-      <label for="localAIModel">Chat model / 聊天模型</label><select id="localAIModel"><option value="">Choose a model / 选择模型</option></select>
-      <label class="local-ai-auto"><input id="localAIAuto" type="checkbox" checked> Analyze when I select a passage / 选中段落后自动解析</label>
-      <div class="form-actions"><button id="localAIUse" class="btn-primary" disabled>Use this model / 使用此模型</button><button id="localAIDisconnect" class="btn-ghost">Disconnect / 断开连接</button></div>
-    </dialog>
   </section>
+
+  <!-- ============ SAVED AI ANALYSES ============ -->
+  <section class="view" id="view-analyses">
+    <h2>Analyses 📝</h2>
+    <p class="hint">Every finished AI analysis from the Book Reader is saved here, newest first. It syncs with your other learning data. / Book Reader 中完成的每一份 AI 解析都会保存在这里（最新的在前），并与其他学习数据一起同步。</p>
+    <div class="analyses-toolbar">
+      <label class="sr-only" for="analysesSearch">Search saved analyses</label>
+      <input id="analysesSearch" type="search" placeholder="Search passages, books, words… / 搜索段落、书名、词语…" autocomplete="off" />
+      <span id="analysesCount" class="hint"></span>
+    </div>
+    <div id="analysesList"></div>
+  </section>
+
+  <!-- AI analysis dialogs live outside the views so they can open from any tab -->
+  <dialog id="readerAnalysisDialog" class="paragraph-dialog" aria-labelledby="paragraphHeading">
+    <header class="paragraph-header"><h2 id="paragraphHeading">AI analysis / AI 解析</h2><button id="paragraphClose" class="icon-btn" aria-label="Close analysis / 关闭解析">✕</button></header>
+    <div class="paragraph-tabs" role="tablist" aria-label="Analysis views / 解析视图">
+      <button id="paragraphTab-simplified" role="tab" data-paragraph-tab="simplified" aria-controls="paragraphContent" aria-selected="true">Simpler English<br><span lang="zh-CN">简化版</span></button>
+      <button id="paragraphTab-highlights" role="tab" data-paragraph-tab="highlights" aria-controls="paragraphContent" aria-selected="false">Key expressions<br><span lang="zh-CN">重点</span></button>
+      <button id="paragraphTab-structure" role="tab" data-paragraph-tab="structure" aria-controls="paragraphContent" aria-selected="false">Sentence structure<br><span lang="zh-CN">结构拆解</span></button>
+    </div>
+    <details class="paragraph-original" open><summary>Original passage / 原文</summary><p id="paragraphOriginal"></p><button id="paragraphListen" class="btn-ghost">🔊 Listen / 听读</button></details>
+    <div class="form-actions"><button id="paragraphGenerate" class="btn-primary">Analyze here / 在工具内解析</button><button id="paragraphLocalAI" class="btn-ghost">Local AI settings / 本地 AI 设置</button><button id="paragraphClaude" class="btn-ghost">Analyze with Claude ↗ / 使用 Claude 解析</button></div>
+    <p id="paragraphStatus" class="hint" role="status" aria-live="polite"></p>
+    <div id="paragraphContent" role="tabpanel" tabindex="0" aria-labelledby="paragraphTab-simplified"></div>
+    <details class="paragraph-paste"><summary>Bring the AI response back / 粘贴 AI 回复</summary><label for="paragraphResponse">Paste the complete reply to the copied prompt. / 粘贴针对已复制提示词的完整回复。</label><textarea id="paragraphResponse" rows="4"></textarea><button id="paragraphPasteBtn" class="btn-primary">Show analysis / 显示解析</button></details>
+  </dialog>
+  <dialog id="localAIDialog" class="paragraph-dialog" aria-labelledby="localAIHeading">
+    <header class="paragraph-header"><h2 id="localAIHeading">Local AI · 本地 AI</h2><button id="localAIClose" class="icon-btn" aria-label="Close settings / 关闭设置">✕</button></header>
+    <p>Start Ollama or LM Studio with a local chat model. Then check the connection here.<br><span lang="zh-CN">启动 Ollama 或 LM Studio 并准备好本地聊天模型，然后在这里检查连接。</span></p>
+    <label for="localAIProvider">Service / 服务</label><select id="localAIProvider"><option value="ollama">Ollama</option><option value="lmstudio">LM Studio</option></select>
+    <p id="localAIHint" class="hint">For local AI, start EnglishTool with <code>python3 scripts/serve-local-ai.py</code>, then open <code>http://127.0.0.1:8000</code>.<br><span lang="zh-CN">使用上述命令启动 EnglishTool，然后打开上述地址，即可连接本地 AI。</span></p>
+    <button id="localAICheck" class="btn-ghost">Check connection / 检查连接</button>
+    <p id="localAIStatus" role="status" aria-live="polite" class="hint"></p>
+    <label for="localAIModel">Chat model / 聊天模型</label><select id="localAIModel"><option value="">Choose a model / 选择模型</option></select>
+    <label class="local-ai-auto"><input id="localAIAuto" type="checkbox" checked> Analyze when I select a passage / 选中段落后自动解析</label>
+    <div class="form-actions"><button id="localAIUse" class="btn-primary" disabled>Use this model / 使用此模型</button><button id="localAIDisconnect" class="btn-ghost">Disconnect / 断开连接</button></div>
+  </dialog>
 
   <!-- ============ NEWS VIEW (DailyNews) ============ -->
   <section class="view" id="view-news">
@@ -509,6 +524,7 @@
 
 <script src="text-core.js"></script>
 <script src="reader-progress.js"></script>
+<script src="analysis-store.js"></script>
 <script src="app.js"></script>
 <script src="books/catalog.js"></script>
 <script src="book-repository.js"></script>
@@ -517,6 +533,7 @@
 <script src="local-ai.js"></script>
 <script src="local-ai-settings.js"></script>
 <script src="paragraph-reader.js"></script>
+<script src="analyses-view.js"></script>
 <script src="practice-modes.js"></script>
 </body>
 </html>

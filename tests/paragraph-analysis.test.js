@@ -206,3 +206,41 @@ test('local AI is not started for passages longer than it can finish', async () 
   assert.equal(h.element('paragraphGenerate').disabled, true);
   assert.match(h.element('paragraphStatus').textContent, /shorter passage|Claude/);
 });
+
+test('a finished analysis is saved automatically with its book position and model', async () => {
+  const h = uiHarness();
+  const saved = [];
+  h.context.saveAnalysis = (context, result, model) => { saved.push({ context, result, model }); return true; };
+  h.context.localAIConfig = { model: 'qwen3.5:4b' };
+  h.context.readerBookId = 'wizard-of-oz';
+  h.context.activeReaderChapter = { id: 'the-cyclone', title: 'The Cyclone' };
+  h.context.window.requestParagraphAI = async () => fixture.analysis;
+  h.context.selectedPassage = fixture.passage;
+  h.run('openParagraphAnalysis(selectedPassage)');
+  await h.run('generateParagraphAnalysis()');
+  assert.equal(saved.length, 1);
+  assert.equal(saved[0].context.bookId, 'wizard-of-oz');
+  assert.equal(saved[0].context.chapterId, 'the-cyclone');
+  assert.equal(saved[0].model, 'qwen3.5:4b');
+  assert.match(h.element('paragraphStatus').textContent, /Analyses tab/);
+  h.element('paragraphResponse').value = JSON.stringify(fixture.analysis);
+  h.run('pasteParagraphAnalysis()');
+  assert.equal(saved[1].model, 'Pasted reply');
+});
+
+test('a saved analysis reopens without asking the model again', () => {
+  const h = uiHarness();
+  let asked = false;
+  h.context.window.requestParagraphAI = async () => { asked = true; };
+  h.context.window.autoParagraphAI = true;
+  h.context.entry = { id: 'a1', text: fixture.passage, title: 'The Golden Bird', chapter: '', bookId: '', chapterId: '', model: 'qwen3.5:4b',
+    updatedAt: '2026-10-09T01:00:00.000Z', result: core.validateResponse(fixture.analysis, fixture.passage) };
+  h.run('showSavedAnalysis(entry)');
+  assert.equal(asked, false);
+  assert.equal(h.element('readerAnalysisDialog').open, true);
+  assert.equal(h.run('paragraphResult.words[0].text'), 'bore');
+  assert.equal(h.element('paragraphOriginal').textContent, fixture.passage);
+  h.context.broken = { ...h.context.entry, result: { simplified: {} } };
+  h.run('closeParagraphAnalysis(); showSavedAnalysis(broken)');
+  assert.equal(h.element('readerAnalysisDialog').open, false, 'A damaged saved analysis is not shown');
+});

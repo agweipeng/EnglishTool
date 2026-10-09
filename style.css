@@ -641,3 +641,9 @@ textarea { resize: vertical; min-height: 50px; }
 #localAIModel, #localAIProvider { display: block; width: 100%; margin-top: 8px; }
 #readerLocalAIBtn { margin-bottom: 14px; }
 @media (max-width: 640px) { .paragraph-dialog { padding: 16px; } .paragraph-tabs button { font-size: 12px; } .paragraph-original, .paragraph-card { padding: 14px; } }
+
+/* Saved AI analyses tab */
+.analyses-toolbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 12px 0; }
+.analyses-toolbar input { flex: 1 1 260px; }
+.analysis-meta { color: var(--text-muted); font-size: 13px; margin-bottom: 6px; }
+.analysis-card blockquote { font-family: Georgia, 'Times New Roman', serif; }

@@ -5,6 +5,7 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const TextCore = require('../text-core.js');
 const ReaderProgress = require('../reader-progress.js');
+const AnalysisStore = require('../analysis-store.js');
 
 function harness(initialWords = []) {
   const memory = new Map();
@@ -12,7 +13,7 @@ function harness(initialWords = []) {
   const saved = [];
   let blob;
   const context = vm.createContext({
-    state: { words: initialWords, known: [], activity: {} }, TextCore, ReaderProgress, Blob,
+    state: { words: initialWords, known: [], activity: {} }, TextCore, ReaderProgress, AnalysisStore, Blob,
     localStorage: { getItem: k => memory.get(k), setItem: (k,v) => memory.set(k,v) },
     URL: { createObjectURL: value => { blob = value; return 'blob:backup'; } },
     document: { createElement: () => ({ click() {} }) },
@@ -53,4 +54,24 @@ test('old learning backups still import; malformed progress fails before any lea
   h.run('importJSON(backupFile)');
   assert.equal(JSON.stringify(h.context.state), before);
   assert.match(h.messages.at(-1), /Import failed/);
+});
+
+test('saved AI analyses travel in JSON backups, and a malformed list is rejected', async () => {
+  const fixture = require('./fixtures/paragraph-analysis.json');
+  const first = harness([{ text: 'bore', defEN: 'carried' }]);
+  first.context.state.analyses = [AnalysisStore.createEntry({ text: fixture.passage, title: 'The Golden Bird', result: fixture.analysis },
+    '2026-10-09T01:00:00.000Z', 'a1')];
+  first.run('exportJSON()');
+  const json = await first.blob().text();
+  const second = harness();
+  second.context.state.analyses = [];
+  second.context.backupFile = json;
+  second.run('importJSON(backupFile)');
+  assert.deepEqual(AnalysisStore.visible(second.context.state.analyses).map(e => e.id), ['a1']);
+  const third = harness();
+  third.context.state.analyses = [];
+  third.context.backupFile = JSON.stringify({ words: [], analyses: 'not a list' });
+  third.run('importJSON(backupFile)');
+  assert.deepEqual(third.context.state.analyses, []);
+  assert.match(third.messages.at(-1), /invalid file/);
 });

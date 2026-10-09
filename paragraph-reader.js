@@ -18,24 +18,59 @@ function closeParagraphAnalysis() {
 function openParagraphAnalysis(text) {
   if (!reader || !text.trim()) return;
   if (text.length > ParagraphCore.MAX_CHARS) { toast('Select a shorter passage — up to 6,000 characters. / 请选中较短的段落。', 3500); return; }
-  closeParagraphAnalysis();
   closeReaderPanel();
-  paragraphContext = { text, title: reader.title, chapter: readerBookId ? activeReaderChapter?.title || '' : '' };
-  paragraphResult = null;
-  paragraphTab = 'simplified';
-  const dialog = document.getElementById('readerAnalysisDialog');
-  document.getElementById('paragraphOriginal').textContent = text;
-  document.getElementById('paragraphResponse').value = '';
-  const hasAI = typeof window.requestParagraphAI === 'function';
-  const limit = ParagraphCore.LOCAL_MAX_CHARS.toLocaleString();
-  document.getElementById('paragraphStatus').textContent = !hasAI
-    ? 'An AI connection is needed for analysis here. You can also use Claude and bring the response back. / 工具内解析需要连接 AI；也可以使用 Claude，再把回复粘贴回来。'
-    : canAnalyzeHere(text) ? 'Ready to analyze your selection. / 可以开始解析所选段落。'
-    : `Local AI handles up to ${limit} characters in reasonable time. Select a shorter passage, or use Claude. / 本地 AI 适合最多 ${limit} 个字符的段落，请选中较短的段落，或使用 Claude。`;
-  document.getElementById('paragraphGenerate').disabled = !canAnalyzeHere(text);
-  renderParagraphAnalysis();
-  dialog.showModal();
+  const inBook = !!readerBookId;
+  showParagraphDialog({
+    text, title: reader.title, chapter: inBook ? activeReaderChapter?.title || '' : '',
+    bookId: inBook ? readerBookId : '', chapterId: inBook ? activeReaderChapter?.id || '' : '',
+  }, null, readyStatus(text));
   if (window.autoParagraphAI === true && canAnalyzeHere(text)) generateParagraphAnalysis();
+}
+
+// Shows a saved analysis from the Analyses tab without asking the model again
+function showSavedAnalysis(entry) {
+  let result;
+  try { result = ParagraphCore.validateResponse(entry.result, entry.text); }
+  catch (error) {
+    console.warn('Saved analysis could not be shown', error);
+    toast('This saved analysis is damaged and cannot be shown. / 这条已保存的解析已损坏，无法显示。', 3500);
+    return;
+  }
+  const { text, title, chapter, bookId, chapterId } = entry;
+  showParagraphDialog({ text, title, chapter, bookId, chapterId }, result,
+    `Saved analysis${entry.model ? ` · ${entry.model}` : ''}. / 已保存的解析。`);
+}
+
+function showParagraphDialog(context, result, status) {
+  closeParagraphAnalysis();
+  paragraphContext = context;
+  paragraphResult = result;
+  paragraphTab = 'simplified';
+  document.getElementById('paragraphOriginal').textContent = context.text;
+  document.getElementById('paragraphResponse').value = '';
+  document.getElementById('paragraphStatus').textContent = status;
+  document.getElementById('paragraphGenerate').disabled = !canAnalyzeHere(context.text);
+  renderParagraphAnalysis();
+  document.getElementById('readerAnalysisDialog').showModal();
+}
+
+function readyStatus(text) {
+  const limit = ParagraphCore.LOCAL_MAX_CHARS.toLocaleString();
+  if (typeof window.requestParagraphAI !== 'function') {
+    return 'An AI connection is needed for analysis here. You can also use Claude and bring the response back. / 工具内解析需要连接 AI；也可以使用 Claude，再把回复粘贴回来。';
+  }
+  return canAnalyzeHere(text) ? 'Ready to analyze your selection. / 可以开始解析所选段落。'
+    : `Local AI handles up to ${limit} characters in reasonable time. Select a shorter passage, or use Claude. / 本地 AI 适合最多 ${limit} 个字符的段落，请选中较短的段落，或使用 Claude。`;
+}
+
+// Saves a finished analysis to the Analyses tab; returns the status message to show
+function keepAnalysis(context, result, model, doneMessage) {
+  const saved = typeof saveAnalysis === 'function' && saveAnalysis(context, result, model);
+  return saved ? `${doneMessage} Saved in the Analyses tab. / 已保存到“解析”标签页。` : doneMessage;
+}
+
+function localModelName() {
+  return typeof localAIConfig !== 'undefined' && localAIConfig ? localAIConfig.model : '';
 }
 
 // Local models are slow, so longer passages are left to Claude
@@ -104,7 +139,7 @@ async function generateParagraphAnalysis() {
     const response = await window.requestParagraphAI({ prompt: ParagraphCore.buildPrompt(context), signal: controller.signal });
     if (sequence !== paragraphSequence) return;
     paragraphResult = ParagraphCore.validateResponse(ParagraphCore.groundExamples(response, context.text), context.text);
-    status.textContent = 'Analysis ready. / 解析已完成。';
+    status.textContent = keepAnalysis(context, paragraphResult, localModelName(), 'Analysis ready. / 解析已完成。');
     renderParagraphAnalysis();
   } catch (error) {
     if (sequence !== paragraphSequence || error.name === 'AbortError') return;
@@ -126,7 +161,7 @@ function pasteParagraphAnalysis() {
     paragraphRequest = null;
     paragraphResult = result;
     document.getElementById('paragraphGenerate').disabled = !canAnalyzeHere(paragraphContext.text);
-    document.getElementById('paragraphStatus').textContent = 'Analysis loaded. / 解析已载入。';
+    document.getElementById('paragraphStatus').textContent = keepAnalysis(paragraphContext, result, 'Pasted reply', 'Analysis loaded. / 解析已载入。');
     renderParagraphAnalysis();
   } catch {
     document.getElementById('paragraphStatus').textContent = 'Paste the complete response to the copied prompt, including every section. / 请粘贴针对已复制提示词的完整回复，包含所有部分。';
