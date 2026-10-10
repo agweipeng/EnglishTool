@@ -76,47 +76,141 @@ Passage: ${JSON.stringify(text.trim())}`;
   // Finds `text` inside `source` and returns the source's own wording. Small local
   // models often add "…", end a shortened sentence with ".", or swap ’ for ', so
   // those differences (and letter case) are ignored. Returns null when it isn't there.
-  const QUOTE_CLASSES = { "'": "['‘’]", '‘': "['‘’]", '’': "['‘’]", '"': '["“”]', '“': '["“”]', '”': '["“”]' };
-  function exactExcerpt(source, text) {
+  // Dashes too: a chat reply often writes "-" where the passage has "—", with or without spaces around it.
+  const DASHES = '-‐‑‒–—―';
+  const QUOTE_CLASSES = { "'": "['‘’]", '‘': "['‘’]", '’': "['‘’]", '"': '["“”]', '“': '["“”]', '”': '["“”]',
+    ...Object.fromEntries([...DASHES].map(dash => [dash, `\\s*[${DASHES}]\\s*`])) };
+  function excerptMatch(source, text) {
     const target = String(text || '').replace(/\.{3}|…/g, ' ').replace(/\s+/g, ' ').trim()
-      .replace(/^[\s,;:]+|[\s.,;:!?]+$/g, '');
+      .replace(/^[\s,;:]+|[\s.,;:!?]+$/g, '')
+      .replace(new RegExp(`\\s*([${DASHES}])\\s*`, 'g'), '$1');
     if (!target) return null;
     const pattern = [...target].map(c => QUOTE_CLASSES[c]
       || (c === ' ' ? '\\s+' : c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))).join('');
-    const match = new RegExp(pattern, 'i').exec(source);
+    return new RegExp(pattern, 'i').exec(source);
+  }
+  function exactExcerpt(source, text) {
+    const match = excerptMatch(source, text);
     return match ? match[0] : null;
   }
 
-  // Unusable pieces of a reply are dropped rather than failing the whole analysis,
-  // so nothing outside the passage is ever shown and the rest is still useful.
-  // Chat replies often wrap the JSON in a code block or a sentence ("Here is the analysis: …");
-  // fall back to the outermost {…} when the whole reply isn't JSON
-  function parseReplyJSON(reply) {
-    const trimmed = reply.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
+  // Errors a learner can act on; the panel shows their message
+  const replyError = message => Object.assign(new Error(message), { name: 'ReplyError' });
+  const NO_JSON = 'No JSON analysis was found in the reply. Copy the whole reply (in ChatGPT, use the copy button under it) and paste it again. / 回复中没有找到解析，请复制完整回复（在 ChatGPT 中使用回复下方的复制按钮）后重新粘贴。';
+  const MAX_JSON_STARTS = 8;
+
+  // Copying on a phone can add a byte-order mark, zero-width characters or non-breaking spaces
+  const withoutInvisibles = text => text.replace(/[​-‍⁠﻿]/g, '').replace(/[   ]/g, ' ');
+  const withoutFences = text => text.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
+
+  // The {…} object starting at `start`, found by matching braces outside strings; null when it never closes
+  function balancedObject(text, start) {
+    let depth = 0;
+    let inString = false;
+    for (let i = start; i < text.length; i++) {
+      const c = text[i];
+      if (inString) {
+        if (c === '\\') i++;
+        else if (c === '"') inString = false;
+      } else if (c === '"') inString = true;
+      else if (c === '{' || c === '[') depth++;
+      else if ((c === '}' || c === ']') && --depth === 0) return text.slice(start, i + 1);
+    }
+    return null;
+  }
+
+  // Fixes the usual slips in hand-copied JSON: curly quotes used as JSON quotes, unescaped quotes or line
+  // breaks inside text, and trailing commas. Only used when the reply isn't valid JSON as it is.
+  const CLOSES_STRING = /^\s*(?:[}\]:]|,\s*["“”{[]|$)/;
+  const TRAILING_COMMA = /^\s*[}\]]/;
+  function repairJSON(text) {
+    let out = '';
+    let inString = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      const next = () => text.slice(i + 1, i + 40);
+      if (!inString) {
+        if (c === '"' || c === '“' || c === '”') { out += '"'; inString = true; }
+        else if (!(c === ',' && TRAILING_COMMA.test(next()))) out += c;
+        continue;
+      }
+      if (c === '\\') { out += c + (text[i + 1] ?? ''); i++; }
+      else if (c === '"' || c === '“' || c === '”') {
+        if (CLOSES_STRING.test(next())) { out += '"'; inString = false; }
+        else out += c === '"' ? '\\"' : c;
+      }
+      else if (c === '\n') out += '\\n';
+      else if (c === '\t') out += '\\t';
+      else if (c !== '\r') out += c;
+    }
+    return out;
+  }
+
+  const jsonObject = text => {
     try {
-      return JSON.parse(trimmed);
-    } catch (error) {
-      const start = reply.indexOf('{');
-      const end = reply.lastIndexOf('}');
-      if (start < 0 || end <= start) throw error;
-      return JSON.parse(reply.slice(start, end + 1));
+      const value = JSON.parse(text);
+      return value && typeof value === 'object' && !Array.isArray(value) ? value : null;
+    } catch {
+      return null;
+    }
+  };
+
+  // Replies sometimes wrap the analysis ({"analysis": {...}}) or use other key names
+  const ANALYSIS_KEYS = ['simplified', 'mainPoint', 'main_point', 'sentences'];
+  const hasAnalysisKeys = value => !!value && typeof value === 'object' && ANALYSIS_KEYS.some(key => key in value);
+  function analysisRoot(input) {
+    if (hasAnalysisKeys(input)) return input;
+    return Object.values(input).find(hasAnalysisKeys) || input;
+  }
+
+  // Tries the strictest reading first, so a valid reply is never changed by the repairs, and outer
+  // objects before inner ones, so a small {"en","cn"} pair is never taken for the whole analysis
+  function* jsonCandidates(reply) {
+    for (const text of [reply, withoutInvisibles(reply)]) {
+      yield withoutFences(text);
+      for (let at = text.indexOf('{'), tried = 0; at >= 0 && tried < MAX_JSON_STARTS; at = text.indexOf('{', at + 1), tried++) {
+        yield balancedObject(text, at);
+        yield balancedObject(repairJSON(text.slice(at)), 0);
+      }
     }
   }
 
+  function parseReplyJSON(reply) {
+    for (const candidate of jsonCandidates(reply)) {
+      const value = candidate && jsonObject(candidate);
+      if (value && hasAnalysisKeys(analysisRoot(value))) return value;
+    }
+    throw replyError(NO_JSON);
+  }
+  const field = (object, names) => names.map(name => object?.[name]).find(value => value !== undefined);
+  const FIELD_NAMES = {
+    simplified: ['simplified', 'simplifiedVersion', 'simplified_version', 'simpler'],
+    mainPoint: ['mainPoint', 'main_point', 'mainIdea', 'main_idea'],
+    speaking: ['speaking', 'speakingQuestion', 'speaking_question', 'question'],
+  };
+  const PART_LABELS = {
+    simplified: 'the Simpler English version / 简化版', mainPoint: 'the main point / 要点', speaking: 'the speaking question / 口语问题',
+  };
+
+  // Unusable pieces of a reply are dropped rather than failing the whole analysis,
+  // so nothing outside the passage is ever shown and the rest is still useful.
   function validateResponse(raw, passage) {
     let input = raw;
     if (typeof input === 'string') {
-      if (input.length > 60000) throw new Error('The AI response is too long.');
+      if (input.length > 60000) throw replyError('The reply is too long (over 60,000 characters). Paste only the reply to this passage. / 回复过长，请只粘贴这段文字的回复。');
       input = parseReplyJSON(input);
     }
+    if (!input || typeof input !== 'object') throw replyError(NO_JSON);
+    input = analysisRoot(input);
     const text = (value, max = 4000) => (typeof value === 'string' && value.trim() && value.length <= max ? value.trim() : null);
     const bilingual = value => {
-      const en = text(value?.en), cn = text(value?.cn);
+      const pair = value?.question || value?.prompt || value;
+      const en = text(field(pair, ['en', 'english', 'EN'])), cn = text(field(pair, ['cn', 'zh', 'chinese', 'zh_cn', 'CN']));
       return en && cn ? { en, cn } : null;
     };
-    const required = value => {
-      const result = bilingual(value);
-      if (!result) throw new Error('The AI response is incomplete.');
+    const required = name => {
+      const result = bilingual(field(input, FIELD_NAMES[name]));
+      if (!result) throw replyError(`The reply is incomplete: it has no ${PART_LABELS[name]} in English and Chinese. Ask the AI to answer again with every section. / 回复不完整，缺少${PART_LABELS[name].split(' / ')[1]}。`);
       return result;
     };
     const array = value => (Array.isArray(value) ? value : []);
@@ -126,7 +220,12 @@ Passage: ${JSON.stringify(text.trim())}`;
         const excerpt = exactExcerpt(sentence, quote);
         if (excerpt && (excerpt.length >= MIN_SENTENCE_MATCH || excerpt.length === sentence.length)) return sentence;
       }
-      return null;
+      // The splitter cuts at abbreviations such as "U.S." or "Mr.", so a whole sentence may span two pieces:
+      // look in the whole passage, keeping its own wording and closing punctuation
+      const match = excerptMatch(passage, quote);
+      if (!match || match[0].length < MIN_SENTENCE_MATCH) return null;
+      const ending = /^[.!?…]+["”’)]*/.exec(passage.slice(match.index + match[0].length));
+      return (match[0] + (ending ? ending[0] : '')).trim();
     };
 
     const used = new Set();
@@ -141,7 +240,12 @@ Passage: ${JSON.stringify(text.trim())}`;
       analysed.push({ original, core, parts });
       if (analysed.length === MAX_SENTENCES) break;
     }
-    if (!analysed.length) throw new Error('The AI response is missing sentence structure.');
+    if (!array(input.sentences).length) {
+      throw replyError('The reply is incomplete: it has no sentence structure (the "sentences" section). Ask the AI to answer again with every section. / 回复不完整，缺少句子结构部分。');
+    }
+    if (!analysed.length) {
+      throw replyError('The reply’s sentence structure doesn’t match the selected passage: none of its sentences are in it. Make sure you pasted the reply to this passage’s prompt. / 回复中的句子与所选段落不符，请确认粘贴的是这段文字的回复。');
+    }
 
     const items = (value, max) => {
       const seen = new Set();
@@ -155,10 +259,10 @@ Passage: ${JSON.stringify(text.trim())}`;
       }).filter(Boolean).slice(0, max);
     };
     return {
-      simplified: required(input?.simplified), mainPoint: required(input?.mainPoint),
-      words: items(input?.words, MAX_WORDS), phrases: items(input?.phrases, MAX_PHRASES),
+      simplified: required('simplified'), mainPoint: required('mainPoint'),
+      words: items(input.words, MAX_WORDS), phrases: items(input.phrases, MAX_PHRASES),
       sentences: analysed,
-      speaking: required(input?.speaking),
+      speaking: required('speaking'),
     };
   }
   const api = { MAX_CHARS, LOCAL_MAX_CHARS, MAX_SENTENCES, MAX_PARTS, MAX_WORDS, MAX_PHRASES,
