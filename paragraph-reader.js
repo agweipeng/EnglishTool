@@ -165,8 +165,10 @@ function pasteParagraphAnalysis() {
     document.getElementById('paragraphGenerate').disabled = !canAnalyzeHere(paragraphContext.text);
     document.getElementById('paragraphStatus').textContent = keepAnalysis(paragraphContext, result, 'Pasted reply', 'Analysis loaded. / 解析已载入。');
     renderParagraphAnalysis();
-  } catch {
-    document.getElementById('paragraphStatus').textContent = 'Paste the complete response to the copied prompt, including every section. / 请粘贴针对已复制提示词的完整回复，包含所有部分。';
+  } catch (error) {
+    // Reply problems explain themselves (no JSON found, a missing section, sentences from another passage)
+    document.getElementById('paragraphStatus').textContent = error?.name === 'ReplyError' ? error.message
+      : 'Paste the complete response to the copied prompt, including every section. / 请粘贴针对已复制提示词的完整回复，包含所有部分。';
   }
 }
 

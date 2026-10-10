@@ -291,3 +291,67 @@ test('a reply copied from ChatGPT or Claude with a sentence around the JSON stil
   }
   assert.throws(() => core.validateResponse('Sorry, I cannot help with that.', fixture.passage));
 });
+
+// ----- Replies pasted from chat apps (ChatGPT, Claude) -----
+const newsPassage = 'The U.S. economy grew faster than expected — officials said on Tuesday. Prices rose, but wages rose too.';
+const newsAnalysis = () => ({
+  simplified: { en: 'The US economy grew fast. Prices and wages rose.', cn: '美国经济增长很快。物价和工资都上涨了。' },
+  mainPoint: { en: 'Growth beat forecasts.', cn: '增长超出预期。' },
+  words: [{ text: 'expected', meaning: { en: 'thought likely to happen', cn: '预期的' }, example: 'grew faster than expected' }],
+  phrases: [],
+  sentences: [
+    { original: 'The U.S. economy grew faster than expected - officials said on Tuesday.', core: { en: 'The economy grew.', cn: '经济增长了。' },
+      parts: [{ text: 'faster than expected', explanation: { en: 'a comparison', cn: '比较结构' } }] },
+    { original: 'Prices rose, but wages rose too.', core: { en: 'Prices rose.', cn: '物价上涨。' },
+      parts: [{ text: 'but wages rose too', explanation: { en: 'a contrast clause', cn: '转折分句' } }] },
+  ],
+  speaking: { en: 'Do you think wages will keep up?', cn: '你认为工资会跟上吗？' },
+});
+
+test('a sentence the splitter cuts at "U.S." or quoted with a different dash still matches the passage', () => {
+  const result = core.validateResponse(JSON.stringify(newsAnalysis()), newsPassage);
+  assert.deepEqual(result.sentences.map(s => s.original), [
+    'The U.S. economy grew faster than expected — officials said on Tuesday.',
+    'Prices rose, but wages rose too.',
+  ], 'The passage’s own wording is kept, with its em dash');
+  assert.equal(result.sentences[0].parts[0].text, 'faster than expected');
+});
+
+test('invisible characters from copying on a phone do not break the reply', () => {
+  const pretty = JSON.stringify(newsAnalysis(), null, 2).replace(/^ +/gm, spaces => ' '.repeat(spaces.length));
+  const reply = `﻿${pretty.replace('{', '{​')}`;
+  assert.equal(core.validateResponse(reply, newsPassage).sentences.length, 2);
+});
+
+test('common JSON slips in chat replies are repaired: inner quotes, line breaks, trailing commas, curly quotes', () => {
+  const analysis = newsAnalysis();
+  analysis.mainPoint.en = 'MAIN';
+  analysis.simplified.cn = 'CN';
+  let reply = JSON.stringify(analysis, null, 2)
+    .replace('"MAIN"', '"The writer calls it "a surprise".\nGrowth beat forecasts."')
+    .replace('"CN"', '"他说：“很好”，然后离开。"')
+    .replace(/\n(\s*)\]/, ',\n$1]')
+    .replace(/\n\}$/, ',\n}');
+  const repaired = core.validateResponse(`Here is the analysis:\n\n${reply}\n\nLet me know if you want {more} examples!`, newsPassage);
+  assert.equal(repaired.mainPoint.en, 'The writer calls it "a surprise".\nGrowth beat forecasts.');
+  assert.equal(repaired.simplified.cn, '他说：“很好”，然后离开。');
+  const curly = JSON.stringify(newsAnalysis()).replace(/"/g, (_, at, all) => (/[{[,:]\s*$/.test(all.slice(0, at)) ? '“' : '”'));
+  assert.equal(core.validateResponse(curly, newsPassage).sentences.length, 2, 'Curly quotes used as JSON quotes');
+});
+
+test('common variations in the reply’s shape are understood', () => {
+  const { mainPoint, speaking, ...rest } = newsAnalysis();
+  const variant = { analysis: { ...rest, main_point: { english: mainPoint.en, chinese: mainPoint.cn }, speaking: { question: { en: speaking.en, zh: speaking.cn } } } };
+  const result = core.validateResponse(JSON.stringify(variant), newsPassage);
+  assert.deepEqual(result.mainPoint, mainPoint);
+  assert.deepEqual(result.speaking, speaking);
+});
+
+test('a reply that still can’t be used says exactly what is wrong', () => {
+  assert.throws(() => core.validateResponse('Sorry, I can’t help with that.', newsPassage), /no JSON/i);
+  const { speaking, ...noSpeaking } = newsAnalysis();
+  assert.throws(() => core.validateResponse(JSON.stringify(noSpeaking), newsPassage), /speaking/i);
+  const wrongPassage = newsAnalysis();
+  wrongPassage.sentences = [{ original: 'A sentence from another article entirely.', core: { en: 'x', cn: 'x' }, parts: [] }];
+  assert.throws(() => core.validateResponse(JSON.stringify(wrongPassage), newsPassage), /passage/i);
+});
