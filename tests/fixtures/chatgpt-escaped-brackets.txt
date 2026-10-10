@@ -1,0 +1,182 @@
+{
+  "simplified": {
+    "en": "We have brought those rules together in a new section. The section is called “Do Not Engage in Deceptive Campaigns or Artificial Activity.” It applies to all kinds of deceptive activity, whether political or commercial. It covers attempts to hide who is behind a message. It also covers attempts to spread content more widely by using fake accounts or posts. In addition, it covers creating tools and systems that help people run campaigns designed to influence others.",
+    "cn": "我们将这些规则整合到了一个新的章节中。该章节名为“不要参与欺骗性宣传活动或人为制造的活动”。它适用于各种欺骗性活动，无论是政治性质还是商业性质。它涵盖了试图隐藏信息背后真正操作者的行为，也涵盖了通过使用虚假账号或帖子来扩大内容传播范围的行为。此外，它还涵盖了开发相关工具和基础设施，以帮助人们开展旨在影响他人的宣传活动。"
+  },
+  "mainPoint": {
+    "en": "The passage introduces a new policy section that brings together rules against deceptive campaigns and artificial activity. These rules cover hiding who is behind messages, spreading content through fake accounts or posts, and building tools or infrastructure to support influence campaigns.",
+    "cn": "这段话介绍了一个新的政策章节，将有关禁止欺骗性宣传活动和人为制造活动的规则整合在一起。这些规则涵盖了隐藏信息背后真正操作者的行为、利用虚假账号或帖子传播内容，以及建立支持影响力宣传活动的工具或基础设施。"
+  },
+  "words": \[
+    {
+      "text": "consolidated",
+      "meaning": {
+        "en": "Combined several things into one organized whole. Here, it means bringing existing rules together in one section.",
+        "cn": "整合、归并。这里指将原有的多项规则集中到一个章节中。"
+      },
+      "example": "We've consolidated those rules into a new section titled Do Not Engage in Deceptive Campaigns or Artificial Activity, which applies to deceptive activity of any kind (whether political or commercial)."
+    },
+    {
+      "text": "deceptive",
+      "meaning": {
+        "en": "Intended to mislead or make people believe something that is not true. Here, it describes campaigns or activities that hide the truth or mislead people.",
+        "cn": "欺骗性的、误导性的。这里指隐瞒真相或使人产生错误认识的宣传活动或行为。"
+      },
+      "example": "It covers efforts to obscure who is behind a message or amplify content through fake accounts or posts, along with building the tools and infrastructure for running influence operation campaigns"
+    },
+    {
+      "text": "obscure",
+      "meaning": {
+        "en": "To make something difficult to see, understand, or discover. Here, it means concealing the identity of the person or group responsible for a message.",
+        "cn": "掩盖、使难以察觉。这里指隐藏发布某条信息的个人或组织的真实身份。"
+      },
+      "example": "It covers efforts to obscure who is behind a message or amplify content through fake accounts or posts, along with building the tools and infrastructure for running influence operation campaigns"
+    },
+    {
+      "text": "amplify",
+      "meaning": {
+        "en": "To increase the reach, strength, or effect of something. Here, it means making content spread more widely.",
+        "cn": "扩大、增强。这里指扩大内容的传播范围或影响力。"
+      },
+      "example": "It covers efforts to obscure who is behind a message or amplify content through fake accounts or posts, along with building the tools and infrastructure for running influence operation campaigns"
+    },
+    {
+      "text": "infrastructure",
+      "meaning": {
+        "en": "The basic systems, resources, and technical arrangements needed for an activity. Here, it refers to the underlying setup that enables influence campaigns to operate.",
+        "cn": "基础设施。这里指支持影响力宣传活动运行所需的基础系统、资源和技术安排。"
+      },
+      "example": "It covers efforts to obscure who is behind a message or amplify content through fake accounts or posts, along with building the tools and infrastructure for running influence operation campaigns"
+    },
+    {
+      "text": "commercial",
+      "meaning": {
+        "en": "Related to business, trade, or making money. Here, it distinguishes business-related deceptive activity from political deceptive activity.",
+        "cn": "商业的、与商业活动有关的。这里用来区分商业性质的欺骗行为与政治性质的欺骗行为。"
+      },
+      "example": "It applies to deceptive activity of any kind (whether political or commercial)."
+    }
+  \],
+  "phrases": \[
+    {
+      "text": "consolidated those rules into a new section",
+      "meaning": {
+        "en": "Brought existing rules together in one new, organized section. This expression is useful for describing the organization of policies, documents, or guidelines.",
+        "cn": "将那些规则整合到一个新的章节中。这个表达适用于描述政策、文件或指南的整合。"
+      },
+      "example": "We've consolidated those rules into a new section titled Do Not Engage in Deceptive Campaigns or Artificial Activity, which applies to deceptive activity of any kind (whether political or commercial)."
+    },
+    {
+      "text": "applies to deceptive activity of any kind",
+      "meaning": {
+        "en": "Covers every type of deceptive activity, without limiting the rule to one particular category.",
+        "cn": "适用于任何类型的欺骗性活动，表示规则并不限于某一种特定类别。"
+      },
+      "example": "We've consolidated those rules into a new section titled Do Not Engage in Deceptive Campaigns or Artificial Activity, which applies to deceptive activity of any kind (whether political or commercial)."
+    },
+    {
+      "text": "who is behind a message",
+      "meaning": {
+        "en": "The person or group responsible for creating or sending a message. The phrase often refers to the real source or organizer of a communication.",
+        "cn": "某条信息背后的操作者，即负责创建或发布该信息的个人或组织。这个表达通常指信息传播的真实来源或组织者。"
+      },
+      "example": "It covers efforts to obscure who is behind a message or amplify content through fake accounts or posts, along with building the tools and infrastructure for running influence operation campaigns"
+    },
+    {
+      "text": "through fake accounts or posts",
+      "meaning": {
+        "en": "By using false or inauthentic accounts or posts as a means of spreading content.",
+        "cn": "通过虚假账号或帖子，表示利用这些不真实的账号或帖子作为传播内容的手段。"
+      },
+      "example": "It covers efforts to obscure who is behind a message or amplify content through fake accounts or posts, along with building the tools and infrastructure for running influence operation campaigns"
+    },
+    {
+      "text": "along with building the tools and infrastructure",
+      "meaning": {
+        "en": "Together with creating the tools and underlying systems needed for an activity. Here, it adds another type of activity covered by the policy.",
+        "cn": "以及建立相关工具和基础设施。这里用于补充说明该政策还涵盖另一类行为，即创建支持相关活动的工具和基础系统。"
+      },
+      "example": "It covers efforts to obscure who is behind a message or amplify content through fake accounts or posts, along with building the tools and infrastructure for running influence operation campaigns"
+    }
+  \],
+  "sentences": \[
+    {
+      "original": "We've consolidated those rules into a new section titled Do Not Engage in Deceptive Campaigns or Artificial Activity, which applies to deceptive activity of any kind (whether political or commercial).",
+      "core": {
+        "en": "We consolidated the rules into a new section. The new section covers all kinds of deceptive activity.",
+        "cn": "我们将这些规则整合到了一个新的章节中。这个新章节涵盖所有类型的欺骗性活动。"
+      },
+      "parts": \[
+        {
+          "text": "We've consolidated those rules into a new section",
+          "explanation": {
+            "en": "“We've” means “we have.” The present perfect “have consolidated” describes an action that has been completed and is relevant now. “Those rules” is the object, and “into a new section” describes the result of the action.",
+            "cn": "“We've”是“We have”的缩写。现在完成时“have consolidated”表示一个已经完成、且与当前情况相关的动作。“those rules”是宾语，“into a new section”说明整合后的结果。"
+          }
+        },
+        {
+          "text": "titled Do Not Engage in Deceptive Campaigns or Artificial Activity",
+          "explanation": {
+            "en": "“Titled ...” is a past-participle phrase modifying “a new section.” It means that the section has the stated title. The implied full form is “which is titled ...” or “that is titled ...”.",
+            "cn": "“titled ...”是过去分词短语，修饰“a new section”，表示该章节的名称。它相当于“which is titled ...”或“that is titled ...”，其中关系代词和系动词被省略。"
+          }
+        },
+        {
+          "text": "which applies to deceptive activity of any kind",
+          "explanation": {
+            "en": "“Which” introduces a non-restrictive relative clause referring to the new section. “Applies to” means “is relevant to” or “covers.” The phrase “of any kind” emphasizes that there are no limits to the types covered.",
+            "cn": "“which”引导非限制性定语从句，指代前面的新章节。“applies to”表示“适用于”或“涵盖”。“of any kind”强调涵盖的类型没有限制。"
+          }
+        },
+        {
+          "text": "(whether political or commercial)",
+          "explanation": {
+            "en": "This parenthetical expression presents two alternatives. The full idea is “whether the activity is political or commercial.” The words “the activity is” are omitted because the meaning is clear from the context.",
+            "cn": "这个括号内的表达列出了两种可能性。完整意思是“无论该活动是政治性质还是商业性质”。由于上下文已经清楚地表达了含义，因此省略了“the activity is”。"
+          }
+        }
+      \]
+    },
+    {
+      "original": "It covers efforts to obscure who is behind a message or amplify content through fake accounts or posts, along with building the tools and infrastructure for running influence operation campaigns",
+      "core": {
+        "en": "It covers efforts to hide the source of messages, spread content using fake accounts or posts, and build systems for influence campaigns.",
+        "cn": "它涵盖了隐藏信息来源、利用虚假账号或帖子传播内容，以及为影响力宣传活动建立相关系统等行为。"
+      },
+      "parts": \[
+        {
+          "text": "It covers efforts",
+          "explanation": {
+            "en": "“It” refers to the new policy section. “Covers” is the main verb, and “efforts” is its object. The following infinitive phrases explain what those efforts involve.",
+            "cn": "“It”指前面提到的新政策章节。“covers”是主要动词，“efforts”是宾语。后面的不定式短语具体说明这些行为包括什么。"
+          }
+        },
+        {
+          "text": "to obscure who is behind a message or amplify content",
+          "explanation": {
+            "en": "The infinitive “to obscure” explains the kind of efforts being covered. “Or amplify” shares the same infinitive marker “to,” which is understood rather than repeated: “to obscure ... or (to) amplify ...”. The embedded clause “who is behind a message” acts as the object of “obscure.”",
+            "cn": "不定式“to obscure”说明这里所指的行为类型。“or amplify”与前面的不定式共用“to”，因此不必重复，完整结构是“to obscure ... or (to) amplify ...”。“who is behind a message”是嵌入式从句，在“obscure”之后充当宾语。"
+          }
+        },
+        {
+          "text": "through fake accounts or posts",
+          "explanation": {
+            "en": "The preposition “through” introduces the means used to amplify content. “Fake accounts or posts” gives two possible means: false accounts or false posts.",
+            "cn": "介词“through”引出扩大内容传播范围的手段。“fake accounts or posts”列出了两种可能的手段：虚假账号或虚假帖子。"
+          }
+        },
+        {
+          "text": "along with building the tools and infrastructure for running influence operation campaigns",
+          "explanation": {
+            "en": "“Along with” means “in addition to” and introduces another activity covered by the policy. “Building” is a gerund, functioning as the object of “along with.” “For running influence operation campaigns” explains the purpose of the tools and infrastructure. The passage ends without a final period, but the grammatical structure is understandable.",
+            "cn": "“along with”表示“除了……之外，还包括”，引出政策涵盖的另一类行为。“building”是动名词，在“along with”之后充当其补充对象。“for running influence operation campaigns”说明这些工具和基础设施的用途。原文末尾没有句号，但整体语法结构仍然可以理解。"
+          }
+        }
+      \]
+    }
+  \],
+  "speaking": {
+    "en": "What kinds of deceptive activity does the new policy section cover, and how might fake accounts or posts help spread content?",
+    "cn": "这个新的政策章节涵盖哪些类型的欺骗性活动？虚假账号或帖子可能如何帮助传播内容？"
+  }
+}

@@ -8,6 +8,24 @@
   const withoutInvisibles = text => text.replace(/[​-‍⁠﻿]/g, '').replace(/[   ]/g, ' ');
   const withoutFences = text => text.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
 
+  // Copying a formatted chat answer (the ChatGPT app does this) can add Markdown backslashes such as \[ \] \_ \*,
+  // which JSON doesn't allow. Drops them, keeping real JSON escapes inside strings (\" \\ \n \u…).
+  const JSON_ESCAPES = new Set(['"', '\\', '/', 'b', 'f', 'n', 'r', 't', 'u']);
+  function withoutMarkdownEscapes(text) {
+    let out = '';
+    let inString = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (c === '\\') {
+        if (inString && JSON_ESCAPES.has(text[i + 1])) { out += c + text[i + 1]; i++; }
+        continue;
+      }
+      if (c === '"') inString = !inString;
+      out += c;
+    }
+    return out;
+  }
+
   // The {…} object starting at `start`, found by matching braces outside strings; null when it never closes
   function balancedObject(text, start) {
     let depth = 0;
@@ -63,7 +81,8 @@
   // Tries the strictest reading first, so a valid reply is never changed by the repairs, and outer
   // objects before inner ones, so a small {"en","cn"} pair is never taken for the whole analysis
   function* jsonCandidates(reply) {
-    for (const text of [reply, withoutInvisibles(reply)]) {
+    const visible = withoutInvisibles(reply);
+    for (const text of [reply, visible, withoutMarkdownEscapes(visible)]) {
       yield withoutFences(text);
       for (let at = text.indexOf('{'), tried = 0; at >= 0 && tried < MAX_JSON_STARTS; at = text.indexOf('{', at + 1), tried++) {
         yield balancedObject(text, at);

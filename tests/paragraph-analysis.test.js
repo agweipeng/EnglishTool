@@ -360,3 +360,14 @@ test('a reply that still can’t be used says exactly what is wrong', () => {
   wrongPassage.sentences = [{ original: 'A sentence from another article entirely.', core: { en: 'x', cn: 'x' }, parts: [] }];
   assert.throws(() => core.validateResponse(JSON.stringify(wrongPassage), newsPassage), /passage/i);
 });
+
+test('a ChatGPT reply copied with Markdown backslashes before its brackets still shows', () => {
+  const passage = "We've consolidated those rules into a new section titled Do Not Engage in Deceptive Campaigns or Artificial Activity, which applies to deceptive activity of any kind (whether political or commercial). It covers efforts to obscure who is behind a message or amplify content through fake accounts or posts, along with building the tools and infrastructure for running influence operation campaigns";
+  const reply = require('node:fs').readFileSync(require.resolve('./fixtures/chatgpt-escaped-brackets.txt'), 'utf8');
+  assert.match(reply, /"words": \\\[/, 'The fixture keeps the backslashes exactly as copied');
+  const result = core.validateResponse(reply, passage);
+  assert.equal(result.words.length, 6);
+  assert.equal(result.phrases[2].text, 'who is behind a message');
+  assert.equal(result.sentences.length, 2);
+  assert.match(result.sentences[0].parts[0].explanation.en, /“We've” means “we have\.”/);
+});
