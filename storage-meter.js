@@ -15,10 +15,11 @@ function measureStorage(data) {
   const total = jsonLength(data);
   const analyses = { size: jsonLength(data.analyses), count: liveCount(data.analyses) };
   const materials = { size: jsonLength(data.materials), count: liveCount(data.materials) };
-  const learning = { size: total - analyses.size - materials.size, count: liveCount(data.words) };
+  const quizzes = { size: jsonLength(data.quizzes), count: liveCount(data.quizzes) };
+  const learning = { size: total - analyses.size - materials.size - quizzes.size, count: liveCount(data.words) };
   const ratio = total / STORAGE_LIMIT_CHARS;
   const level = ratio >= STORAGE_HIGH_RATIO ? 'high' : ratio >= STORAGE_WARN_RATIO ? 'warn' : 'ok';
-  return { total, ratio, level, learning, analyses, materials };
+  return { total, ratio, level, learning, analyses, materials, quizzes };
 }
 
 function formatSize(chars) {
@@ -42,6 +43,7 @@ function renderStorageMeter() {
     `Words &amp; progress ${formatSize(usage.learning.size)} (${countOf(usage.learning.count, 'word', 'words')})`,
     `Saved analyses ${formatSize(usage.analyses.size)} (${countOf(usage.analyses.count, 'analysis', 'analyses')})`,
     `Reading materials ${formatSize(usage.materials.size)} (${countOf(usage.materials.count, 'reading material', 'reading materials')})`,
+    `Quizzes ${formatSize(usage.quizzes.size)} (${countOf(usage.quizzes.count, 'quiz', 'quizzes')})`,
   ];
   meter.innerHTML = `<div class="storage-bar storage-${usage.level}" role="meter" aria-label="Storage used / 已用空间"
       aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent}"><span style="width:${Math.min(percent, 100)}%"></span></div>

@@ -45,6 +45,7 @@ function defaultState() {
     knownLog: {},   // { word: { known, ts } } — un-marks, so sync doesn't resurrect them
     analyses: [],   // saved AI passage analyses (see analysis-store.js)
     materials: [],  // saved transcripts and articles for the Reader (see material-store.js)
+    quizzes: [],    // checked quizzes with their AI feedback (see quiz-store.js)
   };
 }
 
@@ -176,6 +177,7 @@ function mergeStates(local, remote) {
     analyses: AnalysisStore.merge(local.analyses, remote.analyses),
     materials: MaterialStore.merge(local.materials, remote.materials),
     journalFeedback: JournalFeedbackStore.merge(local.journalFeedback, remote.journalFeedback),
+    quizzes: QuizStore.merge(local.quizzes, remote.quizzes),
   };
 }
 
@@ -297,6 +299,8 @@ function refreshActiveView() {
     if (typeof renderReadingMaterials === 'function') renderReadingMaterials();
   }
   else if (id === 'analyses' && typeof renderAnalysesView === 'function') renderAnalysesView();
+  // Quiz: saved quizzes only, so a sync never resets the text box being typed in
+  else if (id === 'quiz' && typeof refreshQuizSaved === 'function') refreshQuizSaved();
   else if (id === 'settings' && typeof renderStorageMeter === 'function') renderStorageMeter();
   // learn view: don't disrupt an in-progress card
 }
@@ -422,6 +426,7 @@ function showView(name) {
   if (name === 'reading') renderReading();
   if (name === 'reader') renderReader();
   if (name === 'analyses' && typeof renderAnalysesView === 'function') renderAnalysesView();
+  if (name === 'quiz' && typeof renderQuizView === 'function') renderQuizView();
   if (name === 'news' && typeof loadAINews === 'function') loadAINews();
   if (name === 'settings' && typeof renderStorageMeter === 'function') renderStorageMeter();
   if (name === 'journal') { renderJournal(); renderRoleplayWords(); }
@@ -1499,10 +1504,12 @@ function importJSON(file) {
       if (parsed.readingProgress !== undefined) ReaderProgress.validateSnapshot(parsed.readingProgress);
       if (parsed.analyses !== undefined && !Array.isArray(parsed.analyses)) throw new Error('Invalid saved analyses');
       if (parsed.materials !== undefined && !Array.isArray(parsed.materials)) throw new Error('Invalid reading materials');
+      if (parsed.quizzes !== undefined && !Array.isArray(parsed.quizzes)) throw new Error('Invalid quizzes');
       const analysisCount = AnalysisStore.visible(parsed.analyses).length;
       const materialCount = MaterialStore.visible(parsed.materials).length;
+      const quizCount = QuizStore.visible(parsed.quizzes).length;
       const extras = [parsed.readingProgress ? 'reading bookmarks' : '', analysisCount ? `${analysisCount} saved analyses` : '',
-        materialCount ? `${materialCount} reading materials` : ''].filter(Boolean);
+        materialCount ? `${materialCount} reading materials` : '', quizCount ? `${quizCount} quizzes` : ''].filter(Boolean);
       if (!confirm(`Import ${parsed.words.length} words${extras.length ? ` and ${extras.join(' and ')}` : ''}? This will merge with existing data.`)) return;
       if (parsed.readingProgress) {
         ReaderProgress.createStore(localStorage).merge(parsed.readingProgress);
@@ -1521,6 +1528,7 @@ function importJSON(file) {
       state.knownLog = mergedKnown.knownLog;
       state.analyses = AnalysisStore.merge(state.analyses, parsed.analyses);
       state.materials = MaterialStore.merge(state.materials, parsed.materials);
+      state.quizzes = QuizStore.merge(state.quizzes, parsed.quizzes);
       state.journalFeedback = JournalFeedbackStore.merge(state.journalFeedback, parsed.journalFeedback);
       saveState();
       if (typeof renderReadingMaterials === 'function') renderReadingMaterials();

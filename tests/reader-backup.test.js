@@ -8,6 +8,7 @@ const ReaderProgress = require('../reader-progress.js');
 const AnalysisStore = require('../analysis-store.js');
 const MaterialStore = require('../material-store.js');
 const JournalFeedbackStore = require('../journal-feedback-store.js');
+const QuizStore = require('../quiz-store.js');
 
 function harness(initialWords = []) {
   const memory = new Map();
@@ -15,7 +16,7 @@ function harness(initialWords = []) {
   const saved = [];
   let blob;
   const context = vm.createContext({
-    state: { words: initialWords, known: [], activity: {} }, TextCore, ReaderProgress, AnalysisStore, MaterialStore, JournalFeedbackStore, Blob,
+    state: { words: initialWords, known: [], activity: {} }, TextCore, ReaderProgress, AnalysisStore, MaterialStore, JournalFeedbackStore, QuizStore, Blob,
     localStorage: { getItem: k => memory.get(k), setItem: (k,v) => memory.set(k,v) },
     URL: { createObjectURL: value => { blob = value; return 'blob:backup'; } },
     document: { createElement: () => ({ click() {} }) },
@@ -94,4 +95,26 @@ test('saved reading materials such as BBC transcripts travel in JSON backups', a
   third.run('importJSON(backupFile)');
   assert.deepEqual(third.context.state.materials, []);
   assert.match(third.messages.at(-1), /invalid file/);
+});
+
+const savedQuiz = (id, at) => QuizStore.createEntry({ source: 'mix', items: [{ text: 'carry on', answer: 'We carried on.' }],
+  feedbackText: 'Good!', checkedWith: 'claude' }, at, id);
+
+test('saved quizzes are part of JSON backups, and a damaged quiz list is refused', () => {
+  const h = harness();
+  h.context.backupFile = JSON.stringify({ words: [], quizzes: [savedQuiz('q1', '2026-10-10T01:00:00Z')] });
+  h.run('importJSON(backupFile)');
+  assert.deepEqual(QuizStore.visible(h.context.state.quizzes).map(quiz => quiz.id), ['q1']);
+  h.context.backupFile = JSON.stringify({ words: [], quizzes: 'not a list' });
+  h.run('importJSON(backupFile)');
+  assert.match(h.messages.at(-1), /Import failed/);
+});
+
+test('sync keeps the quizzes of both devices', () => {
+  const app = fs.readFileSync(require.resolve('../app.js'), 'utf8');
+  const context = vm.createContext({ TextCore, AnalysisStore, MaterialStore, JournalFeedbackStore, QuizStore });
+  vm.runInContext(app.slice(app.indexOf('// ============ Merge logic'), app.indexOf('// ============ Sync orchestration')), context);
+  context.local = { words: [], quizzes: [savedQuiz('q1', '2026-10-10T01:00:00Z')] };
+  context.remote = { words: [], quizzes: [savedQuiz('q2', '2026-10-10T02:00:00Z')] };
+  assert.deepEqual(QuizStore.visible(vm.runInContext('mergeStates(local, remote)', context).quizzes).map(quiz => quiz.id), ['q2', 'q1']);
 });

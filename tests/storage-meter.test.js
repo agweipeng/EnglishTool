@@ -60,3 +60,15 @@ test('the Settings meter shows the total, the breakdown and advice only when it 
   assert.match(big.meter.innerHTML, /Getting full/);
   assert.match(big.meter.innerHTML, /aria-valuenow="70"/);
 });
+
+test('saved quizzes are measured and listed on their own', () => {
+  const state = { words: [], quizzes: [{ id: 'q1', items: [{ text: text(2000) }] }, { id: 'q2', deleted: true }] };
+  const h = harness(state);
+  h.sandbox.probe = state;
+  const usage = h.run('measureStorage(probe)');
+  assert.equal(usage.quizzes.size, JSON.stringify(state.quizzes).length);
+  assert.equal(usage.quizzes.count, 1);
+  assert.equal(usage.learning.size, usage.total - usage.quizzes.size);
+  h.run('renderStorageMeter()');
+  assert.match(h.meter.innerHTML, /Quizzes \d+ KB \(1 quiz\)/);
+});
