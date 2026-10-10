@@ -94,6 +94,8 @@ function saveCurrentReadingMaterial() {
 }
 
 function openReadingMaterial(item) {
+  if (typeof mayReplaceReaderText === 'function' && !mayReplaceReaderText()) return;
+  if (typeof cancelArticleImport === 'function') cancelArticleImport();
   clearReader();
   document.getElementById('readerTitle').value = item.title;
   document.getElementById('readerMaterialType').value = item.type;

@@ -9,6 +9,7 @@ const AnalysisStore = require('../analysis-store.js');
 const MaterialStore = require('../material-store.js');
 const JournalFeedbackStore = require('../journal-feedback-store.js');
 const QuizStore = require('../quiz-store.js');
+const LearningMerge = require('../learning-merge.js');
 
 function harness(initialWords = []) {
   const memory = new Map();
@@ -16,7 +17,7 @@ function harness(initialWords = []) {
   const saved = [];
   let blob;
   const context = vm.createContext({
-    state: { words: initialWords, known: [], activity: {} }, TextCore, ReaderProgress, AnalysisStore, MaterialStore, JournalFeedbackStore, QuizStore, Blob,
+    state: { words: initialWords, known: [], activity: {} }, TextCore, ReaderProgress, AnalysisStore, MaterialStore, JournalFeedbackStore, QuizStore, LearningMerge, Blob,
     localStorage: { getItem: k => memory.get(k), setItem: (k,v) => memory.set(k,v) },
     URL: { createObjectURL: value => { blob = value; return 'blob:backup'; } },
     document: { createElement: () => ({ click() {} }) },
@@ -110,11 +111,70 @@ test('saved quizzes are part of JSON backups, and a damaged quiz list is refused
   assert.match(h.messages.at(-1), /Import failed/);
 });
 
-test('sync keeps the quizzes of both devices', () => {
+// The merge functions of app.js on their own
+function mergeContext() {
   const app = fs.readFileSync(require.resolve('../app.js'), 'utf8');
-  const context = vm.createContext({ TextCore, AnalysisStore, MaterialStore, JournalFeedbackStore, QuizStore });
+  const context = vm.createContext({ TextCore, AnalysisStore, MaterialStore, JournalFeedbackStore, QuizStore, LearningMerge });
   vm.runInContext(app.slice(app.indexOf('// ============ Merge logic'), app.indexOf('// ============ Sync orchestration')), context);
+  return { context, run: code => vm.runInContext(code, context) };
+}
+
+test('sync keeps the quizzes of both devices', () => {
+  const { context, run } = mergeContext();
   context.local = { words: [], quizzes: [savedQuiz('q1', '2026-10-10T01:00:00Z')] };
   context.remote = { words: [], quizzes: [savedQuiz('q2', '2026-10-10T02:00:00Z')] };
-  assert.deepEqual(QuizStore.visible(vm.runInContext('mergeStates(local, remote)', context).quizzes).map(quiz => quiz.id), ['q2', 'q1']);
+  assert.deepEqual(QuizStore.visible(run('mergeStates(local, remote)').quizzes).map(quiz => quiz.id), ['q2', 'q1']);
+});
+
+const emptyState = () => ({ words: [], deletedWords: {}, journal: {}, journalLog: {}, journalFeedback: {}, known: [], knownLog: {},
+  analyses: [], materials: [], quizzes: [], activity: {}, streak: { current: 0, lastDay: null } });
+const fullState = () => ({ ...emptyState(),
+  words: [{ id: 'w1', text: 'prairie', updatedAt: '2026-10-09T01:00:00Z' }],
+  journal: { '2026-10-09': 'Dear diary.' }, known: ['walk'],
+  journalFeedback: { '2026-10-09': { text: 'Nice.', source: 'claude', updatedAt: '2026-10-09T01:00:00Z' } },
+  quizzes: [savedQuiz('q1', '2026-10-09T01:00:00Z')] });
+
+test('Reset All stays reset after a sync with a device (or gist) that still has the old data', () => {
+  const { context, run } = mergeContext();
+  context.old = fullState();
+  context.fresh = emptyState();
+  const merged = run('mergeStates(replaceState(old, fresh, "2026-10-10T00:00:00Z"), old)');
+  assert.deepEqual([...merged.words], []);
+  assert.deepEqual({ ...merged.journal }, {});
+  assert.deepEqual([...merged.known], []);
+  assert.equal(JournalFeedbackStore.get(merged.journalFeedback, '2026-10-09'), null);
+  assert.deepEqual(QuizStore.visible(merged.quizzes), []);
+});
+
+test('a Sync Code replace drops what the code does not have, even after a later sync', () => {
+  const { context, run } = mergeContext();
+  context.old = fullState();
+  context.code = { ...emptyState(), words: [{ id: 'w2', text: 'meadow', updatedAt: '2026-10-08T01:00:00Z' }],
+    journal: { '2026-10-08': 'From the phone.' } };
+  const merged = run('mergeStates(replaceState(old, code, "2026-10-10T00:00:00Z"), old)');
+  assert.deepEqual(Array.from(merged.words, w => w.text), ['meadow']);
+  assert.deepEqual({ ...merged.journal }, { '2026-10-08': 'From the phone.' });
+});
+
+test('importing a backup brings back its journal and streak, and restored words are no longer marked deleted', () => {
+  const h = harness();
+  Object.assign(h.context.state, { deletedWords: { w1: '2026-10-09T00:00:00Z' }, journal: { '2026-10-06': 'Newer here.' },
+    journalLog: { '2026-10-05': '2026-10-09T00:00:00Z', '2026-10-06': '2026-10-09T00:00:00Z' }, streak: { current: 1, lastDay: '2026-10-01' } });
+  h.context.backupFile = JSON.stringify({ words: [{ id: 'w1', text: 'prairie', updatedAt: '2026-10-01T00:00:00Z' }],
+    journal: { '2026-10-05': 'Deleted here, kept in the backup.', '2026-10-06': 'Older.' }, streak: { current: 4, lastDay: '2026-10-05' } });
+  h.run('importJSON(backupFile)');
+  assert.deepEqual({ ...h.context.state.journal }, { '2026-10-05': 'Deleted here, kept in the backup.', '2026-10-06': 'Newer here.' });
+  assert.deepEqual({ ...h.context.state.streak }, { current: 4, lastDay: '2026-10-05' });
+  assert.deepEqual({ ...h.context.state.deletedWords }, {});
+  const synced = LearningMerge.mergeWords(h.context.state, { words: [], deletedWords: { w1: '2026-10-09T00:00:00Z' } });
+  assert.deepEqual(synced.words.map(w => w.text), ['prairie'], 'The restored word survives a sync with the old deletion');
+});
+
+test('an import that cannot be saved leaves the data as it was', () => {
+  const h = harness([{ id: 'w0', text: 'existing' }]);
+  h.context.saveState = () => { const error = new Error('full'); error.name = 'QuotaExceededError'; throw error; };
+  h.context.backupFile = JSON.stringify({ words: [{ id: 'w1', text: 'new' }] });
+  h.run('importJSON(backupFile)');
+  assert.deepEqual(Array.from(h.context.state.words, w => w.text), ['existing']);
+  assert.match(h.messages.at(-1), /storage is full/);
 });

@@ -250,6 +250,12 @@ function restoreReadingPosition(bookmark, ratio) {
 
 async function openBookChapter(bookId, chapterIdOrIndex, restore = false) {
   if (!readerBookById(bookId)) { toast('This book is not in the bookshelf'); return; }
+  // article-import.js: ask before replacing pasted text that isn't saved, and stop an import still loading
+  if (typeof mayReplaceReaderText === 'function' && !mayReplaceReaderText()) {
+    document.getElementById('readerBook').value = readerBookId || '';
+    return;
+  }
+  if (typeof cancelArticleImport === 'function') cancelArticleImport();
   clearTimeout(readerBookmarkTimer);
   saveBookPosition();
   const sequence = ++readerOpenSequence;
@@ -658,13 +664,21 @@ async function learnFromReader(surface, sentence, btn) {
     const tags = sourceTitle ? [sourceTitle] : [];
     // Re-check: the same word may have been added while the lookups were running
     if (findWordByText(text)) { toast(`"${text}" is already in your library`); return; }
-    state.words.push(newWordEntry({
+    const previous = state.words;
+    state.words = [...state.words, newWordEntry({
       text,
       ...fields,
       examples: [...bookExample, ...fields.examples].slice(0, MAX_EXAMPLES),
       tags,
-    }));
-    saveState();
+    })];
+    try {
+      saveState();
+    } catch (e) {
+      // Not saved: take the word back out, so it doesn't look learned until the next reload
+      state.words = previous;
+      toast(storageErrorMessage(e), 4000);
+      return;
+    }
     toast(fields.defEN || fields.defCN
       ? `✓ Added "${text}" with the book's sentence`
       : `Added "${text}", but the dictionary lookup failed — add its meaning in the Library`, 3500);

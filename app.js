@@ -36,10 +36,12 @@ let drill = null;         // active drill state
 function defaultState() {
   return {
     words: [],
+    deletedWords: {},  // { wordId: deletedAt } — so a sync doesn't bring deleted words back (learning-merge.js)
     settings: { voiceURI: null, rate: 1, theme: 'light' },
     activity: {},   // { 'YYYY-MM-DD': reviewCount }
     streak: { current: 0, lastDay: null },
     journal: {},    // { 'YYYY-MM-DD': 'entry text' }
+    journalLog: {}, // { 'YYYY-MM-DD': savedAt } — last save or delete of each entry, for merging
     journalFeedback: {},  // { 'YYYY-MM-DD': { text, source, updatedAt } } — pasted AI replies (journal-feedback-store.js)
     known: [],      // lowercase words the user already knows (Book Reader)
     knownLog: {},   // { word: { known, ts } } — un-marks, so sync doesn't resurrect them
@@ -101,7 +103,8 @@ async function ghAuth(token) {
 }
 async function ghFindGist(token) {
   const r = await fetch('https://api.github.com/gists?per_page=100', { headers: ghHeaders(token) });
-  if (!r.ok) return null;
+  // A failed list must not look like "no gist yet", or connecting would create a second one
+  if (!r.ok) throw new Error(`Could not list your gists (${r.status})`);
   const list = await r.json();
   return list.find(g => g.files && g.files[GIST_FILE]) || null;
 }
@@ -141,17 +144,11 @@ async function ghUpdateGist(token, id, content) {
 
 // ============ Merge logic (per-word updatedAt wins) ============
 
-function wordEditTs(w) { return w.updatedAt || w.createdAt || ''; }
-
 function mergeStates(local, remote) {
   if (!remote || !Array.isArray(remote.words)) return local;
-  const byId = new Map();
-  for (const w of (local.words || [])) byId.set(w.id, w);
-  for (const w of remote.words) {
-    const cur = byId.get(w.id);
-    if (!cur) byId.set(w.id, w);
-    else if (wordEditTs(w) > wordEditTs(cur)) byId.set(w.id, w);
-  }
+  // Words and journal entries: the newest edit or deletion wins (learning-merge.js)
+  const { words, deletedWords } = LearningMerge.mergeWords(local, remote);
+  const { journal, journalLog } = LearningMerge.mergeJournal(local, remote);
   const activity = { ...(local.activity || {}) };
   for (const [k, v] of Object.entries(remote.activity || {})) {
     activity[k] = Math.max(activity[k] || 0, v);
@@ -159,25 +156,61 @@ function mergeStates(local, remote) {
   const localLast = local.streak?.lastDay || '';
   const remoteLast = remote.streak?.lastDay || '';
   const streak = remoteLast > localLast ? remote.streak : local.streak;
-  // Journal: per-date conflict resolution — keep the longer entry (assumed newer/more complete)
-  const journal = { ...(local.journal || {}) };
-  for (const [date, text] of Object.entries(remote.journal || {})) {
-    if (!journal[date] || text.length > journal[date].length) journal[date] = text;
-  }
   // Known words: union, except words whose newest log entry is an un-mark
   const { known, knownLog } = TextCore.mergeKnown(local, remote);
   return {
     ...local,
-    words: [...byId.values()],
+    words,
+    deletedWords,
     activity,
     streak,
     journal,
+    journalLog,
     known,
     knownLog,
     analyses: AnalysisStore.merge(local.analyses, remote.analyses),
     materials: MaterialStore.merge(local.materials, remote.materials),
     journalFeedback: JournalFeedbackStore.merge(local.journalFeedback, remote.journalFeedback),
     quizzes: QuizStore.merge(local.quizzes, remote.quizzes),
+  };
+}
+
+// `next` (a fresh state for Reset All, or the data of a Sync Code), plus deletion records for everything in
+// `current` that `next` doesn't have, so a sync with another device doesn't bring the old data back
+function replaceState(current, next, now) {
+  const liveIds = list => new Set((Array.isArray(list) ? list : []).filter(e => e && !e.deleted).map(e => e.id));
+  const dropMissing = (store, key) => {
+    const kept = liveIds(next[key]);
+    const list = Array.isArray(current[key]) ? current[key] : [];
+    const gone = [...liveIds(list)].filter(id => !kept.has(id));
+    return store.merge(next[key], gone.reduce((rest, id) => store.remove(rest, id, now), list).filter(e => e.deleted));
+  };
+  const keptWords = liveIds(next.words);
+  const goneWords = [...liveIds(current.words)].filter(id => !keptWords.has(id));
+  const removed = LearningMerge.deleteWords({ deletedWords: next.deletedWords }, goneWords, now);
+  // Words of `next` this device had deleted come back on every device
+  const { words, deletedWords } = LearningMerge.restoreWords(
+    { words: next.words, deletedWords: { ...(current.deletedWords || {}), ...removed.deletedWords } }, [...keptWords], now);
+  const journalOf = data => ({ journal: data.journal || {}, journalLog: data.journalLog || {} });
+  const { journal, journalLog } = Object.keys(current.journal || {}).filter(date => !(next.journal || {})[date])
+    .reduce((data, date) => LearningMerge.setJournalEntry(data, date, '', now), journalOf(next));
+  const journalFeedback = Object.keys(current.journalFeedback || {})
+    .filter(date => JournalFeedbackStore.get(current.journalFeedback, date) && !JournalFeedbackStore.get(next.journalFeedback, date))
+    .reduce((map, date) => JournalFeedbackStore.set(map, date, { text: '', source: 'other' }, now), next.journalFeedback || {});
+  const nextKnown = new Set(next.known || []);
+  const { known, knownLog } = TextCore.applyKnownChange(next, (current.known || []).filter(k => !nextKnown.has(k)), false, now);
+  return {
+    ...next,
+    words,
+    deletedWords,
+    journal,
+    journalLog,
+    journalFeedback,
+    known,
+    knownLog,
+    analyses: dropMissing(AnalysisStore, 'analyses'),
+    materials: dropMissing(MaterialStore, 'materials'),
+    quizzes: dropMissing(QuizStore, 'quizzes'),
   };
 }
 
@@ -200,16 +233,22 @@ async function connectSync(token) {
   const t = (token || '').trim();
   if (!t) return { error: 'Token is required' };
   setSyncStatus('syncing');
-  const user = await ghAuth(t);
-  if (!user) { setSyncStatus('error'); return { error: 'Invalid token or insufficient scope' }; }
-  let gist = await ghFindGist(t);
-  if (!gist) {
-    gist = await ghCreateGist(t, JSON.stringify(state));
-    if (!gist) { setSyncStatus('error'); return { error: 'Failed to create gist' }; }
+  try {
+    const user = await ghAuth(t);
+    if (!user) { setSyncStatus('error'); return { error: 'Invalid token or insufficient scope' }; }
+    let gist = await ghFindGist(t);
+    if (!gist) {
+      gist = await ghCreateGist(t, JSON.stringify(state));
+      if (!gist) { setSyncStatus('error'); return { error: 'Failed to create gist' }; }
+    }
+    saveSyncConfig({ token: t, gistId: gist.id, user: user.login, lastSyncedAt: Date.now() });
+    await syncNow();
+    return { ok: true, user: user.login, gistId: gist.id };
+  } catch (e) {
+    console.error('Gist connect failed', e);
+    setSyncStatus('error');
+    return { error: 'Could not reach GitHub — check your connection and try again' };
   }
-  saveSyncConfig({ token: t, gistId: gist.id, user: user.login, lastSyncedAt: Date.now() });
-  await syncNow();
-  return { ok: true, user: user.login, gistId: gist.id };
 }
 
 // One round: read the gist, merge it into this device, and push only if the gist is missing something.
@@ -249,17 +288,23 @@ async function runSyncRounds(cfg) {
       const round = await pullMergePush(cfg);
       ok = round.ok;
       remoteChanged = remoteChanged || round.remoteChanged;
-    } while (ok && syncAgain);
+    } while (ok && syncAgain && isSameSyncConfig(cfg));
+    // Disconnected (or reconnected) while this sync ran: don't save the old token again
+    if (!isSameSyncConfig(cfg)) return false;
     if (!ok) { setSyncStatus('error'); return false; }
-    cfg.lastSyncedAt = Date.now();
-    saveSyncConfig(cfg);
+    saveSyncConfig({ ...cfg, lastSyncedAt: Date.now() });
     setSyncStatus('ok');
     if (remoteChanged) refreshActiveView();
     return true;
   } catch (e) {
-    setSyncStatus('error');
+    if (isSameSyncConfig(cfg)) setSyncStatus('error');
     return false;
   }
+}
+
+function isSameSyncConfig(cfg) {
+  const current = loadSyncConfig();
+  return current.gistId === cfg.gistId && current.token === cfg.token;
 }
 
 async function syncNow() {
@@ -332,6 +377,12 @@ function toast(msg, ms = 1800) {
   el.classList.remove('hidden');
   clearTimeout(toast._t);
   toast._t = setTimeout(() => el.classList.add('hidden'), ms);
+}
+// For a failed saveState(); a full browser storage is the usual cause
+function storageErrorMessage(e) {
+  return e?.name === 'QuotaExceededError'
+    ? 'Not saved — browser storage is full (see Settings → Storage)'
+    : 'Not saved — something went wrong';
 }
 
 // ============ Activity / Streak ============
@@ -800,30 +851,27 @@ function saveWord() {
   if (!text) { toast('Word is required'); return; }
   const enrichment = collectEnrichment();
   const existing = state.words.find(w => w.text.toLowerCase() === text.toLowerCase());
-  const nowIso = new Date().toISOString();
-  if (existing) {
-    if (!confirm(`"${text}" already exists. Update it?`)) return;
-    Object.assign(existing, {
-      phonetic: document.getElementById('newPhonetic').value.trim(),
-      defEN: document.getElementById('defEN').value.trim(),
-      defCN: document.getElementById('defCN').value.trim(),
-      examples: collectExamples(),
-      tags: document.getElementById('newTags').value.split(',').map(s => s.trim()).filter(Boolean),
-      ...enrichment,
-      updatedAt: nowIso,
-    });
-  } else {
-    state.words.push(newWordEntry({
-      text,
-      phonetic: document.getElementById('newPhonetic').value.trim(),
-      defEN: document.getElementById('defEN').value.trim(),
-      defCN: document.getElementById('defCN').value.trim(),
-      examples: collectExamples(),
-      tags: document.getElementById('newTags').value.split(',').map(s => s.trim()).filter(Boolean),
-      ...enrichment,
-    }));
+  if (existing && !confirm(`"${text}" already exists. Update it?`)) return;
+  const fields = {
+    phonetic: document.getElementById('newPhonetic').value.trim(),
+    defEN: document.getElementById('defEN').value.trim(),
+    defCN: document.getElementById('defCN').value.trim(),
+    examples: collectExamples(),
+    tags: document.getElementById('newTags').value.split(',').map(s => s.trim()).filter(Boolean),
+    ...enrichment,
+  };
+  const previous = state.words;
+  state.words = existing
+    ? state.words.map(w => (w === existing ? { ...w, ...fields, updatedAt: new Date().toISOString() } : w))
+    : [...state.words, newWordEntry({ text, ...fields })];
+  try {
+    saveState();
+  } catch (e) {
+    console.error('Word could not be saved', e);
+    state.words = previous;
+    toast(storageErrorMessage(e), 4000);
+    return;
   }
-  saveState();
   toast(`✓ Saved "${text}"`);
   clearForm();
 }
@@ -838,9 +886,18 @@ async function bulkImport() {
     const w = words[i];
     status.textContent = `Processing ${i + 1}/${words.length}: ${w}...`;
     if (findWordByText(w)) continue;
-    state.words.push(newWordEntry({ text: w, ...(await lookupWordFields(w)) }));
+    const entry = newWordEntry({ text: w, ...(await lookupWordFields(w)) });
+    const previous = state.words;
+    state.words = [...state.words, entry];
+    try {
+      saveState();
+    } catch (e) {
+      console.error('Bulk import stopped', e);
+      state.words = previous;
+      status.textContent = `${storageErrorMessage(e)} — imported ${added} of ${words.length} word(s)`;
+      return;
+    }
     added++;
-    saveState();
   }
   status.textContent = `✓ Imported ${added} new word(s)`;
   document.getElementById('bulkInput').value = '';
@@ -963,9 +1020,16 @@ function ratingButtons(word) {
 function attachRating(scope, word) {
   scope.querySelectorAll('.rating-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      applyRating(word, btn.dataset.r);
-      recordReview();
-      saveState();
+      // A sync during the session may have replaced (or deleted) this word; rate the one in state
+      const live = state.words.find(w => w.id === word.id);
+      if (live) applyRating(live, btn.dataset.r);
+      try {
+        recordReview();  // saves the rating too
+      } catch (e) {
+        console.error('Review could not be saved', e);
+        toast(storageErrorMessage(e), 4000);
+      }
+      // Always move on, so a failed save never makes the same card count twice
       session.index++;
       showCard();
     });
@@ -1245,8 +1309,17 @@ function handleLibAction(id, act) {
   }
   if (act === 'delete') {
     if (!confirm(`Delete "${w.text}"? This cannot be undone.`)) return;
-    state.words = state.words.filter(x => x.id !== id);
-    saveState(); renderLibrary(); toast('Deleted');
+    const previous = { words: state.words, deletedWords: state.deletedWords };
+    // A dated deletion, so a sync with another device doesn't bring the word back
+    Object.assign(state, LearningMerge.deleteWords(state, [id], new Date().toISOString()));
+    try {
+      saveState();
+    } catch (e) {
+      Object.assign(state, previous);
+      toast(storageErrorMessage(e), 4000);
+      return;
+    }
+    renderLibrary(); toast('Deleted');
   }
 }
 
@@ -1493,6 +1566,45 @@ function exportAnki() {
   a.download = `english-trainer-anki-${todayKey()}.csv`;
   a.click();
 }
+// `current` with a JSON backup merged in, as a new object. A backup is for recovery: its words and journal
+// entries that are missing here come back (on every device), even when they had been deleted.
+function mergeBackup(current, parsed, now) {
+  const texts = new Set((current.words || []).map(w => w.text.toLowerCase()));
+  const added = parsed.words.filter(w => {
+    const key = w.text.toLowerCase();
+    if (texts.has(key)) return false;
+    texts.add(key);
+    return true;
+  });
+  const { words, deletedWords } = LearningMerge.restoreWords(
+    { words: [...(current.words || []), ...added], deletedWords: current.deletedWords }, added.map(w => w.id), now);
+  const activity = { ...(current.activity || {}) };
+  Object.entries(parsed.activity || {}).forEach(([k, v]) => { activity[k] = Math.max(activity[k] || 0, v); });
+  const merged = LearningMerge.mergeJournal(current, parsed);
+  const { journal, journalLog } = Object.entries(LearningMerge.mergeJournal({}, parsed).journal)
+    .filter(([date]) => !Object.hasOwn(merged.journal, date))
+    .reduce((data, [date, text]) => LearningMerge.setJournalEntry(data, date, text, now), merged);
+  const streak = parsed.streak;
+  const isStreak = !!streak && Number.isInteger(streak.current) && streak.current >= 0
+    && typeof streak.lastDay === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(streak.lastDay);
+  const { known, knownLog } = TextCore.mergeKnown(current, parsed);
+  return {
+    ...current,
+    words,
+    deletedWords,
+    activity,
+    journal,
+    journalLog,
+    streak: isStreak && streak.lastDay > (current.streak?.lastDay || '') ? { current: streak.current, lastDay: streak.lastDay } : current.streak,
+    known,
+    knownLog,
+    analyses: AnalysisStore.merge(current.analyses, parsed.analyses),
+    materials: MaterialStore.merge(current.materials, parsed.materials),
+    quizzes: QuizStore.merge(current.quizzes, parsed.quizzes),
+    journalFeedback: JournalFeedbackStore.merge(current.journalFeedback, parsed.journalFeedback),
+  };
+}
+
 function importJSON(file) {
   const reader = new FileReader();
   reader.onload = () => {
@@ -1515,22 +1627,14 @@ function importJSON(file) {
         ReaderProgress.createStore(localStorage).merge(parsed.readingProgress);
         if (typeof onReaderProgressImported === 'function') onReaderProgressImported();
       }
-      const byText = new Map(state.words.map(w => [w.text.toLowerCase(), w]));
-      parsed.words.forEach(w => {
-        const key = w.text.toLowerCase();
-        if (!byText.has(key)) { state.words.push(w); byText.set(key, w); }
-      });
-      Object.entries(parsed.activity || {}).forEach(([k, v]) => {
-        state.activity[k] = Math.max(state.activity[k] || 0, v);
-      });
-      const mergedKnown = TextCore.mergeKnown(state, parsed);
-      state.known = mergedKnown.known;
-      state.knownLog = mergedKnown.knownLog;
-      state.analyses = AnalysisStore.merge(state.analyses, parsed.analyses);
-      state.materials = MaterialStore.merge(state.materials, parsed.materials);
-      state.quizzes = QuizStore.merge(state.quizzes, parsed.quizzes);
-      state.journalFeedback = JournalFeedbackStore.merge(state.journalFeedback, parsed.journalFeedback);
-      saveState();
+      const previous = state;
+      state = mergeBackup(previous, parsed, new Date().toISOString());
+      try {
+        saveState();
+      } catch (e) {
+        state = previous;
+        throw e;
+      }
       if (typeof renderReadingMaterials === 'function') renderReadingMaterials();
       toast(`Imported ${parsed.words.length} words`);
       renderLibrary();
@@ -1552,8 +1656,15 @@ function toggleTheme() {
 function resetAll() {
   if (!confirm('Delete ALL words and progress? Cannot be undone.')) return;
   if (!confirm('Are you absolutely sure?')) return;
-  state = defaultState();
-  saveState();
+  const previous = state;
+  state = replaceState(previous, defaultState(), new Date().toISOString());
+  try {
+    saveState();
+  } catch (e) {
+    state = previous;
+    toast(storageErrorMessage(e));
+    return;
+  }
   applyTheme();
   document.getElementById('streakBadge').textContent = `🔥 0`;
   toast('All data cleared');
@@ -1587,8 +1698,15 @@ function applySyncCode() {
     const parsed = JSON.parse(json);
     if (!parsed || !Array.isArray(parsed.words)) throw new Error('bad');
     if (!confirm(`Replace local data with ${parsed.words.length} words from sync code?`)) return;
-    state = Object.assign(defaultState(), parsed);
-    saveState();
+    const previous = state;
+    state = replaceState(previous, Object.assign(defaultState(), parsed), new Date().toISOString());
+    try {
+      saveState();
+    } catch (e) {
+      state = previous;
+      toast(storageErrorMessage(e));
+      return;
+    }
     applyTheme();
     document.getElementById('streakBadge').textContent = `🔥 ${state.streak.current || 0}`;
     toast('Synced from code ✓');
@@ -1627,8 +1745,12 @@ async function handleConnectClick() {
   if (!token) { toast('Paste your GitHub token first'); return; }
   const btn = document.getElementById('syncConnectBtn');
   btn.disabled = true; btn.textContent = 'Connecting...';
-  const res = await connectSync(token);
-  btn.disabled = false; btn.textContent = '🔗 Connect';
+  let res;
+  try {
+    res = await connectSync(token);
+  } finally {
+    btn.disabled = false; btn.textContent = '🔗 Connect';
+  }
   if (res.error) { toast(res.error); return; }
   document.getElementById('gistToken').value = '';
   toast(`Connected as ${res.user} ✓`);
@@ -1661,6 +1783,8 @@ function currentJournalDate() {
 
 function renderJournal() {
   const dateEl = document.getElementById('journalDate');
+  // Text that couldn't be saved stays on screen with its own day, instead of being replaced by another day
+  if (!commitJournal()) { dateEl.value = pendingJournal.date; return; }
   if (!dateEl.value) dateEl.value = todayKey();
   const date = dateEl.value;
   const text = (state.journal && state.journal[date]) || '';
@@ -1677,14 +1801,44 @@ function updateJournalCounts() {
   document.getElementById('journalCharCount').textContent = t.length;
 }
 
-function saveJournalCurrent() {
-  const date = currentJournalDate();
-  const text = document.getElementById('journalText').value;
-  if (!state.journal) state.journal = {};
-  if (text.trim()) state.journal[date] = text;
-  else delete state.journal[date];
-  saveState();
+// ----- Entry text, saved a moment after typing stops -----
+const JOURNAL_SAVE_MS = 1000;
+let journalTimer = null;
+let pendingJournal = null;   // { date, text } waiting to be saved
+
+// The date is taken now, so switching days before the save can't move the text to another day
+function scheduleJournalSave() {
+  pendingJournal = { date: currentJournalDate(), text: document.getElementById('journalText').value };
+  clearTimeout(journalTimer);
+  journalTimer = setTimeout(commitJournal, JOURNAL_SAVE_MS);
+}
+
+// Saves the text waiting (if any); false when it couldn't be saved
+function commitJournal() {
+  clearTimeout(journalTimer);
+  const pending = pendingJournal;
+  pendingJournal = null;
+  if (!pending) return true;
+  const saved = (state.journal || {})[pending.date] || '';
+  if (saved === (pending.text.trim() ? pending.text : '')) return true;
+  const previous = { journal: state.journal, journalLog: state.journalLog };
+  Object.assign(state, LearningMerge.setJournalEntry(state, pending.date, pending.text, new Date().toISOString()));
+  try {
+    saveState();
+  } catch (error) {
+    console.error('Journal entry could not be saved', error);
+    Object.assign(state, previous);
+    pendingJournal = pending;   // kept, so the next save (or leaving the page) tries again
+    toast(storageErrorMessage(error), 4000);
+    return false;
+  }
   renderJournalHistory();
+  return true;
+}
+
+function saveJournalCurrent() {
+  pendingJournal = { date: currentJournalDate(), text: document.getElementById('journalText').value };
+  return commitJournal();
 }
 
 function renderJournalHistory() {
@@ -1798,17 +1952,28 @@ async function copyJournalOnly() {
 }
 
 function deleteCurrentJournal() {
+  if (!commitJournal()) return;
   const date = currentJournalDate();
   if (!state.journal?.[date]) { toast('No entry to delete'); return; }
   const feedback = JournalFeedbackStore.get(state.journalFeedback, date);
   if (!confirm(`Delete journal entry for ${date}${feedback ? ' and its AI feedback' : ''}?`)) return;
-  delete state.journal[date];
+  const now = new Date().toISOString();
+  const previous = { journal: state.journal, journalLog: state.journalLog, journalFeedback: state.journalFeedback };
+  // A dated deletion, so a sync doesn't bring the entry back
+  Object.assign(state, LearningMerge.setJournalEntry(state, date, '', now));
+  if (feedback) state.journalFeedback = JournalFeedbackStore.set(state.journalFeedback, date, { text: '', source: feedback.source }, now);
+  try {
+    saveState();
+  } catch (error) {
+    console.error('Journal entry could not be deleted', error);
+    Object.assign(state, previous);
+    toast(storageErrorMessage(error), 4000);
+    return;
+  }
   document.getElementById('journalText').value = '';
   pendingJournalFeedback = null;
   clearTimeout(journalFeedbackTimer);
-  if (feedback) state.journalFeedback = JournalFeedbackStore.set(state.journalFeedback, date, { text: '', source: feedback.source }, new Date().toISOString());
   renderJournalFeedback();
-  saveState();
   updateJournalCounts();
   renderJournalHistory();
   toast('Deleted');
@@ -1994,13 +2159,12 @@ function init() {
 
   // Journal
   document.getElementById('journalDate').addEventListener('change', renderJournal);
-  window.addEventListener('pagehide', commitJournalFeedback);
-  document.addEventListener('visibilitychange', () => { if (document.hidden) commitJournalFeedback(); });
+  const saveJournalNow = () => { commitJournal(); commitJournalFeedback(); };
+  window.addEventListener('pagehide', saveJournalNow);
+  document.addEventListener('visibilitychange', () => { if (document.hidden) saveJournalNow(); });
   document.getElementById('journalText').addEventListener('input', () => {
     updateJournalCounts();
-    // Debounced autosave: 1s after last keystroke
-    clearTimeout(window._journalSaveTimer);
-    window._journalSaveTimer = setTimeout(saveJournalCurrent, 1000);
+    scheduleJournalSave();
   });
   document.querySelectorAll('[data-chat-for="journal"]').forEach(link => link.addEventListener('click', event => {
     saveJournalCurrent();
