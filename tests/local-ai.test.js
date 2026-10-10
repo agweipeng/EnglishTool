@@ -63,3 +63,20 @@ test('aborting a model request propagates cancellation', async () => {
   }});
   await assert.rejects(request({prompt:'test',signal:controller.signal}), {name:'AbortError'});
 });
+
+test('a feature can ask the local model for its own JSON shape', async () => {
+  const quizSchema = { type: 'object', properties: { items: { type: 'array' } }, required: ['items'] };
+  const proxy = ai.request('local-chat', { direct: false, fetchImpl: async (url, options) => {
+    const body = JSON.parse(options.body);
+    assert.equal(body.response_format.json_schema.name, 'quiz_feedback');
+    assert.deepEqual(body.response_format.json_schema.schema, quizSchema);
+    return { ok: true, json: async () => ({ choices: [{ message: { content: '{"items":[]}' }, finish_reason: 'stop' }] }) };
+  } });
+  assert.equal(await proxy({ prompt: 'p', schema: quizSchema, schemaName: 'quiz_feedback' }), '{"items":[]}');
+  const direct = ai.request('qwen3.5:4b', { provider: 'ollama', direct: true, fetchImpl: async (url, options) => {
+    if (url.endsWith('/api/tags')) return { ok: true, status: 200, json: async () => ({ models: [{ name: 'qwen3.5:4b' }] }) };
+    assert.deepEqual(JSON.parse(options.body).format, quizSchema);
+    return { ok: true, status: 200, json: async () => ({ done: true, message: { content: '{"items":[]}' } }) };
+  } });
+  assert.equal(await direct({ prompt: 'p', schema: quizSchema }), '{"items":[]}');
+});

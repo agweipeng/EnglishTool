@@ -41,11 +41,11 @@
     if (!Array.isArray(body?.data)) throw fail(messages.invalid);
     return body.data.filter(model => typeof model?.id === 'string' && model.id.trim()).map(model => model.id);
   }
-  async function proxyChat(model, provider, prompt, signal, fetchImpl) {
+  async function proxyChat(model, provider, prompt, signal, fetchImpl, format, schemaName) {
     const body = await fetchJSON('/local-ai/chat', { method: 'POST', signal,
       headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model, provider,
         messages: [{ role: 'user', content: prompt }], stream: false, temperature: 0.2, max_tokens: 8192,
-        response_format: { type: 'json_schema', json_schema: { name: 'reading_analysis', strict: true, schema } },
+        response_format: { type: 'json_schema', json_schema: { name: schemaName, strict: true, schema: format } },
       }) }, fetchImpl);
     const choice = body?.choices?.[0];
     if (choice?.finish_reason === 'length') throw fail(messages.invalid);
@@ -98,7 +98,7 @@
 
   // Asks for one complete answer rather than a stream: if a tab stopped reading a
   // stream (e.g. a frozen background tab), Ollama would stall for every later request.
-  async function ollamaChat(model, prompt, signal, fetchImpl) {
+  async function ollamaChat(model, prompt, signal, fetchImpl, format) {
     if (!(await ollamaModels(signal, fetchImpl)).includes(model)) throw fail(messages.model);
     // Aborting the fetch closes the connection, which makes Ollama stop generating
     const controller = new AbortController();
@@ -108,7 +108,7 @@
     try {
       const response = await ollamaFetch('/api/chat', { method: 'POST', signal: controller.signal,
         headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model,
-          messages: [{ role: 'user', content: prompt }], stream: false, think: false, format: schema,
+          messages: [{ role: 'user', content: prompt }], stream: false, think: false, format,
           options: { temperature: 0.2, num_ctx: 16384, num_predict: 8192 } }) }, fetchImpl);
       return await ollamaAnswer(response);
     } catch (error) {
@@ -126,10 +126,11 @@
     const ids = direct && provider === 'ollama' ? await ollamaModels(signal, fetchImpl) : await proxyModels(provider, signal, fetchImpl);
     return [...new Set(ids)];
   }
+  // Passage analysis uses the default schema; other features (the Quiz) pass their own JSON shape
   function request(model, { provider = 'lmstudio', direct = usesDirectOllama(), fetchImpl = defaultFetch() } = {}) {
-    return ({ prompt, signal }) => (direct && provider === 'ollama'
-      ? ollamaChat(model, prompt, signal, fetchImpl)
-      : proxyChat(model, provider, prompt, signal, fetchImpl));
+    return ({ prompt, signal, schema: format = schema, schemaName = 'reading_analysis' }) => (direct && provider === 'ollama'
+      ? ollamaChat(model, prompt, signal, fetchImpl, format)
+      : proxyChat(model, provider, prompt, signal, fetchImpl, format, schemaName));
   }
   const api = { models, request, schema, usesDirectOllama };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
