@@ -709,3 +709,6 @@ textarea { resize: vertical; min-height: 50px; }
 .quiz-history-item.active { border-color: var(--primary); }
 .quiz-history-open { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; gap: 4px 12px; text-align: left;
   background: none; border: none; color: inherit; cursor: pointer; font: inherit; padding: 4px; }
+.quiz-example { margin: 8px 0 12px; }
+.quiz-example .hint { display: block; margin-bottom: 2px; }
+.quiz-example .btn-ghost { padding: 0 8px; margin-left: 4px; }

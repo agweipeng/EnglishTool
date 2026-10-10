@@ -26,7 +26,8 @@ New tab **Quiz 🧩**, placed after **Analyses 📝**.
 
 1. **Start.** Source selector: *Mix (default) / Library only / Analyses only*. **New quiz** picks 5 items.
 2. **The 5 tests**, one at a time, with a 1/5…5/5 progress bar and Back / Next.
-   - The word or phrase, a 🔊 button (existing `speak`), and its meaning in English and Chinese.
+   - The word or phrase, a 🔊 button (existing `speak`), its meaning in English and Chinese, and its saved
+     example sentence with its own 🔊 (or a note that none is saved yet).
    - A text box: "Write 2–3 sentences using it in different ways".
    - A live hint under the box: "✓ *carry on* used" or "Not used yet". It uses
      `TextCore.containsSpokenTarget`, so word forms count (*carried on*). It is only a hint; it never

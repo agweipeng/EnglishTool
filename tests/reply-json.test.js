@@ -20,3 +20,8 @@ test('returns null when no object passes the check', () => {
   assert.equal(findReplyJSON('', hasItems), null);
   assert.equal(findReplyJSON(undefined, hasItems), null);
 });
+
+test('Markdown backslashes from a copied chat answer are removed, but real JSON escapes are kept', () => {
+  const reply = '{"items": \\[{"model": "a\\_b \\*c\\* say \\"hi\\" \\\\ end\\nnext"}\\]}';
+  assert.equal(findReplyJSON(reply, hasItems).items[0].model, 'a_b *c* say "hi" \\ end\nnext');
+});
