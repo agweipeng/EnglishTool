@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>English Vocabulary & Listening Trainer</title>
-<link rel="stylesheet" href="style.css?v=c2b52ab1" />
+<link rel="stylesheet" href="style.css?v=24786796" />
 </head>
 <body>
 <header class="topbar">
@@ -345,10 +345,10 @@
       <button id="paragraphTab-structure" role="tab" data-paragraph-tab="structure" aria-controls="paragraphContent" aria-selected="false">Sentence structure<br><span lang="zh-CN">结构拆解</span></button>
     </div>
     <details class="paragraph-original" open><summary>Original passage / 原文</summary><p id="paragraphOriginal"></p><button id="paragraphListen" class="btn-ghost">🔊 Listen / 听读</button></details>
+    <details class="paragraph-paste"><summary>Bring the AI response back / 粘贴 AI 回复</summary><label for="paragraphResponse">Paste the complete reply from Claude or ChatGPT to the copied prompt. / 粘贴 Claude 或 ChatGPT 针对已复制提示词的完整回复。</label><textarea id="paragraphResponse" rows="4"></textarea><button id="paragraphPasteBtn" class="btn-primary">Show analysis / 显示解析</button></details>
     <div class="form-actions"><button id="paragraphGenerate" class="btn-primary">Analyze with local AI / 使用本地 AI 解析</button><button id="paragraphLocalAI" class="btn-ghost">Local AI settings / 本地 AI 设置</button><a class="btn-ghost" data-chat="claude" data-chat-for="paragraph" href="https://claude.ai/new" target="_blank" rel="noopener">Analyze with Claude ↗ / 使用 Claude 解析</a><a class="btn-ghost" data-chat="chatgpt" data-chat-for="paragraph" href="https://chatgpt.com/" target="_blank" rel="noopener">Analyze with ChatGPT ↗ / 使用 ChatGPT 解析</a></div>
     <p id="paragraphStatus" class="hint" role="status" aria-live="polite"></p>
     <div id="paragraphContent" role="tabpanel" tabindex="0" aria-labelledby="paragraphTab-simplified"></div>
-    <details class="paragraph-paste"><summary>Bring the AI response back / 粘贴 AI 回复</summary><label for="paragraphResponse">Paste the complete reply from Claude or ChatGPT to the copied prompt. / 粘贴 Claude 或 ChatGPT 针对已复制提示词的完整回复。</label><textarea id="paragraphResponse" rows="4"></textarea><button id="paragraphPasteBtn" class="btn-primary">Show analysis / 显示解析</button></details>
   </dialog>
   <dialog id="localAIDialog" class="paragraph-dialog" aria-labelledby="localAIHeading">
     <header class="paragraph-header"><h2 id="localAIHeading">Local AI · 本地 AI</h2><button id="localAIClose" class="icon-btn" aria-label="Close settings / 关闭设置">✕</button></header>
