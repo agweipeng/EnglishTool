@@ -10,6 +10,7 @@
 import { writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { LIST_URL as BBC_LIST_URL, parseEpisodeList, parseEpisodeAudio } from './bbc-six-minute.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_PATH = resolve(__dirname, '..', 'news.json');
@@ -207,6 +208,20 @@ async function fetchGithubAI() {
     }));
 }
 
+// ----- Source: BBC Learning English, 6 Minute English (a new episode each week) -----
+// Episodes from the last 10 days, each with its MP3 so the Reader can play it next to the transcript.
+async function fetchBBCSixMinute() {
+  const episodes = parseEpisodeList(await fetchText(BBC_LIST_URL));
+  return Promise.all(episodes.map(async episode => {
+    try {
+      return { ...episode, audioUrl: parseEpisodeAudio(await fetchText(episode.url)) };
+    } catch (e) {
+      console.warn(`BBC episode page failed for ${episode.url}: ${e.message}`);
+      return { ...episode, audioUrl: '' };
+    }
+  }));
+}
+
 // ----- Orchestrator -----
 async function safe(name, fn) {
   try {
@@ -232,6 +247,17 @@ async function main() {
   // Fallback: if a source returns empty, retain previous content so the UI never goes blank
   const keepIfEmpty = (current, prevList) => current.length > 0 ? current : (prevList || []);
 
+  // BBC: only the last 10 days, so an empty list is a real answer (e.g. a break between series);
+  // the previous list is kept only when the page could not be read
+  let bbc;
+  try {
+    bbc = await fetchBBCSixMinute();
+    console.log(`✓ bbc: ${bbc.length} items`);
+  } catch (e) {
+    console.warn(`✗ bbc failed: ${e.message}`);
+    bbc = previous?.sources?.bbc || [];
+  }
+
   const out = {
     generatedAt: new Date().toISOString(),
     sources: {
@@ -239,6 +265,7 @@ async function main() {
       openai: keepIfEmpty(openai, previous?.sources?.openai),
       google: keepIfEmpty(google, previous?.sources?.google),
       github: keepIfEmpty(github, previous?.sources?.github),
+      bbc,
     },
   };
 

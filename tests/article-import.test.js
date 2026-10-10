@@ -30,15 +30,17 @@ function harness({ fetchResult = { ok: true, status: 200, json: async () => repl
     showView: name => calls.views.push(name),
     clearReader() {
       calls.cleared++;
-      ['readerInput', 'readerTitle', 'readerMaterialSource'].forEach(id => { element(id).value = ''; });
+      ['readerInput', 'readerTitle', 'readerMaterialSource', 'readerMaterialAudio'].forEach(id => { element(id).value = ''; });
       element('readerMaterialType').value = 'book';
       element('readerPaste').open = true;
     },
     analyzeReaderText() { calls.analyzed.push(element('readerInput').value); },
     saveCurrentReadingMaterial() {
-      calls.saved.push({ title: element('readerTitle').value, type: element('readerMaterialType').value, source: element('readerMaterialSource').value });
+      calls.saved.push({ title: element('readerTitle').value, type: element('readerMaterialType').value, source: element('readerMaterialSource').value,
+        ...(element('readerMaterialAudio').value ? { audio: element('readerMaterialAudio').value } : {}) });
       return true;
     },
+    setReaderAudio: (url, text) => { calls.audio = { url, text }; },
     toast: message => calls.toasts.push(message),
     confirm: message => { calls.confirms.push(message); return calls.confirmAnswer; },
   });
@@ -165,4 +167,12 @@ test('an article too long for the shelf is still opened, with a note that it was
   assert.equal(h.calls.analyzed.length, 1);
   assert.equal(h.calls.saved.length, 0);
   assert.match(h.element('readerImportStatus').textContent, /too long to save/i);
+});
+
+test('a News episode with audio opens as a conversation, with its player, and is saved with the audio link', async () => {
+  const h = harness();
+  const audio = 'https://downloads.bbc.co.uk/learningenglish/features/6min/261001_music_download.mp3';
+  assert.equal(await h.run(`importArticleFromLink('https://openai.com/index/b/', { openReader: true, type: 'conversation', audioUrl: '${audio}' })`), true);
+  assert.deepEqual(h.calls.saved, [{ title: 'Disrupting false front operations', type: 'conversation', source: 'https://openai.com/index/b/', audio }]);
+  assert.deepEqual(h.calls.audio, { url: audio, text: articleText });
 });

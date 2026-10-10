@@ -74,14 +74,16 @@ function shelfTitle(article) {
 
 // Fills the paste form with the article, shows it, and saves it when it fits on the shelf.
 // Returns { message, saved }.
-function showImportedArticle(article, type) {
+function showImportedArticle(article, type, audioUrl = '') {
   const title = shelfTitle(article);
   clearReader();
   document.getElementById('readerTitle').value = title;
   document.getElementById('readerMaterialType').value = type;
   document.getElementById('readerMaterialSource').value = article.url;
+  document.getElementById('readerMaterialAudio').value = audioUrl;
   document.getElementById('readerInput').value = article.text;
   analyzeReaderText();
+  if (audioUrl) setReaderAudio(audioUrl, article.text);
   document.getElementById('readerPaste').open = false;
   document.getElementById('readerImportUrl').value = '';
   if (article.text.length > MaterialStore.MAX_MATERIAL_CHARS) {
@@ -95,7 +97,8 @@ function showImportedArticle(article, type) {
 const confirmReplaceReaderText = () => confirm('Replace the text in the reader with this article? Save it to your materials first if you want to keep it. / 用这篇文章替换阅读器中的文字吗？');
 const IMPORT_CANCELLED = 'Import cancelled — your text is still in the reader. / 已取消导入，阅读器中的文字保留不变。';
 
-async function importArticleFromLink(link, { openReader = false } = {}) {
+// `type` and `audioUrl` come from News items that say what they are (a BBC 6 Minute English episode is a conversation with audio)
+async function importArticleFromLink(link, { openReader = false, type: itemType = '', audioUrl = '' } = {}) {
   let url;
   try {
     url = ArticleImportCore.normalizeArticleUrl(link);
@@ -111,7 +114,7 @@ async function importArticleFromLink(link, { openReader = false } = {}) {
   const textBefore = document.getElementById('readerInput').value;
   // News headlines are news; for a pasted link a chosen type (such as Conversation) is kept, and the default Book becomes News
   const chosenType = document.getElementById('readerMaterialType').value;
-  const type = !openReader && chosenType && chosenType !== 'book' ? chosenType : 'news';
+  const type = itemType || (!openReader && chosenType && chosenType !== 'book' ? chosenType : 'news');
 
   articleImportRequest?.abort();
   const request = new AbortController();
@@ -129,7 +132,7 @@ async function importArticleFromLink(link, { openReader = false } = {}) {
       setArticleImportStatus(IMPORT_CANCELLED);
       return false;
     }
-    const { message, saved } = showImportedArticle(article, type);
+    const { message, saved } = showImportedArticle(article, type, audioUrl);
     setArticleImportStatus(message);
     // When saving failed, its own message (why) stays on screen
     if (saved) toast(message, 4000);

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-10T12:10:21.042Z",
+  "generatedAt": "2026-10-10T15:10:29.861Z",
   "sources": {
     "anthropic": [
       {
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 276230,
+        "stars": 276296,
         "language": "JavaScript",
         "updatedAt": "2026-10-10T01:41:12Z"
       },
@@ -116,15 +116,15 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 252424,
+        "stars": 252455,
         "language": "Python",
-        "updatedAt": "2026-10-10T11:29:39Z"
+        "updatedAt": "2026-10-10T15:04:03Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 190074,
+        "stars": 190116,
         "language": "TypeScript",
         "updatedAt": "2026-10-10T05:31:12Z"
       },
@@ -132,15 +132,15 @@
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187503,
+        "stars": 187508,
         "language": "Python",
-        "updatedAt": "2026-10-10T11:54:32Z"
+        "updatedAt": "2026-10-10T15:08:19Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 182599,
+        "stars": 182612,
         "language": "Go",
         "updatedAt": "2026-10-10T07:31:41Z"
       },
@@ -148,7 +148,7 @@
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 172341,
+        "stars": 172380,
         "language": "HTML",
         "updatedAt": "2026-10-10T03:21:41Z"
       },
@@ -156,7 +156,7 @@
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 166992,
+        "stars": 167058,
         "language": "Python",
         "updatedAt": "2026-10-10T02:22:38Z"
       },
@@ -164,7 +164,7 @@
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 160088,
+        "stars": 160199,
         "language": "JavaScript",
         "updatedAt": "2026-10-10T04:19:53Z"
       },
@@ -172,23 +172,23 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 158074,
+        "stars": 158081,
         "language": "TypeScript",
-        "updatedAt": "2026-10-10T12:09:44Z"
+        "updatedAt": "2026-10-10T14:29:09Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 154177,
+        "stars": 154189,
         "language": "Python",
-        "updatedAt": "2026-10-10T10:46:58Z"
+        "updatedAt": "2026-10-10T14:55:07Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 147551,
+        "stars": 147557,
         "language": "Python",
         "updatedAt": "2026-10-10T08:54:26Z"
       },
@@ -196,9 +196,25 @@
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 125151,
+        "stars": 125194,
         "language": "Python",
-        "updatedAt": "2026-10-10T00:53:14Z"
+        "updatedAt": "2026-10-10T13:57:16Z"
+      }
+    ],
+    "bbc": [
+      {
+        "title": "Are people drinking less alcohol?",
+        "url": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-261008",
+        "date": "2026-10-08",
+        "description": "Do you drink alcoholic drinks?",
+        "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/261008_6_minute_english_are_people_drinking_less_alcohol_download.mp3"
+      },
+      {
+        "title": "Why does heartbreak hurt so much?",
+        "url": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-261001",
+        "date": "2026-10-01",
+        "description": "Have you ever had your heart broken?",
+        "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/261001_6_minute_english_why_does_heartbreak_hurt_so_much_download.mp3"
       }
     ]
   }
