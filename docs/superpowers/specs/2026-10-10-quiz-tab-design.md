@@ -95,7 +95,8 @@ tab opens; cleared when the quiz is checked and saved, or when **New quiz** is c
 - For variety, each source's ordered list is cut to its top 20 and shuffled (random source injectable
   for tests). **Library only / Analyses only** take the first 5 of that shuffled list. **Mix** takes
   alternately from the two shuffled lists, starting with Library, and fills from the other list if one
-  runs out. **Swap word** takes the next unused item from the same shuffled lists.
+  runs out. **Swap word** draws one more item the same way, leaving out the quiz's current items and any
+  item already swapped out.
 - With fewer than 5 candidates the quiz uses what exists (at least 1) and says why; with none it explains
   how to add words or save an analysis.
 
