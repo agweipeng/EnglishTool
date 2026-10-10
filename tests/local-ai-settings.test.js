@@ -23,7 +23,7 @@ function harness() {
   return {context,run,element,saved};
 }
 
-test('saving a checked model enables automatic local analysis and persists only preferences', async () => {
+test('saving a checked model connects it without automatic analysis and persists only preferences', async () => {
   const h = harness();
   h.run('openLocalAISettings()');
   await h.run('checkLocalAIConnection()');
@@ -31,8 +31,8 @@ test('saving a checked model enables automatic local analysis and persists only 
   h.element('localAIUse').disabled=false;
   h.run('saveLocalAIConnection()');
   assert.equal(typeof h.context.window.requestParagraphAI, 'function');
-  assert.equal(h.context.window.autoParagraphAI, true);
-  assert.deepEqual(JSON.parse([...h.saved.values()][0]),{model:'chat-model',provider:'ollama',auto:true});
+  assert.equal(h.context.window.autoParagraphAI, undefined, 'Local AI never starts by itself');
+  assert.deepEqual(JSON.parse([...h.saved.values()][0]),{model:'chat-model',provider:'ollama'});
 });
 
 test('failed connection checks cannot apply a stale saved model', async () => {
@@ -69,12 +69,13 @@ test('existing LM Studio settings retain their provider when the app reloads', (
   assert.equal(h.element('readerLocalAIBtn').textContent,'✓ LM Studio · 本地 AI');
 });
 
-test('saved Ollama model and automatic analysis remain configured after reload', () => {
+test('a saved Ollama model stays connected after reload, but an old automatic-analysis setting is ignored', () => {
   const h = harness();
   h.saved.set('englishTrainerLocalAI_v1',JSON.stringify({provider:'ollama',model:'qwen3.5:4b',auto:true}));
   h.run('initLocalAISettings()');
   assert.equal(h.run('localAIConfig.provider'),'ollama');
-  assert.equal(h.context.window.autoParagraphAI,true);
+  assert.equal(typeof h.context.window.requestParagraphAI,'function');
+  assert.equal(h.context.window.autoParagraphAI,undefined);
   assert.equal(h.element('readerLocalAIBtn').textContent,'✓ Ollama · 本地 AI');
 });
 

@@ -128,13 +128,18 @@ test('late AI responses cannot replace analysis for a newer selection', async ()
   assert.equal(h.run('paragraphContext.chapter'), '', 'Personal text must not use a stale book chapter');
 });
 
-test('a configured local model automatically analyzes a new selection', async () => {
+test('selecting a passage lets you choose: local AI only runs when you ask for it', async () => {
   const h = uiHarness();
   let request;
-  h.context.window.autoParagraphAI = true;
+  h.context.window.autoParagraphAI = true;   // an old setting from before the choice existed
   h.context.window.requestParagraphAI = async options => { request = options; return fixture.analysis; };
   h.context.selectedPassage = fixture.passage;
   h.run('openParagraphAnalysis(selectedPassage)');
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(request, undefined, 'Selecting text never starts local AI by itself');
+  assert.match(h.element('paragraphStatus').textContent, /local AI, Claude or ChatGPT/);
+  assert.equal(h.element('paragraphGenerate').disabled, false);
+  h.run('generateParagraphAnalysis()');
   await new Promise(resolve => setImmediate(resolve));
   assert.match(request.prompt, /A certain king/);
   assert.equal(h.run('paragraphResult.words[0].text'), 'bore');
