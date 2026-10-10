@@ -194,6 +194,27 @@
     return pieces;
   }
 
+  // Paragraphs as [{ start, end }] offsets, trimmed of surrounding spaces. Blank lines separate
+  // paragraphs; text with no blank line at all (a pasted article) is split at each line break.
+  function paragraphRanges(text) {
+    const src = String(text || '');
+    const separator = /\n[ \t\r]*\n/.test(src) ? /\n[ \t\r]*\n\s*/g : /\n\s*/g;
+    const ranges = [];
+    let last = 0;
+    const add = (from, to) => {
+      const part = src.slice(from, to);
+      const start = from + (part.length - part.trimStart().length);
+      const end = to - (part.length - part.trimEnd().length);
+      if (end > start) ranges.push({ start, end });
+    };
+    for (const m of src.matchAll(separator)) {
+      add(last, m.index);
+      last = m.index + m[0].length;
+    }
+    add(last, src.length);
+    return ranges;
+  }
+
   function isAbbreviationBefore(text, dotIndex) {
     const m = /([A-Za-z]+)$/.exec(text.slice(Math.max(0, dotIndex - 10), dotIndex));
     return !!m && ABBREVIATIONS.has(m[1].toLowerCase());
@@ -476,6 +497,7 @@
     expandForms,
     relatedKnownWords,
     tokenizeText,
+    paragraphRanges,
     splitSentences,
     sentenceAt,
     splitAtWord,

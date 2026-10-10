@@ -14,7 +14,7 @@ function harness() {
     if (!elements.has(id)) elements.set(id, { innerHTML: '', textContent: '', value: '', addEventListener() {} });
     return elements.get(id);
   };
-  const calls = { saveState: 0, shown: [], opened: [], views: [] };
+  const calls = { saveState: 0, shown: [], opened: [], views: [], readAloud: [] };
   let ids = 0;
   const sandbox = vm.createContext({
     AnalysisStore, console, Date,
@@ -24,6 +24,7 @@ function harness() {
     uid: () => `id${++ids}`, toast() {}, confirm: () => true,
     saveState() { calls.saveState++; },
     showSavedAnalysis: entry => calls.shown.push(entry),
+    openReadAloud: text => calls.readAloud.push(text),
     readerBookById: id => (id === 'wizard-of-oz' ? { id } : undefined),
     showView: name => calls.views.push(name),
     openBookChapter: async (...args) => { calls.opened.push(args); },
@@ -75,6 +76,7 @@ test('the Analyses tab lists saved analyses safely, newest first, and can be sea
   assert.doesNotMatch(html, /<b>Toto/);
   assert.match(html, /Your own text/);
   assert.match(html, /Open in book/, 'Book passages can jump back to the chapter');
+  assert.equal((html.match(/data-analysis-act="read"/g) || []).length, 2, 'Every original text has a Read aloud button');
   h.run('analysesQuery = "golden"; renderAnalysesView()');
   assert.doesNotMatch(h.element('analysesList').innerHTML, /Toto/);
 });
@@ -87,6 +89,8 @@ test('cards open the saved analysis, jump to the book, or delete it', async () =
   const id = h.sandbox.state.analyses[0].id;
   h.click('open', id);
   assert.equal(h.calls.shown[0].id, id);
+  h.click('read', id);
+  assert.deepEqual(h.calls.readAloud, [fixture.passage], 'Read aloud uses the whole original text, not the card preview');
   await h.click('book', id);
   assert.deepEqual(h.calls.views, ['reader']);
   assert.deepEqual(h.calls.opened[0], ['wizard-of-oz', 'the-cyclone']);

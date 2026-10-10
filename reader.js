@@ -405,11 +405,41 @@ function refreshReaderStatuses() {
   renderReaderSummary();
 }
 
+// The button's label is drawn by CSS, so the passage's text — which selections and reading
+// positions are measured in — stays exactly the original
+function readAloudButton({ start, end }) {
+  return `<button type="button" class="mic-btn paragraph-mic" data-read-from="${start}" data-read-to="${end}" title="Read aloud challenge" aria-label="Read this paragraph aloud"></button>`;
+}
+
+// Word spans and gap text, with a Read aloud button at the end of each paragraph. A paragraph
+// always ends before a space or the end of the text, so a button never splits a word.
+function readerPassageHTML(pieces, paragraphs) {
+  const html = [];
+  let next = 0;
+  const buttonsUpTo = offset => {
+    while (next < paragraphs.length && paragraphs[next].end <= offset) html.push(readAloudButton(paragraphs[next++]));
+  };
+  pieces.forEach((p, i) => {
+    buttonsUpTo(p.start);
+    if (p.isWord) {
+      html.push(`<span class="rw rw-${p.status}" data-i="${i}">${escapeHTML(p.text)}</span>`);
+      return;
+    }
+    let from = 0;
+    while (next < paragraphs.length && paragraphs[next].end < p.start + p.text.length) {
+      const cut = paragraphs[next].end - p.start;
+      html.push(escapeHTML(p.text.slice(from, cut)), readAloudButton(paragraphs[next++]));
+      from = cut;
+    }
+    html.push(escapeHTML(p.text.slice(from)));
+  });
+  buttonsUpTo(Infinity);
+  return html.join('');
+}
+
 function renderReaderPassage() {
   const wrap = document.getElementById('readerPassage');
-  wrap.innerHTML = reader.analysis.pieces.map((p, i) => (p.isWord
-    ? `<span class="rw rw-${p.status}" data-i="${i}">${escapeHTML(p.text)}</span>`
-    : escapeHTML(p.text))).join('');
+  wrap.innerHTML = readerPassageHTML(reader.analysis.pieces, TextCore.paragraphRanges(reader.text));
   wrap.classList.remove('hidden');
 }
 
@@ -717,6 +747,12 @@ function onSelectionChange() {
 }
 
 function onPassageClick(e) {
+  const readButton = e.target.closest('[data-read-from]');
+  if (readButton) {
+    const { readFrom, readTo } = readButton.dataset;
+    openReadAloud(reader.text.slice(Number(readFrom), Number(readTo)));
+    return;
+  }
   if (selectedReadingText()) return;   // selections are handled by onSelectionChange
   const span = e.target.closest('.rw');
   if (span) openWordPanel(Number(span.dataset.i));

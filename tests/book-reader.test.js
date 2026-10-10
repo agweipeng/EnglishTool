@@ -129,6 +129,29 @@ test('legacy pasted text is preserved and editing a chapter detaches its bookmar
   assert.equal(JSON.parse(memory.get('englishTrainerBookmarks_v1'))[book.id].chapterIndex, 1);
 });
 
+test('each passage paragraph ends with a Read aloud button that keeps the passage text unchanged', () => {
+  const h = readerHarness();
+  const text = 'Dorothy lived in Kansas.\n\n“Where is Toto?” she asked.\n\nThe wind <rose>.';
+  h.element('readerInput').value = text;
+  h.run('analyzeReaderText()');
+  const html = h.element('readerPassage').innerHTML;
+  const buttons = [...html.matchAll(/<button[^>]*data-read-from="(\d+)" data-read-to="(\d+)"[^>]*><\/button>/g)];
+  assert.deepEqual(buttons.map(([, from, to]) => text.slice(Number(from), Number(to))),
+    ['Dorothy lived in Kansas.', '“Where is Toto?” she asked.', 'The wind <rose>.']);
+  // The label comes from CSS, so selections and reading positions count only the passage's own characters
+  const shown = html.replace(/<button[^>]*><\/button>|<\/?span[^>]*>/g, '')
+    .replace(/&(lt|gt|amp|quot|#39);/g, (_, code) => ({ lt: '<', gt: '>', amp: '&', quot: '"', '#39': "'" }[code]));
+  assert.equal(shown, text);
+  assert.ok(html.indexOf('data-read-to="24"') < html.indexOf('\n\n'), 'The button sits at the end of its paragraph');
+
+  const heard = [];
+  h.context.openReadAloud = target => heard.push(target);
+  const [, from, to] = buttons[1];
+  h.run(`onPassageClick({ target: { closest: selector => (selector === '[data-read-from]'
+    ? { dataset: { readFrom: '${from}', readTo: '${to}' } } : null) } })`);
+  assert.deepEqual(heard, ['“Where is Toto?” she asked.']);
+});
+
 test('bad bookmark data cannot select a missing chapter or invalid scroll position', async () => {
   const h = readerHarness(new Map([['englishTrainerBookmarks_v1', JSON.stringify({ 'wizard-of-oz': { chapterIndex: 999, scrollRatio: 30 } })]]));
   await h.run('openBookChapter("wizard-of-oz", undefined, true)');

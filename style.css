@@ -457,6 +457,13 @@ textarea { resize: vertical; min-height: 50px; }
   cursor: pointer; color: var(--text-muted);
 }
 .mic-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+/* Reader: one per paragraph. The label is CSS-only so the passage text (selection offsets) is unchanged. */
+.paragraph-mic {
+  margin-left: 8px; padding: 2px 9px; vertical-align: 2px; line-height: 1.5;
+  font-family: system-ui, -apple-system, sans-serif; user-select: none; -webkit-user-select: none;
+}
+.paragraph-mic::before { content: '🎙️ Read aloud'; }
+.analysis-card .mic-btn { margin-bottom: 8px; }
 
 /* ============ Sync indicator (top bar) ============ */
 .sync-indicator {

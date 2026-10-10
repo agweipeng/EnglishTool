@@ -37,6 +37,7 @@ function analysisCard(entry) {
   return `<article class="paragraph-card analysis-card" data-id="${escapeHTML(entry.id)}">
     <div class="analysis-meta">${escapeHTML(meta)}</div>
     <blockquote>${escapeHTML(preview)}</blockquote>
+    <button class="mic-btn" data-analysis-act="read" title="Read aloud challenge">🎙️ Read aloud</button>
     ${main.en ? `<p>${escapeHTML(main.en)}</p>` : ''}${main.cn ? `<p class="paragraph-cn" lang="zh-CN">${escapeHTML(main.cn)}</p>` : ''}
     <div class="form-actions">
       <button class="btn-primary" data-analysis-act="open">Open / 查看</button>
@@ -94,6 +95,7 @@ function onAnalysesClick(event) {
   if (!entry) return undefined;
   const act = button.dataset.analysisAct;
   if (act === 'open') return showSavedAnalysis(entry);
+  if (act === 'read') return openReadAloud(entry.text);   // the whole original, not the card preview
   if (act === 'book') return openAnalysisInBook(entry);
   if (act === 'delete') return deleteAnalysis(entry);
   return undefined;
