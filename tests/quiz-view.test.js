@@ -120,7 +120,8 @@ test('a cancelled local check keeps the answers and saves nothing', async () => 
 
 test('a pasted reply that is not JSON is saved as text', () => {
   const h = harness();
-  h.run('startNewQuiz(); setQuizAnswer("We carried on."); quizReplyService = "chatgpt"');
+  h.run('startNewQuiz(); setQuizAnswer("We carried on.")');
+  h.element('quizReplySource').value = 'chatgpt';
   h.element('quizReply').value = 'Great work! Everything sounds natural.';
   h.run('saveQuizReply()');
   const [saved] = QuizStore.visible(h.context.state.quizzes);
@@ -159,4 +160,58 @@ test('past quizzes reopen and delete, and read-aloud buttons open the challenge'
   click({ '[data-quiz-act]': { quizAct: 'delete' } }, { id });
   assert.deepEqual(QuizStore.visible(h.context.state.quizzes), []);
   assert.equal(h.element('quizResults').innerHTML, '');
+});
+
+test('pasting the copied prompt instead of the reply is refused and the answers stay', () => {
+  const h = harness();
+  h.run('startNewQuiz(); setQuizAnswer("We carried on.")');
+  h.element('quizReply').value = h.run('QuizCore.buildQuizPrompt(quizDraft.items)');
+  h.run('saveQuizReply()');
+  assert.deepEqual(QuizStore.visible(h.context.state.quizzes), []);
+  assert.equal(h.run('quizDraft.items[0].answer'), 'We carried on.');
+  assert.match(h.element('quizStatus').textContent, /prompt/);
+});
+
+test('after a reload the paste box and the chosen chat are still there', () => {
+  const h = harness();
+  h.run('startNewQuiz(); setQuizAnswer("We carried on.")');
+  h.run('onQuizChatClick({ preventDefault() {}, currentTarget: { dataset: { chat: "chatgpt" } } })');
+  h.runTimers(600);
+  const again = harness({ memory: h.memory });
+  again.run('renderQuizView()');
+  assert.equal(again.element('quizPaste').classList.contains('hidden'), false);
+  assert.equal(again.element('quizReplySource').value, 'chatgpt');
+  again.element('quizReply').value = 'Looks good!';
+  again.run('saveQuizReply()');
+  assert.equal(QuizStore.visible(again.context.state.quizzes)[0].checkedWith, 'chatgpt');
+});
+
+test('a damaged synced quiz still shows instead of breaking the tab', () => {
+  const damaged = { id: 'q1', createdAt: '2026-10-10T01:00:00Z', updatedAt: '2026-10-10T01:00:00Z', source: 'mix', checkedWith: 'claude', model: '',
+    items: [{ text: 'carry on' }, { text: 'gaze', answer: 5 }], feedbackText: '',
+    feedback: { items: [null, { verdict: 'natural', sentences: [null, { yours: 'I gazed.' }] }], tip: null } };
+  const h = harness({ state: { words, analyses: [], quizzes: [damaged] } });
+  h.run('quizShownId = "q1"; renderQuizView()');
+  assert.match(h.element('quizResults').innerHTML, /I gazed\./);
+  assert.match(h.element('quizHistory').innerHTML, /carry on · gaze/);
+});
+
+test('a delete that cannot be saved keeps the quiz and its open results', () => {
+  const h = harness();
+  h.run('startNewQuiz(); setQuizAnswer("We carried on.")');
+  h.element('quizReply').value = 'Fine.';
+  h.run('saveQuizReply()');
+  const id = QuizStore.visible(h.context.state.quizzes)[0].id;
+  h.context.saveState = () => { throw new Error('QuotaExceededError'); };
+  h.run(`deleteQuiz(${JSON.stringify(id)})`);
+  assert.equal(QuizStore.visible(h.context.state.quizzes).length, 1);
+  assert.match(h.element('quizResults').innerHTML, /Fine\./);
+});
+
+test('opening the tab again keeps the source chosen for the next quiz', () => {
+  const h = harness();
+  h.run('startNewQuiz()');
+  h.element('quizSource').value = 'library';
+  h.run('renderQuizView()');
+  assert.equal(h.element('quizSource').value, 'library');
 });

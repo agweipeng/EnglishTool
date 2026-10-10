@@ -37,7 +37,9 @@ New tab **Quiz 🧩**, placed after **Analyses 📝**.
    is written): **Check with local AI / Claude / ChatGPT**, the same choice as passage analysis.
    - Local AI: shows progress and a **Cancel** button.
    - Claude / ChatGPT: real `<a data-chat>` links (so the ChatGPT app opens on iPhone) that copy the
-     prompt; a box appears to paste the reply, then **Save reply**.
+     prompt. The paste box, with a *Reply from: Claude / ChatGPT* choice remembered in the draft, is always
+     shown under the check buttons (a phone may reload the page while the chat app is open), then **Save
+     reply**. Pasting the copied prompt itself is refused, and the answers stay.
 4. **Results**: one card per test with the verdict ✓ natural / ~ understandable / ✗ wrong, each of the
    learner's sentences with its better version and a short English + Chinese note, one model sentence,
    and the item's original example to compare. Every better and model sentence has a 🎙️ Read aloud

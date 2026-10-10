@@ -135,3 +135,16 @@ test('the local-model schema matches the requested shape', () => {
   assert.deepEqual(Q.FEEDBACK_SCHEMA.properties.items.items.properties.verdict.enum, ['natural', 'understandable', 'wrong']);
   assert.equal(Q.FEEDBACK_SCHEMA.properties.items.maxItems, Q.QUIZ_SIZE);
 });
+
+test('a reply with no recognised verdict, such as the echoed template, is kept as text', () => {
+  const template = Q.buildQuizPrompt(items).split('in exactly this shape:\n')[1].split('\n')[0];
+  assert.equal(Q.parseQuizFeedback(template, items).feedback, null);
+  assert.equal(Q.parseQuizFeedback('{"items": []}', items).feedback, null);
+  assert.equal(Q.parseQuizFeedback('{"items": [{"verdict": "great"}]}', items).feedbackText, '{"items": [{"verdict": "great"}]}');
+});
+
+test('the copied prompt is recognised so it is never saved as a reply', () => {
+  assert.equal(Q.looksLikeQuizPrompt(Q.buildQuizPrompt(items)), true);
+  assert.equal(Q.looksLikeQuizPrompt(`  ${Q.buildQuizPrompt(items).slice(0, 2000)}`), true);
+  assert.equal(Q.looksLikeQuizPrompt('{"items":[{"verdict":"natural"}]}'), false);
+});

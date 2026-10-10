@@ -360,10 +360,14 @@
         <a class="btn-ghost" data-chat="chatgpt" data-chat-for="quiz" href="https://chatgpt.com/" target="_blank" rel="noopener">Check with ChatGPT ↗ / 使用 ChatGPT 检查</a>
         <button id="quizCancelBtn" class="btn-ghost hidden">Cancel / 取消</button>
       </div>
-      <div id="quizPaste" class="quiz-paste hidden">
+      <div id="quizPaste" class="quiz-paste">
         <label for="quizReply">Paste the whole reply from Claude or ChatGPT. / 粘贴 Claude 或 ChatGPT 的完整回复。</label>
         <textarea id="quizReply" rows="6"></textarea>
-        <button id="quizReplyBtn" class="btn-primary">Save reply / 保存回复</button>
+        <div class="form-actions">
+          <label for="quizReplySource">Reply from / 回复来自</label>
+          <select id="quizReplySource"><option value="claude">Claude</option><option value="chatgpt">ChatGPT</option></select>
+          <button id="quizReplyBtn" class="btn-primary">Save reply / 保存回复</button>
+        </div>
       </div>
     </div>
     <p id="quizStatus" class="hint" role="status" aria-live="polite"></p>
@@ -634,7 +638,7 @@
 <script src="material-store.js?v=d55fff5b"></script>
 <script src="journal-feedback-store.js?v=67aa124a"></script>
 <script src="reply-json.js?v=c0fb3abf"></script>
-<script src="quiz-core.js?v=e37cd55a"></script>
+<script src="quiz-core.js?v=565fe886"></script>
 <script src="quiz-store.js?v=bdf2fedc"></script>
 <script src="chat-links.js?v=85a25a13"></script>
 <script src="app.js?v=a6864bd0"></script>
@@ -652,7 +656,7 @@
 <script src="local-ai-settings.js?v=59d7f126"></script>
 <script src="paragraph-reader.js?v=5ab4ca60"></script>
 <script src="analyses-view.js?v=eba8459f"></script>
-<script src="quiz-view.js?v=5b99cf86"></script>
+<script src="quiz-view.js?v=3b89934a"></script>
 <script src="practice-modes.js?v=0dbd33cd"></script>
 </body>
 </html>

@@ -132,15 +132,21 @@ ${tests}`;
     return { verdict: VERDICTS.includes(verdict) ? verdict : 'unchecked', sentences, model: text(raw?.model) };
   }
 
-  // { feedback, feedbackText }: results match the items by position; a reply without usable JSON is kept
-  // as text so it is never lost
+  // { feedback, feedbackText }: results match the items by position. A reply without usable JSON, or whose
+  // JSON judges nothing (such as the echoed template), is kept as text so it is never lost.
   function parseQuizFeedback(reply, items) {
     const raw = String(reply || '').slice(0, MAX_REPLY_CHARS);
+    const asText = { feedback: null, feedbackText: raw.trim() };
     const found = replyJSON.findReplyJSON(raw, value => !!feedbackRoot(value));
-    if (!found) return { feedback: null, feedbackText: raw.trim() };
+    if (!found) return asText;
     const results = feedbackRoot(found);
-    return { feedback: { items: items.map((item, i) => itemResult(results.items[i])), tip: bilingual(results.tip) }, feedbackText: '' };
+    const judged = items.map((item, i) => itemResult(results.items[i]));
+    if (!judged.some(item => item.verdict !== 'unchecked')) return asText;
+    return { feedback: { items: judged, tip: bilingual(results.tip) }, feedbackText: '' };
   }
+
+  // The prompt the learner copied, pasted back by mistake: a real reply never repeats the template line
+  const looksLikeQuizPrompt = reply => String(reply || '').includes(FEEDBACK_SHAPE);
 
   // { natural, total }: how many items were judged natural; null for a reply kept as text
   function quizScore(feedback) {
@@ -149,7 +155,7 @@ ${tests}`;
   }
 
   const api = { QUIZ_SIZE, MAX_ANSWER_CHARS, MAX_REPLY_CHARS, FEEDBACK_SCHEMA, libraryCandidates, analysisCandidates,
-    recentKeys, pickQuizItems, usesTarget, buildQuizPrompt, parseQuizFeedback, quizScore };
+    recentKeys, pickQuizItems, usesTarget, buildQuizPrompt, parseQuizFeedback, looksLikeQuizPrompt, quizScore };
   if (isNode) module.exports = api;
   else root.QuizCore = api;
 })(typeof window !== 'undefined' ? window : globalThis);

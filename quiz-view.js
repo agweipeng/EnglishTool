@@ -23,7 +23,7 @@ let quizShownId = '';        // the saved quiz whose results are shown
 let quizRequest = null;      // the local AI check in progress
 let quizSequence = 0;
 let quizDraftTimer = null;
-let quizReplyService = 'claude';
+const QUIZ_CHATS = ['claude', 'chatgpt'];
 
 const setQuizNotice = message => { document.getElementById('quizNotice').textContent = message; };
 const setQuizStatus = message => { document.getElementById('quizStatus').textContent = message; };
@@ -43,6 +43,7 @@ function validQuizDraft(value) {
     source: QUIZ_SOURCES.includes(value.source) ? value.source : 'mix', items,
     index: Math.min(Math.max(0, Math.floor(Number(value.index)) || 0), items.length - 1),
     swapped: Array.isArray(value.swapped) ? value.swapped.filter(text => typeof text === 'string') : [],
+    service: QUIZ_CHATS.includes(value.service) ? value.service : 'claude',   // the chat a pasted reply comes from
     updatedAt: String(value.updatedAt || ''),
   };
 }
@@ -89,7 +90,9 @@ function startNewQuiz() {
   const source = QUIZ_SOURCES.includes(chosen) ? chosen : 'mix';
   const items = QuizCore.pickQuizItems(quizCandidates(source));
   if (!items.length) { setQuizNotice(QUIZ_EMPTY_MESSAGES[source]); return; }
-  setQuizDraft({ source, items: items.map(item => ({ ...item, answer: '' })), index: 0, swapped: [] }, { saveNow: true });
+  const service = document.getElementById('quizReplySource').value;
+  setQuizDraft({ source, items: items.map(item => ({ ...item, answer: '' })), index: 0, swapped: [],
+    service: QUIZ_CHATS.includes(service) ? service : 'claude' }, { saveNow: true });
   quizShownId = '';
   setQuizNotice(items.length < QuizCore.QUIZ_SIZE
     ? `Only ${items.length} words or phrases were available, so this quiz is shorter. / 只找到 ${items.length} 个词或短语，所以本次测验较短。` : '');
@@ -174,8 +177,7 @@ function onQuizChatClick(event) {
   if (quizRequest) { event.preventDefault(); return; }
   if (!hasQuizAnswers(quizDraft)) { event.preventDefault(); toast('Write at least one answer first. / 请先至少写一题。'); return; }
   const service = event.currentTarget.dataset.chat;
-  quizReplyService = service;
-  document.getElementById('quizPaste').classList.remove('hidden');
+  setQuizReplySource(service);
   copyChatPrompt(service, QuizCore.buildQuizPrompt(quizDraft.items),
     `Prompt copied → paste it into ${AI_CHATS[service].name}, then paste the reply below. / 提示词已复制，请粘贴到 ${AI_CHATS[service].name}，再把回复粘贴到下方。`);
 }
@@ -184,10 +186,21 @@ function saveQuizReply() {
   if (!quizDraft) return;
   const reply = document.getElementById('quizReply').value.trim();
   if (!reply) { setQuizStatus('Paste the whole reply first. / 请先粘贴完整回复。'); return; }
+  if (QuizCore.looksLikeQuizPrompt(reply)) {
+    setQuizStatus('This is the prompt you copied, not the AI’s reply. Paste it into the chat first, then paste the chat’s answer here. / 这是你复制的提示词，不是 AI 的回复。请先把它粘贴到聊天中，再把聊天的回答粘贴到这里。');
+    return;
+  }
   ++quizSequence;
   quizRequest?.abort();
   quizRequest = null;
-  finishQuiz(quizDraft, QuizCore.parseQuizFeedback(reply, quizDraft.items), quizReplyService, '');
+  const chosen = document.getElementById('quizReplySource').value;
+  finishQuiz(quizDraft, QuizCore.parseQuizFeedback(reply, quizDraft.items), QUIZ_CHATS.includes(chosen) ? chosen : 'claude', '');
+}
+
+// Remembered in the draft, so the reply is credited to the right chat even after the page reloads
+function setQuizReplySource(service) {
+  document.getElementById('quizReplySource').value = service;
+  if (quizDraft && QUIZ_CHATS.includes(service)) setQuizDraft({ ...quizDraft, service }, { saveNow: true });
 }
 
 // Saves the checked quiz; on failure the draft (and the answers) stay
@@ -209,7 +222,6 @@ function finishQuiz(draft, parsed, checkedWith, model) {
   setQuizDraft(null, { saveNow: true });
   quizShownId = entry.id;
   document.getElementById('quizReply').value = '';
-  document.getElementById('quizPaste').classList.add('hidden');
   setQuizNotice('');
   setQuizStatus(parsed.feedback ? 'Checked and saved below. / 已检查并保存在下方。'
     : 'Saved as text: the reply wasn’t in the expected format. / 已作为文本保存：回复格式与预期不符。');
@@ -228,6 +240,7 @@ function deleteQuiz(id) {
     state.quizzes = previous;
     console.warn('Quiz not deleted', error);
     toast('Could not delete it — please try again. / 删除失败，请重试。');
+    return;
   }
   if (quizShownId === id) quizShownId = '';
   refreshQuizSaved();
@@ -277,8 +290,17 @@ function renderQuizCheck() {
 
 const quizReadButton = sentence => (sentence
   ? `<button type="button" class="mic-btn" data-quiz-read="${escapeHTML(sentence)}" title="Read aloud challenge">🎙️ Read aloud</button>` : '');
-const quizNote = (note = {}) => `${note.en ? `<p class="hint">${escapeHTML(note.en)}</p>` : ''}${note.cn ? `<p class="hint paragraph-cn" lang="zh-CN">${escapeHTML(note.cn)}</p>` : ''}`;
-const quizAnswerText = item => (item.answer.trim() ? escapeHTML(item.answer) : 'Skipped / 已跳过');
+// Saved quizzes can arrive from another device or an old backup, so missing or odd fields render as empty
+const quizText = value => (typeof value === 'string' ? value : '');
+function quizNote(note) {
+  const en = quizText(note?.en);
+  const cn = quizText(note?.cn);
+  return `${en ? `<p class="hint">${escapeHTML(en)}</p>` : ''}${cn ? `<p class="hint paragraph-cn" lang="zh-CN">${escapeHTML(cn)}</p>` : ''}`;
+}
+function quizAnswerText(item) {
+  const answer = quizText(item.answer);
+  return answer.trim() ? escapeHTML(answer) : 'Skipped / 已跳过';
+}
 
 function quizScoreText(quiz) {
   const score = QuizCore.quizScore(quiz.feedback);
@@ -286,20 +308,24 @@ function quizScoreText(quiz) {
 }
 
 function quizSentenceHTML(sentence) {
-  const changed = sentence.better && sentence.better !== sentence.yours;
-  return `<div class="quiz-sentence"><p class="quiz-yours">${escapeHTML(sentence.yours)}</p>
-    ${changed ? `<p class="quiz-better">→ ${escapeHTML(sentence.better)}</p>` : ''}
-    ${quizNote(sentence.note)}${quizReadButton(sentence.better || sentence.yours)}</div>`;
+  const yours = quizText(sentence.yours);
+  const better = quizText(sentence.better);
+  return `<div class="quiz-sentence"><p class="quiz-yours">${escapeHTML(yours)}</p>
+    ${better && better !== yours ? `<p class="quiz-better">→ ${escapeHTML(better)}</p>` : ''}
+    ${quizNote(sentence.note)}${quizReadButton(better || yours)}</div>`;
 }
 
-function quizItemHTML(item, result = {}) {
-  const verdict = QUIZ_VERDICT_LABELS[result.verdict] ? result.verdict : 'unchecked';
-  const sentences = Array.isArray(result.sentences) ? result.sentences : [];
+function quizItemHTML(item, result) {
+  const checked = result && typeof result === 'object' ? result : {};
+  const verdict = QUIZ_VERDICT_LABELS[checked.verdict] ? checked.verdict : 'unchecked';
+  const sentences = (Array.isArray(checked.sentences) ? checked.sentences : []).filter(sentence => sentence && typeof sentence === 'object');
+  const model = quizText(checked.model);
+  const example = quizText(item.example);
   return `<article class="paragraph-card quiz-result quiz-${verdict}">
     <h4><span class="quiz-verdict">${QUIZ_VERDICT_LABELS[verdict]}</span> ${escapeHTML(item.text)}</h4>
     ${sentences.length ? sentences.map(quizSentenceHTML).join('') : `<p class="quiz-yours">${quizAnswerText(item)}</p>`}
-    ${result.model ? `<p class="quiz-model"><b>Model / 示范：</b>${escapeHTML(result.model)} ${quizReadButton(result.model)}</p>` : ''}
-    ${item.example ? `<blockquote>${escapeHTML(item.example)}</blockquote>` : ''}
+    ${model ? `<p class="quiz-model"><b>Model / 示范：</b>${escapeHTML(model)} ${quizReadButton(model)}</p>` : ''}
+    ${example ? `<blockquote>${escapeHTML(example)}</blockquote>` : ''}
   </article>`;
 }
 
@@ -310,8 +336,8 @@ function quizResultsHTML(quiz) {
     return `${head}${quiz.items.map(item => `<article class="paragraph-card"><h4>${escapeHTML(item.text)}</h4><p class="quiz-yours">${quizAnswerText(item)}</p></article>`).join('')}
       <article class="paragraph-card"><h4>AI reply / AI 回复</h4><div class="quiz-reply-text">${escapeHTML(quiz.feedbackText)}</div></article>`;
   }
-  const tip = quiz.feedback.tip || {};
-  return `${head}${tip.en || tip.cn ? `<article class="paragraph-card quiz-tip"><h4>Tip / 建议</h4>${quizNote(tip)}</article>` : ''}
+  const tip = quizNote(quiz.feedback.tip);
+  return `${head}${tip ? `<article class="paragraph-card quiz-tip"><h4>Tip / 建议</h4>${tip}</article>` : ''}
     ${quiz.items.map((item, i) => quizItemHTML(item, quiz.feedback.items[i])).join('')}`;
 }
 
@@ -338,7 +364,6 @@ function refreshQuizSaved() {
 }
 
 function renderQuizView() {
-  if (quizDraft) document.getElementById('quizSource').value = quizDraft.source;
   renderQuizTest();
   renderQuizCheck();
   refreshQuizSaved();
@@ -367,6 +392,12 @@ function onQuizClick(event) {
 
 function initQuizView() {
   quizDraft = loadQuizDraft();
+  // Only when a saved draft is restored, so reopening the tab never undoes a source chosen for the next quiz
+  if (quizDraft) {
+    document.getElementById('quizSource').value = quizDraft.source;
+    document.getElementById('quizReplySource').value = quizDraft.service;
+  }
+  document.getElementById('quizReplySource').addEventListener('change', event => setQuizReplySource(event.target.value));
   const view = document.getElementById('view-quiz');
   view.addEventListener('click', onQuizClick);
   view.addEventListener('input', event => { if (event.target.id === 'quizAnswer') setQuizAnswer(event.target.value); });
