@@ -107,6 +107,8 @@ function uiHarness() {
     closeReaderPanel() {}, closeOnBackdropClick() {}, escapeHTML: text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),
     findWordByText: word => context.state.words.find(w => w.text.toLowerCase() === word.toLowerCase()),
     newWordEntry: fields => ({ id: 'saved', ...fields }), refreshReaderStatuses() {}, saveState() {}, toast() {}, speak() {},
+    chatLinkAttributes: service => `href="https://${service}.example/"`, copied: [],
+    copyChatPrompt: (service, text) => context.copied.push({ service, text }),
   });
   const run = code => vm.runInContext(code, context);
   run(fs.readFileSync(require.resolve('../paragraph-reader.js'), 'utf8'));
@@ -370,4 +372,27 @@ test('a ChatGPT reply copied with Markdown backslashes before its brackets still
   assert.equal(result.phrases[2].text, 'who is behind a message');
   assert.equal(result.sentences.length, 2);
   assert.match(result.sentences[0].parts[0].explanation.en, /“We've” means “we have\.”/);
+});
+
+test('the "Speak about it" role-play opens with the question, includes the passage and steers to its key words and phrases', () => {
+  const prompt = core.buildSpeakingRoleplay({ text: fixture.passage, title: 'The Golden Bird' }, fixture.analysis);
+  assert.match(prompt, /conversation role-play/);
+  assert.ok(prompt.includes(fixture.analysis.speaking.en), 'The speaking question');
+  assert.ok(prompt.includes(fixture.passage), 'The passage itself');
+  assert.match(prompt, /"The Golden Bird"/);
+  assert.match(prompt, /- bore \(结出果实\)/, 'Key words with a short Chinese meaning');
+  assert.ok(prompt.includes(`- ${fixture.analysis.phrases[0].text}`), 'Key phrases');
+  assert.match(prompt, /END/, 'Feedback at the end, like the Journal role-play');
+});
+
+test('the "Speak about it" card has a ChatGPT role-play link that copies a prompt about this passage', () => {
+  const h = uiHarness();
+  h.context.entry = { id: 'a1', text: fixture.passage, title: 'The Golden Bird', chapter: '', bookId: '', chapterId: '',
+    updatedAt: '2026-10-09T01:00:00.000Z', result: core.validateResponse(fixture.analysis, fixture.passage) };
+  h.run('showSavedAnalysis(entry)');
+  assert.match(h.element('paragraphContent').innerHTML, /<a [^>]*data-chat="chatgpt" data-paragraph-act="roleplay" href="https:\/\/chatgpt\.example\/"/);
+  h.run(`handleParagraphCard({ dataset: { paragraphAct: 'roleplay' } })`);
+  assert.equal(h.context.copied.length, 1);
+  assert.equal(h.context.copied[0].service, 'chatgpt');
+  assert.ok(h.context.copied[0].text.includes(fixture.analysis.speaking.en));
 });

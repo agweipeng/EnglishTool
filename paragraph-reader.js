@@ -105,7 +105,9 @@ function renderParagraphAnalysis() {
   if (!paragraphResult) { content.innerHTML = '<p class="hint">Your explanation will appear here. / 段落解析将显示在这里。</p>'; return; }
   if (paragraphTab === 'simplified') {
     content.innerHTML = bilingualParagraph(paragraphResult.simplified, 'paragraph-card')
-      + `<article class="paragraph-card"><h4>Speak about it / 开口练习</h4>${bilingualParagraph(paragraphResult.speaking)}</article>`;
+      + `<article class="paragraph-card"><h4>Speak about it / 开口练习</h4>${bilingualParagraph(paragraphResult.speaking)}
+        <p class="hint">Talk it through with ChatGPT (try voice mode); type END for feedback. / 与 ChatGPT 对话练习（可用语音模式），输入 END 获取反馈。</p>
+        <div class="form-actions"><a class="btn-primary" data-chat="chatgpt" data-paragraph-act="roleplay" ${chatLinkAttributes('chatgpt')}>📋 Copy role-play → ChatGPT / 复制角色扮演提示词</a></div></article>`;
   } else if (paragraphTab === 'highlights') {
     content.innerHTML = `<article class="paragraph-card"><h4>Main point / 段落大意</h4>${bilingualParagraph(paragraphResult.mainPoint)}</article>
       <h3>Useful words / 重点词汇</h3>${paragraphItemCards(paragraphResult.words, 'words')}
@@ -172,6 +174,14 @@ function pasteParagraphAnalysis() {
 }
 
 function handleParagraphCard(button) {
+  // The link opens ChatGPT (the app on iPhone); the tap copies the prompt
+  if (button.dataset.paragraphAct === 'roleplay') {
+    if (paragraphContext && paragraphResult) {
+      copyChatPrompt('chatgpt', ParagraphCore.buildSpeakingRoleplay(paragraphContext, paragraphResult),
+        'Role-play copied → paste it into ChatGPT (try voice mode!). / 角色扮演提示词已复制，请粘贴到 ChatGPT。');
+    }
+    return;
+  }
   const kind = button.dataset.kind;
   if (!['words', 'phrases'].includes(kind)) return;
   const item = paragraphResult?.[kind]?.[Number(button.dataset.index)];

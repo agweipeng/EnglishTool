@@ -63,3 +63,9 @@ test('the prompt is copied with a message naming the chat', async () => {
   assert.deepEqual(h.calls.copied, ['Explain this passage']);
   assert.match(h.calls.toasts.at(-1), /ChatGPT/);
 });
+
+test('links made later (such as the role-play button in an analysis) get the same address and tab rules', () => {
+  assert.equal(load(IPHONE).run('chatLinkAttributes("chatgpt")'), 'href="https://chatgpt.com/#native"');
+  assert.equal(load(MAC).run('chatLinkAttributes("chatgpt")'), 'href="https://chatgpt.com/" target="_blank" rel="noopener"');
+  assert.equal(load(IPHONE).run('chatLinkAttributes("claude")'), 'href="https://claude.ai/new"');
+});

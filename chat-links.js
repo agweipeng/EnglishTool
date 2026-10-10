@@ -14,6 +14,12 @@ const AI_CHATS = {
 const isAppleMobile = () => /iPhone|iPad|iPod/.test(navigator.userAgent)
   || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
+// The same address and tab rules for a chat link written as HTML after the page has loaded
+function chatLinkAttributes(service) {
+  const chat = AI_CHATS[service];
+  return isAppleMobile() ? `href="${chat.appUrl || chat.url}"` : `href="${chat.url}" target="_blank" rel="noopener"`;
+}
+
 function setupChatLinks() {
   const appleMobile = isAppleMobile();
   document.querySelectorAll('a[data-chat]').forEach(link => {
