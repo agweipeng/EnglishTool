@@ -123,6 +123,22 @@ test('tokenizeText pieces rebuild the original text', () => {
   assert.equal(text.slice(go.start, go.start + 2), 'go');
 });
 
+// ---------- paragraphRanges ----------
+
+test('paragraphRanges finds each blank-line paragraph without its surrounding spaces', () => {
+  const text = '  “You are now our ruler,” he said.\n\n\n“I shall.”\n \nThe end.\n';
+  const paragraphs = TC.paragraphRanges(text).map(({ start, end }) => text.slice(start, end));
+  assert.deepEqual(paragraphs, ['“You are now our ruler,” he said.', '“I shall.”', 'The end.']);
+});
+
+test('paragraphRanges uses single line breaks when the text has no blank lines', () => {
+  const text = 'First paragraph.\nSecond one.\r\nThird.';
+  assert.deepEqual(TC.paragraphRanges(text).map(({ start, end }) => text.slice(start, end)),
+    ['First paragraph.', 'Second one.', 'Third.']);
+  assert.deepEqual(TC.paragraphRanges(' \n\n '), []);
+  assert.deepEqual(TC.paragraphRanges('One line only.'), [{ start: 0, end: 14 }]);
+});
+
 // ---------- splitSentences / sentenceAt ----------
 
 test('sentenceAt returns the sentence containing an offset', () => {
