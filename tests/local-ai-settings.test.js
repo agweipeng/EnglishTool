@@ -76,6 +76,8 @@ test('a saved Ollama model stays connected after reload, but an old automatic-an
   assert.equal(h.run('localAIConfig.provider'),'ollama');
   assert.equal(typeof h.context.window.requestParagraphAI,'function');
   assert.equal(h.context.window.autoParagraphAI,undefined);
+  assert.deepEqual(JSON.parse(h.saved.get('englishTrainerLocalAI_v1')),{provider:'ollama',model:'qwen3.5:4b'},
+    'The old automatic-analysis flag is erased, so an old copy of the app cached elsewhere cannot use it either');
   assert.equal(h.element('readerLocalAIBtn').textContent,'✓ Ollama · 本地 AI');
 });
 

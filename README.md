@@ -191,6 +191,7 @@ Use Chrome or Edge on that computer and allow local network access if the browse
 - `article-import-core.js` / `article-import.js` — import an article from a link through Jina Reader (Markdown to text, errors, saving to materials)
 - `journal-feedback-store.js` — pasted Claude/ChatGPT replies to journal entries (save, clear, device merge)
 - `outside-click.js` — closing pop-ups by clicking outside them
+- `scripts/stamp-assets.cjs` — content fingerprints on the app's script and stylesheet links (see Releasing changes)
 - `chat-links.js` — the Claude/ChatGPT links: copy the prompt, open the site (or the ChatGPT app on iPhone/iPad)
 - `storage-meter.js` — Settings → Storage: how much browser space the learning data uses
 - `paragraph-core.js` / `paragraph-reader.js` — bilingual passage prompts, response validation and analysis panel
@@ -213,3 +214,13 @@ Use Chrome or Edge on that computer and allow local network access if the browse
 node --test
 python3 -m unittest discover -s tests -p 'test_local_ai_server.py'
 ```
+
+## Releasing changes
+
+Every app script and stylesheet link in `index.html` carries a fingerprint of its content (`reader.js?v=1a2b3c4d`). GitHub Pages lets browsers reuse files for 10 minutes, so without it a release could run a mix of old and new scripts. After changing any app file, run:
+
+```bash
+node scripts/stamp-assets.cjs
+```
+
+`node --test` fails if a fingerprint is out of date. `books/catalog.js` stays unversioned because the daily news job rewrites it.
