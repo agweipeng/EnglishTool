@@ -114,8 +114,15 @@ function saveLocalAIConnection() {
 function initLocalAISettings() {
   let saved;
   try { saved = JSON.parse(localStorage.getItem(LOCAL_AI_KEY)); } catch { /* Start without a connection. */ }
-  applyLocalAIConfig(typeof saved?.model === 'string' && saved.model.trim()
-    ? { model: saved.model, provider: saved.provider === 'ollama' ? 'ollama' : 'lmstudio' } : null);
+  const config = typeof saved?.model === 'string' && saved.model.trim()
+    ? { model: saved.model, provider: saved.provider === 'ollama' ? 'ollama' : 'lmstudio' } : null;
+  // Older versions saved an automatic-analysis flag; erase it so an old copy of the app cached on another
+  // device can't start local AI by itself either
+  if (config && 'auto' in saved) {
+    try { localStorage.setItem(LOCAL_AI_KEY, JSON.stringify({ provider: config.provider, model: config.model })); }
+    catch { /* Keeping the old flag is harmless here; this version never reads it. */ }
+  }
+  applyLocalAIConfig(config);
   document.getElementById('readerLocalAIBtn').addEventListener('click', openLocalAISettings);
   document.getElementById('localAIClose').addEventListener('click', closeLocalAISettings);
   document.getElementById('localAIDialog').addEventListener('cancel', closeLocalAISettings);
