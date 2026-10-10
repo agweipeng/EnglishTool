@@ -664,7 +664,7 @@ textarea { resize: vertical; min-height: 50px; }
 .paragraph-card blockquote { border-left: 3px solid var(--border); margin: 12px 0; padding-left: 12px; line-height: 1.7; }
 .paragraph-label { display: inline-block; color: var(--primary); background: var(--surface-2); border-radius: 5px; padding: 4px 8px; font-size: 13px; }
 .paragraph-part { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
-.paragraph-paste { margin-top: 18px; }
+.paragraph-paste { margin: 0 0 14px; }   /* between the original passage and the analyze buttons */
 .paragraph-paste label { display: block; margin: 12px 0 6px; font-size: 13px; color: var(--text-muted); }
 .paragraph-paste textarea { width: 100%; box-sizing: border-box; margin-bottom: 8px; }
 #localAIModel, #localAIProvider { display: block; width: 100%; margin-top: 8px; }
