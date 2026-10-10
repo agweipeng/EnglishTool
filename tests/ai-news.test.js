@@ -69,3 +69,29 @@ test('Read aloud still works on a headline, and unknown buttons do nothing', () 
   h.run(`onAINewsClick({ target: { closest: selector => selector === '[data-news-import]' ? { dataset: { newsImport: 'openai:9' } } : null } })`);
   assert.equal(h.calls.imports.length, 0);
 });
+
+const bbcEpisode = { title: 'Why does music <b>move</b> us?', url: 'https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-261001',
+  date: '2026-10-01', description: 'What do you listen to?', audioUrl: 'https://downloads.bbc.co.uk/learningenglish/features/6min/261001_music_download.mp3' };
+
+test('BBC 6 Minute English episodes are listed with their date and teaser', () => {
+  const h = harness();
+  h.sandbox.data = { ...news, sources: { ...news.sources, bbc: [bbcEpisode, { ...bbcEpisode, url: 'javascript:alert(1)' }] } };
+  h.run('renderAINews(data)');
+  const bbc = h.element('newsBBC').innerHTML;
+  assert.match(bbc, /Why does music &lt;b&gt;move/);
+  assert.match(bbc, /What do you listen to\?/);
+  assert.match(bbc, /data-news-import="bbc:0"/);
+  assert.doesNotMatch(bbc, /javascript:/);
+  assert.match(bbc, /🎧/, 'Marked as having audio');
+  h.sandbox.data = news;
+  h.run('renderAINews(data)');
+  assert.match(h.element('newsBBC').innerHTML, /No episodes in the last 10 days/);
+});
+
+test('importing an episode opens it as a conversation with its audio', () => {
+  const h = harness();
+  h.sandbox.data = { ...news, sources: { ...news.sources, bbc: [bbcEpisode] } };
+  h.run('renderAINews(data)');
+  h.run(`onAINewsClick({ target: { closest: selector => selector === '[data-news-import]' ? { dataset: { newsImport: 'bbc:0' } } : null } })`);
+  assert.deepEqual(h.calls.imports, [[bbcEpisode.url, { openReader: true, type: 'conversation', audioUrl: bbcEpisode.audioUrl }]]);
+});

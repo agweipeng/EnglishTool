@@ -8,9 +8,9 @@ const AI_NEWS_SECTIONS = [
   { key: 'openai', id: 'newsOpenAI' },
   { key: 'google', id: 'newsGoogle' },
 ];
-const AI_NEWS_LIST_IDS = [...AI_NEWS_SECTIONS.map(section => section.id), 'newsGithub'];
+const AI_NEWS_LIST_IDS = ['newsBBC', ...AI_NEWS_SECTIONS.map(section => section.id), 'newsGithub'];
 let aiNewsCache = null;
-let aiNewsItems = new Map();   // 'openai:0' → { title, url }
+let aiNewsItems = new Map();   // 'openai:0' → { title, url }; 'bbc:0' → { title, url, type, audioUrl }
 
 const safeNewsUrl = url => {
   try { return ['http:', 'https:'].includes(new URL(url).protocol) ? url : ''; } catch { return ''; }
@@ -47,6 +47,7 @@ function renderAINews(data) {
     document.getElementById(id).innerHTML = items.length ? items.map((item, index) => articleCard(item, `${key}:${index}`)).join('')
       : '<p class="hint">No items yet.</p>';
   });
+  renderBBCEpisodes(sources.bbc);
   const repos = (Array.isArray(sources.github) ? sources.github : []).filter(repo => repo && safeNewsUrl(repo.url));
   document.getElementById('newsGithub').innerHTML = repos.length ? repos.map(repoCard).join('') : '<p class="hint">No items yet.</p>';
 }
@@ -59,6 +60,33 @@ function articleCard(item, key) {
       </a>
       <div class="news-card-actions">
         <button class="btn-ghost" data-news-import="${escapeHTML(key)}" title="Read this article in the Reader with word lookups and AI analysis">📥 Import to Reader</button>
+        <button class="mic-btn" data-mic-text="${escapeHTML(item.title)}" title="Read aloud challenge">🎙️ Read aloud</button>
+      </div>
+    </div>`;
+}
+
+// BBC 6 Minute English: a conversation with a transcript and audio, so it is imported as one, with its player
+function renderBBCEpisodes(list) {
+  const episodes = (Array.isArray(list) ? list : [])
+    .map(item => ({ title: String(item?.title || '').trim(), url: safeNewsUrl(item?.url), date: String(item?.date || ''),
+      description: String(item?.description || ''), audioUrl: /^https:\/\//.test(item?.audioUrl || '') ? item.audioUrl : '' }))
+    .filter(item => item.title && item.url);
+  episodes.forEach((item, index) => aiNewsItems.set(`bbc:${index}`, { ...item, type: 'conversation' }));
+  document.getElementById('newsBBC').innerHTML = episodes.length ? episodes.map((item, index) => episodeCard(item, `bbc:${index}`)).join('')
+    : '<p class="hint">No episodes in the last 10 days. / 最近 10 天没有新节目。</p>';
+}
+
+function episodeCard(item, key) {
+  const date = /^\d{4}-\d{2}-\d{2}$/.test(item.date)
+    ? new Date(`${item.date}T12:00:00`).toLocaleDateString(undefined, { dateStyle: 'medium' }) : '';
+  return `<div class="news-card-wrap">
+      <a class="news-card" href="${escapeHTML(item.url)}" target="_blank" rel="noopener">
+        <div class="news-card-title">${escapeHTML(item.title)}</div>
+        ${item.description ? `<div class="news-card-desc">${escapeHTML(item.description)}</div>` : ''}
+        <div class="news-card-meta">${escapeHTML([date, item.audioUrl ? '🎧 audio + transcript' : 'transcript'].filter(Boolean).join(' · '))} ↗</div>
+      </a>
+      <div class="news-card-actions">
+        <button class="btn-ghost" data-news-import="${escapeHTML(key)}" title="Read the transcript in the Reader, with the audio, word lookups and AI analysis">📥 Import to Reader</button>
         <button class="mic-btn" data-mic-text="${escapeHTML(item.title)}" title="Read aloud challenge">🎙️ Read aloud</button>
       </div>
     </div>`;
@@ -77,7 +105,7 @@ function onAINewsClick(event) {
   const importButton = event.target.closest('[data-news-import]');
   if (importButton) {
     const item = aiNewsItems.get(importButton.dataset.newsImport);
-    if (item) importArticleFromLink(item.url, { openReader: true });
+    if (item) importArticleFromLink(item.url, { openReader: true, ...(item.type ? { type: item.type, audioUrl: item.audioUrl } : {}) });
     return;
   }
   const mic = event.target.closest('[data-mic-text]');
