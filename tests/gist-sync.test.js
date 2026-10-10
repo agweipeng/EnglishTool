@@ -7,11 +7,12 @@ const TextCore = require('../text-core.js');
 const AnalysisStore = require('../analysis-store.js');
 const MaterialStore = require('../material-store.js');
 const JournalFeedbackStore = require('../journal-feedback-store.js');
+const QuizStore = require('../quiz-store.js');
 
 const word = (id, text, updatedAt) => ({ id, text, updatedAt });
 // Same shape as defaultState() in app.js
 const data = (words, known = []) => ({ words, settings: { voiceURI: null, rate: 1, theme: 'light' }, activity: {},
-  streak: { current: 0, lastDay: null }, journal: {}, journalFeedback: {}, known, knownLog: {}, analyses: [], materials: [] });
+  streak: { current: 0, lastDay: null }, journal: {}, journalFeedback: {}, known, knownLog: {}, analyses: [], materials: [], quizzes: [] });
 
 // A fake gist server: GET returns the stored file, PATCH replaces it. `gate` lets a test hold a GET open.
 function gistServer(initial) {
@@ -41,7 +42,7 @@ function harness(localState, server) {
   const timers = [];
   const calls = { refresh: 0 };
   const context = vm.createContext({
-    state: localState, TextCore, AnalysisStore, MaterialStore, JournalFeedbackStore, JSON, Date, Math, Map, Object, Array, Promise, Error,
+    state: localState, TextCore, AnalysisStore, MaterialStore, JournalFeedbackStore, QuizStore, JSON, Date, Math, Map, Object, Array, Promise, Error,
     STORAGE_KEY: 'englishTrainerData_v1', SYNC_KEY: 'englishTrainerSync_v1', GIST_FILE: 'english-trainer-data.json', PUSH_DEBOUNCE_MS: 2500,
     localStorage: { getItem: k => memory.get(k) ?? null, setItem: (k, v) => memory.set(k, v), removeItem: k => memory.delete(k) },
     document: { getElementById: () => null },

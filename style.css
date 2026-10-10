@@ -683,3 +683,29 @@ textarea { resize: vertical; min-height: 50px; }
 .analyses-toolbar input { flex: 1 1 260px; }
 .analysis-meta { color: var(--text-muted); font-size: 13px; margin-bottom: 6px; }
 .analysis-card blockquote { font-family: Georgia, 'Times New Roman', serif; }
+
+/* ============ Quiz ============ */
+.quiz-toolbar { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin: 12px 0; }
+.quiz-card { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 16px; margin: 0 0 16px; min-width: 0; }
+.quiz-card legend { padding: 0 4px; }
+.quiz-progress { height: 6px; background: var(--surface-2); border-radius: 999px; overflow: hidden; margin-bottom: 12px; }
+.quiz-progress span { display: block; height: 100%; background: var(--primary); }
+.quiz-word { display: flex; align-items: center; gap: 8px; font-size: 22px; margin-bottom: 4px; }
+.quiz-card textarea, .quiz-paste textarea { width: 100%; box-sizing: border-box; margin-top: 6px; }
+.quiz-used { min-height: 1.4em; color: var(--text-muted); font-size: 13px; margin: 6px 0; }
+.quiz-used.ok { color: var(--success); }
+.quiz-check, .quiz-paste { margin: 12px 0; }
+.quiz-result-head h3 { margin-bottom: 4px; }
+.quiz-verdict { font-size: 13px; padding: 2px 8px; border-radius: 999px; background: var(--surface-2); margin-right: 6px; white-space: nowrap; }
+.quiz-natural .quiz-verdict { color: var(--success); }
+.quiz-understandable .quiz-verdict { color: var(--warning); }
+.quiz-wrong .quiz-verdict { color: var(--danger); }
+.quiz-sentence { border-top: 1px solid var(--border); padding: 8px 0; }
+.quiz-yours, .quiz-better { margin: 0 0 4px; }
+.quiz-better { font-weight: 600; }
+.quiz-reply-text { white-space: pre-wrap; }
+.quiz-history-item { display: flex; gap: 8px; align-items: center; border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 8px; margin-bottom: 8px; background: var(--surface); }
+.quiz-history-item.active { border-color: var(--primary); }
+.quiz-history-open { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; gap: 4px 12px; text-align: left;
+  background: none; border: none; color: inherit; cursor: pointer; font: inherit; padding: 4px; }
