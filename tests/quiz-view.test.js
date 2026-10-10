@@ -215,3 +215,20 @@ test('opening the tab again keeps the source chosen for the next quiz', () => {
   h.run('renderQuizView()');
   assert.equal(h.element('quizSource').value, 'library');
 });
+
+test('each test shows an example sentence for the word, which can be heard', () => {
+  const withExample = [{ id: 'e1', text: 'gaze', defEN: 'look steadily', defCN: '凝视', createdAt: '2026-10-02T00:00:00Z',
+    examples: [{ en: 'She <gazed> at the sea.', cn: '' }] }, { id: 'e2', text: 'linger', defEN: 'stay longer', createdAt: '2026-10-01T00:00:00Z', examples: [] }];
+  const h = harness({ state: { words: withExample, analyses: [], quizzes: [] } });
+  const spoken = [];
+  h.context.speak = text => spoken.push(text);
+  h.run('startNewQuiz()');
+  h.run('quizDraft = { ...quizDraft, index: quizDraft.items.findIndex(item => item.text === "gaze") }; renderQuizTest()');
+  const html = h.element('quizTest').innerHTML;
+  assert.match(html, /Example \/ 例句/);
+  assert.match(html, /She &lt;gazed&gt; at the sea\./);
+  h.run('onQuizClick({ target: { closest: selector => (selector === "[data-quiz-act]" ? { dataset: { quizAct: "say-example" } } : null) } })');
+  assert.deepEqual(spoken, ['She <gazed> at the sea.']);
+  h.run('quizDraft = { ...quizDraft, index: quizDraft.items.findIndex(item => item.text === "linger") }; renderQuizTest()');
+  assert.match(h.element('quizTest').innerHTML, /No example saved/);
+});

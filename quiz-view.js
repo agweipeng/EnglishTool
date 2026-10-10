@@ -260,6 +260,7 @@ function renderQuizTest() {
     <div class="quiz-word"><b>${escapeHTML(item.text)}</b><button type="button" class="btn-ghost" data-quiz-act="say" aria-label="Listen / 听读">🔊</button></div>
     ${item.meaning.en ? `<p>${escapeHTML(item.meaning.en)}</p>` : ''}
     ${item.meaning.cn ? `<p class="paragraph-cn" lang="zh-CN">${escapeHTML(item.meaning.cn)}</p>` : ''}
+    ${quizExampleHTML(item)}
     <label for="quizAnswer">Write 2–3 sentences using “${escapeHTML(item.text)}” in different ways. / 用它以不同方式写 2–3 个句子。</label>
     <textarea id="quizAnswer" rows="4" maxlength="${QuizCore.MAX_ANSWER_CHARS}">${escapeHTML(item.answer)}</textarea>
     <p id="quizUsed" class="quiz-used" aria-live="polite"></p>
@@ -270,6 +271,17 @@ function renderQuizTest() {
     </div>
   </fieldset>`;
   renderQuizUsed();
+}
+
+// The saved example (from the book, the analysis or the Library entry) shows how the word is used
+function quizExampleHTML(item) {
+  const example = quizText(item.example).trim();
+  if (!example) {
+    return '<p class="hint quiz-example">No example saved for this word yet — checking your answers will give you a model sentence. / 这个词还没有保存例句，检查答案时会给出示范句。</p>';
+  }
+  return `<blockquote class="quiz-example"><span class="hint">Example / 例句</span>
+    <span>${escapeHTML(example)}</span>
+    <button type="button" class="btn-ghost" data-quiz-act="say-example" aria-label="Listen to the example / 听例句">🔊</button></blockquote>`;
 }
 
 // A hint only: it never blocks moving on or checking
@@ -376,6 +388,7 @@ function onQuizClick(event) {
   if (!button) return undefined;
   const act = button.dataset.quizAct;
   if (act === 'say') return quizDraft && speak(quizDraft.items[quizDraft.index].text);
+  if (act === 'say-example') return quizDraft && speak(quizText(quizDraft.items[quizDraft.index].example));
   if (act === 'back') return moveQuizTest(-1);
   if (act === 'next') return moveQuizTest(1);
   if (act === 'swap') return swapQuizItem();
