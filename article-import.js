@@ -18,6 +18,21 @@ function hasUnsavedReaderText() {
   return !MaterialStore.visible(state.materials).some(item => item.text === text);
 }
 
+// Before a book chapter or a saved material replaces the reader text: true when nothing would be lost or the user agrees
+function mayReplaceReaderText() {
+  return !hasUnsavedReaderText() || confirm('Replace the text in the reader? It is not saved — save it to your materials first if you want to keep it. / 替换阅读器中的文字吗？这些文字尚未保存。');
+}
+
+// Opening something else stops an import still loading, so the article can't replace what was opened
+function cancelArticleImport() {
+  if (!articleImportRequest) return;
+  ++articleImportSequence;
+  articleImportRequest.abort();
+  articleImportRequest = null;
+  document.getElementById('readerImportBtn').disabled = false;
+  setArticleImportStatus('');
+}
+
 function importFailureMessage(error, status) {
   if (status === 429) return 'Too many imports in a short time — wait a minute and try again. / 导入过于频繁，请稍等一分钟再试。';
   if (status) return `The article reader could not open this page (error ${status}). Copy and paste the text instead. / 无法打开该网页，请复制粘贴正文。`;
