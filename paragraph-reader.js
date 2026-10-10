@@ -26,7 +26,6 @@ function openParagraphAnalysis(text) {
     text, title: reader.title, chapter: inBook ? activeReaderChapter?.title || '' : '',
     bookId: inBook ? readerBookId : '', chapterId: inBook ? activeReaderChapter?.id || '' : '', kind,
   }, null, readyStatus(text));
-  if (window.autoParagraphAI === true && canAnalyzeHere(text)) generateParagraphAnalysis();
 }
 
 // Shows a saved analysis from the Analyses tab without asking the model again
@@ -59,9 +58,9 @@ function showParagraphDialog(context, result, status) {
 function readyStatus(text) {
   const limit = ParagraphCore.LOCAL_MAX_CHARS.toLocaleString();
   if (typeof window.requestParagraphAI !== 'function') {
-    return 'An AI connection is needed for analysis here. You can also use Claude or ChatGPT and bring the response back. / 工具内解析需要连接 AI；也可以使用 Claude 或 ChatGPT，再把回复粘贴回来。';
+    return 'Choose Claude or ChatGPT and bring the reply back, or connect a local AI in Local AI settings. / 请选择 Claude 或 ChatGPT 并把回复粘贴回来，或在“本地 AI 设置”中连接本地 AI。';
   }
-  return canAnalyzeHere(text) ? 'Ready to analyze your selection. / 可以开始解析所选段落。'
+  return canAnalyzeHere(text) ? 'Choose how to analyze: local AI, Claude or ChatGPT. / 请选择解析方式：本地 AI、Claude 或 ChatGPT。'
     : `Local AI handles up to ${limit} characters in reasonable time. Select a shorter passage, or use Claude or ChatGPT. / 本地 AI 适合最多 ${limit} 个字符的段落，请选中较短的段落，或使用 Claude 或 ChatGPT。`;
 }
 

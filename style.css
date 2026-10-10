@@ -667,8 +667,6 @@ textarea { resize: vertical; min-height: 50px; }
 .paragraph-paste { margin-top: 18px; }
 .paragraph-paste label { display: block; margin: 12px 0 6px; font-size: 13px; color: var(--text-muted); }
 .paragraph-paste textarea { width: 100%; box-sizing: border-box; margin-bottom: 8px; }
-.local-ai-auto { display: flex; align-items: center; gap: 8px; margin: 18px 0; }
-.local-ai-auto input { width: auto; }
 #localAIModel, #localAIProvider { display: block; width: 100%; margin-top: 8px; }
 #readerLocalAIBtn { margin-bottom: 14px; }
 @media (max-width: 640px) { .paragraph-dialog { padding: 16px; } .paragraph-tabs button { font-size: 12px; } .paragraph-original, .paragraph-card { padding: 14px; } }

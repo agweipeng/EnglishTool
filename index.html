@@ -345,7 +345,7 @@
       <button id="paragraphTab-structure" role="tab" data-paragraph-tab="structure" aria-controls="paragraphContent" aria-selected="false">Sentence structure<br><span lang="zh-CN">结构拆解</span></button>
     </div>
     <details class="paragraph-original" open><summary>Original passage / 原文</summary><p id="paragraphOriginal"></p><button id="paragraphListen" class="btn-ghost">🔊 Listen / 听读</button></details>
-    <div class="form-actions"><button id="paragraphGenerate" class="btn-primary">Analyze here / 在工具内解析</button><button id="paragraphLocalAI" class="btn-ghost">Local AI settings / 本地 AI 设置</button><a class="btn-ghost" data-chat="claude" data-chat-for="paragraph" href="https://claude.ai/new" target="_blank" rel="noopener">Analyze with Claude ↗ / 使用 Claude 解析</a><a class="btn-ghost" data-chat="chatgpt" data-chat-for="paragraph" href="https://chatgpt.com/" target="_blank" rel="noopener">Analyze with ChatGPT ↗ / 使用 ChatGPT 解析</a></div>
+    <div class="form-actions"><button id="paragraphGenerate" class="btn-primary">Analyze with local AI / 使用本地 AI 解析</button><button id="paragraphLocalAI" class="btn-ghost">Local AI settings / 本地 AI 设置</button><a class="btn-ghost" data-chat="claude" data-chat-for="paragraph" href="https://claude.ai/new" target="_blank" rel="noopener">Analyze with Claude ↗ / 使用 Claude 解析</a><a class="btn-ghost" data-chat="chatgpt" data-chat-for="paragraph" href="https://chatgpt.com/" target="_blank" rel="noopener">Analyze with ChatGPT ↗ / 使用 ChatGPT 解析</a></div>
     <p id="paragraphStatus" class="hint" role="status" aria-live="polite"></p>
     <div id="paragraphContent" role="tabpanel" tabindex="0" aria-labelledby="paragraphTab-simplified"></div>
     <details class="paragraph-paste"><summary>Bring the AI response back / 粘贴 AI 回复</summary><label for="paragraphResponse">Paste the complete reply from Claude or ChatGPT to the copied prompt. / 粘贴 Claude 或 ChatGPT 针对已复制提示词的完整回复。</label><textarea id="paragraphResponse" rows="4"></textarea><button id="paragraphPasteBtn" class="btn-primary">Show analysis / 显示解析</button></details>
@@ -358,7 +358,6 @@
     <button id="localAICheck" class="btn-ghost">Check connection / 检查连接</button>
     <p id="localAIStatus" role="status" aria-live="polite" class="hint"></p>
     <label for="localAIModel">Chat model / 聊天模型</label><select id="localAIModel"><option value="">Choose a model / 选择模型</option></select>
-    <label class="local-ai-auto"><input id="localAIAuto" type="checkbox" checked> Analyze when I select a passage / 选中段落后自动解析</label>
     <div class="form-actions"><button id="localAIUse" class="btn-primary" disabled>Use this model / 使用此模型</button><button id="localAIDisconnect" class="btn-ghost">Disconnect / 断开连接</button></div>
   </dialog>
 

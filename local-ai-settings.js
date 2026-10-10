@@ -10,7 +10,6 @@ const localAIName = provider => provider === 'ollama' ? 'Ollama' : 'LM Studio';
 function applyLocalAIConfig(config) {
   localAIConfig = config;
   window.requestParagraphAI = config ? LocalAI.request(config.model, { provider: config.provider }) : undefined;
-  window.autoParagraphAI = !!config?.auto;
   document.getElementById('readerLocalAIBtn').textContent = config
     ? `✓ ${localAIName(config.provider)} · 本地 AI` : 'Local AI · 本地 AI';
 }
@@ -36,7 +35,6 @@ function openLocalAISettings() {
     model.append(option);
     model.value = localAIConfig.model;
   }
-  document.getElementById('localAIAuto').checked = localAIConfig?.auto ?? true;
   document.getElementById('localAIStatus').textContent = 'Check the connection to list your models. / 检查连接以列出你的模型。';
   document.getElementById('localAICheck').disabled = false;
   document.getElementById('localAIUse').disabled = true;
@@ -102,7 +100,8 @@ async function checkLocalAIConnection() {
 function saveLocalAIConnection() {
   const model = document.getElementById('localAIModel').value;
   if (!localAIAvailableModels.includes(model) || document.getElementById('localAIUse').disabled) return;
-  const config = { model, provider: document.getElementById('localAIProvider').value, auto: document.getElementById('localAIAuto').checked };
+  // Local AI only runs when you choose it in the analysis panel, so no automatic-analysis preference is kept
+  const config = { model, provider: document.getElementById('localAIProvider').value };
   try { localStorage.setItem(LOCAL_AI_KEY, JSON.stringify(config)); }
   catch { toast('Could not save the connection. / 无法保存连接设置。'); return; }
   applyLocalAIConfig(config);
@@ -116,7 +115,7 @@ function initLocalAISettings() {
   let saved;
   try { saved = JSON.parse(localStorage.getItem(LOCAL_AI_KEY)); } catch { /* Start without a connection. */ }
   applyLocalAIConfig(typeof saved?.model === 'string' && saved.model.trim()
-    ? { model: saved.model, provider: saved.provider === 'ollama' ? 'ollama' : 'lmstudio', auto: saved.auto === true } : null);
+    ? { model: saved.model, provider: saved.provider === 'ollama' ? 'ollama' : 'lmstudio' } : null);
   document.getElementById('readerLocalAIBtn').addEventListener('click', openLocalAISettings);
   document.getElementById('localAIClose').addEventListener('click', closeLocalAISettings);
   document.getElementById('localAIDialog').addEventListener('cancel', closeLocalAISettings);
