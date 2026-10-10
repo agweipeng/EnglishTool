@@ -337,8 +337,7 @@ function refreshActiveView() {
   if (!active) return;
   const id = active.id.replace('view-', '');
   if (id === 'library') renderLibrary();
-  else if (id === 'stats') renderStats();
-  else if (id === 'reading') renderReading();
+  else if (id === 'practice') renderReading();
   else if (id === 'reader') {
     refreshReaderStatuses();
     if (typeof renderReadingMaterials === 'function') renderReadingMaterials();
@@ -347,7 +346,8 @@ function refreshActiveView() {
   // Quiz: saved quizzes only, so a sync never resets the text box being typed in
   else if (id === 'quiz' && typeof refreshQuizSaved === 'function') refreshQuizSaved();
   else if (id === 'settings' && typeof renderStorageMeter === 'function') renderStorageMeter();
-  // learn view: don't disrupt an in-progress card
+  // Learn: only the progress numbers, so an in-progress card is never disrupted
+  else if (id === 'learn') renderStats();
 }
 
 // ============ Helpers ============
@@ -463,7 +463,19 @@ function pickSessionWords(limit = SESSION_SIZE) {
 }
 
 // ============ View routing ============
-function showView(name) {
+// Former tabs live inside others now; their names (buttons, the ?add= quick-add) open the tab that holds them
+const VIEW_ALIASES = { add: 'library', stats: 'learn', drill: 'practice', reading: 'practice' };
+
+// Opens the add-word form inside Words; `focus` also brings it into view and puts the cursor in it
+function openAddWordPanel(focus) {
+  document.getElementById('addWordPanel').open = true;
+  if (!focus) return;
+  document.getElementById('addWordPanel').scrollIntoView({ block: 'start' });
+  document.getElementById('newWord').focus();
+}
+
+function showView(requested) {
+  const name = VIEW_ALIASES[requested] || requested;
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   const view = document.getElementById('view-' + name);
@@ -471,10 +483,12 @@ function showView(name) {
   if (view) view.classList.add('active');
   if (tab) tab.classList.add('active');
 
-  if (name === 'learn') startSession();
-  if (name === 'library') renderLibrary();
-  if (name === 'stats') renderStats();
-  if (name === 'reading') renderReading();
+  if (name === 'learn') { renderStats(); startSession(); }
+  if (name === 'library') {
+    renderLibrary();
+    if (requested === 'add' || !state.words.length) openAddWordPanel(requested === 'add');
+  }
+  if (name === 'practice') renderReading();
   if (name === 'reader') renderReader();
   if (name === 'analyses' && typeof renderAnalysesView === 'function') renderAnalysesView();
   if (name === 'quiz' && typeof renderQuizView === 'function') renderQuizView();
@@ -1031,6 +1045,7 @@ function attachRating(scope, word) {
       }
       // Always move on, so a failed save never makes the same card count twice
       session.index++;
+      renderStats();
       showCard();
     });
   });
@@ -1449,6 +1464,8 @@ function renderStats() {
   if (leechEl) leechEl.textContent = leeches.length;
   const knownEl = document.getElementById('statKnown');
   if (knownEl) knownEl.textContent = knownWordSet().size;
+  const summary = document.getElementById('learnProgressSummary');
+  if (summary) summary.textContent = `${due.length} due · 🔥 ${state.streak.current} · ${state.activity[todayKey()] || 0} reviewed today`;
   renderHeatmap();
   renderLevelChart();
 }
@@ -2120,11 +2137,7 @@ function init() {
   document.getElementById('streakBadge').textContent = `🔥 ${state.streak.current || 0}`;
   loadVoices();
 
-  document.querySelectorAll('.tab').forEach(t => {
-    // Anchor tabs (e.g. Digests → external static page) navigate via href; don't route through showView
-    if (t.tagName === 'A') return;
-    t.addEventListener('click', () => showView(t.dataset.view));
-  });
+  document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => showView(t.dataset.view)));
   document.querySelectorAll('[data-goto]').forEach(el => {
     el.addEventListener('click', () => showView(el.dataset.goto));
   });
@@ -2249,6 +2262,7 @@ function init() {
     }
   });
 
+  renderStats();
   startSession();
   handleUrlParams();
 }

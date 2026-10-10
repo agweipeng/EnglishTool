@@ -60,7 +60,6 @@ p { margin: 6px 0; }
   border-radius: 8px; cursor: pointer; color: var(--text-muted);
   font-size: 14px; font-weight: 500;
   transition: all 0.15s;
-  text-decoration: none; /* Anchor tabs (e.g. Digests) shouldn't be underlined */
   display: inline-flex; align-items: center;
 }
 .tab:hover { background: var(--surface-2); color: var(--text); }
@@ -215,7 +214,9 @@ textarea { resize: vertical; min-height: 50px; }
 
 /* ============ Library ============ */
 .library-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
-.library-filters { display: flex; gap: 8px; }
+.library-filters { display: flex; gap: 8px; max-width: 100%; }
+.library-filters > * { min-width: 0; }
+.library-filters input[type="search"] { flex: 1 1 140px; }
 .library-list { display: flex; flex-direction: column; gap: 8px; }
 .library-item {
   background: var(--surface); padding: 14px;
@@ -260,6 +261,16 @@ textarea { resize: vertical; min-height: 50px; }
 .drill-sentence { font-size: 18px; margin: 10px 0; }
 .drill-cn { color: var(--text-muted); }
 .drill-progress { margin-top: 16px; color: var(--text-muted); font-size: 13px; }
+
+/* ============ Panels inside Learn, Words and Practice ============ */
+.learn-progress { margin-bottom: 16px; }
+.learn-progress > summary, .add-word-panel > summary { cursor: pointer; font-weight: 600; padding: 6px 0; }
+.learn-progress[open] > summary { margin-bottom: 12px; }
+.learn-progress h4 { margin: 16px 0 8px; }
+.add-word-panel { margin-bottom: 20px; }
+.add-word-panel[open] > summary { margin-bottom: 14px; }
+.practice-block { margin-bottom: 20px; }
+.practice-block > h3 { margin-top: 0; }
 
 /* ============ Stats ============ */
 .stats-grid {

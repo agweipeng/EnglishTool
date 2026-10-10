@@ -195,8 +195,26 @@ Passage: ${JSON.stringify(text.trim())}`;
       speaking: required('speaking'),
     };
   }
+  // A conversation role-play about the "Speak about it" question: the chat partner opens with it, knows the
+  // passage, and steers the learner to the passage's key words and phrases (same rules as the Journal role-play)
+  const ROLEPLAY_TERMS_PER_KIND = 3;
+  function buildSpeakingRoleplay({ text, title = '' }, result) {
+    const firstMeaning = item => String(item.meaning?.cn || '').split(/[。.]/)[0];
+    const terms = [...(result.words || []).slice(0, ROLEPLAY_TERMS_PER_KIND), ...(result.phrases || []).slice(0, ROLEPLAY_TERMS_PER_KIND)]
+      .map(item => ({ text: item.text, defCN: firstMeaning(item) }));
+    const scenario = [
+      `We're two friends chatting about a passage I just read${title ? ` from "${title}"` : ''}. Open with this question, then keep the conversation going and share your own view too: "${result.speaking.en}"`,
+      '',
+      'The passage (for context only):',
+      '"""',
+      text,
+      '"""',
+    ].join('\n');
+    return textCore.buildRoleplayPrompt({ scenario, words: terms });
+  }
+
   const api = { MAX_CHARS, LOCAL_MAX_CHARS, MAX_SENTENCES, MAX_PARTS, MAX_WORDS, MAX_PHRASES,
-    buildPrompt, validateResponse, groundExamples, exactExcerpt };
+    buildPrompt, validateResponse, groundExamples, exactExcerpt, buildSpeakingRoleplay };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.ParagraphCore = api;
 })(typeof window !== 'undefined' ? window : globalThis);
