@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Only this site's own scripts run, and the page only talks to the services it uses (sync, article reader,
+     dictionaries, translation, Ollama on this computer). This keeps the Gist sync token safe even if a
+     bad backup, sync code or article ever got HTML into the page. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' https: blob:; connect-src 'self' https://api.github.com https://gist.githubusercontent.com https://r.jina.ai https://api.dictionaryapi.dev https://en.wiktionary.org https://api.mymemory.translated.net https://api.datamuse.com http://127.0.0.1:11434; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'" />
 <title>English Vocabulary & Listening Trainer</title>
 <link rel="stylesheet" href="style.css?v=3d373eab" />
 </head>
@@ -425,10 +429,10 @@
         <button class="btn-ghost" id="newsRefreshBtn">🔄 Refresh</button>
       </div>
     </div>
-    <p class="hint">BBC Learning English episodes from the last 10 days, the latest posts from Anthropic, OpenAI, Google AI / Gemini, and the most-starred AI repos on GitHub this week. Updated daily by a GitHub Action. Choose <b>📥 Import to Reader</b> on a post to read it in the Reader with word lookups and AI analysis. / 点击 <b>📥 Import to Reader</b>，即可在阅读器中查词并进行 AI 解析。</p>
+    <p class="hint">BBC Learning English episodes from the last 30 days, the latest posts from Anthropic, OpenAI, Google AI / Gemini, and the most-starred AI repos on GitHub this week. Updated daily by a GitHub Action. Choose <b>📥 Import to Reader</b> on a post to read it in the Reader with word lookups and AI analysis. / 点击 <b>📥 Import to Reader</b>，即可在阅读器中查词并进行 AI 解析。</p>
 
     <div class="news-section">
-      <h3>🎧 BBC 6 Minute English (last 10 days)</h3>
+      <h3>🎧 BBC 6 Minute English (last 30 days)</h3>
       <p class="hint">A new episode every week: two presenters talk about one topic and explain useful words. <b>📥 Import to Reader</b> brings in the transcript with the audio player. / 每周一期：导入后可在阅读器中边听音频边看文字稿。</p>
       <div class="news-list" id="newsBBC"><p class="hint">Loading…</p></div>
     </div>
@@ -577,7 +581,7 @@
 
     <div class="setting-block">
       <h3>Cloud Sync (GitHub Gist) ☁️</h3>
-      <p class="hint">Automatic two-way sync between devices via a private GitHub Gist. Create a fine-grained token at <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">github.com/settings/tokens</a> with permission <b>Gists: Read &amp; write</b> (nothing else needed).</p>
+      <p class="hint">Automatic two-way sync between devices via a private GitHub Gist. Create a fine-grained token at <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">github.com/settings/tokens</a> with permission <b>Gists: Read &amp; write</b> (nothing else needed) and an expiry date (e.g. 90 days). / 请创建只含 Gists 读写权限、并设置过期时间的细粒度令牌。</p>
       <div id="syncDisconnected">
         <label>GitHub Token
           <input type="password" id="gistToken" placeholder="github_pat_..." autocomplete="off" />
@@ -585,7 +589,7 @@
         <div class="form-actions">
           <button class="btn-primary" id="syncConnectBtn">🔗 Connect</button>
         </div>
-        <p class="hint">The token is stored only on this device. With <b>Gists</b> scope it can only read/write your gists — nothing else in your GitHub account.</p>
+        <p class="hint">The token is stored only in this browser and is sent only to api.github.com. With just <b>Gists: Read &amp; write</b> it can read and write your gists — nothing else in your GitHub account. <b>Disconnect</b> removes it from this browser; to cancel it completely, delete it at github.com/settings/tokens. / 令牌只保存在本浏览器，只发送给 api.github.com；断开连接会从本浏览器删除令牌，如需彻底作废，请在 GitHub 令牌设置中删除。</p>
       </div>
       <div id="syncConnected" class="hidden">
         <p>Connected as <b id="syncUser">—</b>. Gist: <code id="syncGistId">—</code></p>
@@ -641,8 +645,8 @@
 <script src="quiz-core.js?v=565fe886"></script>
 <script src="quiz-store.js?v=bdf2fedc"></script>
 <script src="chat-links.js?v=109b66da"></script>
-<script src="learning-merge.js?v=861b1995"></script>
-<script src="app.js?v=d44212ba"></script>
+<script src="learning-merge.js?v=f59c3548"></script>
+<script src="app.js?v=8683f042"></script>
 <script src="storage-meter.js?v=554358d1"></script>
 <script src="books/catalog.js"></script>
 <script src="book-repository.js?v=2cf7afb6"></script>
@@ -652,7 +656,7 @@
 <script src="materials-view.js?v=afa60aaa"></script>
 <script src="article-import-core.js?v=5c90e752"></script>
 <script src="article-import.js?v=b533ba58"></script>
-<script src="ai-news.js?v=7b43ecc0"></script>
+<script src="ai-news.js?v=7bf945ab"></script>
 <script src="local-ai.js?v=f3acd797"></script>
 <script src="local-ai-settings.js?v=59d7f126"></script>
 <script src="paragraph-reader.js?v=6b07c093"></script>

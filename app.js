@@ -1276,7 +1276,7 @@ function renderLibrary() {
       </div>
       <div>
         <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-        <div class="hint" style="text-align:center;margin-top:4px">Level ${w.level}/${MAX_LEVEL}</div>
+        <div class="hint" style="text-align:center;margin-top:4px">Level ${Number(w.level) || 0}/${MAX_LEVEL}</div>
       </div>
       <div class="item-actions">
         <button class="icon-btn" data-act="speak" title="Play">🔊</button>
@@ -1587,7 +1587,7 @@ function exportAnki() {
 // entries that are missing here come back (on every device), even when they had been deleted.
 function mergeBackup(current, parsed, now) {
   const texts = new Set((current.words || []).map(w => w.text.toLowerCase()));
-  const added = parsed.words.filter(w => {
+  const added = LearningMerge.cleanWords(parsed.words).filter(w => {
     const key = w.text.toLowerCase();
     if (texts.has(key)) return false;
     texts.add(key);
@@ -1716,7 +1716,8 @@ function applySyncCode() {
     if (!parsed || !Array.isArray(parsed.words)) throw new Error('bad');
     if (!confirm(`Replace local data with ${parsed.words.length} words from sync code?`)) return;
     const previous = state;
-    state = replaceState(previous, Object.assign(defaultState(), parsed), new Date().toISOString());
+    const incoming = { ...parsed, words: LearningMerge.cleanWords(parsed.words) };
+    state = replaceState(previous, Object.assign(defaultState(), incoming), new Date().toISOString());
     try {
       saveState();
     } catch (e) {

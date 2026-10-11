@@ -209,7 +209,7 @@ async function fetchGithubAI() {
 }
 
 // ----- Source: BBC Learning English, 6 Minute English (a new episode each week) -----
-// Episodes from the last 10 days, each with its MP3 so the Reader can play it next to the transcript.
+// Episodes from the last 30 days, each with its MP3 so the Reader can play it next to the transcript.
 async function fetchBBCSixMinute() {
   const episodes = parseEpisodeList(await fetchText(BBC_LIST_URL));
   return Promise.all(episodes.map(async episode => {
@@ -247,7 +247,7 @@ async function main() {
   // Fallback: if a source returns empty, retain previous content so the UI never goes blank
   const keepIfEmpty = (current, prevList) => current.length > 0 ? current : (prevList || []);
 
-  // BBC: only the last 10 days, so an empty list is a real answer (e.g. a break between series);
+  // BBC: only the last 30 days, so an empty list is a real answer (e.g. a break between series);
   // the previous list is kept only when the page could not be read
   let bbc;
   try {

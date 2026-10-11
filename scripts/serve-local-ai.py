@@ -67,7 +67,12 @@ class LocalAIHandler(SimpleHTTPRequestHandler):
 
     def safe_static_path(self):
         relative = unquote(urlsplit(self.path).path).lstrip('/')
-        path = (ROOT / relative).resolve()
+        if '\0' in relative:
+            return False
+        try:
+            path = (ROOT / relative).resolve()
+        except (OSError, ValueError):
+            return False
         return (not any(part.startswith('.') for part in Path(relative).parts)
                 and path.is_relative_to(ROOT))
 

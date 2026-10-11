@@ -4,9 +4,19 @@
 
 const DEFAULT_URL = 'http://localhost:8000/';
 
+// The selected text travels in the link, so only https (or this computer) is allowed
+function isTrainerUrl(value) {
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' || (url.protocol === 'http:' && ['localhost', '127.0.0.1'].includes(url.hostname));
+  } catch {
+    return false;
+  }
+}
+
 async function getTrainerUrl() {
   const { trainerUrl } = await chrome.storage.sync.get('trainerUrl');
-  return trainerUrl || DEFAULT_URL;
+  return isTrainerUrl(trainerUrl) ? trainerUrl : DEFAULT_URL;
 }
 
 chrome.runtime.onInstalled.addListener(() => {

@@ -67,3 +67,13 @@ test('damaged or hostile keys from another device are ignored', () => {
   const words = M.mergeWords({ words: [] }, remote);
   assert.deepEqual(words, { words: [{ text: 'no id' }], deletedWords: {} }, 'A word without an id (old backups) is kept; null is dropped');
 });
+
+test('word fields from a backup, Sync Code or another device are cleaned, so they cannot carry HTML into the page', () => {
+  const hostile = { id: 'w1', text: 'walk', level: '<img src=x onerror=alert(1)>', interval: 'x', ease: 2.5, rightCount: 3, wrongCount: null,
+    nextReview: Infinity, tags: 'not a list', examples: [{ en: 'We walk.', cn: 5 }, 'junk'] };
+  const [clean] = M.cleanWords([hostile]);
+  assert.deepEqual(clean, { id: 'w1', text: 'walk', ease: 2.5, rightCount: 3, tags: [], examples: [{ en: 'We walk.', cn: '' }] });
+  const fine = { ...word('w2', '2026-10-01T00:00:00Z'), level: 2, tags: ['IELTS'], examples: [{ en: 'Go.', cn: '走。' }] };
+  assert.equal(M.cleanWords([fine])[0], fine, 'A clean word is kept as it is');
+  assert.equal(M.mergeWords({ words: [] }, { words: [hostile] }).words[0].level, undefined, 'A sync cleans the words too');
+});

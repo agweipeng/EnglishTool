@@ -85,6 +85,11 @@ class LocalServerTests(unittest.TestCase):
         self.assertEqual(self.upstream.request.full_url, 'http://127.0.0.1:1234/v1/models')
         self.assertEqual(self.upstream.request.get_header('Authorization'), 'Bearer test-token')
 
+    def test_odd_static_paths_get_404_not_a_server_error(self):
+        for path in ('/%00', '/index.html%00.js', '/..%2f..%2fetc%2fpasswd', '/.git/config'):
+            status, _ = self.request(path)
+            self.assertEqual(status, 404, path)
+
     def test_chat_payload_is_whitelisted(self):
         status, _ = self.request('/local-ai/chat', {'model':'test-model', 'messages':[{'role':'user','content':'test'}], 'tools':[{}], 'url':'https://example.com'})
         self.assertEqual(status, 200)

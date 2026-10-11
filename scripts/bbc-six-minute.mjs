@@ -5,7 +5,7 @@
 export const LIST_URL = 'https://www.bbc.co.uk/learningenglish/english/features/6-minute-english';
 const SITE = 'https://www.bbc.co.uk';
 const DAY_MS = 86400000;
-export const RECENT_DAYS = 10;
+export const RECENT_DAYS = 30;
 
 const EPISODE_CARD = /<h2[^>]*>\s*<a\s[^>]*?href="(\/learningenglish\/english\/features\/6-minute-english_\d{4}\/ep-(\d{2})(\d{2})(\d{2}))"[^>]*>([\s\S]*?)<\/a>\s*<\/h2>([\s\S]*?)(?=<h2[\s>]|$)/g;
 const AUDIO_LINK = /href="(https:\/\/downloads\.bbc\.co\.uk\/learningenglish\/[^"]+\.mp3)"/;

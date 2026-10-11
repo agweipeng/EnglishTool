@@ -73,7 +73,7 @@ function renderBBCEpisodes(list) {
     .filter(item => item.title && item.url);
   episodes.forEach((item, index) => aiNewsItems.set(`bbc:${index}`, { ...item, type: 'conversation' }));
   document.getElementById('newsBBC').innerHTML = episodes.length ? episodes.map((item, index) => episodeCard(item, `bbc:${index}`)).join('')
-    : '<p class="hint">No episodes in the last 10 days. / 最近 10 天没有新节目。</p>';
+    : '<p class="hint">No episodes in the last 30 days. / 最近 30 天没有新节目。</p>';
 }
 
 function episodeCard(item, key) {
