@@ -16,6 +16,26 @@
   // Words from old backups may have no id; those are matched by their text
   const wordKey = word => (isId(word.id) ? `id:${word.id}` : `text:${word.text.toLowerCase()}`);
 
+  // Words from a backup, a Sync Code or another device are data, not trusted: numbers must be numbers and
+  // lists must hold text, so nothing odd can reach the page. A word that is already clean is returned as it is.
+  const NUMBER_FIELDS = ['level', 'interval', 'ease', 'rightCount', 'wrongCount', 'nextReview'];
+  const asText = value => (typeof value === 'string' ? value : '');
+  function cleanWord(word) {
+    const badNumbers = NUMBER_FIELDS.filter(key => key in word && !Number.isFinite(word[key]));
+    const badTags = 'tags' in word && !(Array.isArray(word.tags) && word.tags.every(tag => typeof tag === 'string'));
+    const badExamples = 'examples' in word && !(Array.isArray(word.examples)
+      && word.examples.every(ex => ex && typeof ex === 'object' && typeof ex.en === 'string' && typeof ex.cn === 'string'));
+    if (!badNumbers.length && !badTags && !badExamples) return word;
+    const clean = Object.fromEntries(Object.entries(word).filter(([key]) => !badNumbers.includes(key)));
+    if (badTags) clean.tags = list(word.tags).filter(tag => typeof tag === 'string');
+    if (badExamples) {
+      clean.examples = list(word.examples).filter(ex => ex && typeof ex === 'object')
+        .map(ex => ({ ...ex, en: asText(ex.en), cn: asText(ex.cn) }));
+    }
+    return clean;
+  }
+  const cleanWords = words => list(words).filter(isWord).map(cleanWord);
+
   // { id: deletedAt }, keeping the latest deletion of each word
   function mergeDeletions(...logs) {
     const latest = new Map();
@@ -31,8 +51,7 @@
   function mergeWords(local, remote) {
     const deletedWords = mergeDeletions(local.deletedWords, remote.deletedWords);
     const byKey = new Map();
-    for (const word of [...list(local.words), ...list(remote.words)]) {
-      if (!isWord(word)) continue;
+    for (const word of cleanWords([...list(local.words), ...list(remote.words)])) {
       const key = wordKey(word);
       const current = byKey.get(key);
       if (!current || wordEditTs(word) > wordEditTs(current)) byKey.set(key, word);
@@ -96,7 +115,7 @@
     return { journal: byDate([...others(data.journal), ...saved]), journalLog: byDate([...others(data.journalLog), [date, now]]) };
   }
 
-  const api = { mergeWords, deleteWords, restoreWords, mergeJournal, setJournalEntry };
+  const api = { mergeWords, deleteWords, restoreWords, mergeJournal, setJournalEntry, cleanWords };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.LearningMerge = api;
 })(typeof window !== 'undefined' ? window : globalThis);

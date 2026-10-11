@@ -13,11 +13,12 @@ const listPage = [
   '<a href="/learningenglish/english/features/6-minute-english">6 Minute English</a>',
   card('261008', 'Are people &amp; pets happier?', 'Do you have a pet?'),
   card('261001', 'Why does music move us?', 'What do you listen to?', 'standard'),
-  card('260924', 'An older episode', 'Too old for the list', 'standard'),
+  card('260924', 'A September episode', 'Still in the last 30 days', 'standard'),
+  card('260903', 'An older episode', 'Too old for the list', 'standard'),
   card('261001', 'Why does music move us?', 'What do you listen to?', 'standard'),
 ].join('\n');
 
-test('episodes from the last 10 days are listed newest first, with date, teaser and full link', async () => {
+test('episodes from the last 30 days are listed newest first, with date, teaser and full link', async () => {
   const { parseEpisodeList } = await core();
   const episodes = parseEpisodeList(listPage, new Date('2026-10-10T06:00:00Z'));
   assert.deepEqual(episodes, [
@@ -25,12 +26,15 @@ test('episodes from the last 10 days are listed newest first, with date, teaser 
       date: '2026-10-08', description: 'Do you have a pet?' },
     { title: 'Why does music move us?', url: 'https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-261001',
       date: '2026-10-01', description: 'What do you listen to?' },
+    { title: 'A September episode', url: 'https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-260924',
+      date: '2026-09-24', description: 'Still in the last 30 days' },
   ]);
 });
 
 test('the number of days can be changed, and a page without episodes gives an empty list', async () => {
   const { parseEpisodeList } = await core();
-  assert.equal(parseEpisodeList(listPage, new Date('2026-10-10T06:00:00Z'), 30).length, 3);
+  assert.equal(parseEpisodeList(listPage, new Date('2026-10-10T06:00:00Z'), 10).length, 2);
+  assert.equal(parseEpisodeList(listPage, new Date('2026-10-10T06:00:00Z'), 60).length, 4);
   assert.deepEqual(parseEpisodeList('<html>Sorry, something went wrong</html>', new Date('2026-10-10T06:00:00Z')), []);
 });
 

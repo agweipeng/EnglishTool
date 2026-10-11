@@ -12,6 +12,15 @@ export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/bin:/bin:/usr/sbin:/sbin:
 SLUG="${1:?usage: publish-digest.sh <slug> <title>}"
 TITLE="${2:?usage: publish-digest.sh <slug> <title>}"
 
+# The slug becomes a folder name: only lowercase letters, digits and dashes, so it can't leave digests/
+if [[ ! "$SLUG" =~ ^[a-z0-9][a-z0-9-]*$ ]]; then
+  echo "publish-digest.sh: invalid slug '$SLUG' (use a-z, 0-9 and -)" >&2
+  exit 1
+fi
+# Pages share the app's origin, so text from the digest generator must never become HTML
+html_escape() { python3 -c 'import sys,html;print(html.escape(sys.stdin.read()),end="")'; }
+TITLE_ESC="$(printf '%s' "$TITLE" | html_escape)"
+
 REPO="/Users/ronnieag/Documents/myagent/EnglishTool"
 PAGES_BASE="https://agweipeng.github.io/EnglishTool"
 DATE="$(date +%F)"
@@ -30,7 +39,7 @@ cat > "$DIGEST_FILE" <<HTML
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${TITLE} — ${DATE}</title>
+<title>${TITLE_ESC} — ${DATE}</title>
 <style>
   body{max-width:780px;margin:2em auto;padding:0 1em;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#222}
   h1{font-size:1.6em;margin:0 0 .25em}
@@ -42,7 +51,7 @@ cat > "$DIGEST_FILE" <<HTML
 </head>
 <body>
 <p><a href="../">← all digests</a></p>
-<h1>${TITLE}</h1>
+<h1>${TITLE_ESC}</h1>
 <div class="meta">${DATE}</div>
 <hr>
 <pre>${BODY_ESC}</pre>
@@ -79,7 +88,7 @@ HEAD
     [ -d "$d" ] || continue
     name="$(basename "$d")"
     if [ -f "$d/title.txt" ]; then
-      title="$(cat "$d/title.txt")"
+      title="$(html_escape < "$d/title.txt")"
     else
       title="$name"
     fi

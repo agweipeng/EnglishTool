@@ -85,7 +85,7 @@ test('BBC 6 Minute English episodes are listed with their date and teaser', () =
   assert.match(bbc, /🎧/, 'Marked as having audio');
   h.sandbox.data = news;
   h.run('renderAINews(data)');
-  assert.match(h.element('newsBBC').innerHTML, /No episodes in the last 10 days/);
+  assert.match(h.element('newsBBC').innerHTML, /No episodes in the last 30 days/);
 });
 
 test('importing an episode opens it as a conversation with its audio', () => {
