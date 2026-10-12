@@ -6,7 +6,7 @@
    - Conversation role-play prompt for Claude or ChatGPT
    Depends on text-core.js (TextCore) and app.js globals:
    state, saveState, speak, toast, escapeHTML, ratingButtons,
-   attachRating, renderSpellingCard, renderMeaningCard, isLeech,
+   attachRating, renderSpellingCard, renderMeaningCard, isLeech, saveOrRollback,
    newWordEntry, lookupWordFields, findWordByText, MAX_EXAMPLES.
    ============================================================ */
 
@@ -190,13 +190,19 @@ async function addPhraseCard(phrase, sourceId, btn) {
     btn.textContent = `✓ ${phrase}`;
     // Re-check: it may have been added while the lookups were running
     if (findWordByText(phrase)) { toast(`"${phrase}" is already in your library`); return; }
-    state.words.push(newWordEntry({
+    const previous = state.words;
+    state.words = [...previous, newWordEntry({
       text: phrase,
       ...fields,
       examples: [...sourceExamples, ...fields.examples].slice(0, MAX_EXAMPLES),
       tags: ['phrase'],
-    }));
-    saveState();
+    })];
+    // Not saved (storage full): the phrase is taken back out and the button can be used again
+    if (!saveOrRollback(() => { state.words = previous; })) {
+      btn.textContent = `＋ ${phrase}`;
+      btn.disabled = false;
+      return;
+    }
     toast(fields.defCN
       ? `✓ Added phrase "${phrase}"`
       : `Added "${phrase}", but the translation failed — add its meaning in the Library`, 3500);

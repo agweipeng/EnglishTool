@@ -86,6 +86,29 @@ test('a reader-service reply becomes an article with its title, text and origina
   assert.equal(untitled.url, 'https://www.example.org/a', 'Only a safe original link is kept');
 });
 
+test('text longer than the limit is cut at the last paragraph break that fits', () => {
+  const text = ['First paragraph.', 'Second paragraph.', 'Third paragraph.'].join('\n\n');
+  assert.deepEqual(core.cutAtParagraph(text, 40), { text: 'First paragraph.\n\nSecond paragraph.', fullLength: text.length });
+  assert.deepEqual(core.cutAtParagraph(text, 1000), { text, fullLength: text.length }, 'Short text is kept whole');
+  assert.equal(core.cutAtParagraph('One very long line with no breaks at all', 20).text, 'One very long line',
+    'Without a paragraph break, it is cut at a space');
+  assert.equal(core.cutAtParagraph('x'.repeat(50), 20).text, 'x'.repeat(20));
+});
+
+test('an article longer than the Reader can show is cut to its first part, and says how long it was', () => {
+  const block = `${paragraph}\n\n`;
+  const content = block.repeat(Math.ceil(250000 / block.length));
+  const article = core.parseReaderReply({ code: 200, data: { title: 'Long', url: 'https://a.example/x', content } }, 'https://a.example/x');
+  assert.equal(core.MAX_READER_CHARS, 200000);
+  assert.ok(article.text.length <= core.MAX_READER_CHARS);
+  assert.ok(article.text.endsWith(paragraph), 'The cut falls between paragraphs');
+  assert.equal(article.fullLength, content.trim().length);
+  const smaller = core.parseReaderReply({ code: 200, data: { title: 'Long', content } }, 'https://a.example/x', 1000);
+  assert.ok(smaller.text.length <= 1000 && smaller.text.endsWith(paragraph), 'The caller can pass the Reader limit');
+  const short = core.parseReaderReply({ code: 200, data: { title: 'Short', content: paragraph } }, 'https://a.example/x');
+  assert.equal('fullLength' in short, false, 'A whole article has no cut note');
+});
+
 test('failed or nearly empty pages are refused with a clear reason', () => {
   assert.throws(() => core.parseReaderReply({ code: 422, data: null }, 'https://a.example/x'), /could not read/i);
   assert.throws(() => core.parseReaderReply(null, 'https://a.example/x'), /could not read/i);

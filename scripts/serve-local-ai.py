@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Serve EnglishTool and proxy Ollama/LM Studio model and chat APIs on loopback."""
 import argparse
+import http.client
 import json
 import os
 import select
@@ -17,6 +18,26 @@ MAX_BODY = 100000
 MAX_REPLY = 1000000
 CHAT_DEADLINE = 300   # seconds for a whole answer
 READ_TIMEOUT = 120    # seconds without any new output from the model
+CLIENT_TIMEOUT = 30   # seconds a browser connection may sit idle, e.g. a body that never arrives
+
+# Only the app itself is served. Tooling folders, the browser extension and personal
+# backups (Settings -> Export JSON saves english-trainer-*.json) stay private.
+SERVED_EXTENSIONS = {'.html', '.js', '.css', '.json', '.svg', '.png', '.jpg', '.jpeg', '.webp',
+                     '.ico', '.webmanifest', '.txt', '.md', '.mp3'}
+PRIVATE_FOLDERS = {'scripts', 'tests', 'node_modules', 'docs', 'extension'}
+ROOT_JSON_FILES = {'news.json'}   # the only top-level data file the app fetches
+
+
+def is_app_file(relative):
+    """True for files the app needs: pages, scripts, styles, news.json, books/ and digests/."""
+    parts = [part.lower() for part in Path(relative).parts]   # macOS file names ignore case
+    if not parts:
+        return True   # the site root serves index.html
+    if parts[0] in PRIVATE_FOLDERS:
+        return False
+    if len(parts) == 1 and parts[0].endswith('.json') and parts[0] not in ROOT_JSON_FILES:
+        return False
+    return (ROOT / relative).is_dir() or Path(parts[-1]).suffix in SERVED_EXTENSIONS
 
 
 class ClientDisconnected(Exception):
@@ -39,6 +60,9 @@ class NoRedirect(HTTPRedirectHandler):
 
 
 class LocalAIHandler(SimpleHTTPRequestHandler):
+    # A client that stops sending (e.g. a short body) must not hold a server thread forever
+    timeout = CLIENT_TIMEOUT
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(ROOT), **kwargs)
 
@@ -74,7 +98,7 @@ class LocalAIHandler(SimpleHTTPRequestHandler):
         except (OSError, ValueError):
             return False
         return (not any(part.startswith('.') for part in Path(relative).parts)
-                and path.is_relative_to(ROOT))
+                and path.is_relative_to(ROOT) and is_app_file(relative))
 
     def do_GET(self):
         if not self.trusted_request():
@@ -208,7 +232,8 @@ class LocalAIHandler(SimpleHTTPRequestHandler):
             reason = getattr(error, 'reason', error)
             timed_out = isinstance(reason, (TimeoutError, socket.timeout))
             self.error_json(504 if timed_out else 503, 'timeout' if timed_out else 'unavailable')
-        except (ValueError, OSError):
+        except (ValueError, OSError, http.client.HTTPException):
+            # HTTPException: a garbled or cut-short answer, e.g. BadStatusLine or IncompleteRead
             self.error_json(502, 'invalid')
 
     def list_directory(self, path):

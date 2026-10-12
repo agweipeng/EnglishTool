@@ -46,7 +46,7 @@ const PICK_ORDER = ['NVDA', 'GOOGL', 'AAPL', 'META', 'GROK', 'SMH', 'QQQ', 'SPY'
 
 // A character reference outside Unicode becomes the replacement character instead of failing the whole feed
 const codePoint = n => (n >= 0 && n <= 0x10FFFF ? String.fromCodePoint(n) : '�');
-function decodeEntities(text) {
+export function decodeEntities(text) {
   return String(text || '')
     .replace(/&#(\d+);/g, (_, n) => codePoint(Number(n)))
     .replace(/&#x([0-9a-f]+);/gi, (_, h) => codePoint(parseInt(h, 16)))

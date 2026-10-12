@@ -17,8 +17,9 @@ const data = (words, known = []) => ({ words, deletedWords: {}, settings: { voic
 
 // A fake gist server: GET returns the stored file, PATCH replaces it. `gate` lets a test hold a GET open.
 function gistServer(initial) {
-  const server = { content: JSON.stringify(initial), gets: 0, patches: 0, active: 0, maxActive: 0, failGet: false, gate: null };
+  const server = { content: JSON.stringify(initial), gets: 0, patches: 0, active: 0, maxActive: 0, failGet: false, gate: null, urls: [] };
   server.fetch = async (url, options = {}) => {
+    server.urls.push(url);
     server.active++;
     server.maxActive = Math.max(server.maxActive, server.active);
     try {
@@ -154,18 +155,59 @@ test('disconnecting during a sync stays disconnected when the sync finishes', as
   assert.equal(h.memory.has('englishTrainerSync_v1'), false, 'The token is not saved again');
 });
 
-// A GitHub API stand-in for connecting: the user check passes, the gist list answers with `listStatus`
-function connectServer({ listStatus = 200, offline = false } = {}) {
+test('when the merged data cannot be stored (storage full), the sync reports an error and pushes nothing', async () => {
+  const server = gistServer(data([word('w2', 'phone word', '2026-10-09T02:00:00Z')]));
+  const h = harness(data([word('w1', 'mac word', '2026-10-09T01:00:00Z')]), server);
+  h.context.localStorage.setItem = (key, value) => {
+    if (key === 'englishTrainerData_v1') { const error = new Error('full'); error.name = 'QuotaExceededError'; throw error; }
+    h.memory.set(key, value);
+  };
+  assert.equal(await h.run('syncNow()'), false);
+  assert.equal(server.patches, 0, 'Nothing this device could not keep is pushed');
+  assert.deepEqual(Array.from(h.context.state.words, w => w.text), ['mac word'], 'This device keeps what it has stored');
+});
+
+test('connecting to another gist while a sync runs syncs the new gist once the old sync stops', async () => {
+  const server = gistServer(data([]));
+  let release;
+  server.gate = new Promise(resolve => { release = resolve; });
+  const h = harness(data([word('w1', 'first', '2026-10-09T01:00:00Z')]), server);
+  const first = h.run('syncNow()');
+  await new Promise(resolve => setImmediate(resolve));
+  h.memory.set('englishTrainerSync_v1', JSON.stringify({ token: 't2', gistId: 'g2' }));
+  const second = h.run('syncNow()');
+  server.gate = null;
+  release();
+  assert.equal(await first, false, 'The old sync stops');
+  assert.equal(await second, true);
+  assert.ok(server.urls.some(url => url.endsWith('/gists/g2')), 'The new gist is read and synced');
+});
+
+// A GitHub API stand-in for connecting: the user check passes, the gist list answers with `listStatus`;
+// `failRead` makes reading the gist fail, so the first sync after connecting fails
+function connectServer({ listStatus = 200, offline = false, failRead = false } = {}) {
   const server = { posts: 0 };
   server.fetch = async (url, options = {}) => {
     if (offline) throw new TypeError('Failed to fetch');
     if (url.endsWith('/user')) return { ok: true, json: async () => ({ login: 'me' }) };
     if (options.method === 'POST') { server.posts++; return { ok: true, json: async () => ({ id: 'new' }) }; }
     if (url.includes('/gists?')) return { ok: listStatus === 200, status: listStatus, json: async () => [] };
+    if (failRead && (options.method || 'GET') === 'GET') return { ok: false, status: 500 };
     return { ok: true, json: async () => ({ files: {} }) };
   };
   return server;
 }
+
+test('connecting says whether the first sync worked', async () => {
+  const ok = harness(data([]), connectServer());
+  ok.memory.delete('englishTrainerSync_v1');
+  assert.deepEqual({ ...(await ok.run('connectSync("token")')) }, { ok: true, user: 'me', gistId: 'new', synced: true });
+  const failing = harness(data([]), connectServer({ failRead: true }));
+  failing.memory.delete('englishTrainerSync_v1');
+  const result = await failing.run('connectSync("token")');
+  assert.equal(result.ok, true, 'Still connected');
+  assert.equal(result.synced, false, 'but the page can tell the user the first sync failed');
+});
 
 test('connecting never creates a second gist when the gist list cannot be read', async () => {
   const server = connectServer({ listStatus: 502 });

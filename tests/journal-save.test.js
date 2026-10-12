@@ -104,6 +104,16 @@ test('after a sync, a newer entry from another device shows on screen, but never
   assert.equal(h.element('journalText').value, 'Typing now');
 });
 
+test('a date the app cannot use (such as a five-digit year) falls back to today instead of losing the entry', () => {
+  const h = harness();
+  h.element('journalDate').value = '20260-10-10';
+  h.run('renderJournal()');
+  assert.equal(h.element('journalDate').value, '2026-10-10');
+  h.type('Saved under today');
+  h.run('commitJournal()');
+  assert.deepEqual({ ...h.context.state.journal }, { '2026-10-10': 'Saved under today' });
+});
+
 test('a delete that cannot be saved leaves the entry in place', () => {
   const h = harness({ journal: { '2026-10-10': 'Keep me' } });
   h.element('journalDate').value = '2026-10-10';

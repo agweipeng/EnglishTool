@@ -9,9 +9,9 @@
 
 import { writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { LIST_URL as BBC_LIST_URL, parseEpisodeList, parseEpisodeAudio } from './bbc-six-minute.mjs';
-import { buildMarkets, buildChina, keepRecentTopics } from './news-feeds.mjs';
+import { buildMarkets, buildChina, keepRecentTopics, decodeEntities } from './news-feeds.mjs';
 
 // Google News pages answer a normal browser; a short pause between its requests keeps the daily run polite
 const BROWSER_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
@@ -57,17 +57,9 @@ async function fetchJson(url, opts = {}) {
   }
 }
 
-function decodeHtmlEntities(s) {
-  return String(s || '')
-    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(+n))
-    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCharCode(parseInt(h, 16)))
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;|&apos;/g, "'")
-    .replace(/&nbsp;/g, ' ');
-}
+// Shared with the RSS reader: decodes &amp; last (so "&amp;lt;" stays "&lt;") and
+// handles characters above U+FFFF such as emoji
+export const decodeHtmlEntities = decodeEntities;
 
 function stripTags(s) {
   return decodeHtmlEntities(String(s || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim());
@@ -230,15 +222,38 @@ async function fetchBBCSixMinute() {
 }
 
 // ----- Orchestrator -----
+// { items } on success, { items: [], error } when the source could not be read
 async function safe(name, fn) {
   try {
-    const data = await fn();
-    console.log(`✓ ${name}: ${data.length} items`);
-    return data;
+    const items = await fn();
+    console.log(`✓ ${name}: ${items.length} items`);
+    return { items };
   } catch (e) {
     console.warn(`✗ ${name} failed: ${e.message}`);
-    return [];
+    return { items: [], error: e.message };
   }
+}
+
+// A GitHub Actions annotation, so a source that quietly serves old news shows up on the run's summary.
+// Newlines would end the annotation early, so the reason is kept on one line.
+export function staleWarning(name, reason) {
+  const oneLine = String(reason || 'unknown').replace(/\s+/g, ' ').trim();
+  return `::warning title=News source::${name} kept yesterday's items (${oneLine})`;
+}
+
+// Fallback: if a source returns empty, retain previous content so the UI never goes blank — and say so
+export function keepIfEmpty(name, result, prevList, warn = console.log) {
+  if (result.items.length > 0) return result.items;
+  warn(staleWarning(name, result.error || 'no items today'));
+  return prevList || [];
+}
+
+// Same news as yesterday keeps yesterday's timestamp, so news.json is byte-identical and the
+// workflow's "News unchanged" check skips the commit (and the Pages rebuild)
+export function withGeneratedAt(sources, previous, now = new Date()) {
+  const unchanged = typeof previous?.generatedAt === 'string'
+    && JSON.stringify(sources) === JSON.stringify(previous?.sources);
+  return { generatedAt: unchanged ? previous.generatedAt : now.toISOString(), sources };
 }
 
 // Yesterday's news.json. A damaged file is treated as no previous news, so the job
@@ -263,26 +278,15 @@ async function main() {
     safe('github', fetchGithubAI),
   ]);
 
-  // Fallback: if a source returns empty, retain previous content so the UI never goes blank
-  const keepIfEmpty = (current, prevList) => current.length > 0 ? current : (prevList || []);
-
   // US markets and China (scripts/news-feeds.mjs). Each feed that fails is skipped; a market topic that comes
   // back empty keeps yesterday's headlines while they are recent, and so does an empty China section.
   const feedFetch = (url, opts = {}) => fetchText(url, { ...opts, headers: { 'User-Agent': BROWSER_UA, ...opts.headers } });
-  let markets = [];
-  let china = [];
-  try {
-    markets = await buildMarkets(feedFetch, new Date(), { pauseMs: GOOGLE_PAUSE_MS });
-    console.log(`✓ markets: ${markets.map(t => `${t.key} ${t.items.length}`).join(', ')}`);
-  } catch (e) {
-    console.warn(`✗ markets failed: ${e.message}`);
+  const markets = await safe('markets', () => buildMarkets(feedFetch, new Date(), { pauseMs: GOOGLE_PAUSE_MS }));
+  if (markets.items.length) console.log(`  markets: ${markets.items.map(t => `${t.key} ${t.items.length}`).join(', ')}`);
+  for (const topic of markets.items.filter(t => t.items.length === 0)) {
+    console.log(staleWarning(`markets/${topic.key}`, 'no recent headlines today'));
   }
-  try {
-    china = await buildChina(feedFetch);
-    console.log(`✓ china: ${china.length} items`);
-  } catch (e) {
-    console.warn(`✗ china failed: ${e.message}`);
-  }
+  const china = await safe('china', () => buildChina(feedFetch));
 
   // BBC: only the last 30 days, so an empty list is a real answer (e.g. a break between series);
   // the previous list is kept only when the page could not be read, or showed no episodes at all
@@ -293,27 +297,30 @@ async function main() {
     console.log(`✓ bbc: ${bbc.length} items`);
   } catch (e) {
     console.warn(`✗ bbc failed: ${e.message}`);
+    console.log(staleWarning('bbc', e.message));
     bbc = previous?.sources?.bbc || [];
   }
 
-  const out = {
-    generatedAt: new Date().toISOString(),
-    sources: {
-      anthropic: keepIfEmpty(anthropic, previous?.sources?.anthropic),
-      openai: keepIfEmpty(openai, previous?.sources?.openai),
-      google: keepIfEmpty(google, previous?.sources?.google),
-      github: keepIfEmpty(github, previous?.sources?.github),
-      bbc,
-      markets: markets.length ? keepRecentTopics(markets, previous?.sources?.markets) : (previous?.sources?.markets || []),
-      china: keepIfEmpty(china, previous?.sources?.china),
-    },
-  };
+  const out = withGeneratedAt({
+    anthropic: keepIfEmpty('anthropic', anthropic, previous?.sources?.anthropic),
+    openai: keepIfEmpty('openai', openai, previous?.sources?.openai),
+    google: keepIfEmpty('google', google, previous?.sources?.google),
+    github: keepIfEmpty('github', github, previous?.sources?.github),
+    bbc,
+    markets: markets.items.length
+      ? keepRecentTopics(markets.items, previous?.sources?.markets)
+      : keepIfEmpty('markets', markets, previous?.sources?.markets),
+    china: keepIfEmpty('china', china, previous?.sources?.china),
+  }, previous);
 
   writeFileSync(OUT_PATH, JSON.stringify(out, null, 2));
   console.log(`Wrote ${OUT_PATH} (${Buffer.byteLength(JSON.stringify(out))} bytes)`);
 }
 
-main().catch(e => {
-  console.error('Fatal:', e);
-  process.exit(1);
-});
+// Run only as a script (`node scripts/fetch-news.mjs`), so tests can import the helpers above
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  main().catch(e => {
+    console.error('Fatal:', e);
+    process.exit(1);
+  });
+}
