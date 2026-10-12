@@ -17,6 +17,7 @@ test('the page has a Content-Security-Policy that only runs its own scripts', ()
   assert.ok(html.indexOf('Content-Security-Policy') < html.indexOf('<script'), 'The policy comes before any script');
   assert.doesNotMatch(html, /<script(?![^>]*\bsrc=)[^>]*>/, 'No inline <script> blocks');
   assert.doesNotMatch(html, /\son[a-z]+="/i, 'No inline event handlers');
+  assert.match(html, /<meta name="referrer" content="no-referrer"/, 'Other sites are not told which page asked');
 });
 
 test('every web service the app talks to is allowed by connect-src, and nothing else is', () => {

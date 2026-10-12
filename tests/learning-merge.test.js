@@ -134,3 +134,44 @@ test('after Reset All, progress from before the reset does not come back from an
   const later = { ...gist, streak: { current: 1, lastDay: '2026-10-06' } };
   assert.deepEqual(M.mergeProgress(reset, later).streak, { current: 1, lastDay: '2026-10-06' }, 'A streak started after the reset counts');
 });
+
+test('a review on one device and an edit on the other both survive a sync', () => {
+  const base = { id: 'w1', text: 'ubiquitous', defCN: '普遍的', level: 1, interval: 1, rightCount: 2, wrongCount: 0,
+    nextReview: 1, archivedAt: null, updatedAt: '2026-10-01T00:00:00Z', srsUpdatedAt: '2026-10-01T00:00:00Z' };
+  // A review moves only the progress time
+  const phone = { ...base, level: 2, interval: 6, rightCount: 3, nextReview: 999, srsUpdatedAt: '2026-10-09T10:00:00Z' };
+  // The laptop's edit keeps the time of its last review
+  const laptop = { ...base, defCN: '无处不在的', updatedAt: '2026-10-09T10:05:00Z' };
+  const forward = M.mergeWords({ words: [laptop] }, { words: [phone] }).words;
+  const backward = M.mergeWords({ words: [phone] }, { words: [laptop] }).words;
+  assert.deepEqual(forward, backward, 'Both devices end up with the same word');
+  assert.equal(forward[0].defCN, '无处不在的', 'The newer edit');
+  assert.equal(forward[0].level, 2, 'The newer review');
+  assert.equal(forward[0].nextReview, 999);
+  assert.equal(forward[0].updatedAt, '2026-10-09T10:05:00Z');
+});
+
+test('resetting a word’s progress wins over an older copy with more reviews', () => {
+  const reviewed = { id: 'w1', text: 'walk', level: 4, rightCount: 9, wrongCount: 1, updatedAt: '2026-10-01T00:00:00Z', srsUpdatedAt: '2026-10-01T00:00:00Z' };
+  const reset = { ...reviewed, level: 0, rightCount: 0, wrongCount: 0, updatedAt: '2026-10-05T00:00:00Z', srsUpdatedAt: '2026-10-05T00:00:00Z' };
+  const [merged] = M.mergeWords({ words: [reviewed] }, { words: [reset] }).words;
+  assert.equal(merged.level, 0);
+  assert.equal(merged.rightCount, 0);
+});
+
+test('an edit survives a review made later on another device that had not synced yet', () => {
+  const base = { id: 'w1', text: 'walk', defEN: 'old', level: 1, updatedAt: '2026-10-01T00:00:00Z', srsUpdatedAt: '2026-10-01T00:00:00Z' };
+  const edited = { ...base, defEN: 'new', updatedAt: '2026-10-09T10:00:00Z' };
+  const reviewed = { ...base, level: 2, srsUpdatedAt: '2026-10-09T10:05:00Z' };
+  for (const [a, b] of [[edited, reviewed], [reviewed, edited]]) {
+    const [merged] = M.mergeWords({ words: [a] }, { words: [b] }).words;
+    assert.equal(merged.defEN, 'new');
+    assert.equal(merged.level, 2);
+  }
+});
+
+test('a word reviewed after it was deleted elsewhere comes back, like one edited after', () => {
+  const w = { id: 'w1', text: 'walk', updatedAt: '2026-10-01T00:00:00Z', srsUpdatedAt: '2026-10-09T00:00:00Z' };
+  const merged = M.mergeWords({ words: [w] }, { words: [], deletedWords: { w1: '2026-10-05T00:00:00Z' } });
+  assert.deepEqual(merged.words.map(x => x.id), ['w1']);
+});

@@ -6,6 +6,8 @@
 <!-- Only this site's own scripts run, and the page only talks to the services it uses (sync, article reader,
      dictionaries, translation, Ollama on this computer). This keeps the Gist sync token safe even if a
      bad backup, sync code or article ever got HTML into the page. -->
+<!-- No page address is sent along with requests to other sites -->
+<meta name="referrer" content="no-referrer" />
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' https: blob:; connect-src 'self' https://api.github.com https://gist.githubusercontent.com https://r.jina.ai https://api.dictionaryapi.dev https://en.wiktionary.org https://api.mymemory.translated.net https://api.datamuse.com http://127.0.0.1:11434; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'" />
 <title>English Vocabulary & Listening Trainer</title>
 <link rel="stylesheet" href="style.css?v=e6842b43" />
@@ -660,23 +662,23 @@
 <script src="quiz-core.js?v=e561ceaf"></script>
 <script src="quiz-store.js?v=bdf2fedc"></script>
 <script src="chat-links.js?v=109b66da"></script>
-<script src="learning-merge.js?v=fe790228"></script>
-<script src="app.js?v=87d9e07a"></script>
+<script src="learning-merge.js?v=e8dad018"></script>
+<script src="app.js?v=b749ac38"></script>
 <script src="storage-meter.js?v=554358d1"></script>
 <script src="books/catalog.js"></script>
 <script src="book-repository.js?v=2cf7afb6"></script>
 <script src="paragraph-core.js?v=e526d1e9"></script>
 <script src="outside-click.js?v=f54e5ae6"></script>
-<script src="reader.js?v=91296ddc"></script>
+<script src="reader.js?v=7414c3ed"></script>
 <script src="materials-view.js?v=afa60aaa"></script>
-<script src="article-import-core.js?v=fddc30a5"></script>
+<script src="article-import-core.js?v=37d822aa"></script>
 <script src="article-import.js?v=127b489c"></script>
 <script src="ai-news.js?v=5570b94c"></script>
 <script src="local-ai.js?v=f3acd797"></script>
 <script src="local-ai-settings.js?v=59d7f126"></script>
 <script src="paragraph-reader.js?v=6b07c093"></script>
 <script src="analyses-view.js?v=789f2719"></script>
-<script src="quiz-view.js?v=2a6dd643"></script>
+<script src="quiz-view.js?v=60f02425"></script>
 <script src="practice-modes.js?v=beec9395"></script>
 </body>
 </html>

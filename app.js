@@ -54,14 +54,51 @@ function defaultState() {
   };
 }
 
+// Saved data or a Sync Code shaped like the app's data, whatever was in it: every known part has the type the
+// page expects (anything else gets its default), so odd data can't stop the app from starting
+// (Function declarations, not consts: loadState() runs while the page script is still starting)
+function isPlainObject(value) { return !!value && typeof value === 'object' && !Array.isArray(value); }
+function keepEntries(value, isOk) {
+  return isPlainObject(value) ? Object.fromEntries(Object.entries(value).filter(([key, item]) => isOk(item, key))) : {};
+}
+function normalizeState(data) {
+  const DATE_KEY_RE = /^\d{4}-\d{2}-\d{2}$/;
+  const base = defaultState();
+  if (!isPlainObject(data)) return base;
+  const settings = isPlainObject(data.settings) ? data.settings : {};
+  const streak = data.streak;
+  const isStreak = isPlainObject(streak) && Number.isInteger(streak.current) && streak.current >= 0
+    && (streak.lastDay === null || (typeof streak.lastDay === 'string' && DATE_KEY_RE.test(streak.lastDay)));
+  return {
+    ...data,
+    words: LearningMerge.cleanWords(data.words),
+    deletedWords: keepEntries(data.deletedWords, at => typeof at === 'string'),
+    settings: {
+      ...settings,
+      voiceURI: typeof settings.voiceURI === 'string' ? settings.voiceURI : null,
+      rate: Number.isFinite(settings.rate) && settings.rate > 0 ? settings.rate : base.settings.rate,
+      theme: settings.theme === 'dark' ? 'dark' : 'light',
+    },
+    activity: keepEntries(data.activity, (count, day) => DATE_KEY_RE.test(day) && Number.isFinite(count)),
+    streak: isStreak ? { current: streak.current, lastDay: streak.lastDay } : base.streak,
+    journal: keepEntries(data.journal, (text, day) => DATE_KEY_RE.test(day) && typeof text === 'string'),
+    journalLog: keepEntries(data.journalLog, at => typeof at === 'string'),
+    journalFeedback: keepEntries(data.journalFeedback, isPlainObject),
+    known: Array.isArray(data.known) ? data.known.filter(word => typeof word === 'string') : [],
+    knownLog: keepEntries(data.knownLog, isPlainObject),
+    analyses: Array.isArray(data.analyses) ? data.analyses : [],
+    materials: Array.isArray(data.materials) ? data.materials : [],
+    quizzes: Array.isArray(data.quizzes) ? data.quizzes : [],
+  };
+}
+
 function loadState() {
   let raw = null;
   try {
     raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return defaultState();
-    const loaded = Object.assign(defaultState(), JSON.parse(raw));
-    // A word saved with an odd field (e.g. by an older version or a past sync) must not break the page
-    return { ...loaded, words: LearningMerge.cleanWords(loaded.words) };
+    // A word or setting saved oddly (e.g. by an older version or a past sync) must not break the page
+    return normalizeState(JSON.parse(raw));
   } catch (e) {
     console.error('Failed to load state', e);
     // The next save would overwrite the unreadable data, so a copy is kept for recovery
@@ -107,16 +144,26 @@ function ghHeaders(token) {
     'X-GitHub-Api-Version': '2022-11-28',
   };
 }
+// An Error carrying GitHub's HTTP status, so syncErrorReason() can tell the user what to do
+function ghError(message, status) {
+  return Object.assign(new Error(`${message} (${status})`), { status });
+}
+// Gist ids are hex; anything else never goes into a request URL
+const isGistId = id => typeof id === 'string' && /^[0-9a-f]{1,64}$/i.test(id);
+function checkGistId(id) {
+  if (!isGistId(id)) throw new Error('The sync gist id is not valid — disconnect and connect again');
+}
 async function ghAuth(token) {
   const r = await fetch('https://api.github.com/user', { headers: ghHeaders(token) });
-  return r.ok ? await r.json() : null;
+  if (!r.ok) throw ghError('Could not sign in to GitHub', r.status);
+  return r.json();
 }
 async function ghFindGist(token) {
   const r = await fetch('https://api.github.com/gists?per_page=100', { headers: ghHeaders(token) });
   // A failed list must not look like "no gist yet", or connecting would create a second one
-  if (!r.ok) throw new Error(`Could not list your gists (${r.status})`);
+  if (!r.ok) throw ghError('Could not list your gists', r.status);
   const list = await r.json();
-  return list.find(g => g.files && g.files[GIST_FILE]) || null;
+  return (Array.isArray(list) ? list : []).find(g => g && g.files && g.files[GIST_FILE]) || null;
 }
 async function ghCreateGist(token, content) {
   const r = await fetch('https://api.github.com/gists', {
@@ -128,13 +175,11 @@ async function ghCreateGist(token, content) {
       files: { [GIST_FILE]: { content } },
     }),
   });
-  return r.ok ? await r.json() : null;
-}
-// An Error carrying GitHub's HTTP status, so syncErrorReason() can tell the user what to do
-function ghError(message, status) {
-  return Object.assign(new Error(`${message} (${status})`), { status });
+  if (!r.ok) throw ghError('Could not create the sync gist', r.status);
+  return r.json();
 }
 async function ghGetGist(token, id) {
+  checkGistId(id);
   // A failed read must stop the sync: treating it as "no remote data" would overwrite the other devices
   const r = await fetch(`https://api.github.com/gists/${id}`, { headers: ghHeaders(token) });
   if (!r.ok) throw ghError('Could not read the sync gist', r.status);
@@ -142,12 +187,16 @@ async function ghGetGist(token, id) {
   const file = data.files?.[GIST_FILE];
   if (!file) return null;
   if (!file.truncated) return file.content || null;
-  // The API cuts files over 1 MB short; the full text is at raw_url
-  const raw = await fetch(file.raw_url);
+  // The API cuts files over 1 MB short; the full text is at raw_url. Only GitHub's own file host, and never
+  // with the token, cookies or a referrer.
+  const rawUrl = (() => { try { return new URL(file.raw_url); } catch (e) { return null; } })();
+  if (!rawUrl || rawUrl.origin !== 'https://gist.githubusercontent.com') throw new Error('Unexpected sync file address');
+  const raw = await fetch(rawUrl.href, { credentials: 'omit', referrerPolicy: 'no-referrer' });
   if (!raw.ok) throw ghError('Could not read the full sync file', raw.status);
   return raw.text();
 }
 async function ghUpdateGist(token, id, content) {
+  checkGistId(id);
   const r = await fetch(`https://api.github.com/gists/${id}`, {
     method: 'PATCH',
     headers: ghHeaders(token),
@@ -264,19 +313,19 @@ async function connectSync(token) {
   setSyncStatus('syncing');
   try {
     const user = await ghAuth(t);
-    if (!user) { setSyncStatus('error'); return { error: 'Invalid token or insufficient scope' }; }
-    let gist = await ghFindGist(t);
-    if (!gist) {
-      gist = await ghCreateGist(t, JSON.stringify(state));
-      if (!gist) { setSyncStatus('error'); return { error: 'Failed to create gist' }; }
-    }
+    const gist = (await ghFindGist(t)) || (await ghCreateGist(t, JSON.stringify(state)));
+    checkGistId(gist?.id);
     saveSyncConfig({ token: t, gistId: gist.id, user: user.login, lastSyncedAt: Date.now() });
+    lastSyncError = '';
     const synced = await syncNow();
     return { ok: true, user: user.login, gistId: gist.id, synced };
   } catch (e) {
     console.error('Gist connect failed', e);
-    setSyncStatus('error');
-    return { error: 'Could not reach GitHub — check your connection and try again' };
+    // The dot goes back to what it showed before (hidden when nothing is connected)
+    setSyncStatus(currentSyncStatus());
+    // A token that can sign in but not see gists gets 404 from the gist list
+    const reason = e?.status === 404 ? 'the token cannot use your gists — give it Gists: Read & write' : syncErrorReason(e);
+    return { error: `Could not connect — ${reason}` };
   }
 }
 
@@ -285,29 +334,34 @@ async function connectSync(token) {
 async function pullMergePush(cfg) {
   const remoteJson = await ghGetGist(cfg.token, cfg.gistId);
   let remoteChanged = false;
-  let storageFull = false;
   let remote = null;
   try { remote = remoteJson ? JSON.parse(remoteJson) : null; } catch (e) { /* corrupt remote, will be overwritten by push */ }
   if (remote) {
     const before = JSON.stringify(state);
     const merged = mergeStates(state, remote);
-    const after = JSON.stringify(merged);
-    if (after !== before) {
-      // Direct write, no re-push. When storage is full the merge still goes up: it holds everything from
-      // both sides, so GitHub loses nothing, and this device keeps it in memory until there is room.
-      try {
-        localStorage.setItem(STORAGE_KEY, after);
-      } catch (e) {
-        if (e?.name !== 'QuotaExceededError') throw e;
-        storageFull = true;
-      }
+    if (JSON.stringify(merged) !== before) {
       state = merged;
       remoteChanged = true;
     }
   }
+  // Direct write, no re-push. When storage is full the merge still goes up: it holds everything from both
+  // sides, so GitHub loses nothing, and this device keeps it in memory and tries again on every sync.
+  if (remoteChanged || mergeNotStored) mergeNotStored = !storeSyncedState();
   const content = JSON.stringify(state);
   if (content !== remoteJson) await ghUpdateGist(cfg.token, cfg.gistId, content);
-  return { remoteChanged, storageFull };
+  return { remoteChanged, storageFull: mergeNotStored };
+}
+
+// True when this device could not store what a sync brought in (storage full)
+let mergeNotStored = false;
+function storeSyncedState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    return true;
+  } catch (e) {
+    if (e?.name !== 'QuotaExceededError') throw e;
+    return false;
+  }
 }
 
 // Only one sync runs at a time. A save during a sync asks for one more round afterwards,
@@ -360,6 +414,12 @@ async function syncNow() {
   syncRunConfig = cfg;
   syncRun = runSyncRounds(cfg).finally(() => { syncRun = null; });
   return syncRun;
+}
+
+// What the sync dot should show when nothing new happened
+function currentSyncStatus() {
+  if (!isSyncConnected()) return 'hidden';
+  return syncRun ? 'syncing' : lastSyncError ? 'error' : 'ok';
 }
 
 function disconnectSync() {
@@ -473,8 +533,17 @@ function recordReview() {
     state.streak.current = (diffDays === 1) ? state.streak.current + 1 : 1;
     state.streak.lastDay = t;
   }
-  document.getElementById('streakBadge').textContent = `🔥 ${state.streak.current}`;
+  document.getElementById('streakBadge').textContent = `🔥 ${displayStreak()}`;
   saveState();
+}
+
+// The streak as it stands today: it is only counted up on a review, so after a missed day it shows 0
+// until the next review starts a new one
+function displayStreak() {
+  const { current, lastDay } = state.streak || {};
+  if (!lastDay || !Number.isInteger(current)) return 0;
+  const days = Math.round((new Date(todayKey()) - new Date(lastDay)) / DAY_MS);
+  return days <= 1 ? current : 0;
 }
 
 // ============ SRS Engine (modified SM-2 + Leitner) ============
@@ -495,7 +564,7 @@ function applyRating(word, rating) {
   // "mastered" in one day. Forgetting it still counts.
   if (rating !== 'again' && !isDue(word)) {
     word.rightCount += 1;
-    word.updatedAt = new Date().toISOString();
+    word.srsUpdatedAt = new Date().toISOString();
     return;
   }
 
@@ -524,7 +593,9 @@ function applyRating(word, rating) {
       break;
   }
   word.nextReview = nowMs() + word.interval * DAY_MS;
-  word.updatedAt = new Date().toISOString();
+  // Reviews move only the progress time: `updatedAt` is the time of the last edit of the word's text, so an
+  // edit on one device and a review on another both survive a sync (LearningMerge.mergeWords)
+  word.srsUpdatedAt = new Date().toISOString();
 
   if (word.level >= MAX_LEVEL) {
     word.level = MAX_LEVEL;
@@ -573,7 +644,7 @@ function showView(requested) {
   if (view) view.classList.add('active');
   if (tab) tab.classList.add('active');
 
-  if (name === 'learn') { renderStats(); startSession(); }
+  if (name === 'learn') { renderStats(); if (!isSessionInProgress()) startSession(); }
   if (name === 'library') {
     renderLibrary();
     if (requested === 'add' || !state.words.length) openAddWordPanel(requested === 'add');
@@ -782,15 +853,17 @@ function learningWordSet() {
   return new Set(state.words.filter(w => !w.archivedAt).map(w => w.text.toLowerCase()));
 }
 
+// True when saved; when storage is full the change is undone and the user is told
 function setKnown(words, isKnown) {
+  const previous = { known: state.known, knownLog: state.knownLog };
   const next = TextCore.applyKnownChange(state, words, isKnown, new Date().toISOString());
   state.known = next.known;
   state.knownLog = next.knownLog;
-  saveState();
+  return saveOrRollback(() => { state.known = previous.known; state.knownLog = previous.knownLog; });
 }
 
-function markKnown(words) { setKnown(words, true); }
-function unmarkKnown(words) { setKnown(words, false); }
+function markKnown(words) { return setKnown(words, true); }
+function unmarkKnown(words) { return setKnown(words, false); }
 
 // Escaped sentence with the word (any inflected form) wrapped by `wrap(matchText)`;
 // null when the sentence doesn't contain the word.
@@ -818,7 +891,7 @@ function newWordEntry(fields) {
     ...fields,
     level: 0, ease: DEFAULT_EASE, interval: 1,
     nextReview: nowMs(), rightCount: 0, wrongCount: 0,
-    createdAt: nowIso, updatedAt: nowIso, archivedAt: null,
+    createdAt: nowIso, updatedAt: nowIso, srsUpdatedAt: nowIso, archivedAt: null,
   };
 }
 
@@ -938,7 +1011,11 @@ async function translateDefOnly() {
   document.getElementById('defCN').value = cn;
 }
 
+// The word opened with Edit in Words, so saving updates that word even when its spelling changed
+let editingWordId = null;
+
 function clearForm() {
+  editingWordId = null;
   ['newWord', 'newPhonetic', 'defEN', 'defCN', 'newTags'].forEach(id => {
     document.getElementById(id).value = '';
   });
@@ -954,9 +1031,13 @@ function saveWord() {
   const text = document.getElementById('newWord').value.trim();
   if (!text) { toast('Word is required'); return; }
   const enrichment = collectEnrichment();
-  const existing = state.words.find(w => w.text.toLowerCase() === text.toLowerCase());
-  if (existing && !confirm(`"${text}" already exists. Update it?`)) return;
+  const editing = state.words.find(w => w.id === editingWordId) || null;
+  const sameText = state.words.find(w => w !== editing && w.text.toLowerCase() === text.toLowerCase()) || null;
+  // Another word already has this spelling: that one is updated (the one being edited stays as it is)
+  if (sameText && !confirm(`"${text}" already exists. Update it?`)) return;
+  const existing = sameText || editing;
   const fields = {
+    ...(existing === editing && editing ? { text } : {}),
     phonetic: document.getElementById('newPhonetic').value.trim(),
     defEN: document.getElementById('defEN').value.trim(),
     defCN: document.getElementById('defCN').value.trim(),
@@ -966,7 +1047,9 @@ function saveWord() {
   };
   const previous = state.words;
   state.words = existing
-    ? state.words.map(w => (w === existing ? { ...w, ...fields, updatedAt: new Date().toISOString() } : w))
+    // An edit keeps the time of the word's last review, so a review on another device still counts
+    ? state.words.map(w => (w === existing
+      ? { ...w, ...fields, srsUpdatedAt: w.srsUpdatedAt || w.updatedAt || w.createdAt, updatedAt: new Date().toISOString() } : w))
     : [...state.words, newWordEntry({ text, ...fields })];
   try {
     saveState();
@@ -1083,6 +1166,22 @@ function startSession(options) {
   card.classList.remove('hidden');
   session = { queue: words, index: 0, total: words.length, again: new Set() };
   showCard();
+}
+
+// A session with cards left; coming back to the Learn tab continues it instead of starting over
+function isSessionInProgress() {
+  if (!session || session.index >= session.queue.length) return false;
+  // After Reset All or a Sync Code the words may be gone
+  const current = session.queue[session.index];
+  return state.words.some(w => w.id === current.id);
+}
+
+// 1–4 rate the card on the Learn tab. Not while typing or choosing, and not with Ctrl/Cmd/Alt
+// (Cmd+3 switches browser tabs) or a held-down key.
+function isLearnShortcut(e) {
+  if (e.ctrlKey || e.metaKey || e.altKey || e.repeat) return false;
+  if (['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target?.tagName) || e.target?.isContentEditable) return false;
+  return document.getElementById('view-learn').classList.contains('active');
 }
 
 function endSession() {
@@ -1442,14 +1541,16 @@ function handleLibAction(id, act) {
       family: w.family || [],
       collocations: w.collocations || [],
     });
+    editingWordId = w.id;
     toast('Editing — save to update');
     return;
   }
   if (act === 'reset') {
     if (!confirm(`Reset progress for "${w.text}"?`)) return;
     const previous = state.words;
+    const resetAt = new Date().toISOString();
     const fresh = { ...w, level: 0, interval: 1, ease: DEFAULT_EASE, rightCount: 0, wrongCount: 0,
-      nextReview: nowMs(), archivedAt: null, updatedAt: new Date().toISOString() };
+      nextReview: nowMs(), archivedAt: null, srsUpdatedAt: resetAt };
     state.words = previous.map(x => (x.id === id ? fresh : x));
     if (!saveOrRollback(() => { state.words = previous; })) return;
     renderLibrary(); toast('Reset');
@@ -1598,14 +1699,14 @@ function renderStats() {
   document.getElementById('statLearning').textContent = learning.length;
   document.getElementById('statArchived').textContent = archived.length;
   document.getElementById('statDue').textContent = due.length;
-  document.getElementById('statStreak').textContent = state.streak.current;
+  document.getElementById('statStreak').textContent = displayStreak();
   document.getElementById('statReviewed').textContent = state.activity[todayKey()] || 0;
   const leechEl = document.getElementById('statLeeches');
   if (leechEl) leechEl.textContent = leeches.length;
   const knownEl = document.getElementById('statKnown');
   if (knownEl) knownEl.textContent = knownWordSet().size;
   const summary = document.getElementById('learnProgressSummary');
-  if (summary) summary.textContent = `${due.length} due · 🔥 ${state.streak.current} · ${state.activity[todayKey()] || 0} reviewed today`;
+  if (summary) summary.textContent = `${due.length} due · 🔥 ${displayStreak()} · ${state.activity[todayKey()] || 0} reviewed today`;
   renderHeatmap();
   renderLevelChart();
 }
@@ -1708,13 +1809,18 @@ function exportJSON() {
   a.download = `english-trainer-${todayKey()}.json`;
   a.click();
 }
+// One CSV cell. Text is escaped because Anki reads the fields as HTML (only the line breaks added here are
+// markup), and a leading = + @ (or - before a non-letter) gets a ' so a spreadsheet never runs it as a formula.
+function ankiCell(value, isHTML = false) {
+  const text = String(value == null ? '' : value);
+  const safe = (isHTML ? text : escapeHTML(text)).replace(/^(?:[=+@\t\r]|-(?![a-z]))/i, "'$&");
+  return `"${safe.replace(/"/g, '""')}"`;
+}
 function exportAnki() {
   const rows = state.words.map(w => {
-    const front = w.text;
-    const back = [w.phonetic, w.defEN, w.defCN, (w.examples || []).map(e => `${e.en} | ${e.cn}`).join('<br>')]
-      .filter(Boolean).join('<br><br>');
-    return [front, back, (w.tags || []).join(' ')]
-      .map(s => `"${String(s).replace(/"/g, '""')}"`).join(',');
+    const examples = (w.examples || []).map(e => `${escapeHTML(e.en)} | ${escapeHTML(e.cn)}`).join('<br>');
+    const back = [w.phonetic, w.defEN, w.defCN].filter(Boolean).map(escapeHTML).concat(examples ? [examples] : []).join('<br><br>');
+    return [ankiCell(w.text), ankiCell(back, true), ankiCell((w.tags || []).join(' '))].join(',');
   });
   const csv = 'Front,Back,Tags\n' + rows.join('\n');
   const blob = new Blob([csv], { type: 'text/csv' });
@@ -1836,6 +1942,7 @@ function resetAll() {
   applyTheme();
   document.getElementById('streakBadge').textContent = `🔥 0`;
   toast('All data cleared');
+  session = null;
   showView('learn');
 }
 
@@ -1870,8 +1977,7 @@ function applySyncCode() {
     if (!parsed || !Array.isArray(parsed.words)) throw new Error('bad');
     if (!confirm(`Replace local data with ${parsed.words.length} words from sync code?`)) return;
     const previous = state;
-    const incoming = { ...parsed, words: LearningMerge.cleanWords(parsed.words) };
-    state = replaceState(previous, Object.assign(defaultState(), incoming), new Date().toISOString());
+    state = replaceState(previous, normalizeState(parsed), new Date().toISOString());
     try {
       saveState();
     } catch (e) {
@@ -1880,7 +1986,7 @@ function applySyncCode() {
       return;
     }
     applyTheme();
-    document.getElementById('streakBadge').textContent = `🔥 ${state.streak.current || 0}`;
+    document.getElementById('streakBadge').textContent = `🔥 ${displayStreak()}`;
     toast('Synced from code ✓');
     showView('library');
   } catch (e) {
@@ -1910,7 +2016,7 @@ function renderSyncUI() {
       errorText.textContent = lastSyncError ? `⚠️ Last sync problem: ${lastSyncError}` : '';
       errorText.classList.toggle('hidden', !lastSyncError);
     }
-    setSyncStatus(syncRun ? 'syncing' : lastSyncError ? 'error' : 'ok');
+    setSyncStatus(currentSyncStatus());
   } else {
     disc.classList.remove('hidden');
     conn.classList.add('hidden');
@@ -2313,7 +2419,7 @@ function init() {
   if (storageLoadProblem) {
     toast(`Your saved data could not be read, so the app started empty. A copy was kept in this browser (${STORAGE_KEY}_corrupt) for recovery.`, 10000);
   }
-  document.getElementById('streakBadge').textContent = `🔥 ${state.streak.current || 0}`;
+  document.getElementById('streakBadge').textContent = `🔥 ${displayStreak()}`;
   loadVoices();
 
   document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => showView(t.dataset.view)));
@@ -2433,14 +2539,13 @@ function init() {
   window.addEventListener('storage', event => {
     if (event.key !== STORAGE_KEY || !event.newValue || !onOtherTabSaved(event.newValue)) return;
     applyTheme();
-    document.getElementById('streakBadge').textContent = `🔥 ${state.streak.current || 0}`;
+    document.getElementById('streakBadge').textContent = `🔥 ${displayStreak()}`;
     refreshActiveView();
   });
 
   // Keyboard shortcuts in learn view (1=Again, 2=Hard, 3=Good, 4=Easy)
   document.addEventListener('keydown', e => {
-    if (!document.getElementById('view-learn').classList.contains('active')) return;
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (!isLearnShortcut(e)) return;
     const map = { '1': 'again', '2': 'hard', '3': 'good', '4': 'easy' };
     const r = map[e.key];
     if (r) {

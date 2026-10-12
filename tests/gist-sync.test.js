@@ -44,11 +44,11 @@ function gistServer(initial) {
 }
 
 function harness(localState, server) {
-  const memory = new Map([['englishTrainerSync_v1', JSON.stringify({ token: 't', gistId: 'g1' })]]);
+  const memory = new Map([['englishTrainerSync_v1', JSON.stringify({ token: 't', gistId: 'aa1' })]]);
   const timers = [];
   const calls = { refresh: 0 };
   const context = vm.createContext({
-    state: localState, TextCore, AnalysisStore, MaterialStore, JournalFeedbackStore, QuizStore, LearningMerge, JSON, console: { error() {} }, Date, Math, Map, Object, Array, Promise, Error,
+    state: localState, TextCore, AnalysisStore, MaterialStore, JournalFeedbackStore, QuizStore, LearningMerge, JSON, console: { error() {} }, Date, Math, Map, Object, Array, Promise, Error, URL,
     STORAGE_KEY: 'englishTrainerData_v1', SYNC_KEY: 'englishTrainerSync_v1', GIST_FILE: 'english-trainer-data.json', PUSH_DEBOUNCE_MS: 2500,
     localStorage: { getItem: k => memory.get(k) ?? null, setItem: (k, v) => memory.set(k, v), removeItem: k => memory.delete(k) },
     document: { getElementById: () => null },
@@ -210,13 +210,13 @@ test('connecting to another gist while a sync runs syncs the new gist once the o
   const h = harness(data([word('w1', 'first', '2026-10-09T01:00:00Z')]), server);
   const first = h.run('syncNow()');
   await new Promise(resolve => setImmediate(resolve));
-  h.memory.set('englishTrainerSync_v1', JSON.stringify({ token: 't2', gistId: 'g2' }));
+  h.memory.set('englishTrainerSync_v1', JSON.stringify({ token: 't2', gistId: 'bb2' }));
   const second = h.run('syncNow()');
   server.gate = null;
   release();
   assert.equal(await first, false, 'The old sync stops');
   assert.equal(await second, true);
-  assert.ok(server.urls.some(url => url.endsWith('/gists/g2')), 'The new gist is read and synced');
+  assert.ok(server.urls.some(url => url.endsWith('/gists/bb2')), 'The new gist is read and synced');
 });
 
 // A GitHub API stand-in for connecting: the user check passes, the gist list answers with `listStatus`;
@@ -226,7 +226,7 @@ function connectServer({ listStatus = 200, offline = false, failRead = false } =
   server.fetch = async (url, options = {}) => {
     if (offline) throw new TypeError('Failed to fetch');
     if (url.endsWith('/user')) return { ok: true, json: async () => ({ login: 'me' }) };
-    if (options.method === 'POST') { server.posts++; return { ok: true, json: async () => ({ id: 'new' }) }; }
+    if (options.method === 'POST') { server.posts++; return { ok: true, json: async () => ({ id: 'beef01' }) }; }
     if (url.includes('/gists?')) return { ok: listStatus === 200, status: listStatus, json: async () => [] };
     if (failRead && (options.method || 'GET') === 'GET') return { ok: false, status: 500 };
     return { ok: true, json: async () => ({ files: {} }) };
@@ -237,7 +237,7 @@ function connectServer({ listStatus = 200, offline = false, failRead = false } =
 test('connecting says whether the first sync worked', async () => {
   const ok = harness(data([]), connectServer());
   ok.memory.delete('englishTrainerSync_v1');
-  assert.deepEqual({ ...(await ok.run('connectSync("token")')) }, { ok: true, user: 'me', gistId: 'new', synced: true });
+  assert.deepEqual({ ...(await ok.run('connectSync("token")')) }, { ok: true, user: 'me', gistId: 'beef01', synced: true });
   const failing = harness(data([]), connectServer({ failRead: true }));
   failing.memory.delete('englishTrainerSync_v1');
   const result = await failing.run('connectSync("token")');
@@ -260,4 +260,63 @@ test('connecting while offline reports an error instead of failing silently', as
   h.memory.delete('englishTrainerSync_v1');
   const result = await h.run('connectSync("token")');
   assert.match(result.error, /GitHub/);
+});
+
+test('a token that cannot use gists is told so when connecting, and no sync dot is left behind', async () => {
+  const h = harness(data([]), connectServer({ listStatus: 404 }));
+  h.memory.delete('englishTrainerSync_v1');
+  const statuses = [];
+  h.run('setSyncStatus = s => STATUSES.push(s)', h.context.STATUSES = statuses);
+  const result = await h.run('connectSync("token")');
+  assert.match(result.error, /Gists: Read & write/);
+  assert.equal(statuses.at(-1), 'hidden');
+  const expired = harness(data([]), { fetch: async () => ({ ok: false, status: 401 }) });
+  expired.memory.delete('englishTrainerSync_v1');
+  assert.match((await expired.run('connectSync("token")')).error, /token expired or invalid/);
+});
+
+test('while storage stays full every sync keeps saying so, and the warning goes once the data is stored', async () => {
+  const server = gistServer(data([word('w2', 'phone word', '2026-10-09T02:00:00Z')]));
+  const h = harness(data([word('w1', 'mac word', '2026-10-09T01:00:00Z')]), server);
+  let full = true;
+  h.context.localStorage.setItem = (key, value) => {
+    if (key === 'englishTrainerData_v1' && full) { const error = new Error('full'); error.name = 'QuotaExceededError'; throw error; }
+    h.memory.set(key, value);
+  };
+  await h.run('syncNow()');
+  assert.equal(await h.run('syncNow()'), true);
+  assert.match(h.run('lastSyncError'), /storage is full/, 'Still not stored, so still a problem');
+  full = false;
+  await h.run('syncNow()');
+  assert.equal(h.run('lastSyncError'), '');
+  assert.match(h.memory.get('englishTrainerData_v1'), /phone word/, 'Stored once there was room');
+});
+
+test('a large sync file is only fetched from GitHub’s own file host, without the token', async () => {
+  const requests = [];
+  const truncated = rawUrl => async (url, options = {}) => {
+    requests.push({ url, options });
+    if (url.startsWith('https://api.github.com/')) {
+      return { ok: true, json: async () => ({ files: { 'english-trainer-data.json': { truncated: true, raw_url: rawUrl } } }) };
+    }
+    return { ok: true, text: async () => JSON.stringify(data([])) };
+  };
+  const evil = harness(data([]), { fetch: truncated('https://evil.example/steal') });
+  assert.equal(await evil.run('syncNow()'), false);
+  assert.ok(!requests.some(r => r.url.startsWith('https://evil.example')), 'Nothing is sent to another host');
+  requests.length = 0;
+  const good = harness(data([]), { fetch: truncated('https://gist.githubusercontent.com/me/aa1/raw/file.json') });
+  await good.run('syncNow()');
+  const raw = requests.find(r => r.url.startsWith('https://gist.githubusercontent.com/'));
+  assert.ok(raw, 'The real file host is used');
+  assert.equal(raw.options.headers, undefined, 'No token');
+  assert.equal(raw.options.credentials, 'omit');
+});
+
+test('a gist id that is not plain hex never goes into a request', async () => {
+  const server = gistServer(data([]));
+  const h = harness(data([]), server);
+  h.memory.set('englishTrainerSync_v1', JSON.stringify({ token: 't', gistId: '../user' }));
+  assert.equal(await h.run('syncNow()'), false);
+  assert.equal(server.urls.length, 0);
 });

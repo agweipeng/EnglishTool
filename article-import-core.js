@@ -29,8 +29,15 @@
     }
     url.username = '';
     url.password = '';
+    // The link goes to the reading service and is saved with the article: the #part, tracking tags and
+    // anything that looks like a key (a signed or private share link) are left out
+    if (!/^#[/!]/.test(url.hash)) url.hash = '';   // "#/article/1" is part of the address on some sites
+    [...new Set(url.searchParams.keys())].filter(isPrivateOrTrackingParam).forEach(name => url.searchParams.delete(name));
     return url.href;
   }
+  // Whole names only: many sites name the article with params like newsCode, articleKey or sid
+  const isPrivateOrTrackingParam = name =>
+    /^(utm_|mc_|x-amz-)|^(fbclid|gclid|msclkid|mc_eid)$|^((access|api|auth|id|refresh)_?)?token$|^api_?key$|^(sig|signature|auth|authorization|secret|password|sessionid)$/i.test(name);
 
   const readerRequestUrl = url => `${JINA_READER}${url}`;
 

@@ -695,7 +695,7 @@ async function learnFromReader(surface, sentence, btn) {
 function knowAllRemaining() {
   const words = reader.analysis.unknown.map(u => u.word);
   if (!confirm(`Mark ${words.length} remaining unknown words as known?`)) return;
-  markKnown(words);
+  if (!markKnown(words)) return;
   toast(`✓ ${words.length} words marked as known`);
   refreshReaderStatuses();
 }
@@ -710,8 +710,12 @@ function handleReaderAction(btn) {
     const sentence = btn.dataset.sentence !== undefined ? btn.dataset.sentence : firstSentenceFor(text);
     return learnFromReader(text, sentence, btn);
   }
-  if (act === 'know') { markKnown([text]); closeReaderPanel(); return refreshReaderStatuses(); }
-  if (act === 'unknow') { unmarkKnown(TextCore.relatedKnownWords(text, state.known)); closeReaderPanel(); return refreshReaderStatuses(); }
+  // A change that could not be saved leaves the card open, so nothing looks done that isn't
+  if (act === 'know') { if (markKnown([text])) { closeReaderPanel(); refreshReaderStatuses(); } return; }
+  if (act === 'unknow') {
+    if (unmarkKnown(TextCore.relatedKnownWords(text, state.known))) { closeReaderPanel(); refreshReaderStatuses(); }
+    return;
+  }
 }
 
 // ---------- Phrase selection (mouse drag or touch long-press) ----------

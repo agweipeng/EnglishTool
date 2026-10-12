@@ -12,6 +12,8 @@
   const own = (object, key) => !!object && typeof object === 'object' && Object.hasOwn(object, key);
 
   const wordEditTs = word => word.updatedAt || word.createdAt || '';
+  // The word's last change of any kind: an edit, or a review or reset (srsUpdatedAt)
+  const wordChangeTs = word => [wordEditTs(word), word.srsUpdatedAt || ''].sort().pop();
   const isWord = word => !!word && typeof word === 'object' && typeof word.text === 'string';
   // Words from old backups may have no id; those are matched by their text
   const wordKey = word => (isId(word.id) ? `id:${word.id}` : `text:${word.text.toLowerCase()}`);
@@ -20,7 +22,7 @@
   // must be text and lists must hold text, so nothing odd can reach the page or break it. A word that is
   // already clean is returned as it is.
   const NUMBER_FIELDS = ['level', 'interval', 'ease', 'rightCount', 'wrongCount', 'nextReview'];
-  const TEXT_FIELDS = ['phonetic', 'defEN', 'defCN', 'createdAt', 'updatedAt'];
+  const TEXT_FIELDS = ['phonetic', 'defEN', 'defCN', 'createdAt', 'updatedAt', 'srsUpdatedAt'];
   const LIST_FIELDS = ['tags', 'synonyms', 'antonyms', 'family', 'collocations'];
   const asText = value => (typeof value === 'string' ? value : '');
   const isTextList = value => Array.isArray(value) && value.every(item => typeof item === 'string');
@@ -68,6 +70,29 @@
     return [...byKey.values()];
   }
   const isNewer = (a, b) => wordEditTs(a) > wordEditTs(b);
+
+  // Two copies of the same word (same id): the text comes from the newer edit (`updatedAt`), the review progress
+  // from the later review or reset (`srsUpdatedAt`), so a review on one device and an edit on another both survive.
+  // Ties are broken by content, so every device keeps the same copy.
+  const PROGRESS_FIELDS = ['level', 'interval', 'ease', 'rightCount', 'wrongCount', 'nextReview', 'archivedAt', 'srsUpdatedAt'];
+  const progressTs = word => word.srsUpdatedAt || wordEditTs(word);
+  const pickBy = (a, b, ts) => (ts(a) !== ts(b) ? (ts(a) > ts(b) ? a : b)
+    : JSON.stringify(a) >= JSON.stringify(b) ? a : b);
+  function combineCopies(a, b) {
+    const content = pickBy(a, b, wordEditTs);
+    const progress = pickBy(a, b, progressTs);
+    if (content === progress) return content;
+    const text = Object.fromEntries(Object.entries(content).filter(([key]) => !PROGRESS_FIELDS.includes(key)));
+    return { ...text, ...Object.fromEntries(PROGRESS_FIELDS.filter(key => key in progress).map(key => [key, progress[key]])) };
+  }
+  function combineById(words) {
+    const byKey = new Map();
+    for (const word of words) {
+      const key = wordKey(word);
+      byKey.set(key, byKey.has(key) ? combineCopies(byKey.get(key), word) : word);
+    }
+    return [...byKey.values()];
+  }
   // Between two copies of the same word: more reviews (progress) first, then the newer edit, then the id,
   // so every device picks the same one
   const reviews = word => (word.rightCount || 0) + (word.wrongCount || 0);
@@ -81,13 +106,13 @@
   // recorded as deleted, so every device ends up with the same one.
   function mergeWords(local, remote) {
     const deletions = mergeDeletions(local.deletedWords, remote.deletedWords);
-    const isDeleted = word => isId(word.id) && own(deletions, word.id) && deletions[word.id] >= wordEditTs(word);
-    const live = bestBy(cleanWords([...list(local.words), ...list(remote.words)]), wordKey, isNewer).filter(word => !isDeleted(word));
+    const isDeleted = word => isId(word.id) && own(deletions, word.id) && deletions[word.id] >= wordChangeTs(word);
+    const live = combineById(cleanWords([...list(local.words), ...list(remote.words)])).filter(word => !isDeleted(word));
     const duplicates = [];
     const words = bestBy(live, textKey, isBetterCopy, duplicates);
     const winners = new Map(words.map(word => [textKey(word), word]));
     const extra = duplicates.filter(word => isId(word.id))
-      .map(word => [word.id, laterTs(wordEditTs(word), wordEditTs(winners.get(textKey(word))))]);
+      .map(word => [word.id, laterTs(wordChangeTs(word), wordChangeTs(winners.get(textKey(word))))]);
     return { words, deletedWords: mergeDeletions(deletions, Object.fromEntries(extra)) };
   }
 
