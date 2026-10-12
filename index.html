@@ -14,10 +14,10 @@
 <header class="topbar">
   <div class="brand">📚 English Trainer</div>
   <nav class="tabs">
-    <button class="tab active" data-view="learn">Learn</button>
+    <button class="tab active" data-view="reader">Reader 📖</button>
+    <button class="tab" data-view="learn">Learn</button>
     <button class="tab" data-view="library">Words</button>
     <button class="tab" data-view="practice">Practice 🎧</button>
-    <button class="tab" data-view="reader">Reader 📖</button>
     <button class="tab" data-view="analyses">Analyses 📝</button>
     <button class="tab" data-view="quiz">Quiz 🧩</button>
     <button class="tab" data-view="journal">Journal ✍️</button>
@@ -31,7 +31,7 @@
 <main id="app">
 
   <!-- ============ LEARN VIEW ============ -->
-  <section class="view active" id="view-learn">
+  <section class="view" id="view-learn">
     <details class="learn-progress" id="learnProgress">
       <summary>📊 Your progress / 学习进度 <span class="hint" id="learnProgressSummary"></span></summary>
       <div class="stats-grid">
@@ -244,7 +244,7 @@
   </section>
 
   <!-- ============ BOOK READER VIEW ============ -->
-  <section class="view" id="view-reader">
+  <section class="view active" id="view-reader">
     <div class="reader-header">
       <h2>Reader 📖</h2>
       <button id="readerLocalAIBtn" class="btn-ghost">Local AI · 本地 AI</button>
@@ -661,7 +661,7 @@
 <script src="quiz-store.js?v=bdf2fedc"></script>
 <script src="chat-links.js?v=109b66da"></script>
 <script src="learning-merge.js?v=fe790228"></script>
-<script src="app.js?v=a58cfe7c"></script>
+<script src="app.js?v=87d9e07a"></script>
 <script src="storage-meter.js?v=554358d1"></script>
 <script src="books/catalog.js"></script>
 <script src="book-repository.js?v=2cf7afb6"></script>
