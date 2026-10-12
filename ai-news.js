@@ -1,4 +1,4 @@
-/* News tab: daily AI headlines from news.json (written by .github/workflows/daily-news.yml).
+/* News tab: BBC Learning English, US market, China and AI headlines from news.json (written by .github/workflows/daily-news.yml).
    The articles are copyrighted, so the repository only stores links; "Import to Reader" fetches an
    article for you (article-import.js) into your private reading materials for word lookups and AI analysis. */
 'use strict';
@@ -8,9 +8,11 @@ const AI_NEWS_SECTIONS = [
   { key: 'openai', id: 'newsOpenAI' },
   { key: 'google', id: 'newsGoogle' },
 ];
-const AI_NEWS_LIST_IDS = ['newsBBC', ...AI_NEWS_SECTIONS.map(section => section.id), 'newsGithub'];
+const AI_NEWS_LIST_IDS = ['newsBBC', 'newsMarkets', 'newsChina', ...AI_NEWS_SECTIONS.map(section => section.id), 'newsGithub'];
+const MARKET_KEY = /^[A-Z]{1,6}$/;   // NVDA, GOOGL, GROK… (used in button data, so nothing else is allowed)
 let aiNewsCache = null;
-let aiNewsItems = new Map();   // 'openai:0' → { title, url }; 'bbc:0' → { title, url, type, audioUrl }
+// 'openai:0' → { title, url }; 'mk:NVDA:0' and 'china:0' → { title, url, publisher, date }; 'bbc:0' → { …, type, audioUrl }
+let aiNewsItems = new Map();
 
 const safeNewsUrl = url => {
   try { return ['http:', 'https:'].includes(new URL(url).protocol) ? url : ''; } catch { return ''; }
@@ -48,21 +50,46 @@ function renderAINews(data) {
       : '<p class="hint">No items yet.</p>';
   });
   renderBBCEpisodes(sources.bbc);
+  renderMarkets(sources.markets);
+  document.getElementById('newsChina').innerHTML = renderHeadlines(sources.china, 'china') || '<p class="hint">No items yet.</p>';
   const repos = (Array.isArray(sources.github) ? sources.github : []).filter(repo => repo && safeNewsUrl(repo.url));
   document.getElementById('newsGithub').innerHTML = repos.length ? repos.map(repoCard).join('') : '<p class="hint">No items yet.</p>';
 }
 
-function articleCard(item, key) {
+function articleCard(item, key, meta = newsHost(item.url)) {
   return `<div class="news-card-wrap">
       <a class="news-card" href="${escapeHTML(item.url)}" target="_blank" rel="noopener">
         <div class="news-card-title">${escapeHTML(item.title)}</div>
-        <div class="news-card-meta">${escapeHTML(newsHost(item.url))} ↗</div>
+        <div class="news-card-meta">${escapeHTML(meta)} ↗</div>
       </a>
       <div class="news-card-actions">
         <button class="btn-ghost" data-news-import="${escapeHTML(key)}" title="Read this article in the Reader with word lookups and AI analysis">📥 Import to Reader</button>
         <button class="mic-btn" data-mic-text="${escapeHTML(item.title)}" title="Read aloud challenge">🎙️ Read aloud</button>
       </div>
     </div>`;
+}
+
+const newsDate = date => (/^\d{4}-\d{2}-\d{2}$/.test(date)
+  ? new Date(`${date}T12:00:00`).toLocaleDateString(undefined, { dateStyle: 'medium' }) : '');
+
+// Cards for headlines with a publisher and date (market and China news), or '' when there are none
+function renderHeadlines(list, keyPrefix) {
+  const items = (Array.isArray(list) ? list : [])
+    .map(item => ({ title: String(item?.title || '').trim(), url: safeNewsUrl(item?.url),
+      publisher: String(item?.publisher || ''), date: String(item?.date || '') }))
+    .filter(item => item.title && item.url);
+  items.forEach((item, index) => aiNewsItems.set(`${keyPrefix}:${index}`, item));
+  return items.map((item, index) => articleCard(item, `${keyPrefix}:${index}`,
+    [item.publisher || newsHost(item.url), newsDate(item.date)].filter(Boolean).join(' · '))).join('');
+}
+
+// US markets: one group per ticker or topic (SPY, QQQ, … Grok), as listed in news.json
+function renderMarkets(list) {
+  const topics = (Array.isArray(list) ? list : []).filter(topic => MARKET_KEY.test(topic?.key || ''));
+  document.getElementById('newsMarkets').innerHTML = topics.length ? topics.map(topic => `<div class="news-topic">
+      <h4>${escapeHTML(String(topic.label || topic.key))}</h4>
+      <div class="news-list">${renderHeadlines(topic.items, `mk:${topic.key}`) || '<p class="hint">No readable news this week.</p>'}</div>
+    </div>`).join('') : '<p class="hint">No items yet.</p>';
 }
 
 // BBC 6 Minute English: a conversation with a transcript and audio, so it is imported as one, with its player
@@ -77,8 +104,7 @@ function renderBBCEpisodes(list) {
 }
 
 function episodeCard(item, key) {
-  const date = /^\d{4}-\d{2}-\d{2}$/.test(item.date)
-    ? new Date(`${item.date}T12:00:00`).toLocaleDateString(undefined, { dateStyle: 'medium' }) : '';
+  const date = newsDate(item.date);
   return `<div class="news-card-wrap">
       <a class="news-card" href="${escapeHTML(item.url)}" target="_blank" rel="noopener">
         <div class="news-card-title">${escapeHTML(item.title)}</div>

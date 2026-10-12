@@ -394,6 +394,7 @@ textarea { resize: vertical; min-height: 50px; }
 .news-card-wrap { display: flex; flex-direction: column; gap: 6px; }
 .news-card-actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .news-card-actions .btn-ghost { padding: 4px 10px; font-size: 12px; }
+.news-topic h4 { margin: 14px 0 8px; font-size: 14px; color: var(--text-muted); }
 @media (max-width: 640px) {
   .news-list { grid-template-columns: 1fr; }
 }

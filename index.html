@@ -8,7 +8,7 @@
      bad backup, sync code or article ever got HTML into the page. -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' https: blob:; connect-src 'self' https://api.github.com https://gist.githubusercontent.com https://r.jina.ai https://api.dictionaryapi.dev https://en.wiktionary.org https://api.mymemory.translated.net https://api.datamuse.com http://127.0.0.1:11434; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'" />
 <title>English Vocabulary & Listening Trainer</title>
-<link rel="stylesheet" href="style.css?v=3d373eab" />
+<link rel="stylesheet" href="style.css?v=f421c20b" />
 </head>
 <body>
 <header class="topbar">
@@ -429,12 +429,24 @@
         <button class="btn-ghost" id="newsRefreshBtn">🔄 Refresh</button>
       </div>
     </div>
-    <p class="hint">BBC Learning English episodes from the last 30 days, the latest posts from Anthropic, OpenAI, Google AI / Gemini, and the most-starred AI repos on GitHub this week. Updated daily by a GitHub Action. Choose <b>📥 Import to Reader</b> on a post to read it in the Reader with word lookups and AI analysis. / 点击 <b>📥 Import to Reader</b>，即可在阅读器中查词并进行 AI 解析。</p>
+    <p class="hint">BBC Learning English episodes from the last 30 days, this week's US market and China news, the latest posts from Anthropic, OpenAI, Google AI / Gemini, and the most-starred AI repos on GitHub this week. Updated daily by a GitHub Action. Choose <b>📥 Import to Reader</b> on a post to read it in the Reader with word lookups and AI analysis. / 点击 <b>📥 Import to Reader</b>，即可在阅读器中查词并进行 AI 解析。</p>
 
     <div class="news-section">
       <h3>🎧 BBC 6 Minute English (last 30 days)</h3>
       <p class="hint">A new episode every week: two presenters talk about one topic and explain useful words. <b>📥 Import to Reader</b> brings in the transcript with the audio player. / 每周一期：导入后可在阅读器中边听音频边看文字稿。</p>
       <div class="news-list" id="newsBBC"><p class="hint">Loading…</p></div>
+    </div>
+
+    <div class="news-section">
+      <h3>📈 US markets &amp; stocks (this week)</h3>
+      <p class="hint">Up to 3 headlines for each: SPY, QQQ, chip stocks (SMH), Nvidia, Google, Apple, Meta, and Grok / xAI — only from sites the Reader can import in full (CNBC, AP, the Guardian, BBC, The Verge, TechCrunch, Gizmodo). News only, no prices. / 每个股票或主题最多 3 条新闻，只选可完整导入阅读器的网站。</p>
+      <div id="newsMarkets"><p class="hint">Loading…</p></div>
+    </div>
+
+    <div class="news-section">
+      <h3>🇨🇳 China</h3>
+      <p class="hint">The newest China stories from BBC News and the Guardian. / BBC 和《卫报》最新的中国新闻。</p>
+      <div class="news-list" id="newsChina"><p class="hint">Loading…</p></div>
     </div>
 
     <div class="news-section">
@@ -656,7 +668,7 @@
 <script src="materials-view.js?v=afa60aaa"></script>
 <script src="article-import-core.js?v=5c90e752"></script>
 <script src="article-import.js?v=b533ba58"></script>
-<script src="ai-news.js?v=7bf945ab"></script>
+<script src="ai-news.js?v=5570b94c"></script>
 <script src="local-ai.js?v=f3acd797"></script>
 <script src="local-ai-settings.js?v=59d7f126"></script>
 <script src="paragraph-reader.js?v=6b07c093"></script>

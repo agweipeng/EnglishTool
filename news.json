@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-11T14:40:03.965Z",
+  "generatedAt": "2026-10-12T01:09:51.672Z",
   "sources": {
     "anthropic": [
       {
@@ -108,47 +108,47 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 276905,
+        "stars": 277242,
         "language": "JavaScript",
-        "updatedAt": "2026-10-11T14:25:46Z"
+        "updatedAt": "2026-10-12T00:49:56Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 252714,
+        "stars": 252813,
         "language": "Python",
-        "updatedAt": "2026-10-11T14:19:09Z"
+        "updatedAt": "2026-10-12T00:33:04Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 190366,
+        "stars": 190541,
         "language": "TypeScript",
-        "updatedAt": "2026-10-10T23:09:56Z"
+        "updatedAt": "2026-10-12T01:04:44Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187517,
+        "stars": 187525,
         "language": "Python",
-        "updatedAt": "2026-10-11T14:32:47Z"
+        "updatedAt": "2026-10-12T01:08:05Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 182741,
+        "stars": 182784,
         "language": "Go",
-        "updatedAt": "2026-10-11T06:52:52Z"
+        "updatedAt": "2026-10-11T20:29:40Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 172582,
+        "stars": 172633,
         "language": "HTML",
         "updatedAt": "2026-10-11T03:22:49Z"
       },
@@ -156,15 +156,15 @@
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 167507,
+        "stars": 167523,
         "language": "Python",
-        "updatedAt": "2026-10-11T13:57:46Z"
+        "updatedAt": "2026-10-12T00:50:41Z"
       },
       {
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 160865,
+        "stars": 161121,
         "language": "JavaScript",
         "updatedAt": "2026-10-10T04:19:53Z"
       },
@@ -172,33 +172,33 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 158140,
+        "stars": 158168,
         "language": "TypeScript",
-        "updatedAt": "2026-10-11T12:42:46Z"
+        "updatedAt": "2026-10-12T00:58:08Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 154292,
+        "stars": 154327,
         "language": "Python",
-        "updatedAt": "2026-10-11T13:58:57Z"
+        "updatedAt": "2026-10-11T18:17:41Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 147612,
+        "stars": 147630,
         "language": "Python",
-        "updatedAt": "2026-10-11T09:01:17Z"
+        "updatedAt": "2026-10-12T00:41:04Z"
       },
       {
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 125446,
+        "stars": 125566,
         "language": "Python",
-        "updatedAt": "2026-10-10T21:32:30Z"
+        "updatedAt": "2026-10-11T20:42:00Z"
       }
     ],
     "bbc": [
@@ -229,6 +229,232 @@
         "date": "2026-09-17",
         "description": "How do you feel about being rejected?",
         "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/260917_6_minute_english_is_rejection_good_for_us_download.mp3"
+      }
+    ],
+    "markets": [
+      {
+        "key": "SPY",
+        "label": "SPY · S&P 500",
+        "items": [
+          {
+            "title": "S&P 500 futures are little changed with big banks set to kick off earnings season: Live updates",
+            "url": "https://www.cnbc.com/2026/10/11/stock-market-today-live-updates.html",
+            "publisher": "CNBC",
+            "date": "2026-10-12"
+          },
+          {
+            "title": "Wall Street is pitching data centers as a major real estate bet. The risks are piling up",
+            "url": "https://www.cnbc.com/2026/10/09/ai-data-centers-investing.html",
+            "publisher": "CNBC",
+            "date": "2026-10-09"
+          },
+          {
+            "title": "Living with Mom and trading on margin. The regular investor gets in on Wall Street's record stock borrowing binge",
+            "url": "https://www.cnbc.com/2026/10/09/margin-debt-stock-market-risk.html",
+            "publisher": "CNBC",
+            "date": "2026-10-09"
+          }
+        ]
+      },
+      {
+        "key": "QQQ",
+        "label": "QQQ · Nasdaq",
+        "items": [
+          {
+            "title": "Tokenization could unleash tens of billions of dollars in trapped capital, Nasdaq CEO says",
+            "url": "https://www.cnbc.com/2026/10/09/nasdaq-ceo-tokenization-could-unleash-billions-in-trapped-capital-.html",
+            "publisher": "CNBC",
+            "date": "2026-10-09"
+          },
+          {
+            "title": "S&P 500 and Nasdaq surge to record highs after AI chipmaker rally",
+            "url": "https://www.theguardian.com/business/2026/oct/06/sp-500-nasdaq-stocks-ai-chipmakers",
+            "publisher": "The Guardian",
+            "date": "2026-10-06"
+          }
+        ]
+      },
+      {
+        "key": "SMH",
+        "label": "SMH · Chip stocks",
+        "items": [
+          {
+            "title": "This Chinese memory chip maker has global potential and is poised to outperform",
+            "url": "https://www.cnbc.com/2026/10/11/this-chinese-memory-chip-maker-has-global-potential.html",
+            "publisher": "CNBC",
+            "date": "2026-10-11"
+          },
+          {
+            "title": "Cramer’s week ahead: Earnings kick off as banks and chipmakers face big tests",
+            "url": "https://www.cnbc.com/2026/10/09/jim-cramer-week-ahead-bank-earnings-ai-chips.html",
+            "publisher": "CNBC",
+            "date": "2026-10-09"
+          },
+          {
+            "title": "Stocks making the biggest moves premarket: Haemonetics, Broadcom, Lululemon, Palantir, Wolfspeed & more",
+            "url": "https://www.cnbc.com/2026/10/08/stocks-making-the-biggest-moves-premarket-hae-avgo-lulu-wolf.html",
+            "publisher": "CNBC",
+            "date": "2026-10-08"
+          }
+        ]
+      },
+      {
+        "key": "NVDA",
+        "label": "NVDA · Nvidia",
+        "items": [
+          {
+            "title": "Nvidia GPUs are everywhere. Here are the ways companies are accessing them",
+            "url": "https://www.cnbc.com/2026/10/10/nvidia-gpus-are-everywhere-heres-how-companies-access-them.html",
+            "publisher": "CNBC",
+            "date": "2026-10-10"
+          },
+          {
+            "title": "Two massive trades just happened in Micron and Nvidia. What they could mean for chips",
+            "url": "https://www.cnbc.com/2026/10/09/two-massive-trades-just-happened-in-micron-and-nvidia-what-they-could-mean-for-chips.html",
+            "publisher": "CNBC",
+            "date": "2026-10-09"
+          },
+          {
+            "title": "Nvidia-backed Aussie AI firm Firmus withdraws historic IPO, citing market volatility",
+            "url": "https://www.cnbc.com/2026/10/09/nvidia-ai-firmus-ipo-.html",
+            "publisher": "CNBC",
+            "date": "2026-10-09"
+          }
+        ]
+      },
+      {
+        "key": "GOOGL",
+        "label": "GOOGL · Google",
+        "items": [
+          {
+            "title": "Google teases Fitbit Edge launch next week",
+            "url": "https://www.theverge.com/tech/1008918/google-fitbit-edge-launch-next-week",
+            "publisher": "The Verge",
+            "date": "2026-10-12"
+          },
+          {
+            "title": "One Tech Tip: Lake America backlash fuels interest in Google Maps alternatives",
+            "url": "https://apnews.com/article/google-maps-mapquest-navigation-57a01b62d71b85d21a01091f26fad36a",
+            "publisher": "AP News",
+            "date": "2026-10-08"
+          },
+          {
+            "title": "Google’s AI note-taking app transcribes your meetings completely offline",
+            "url": "https://www.theverge.com/tech/1007985/google-ai-notetaking-app-transcribe-offline",
+            "publisher": "The Verge",
+            "date": "2026-10-08"
+          }
+        ]
+      },
+      {
+        "key": "AAPL",
+        "label": "AAPL · Apple",
+        "items": [
+          {
+            "title": "Apple is reportedly partnering with LG to launch a smart lock, thermostat, and doorbell",
+            "url": "https://techcrunch.com/2026/10/06/apple-is-reportedly-partnering-with-lg-to-launch-a-smart-lock-thermostat-and-doorbell/",
+            "publisher": "TechCrunch",
+            "date": "2026-10-06"
+          },
+          {
+            "title": "TCL’s paperlike OLED phone made me more excited for the iPhone Duo",
+            "url": "https://www.theverge.com/tech/1004079/tcl-p80-ultra-nxtpaper-matte-display-iphone-duo",
+            "publisher": "The Verge",
+            "date": "2026-10-05"
+          },
+          {
+            "title": "Apple iPhone 18 Pro review: big changes for small differences",
+            "url": "https://www.theguardian.com/technology/2026/oct/05/apple-iphone-18-pro-review-battery-life-screen-siri-camera-variable-aperture-ios-27",
+            "publisher": "The Guardian",
+            "date": "2026-10-05"
+          }
+        ]
+      },
+      {
+        "key": "META",
+        "label": "META · Meta",
+        "items": [
+          {
+            "title": "Hollywood takes on Zuckerberg, Musk and Altman amid widespread anxiety over AI",
+            "url": "https://www.cnbc.com/2026/10/10/ai-movies-tech-ceos-hollywood.html",
+            "publisher": "CNBC",
+            "date": "2026-10-10"
+          },
+          {
+            "title": "Trump bought up to $25 million in Meta and millions in SpaceX debt in August",
+            "url": "https://www.cnbc.com/2026/10/08/trump-august-trades-meta-spacex-financial-disclosure.html",
+            "publisher": "CNBC",
+            "date": "2026-10-08"
+          },
+          {
+            "title": "How Meta got ahead of OpenAI in the AI agent race",
+            "url": "https://www.theverge.com/podcast/1007408/meta-muse-openai-dots-ai-agent-race-privacy-free",
+            "publisher": "The Verge",
+            "date": "2026-10-08"
+          }
+        ]
+      },
+      {
+        "key": "GROK",
+        "label": "Grok · xAI",
+        "items": [
+          {
+            "title": "Grok Bot Is Now a Model Router as SpaceX Continues to Pivot Further Toward AI Infrastructure",
+            "url": "https://gizmodo.com/grok-bot-is-now-a-model-router-as-spacex-continues-to-pivot-further-toward-ai-infrastructure-2000823057",
+            "publisher": "Gizmodo",
+            "date": "2026-10-07"
+          }
+        ]
+      }
+    ],
+    "china": [
+      {
+        "title": "Volkswagen boss backs EU plan to bolster domestic European industry",
+        "url": "https://www.theguardian.com/business/2026/oct/11/volkswagen-boss-backs-eu-plan-to-boost-domestic-european-industry",
+        "publisher": "The Guardian",
+        "date": "2026-10-11"
+      },
+      {
+        "title": "China agrees to ‘halve’ hybrid car exports to EU in landmark deal",
+        "url": "https://www.theguardian.com/business/2026/oct/09/china-agrees-to-curb-hybrid-car-exports-to-eu-in-landmark-deal",
+        "publisher": "The Guardian",
+        "date": "2026-10-09"
+      },
+      {
+        "title": "Mao’s Last Dancer Li Cunxin on his long-awaited follow-up: ‘I don’t think my publisher expected it to take 14 years!’",
+        "url": "https://www.theguardian.com/books/2026/oct/10/chinese-ballet-maos-last-dancer-li-cunxin-memoir-follow-up-14-years",
+        "publisher": "The Guardian",
+        "date": "2026-10-09"
+      },
+      {
+        "title": "EU ‘pulling out all stops’ with minerals projects as it tries to avert China trade war",
+        "url": "https://www.theguardian.com/world/2026/oct/09/eu-pulling-out-all-stops-with-minerals-projects-as-it-tries-to-avert-china-trade-war",
+        "publisher": "The Guardian",
+        "date": "2026-10-09"
+      },
+      {
+        "title": "How India became dangerously addicted to Chinese imports",
+        "url": "https://www.bbc.co.uk/news/articles/c5pve834grpno",
+        "publisher": "BBC",
+        "date": "2026-10-05"
+      },
+      {
+        "title": "UK university asks staff to review some partnerships with China after MI5 warning",
+        "url": "https://www.bbc.co.uk/news/articles/c65yn877dkk0o",
+        "publisher": "BBC",
+        "date": "2026-10-04"
+      },
+      {
+        "title": "China has cracked down on AI relationships. Is it ahead of the game?",
+        "url": "https://www.bbc.co.uk/news/articles/cm4gjy9lr551o",
+        "publisher": "BBC",
+        "date": "2026-09-30"
+      },
+      {
+        "title": "Restaurant named after Xi Jinping attacked by Chinese nationals in South Korea",
+        "url": "https://www.bbc.co.uk/news/articles/c9kgvm275ev8o",
+        "publisher": "BBC",
+        "date": "2026-09-30"
       }
     ]
   }
