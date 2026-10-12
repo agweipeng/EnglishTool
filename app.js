@@ -2450,7 +2450,8 @@ function init() {
   });
 
   renderStats();
-  startSession();
+  // The Reader opens first (Learn starts its session when opened); ?add= from the browser extension opens Words instead
+  showView('reader');
   handleUrlParams();
 }
 

@@ -9,10 +9,18 @@ const app = fs.readFileSync(require.resolve('../app.js'), 'utf8');
 
 test('the top bar has 9 tabs, each with its own view, and no Digests link', () => {
   const tabs = [...html.matchAll(/<button class="tab[^"]*" data-view="([a-z]+)"/g)].map(m => m[1]);
-  assert.deepEqual(tabs, ['learn', 'library', 'practice', 'reader', 'analyses', 'quiz', 'journal', 'news', 'settings']);
+  assert.deepEqual(tabs, ['reader', 'learn', 'library', 'practice', 'analyses', 'quiz', 'journal', 'news', 'settings']);
   tabs.forEach(name => assert.match(html, new RegExp(`<section class="view[^"]*" id="view-${name}">`)));
   assert.doesNotMatch(html, /href="digests\//);
   ['view-add', 'view-drill', 'view-reading', 'view-stats'].forEach(id => assert.ok(!html.includes(`id="${id}"`), id));
+});
+
+test('the Reader is the first tab and the one a fresh page opens on', () => {
+  assert.deepEqual([...html.matchAll(/<button class="tab active" data-view="([a-z]+)"/g)].map(m => m[1]), ['reader']);
+  assert.deepEqual([...html.matchAll(/<section class="view active" id="view-([a-z]+)"/g)].map(m => m[1]), ['reader']);
+  const init = app.slice(app.indexOf('function init()'));
+  const opensReader = init.indexOf("showView('reader')");
+  assert.ok(opensReader > -1 && opensReader < init.indexOf('handleUrlParams()'), 'A quick-add link (?add=) still opens Words');
 });
 
 test('what the old tabs held is now inside the new ones', () => {
