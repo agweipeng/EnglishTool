@@ -10,9 +10,12 @@
     return { id, createdAt: now, updatedAt: now, text: text.trim(), title, chapter, bookId, chapterId, kind, model, result };
   }
 
-  // A live analysis needs its passage and a result object; tombstones and malformed entries are handled by SyncedList
+  // A live analysis needs its passage and a result object, and its labels (when present) must be text, or
+  // showing it would fail; tombstones and malformed entries are handled by SyncedList
+  const LABELS = ['title', 'chapter', 'bookId', 'chapterId', 'kind', 'model', 'createdAt'];
   const list = SyncedList.create(entry => isText(entry.text) && !!entry.text.trim()
-    && !!entry.result && typeof entry.result === 'object' && !Array.isArray(entry.result));
+    && !!entry.result && typeof entry.result === 'object' && !Array.isArray(entry.result)
+    && LABELS.every(key => entry[key] === undefined || isText(entry[key])));
   const samePassage = (a, b) => (a.bookId || '') === (b.bookId || '') && normalize(a.text) === normalize(b.text);
 
   // Re-analysing the same passage replaces the earlier copy and keeps its id

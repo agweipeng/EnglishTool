@@ -55,8 +55,9 @@ function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return defaultState();
-    const parsed = JSON.parse(raw);
-    return Object.assign(defaultState(), parsed);
+    const loaded = Object.assign(defaultState(), JSON.parse(raw));
+    // A word saved with an odd field (e.g. by an older version or a past sync) must not break the page
+    return { ...loaded, words: LearningMerge.cleanWords(loaded.words) };
   } catch (e) {
     console.error('Failed to load state', e);
     return defaultState();
@@ -149,13 +150,8 @@ function mergeStates(local, remote) {
   // Words and journal entries: the newest edit or deletion wins (learning-merge.js)
   const { words, deletedWords } = LearningMerge.mergeWords(local, remote);
   const { journal, journalLog } = LearningMerge.mergeJournal(local, remote);
-  const activity = { ...(local.activity || {}) };
-  for (const [k, v] of Object.entries(remote.activity || {})) {
-    activity[k] = Math.max(activity[k] || 0, v);
-  }
-  const localLast = local.streak?.lastDay || '';
-  const remoteLast = remote.streak?.lastDay || '';
-  const streak = remoteLast > localLast ? remote.streak : local.streak;
+  // Review counts and streak; after a Reset All on either side, only progress from then on is kept
+  const { activity, streak, resetAt } = LearningMerge.mergeProgress(local, remote);
   // Known words: union, except words whose newest log entry is an un-mark
   const { known, knownLog } = TextCore.mergeKnown(local, remote);
   return {
@@ -164,6 +160,7 @@ function mergeStates(local, remote) {
     deletedWords,
     activity,
     streak,
+    ...(resetAt ? { resetAt } : {}),
     journal,
     journalLog,
     known,
@@ -199,8 +196,12 @@ function replaceState(current, next, now) {
     .reduce((map, date) => JournalFeedbackStore.set(map, date, { text: '', source: 'other' }, now), next.journalFeedback || {});
   const nextKnown = new Set(next.known || []);
   const { known, knownLog } = TextCore.applyKnownChange(next, (current.known || []).filter(k => !nextKnown.has(k)), false, now);
+  // The later Reset All of the two stays, so the progress in `next` counts in full and older progress
+  // elsewhere doesn't come back (LearningMerge.mergeProgress)
+  const resetAt = [current.resetAt, next.resetAt].filter(at => typeof at === 'string' && at).sort().pop();
   return {
     ...next,
+    ...(resetAt ? { resetAt } : {}),
     words,
     deletedWords,
     journal,
@@ -348,6 +349,22 @@ function refreshActiveView() {
   else if (id === 'settings' && typeof renderStorageMeter === 'function') renderStorageMeter();
   // Learn: only the progress numbers, so an in-progress card is never disrupted
   else if (id === 'learn') renderStats();
+  // Journal: the entry on screen, unless something is being typed
+  else if (id === 'journal' && typeof refreshJournalAfterSync === 'function') refreshJournalAfterSync();
+}
+
+// ============ Other tabs ============
+// Each open tab keeps its own copy of the data and saves all of it, so a change saved in another tab is merged
+// in here at once (newest edit wins, as with sync); otherwise this tab's next save would write its older copy
+// over it. Nothing is written back: the other tab already saved, and two tabs must not echo each other.
+// False when the saved data can't be read.
+function onOtherTabSaved(raw) {
+  let other;
+  try { other = JSON.parse(raw); } catch { return false; }
+  if (!other || typeof other !== 'object' || !Array.isArray(other.words)) return false;
+  const settings = other.settings && typeof other.settings === 'object' ? other.settings : {};
+  state = { ...mergeStates(state, other), settings: { ...state.settings, ...settings } };
+  return true;
 }
 
 // ============ Helpers ============
@@ -402,12 +419,26 @@ function recordReview() {
 }
 
 // ============ SRS Engine (modified SM-2 + Leitner) ============
+// A word is due once its review time has come; a new word is due at once
+function isDue(word, now = nowMs()) {
+  return !word.archivedAt && (word.nextReview || 0) <= now;
+}
+
 function applyRating(word, rating) {
   word.ease = word.ease || DEFAULT_EASE;
   word.interval = word.interval || 1;
   word.level = word.level || 0;
   word.rightCount = word.rightCount || 0;
   word.wrongCount = word.wrongCount || 0;
+
+  // An answer before the word is due (Practice anyway, or a second look after Again) is counted but doesn't
+  // move the word up or push its review back: only a review on time earns a longer gap, so a word can't be
+  // "mastered" in one day. Forgetting it still counts.
+  if (rating !== 'again' && !isDue(word)) {
+    word.rightCount += 1;
+    word.updatedAt = new Date().toISOString();
+    return;
+  }
 
   switch (rating) {
     case 'again':
@@ -445,17 +476,17 @@ function applyRating(word, rating) {
 function priorityScore(word) {
   if (word.archivedAt) return -Infinity;
   const overdueDays = Math.max(0, (nowMs() - (word.nextReview || 0)) / DAY_MS);
-  const levelWeight = (MAX_LEVEL - word.level) * 10;
+  const levelWeight = (MAX_LEVEL - (word.level || 0)) * 10;
   const wrongWeight = (word.wrongCount || 0) * 2;
   const newBonus = (word.rightCount === 0 && word.wrongCount === 0) ? 15 : 0;
   const leechBoost = isLeech(word) ? 25 : 0;
   return levelWeight + overdueDays + wrongWeight + newBonus + leechBoost + Math.random() * 2;
 }
 
-function pickSessionWords(limit = SESSION_SIZE) {
-  const active = state.words.filter(w => !w.archivedAt);
-  if (active.length === 0) return [];
-  return active
+// The most urgent due words; with `early`, words that are not due yet instead (practice that keeps the schedule)
+function pickSessionWords(limit = SESSION_SIZE, { early = false } = {}) {
+  const now = nowMs();
+  return state.words.filter(w => !w.archivedAt && isDue(w, now) !== early)
     .map(w => ({ w, score: priorityScore(w) }))
     .sort((a, b) => b.score - a.score)
     .slice(0, limit)
@@ -941,25 +972,40 @@ function extractFromTranscript() {
 }
 
 // ============ Learn Session ============
-function startSession() {
-  const words = pickSessionWords();
+// `early`: practise words that are not due yet (their schedule stays as it is). Also a click handler, so
+// anything that isn't an options object counts as a normal session.
+function startSession(options) {
+  const early = options?.early === true;
+  const words = pickSessionWords(SESSION_SIZE, { early });
   const empty = document.getElementById('emptyLearn');
   const card = document.getElementById('flashcard');
   if (words.length === 0) {
+    session = null;
     empty.classList.remove('hidden');
+    card.classList.add('hidden');
+    document.getElementById('sessionProgress').textContent = '0 / 0';
+    const waiting = state.words.filter(w => !w.archivedAt);
+    if (waiting.length) {
+      const next = new Date(Math.min(...waiting.map(w => w.nextReview || 0)));
+      empty.innerHTML = `
+        <h2>Nothing to review right now ✅</h2>
+        <p>Next review: ${escapeHTML(next.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }))}. Words come back on their day — that spacing is what makes them stick.</p>
+        <button class="btn-ghost" id="practiceEarlyBtn" title="Your answers are counted, but review days stay as they are — except Again, which brings a word back tomorrow">Practice anyway</button>
+      `;
+      empty.querySelector('#practiceEarlyBtn').addEventListener('click', () => startSession({ early: true }));
+      return;
+    }
     empty.innerHTML = `
       <h2>No words to learn yet 🌱</h2>
       <p>Add some words first, or all your words are mastered.</p>
       <button class="btn-primary" data-goto="add">+ Add a Word</button>
     `;
     empty.querySelector('[data-goto]').addEventListener('click', () => showView('add'));
-    card.classList.add('hidden');
-    document.getElementById('sessionProgress').textContent = '0 / 0';
     return;
   }
   empty.classList.add('hidden');
   card.classList.remove('hidden');
-  session = { queue: words, index: 0, total: words.length };
+  session = { queue: words, index: 0, total: words.length, again: new Set() };
   showCard();
 }
 
@@ -985,7 +1031,7 @@ function showCard() {
   }
   const word = session.queue[session.index];
   document.getElementById('sessionProgress').textContent = `${session.index + 1} / ${session.total}`;
-  document.getElementById('cardLevel').textContent = `Level ${word.level}/${MAX_LEVEL}`;
+  document.getElementById('cardLevel').textContent = `Level ${word.level || 0}/${MAX_LEVEL}`;
 
   const modeSel = document.getElementById('learnMode').value;
   const mode = modeSel === 'mixed' ? randomMode(word) : modeSel;
@@ -1023,25 +1069,35 @@ function renderCard(word, mode) {
 }
 
 function ratingButtons(word) {
+  // Before its day, Hard/Good/Easy keep the review day (see applyRating)
+  const days = n => (isDue(word) ? `~${n}d` : 'same day');
   return `
-    <button class="rating-btn again" data-r="again"><span class="label">Again</span><span class="sub">&lt; 1 day</span></button>
-    <button class="rating-btn hard"  data-r="hard"><span class="label">Hard</span><span class="sub">~${Math.max(1, Math.round((word.interval||1)*1.2))}d</span></button>
-    <button class="rating-btn good"  data-r="good"><span class="label">Good</span><span class="sub">~${Math.max(1, Math.round((word.interval||1)*(word.ease||2.5)))}d</span></button>
-    <button class="rating-btn easy"  data-r="easy"><span class="label">Easy</span><span class="sub">~${Math.max(2, Math.round((word.interval||1)*(word.ease||2.5)*1.3))}d</span></button>
+    <button class="rating-btn again" data-r="again" title="Shown again at the end of this session, then reviewed tomorrow"><span class="label">Again</span><span class="sub">1d</span></button>
+    <button class="rating-btn hard"  data-r="hard"><span class="label">Hard</span><span class="sub">${days(Math.max(1, Math.round((word.interval||1)*1.2)))}</span></button>
+    <button class="rating-btn good"  data-r="good"><span class="label">Good</span><span class="sub">${days(Math.max(1, Math.round((word.interval||1)*(word.ease||2.5))))}</span></button>
+    <button class="rating-btn easy"  data-r="easy"><span class="label">Easy</span><span class="sub">${days(Math.max(2, Math.round((word.interval||1)*(word.ease||2.5)*1.3)))}</span></button>
   `;
 }
 
 function attachRating(scope, word) {
   scope.querySelectorAll('.rating-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      // A sync during the session may have replaced (or deleted) this word; rate the one in state
+      // A sync during the session may have replaced (or deleted) this word; rate the one in state.
+      // Again on the second look after an Again is not counted twice.
       const live = state.words.find(w => w.id === word.id);
-      if (live) applyRating(live, btn.dataset.r);
+      const isRepeatAgain = btn.dataset.r === 'again' && !!session.again?.has(word.id);
+      if (live && !isRepeatAgain) applyRating(live, btn.dataset.r);
       try {
         recordReview();  // saves the rating too
       } catch (e) {
         console.error('Review could not be saved', e);
         toast(storageErrorMessage(e), 4000);
+      }
+      // A forgotten word comes back once at the end of the session
+      if (btn.dataset.r === 'again' && session.again && !session.again.has(word.id)) {
+        session.again.add(word.id);
+        session.queue.push(word);
+        session.total += 1;
       }
       // Always move on, so a failed save never makes the same card count twice
       session.index++;
@@ -1674,7 +1730,9 @@ function resetAll() {
   if (!confirm('Delete ALL words and progress? Cannot be undone.')) return;
   if (!confirm('Are you absolutely sure?')) return;
   const previous = state;
-  state = replaceState(previous, defaultState(), new Date().toISOString());
+  const now = new Date().toISOString();
+  // resetAt tells sync that streaks and review counts from before now are gone too (learning-merge.js)
+  state = replaceState(previous, { ...defaultState(), resetAt: now }, now);
   try {
     saveState();
   } catch (e) {
@@ -1851,6 +1909,14 @@ function commitJournal() {
     return false;
   }
   renderJournalHistory();
+  return true;
+}
+
+// After a sync or another tab brought in newer data: shows it, unless an entry or reply is still being typed
+// (that text is saved later and is the newer edit). False when it was left alone.
+function refreshJournalAfterSync() {
+  if (pendingJournal || pendingJournalFeedback) return false;
+  renderJournal();
   return true;
 }
 
@@ -2250,6 +2316,14 @@ function init() {
   });
   document.getElementById('themeToggle').addEventListener('click', toggleTheme);
   document.getElementById('resetAllBtn').addEventListener('click', resetAll);
+
+  // Another tab of the app saved: take its changes in, so this tab doesn't overwrite them later
+  window.addEventListener('storage', event => {
+    if (event.key !== STORAGE_KEY || !event.newValue || !onOtherTabSaved(event.newValue)) return;
+    applyTheme();
+    document.getElementById('streakBadge').textContent = `🔥 ${state.streak.current || 0}`;
+    refreshActiveView();
+  });
 
   // Keyboard shortcuts in learn view (1=Again, 2=Hard, 3=Good, 4=Easy)
   document.addEventListener('keydown', e => {

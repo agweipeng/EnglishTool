@@ -16,6 +16,8 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    # A hung news site must not hold the job (and the concurrency queue) for hours
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -44,5 +46,13 @@ jobs:
             exit 0
           fi
           git commit -m "chore(news): refresh DailyNews and Reader articles $(date -u +'%Y-%m-%d')"
-          git pull --rebase
-          git push
+          # Someone may push while this job runs; retry so the day's news is not lost.
+          # During a rebase "theirs" is this job's own commit, so on a conflict the
+          # freshly fetched news.json and Reader articles win over the older copy.
+          for i in 1 2 3; do
+            git pull --rebase -X theirs && git push && exit 0
+            git rebase --abort 2>/dev/null || true
+            sleep $((i * 5))
+          done
+          echo "Could not push the news after 3 tries" >&2
+          exit 1
