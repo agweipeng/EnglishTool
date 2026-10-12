@@ -11,6 +11,11 @@ import { writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { LIST_URL as BBC_LIST_URL, parseEpisodeList, parseEpisodeAudio } from './bbc-six-minute.mjs';
+import { buildMarkets, buildChina, keepRecentTopics } from './news-feeds.mjs';
+
+// Google News pages answer a normal browser; a short pause between its requests keeps the daily run polite
+const BROWSER_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+const GOOGLE_PAUSE_MS = 400;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT_PATH = resolve(__dirname, '..', 'news.json');
@@ -25,6 +30,8 @@ async function fetchText(url, opts = {}) {
   const t = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
   try {
     const r = await fetch(url, {
+      method: opts.method || 'GET',
+      body: opts.body,
       headers: { 'User-Agent': UA, 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', ...opts.headers },
       signal: ctrl.signal,
     });
@@ -247,6 +254,24 @@ async function main() {
   // Fallback: if a source returns empty, retain previous content so the UI never goes blank
   const keepIfEmpty = (current, prevList) => current.length > 0 ? current : (prevList || []);
 
+  // US markets and China (scripts/news-feeds.mjs). Each feed that fails is skipped; a market topic that comes
+  // back empty keeps yesterday's headlines while they are recent, and so does an empty China section.
+  const feedFetch = (url, opts = {}) => fetchText(url, { ...opts, headers: { 'User-Agent': BROWSER_UA, ...opts.headers } });
+  let markets = [];
+  let china = [];
+  try {
+    markets = await buildMarkets(feedFetch, new Date(), { pauseMs: GOOGLE_PAUSE_MS });
+    console.log(`✓ markets: ${markets.map(t => `${t.key} ${t.items.length}`).join(', ')}`);
+  } catch (e) {
+    console.warn(`✗ markets failed: ${e.message}`);
+  }
+  try {
+    china = await buildChina(feedFetch);
+    console.log(`✓ china: ${china.length} items`);
+  } catch (e) {
+    console.warn(`✗ china failed: ${e.message}`);
+  }
+
   // BBC: only the last 30 days, so an empty list is a real answer (e.g. a break between series);
   // the previous list is kept only when the page could not be read
   let bbc;
@@ -266,6 +291,8 @@ async function main() {
       google: keepIfEmpty(google, previous?.sources?.google),
       github: keepIfEmpty(github, previous?.sources?.github),
       bbc,
+      markets: markets.length ? keepRecentTopics(markets, previous?.sources?.markets) : (previous?.sources?.markets || []),
+      china: keepIfEmpty(china, previous?.sources?.china),
     },
   };
 

@@ -88,6 +88,52 @@ test('BBC 6 Minute English episodes are listed with their date and teaser', () =
   assert.match(h.element('newsBBC').innerHTML, /No episodes in the last 30 days/);
 });
 
+const markets = [
+  { key: 'NVDA', label: 'NVDA · <i>Nvidia</i>', items: [
+    { title: 'Nvidia <b>hits</b> a record', url: 'https://www.cnbc.com/2026/10/10/nvidia.html', publisher: 'CNBC', date: '2026-10-10' },
+    { title: 'Bad link', url: 'javascript:alert(1)', publisher: 'CNBC', date: '2026-10-10' }] },
+  { key: 'GROK', label: 'Grok · xAI', items: [] },
+  { key: 'x"><img', label: 'Odd topic', items: [{ title: 'Odd', url: 'https://www.cnbc.com/2026/10/10/odd.html' }] },
+];
+const china = [{ title: 'China trade story', url: 'https://www.bbc.co.uk/news/articles/c1', publisher: 'BBC', date: '2026-10-10' }];
+
+test('US market news is listed by ticker, each headline with its publisher and date', () => {
+  const h = harness();
+  h.sandbox.data = { ...news, sources: { ...news.sources, markets, china } };
+  h.run('renderAINews(data)');
+  const html = h.element('newsMarkets').innerHTML;
+  assert.match(html, /NVDA · &lt;i&gt;Nvidia/);
+  assert.match(html, /Nvidia &lt;b&gt;hits/);
+  assert.match(html, /CNBC · /, 'The publisher is shown');
+  assert.match(html, /data-news-import="mk:NVDA:0"/);
+  assert.doesNotMatch(html, /javascript:/);
+  assert.match(html, /Grok · xAI[\s\S]*No readable news this week/, 'A topic without news says so');
+  assert.doesNotMatch(html, /Odd topic|&lt;img|<img/, 'A topic with a strange key is left out');
+  assert.match(h.element('newsChina').innerHTML, /China trade story[\s\S]*BBC · /);
+  assert.match(h.element('newsChina').innerHTML, /data-news-import="china:0"/);
+});
+
+test('market and China headlines import into the Reader as news', () => {
+  const h = harness();
+  h.sandbox.data = { ...news, sources: { ...news.sources, markets, china } };
+  h.run('renderAINews(data)');
+  for (const key of ['mk:NVDA:0', 'china:0']) {
+    h.run(`onAINewsClick({ target: { closest: selector => selector === '[data-news-import]' ? { dataset: { newsImport: '${key}' } } : null } })`);
+  }
+  assert.deepEqual(h.calls.imports, [
+    ['https://www.cnbc.com/2026/10/10/nvidia.html', { openReader: true }],
+    ['https://www.bbc.co.uk/news/articles/c1', { openReader: true }],
+  ]);
+});
+
+test('without market or China news (an older news.json), those sections say so', () => {
+  const h = harness();
+  h.sandbox.data = news;
+  h.run('renderAINews(data)');
+  assert.match(h.element('newsMarkets').innerHTML, /No items yet/);
+  assert.match(h.element('newsChina').innerHTML, /No items yet/);
+});
+
 test('importing an episode opens it as a conversation with its audio', () => {
   const h = harness();
   h.sandbox.data = { ...news, sources: { ...news.sources, bbc: [bbcEpisode] } };
