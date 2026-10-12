@@ -734,3 +734,6 @@ textarea { resize: vertical; min-height: 50px; }
 .quiz-example { margin: 8px 0 12px; }
 .quiz-example .hint { display: block; margin-bottom: 2px; }
 .quiz-example .btn-ghost { padding: 0 8px; margin-left: 4px; }
+
+/* Why the last sync failed (Settings → Sync) */
+.sync-error { color: var(--danger); }

@@ -8,7 +8,7 @@
      bad backup, sync code or article ever got HTML into the page. -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' https: blob:; connect-src 'self' https://api.github.com https://gist.githubusercontent.com https://r.jina.ai https://api.dictionaryapi.dev https://en.wiktionary.org https://api.mymemory.translated.net https://api.datamuse.com http://127.0.0.1:11434; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'" />
 <title>English Vocabulary & Listening Trainer</title>
-<link rel="stylesheet" href="style.css?v=9412222b" />
+<link rel="stylesheet" href="style.css?v=e6842b43" />
 </head>
 <body>
 <header class="topbar">
@@ -608,6 +608,7 @@
       <div id="syncConnected" class="hidden">
         <p>Connected as <b id="syncUser">—</b>. Gist: <code id="syncGistId">—</code></p>
         <p class="hint">Last synced: <span id="syncLastTime">—</span></p>
+        <p id="syncErrorText" class="hint sync-error hidden" role="status"></p>
         <div class="form-actions">
           <button class="btn-primary" id="syncNowBtn">🔄 Sync Now</button>
           <button class="btn-ghost" id="syncDisconnectBtn">Disconnect</button>
@@ -660,7 +661,7 @@
 <script src="quiz-store.js?v=bdf2fedc"></script>
 <script src="chat-links.js?v=109b66da"></script>
 <script src="learning-merge.js?v=fe790228"></script>
-<script src="app.js?v=98b8c1ca"></script>
+<script src="app.js?v=a58cfe7c"></script>
 <script src="storage-meter.js?v=554358d1"></script>
 <script src="books/catalog.js"></script>
 <script src="book-repository.js?v=2cf7afb6"></script>

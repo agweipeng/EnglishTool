@@ -17,18 +17,22 @@ const data = (words, known = []) => ({ words, deletedWords: {}, settings: { voic
 
 // A fake gist server: GET returns the stored file, PATCH replaces it. `gate` lets a test hold a GET open.
 function gistServer(initial) {
-  const server = { content: JSON.stringify(initial), gets: 0, patches: 0, active: 0, maxActive: 0, failGet: false, gate: null, urls: [] };
+  const server = { content: JSON.stringify(initial), gets: 0, patches: 0, active: 0, maxActive: 0, failGet: false, getStatus: 500,
+    patchStatus: 200, offline: false, gate: null, urls: [] };
   server.fetch = async (url, options = {}) => {
     server.urls.push(url);
     server.active++;
     server.maxActive = Math.max(server.maxActive, server.active);
     try {
+      // How fetch fails when the network is down
+      if (server.offline) throw new TypeError('Failed to fetch');
       if ((options.method || 'GET') === 'GET') {
         server.gets++;
         if (server.gate) await server.gate;
-        if (server.failGet) return { ok: false, status: 500 };
+        if (server.failGet) return { ok: false, status: server.getStatus };
         return { ok: true, json: async () => ({ files: { 'english-trainer-data.json': { content: server.content, truncated: false } } }) };
       }
+      if (server.patchStatus !== 200) return { ok: false, status: server.patchStatus };
       server.patches++;
       server.content = JSON.parse(options.body).files['english-trainer-data.json'].content;
       return { ok: true };
@@ -155,16 +159,48 @@ test('disconnecting during a sync stays disconnected when the sync finishes', as
   assert.equal(h.memory.has('englishTrainerSync_v1'), false, 'The token is not saved again');
 });
 
-test('when the merged data cannot be stored (storage full), the sync reports an error and pushes nothing', async () => {
+test('when the merged data cannot be stored (storage full), the sync still uploads both devices’ data and says storage is full', async () => {
   const server = gistServer(data([word('w2', 'phone word', '2026-10-09T02:00:00Z')]));
   const h = harness(data([word('w1', 'mac word', '2026-10-09T01:00:00Z')]), server);
   h.context.localStorage.setItem = (key, value) => {
     if (key === 'englishTrainerData_v1') { const error = new Error('full'); error.name = 'QuotaExceededError'; throw error; }
     h.memory.set(key, value);
   };
+  assert.equal(await h.run('syncNow()'), true, 'GitHub has everything');
+  assert.deepEqual(JSON.parse(server.content).words.map(w => w.text).sort(), ['mac word', 'phone word'],
+    'The upload is the merge, so it loses nothing from either device');
+  assert.deepEqual(Array.from(h.context.state.words, w => w.text).sort(), ['mac word', 'phone word'], 'The page shows the merge');
+  assert.match(h.run('lastSyncError'), /storage is full/);
+});
+
+test('a failed sync says why: expired token, refused upload, or no network', async () => {
+  const server = gistServer(data([word('w2', 'phone word', '2026-10-09T02:00:00Z')]));
+  const h = harness(data([word('w1', 'mac word', '2026-10-09T01:00:00Z')]), server);
+  server.failGet = true;
+  server.getStatus = 401;
   assert.equal(await h.run('syncNow()'), false);
-  assert.equal(server.patches, 0, 'Nothing this device could not keep is pushed');
-  assert.deepEqual(Array.from(h.context.state.words, w => w.text), ['mac word'], 'This device keeps what it has stored');
+  assert.match(h.run('lastSyncError'), /token expired or invalid/);
+  server.failGet = false;
+  server.patchStatus = 422;
+  assert.equal(await h.run('syncNow()'), false);
+  assert.match(h.run('lastSyncError'), /rejected the upload/);
+  server.patchStatus = 200;
+  server.offline = true;
+  assert.equal(await h.run('syncNow()'), false);
+  assert.match(h.run('lastSyncError'), /reach GitHub/);
+  server.offline = false;
+  assert.equal(await h.run('syncNow()'), true);
+  assert.equal(h.run('lastSyncError'), '', 'A good sync clears the reason');
+});
+
+test('each GitHub answer gets a reason the user can act on', () => {
+  const h = harness(data([]), gistServer(data([])));
+  const reason = (status) => h.run(`syncErrorReason(Object.assign(new Error('x'), { status: ${status} }))`);
+  assert.match(reason(401), /new token/);
+  assert.match(reason(403), /Gists/);
+  assert.match(reason(404), /connect again/);
+  assert.match(reason(503), /GitHub is having problems/);
+  assert.equal(h.run(`syncErrorReason(new Error('odd'))`), 'odd');
 });
 
 test('connecting to another gist while a sync runs syncs the new gist once the old sync stops', async () => {
