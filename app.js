@@ -130,17 +130,21 @@ async function ghCreateGist(token, content) {
   });
   return r.ok ? await r.json() : null;
 }
+// An Error carrying GitHub's HTTP status, so syncErrorReason() can tell the user what to do
+function ghError(message, status) {
+  return Object.assign(new Error(`${message} (${status})`), { status });
+}
 async function ghGetGist(token, id) {
   // A failed read must stop the sync: treating it as "no remote data" would overwrite the other devices
   const r = await fetch(`https://api.github.com/gists/${id}`, { headers: ghHeaders(token) });
-  if (!r.ok) throw new Error(`Could not read the sync gist (${r.status})`);
+  if (!r.ok) throw ghError('Could not read the sync gist', r.status);
   const data = await r.json();
   const file = data.files?.[GIST_FILE];
   if (!file) return null;
   if (!file.truncated) return file.content || null;
   // The API cuts files over 1 MB short; the full text is at raw_url
   const raw = await fetch(file.raw_url);
-  if (!raw.ok) throw new Error(`Could not read the full sync file (${raw.status})`);
+  if (!raw.ok) throw ghError('Could not read the full sync file', raw.status);
   return raw.text();
 }
 async function ghUpdateGist(token, id, content) {
@@ -149,7 +153,7 @@ async function ghUpdateGist(token, id, content) {
     headers: ghHeaders(token),
     body: JSON.stringify({ files: { [GIST_FILE]: { content } } }),
   });
-  return r.ok;
+  if (!r.ok) throw ghError('Could not save to the sync gist', r.status);
 }
 
 // ============ Merge logic (per-word updatedAt wins) ============
@@ -235,8 +239,23 @@ function setSyncStatus(s) {
   el.title = ({
     ok: 'Synced',
     syncing: 'Syncing…',
-    error: 'Sync error (click to retry)',
+    error: `Sync problem: ${lastSyncError || 'unknown'} (click to retry)`,
   })[s] || 'Sync';
+}
+
+// Why the last sync went wrong, in words the user can act on ('' after a good sync)
+let lastSyncError = '';
+function syncErrorReason(e) {
+  if (e?.name === 'QuotaExceededError') return 'browser storage is full on this device (see Settings → Storage)';
+  const status = e?.status;
+  if (status === 401) return 'GitHub token expired or invalid — create a new token and connect again';
+  if (status === 403) return 'GitHub refused access — the token needs Gists read & write, or wait an hour (rate limit)';
+  if (status === 404) return 'sync gist not found — disconnect and connect again';
+  if (status === 409 || status === 422) return 'GitHub rejected the upload (the data may be too large)';
+  if (status >= 500) return 'GitHub is having problems — try again later';
+  // fetch() rejects with a TypeError when the request never reaches GitHub
+  if (e?.name === 'TypeError') return 'cannot reach GitHub — check your connection';
+  return e?.message || 'unknown error';
 }
 
 async function connectSync(token) {
@@ -262,10 +281,11 @@ async function connectSync(token) {
 }
 
 // One round: read the gist, merge it into this device, and push only if the gist is missing something.
-// A failed read throws, so nothing is pushed over data we could not see.
+// A failed read or upload throws, so nothing is pushed over data we could not see.
 async function pullMergePush(cfg) {
   const remoteJson = await ghGetGist(cfg.token, cfg.gistId);
   let remoteChanged = false;
+  let storageFull = false;
   let remote = null;
   try { remote = remoteJson ? JSON.parse(remoteJson) : null; } catch (e) { /* corrupt remote, will be overwritten by push */ }
   if (remote) {
@@ -273,16 +293,21 @@ async function pullMergePush(cfg) {
     const merged = mergeStates(state, remote);
     const after = JSON.stringify(merged);
     if (after !== before) {
-      // Stored first (direct write, no re-push): if storage is full this throws, the sync shows an error,
-      // and nothing this device couldn't keep is pushed
-      localStorage.setItem(STORAGE_KEY, after);
+      // Direct write, no re-push. When storage is full the merge still goes up: it holds everything from
+      // both sides, so GitHub loses nothing, and this device keeps it in memory until there is room.
+      try {
+        localStorage.setItem(STORAGE_KEY, after);
+      } catch (e) {
+        if (e?.name !== 'QuotaExceededError') throw e;
+        storageFull = true;
+      }
       state = merged;
       remoteChanged = true;
     }
   }
   const content = JSON.stringify(state);
-  const ok = content === remoteJson || await ghUpdateGist(cfg.token, cfg.gistId, content);
-  return { ok, remoteChanged };
+  if (content !== remoteJson) await ghUpdateGist(cfg.token, cfg.gistId, content);
+  return { remoteChanged, storageFull };
 }
 
 // Only one sync runs at a time. A save during a sync asks for one more round afterwards,
@@ -293,23 +318,27 @@ let syncAgain = false;
 async function runSyncRounds(cfg) {
   setSyncStatus('syncing');
   try {
-    let ok = true;
     let remoteChanged = false;
+    let storageFull = false;
     do {
       syncAgain = false;
       const round = await pullMergePush(cfg);
-      ok = round.ok;
       remoteChanged = remoteChanged || round.remoteChanged;
-    } while (ok && syncAgain && isSameSyncConfig(cfg));
+      storageFull = storageFull || round.storageFull;
+    } while (syncAgain && isSameSyncConfig(cfg));
     // Disconnected (or reconnected) while this sync ran: don't save the old token again
     if (!isSameSyncConfig(cfg)) return false;
-    if (!ok) { setSyncStatus('error'); return false; }
     saveSyncConfig({ ...cfg, lastSyncedAt: Date.now() });
-    setSyncStatus('ok');
+    // GitHub has everything; a full storage here is still a problem the user has to fix
+    lastSyncError = storageFull ? syncErrorReason({ name: 'QuotaExceededError' }) : '';
+    setSyncStatus(storageFull ? 'error' : 'ok');
     if (remoteChanged) refreshActiveView();
     return true;
   } catch (e) {
-    if (isSameSyncConfig(cfg)) setSyncStatus('error');
+    console.error('Gist sync failed', e);
+    if (!isSameSyncConfig(cfg)) return false;
+    lastSyncError = syncErrorReason(e);
+    setSyncStatus('error');
     return false;
   }
 }
@@ -335,6 +364,7 @@ async function syncNow() {
 
 function disconnectSync() {
   clearSyncConfig();
+  lastSyncError = '';
   setSyncStatus('hidden');
 }
 
@@ -1874,7 +1904,13 @@ function renderSyncUI() {
     document.getElementById('syncLastTime').textContent = cfg.lastSyncedAt
       ? new Date(cfg.lastSyncedAt).toLocaleString()
       : 'never';
-    setSyncStatus('ok');
+    // Keeps a failed sync visible instead of turning the dot green again
+    const errorText = document.getElementById('syncErrorText');
+    if (errorText) {
+      errorText.textContent = lastSyncError ? `⚠️ Last sync problem: ${lastSyncError}` : '';
+      errorText.classList.toggle('hidden', !lastSyncError);
+    }
+    setSyncStatus(syncRun ? 'syncing' : lastSyncError ? 'error' : 'ok');
   } else {
     disc.classList.remove('hidden');
     conn.classList.add('hidden');
@@ -2353,14 +2389,18 @@ function init() {
   // Cloud sync (Gist)
   document.getElementById('syncConnectBtn').addEventListener('click', handleConnectClick);
   document.getElementById('syncDisconnectBtn').addEventListener('click', handleDisconnectClick);
+  const syncResultMessage = ok => {
+    if (!ok) return `Sync failed — ${lastSyncError || 'try again'}`;
+    return lastSyncError ? `Synced to GitHub, but ${lastSyncError}` : 'Synced ✓';
+  };
   document.getElementById('syncNowBtn').addEventListener('click', async () => {
     const ok = await syncNow();
-    toast(ok ? 'Synced ✓' : 'Sync failed');
+    toast(syncResultMessage(ok), 6000);
     renderSyncUI();
   });
   document.getElementById('syncIndicator').addEventListener('click', async () => {
     const ok = await syncNow();
-    if (!ok) toast('Sync failed — check token / network');
+    if (!ok || lastSyncError) toast(syncResultMessage(ok), 6000);
     renderSyncUI();
   });
   renderSyncUI();
