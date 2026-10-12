@@ -344,7 +344,8 @@ function quizItemHTML(item, result) {
 function quizResultsHTML(quiz) {
   const details = [new Date(quiz.createdAt).toLocaleString(), QUIZ_CHECKER_NAMES[quiz.checkedWith], quiz.model].filter(Boolean).join(' · ');
   const head = `<div class="quiz-result-head"><h3>Results / 结果 · ${escapeHTML(quizScoreText(quiz))}</h3><p class="hint">${escapeHTML(details)}</p></div>`;
-  if (!quiz.feedback) {
+  // Feedback from another device or a backup may lack its items; the reply text is shown then
+  if (!quiz.feedback || !Array.isArray(quiz.feedback.items)) {
     return `${head}${quiz.items.map(item => `<article class="paragraph-card"><h4>${escapeHTML(item.text)}</h4><p class="quiz-yours">${quizAnswerText(item)}</p></article>`).join('')}
       <article class="paragraph-card"><h4>AI reply / AI 回复</h4><div class="quiz-reply-text">${escapeHTML(quiz.feedbackText)}</div></article>`;
   }

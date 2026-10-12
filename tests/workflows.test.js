@@ -20,4 +20,9 @@ for (const name of BOT_PUSHERS) {
   test(`${name} has a time limit`, () => {
     assert.match(workflow(name), /^\s+timeout-minutes: \d+$/m);
   });
+
+  test(`${name} runs on a Node version that still gets security fixes`, () => {
+    const version = Number((/node-version: '(\d+)'/.exec(workflow(name)) || [])[1]);
+    assert.ok(version >= 22, `Node ${version}`);
+  });
 }

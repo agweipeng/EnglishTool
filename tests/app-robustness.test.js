@@ -14,7 +14,7 @@ function page(values = {}) {
   const elements = new Map();
   const element = id => {
     if (!elements.has(id)) {
-      elements.set(id, { id, value: values[id] ?? '', checked: false, textContent: '', innerHTML: '', disabled: false,
+      elements.set(id, { id, value: values[id] ?? '', checked: false, textContent: '', innerHTML: '', disabled: false, dataset: {},
         classList: { add() {}, remove() {}, contains: () => false }, select() {}, scrollIntoView() {}, addEventListener() {} });
     }
     return elements.get(id);
@@ -133,4 +133,90 @@ test('a Sync Code that could not be copied says so instead of claiming it was co
   await new Promise(resolve => setImmediate(resolve));
   assert.doesNotMatch(h.messages.at(-1), /copied/);
   assert.match(h.messages.at(-1), /select/i);
+});
+
+test('Ctrl/Cmd/Alt + a number, typing, or a held key never rate a Learn card', () => {
+  const { document, element } = page();
+  element('view-learn').classList.contains = () => true;
+  const h = load([['// ============ Learn Session', '// ============ Library']], { document });
+  const key = extra => h.context.isLearnShortcut({ key: '3', target: { tagName: 'BODY' }, ...extra });
+  assert.equal(key({}), true);
+  assert.equal(key({ metaKey: true }), false, 'Cmd+3 switches browser tabs');
+  assert.equal(key({ ctrlKey: true }), false);
+  assert.equal(key({ altKey: true }), false);
+  assert.equal(key({ repeat: true }), false);
+  assert.equal(key({ target: { tagName: 'SELECT' } }), false);
+  assert.equal(key({ target: { tagName: 'DIV', isContentEditable: true } }), false);
+});
+
+test('changing a word’s spelling with Edit updates that word and keeps its progress', () => {
+  const { document, element } = page();
+  const colour = { id: 'w1', text: 'colour', level: 3, rightCount: 5, updatedAt: '2026-10-01T00:00:00Z', srsUpdatedAt: '2026-10-01T00:00:00Z' };
+  const state = { words: [colour, { id: 'w2', text: 'walk' }] };
+  const h = load([['// ============ Add View', '// ============ Learn Session'], HELPERS], {
+    document, state, saveState() {}, confirm: () => true,
+    collectEnrichment: () => ({}), collectExamples: () => [], renderExamples() {},
+    newWordEntry: fields => ({ id: 'new', ...fields }),
+  });
+  h.run("collectEnrichment = () => ({}); collectExamples = () => []; renderExamples = () => {}; editingWordId = 'w1'");
+  element('newWord').value = 'color';
+  h.run('saveWord()');
+  assert.deepEqual(Array.from(h.context.state.words, w => w.text), ['color', 'walk'], 'No second card');
+  assert.equal(h.context.state.words[0].level, 3);
+  assert.equal(h.context.state.words[0].srsUpdatedAt, '2026-10-01T00:00:00Z', 'The review time stays');
+  assert.equal(h.run('editingWordId'), null, 'The form is cleared after saving');
+});
+
+test('marking words as known when storage is full is undone and reported, so the page does not pretend', () => {
+  const marker = '// True when saved; when storage is full the change is undone';
+  const code = app.slice(app.indexOf(marker), app.indexOf('function unmarkKnown'));
+  const state = { known: ['walk'], knownLog: {} };
+  const messages = [];
+  const context = vm.createContext({ state, TextCore, console: { error() {} },
+    saveState: () => { throw quotaError(); }, storageErrorMessage: () => 'Not saved — browser storage is full',
+    toast: message => messages.push(message) });
+  vm.runInContext(section('function saveOrRollback', '// ============ Activity') + code, context);
+  assert.equal(vm.runInContext("markKnown(['linger'])", context), false);
+  assert.deepEqual(Array.from(context.state.known), ['walk']);
+  assert.match(messages.at(-1), /storage is full/);
+});
+
+test('the streak shows 0 after a missed day, until the next review', () => {
+  const h = load([['// ============ Activity', '// ============ SRS Engine'], HELPERS], { document: page().document, DAY_MS: 86400000 });
+  h.run('todayKey = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`');
+  const key = offset => { const d = new Date(); d.setDate(d.getDate() - offset); return h.context.todayKey(d); };
+  h.context.state = { streak: { current: 5, lastDay: key(1) } };
+  assert.equal(h.run('displayStreak()'), 5, 'Yesterday counts: today can still continue it');
+  h.context.state = { streak: { current: 5, lastDay: key(10) } };
+  assert.equal(h.run('displayStreak()'), 0);
+  h.context.state = { streak: null };
+  assert.equal(h.run('displayStreak()'), 0);
+});
+
+test('saved data or a Sync Code with odd parts still starts the app', () => {
+  const h = load([['// ============ State', '// ============ Sync config'], HELPERS], {
+    document: page().document, schedulePush() {},
+    localStorage: { getItem: () => JSON.stringify({ words: [], streak: null, settings: null, activity: [], journal: 'x', known: [1, 'walk'] }), setItem() {}, removeItem() {} },
+  });
+  const state = h.run('state');
+  assert.deepEqual({ ...state.settings }, { voiceURI: null, rate: 1, theme: 'light' });
+  assert.deepEqual({ ...state.streak }, { current: 0, lastDay: null });
+  assert.deepEqual({ ...state.activity }, {});
+  assert.deepEqual({ ...state.journal }, {});
+  assert.deepEqual(Array.from(state.known), ['walk']);
+  assert.deepEqual({ ...h.run("normalizeState({ settings: { theme: 'dark', rate: 1.2, voiceURI: 'v' } })").settings }, { theme: 'dark', rate: 1.2, voiceURI: 'v' });
+  assert.equal(h.run('normalizeState(null)').words.length, 0);
+});
+
+test('the Anki export escapes word fields and defuses spreadsheet formulas', () => {
+  const h = load([['// ============ Export / Import', '// ============ Settings'], HELPERS], { document: page().document });
+  assert.equal(h.run('ankiCell(\'<img src=x onerror=alert(1)>\')'), '"&lt;img src=x onerror=alert(1)&gt;"');
+  assert.equal(h.run("ankiCell('=HYPERLINK(\"x\")')"), '"\'=HYPERLINK(&quot;x&quot;)"');
+  assert.equal(h.run("ankiCell('a<br>b', true)"), '"a<br>b"', 'The export’s own line breaks stay');
+});
+
+test('a word list entry like "-ness" is not mistaken for a formula in the Anki export', () => {
+  const h = load([['// ============ Export / Import', '// ============ Settings'], HELPERS], { document: page().document });
+  assert.equal(h.run("ankiCell('-ness')"), '"-ness"');
+  assert.equal(h.run("ankiCell('-1+2')"), '"\'-1+2"');
 });

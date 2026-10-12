@@ -42,15 +42,17 @@ function routing() {
   };
   const views = ['learn', 'library', 'practice', 'settings'].map(name => element(`view-${name}`));
   const rendered = [];
+  const sessionState = { inProgress: false };
   const context = vm.createContext({
     state: { words: [{ id: 'w1', text: 'walk' }] },
     document: { getElementById: element, querySelectorAll: selector => (selector === '.view' ? views : []), querySelector: () => null },
     startSession: () => rendered.push('session'), renderStats: () => rendered.push('stats'),
+    isSessionInProgress: () => sessionState.inProgress,
     renderLibrary: () => rendered.push('library'), renderReading: () => rendered.push('reading'),
   });
   vm.runInContext(app.slice(app.indexOf('// ============ View routing'), app.indexOf('// ============ TTS')), context);
   const active = () => views.filter(v => v.classList.set.has('active')).map(v => v.id);
-  return { run: code => vm.runInContext(code, context), element, rendered, active };
+  return { run: code => vm.runInContext(code, context), element, rendered, active, sessionState };
 }
 
 test('old view names open the tab that now holds them', () => {
@@ -74,4 +76,16 @@ test('Words opens the add form by itself when the library is still empty', () =>
   r.run("state.words = []; showView('library')");
   assert.equal(r.element('addWordPanel').open, true);
   assert.notEqual(r.element('newWord').focused, true, 'No jump or keyboard pop-up when just opening the tab');
+});
+
+test('coming back to Learn continues the session that is under way instead of starting over', () => {
+  const r = routing();
+  r.run("showView('learn')");
+  assert.deepEqual(r.rendered.filter(x => x === 'session'), ['session']);
+  r.sessionState.inProgress = true;
+  r.run("showView('library'); showView('learn')");
+  assert.deepEqual(r.rendered.filter(x => x === 'session'), ['session'], 'No second start while cards are left');
+  r.sessionState.inProgress = false;
+  r.run("showView('learn')");
+  assert.equal(r.rendered.filter(x => x === 'session').length, 2, 'A finished session makes way for a new one');
 });

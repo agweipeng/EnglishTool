@@ -202,3 +202,16 @@ test('a News episode with audio opens as a conversation, with its player, and is
   assert.deepEqual(h.calls.saved, [{ title: 'Disrupting false front operations', type: 'conversation', source: 'https://openai.com/index/b/', audio }]);
   assert.deepEqual(h.calls.audio, { url: audio, text: articleText });
 });
+
+test('a link sent to the reading service keeps the article but drops the #part, tracking tags and key-like values', () => {
+  const url = ArticleImportCore.normalizeArticleUrl('https://news.example.com/story?id=42&utm_source=x&fbclid=y&token=SECRET&sig=abc#comments');
+  assert.equal(url, 'https://news.example.com/story?id=42');
+  assert.equal(ArticleImportCore.normalizeArticleUrl('www.bbc.com/news/world-1'), 'https://www.bbc.com/news/world-1');
+});
+
+test('params that name the article are kept, even when they contain words like key or code', () => {
+  const keep = ['https://example.com/view.do?newsCode=123', 'https://example.com/a?author=5&p=3', 'https://example.com/a?articleKey=9&sid=4'];
+  keep.forEach(link => assert.equal(ArticleImportCore.normalizeArticleUrl(link), link));
+  assert.equal(ArticleImportCore.normalizeArticleUrl('https://example.com/#/article/1'), 'https://example.com/#/article/1');
+  assert.equal(ArticleImportCore.normalizeArticleUrl('https://example.com/a?id=1&access_token=x&api_key=y'), 'https://example.com/a?id=1');
+});

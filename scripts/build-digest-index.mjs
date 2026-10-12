@@ -14,7 +14,7 @@
 
 import { readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DIGESTS_DIR = resolve(__dirname, '..', 'digests');
@@ -34,6 +34,23 @@ const PAGE_STYLE = `<style>` +
   `</style>`;
 
 const STYLE_RE = /<style>[\s\S]*?<\/style>/i;
+
+// Digest pages live on the app's origin, so a script in one could read the app's storage (including the
+// sync token). Every page gets a policy that allows no scripts at all, placed first so it covers everything.
+export const PAGE_POLICY = '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; ' +
+  'style-src \'unsafe-inline\'; img-src \'self\' https: data:; base-uri \'none\'; form-action \'none\'">' +
+  '<meta name="referrer" content="no-referrer">';
+const DOCTYPE_RE = /^\s*<!doctype html>/i;
+// Markup that would run code if the policy were missing; reported so it can be looked at
+const ACTIVE_CONTENT_RE = /<script|<iframe|<object|<embed|\son[a-z]+\s*=|javascript:/i;
+
+// The page with the policy first (right after the doctype); running it again changes nothing
+export function protectPage(html) {
+  const rest = html.split(PAGE_POLICY).join('');
+  const doctype = rest.match(DOCTYPE_RE);
+  return doctype ? doctype[0] + PAGE_POLICY + rest.slice(doctype[0].length) : PAGE_POLICY + rest;
+}
+export const hasActiveContent = html => ACTIVE_CONTENT_RE.test(html);
 
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
@@ -72,8 +89,8 @@ function recolorPages(categories) {
     for (const date of datesFor(slug)) {
       const file = join(DIGESTS_DIR, slug, `${date}.html`);
       const html = readFileSync(file, 'utf8');
-      if (!STYLE_RE.test(html)) continue;
-      const next = html.replace(STYLE_RE, PAGE_STYLE);
+      if (hasActiveContent(html)) console.log(`::warning title=Digest page::${slug}/${date}.html contains script-like markup (blocked by its policy)`);
+      const next = protectPage(STYLE_RE.test(html) ? html.replace(STYLE_RE, PAGE_STYLE) : html);
       if (next !== html) {
         writeFileSync(file, next);
         changed++;
@@ -98,7 +115,7 @@ ${items}
 </section>`;
   }).filter(Boolean).join('\n');
 
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8">
+  return `<!doctype html>${PAGE_POLICY}<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Digest Archive</title>
 <style>
@@ -120,7 +137,10 @@ ${sections}
 `;
 }
 
-const categories = listCategories();
-const recolored = recolorPages(categories);
-writeFileSync(OUT, buildIndex(categories));
-console.log(`Recolored ${recolored} digest page(s); wrote ${OUT}`);
+// Runs only as a script, so the tests can import the functions above
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  const categories = listCategories();
+  const recolored = recolorPages(categories);
+  writeFileSync(OUT, buildIndex(categories));
+  console.log(`Updated ${recolored} digest page(s); wrote ${OUT}`);
+}
