@@ -130,6 +130,17 @@ test('a word deleted on this device stays deleted after syncing with a gist that
   assert.deepEqual(JSON.parse(server.content).words.map(w => w.text), ['kept'], 'The gist drops it too');
 });
 
+test('after Reset All, a sync does not bring back the old streak and review history', async () => {
+  const server = gistServer({ ...data([word('w1', 'old', '2026-10-01T00:00:00Z')]),
+    activity: { '2026-10-01': 9 }, streak: { current: 6, lastDay: '2026-10-04' } });
+  const reset = { ...data([]), deletedWords: { w1: '2026-10-05T10:00:00Z' }, resetAt: '2026-10-05T10:00:00Z' };
+  const h = harness(reset, server);
+  assert.equal(await h.run('syncNow()'), true);
+  const state = h.context.state;
+  assert.deepEqual([state.words.length, { ...state.activity }, { ...state.streak }], [0, {}, { current: 0, lastDay: null }]);
+  assert.equal(JSON.parse(server.content).resetAt, '2026-10-05T10:00:00Z', 'Other devices learn about the reset');
+});
+
 test('disconnecting during a sync stays disconnected when the sync finishes', async () => {
   const server = gistServer(data([]));
   let release;

@@ -32,7 +32,8 @@ function analysisCard(entry) {
   const kindName = ANALYSIS_KIND_NAMES[entry.kind] || '';
   const meta = [where, kindName, new Date(entry.updatedAt).toLocaleString(), entry.model].filter(Boolean).join(' · ');
   const preview = entry.text.length > ANALYSIS_PREVIEW_CHARS ? `${entry.text.slice(0, ANALYSIS_PREVIEW_CHARS)}…` : entry.text;
-  const main = entry.result.mainPoint || {};
+  const point = entry.result.mainPoint || {};
+  const main = { en: typeof point.en === 'string' ? point.en : '', cn: typeof point.cn === 'string' ? point.cn : '' };
   const canOpenBook = entry.bookId && typeof readerBookById === 'function' && readerBookById(entry.bookId);
   return `<article class="paragraph-card analysis-card" data-id="${escapeHTML(entry.id)}">
     <div class="analysis-meta">${escapeHTML(meta)}</div>

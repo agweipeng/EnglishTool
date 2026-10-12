@@ -324,6 +324,18 @@ test('a sentence the splitter cuts at "U.S." or quoted with a different dash sti
   assert.equal(result.sentences[0].parts[0].text, 'faster than expected');
 });
 
+test('a reply\'s spaced hyphen still matches the passage\'s em dash', () => {
+  assert.equal(core.exactExcerpt('One word—word two.', 'word - word'), 'word—word');
+  assert.equal(core.exactExcerpt('One word — word two.', 'word-word'), 'word — word');
+});
+
+test('a long run of dashes that does not match fails quickly instead of hanging', () => {
+  const source = 'word ' + '- '.repeat(40) + 'end';
+  const started = Date.now();
+  assert.equal(core.exactExcerpt(source, 'word ' + '-'.repeat(40) + ' other'), null);
+  assert.ok(Date.now() - started < 200, 'matching took too long');
+});
+
 test('invisible characters from copying on a phone do not break the reply', () => {
   const pretty = JSON.stringify(newsAnalysis(), null, 2).replace(/^ +/gm, spaces => ' '.repeat(spaces.length));
   const reply = `﻿${pretty.replace('{', '{​')}`;

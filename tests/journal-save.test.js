@@ -91,6 +91,19 @@ test('when the save fails on a day switch, the typed text and its day stay on sc
   assert.equal(h.context.state.journal['2026-10-09'], 'Not saved yet', 'It is saved once there is room');
 });
 
+test('after a sync, a newer entry from another device shows on screen, but never over text being typed', () => {
+  const h = harness({ journal: { '2026-10-10': 'Mac text' } });
+  h.element('journalDate').value = '2026-10-10';
+  h.run('renderJournal()');
+  h.context.state.journal = { '2026-10-10': 'Phone text' };
+  assert.equal(h.run('refreshJournalAfterSync()'), true);
+  assert.equal(h.element('journalText').value, 'Phone text', 'So the next keystroke builds on the newer entry');
+  h.type('Typing now');
+  h.context.state.journal = { '2026-10-10': 'Other device again' };
+  assert.equal(h.run('refreshJournalAfterSync()'), false);
+  assert.equal(h.element('journalText').value, 'Typing now');
+});
+
 test('a delete that cannot be saved leaves the entry in place', () => {
   const h = harness({ journal: { '2026-10-10': 'Keep me' } });
   h.element('journalDate').value = '2026-10-10';

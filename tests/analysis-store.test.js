@@ -19,6 +19,14 @@ test('a new analysis keeps its passage, book position, model and result', () => 
   assert.deepEqual(saved.result, fixture.analysis);
 });
 
+test('an analysis whose labels are not text (a damaged backup or gist) is left out, so the Analyses tab still opens', () => {
+  const odd = JSON.parse('{"toString":1}');
+  const entries = [entry('a1', T1), { ...entry('a2', T2), title: odd }, { ...entry('a3', T2), model: 5 }, { ...entry('a4', T2), kind: [] }];
+  assert.deepEqual(store.visible(entries).map(e => e.id), ['a1']);
+  const older = { id: 'a5', updatedAt: T1, text: 'Old entry without labels.', result: {} };
+  assert.deepEqual(store.visible([older]).map(e => e.id), ['a5'], 'Missing labels are fine');
+});
+
 test('saved analyses are listed newest first and re-analysing a passage replaces it', () => {
   const first = store.upsert([], entry('a1', T1));
   const second = store.upsert(first, entry('a2', T2, { text: 'A king had a garden.' }));

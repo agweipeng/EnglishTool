@@ -16,18 +16,26 @@
   // Words from old backups may have no id; those are matched by their text
   const wordKey = word => (isId(word.id) ? `id:${word.id}` : `text:${word.text.toLowerCase()}`);
 
-  // Words from a backup, a Sync Code or another device are data, not trusted: numbers must be numbers and
-  // lists must hold text, so nothing odd can reach the page. A word that is already clean is returned as it is.
+  // Words from a backup, a Sync Code or another device are data, not trusted: numbers must be numbers, text
+  // must be text and lists must hold text, so nothing odd can reach the page or break it. A word that is
+  // already clean is returned as it is.
   const NUMBER_FIELDS = ['level', 'interval', 'ease', 'rightCount', 'wrongCount', 'nextReview'];
+  const TEXT_FIELDS = ['phonetic', 'defEN', 'defCN', 'createdAt', 'updatedAt'];
+  const LIST_FIELDS = ['tags', 'synonyms', 'antonyms', 'family', 'collocations'];
   const asText = value => (typeof value === 'string' ? value : '');
+  const isTextList = value => Array.isArray(value) && value.every(item => typeof item === 'string');
   function cleanWord(word) {
-    const badNumbers = NUMBER_FIELDS.filter(key => key in word && !Number.isFinite(word[key]));
-    const badTags = 'tags' in word && !(Array.isArray(word.tags) && word.tags.every(tag => typeof tag === 'string'));
+    const badKeys = [
+      ...NUMBER_FIELDS.filter(key => key in word && !Number.isFinite(word[key])),
+      ...TEXT_FIELDS.filter(key => key in word && typeof word[key] !== 'string'),
+      ...('archivedAt' in word && word.archivedAt !== null && typeof word.archivedAt !== 'string' ? ['archivedAt'] : []),
+    ];
+    const badLists = LIST_FIELDS.filter(key => key in word && !isTextList(word[key]));
     const badExamples = 'examples' in word && !(Array.isArray(word.examples)
       && word.examples.every(ex => ex && typeof ex === 'object' && typeof ex.en === 'string' && typeof ex.cn === 'string'));
-    if (!badNumbers.length && !badTags && !badExamples) return word;
-    const clean = Object.fromEntries(Object.entries(word).filter(([key]) => !badNumbers.includes(key)));
-    if (badTags) clean.tags = list(word.tags).filter(tag => typeof tag === 'string');
+    if (!badKeys.length && !badLists.length && !badExamples) return word;
+    const clean = Object.fromEntries(Object.entries(word).filter(([key]) => !badKeys.includes(key)));
+    badLists.forEach(key => { clean[key] = list(word[key]).filter(item => typeof item === 'string'); });
     if (badExamples) {
       clean.examples = list(word.examples).filter(ex => ex && typeof ex === 'object')
         .map(ex => ({ ...ex, en: asText(ex.en), cn: asText(ex.cn) }));
@@ -47,17 +55,66 @@
     return Object.fromEntries(latest);
   }
 
-  // { words, deletedWords }: the newer edit of each word wins, and a word deleted after its last edit stays deleted
-  function mergeWords(local, remote) {
-    const deletedWords = mergeDeletions(local.deletedWords, remote.deletedWords);
+  // Keeps the best word of each key (`isBetter(a, b)`: a beats b); `losers` collects the others
+  function bestBy(words, keyOf, isBetter, losers = []) {
     const byKey = new Map();
-    for (const word of cleanWords([...list(local.words), ...list(remote.words)])) {
-      const key = wordKey(word);
+    for (const word of words) {
+      const key = keyOf(word);
       const current = byKey.get(key);
-      if (!current || wordEditTs(word) > wordEditTs(current)) byKey.set(key, word);
+      if (!current) byKey.set(key, word);
+      else if (isBetter(word, current)) { losers.push(current); byKey.set(key, word); }
+      else losers.push(word);
     }
-    const isDeleted = word => isId(word.id) && own(deletedWords, word.id) && deletedWords[word.id] >= wordEditTs(word);
-    return { words: [...byKey.values()].filter(word => !isDeleted(word)), deletedWords };
+    return [...byKey.values()];
+  }
+  const isNewer = (a, b) => wordEditTs(a) > wordEditTs(b);
+  // Between two copies of the same word: more reviews (progress) first, then the newer edit, then the id,
+  // so every device picks the same one
+  const reviews = word => (word.rightCount || 0) + (word.wrongCount || 0);
+  const isBetterCopy = (a, b) => (reviews(a) !== reviews(b) ? reviews(a) > reviews(b)
+    : wordEditTs(a) !== wordEditTs(b) ? isNewer(a, b) : String(a.id) < String(b.id));
+  const textKey = word => word.text.trim().toLowerCase();
+  const laterTs = (a, b) => (a > b ? a : b);
+
+  // { words, deletedWords }: the newer edit of each word wins, and a word deleted after its last edit stays deleted.
+  // The same word added on two devices has two ids; one copy is kept (see isBetterCopy) and the other
+  // recorded as deleted, so every device ends up with the same one.
+  function mergeWords(local, remote) {
+    const deletions = mergeDeletions(local.deletedWords, remote.deletedWords);
+    const isDeleted = word => isId(word.id) && own(deletions, word.id) && deletions[word.id] >= wordEditTs(word);
+    const live = bestBy(cleanWords([...list(local.words), ...list(remote.words)]), wordKey, isNewer).filter(word => !isDeleted(word));
+    const duplicates = [];
+    const words = bestBy(live, textKey, isBetterCopy, duplicates);
+    const winners = new Map(words.map(word => [textKey(word), word]));
+    const extra = duplicates.filter(word => isId(word.id))
+      .map(word => [word.id, laterTs(wordEditTs(word), wordEditTs(winners.get(textKey(word))))]);
+    return { words, deletedWords: mergeDeletions(deletions, Object.fromEntries(extra)) };
+  }
+
+  // Review counts per day and the streak. The bigger count of each day and the newest streak win. After a
+  // Reset All (`resetAt`) only progress from the reset day on counts, on this device and every other one.
+  const isStreak = streak => !!streak && typeof streak === 'object' && Number.isInteger(streak.current) && streak.current >= 0
+    && (streak.lastDay === null || (typeof streak.lastDay === 'string' && DATE_KEY.test(streak.lastDay)));
+  function mergeProgress(local, remote) {
+    const resetOf = data => (isTimestamp(data.resetAt) ? data.resetAt : '');
+    const resetAt = laterTs(resetOf(local), resetOf(remote));
+    // Review days are local dates, so the reset day is too
+    const reset = new Date(resetAt);
+    const resetDay = resetAt ? [reset.getFullYear(), reset.getMonth() + 1, reset.getDate()]
+      .map((part, i) => String(part).padStart(i ? 2 : 4, '0')).join('-') : '';
+    const counts = side => (resetOf(side) === resetAt ? true : (date => date >= resetDay));
+    const activity = {};
+    for (const side of [local, remote]) {
+      const keep = counts(side);
+      for (const [date, count] of entries(side.activity)) {
+        if (DATE_KEY.test(date) && Number.isFinite(count) && (keep === true || keep(date))) activity[date] = Math.max(activity[date] || 0, count);
+      }
+    }
+    const streaks = [local, remote].filter(side => isStreak(side.streak)
+      && (resetOf(side) === resetAt || (side.streak.lastDay || '') >= resetDay)).map(side => side.streak);
+    const streak = streaks.reduce((best, next) => ((next.lastDay || '') > (best.lastDay || '') ? next : best),
+      streaks[0] || { current: 0, lastDay: null });
+    return { activity, streak: { current: streak.current, lastDay: streak.lastDay }, resetAt };
   }
 
   // Removes words and remembers when, so other devices drop them too
@@ -115,7 +172,7 @@
     return { journal: byDate([...others(data.journal), ...saved]), journalLog: byDate([...others(data.journalLog), [date, now]]) };
   }
 
-  const api = { mergeWords, deleteWords, restoreWords, mergeJournal, setJournalEntry, cleanWords };
+  const api = { mergeWords, mergeProgress, deleteWords, restoreWords, mergeJournal, setJournalEntry, cleanWords };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.LearningMerge = api;
 })(typeof window !== 'undefined' ? window : globalThis);

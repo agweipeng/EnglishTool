@@ -19,11 +19,16 @@ function decodeEntities(text) {
 }
 const plainText = html => decodeEntities(String(html || '').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
 
-// [{ title, url, date: 'YYYY-MM-DD', description }] from the last `days` days, newest first
+// [{ title, url, date: 'YYYY-MM-DD', description }] from the last `days` days, newest first.
+// An empty list means the page had episodes but none recent. A page with no episode
+// cards at all (an error page, or the BBC changed its layout) throws instead, so the
+// caller keeps yesterday's list rather than saving an empty one.
 export function parseEpisodeList(html, now = new Date(), days = RECENT_DAYS) {
+  const cards = [...String(html || '').matchAll(EPISODE_CARD)];
+  if (!cards.length) throw new Error('No episodes found on the 6 Minute English page; its layout may have changed');
   const oldest = new Date(now.getTime() - days * DAY_MS).toISOString().slice(0, 10);
   const byUrl = new Map();
-  for (const [, path, yy, mm, dd, title, rest] of String(html || '').matchAll(EPISODE_CARD)) {
+  for (const [, path, yy, mm, dd, title, rest] of cards) {
     const date = `20${yy}-${mm}-${dd}`;
     const url = SITE + path;
     if (date < oldest || byUrl.has(url) || !plainText(title)) continue;

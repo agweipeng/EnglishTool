@@ -79,15 +79,20 @@ Passage: ${JSON.stringify(text.trim())}`;
   // those differences (and letter case) are ignored. Returns null when it isn't there.
   // Dashes too: a chat reply often writes "-" where the passage has "—", with or without spaces around it.
   const DASHES = '-‐‑‒–—―';
-  const QUOTE_CLASSES = { "'": "['‘’]", '‘': "['‘’]", '’': "['‘’]", '"': '["“”]', '“': '["“”]', '”': '["“”]',
-    ...Object.fromEntries([...DASHES].map(dash => [dash, `\\s*[${DASHES}]\\s*`])) };
+  const QUOTE_CLASSES = { "'": "['‘’]", '‘': "['‘’]", '’': "['‘’]", '"': '["“”]', '“': '["“”]', '”': '["“”]' };
+  // A whole run of dashes becomes one piece of the pattern. Spaces and dashes never
+  // overlap inside it, so a long run that fails to match still fails quickly.
+  const DASH_RUN = `(?:\\s*[${DASHES}])+\\s*`;
+  const charPattern = c => QUOTE_CLASSES[c]
+    || (c === ' ' ? '\\s+' : c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
   function excerptMatch(source, text) {
     const target = String(text || '').replace(/\.{3}|…/g, ' ').replace(/\s+/g, ' ').trim()
       .replace(/^[\s,;:]+|[\s.,;:!?]+$/g, '')
       .replace(new RegExp(`\\s*([${DASHES}])\\s*`, 'g'), '$1');
     if (!target) return null;
-    const pattern = [...target].map(c => QUOTE_CLASSES[c]
-      || (c === ' ' ? '\\s+' : c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))).join('');
+    // Splitting on a captured dash run puts the runs at the odd positions
+    const pattern = target.split(new RegExp(`([${DASHES}]+)`))
+      .map((piece, index) => (index % 2 ? DASH_RUN : [...piece].map(charPattern).join(''))).join('');
     return new RegExp(pattern, 'i').exec(source);
   }
   function exactExcerpt(source, text) {

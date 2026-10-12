@@ -241,8 +241,20 @@ async function safe(name, fn) {
   }
 }
 
+// Yesterday's news.json. A damaged file is treated as no previous news, so the job
+// can write a fresh one instead of failing every day.
+function readPrevious() {
+  if (!existsSync(OUT_PATH)) return null;
+  try {
+    return JSON.parse(readFileSync(OUT_PATH, 'utf8'));
+  } catch (e) {
+    console.warn(`✗ previous ${OUT_PATH} could not be read, starting fresh: ${e.message}`);
+    return null;
+  }
+}
+
 async function main() {
-  const previous = existsSync(OUT_PATH) ? JSON.parse(readFileSync(OUT_PATH, 'utf8')) : null;
+  const previous = readPrevious();
 
   const [anthropic, openai, google, github] = await Promise.all([
     safe('anthropic', fetchAnthropic),
@@ -273,7 +285,8 @@ async function main() {
   }
 
   // BBC: only the last 30 days, so an empty list is a real answer (e.g. a break between series);
-  // the previous list is kept only when the page could not be read
+  // the previous list is kept only when the page could not be read, or showed no episodes at all
+  // (parseEpisodeList throws then, e.g. after a BBC layout change)
   let bbc;
   try {
     bbc = await fetchBBCSixMinute();

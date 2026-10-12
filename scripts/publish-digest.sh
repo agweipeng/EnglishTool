@@ -2,8 +2,12 @@
 # publish-digest.sh <slug> <title>
 #
 # Reads plain-text digest on stdin, writes it as an HTML page under
-# digests/<slug>/<YYYY-MM-DD>.html, rebuilds digests/index.html,
-# commits, pushes to origin/main, and prints the GitHub Pages URL.
+# digests/<slug>/<YYYY-MM-DD>.html, commits, pushes to origin/main, and
+# prints the GitHub Pages URL.
+#
+# digests/index.html is not touched here: the Build Digest Index workflow
+# (.github/workflows/fix-digest-links.yml) rebuilds it on every push under
+# digests/. Writing it here too made the two copies conflict on pull.
 
 set -euo pipefail
 
@@ -27,6 +31,18 @@ DATE="$(date +%F)"
 DIGEST_DIR="$REPO/digests/$SLUG"
 DIGEST_FILE="$DIGEST_DIR/$DATE.html"
 URL="$PAGES_BASE/digests/$SLUG/$DATE.html"
+
+# Pull before writing anything, so the pull never has to merge our new files.
+# A failed pull stops the script (set -e) rather than publishing a half-merged tree.
+# Git's messages go to stderr: stdout carries only the URL printed at the end.
+cd "$REPO"
+# The commit is pushed to main, so it must be made on main; on another branch it would never be
+# published (the URL would 404) and the pull would rebase that branch instead
+if [ "$(git rev-parse --abbrev-ref HEAD)" != main ]; then
+  echo "publish-digest: switch $REPO to the main branch first" >&2
+  exit 1
+fi
+git pull --rebase --autostash --quiet origin main >&2
 
 mkdir -p "$DIGEST_DIR"
 printf '%s\n' "$TITLE" > "$DIGEST_DIR/title.txt"
@@ -59,61 +75,11 @@ cat > "$DIGEST_FILE" <<HTML
 </html>
 HTML
 
-INDEX="$REPO/digests/index.html"
-{
-  cat <<'HEAD'
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Digests</title>
-<style>
-  body{max-width:780px;margin:2em auto;padding:0 1em;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#222}
-  h1{font-size:1.8em}
-  h2{margin-top:1.5em;border-bottom:1px solid #eee;padding-bottom:.25em}
-  ul{padding-left:0;list-style:none}
-  li{margin:.25em 0}
-  a{color:#06f;text-decoration:none}
-  a:hover{text-decoration:underline}
-  .date{color:#888;font-variant-numeric:tabular-nums;margin-right:.75em;display:inline-block;min-width:6.5em}
-</style>
-</head>
-<body>
-<p><a href="../">← back to EnglishTool</a></p>
-<h1>Daily Digests</h1>
-HEAD
-
-  for d in "$REPO/digests/"*/; do
-    [ -d "$d" ] || continue
-    name="$(basename "$d")"
-    if [ -f "$d/title.txt" ]; then
-      title="$(html_escape < "$d/title.txt")"
-    else
-      title="$name"
-    fi
-    files="$(find "$d" -maxdepth 1 -name '*.html' -type f 2>/dev/null | sort -r || true)"
-    [ -z "$files" ] && continue
-    printf '<h2>%s</h2>\n<ul>\n' "$title"
-    while IFS= read -r f; do
-      base="$(basename "$f" .html)"
-      printf '<li><span class="date">%s</span><a href="%s/%s.html">view</a></li>\n' "$base" "$name" "$base"
-    done <<< "$files"
-    printf '</ul>\n'
-  done
-
-  cat <<'TAIL'
-</body>
-</html>
-TAIL
-} > "$INDEX"
-
-cd "$REPO"
-git pull --rebase --autostash --quiet origin main >/dev/null 2>&1 || true
-git add "digests/$SLUG/$DATE.html" "digests/$SLUG/title.txt" "digests/index.html"
-if ! git diff --cached --quiet; then
-  git commit -m "digest($SLUG): $DATE" --quiet
-  git push --quiet origin main
+git add -- "digests/$SLUG/$DATE.html" "digests/$SLUG/title.txt"
+# Commit only this digest's files, never anything else that happened to be staged
+if ! git diff --cached --quiet -- "digests/$SLUG/$DATE.html" "digests/$SLUG/title.txt"; then
+  git commit -m "digest($SLUG): $DATE" --quiet -- "digests/$SLUG/$DATE.html" "digests/$SLUG/title.txt"
+  git push --quiet origin main >&2
 fi
 
 printf '%s\n' "$URL"

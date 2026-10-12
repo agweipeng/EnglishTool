@@ -31,11 +31,22 @@ test('episodes from the last 30 days are listed newest first, with date, teaser 
   ]);
 });
 
-test('the number of days can be changed, and a page without episodes gives an empty list', async () => {
+test('the number of days can be changed', async () => {
   const { parseEpisodeList } = await core();
   assert.equal(parseEpisodeList(listPage, new Date('2026-10-10T06:00:00Z'), 10).length, 2);
   assert.equal(parseEpisodeList(listPage, new Date('2026-10-10T06:00:00Z'), 60).length, 4);
-  assert.deepEqual(parseEpisodeList('<html>Sorry, something went wrong</html>', new Date('2026-10-10T06:00:00Z')), []);
+});
+
+test('a page with episodes, none from the last 30 days, gives a real empty list', async () => {
+  const { parseEpisodeList } = await core();
+  assert.deepEqual(parseEpisodeList(listPage, new Date('2027-03-01T06:00:00Z')), []);
+});
+
+test('a page with no episode cards at all is an error, so yesterday\'s list is kept', async () => {
+  const { parseEpisodeList } = await core();
+  const now = new Date('2026-10-10T06:00:00Z');
+  assert.throws(() => parseEpisodeList('<html>Sorry, something went wrong</html>', now), /no episodes/i);
+  assert.throws(() => parseEpisodeList('', now), /no episodes/i);
 });
 
 test('the episode audio is the BBC download MP3, and nothing else', async () => {
