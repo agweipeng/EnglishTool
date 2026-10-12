@@ -10,7 +10,7 @@
 <meta name="referrer" content="no-referrer" />
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' https: blob:; connect-src 'self' https://api.github.com https://gist.githubusercontent.com https://r.jina.ai https://api.dictionaryapi.dev https://en.wiktionary.org https://api.mymemory.translated.net https://api.datamuse.com http://127.0.0.1:11434; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'" />
 <title>English Vocabulary & Listening Trainer</title>
-<link rel="stylesheet" href="style.css?v=e6842b43" />
+<link rel="stylesheet" href="style.css?v=460fc8d3" />
 </head>
 <body>
 <header class="topbar">
@@ -271,6 +271,8 @@
       </div>
       <p id="readerBookAdvice" class="hint">Recommended: The Wonderful Wizard of Oz (绿野仙踪) by L. Frank Baum. A concrete adventure to read and retell.</p>
       <div class="reader-sources">
+        <details class="reader-shelf" id="vocabTestShelf"><summary>📏 Vocabulary test · 词汇量测试<span id="vocabTestSummary"></span></summary>
+          <div id="vocabTest" class="vocab-test"></div></details>
         <details class="reader-shelf"><summary>📚 Browse books · 浏览书库</summary><div id="readerShelf" class="reader-shelf-grid"></div></details>
         <details class="reader-shelf"><summary>📰 News &amp; articles · 新闻与文章</summary>
           <p class="hint">Daily articles from The Conversation, plus easier VOA Learning English news with audio.</p>
@@ -669,7 +671,10 @@
 <script src="book-repository.js?v=2cf7afb6"></script>
 <script src="paragraph-core.js?v=e526d1e9"></script>
 <script src="outside-click.js?v=f54e5ae6"></script>
-<script src="reader.js?v=7414c3ed"></script>
+<script src="reader.js?v=c76fc12a"></script>
+<script src="word-ranks.js?v=40f62238"></script>
+<script src="vocab-size-core.js?v=65ef221b"></script>
+<script src="vocab-size.js?v=f64b1ae9"></script>
 <script src="materials-view.js?v=afa60aaa"></script>
 <script src="article-import-core.js?v=37d822aa"></script>
 <script src="article-import.js?v=127b489c"></script>

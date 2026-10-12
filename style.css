@@ -737,3 +737,15 @@ textarea { resize: vertical; min-height: 50px; }
 
 /* Why the last sync failed (Settings → Sync) */
 .sync-error { color: var(--danger); }
+
+/* Vocabulary test (Reader → 📏) */
+#vocabTestSummary { color: var(--text-muted); font-weight: normal; }
+.vocab-test { padding-top: 8px; }
+.vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; margin: 10px 0 14px; }
+.vocab-word { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; }
+.vocab-word:has(input:checked) { border-color: var(--primary); background: rgba(79, 124, 255, 0.1); }
+.vocab-bands { display: grid; gap: 6px; margin: 10px 0; }
+.vocab-band { display: grid; grid-template-columns: 90px 1fr 44px; align-items: center; gap: 8px; font-size: 0.9em; }
+.vocab-band-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.vocab-band-bar div { height: 100%; background: var(--primary); }
+.vocab-coverage { font-size: 0.9em; font-weight: 600; color: var(--primary); }

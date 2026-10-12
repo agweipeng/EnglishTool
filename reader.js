@@ -166,10 +166,13 @@ function updateBookProgress(saved = true) {
 function shelfCard(book, saved) {
   const latest = isNewsPackage(book) && book.latestArticle ? ` · latest ${formatArticleDate(book.latestArticle)}` : '';
   const position = saved ? 'Resume reading' : 'Start reading';
+  // After a vocabulary test (vocab-size.js): about how much of the book the reader knows
+  const coverage = typeof vocabBookCoverageText === 'function' ? vocabBookCoverageText(book.id) : '';
   return `<article class="reader-shelf-card"><b>${escapeHTML(book.title)}</b>
     <span>${escapeHTML(book.titleCN)} · ${escapeHTML(book.author)}</span>
     <span class="hint">${escapeHTML(book.readingStage)} · ${escapeHTML(book.genre)} · ${book.sectionCount} ${sectionNames(book).many}${escapeHTML(latest)}</span>
-    <p class="hint">${escapeHTML(book.recommendation)}</p>
+    <p class="hint">${escapeHTML(book.recommendation)}</p>${coverage ? `
+    <span class="vocab-coverage">${escapeHTML(coverage)}</span>` : ''}
     <button class="btn-ghost" data-book-id="${escapeHTML(book.id)}">${position} →</button></article>`;
 }
 
@@ -451,7 +454,7 @@ function renderReaderPassage() {
 
 function coverageAdvice(coveragePct) {
   if ((state.known || []).length < CALIBRATION_MIN_KNOWN) {
-    return 'First time? Click <b>Learn</b> on the words you really don\'t know, then <b>I know all the rest</b> — after that the coverage figure becomes accurate.';
+    return 'First time? Take the <b>📏 Vocabulary test</b> above the bookshelf (3 minutes), or click <b>Learn</b> on the words you really don\'t know, then <b>I know all the rest</b> — after that the coverage figure becomes accurate.';
   }
   if (coveragePct >= COVERAGE_COMFORTABLE) return 'Comfortable reading level — read for pleasure and add only the words that matter.';
   if (coveragePct >= COVERAGE_READABLE) return 'Readable with some effort — learn the most frequent unknown words first.';
