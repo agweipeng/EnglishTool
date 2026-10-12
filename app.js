@@ -28,6 +28,9 @@ const LEECH_MIN_TOTAL = 6;
 const LEECH_WRONG_RATIO = 0.4;
 
 // ============ State ============
+// True when the saved data could not be read at start; a copy was kept (see loadState) and init tells the user.
+// Declared before the load below, which may set it.
+let storageLoadProblem = false;
 let state = loadState();
 let session = null;       // active learn session
 let drill = null;         // active drill state
@@ -52,14 +55,20 @@ function defaultState() {
 }
 
 function loadState() {
+  let raw = null;
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return defaultState();
     const loaded = Object.assign(defaultState(), JSON.parse(raw));
     // A word saved with an odd field (e.g. by an older version or a past sync) must not break the page
     return { ...loaded, words: LearningMerge.cleanWords(loaded.words) };
   } catch (e) {
     console.error('Failed to load state', e);
+    // The next save would overwrite the unreadable data, so a copy is kept for recovery
+    if (raw) {
+      storageLoadProblem = true;
+      try { localStorage.setItem(`${STORAGE_KEY}_corrupt`, raw); } catch (copyError) { console.error('No room for a copy', copyError); }
+    }
     return defaultState();
   }
 }
@@ -243,8 +252,8 @@ async function connectSync(token) {
       if (!gist) { setSyncStatus('error'); return { error: 'Failed to create gist' }; }
     }
     saveSyncConfig({ token: t, gistId: gist.id, user: user.login, lastSyncedAt: Date.now() });
-    await syncNow();
-    return { ok: true, user: user.login, gistId: gist.id };
+    const synced = await syncNow();
+    return { ok: true, user: user.login, gistId: gist.id, synced };
   } catch (e) {
     console.error('Gist connect failed', e);
     setSyncStatus('error');
@@ -257,17 +266,19 @@ async function connectSync(token) {
 async function pullMergePush(cfg) {
   const remoteJson = await ghGetGist(cfg.token, cfg.gistId);
   let remoteChanged = false;
-  if (remoteJson) {
-    try {
-      const before = JSON.stringify(state);
-      const merged = mergeStates(state, JSON.parse(remoteJson));
-      const after = JSON.stringify(merged);
-      if (after !== before) {
-        state = merged;
-        localStorage.setItem(STORAGE_KEY, after); // direct write, no re-push
-        remoteChanged = true;
-      }
-    } catch (e) { /* corrupt remote, will be overwritten by push */ }
+  let remote = null;
+  try { remote = remoteJson ? JSON.parse(remoteJson) : null; } catch (e) { /* corrupt remote, will be overwritten by push */ }
+  if (remote) {
+    const before = JSON.stringify(state);
+    const merged = mergeStates(state, remote);
+    const after = JSON.stringify(merged);
+    if (after !== before) {
+      // Stored first (direct write, no re-push): if storage is full this throws, the sync shows an error,
+      // and nothing this device couldn't keep is pushed
+      localStorage.setItem(STORAGE_KEY, after);
+      state = merged;
+      remoteChanged = true;
+    }
   }
   const content = JSON.stringify(state);
   const ok = content === remoteJson || await ghUpdateGist(cfg.token, cfg.gistId, content);
@@ -303,15 +314,21 @@ async function runSyncRounds(cfg) {
   }
 }
 
+const sameSyncConfig = (a, b) => a.gistId === b.gistId && a.token === b.token;
 function isSameSyncConfig(cfg) {
-  const current = loadSyncConfig();
-  return current.gistId === cfg.gistId && current.token === cfg.token;
+  return sameSyncConfig(loadSyncConfig(), cfg);
 }
 
+let syncRunConfig = null;
 async function syncNow() {
   const cfg = loadSyncConfig();
   if (!cfg.token || !cfg.gistId) return false;
-  if (syncRun) { syncAgain = true; return syncRun; }
+  if (syncRun) {
+    if (sameSyncConfig(syncRunConfig, cfg)) { syncAgain = true; return syncRun; }
+    // Reconnected (another token or gist) during a sync: that sync stops, then the new gist is synced
+    return syncRun.then(() => syncNow());
+  }
+  syncRunConfig = cfg;
   syncRun = runSyncRounds(cfg).finally(() => { syncRun = null; });
   return syncRun;
 }
@@ -400,6 +417,18 @@ function storageErrorMessage(e) {
   return e?.name === 'QuotaExceededError'
     ? 'Not saved — browser storage is full (see Settings → Storage)'
     : 'Not saved — something went wrong';
+}
+// Saves; when that fails, `rollback()` puts the change back and the user is told. True when saved.
+function saveOrRollback(rollback) {
+  try {
+    saveState();
+    return true;
+  } catch (e) {
+    console.error('Not saved', e);
+    rollback();
+    toast(storageErrorMessage(e), 4000);
+    return false;
+  }
 }
 
 // ============ Activity / Streak ============
@@ -921,7 +950,22 @@ function saveWord() {
   clearForm();
 }
 
+// One import at a time: a second click while words are being looked up would add them twice
+let bulkImportRunning = false;
 async function bulkImport() {
+  if (bulkImportRunning) return;
+  bulkImportRunning = true;
+  const button = document.getElementById('bulkImportBtn');
+  if (button) button.disabled = true;
+  try {
+    await importWordList();
+  } finally {
+    bulkImportRunning = false;
+    if (button) button.disabled = false;
+  }
+}
+
+async function importWordList() {
   const raw = document.getElementById('bulkInput').value.trim();
   if (!raw) return;
   const status = document.getElementById('bulkStatus');
@@ -932,6 +976,8 @@ async function bulkImport() {
     status.textContent = `Processing ${i + 1}/${words.length}: ${w}...`;
     if (findWordByText(w)) continue;
     const entry = newWordEntry({ text: w, ...(await lookupWordFields(w)) });
+    // Re-check: it may have been added (here or in another tab) while it was being looked up
+    if (findWordByText(w)) continue;
     const previous = state.words;
     state.words = [...state.words, entry];
     try {
@@ -1371,11 +1417,12 @@ function handleLibAction(id, act) {
   }
   if (act === 'reset') {
     if (!confirm(`Reset progress for "${w.text}"?`)) return;
-    w.level = 0; w.interval = 1; w.ease = DEFAULT_EASE;
-    w.rightCount = 0; w.wrongCount = 0;
-    w.nextReview = nowMs(); w.archivedAt = null;
-    w.updatedAt = new Date().toISOString();
-    saveState(); renderLibrary(); toast('Reset');
+    const previous = state.words;
+    const fresh = { ...w, level: 0, interval: 1, ease: DEFAULT_EASE, rightCount: 0, wrongCount: 0,
+      nextReview: nowMs(), archivedAt: null, updatedAt: new Date().toISOString() };
+    state.words = previous.map(x => (x.id === id ? fresh : x));
+    if (!saveOrRollback(() => { state.words = previous; })) return;
+    renderLibrary(); toast('Reset');
     return;
   }
   if (act === 'delete') {
@@ -1409,10 +1456,12 @@ async function startDrill() {
   else if (src === 'due') pool = pool.filter(w => !w.archivedAt && (w.nextReview || 0) <= nowMs());
   if (pool.length === 0) { toast('No words for this source'); return; }
   const queue = shuffle(pool);
-  drill = { running: true, queue, idx: 0, total: queue.length };
+  // This drill's own state: after Stop, a new drill is a new object, so this loop can't pick up its flag
+  const run = { running: true, queue, idx: 0, total: queue.length };
+  drill = run;
   for (let i = 0; i < queue.length; i++) {
-    if (!drill.running) break;
-    drill.idx = i;
+    if (!run.running) break;
+    run.idx = i;
     const w = queue[i];
     const ex = (w.examples && w.examples[0]) ? w.examples[0] : { en: w.text, cn: w.defCN || '' };
     document.getElementById('drillWord').textContent = w.text;
@@ -1420,14 +1469,14 @@ async function startDrill() {
     document.getElementById('drillCN').textContent = showCN ? (ex.cn || w.defCN || '') : '';
     document.getElementById('drillProgress').textContent = `${i + 1} / ${queue.length}`;
     for (let r = 0; r < repeat; r++) {
-      if (!drill.running) break;
+      if (!run.running) break;
       if (sayWord) { await speak(w.text, { rate: speed }); await wait(300); }
       await speak(ex.en, { rate: speed });
       await wait(pause * 1000);
     }
   }
-  if (drill.running) toast('Drill complete 🎧');
-  drill.running = false;
+  if (run.running) toast('Drill complete 🎧');
+  run.running = false;
 }
 function stopDrill() {
   if (drill) drill.running = false;
@@ -1485,10 +1534,15 @@ function renderReading() {
 async function readingPlayAll() {
   if (!readingState || !readingState.words.length) return;
   const speed = parseFloat(document.getElementById('readingSpeed').value);
-  readingState.playing = true;
-  for (let i = 0; i < readingState.words.length; i++) {
-    if (!readingState.playing) break;
-    const w = readingState.words[i];
+  // Each Play has its own token: after Stop then Play, or a rebuilt passage, the old loop sees it isn't
+  // the one playing any more and stops
+  const passage = readingState;
+  const token = {};
+  passage.playing = token;
+  const isPlaying = () => readingState === passage && passage.playing === token;
+  for (let i = 0; i < passage.words.length; i++) {
+    if (!isPlaying()) break;
+    const w = passage.words[i];
     const ex = w.examples.find(e => e.en);
     const el = document.querySelector(`.reading-sentence[data-idx="${i}"]`);
     if (el) { el.classList.add('active'); el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
@@ -1496,10 +1550,10 @@ async function readingPlayAll() {
     if (el) el.classList.remove('active');
     await wait(400);
   }
-  readingState.playing = false;
+  if (passage.playing === token) passage.playing = null;
 }
 function readingStop() {
-  if (readingState) readingState.playing = false;
+  if (readingState) readingState.playing = null;
   speechSynthesis.cancel();
 }
 
@@ -1722,9 +1776,18 @@ function importJSON(file) {
 function applyTheme() {
   document.documentElement.setAttribute('data-theme', state.settings.theme || 'light');
 }
+// A settings change, undone when it can't be saved; true when saved
+function changeSettings(changes) {
+  const previous = state.settings;
+  state.settings = { ...previous, ...changes };
+  return saveOrRollback(() => { state.settings = previous; });
+}
 function toggleTheme() {
-  state.settings.theme = (state.settings.theme === 'dark') ? 'light' : 'dark';
-  saveState(); applyTheme();
+  if (changeSettings({ theme: state.settings.theme === 'dark' ? 'light' : 'dark' })) applyTheme();
+}
+function setSpeechRate(rate) {
+  if (changeSettings({ rate })) document.getElementById('ttsRateVal').textContent = rate.toFixed(2);
+  else document.getElementById('ttsRate').value = state.settings.rate || 1;
 }
 function resetAll() {
   if (!confirm('Delete ALL words and progress? Cannot be undone.')) return;
@@ -1758,8 +1821,11 @@ function generateSyncCode() {
     const ta = document.getElementById('syncCodeOut');
     ta.value = b64;
     ta.select();
-    navigator.clipboard?.writeText(b64);
-    toast('Sync code copied to clipboard');
+    // Copying can be refused (no permission, page not focused); the code is selected in the box either way
+    const copied = navigator.clipboard?.writeText
+      ? navigator.clipboard.writeText(b64).then(() => true, () => false) : Promise.resolve(false);
+    copied.then(ok => toast(ok ? 'Sync code copied to clipboard'
+      : 'Sync code is ready in the box — select it and copy (Cmd/Ctrl+C)', ok ? 1800 : 4000));
   } catch (e) {
     toast('Failed to generate code');
   }
@@ -1829,7 +1895,8 @@ async function handleConnectClick() {
   }
   if (res.error) { toast(res.error); return; }
   document.getElementById('gistToken').value = '';
-  toast(`Connected as ${res.user} ✓`);
+  toast(res.synced ? `Connected as ${res.user} ✓`
+    : `Connected as ${res.user}, but the first sync failed — try 🔄 Sync now`, res.synced ? 1800 : 5000);
   renderSyncUI();
   refreshActiveView();
 }
@@ -1852,13 +1919,19 @@ const GRADE_PROMPT_PREFIX = `Please grade my English journal entry below. I'm a 
 
 My entry`;
 
+// Journal days are YYYY-MM-DD; anything else (a date picker allows a five-digit year) can't be saved or synced
+const JOURNAL_DATE = /^\d{4}-\d{2}-\d{2}$/;
 function currentJournalDate() {
   const el = document.getElementById('journalDate');
-  return (el && el.value) || todayKey();
+  return el && JOURNAL_DATE.test(el.value) ? el.value : todayKey();
 }
 
 function renderJournal() {
   const dateEl = document.getElementById('journalDate');
+  if (dateEl.value && !JOURNAL_DATE.test(dateEl.value)) {
+    dateEl.value = todayKey();
+    toast('Pick a date with a four-digit year — showing today instead');
+  }
   // Text that couldn't be saved stays on screen with its own day, instead of being replaced by another day
   if (!commitJournal()) { dateEl.value = pendingJournal.date; return; }
   if (!dateEl.value) dateEl.value = todayKey();
@@ -2201,6 +2274,9 @@ function handleUrlParams() {
 // ============ Init ============
 function init() {
   applyTheme();
+  if (storageLoadProblem) {
+    toast(`Your saved data could not be read, so the app started empty. A copy was kept in this browser (${STORAGE_KEY}_corrupt) for recovery.`, 10000);
+  }
   document.getElementById('streakBadge').textContent = `🔥 ${state.streak.current || 0}`;
   loadVoices();
 
@@ -2295,16 +2371,12 @@ function init() {
 
   // Settings
   document.getElementById('voiceSelect').addEventListener('change', e => {
-    state.settings.voiceURI = e.target.value; saveState();
+    if (!changeSettings({ voiceURI: e.target.value })) e.target.value = state.settings.voiceURI || '';
   });
   const rateEl = document.getElementById('ttsRate');
   rateEl.value = state.settings.rate || 1;
   document.getElementById('ttsRateVal').textContent = (state.settings.rate || 1).toFixed(2);
-  rateEl.addEventListener('input', e => {
-    state.settings.rate = parseFloat(e.target.value);
-    document.getElementById('ttsRateVal').textContent = state.settings.rate.toFixed(2);
-    saveState();
-  });
+  rateEl.addEventListener('input', e => setSpeechRate(parseFloat(e.target.value)));
   document.getElementById('ttsTestBtn').addEventListener('click', () => speak('Hello! This is a test of the selected voice.'));
   document.getElementById('shadowPlayRef').addEventListener('click', shadowPlayRef);
   document.getElementById('shadowStart').addEventListener('click', shadowStart);

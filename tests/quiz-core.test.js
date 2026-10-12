@@ -97,6 +97,32 @@ test('clean JSON feedback is matched to the items by position', () => {
   assert.deepEqual(feedback.tip, { en: 'Nice work.', cn: '做得好。' });
 });
 
+const three = [{ text: 'carry on' }, { text: 'reluctant' }, { text: 'Set Off' }];
+const result = (word, verdict, model = `${verdict} ${word}`) => ({ word, verdict, sentences: [], model });
+const verdictsOf = reply => Q.parseQuizFeedback(JSON.stringify({ items: reply }), three).feedback.items.map(item => item.model || item.verdict);
+
+test('feedback in a different order is matched to the items by word', () => {
+  assert.deepEqual(verdictsOf([result(' SET OFF ', 'wrong', 'third'), result('carry on', 'natural'), result('Reluctant', 'understandable')]),
+    ['natural carry on', 'understandable Reluctant', 'third']);
+});
+
+test('a skipped item shows as not checked and does not shift the rest', () => {
+  assert.deepEqual(verdictsOf([result('carry on', 'natural'), result('set off', 'wrong')]),
+    ['natural carry on', 'unchecked', 'wrong set off']);
+});
+
+test('a repeated word or an unknown word never takes another item\'s feedback', () => {
+  assert.deepEqual(verdictsOf([result('carry on', 'natural'), result('banana', 'wrong', 'unknown'), result('carry on', 'wrong', 'second copy'),
+    result('reluctant', 'understandable')]), ['natural carry on', 'understandable reluctant', 'unchecked']);
+});
+
+test('feedback without a word, or with a word that matches nothing, falls back to its position when that item is free', () => {
+  assert.deepEqual(verdictsOf([{ verdict: 'natural', model: 'first' }, result('reluctant', 'wrong'), result('set out', 'understandable', 'third')]),
+    ['first', 'wrong reluctant', 'third']);
+  assert.deepEqual(verdictsOf([result('reluctant', 'wrong'), { verdict: 'natural', model: 'no word' }, result('set off', 'natural')]),
+    ['unchecked', 'wrong reluctant', 'natural set off'], 'Position 2 is taken by "reluctant", so the wordless result is ignored');
+});
+
 test('a messy ChatGPT reply with prose, curly quotes and a wrapper is still read', () => {
   const reply = 'Here you go!\n{“feedback”: {“items”: [{“verdict”: “Natural”, “sentences”: [], “model”: “Let’s carry on.”}]}}\nHope it helps.';
   const { feedback } = Q.parseQuizFeedback(reply, items);

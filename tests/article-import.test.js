@@ -169,6 +169,32 @@ test('an article too long for the shelf is still opened, with a note that it was
   assert.match(h.element('readerImportStatus').textContent, /too long to save/i);
 });
 
+test('an article longer than the Reader can show opens its first part, and the status says so', async () => {
+  const paragraphText = 'A long paragraph about policy and research, written for this test. '.repeat(20).trim();
+  const long = `${paragraphText}\n\n`.repeat(Math.ceil(250000 / (paragraphText.length + 2)));
+  const h = harness({ fetchResult: { ok: true, status: 200, json: async () => reply(long) } });
+  h.sandbox.MaterialStore = { ...MaterialStore, MAX_MATERIAL_CHARS: 300000 };
+  assert.equal(await h.run(`importArticleFromLink('https://openai.com/index/b/')`), true);
+  const shown = h.calls.analyzed[0];
+  assert.ok(shown.length <= ArticleImportCore.MAX_READER_CHARS, 'The Reader gets text it can draw');
+  assert.ok(shown.endsWith(paragraphText), 'Cut at a paragraph break');
+  assert.equal(h.element('readerInput').value, shown, 'The saved material is the same first part');
+  assert.equal(h.calls.saved.length, 1);
+  const status = h.element('readerImportStatus').textContent;
+  assert.match(status, /first part/i);
+  assert.ok(status.includes(`${shown.length.toLocaleString()} of ${long.trim().length.toLocaleString()} characters`), status);
+  assert.match(status, /saved it/i);
+});
+
+test('the Reader limit from reader.js is used when it is loaded', async () => {
+  const long = 'Short paragraph of text for the limit test.\n\n'.repeat(30);
+  const h = harness({ fetchResult: { ok: true, status: 200, json: async () => reply(long) } });
+  h.run('var MAX_READER_CHARS = 500;');
+  await h.run(`importArticleFromLink('https://openai.com/index/b/')`);
+  assert.ok(h.calls.analyzed[0].length <= 500);
+  assert.match(h.element('readerImportStatus').textContent, /first part/i);
+});
+
 test('a News episode with audio opens as a conversation, with its player, and is saved with the audio link', async () => {
   const h = harness();
   const audio = 'https://downloads.bbc.co.uk/learningenglish/features/6min/261001_music_download.mp3';

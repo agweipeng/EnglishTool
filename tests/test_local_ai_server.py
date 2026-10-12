@@ -1,10 +1,15 @@
+import http.client
 import importlib.util
 import io
 import json
+import shutil
+import socket
+import tempfile
 import threading
 import time
 import unittest
 from pathlib import Path
+from unittest import mock
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 
@@ -154,6 +159,56 @@ class LocalServerTests(unittest.TestCase):
         self.assertNotIn(b'test-token', body)
         self.upstream.failure = TimeoutError()
         self.assertEqual(json.loads(self.request('/local-ai/models')[1])['error']['code'], 'timeout')
+
+    def test_broken_upstream_http_is_a_502_not_a_dropped_connection(self):
+        # A model server that answers with garbage raises http.client errors, which are not OSErrors
+        self.upstream.failure = http.client.BadStatusLine('garbage')
+        status, body = self.request('/local-ai/models')
+        self.assertEqual(status, 502)
+        self.assertEqual(json.loads(body)['error']['code'], 'invalid')
+
+        class CutShort(Reply):
+            def read(self, *args):
+                raise http.client.IncompleteRead(b'{"da')
+
+        class HalfAnswer:
+            def open(self, request, timeout):
+                return CutShort(b'')
+        self.server.upstream = HalfAnswer()
+        status, body = self.request('/local-ai/chat', {'model':'m', 'messages':[{'role':'user','content':'x'}]})
+        self.assertEqual(status, 502)
+        self.assertEqual(json.loads(body)['error']['code'], 'invalid')
+
+    def test_a_stalled_client_is_dropped_after_a_timeout(self):
+        self.assertEqual(module.LocalAIHandler.timeout, module.CLIENT_TIMEOUT)
+        # Use a short limit here; the real one is CLIENT_TIMEOUT seconds
+        with mock.patch.object(module.LocalAIHandler, 'timeout', 0.3), \
+                socket.create_connection(('127.0.0.1', self.server.server_port), timeout=5) as client:
+            client.sendall(f'POST /local-ai/chat HTTP/1.1\r\nHost: 127.0.0.1:{self.server.server_port}\r\n'
+                           'Content-Type: application/json\r\nContent-Length: 50\r\n\r\n{"model"'.encode())
+            # The body never arrives; the server should close the connection rather than wait forever
+            self.assertEqual(client.recv(1024), b'')
+
+    def test_only_app_files_are_served(self):
+        root = Path(tempfile.mkdtemp()).resolve()
+        self.addCleanup(shutil.rmtree, root)
+        files = ['index.html', 'app.js', 'style.css', 'news.json', 'books/catalog.json',
+                 'books/demo/chapters/one.json', 'books/demo/source.txt', 'digests/index.html',
+                 'english-trainer-2026-05-20.json', 'english-trainer-data.json', 'notes.json',
+                 'scripts/fetch-news.mjs', 'scripts/serve-local-ai.py', 'tests/app.test.js',
+                 'node_modules/pkg/index.js', 'docs/plan.md', 'extension/manifest.json', 'backup.zip']
+        for name in files:
+            (root / name).parent.mkdir(parents=True, exist_ok=True)
+            (root / name).write_text('x')
+        with mock.patch.object(module, 'ROOT', root):
+            for path in ('/', '/index.html', '/app.js', '/style.css', '/news.json', '/books/catalog.json',
+                         '/books/demo/chapters/one.json', '/books/demo/source.txt', '/digests/index.html'):
+                self.assertEqual(self.request(path)[0], 200, path)
+            for path in ('/english-trainer-2026-05-20.json', '/english-trainer-data.json', '/notes.json',
+                         '/scripts/fetch-news.mjs', '/scripts/serve-local-ai.py', '/tests/app.test.js',
+                         '/node_modules/pkg/index.js', '/docs/plan.md', '/extension/manifest.json',
+                         '/backup.zip', '/Scripts/fetch-news.mjs', '/ENGLISH-TRAINER-2026-05-20.JSON'):
+                self.assertEqual(self.request(path)[0], 404, path)
 
     def test_ollama_stream_stops_reading_when_the_browser_disconnects(self):
         chunk = json.dumps({'message': {'content': 'x'}, 'done': False}).encode() + b'\n'

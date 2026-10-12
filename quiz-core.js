@@ -132,15 +132,34 @@ ${tests}`;
     return { verdict: VERDICTS.includes(verdict) ? verdict : 'unchecked', sentences, model: text(raw?.model) };
   }
 
-  // { feedback, feedbackText }: results match the items by position. A reply without usable JSON, or whose
-  // JSON judges nothing (such as the echoed template), is kept as text so it is never lost.
+  // Each quiz item's result (or undefined): matched by the "word" the reply echoes, so a reordered or
+  // skipped result never lands on the wrong word. A result with no word, or a word that matches no item,
+  // falls back to its position if that item has no result yet; a second result for the same word is ignored.
+  function matchResults(items, results) {
+    const keys = items.map(item => keyOf(item?.text));
+    const matched = items.map(() => undefined);
+    const unplaced = [];
+    results.forEach((result, position) => {
+      const key = keyOf(result?.word);
+      const index = key ? keys.indexOf(key) : -1;
+      if (index === -1) unplaced.push({ result, position });
+      else if (!matched[index]) matched[index] = result;
+    });
+    for (const { result, position } of unplaced) {
+      if (position < items.length && !matched[position]) matched[position] = result;
+    }
+    return matched;
+  }
+
+  // { feedback, feedbackText }: results are matched to the items by word (see matchResults). A reply without
+  // usable JSON, or whose JSON judges nothing (such as the echoed template), is kept as text so it is never lost.
   function parseQuizFeedback(reply, items) {
     const raw = String(reply || '').slice(0, MAX_REPLY_CHARS);
     const asText = { feedback: null, feedbackText: raw.trim() };
     const found = replyJSON.findReplyJSON(raw, value => !!feedbackRoot(value));
     if (!found) return asText;
     const results = feedbackRoot(found);
-    const judged = items.map((item, i) => itemResult(results.items[i]));
+    const judged = matchResults(items, results.items).map(itemResult);
     if (!judged.some(item => item.verdict !== 'unchecked')) return asText;
     return { feedback: { items: judged, tip: bilingual(results.tip) }, feedbackText: '' };
   }

@@ -54,7 +54,17 @@ async function fetchArticle(url, signal) {
   } catch {
     reply = null;   // a web page (such as a Wi-Fi login) instead of the reader's reply
   }
-  return ArticleImportCore.parseReaderReply(reply, url);
+  return ArticleImportCore.parseReaderReply(reply, url, readerCharLimit());
+}
+
+// The Reader's limit from reader.js when it is loaded, so an imported article is never too long to show
+const readerCharLimit = () => (typeof MAX_READER_CHARS === 'number' && MAX_READER_CHARS > 0
+  ? MAX_READER_CHARS : ArticleImportCore.MAX_READER_CHARS);
+
+// "“Title”", or "the first part of “Title” (N of M characters)" when the article was cut to fit the Reader
+function importedName(title, article) {
+  if (!article.fullLength) return `“${title}”`;
+  return `the first part of “${title}” (${article.text.length.toLocaleString()} of ${article.fullLength.toLocaleString()} characters — the Reader shows up to ${readerCharLimit().toLocaleString()} at a time)`;
 }
 
 // Saving uses the title as the shelf key: a different page with the same title gets its site name added,
@@ -86,12 +96,14 @@ function showImportedArticle(article, type, audioUrl = '') {
   if (audioUrl) setReaderAudio(audioUrl, article.text);
   document.getElementById('readerPaste').open = false;
   document.getElementById('readerImportUrl').value = '';
+  const name = importedName(title, article);
+  const partCN = article.fullLength ? '（文章过长，仅导入前一部分）' : '';
   if (article.text.length > MaterialStore.MAX_MATERIAL_CHARS) {
-    return { saved: false, message: `Imported “${title}”, but it is too long to save to your materials (${MaterialStore.MAX_MATERIAL_CHARS.toLocaleString()} characters). / 已导入，但文章过长，无法保存到阅读材料。` };
+    return { saved: false, message: `Imported ${name}, but it is too long to save to your materials (${MaterialStore.MAX_MATERIAL_CHARS.toLocaleString()} characters). / 已导入${partCN}，但文章过长，无法保存到阅读材料。` };
   }
   return saveCurrentReadingMaterial()
-    ? { saved: true, message: `Imported “${title}” and saved it to My reading materials. / 已导入并保存到“我的阅读材料”。` }
-    : { saved: false, message: `Imported “${title}”, but it was not saved to your materials — see the message above (the shelf may be full). / 已导入，但未保存到阅读材料。` };
+    ? { saved: true, message: `Imported ${name} and saved it to My reading materials. / 已导入${partCN}并保存到“我的阅读材料”。` }
+    : { saved: false, message: `Imported ${name}, but it was not saved to your materials — see the message above (the shelf may be full). / 已导入${partCN}，但未保存到阅读材料。` };
 }
 
 const confirmReplaceReaderText = () => confirm('Replace the text in the reader with this article? Save it to your materials first if you want to keep it. / 用这篇文章替换阅读器中的文字吗？');

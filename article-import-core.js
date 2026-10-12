@@ -7,6 +7,7 @@
   const MIN_ARTICLE_CHARS = 200;   // less than this is a login wall, cookie notice or error page
   const MAX_TITLE_CHARS = 200;
   const MAX_MARKDOWN_CHARS = 400000;   // far more than any article; keeps cleaning fast
+  const MAX_READER_CHARS = 200000;     // the Reader's own limit (reader.js); the browser passes the real one
 
   const safeLink = value => {
     try {
@@ -90,27 +91,41 @@
       .trim();
   }
 
-  // The reader service's JSON reply → { title, url, text, published }, or an error that says why
-  function parseReaderReply(reply, requestedUrl) {
+  // { text, fullLength }: text longer than maxChars is cut at the last paragraph break that fits
+  // (or the last line break, or space, when there is none), so the Reader never gets more than it can show
+  function cutAtParagraph(text, maxChars) {
+    const fullLength = text.length;
+    if (fullLength <= maxChars) return { text, fullLength };
+    const breakAt = [text.lastIndexOf('\n\n', maxChars), text.lastIndexOf('\n', maxChars), text.lastIndexOf(' ', maxChars)]
+      .find(index => index > 0);
+    return { text: text.slice(0, breakAt || maxChars).trimEnd(), fullLength };
+  }
+
+  // The reader service's JSON reply → { title, url, text, published }, plus fullLength when the text was
+  // cut to the Reader's limit; or an error that says why
+  function parseReaderReply(reply, requestedUrl, maxChars = MAX_READER_CHARS) {
     const data = reply && reply.data;
     if (!reply || reply.code !== 200 || !data || typeof data.content !== 'string') {
       throw new Error('The article reader could not read this page. Copy and paste the text instead. / 无法读取该网页，请复制粘贴正文。');
     }
-    const text = markdownToText(data.content);
-    if (text.length < MIN_ARTICLE_CHARS) {
+    const cleaned = markdownToText(data.content);
+    if (cleaned.length < MIN_ARTICLE_CHARS) {
       throw new Error('This page has not enough article text (it may need a login). Copy and paste the text instead. / 该网页正文太少（可能需要登录），请复制粘贴正文。');
     }
     const url = safeLink(data.url) || requestedUrl;
     const title = (typeof data.title === 'string' ? data.title.trim() : '') || new URL(url).hostname.replace(/^www\./, '');
+    const { text, fullLength } = cutAtParagraph(cleaned, maxChars);
     return {
       title: title.slice(0, MAX_TITLE_CHARS),
       url,
       text,
       published: typeof data.publishedTime === 'string' ? data.publishedTime : '',
+      ...(text.length < fullLength ? { fullLength } : {}),
     };
   }
 
-  const api = { JINA_READER, MIN_ARTICLE_CHARS, normalizeArticleUrl, readerRequestUrl, markdownToText, parseReaderReply };
+  const api = { JINA_READER, MIN_ARTICLE_CHARS, MAX_READER_CHARS, normalizeArticleUrl, readerRequestUrl, markdownToText,
+    cutAtParagraph, parseReaderReply };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.ArticleImportCore = api;
 })(typeof window !== 'undefined' ? window : globalThis);
