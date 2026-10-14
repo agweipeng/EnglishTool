@@ -1,10 +1,14 @@
 {
-  "generatedAt": "2026-10-13T13:52:19.559Z",
+  "generatedAt": "2026-10-14T11:29:34.164Z",
   "sources": {
     "anthropic": [
       {
         "title": "Expanding the Cyber Verification Program Announcements Oct 6, 2026 We’re launching a new, expanded…",
         "url": "https://www.anthropic.com/news/cyber-verification-program"
+      },
+      {
+        "title": "Oct 14, 2026 Announcements Anthropic opens Singapore office and signs MOU with the Government of…",
+        "url": "https://www.anthropic.com/news/singapore-office-opening"
       },
       {
         "title": "Oct 8, 2026 Announcements 2026 Usage Policy update",
@@ -29,10 +33,6 @@
       {
         "title": "Sep 23, 2026 Science Claude discovers a novel enzyme system with CRISPR-like repeats",
         "url": "https://www.anthropic.com/news/claude-discovers-novel-enzyme-system"
-      },
-      {
-        "title": "Sep 18, 2026 Announcements Partnering with Accenture on embedded evaluation",
-        "url": "https://www.anthropic.com/news/accenture-embedded-evaluation"
       }
     ],
     "openai": [
@@ -75,16 +75,16 @@
         "url": "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-september-2026/"
       },
       {
+        "title": "Gemini 4 is now available in the Gemini app",
+        "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-4-argon-availability/"
+      },
+      {
         "title": "Guided Vision in Gemini Live: built for accessibility",
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/guided-vision-gemini-live/"
       },
       {
         "title": "A new wave of Connected Apps is rolling out to Gemini.",
         "url": "https://blog.google/innovation-and-ai/products/gemini-app/new-connected-apps-gemini/"
-      },
-      {
-        "title": "4 ways to tackle household chores with Gemini",
-        "url": "https://blog.google/innovation-and-ai/products/gemini-app/household-chores-tips/"
       },
       {
         "title": "Ask a Scientist: How are researchers using AI to help pregnant women access ultrasounds?",
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 278292,
+        "stars": 278896,
         "language": "JavaScript",
         "updatedAt": "2026-10-12T14:45:46Z"
       },
@@ -116,63 +116,63 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 253346,
+        "stars": 253638,
         "language": "Python",
-        "updatedAt": "2026-10-13T13:43:58Z"
-      },
-      {
-        "name": "firecrawl/firecrawl",
-        "url": "https://github.com/firecrawl/firecrawl",
-        "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 191067,
-        "language": "TypeScript",
-        "updatedAt": "2026-10-13T04:48:27Z"
+        "updatedAt": "2026-10-14T07:00:58Z"
       },
       {
         "name": "morluto/rea",
         "url": "https://github.com/morluto/rea",
         "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
-        "stars": 190871,
+        "stars": 225649,
         "language": "TypeScript",
-        "updatedAt": "2026-10-13T13:51:39Z"
+        "updatedAt": "2026-10-14T11:28:11Z"
+      },
+      {
+        "name": "firecrawl/firecrawl",
+        "url": "https://github.com/firecrawl/firecrawl",
+        "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
+        "stars": 191381,
+        "language": "TypeScript",
+        "updatedAt": "2026-10-13T22:58:04Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187552,
+        "stars": 187569,
         "language": "Python",
-        "updatedAt": "2026-10-13T13:49:53Z"
+        "updatedAt": "2026-10-14T11:27:13Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 183000,
+        "stars": 183112,
         "language": "Go",
-        "updatedAt": "2026-10-13T04:51:43Z"
+        "updatedAt": "2026-10-14T00:20:20Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 172814,
+        "stars": 172920,
         "language": "HTML",
-        "updatedAt": "2026-10-13T03:23:40Z"
+        "updatedAt": "2026-10-14T08:58:33Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 167643,
+        "stars": 167707,
         "language": "Python",
-        "updatedAt": "2026-10-13T13:50:08Z"
+        "updatedAt": "2026-10-14T11:19:42Z"
       },
       {
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 162361,
+        "stars": 163140,
         "language": "JavaScript",
         "updatedAt": "2026-10-13T01:46:28Z"
       },
@@ -180,7 +180,7 @@
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 158991,
+        "stars": 159015,
         "language": "JavaScript",
         "updatedAt": "2026-10-12T04:50:18Z"
       },
@@ -188,17 +188,17 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 158357,
+        "stars": 158434,
         "language": "TypeScript",
-        "updatedAt": "2026-10-13T13:39:01Z"
+        "updatedAt": "2026-10-14T11:24:51Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 155529,
+        "stars": 155622,
         "language": "Python",
-        "updatedAt": "2026-10-13T13:22:14Z"
+        "updatedAt": "2026-10-14T11:28:21Z"
       }
     ],
     "bbc": [
@@ -237,18 +237,6 @@
         "label": "SPY · S&P 500",
         "items": [
           {
-            "title": "Paul Tudor Jones says 2027 could be a really challenging year for the stock market",
-            "url": "https://www.cnbc.com/2026/10/13/paul-tudor-jones-2027-really-challenging-year.html",
-            "publisher": "CNBC",
-            "date": "2026-10-13"
-          },
-          {
-            "title": "The stock market is at a critical juncture. Wall Street is convinced it will resolve in the bulls' favor",
-            "url": "https://www.cnbc.com/2026/10/13/santoli-the-stock-market-is-at-a-critical-juncture.html",
-            "publisher": "CNBC",
-            "date": "2026-10-13"
-          },
-          {
             "title": "Earnings beats are now the norm. What the stock market needs to keep rallying",
             "url": "https://www.cnbc.com/2026/10/07/here-comes-third-quarter-earnings-season-booming-profits-could-propel-the-sp-500-to-new-heights.html",
             "publisher": "CNBC",
@@ -267,10 +255,10 @@
             "date": "2026-10-09"
           },
           {
-            "title": "S&P 500 and Nasdaq surge to record highs after AI chipmaker rally",
-            "url": "https://www.theguardian.com/business/2026/oct/06/sp-500-nasdaq-stocks-ai-chipmakers",
-            "publisher": "The Guardian",
-            "date": "2026-10-06"
+            "title": "Strange market anomaly is creating a buying opportunity in the Nasdaq 100",
+            "url": "https://www.cnbc.com/2026/10/07/strange-market-anomaly-is-creating-a-buying-opportunity-in-the-nasdaq-100.html",
+            "publisher": "CNBC",
+            "date": "2026-10-07"
           }
         ]
       },
@@ -279,7 +267,13 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
-            "title": "Micron, Seagate, Western Digital sink as chip sell-off deepens",
+            "title": "Jim Cramer isn't giving up on semiconductor stocks despite the sell off. Here's why",
+            "url": "https://www.cnbc.com/2026/10/13/jim-cramer-semiconductor-stocks-sell-off.html",
+            "publisher": "CNBC",
+            "date": "2026-10-13"
+          },
+          {
+            "title": "Micron sinks, other memory-linked names dip for a second day",
             "url": "https://www.cnbc.com/2026/10/13/sk-hynix-softbank-samsung-electronics-shares-tech-stocks-fall.html",
             "publisher": "CNBC",
             "date": "2026-10-13"
@@ -289,12 +283,6 @@
             "url": "https://www.cnbc.com/2026/10/13/cxmt-memory-chip-stock-rout.html",
             "publisher": "CNBC",
             "date": "2026-10-13"
-          },
-          {
-            "title": "Stocks making the biggest moves premarket: JPMorgan Chase, Micron, UnitedHealth & more",
-            "url": "https://www.cnbc.com/2026/10/13/stocks-making-the-biggest-moves-premarket-jpm-mu-unh.html",
-            "publisher": "CNBC",
-            "date": "2026-10-13"
           }
         ]
       },
@@ -302,12 +290,6 @@
         "key": "NVDA",
         "label": "NVDA · Nvidia",
         "items": [
-          {
-            "title": "Here are Tuesday's biggest analyst calls: Nvidia, Apple, Netflix, Meta, Galaxy, SoFi, Viking, AT&T & more",
-            "url": "https://www.cnbc.com/2026/10/13/tuesday-big-wall-street-analyst-calls-like-nvidia.html",
-            "publisher": "CNBC",
-            "date": "2026-10-13"
-          },
           {
             "title": "Microsoft to rely more on homegrown AI chips, reducing dependence on Nvidia",
             "url": "https://www.cnbc.com/2026/10/12/microsoft-will-mainly-use-its-maia-chips-for-ai-inference.html",
@@ -319,6 +301,12 @@
             "url": "https://www.theverge.com/news/1009465/microsoft-maia-300-chip-improvements-rollout",
             "publisher": "The Verge",
             "date": "2026-10-12"
+          },
+          {
+            "title": "Nvidia GPUs are everywhere. Here are the ways companies are accessing them",
+            "url": "https://www.cnbc.com/2026/10/10/nvidia-gpus-are-everywhere-heres-how-companies-access-them.html",
+            "publisher": "CNBC",
+            "date": "2026-10-10"
           }
         ]
       },
@@ -327,22 +315,22 @@
         "label": "GOOGL · Google",
         "items": [
           {
-            "title": "Google teases Fitbit Edge launch next week",
-            "url": "https://www.theverge.com/tech/1008918/google-fitbit-edge-launch-next-week",
+            "title": "Google Play now lets anyone build private, vibe-coded apps that run on Android",
+            "url": "https://techcrunch.com/2026/10/13/google-play-now-supports-private-vibe-coded-apps-built-just-for-you/",
+            "publisher": "TechCrunch",
+            "date": "2026-10-13"
+          },
+          {
+            "title": "Google finally releases Gemini 4 Argon",
+            "url": "https://www.theverge.com/ai-artificial-intelligence/1009862/google-releases-gemini-4-argon",
             "publisher": "The Verge",
             "date": "2026-10-13"
           },
           {
-            "title": "Fitbit Edge is Google’s middle ground between Fitbit Air and Pixel Watch",
-            "url": "https://techcrunch.com/2026/10/12/fitbit-edge-is-googles-middle-ground-between-fitbit-air-and-pixel-watch/",
-            "publisher": "TechCrunch",
-            "date": "2026-10-12"
-          },
-          {
-            "title": "One Tech Tip: Lake America backlash fuels interest in Google Maps alternatives",
-            "url": "https://apnews.com/article/google-maps-mapquest-navigation-57a01b62d71b85d21a01091f26fad36a",
-            "publisher": "AP News",
-            "date": "2026-10-08"
+            "title": "Google teases Fitbit Edge launch next week",
+            "url": "https://www.theverge.com/tech/1008918/google-fitbit-edge-launch-next-week",
+            "publisher": "The Verge",
+            "date": "2026-10-13"
           }
         ]
       },
@@ -351,22 +339,22 @@
         "label": "AAPL · Apple",
         "items": [
           {
+            "title": "Apple’s HomeView ad is confusing to everyone except parents",
+            "url": "https://www.theverge.com/tech/1010561/apple-homeview-commercial-reaction",
+            "publisher": "The Verge",
+            "date": "2026-10-13"
+          },
+          {
             "title": "Apple releases HomeView smart home hub with screen as showcase for Siri AI",
             "url": "https://www.cnbc.com/2026/10/13/apple-homeview-smart-home-siri-ai.html",
             "publisher": "CNBC",
             "date": "2026-10-13"
           },
           {
-            "title": "No Man’s Sky is coming to the iPhone and iPad",
-            "url": "https://www.theverge.com/entertainment/1009541/no-mans-sky-iphone-ipad-launch-date",
-            "publisher": "The Verge",
-            "date": "2026-10-12"
-          },
-          {
-            "title": "iPhone 18 Pro Max review: Apple’s biggest, heaviest and longest-lasting superphone",
-            "url": "https://www.theguardian.com/technology/2026/oct/12/iphone-18-pro-max-review-apples-biggest-heaviest-and-longest-lasting-superphone",
+            "title": "Apple unveils new smart home devices that showcase upgraded Siri AI",
+            "url": "https://www.theguardian.com/technology/2026/oct/13/apple-new-smart-home-device-ai",
             "publisher": "The Guardian",
-            "date": "2026-10-12"
+            "date": "2026-10-13"
           }
         ]
       },
@@ -375,9 +363,9 @@
         "label": "META · Meta",
         "items": [
           {
-            "title": "Mark Zuckerberg: Meta Is on the Frontier Now",
-            "url": "https://gizmodo.com/mark-zuckerberg-meta-is-on-the-frontier-now-2000825035",
-            "publisher": "Gizmodo",
+            "title": "I don’t miss the camera on the Ray-Ban Meta Audio glasses",
+            "url": "https://www.theverge.com/tech/1009128/ray-ban-meta-audio-glasses-review-smart-glasses-headphones-wearables",
+            "publisher": "The Verge",
             "date": "2026-10-13"
           },
           {
@@ -399,6 +387,12 @@
         "label": "Grok · xAI",
         "items": [
           {
+            "title": "SpaceXSI bundles X Premium, Grok, and Cursor into one subscription",
+            "url": "https://techcrunch.com/2026/10/13/spacexsi-bundles-x-premium-grok-and-cursor-into-one-subscription/",
+            "publisher": "TechCrunch",
+            "date": "2026-10-13"
+          },
+          {
             "title": "Grok Bot Is Now a Model Router as SpaceX Continues to Pivot Further Toward AI Infrastructure",
             "url": "https://gizmodo.com/grok-bot-is-now-a-model-router-as-spacex-continues-to-pivot-further-toward-ai-infrastructure-2000823057",
             "publisher": "Gizmodo",
@@ -408,6 +402,24 @@
       }
     ],
     "china": [
+      {
+        "title": "UK resists EU pressure to hit China with tariffs",
+        "url": "https://www.theguardian.com/politics/2026/oct/14/uk-will-not-put-tariffs-on-chinese-vehicles-says-jonathan-reynolds",
+        "publisher": "The Guardian",
+        "date": "2026-10-14"
+      },
+      {
+        "title": "Graduate student accused of poisoning colleague and trying to flee to China arrested at LAX",
+        "url": "https://www.theguardian.com/us-news/2026/oct/13/wyoming-student-graduate-poison-arrest",
+        "publisher": "The Guardian",
+        "date": "2026-10-14"
+      },
+      {
+        "title": "'I'd talk to the TV': The paid companions bringing warmth to China's lonely",
+        "url": "https://www.bbc.co.uk/news/articles/cm5ynwpzkgk1o",
+        "publisher": "BBC",
+        "date": "2026-10-13"
+      },
       {
         "title": "It’s My Time review – Michelle Yeoh excels in Rocky-style quest to be Rubik’s Cube champ",
         "url": "https://www.theguardian.com/film/2026/oct/13/its-my-time-review-michelle-yeoh-excels-in-rocky-style-quest-to-be-rubiks-cube-champ",
@@ -419,18 +431,6 @@
         "url": "https://www.theguardian.com/business/2026/oct/13/super-app-uk-students-servers-china-us-blacklist",
         "publisher": "The Guardian",
         "date": "2026-10-13"
-      },
-      {
-        "title": "Stellantis and Renault back UK to get EU car industry protection",
-        "url": "https://www.theguardian.com/business/2026/oct/12/stellantis-renault-uk-eu-car-industry-imports-china",
-        "publisher": "The Guardian",
-        "date": "2026-10-12"
-      },
-      {
-        "title": "EU to limit Chinese hybrid vehicle imports to 350,000 a year",
-        "url": "https://www.theguardian.com/environment/2026/oct/12/eu-deal-china-limit-imports-hybrid-electric-vehicles",
-        "publisher": "The Guardian",
-        "date": "2026-10-12"
       },
       {
         "title": "How India became dangerously addicted to Chinese imports",
@@ -447,12 +447,6 @@
       {
         "title": "China has cracked down on AI relationships. Is it ahead of the game?",
         "url": "https://www.bbc.co.uk/news/articles/cm4gjy9lr551o",
-        "publisher": "BBC",
-        "date": "2026-09-30"
-      },
-      {
-        "title": "Restaurant named after Xi Jinping attacked by Chinese nationals in South Korea",
-        "url": "https://www.bbc.co.uk/news/articles/c9kgvm275ev8o",
         "publisher": "BBC",
         "date": "2026-09-30"
       }
