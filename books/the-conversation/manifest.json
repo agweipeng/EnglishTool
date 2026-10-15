@@ -15,18 +15,51 @@
   "recommendation": "New articles every day, written by university experts for general readers: current topics in natural, educated native English.",
   "sectionType": "article",
   "kind": "news",
-  "version": "68ee2cbc1be6910b",
+  "version": "87b3718c9e6460b5",
   "introduction": "",
-  "latestArticle": "2026-10-12T22:32:44Z",
-  "wordCount": 31458,
+  "latestArticle": "2026-10-14T17:57:45Z",
+  "wordCount": 31110,
   "chapters": [
+    {
+      "id": "yemens-houthis-are-bringing-their-war-to-saudi-arabia-and-reframing-the-n-294208",
+      "title": "Yemen’s Houthis are bringing their war to Saudi Arabia – and reframing the narrative of being an Iranian proxy",
+      "author": "Laurent Bonnefoy, CNRS research fellow, Center for International Studies, Sciences Po",
+      "published": "2026-10-14T17:57:45Z",
+      "url": "https://theconversation.com/yemens-houthis-are-bringing-their-war-to-saudi-arabia-and-reframing-the-narrative-of-being-an-iranian-proxy-294208",
+      "number": 1,
+      "wordCount": 1380,
+      "version": "8ad6be887b039bee",
+      "path": "books/the-conversation/chapters/yemens-houthis-are-bringing-their-war-to-saudi-arabia-and-reframing-the-n-294208.json"
+    },
+    {
+      "id": "from-a-little-princess-to-black-panther-how-hollywood-films-have-reimagin-291232",
+      "title": "From ‘A Little Princess’ to ‘Black Panther,’ how Hollywood films have reimagined the South Asian epic ‘Ramayana’",
+      "author": "Sohini Sarah Pillai, Assistant Professor of Religion, Kalamazoo College",
+      "published": "2026-10-14T12:19:27Z",
+      "url": "https://theconversation.com/from-a-little-princess-to-black-panther-how-hollywood-films-have-reimagined-the-south-asian-epic-ramayana-291232",
+      "number": 2,
+      "wordCount": 1191,
+      "version": "27f4de5714799287",
+      "path": "books/the-conversation/chapters/from-a-little-princess-to-black-panther-how-hollywood-films-have-reimagin-291232.json"
+    },
+    {
+      "id": "air-conditioners-contribute-to-climate-change-this-40-year-old-treaty-aim-293262",
+      "title": "Air conditioners contribute to climate change – this 40-year-old treaty aims to limit the harm",
+      "author": "Matt Rigby, Reader in Atmospheric Chemistry, University of Bristol; Lucy Carpenter, Professor of Atmospheric Chemistry, University of York",
+      "published": "2026-10-13T10:33:43Z",
+      "url": "https://theconversation.com/air-conditioners-contribute-to-climate-change-this-40-year-old-treaty-aims-to-limit-the-harm-293262",
+      "number": 3,
+      "wordCount": 972,
+      "version": "ff3627f52083835f",
+      "path": "books/the-conversation/chapters/air-conditioners-contribute-to-climate-change-this-40-year-old-treaty-aim-293262.json"
+    },
     {
       "id": "possessed-nuns-and-sexual-deviance-the-history-behind-ken-russells-highly-294049",
       "title": "Possessed nuns and sexual deviance: the history behind Ken Russell’s highly-censored film The Devils",
       "author": "Philip C. Almond, Emeritus Professor in the History of Religious Thought, The University of Queensland; Brendan C. Walsh, Honorary Research Fellow, The University of Queensland",
       "published": "2026-10-12T22:32:44Z",
       "url": "https://theconversation.com/possessed-nuns-and-sexual-deviance-the-history-behind-ken-russells-highly-censored-film-the-devils-294049",
-      "number": 1,
+      "number": 4,
       "wordCount": 1086,
       "version": "64c95cff804459f0",
       "path": "books/the-conversation/chapters/possessed-nuns-and-sexual-deviance-the-history-behind-ken-russells-highly-294049.json"
@@ -37,7 +70,7 @@
       "author": "Emma Elliott Smith, Research Associate in Anthropology, National Museum of Natural History, Smithsonian Institution; University of New Mexico; Torben Rick, Curator of North American Archaeology, Smithsonian Institution",
       "published": "2026-10-12T19:00:44Z",
       "url": "https://theconversation.com/hooked-on-tuna-people-have-been-harvesting-these-ocean-predators-for-44-000-years-292428",
-      "number": 2,
+      "number": 5,
       "wordCount": 1129,
       "version": "21ed44b79de5f112",
       "path": "books/the-conversation/chapters/hooked-on-tuna-people-have-been-harvesting-these-ocean-predators-for-44-0-292428.json"
@@ -48,7 +81,7 @@
       "author": "Andrew Fountain, Professor of Geography, Portland State University",
       "published": "2026-10-12T19:00:06Z",
       "url": "https://theconversation.com/300-glaciers-have-disappeared-from-the-american-west-since-the-mid-20th-century-the-survivors-have-a-few-things-in-common-294084",
-      "number": 3,
+      "number": 6,
       "wordCount": 800,
       "version": "cf7774fdd401e270",
       "path": "books/the-conversation/chapters/300-glaciers-have-disappeared-from-the-american-west-since-the-mid-20th-c-294084.json"
@@ -59,7 +92,7 @@
       "author": "Conor O'Kane, Senior Lecturer in Economics, Bournemouth University",
       "published": "2026-10-12T18:50:04Z",
       "url": "https://theconversation.com/economics-nobel-how-this-years-winners-helped-to-smooth-the-cycle-of-economic-peaks-and-troughs-294217",
-      "number": 4,
+      "number": 7,
       "wordCount": 861,
       "version": "c4505238c90c1879",
       "path": "books/the-conversation/chapters/economics-nobel-how-this-years-winners-helped-to-smooth-the-cycle-of-econ-294217.json"
@@ -70,7 +103,7 @@
       "author": "Stefan Wolff, Professor of International Security, University of Birmingham",
       "published": "2026-10-12T13:56:31Z",
       "url": "https://theconversation.com/donald-trump-aligns-with-vladimir-putin-yet-again-leaving-ukraine-and-us-relations-with-europe-under-pressure-294119",
-      "number": 5,
+      "number": 8,
       "wordCount": 999,
       "version": "d534e79903bf1b42",
       "path": "books/the-conversation/chapters/donald-trump-aligns-with-vladimir-putin-yet-again-leaving-ukraine-and-us-294119.json"
@@ -81,7 +114,7 @@
       "author": "Dileepa Ediriweera, Health Data Scientist, Liverpool School of Tropical Medicine",
       "published": "2026-10-12T13:18:36Z",
       "url": "https://theconversation.com/snakebites-are-a-far-bigger-problem-than-we-knew-new-study-maps-the-hidden-dangers-292524",
-      "number": 6,
+      "number": 9,
       "wordCount": 780,
       "version": "d7ddba9385350aea",
       "path": "books/the-conversation/chapters/snakebites-are-a-far-bigger-problem-than-we-knew-new-study-maps-the-hidde-292524.json"
@@ -92,7 +125,7 @@
       "author": "Carolyn Strange, Professor of History, School of History, ANU, Australian National University",
       "published": "2026-10-12T05:14:06Z",
       "url": "https://theconversation.com/how-a-botched-execution-and-proposed-livestream-of-a-firing-squad-fit-in-to-the-us-death-penalty-history-294052",
-      "number": 7,
+      "number": 10,
       "wordCount": 945,
       "version": "528f13861d978821",
       "path": "books/the-conversation/chapters/how-a-botched-execution-and-proposed-livestream-of-a-firing-squad-fit-in-294052.json"
@@ -103,7 +136,7 @@
       "author": "Michelle Burgis-Kasthala, Professor of International Law, La Trobe University",
       "published": "2026-10-11T05:08:32Z",
       "url": "https://theconversation.com/trump-misses-out-on-nobel-prize-again-and-imposes-new-sanctions-on-the-international-criminal-court-what-does-it-mean-294115",
-      "number": 8,
+      "number": 11,
       "wordCount": 1202,
       "version": "694b76d4c181164e",
       "path": "books/the-conversation/chapters/trump-misses-out-on-nobel-prize-again-and-imposes-new-sanctions-on-the-in-294115.json"
@@ -114,7 +147,7 @@
       "author": "Safiullah Taye, Researcher and sessional academic, Australian Catholic University; Farkhondeh Akbari, Research Fellow, ARC Centre of Excellence for the Elimination of Violence Against Women, Monash University; Niamatullah Ibrahimi, Senior Research Fellow, Initiative for Peacebuilding, The University of Melbourne",
       "published": "2026-10-09T05:35:48Z",
       "url": "https://theconversation.com/the-war-on-terror-failed-afghanistan-but-the-peoples-hopes-for-democracy-live-on-291143",
-      "number": 9,
+      "number": 12,
       "wordCount": 1271,
       "version": "b340c250c77c7b37",
       "path": "books/the-conversation/chapters/the-war-on-terror-failed-afghanistan-but-the-peoples-hopes-for-democracy-291143.json"
@@ -125,7 +158,7 @@
       "author": "Laura Jansen, Associate Professor in Classics & Comparative Literature, University of Bristol",
       "published": "2026-10-08T11:08:08Z",
       "url": "https://theconversation.com/anne-carson-wins-nobel-prize-in-literature-how-she-discovered-new-possibilities-within-language-293969",
-      "number": 10,
+      "number": 13,
       "wordCount": 675,
       "version": "ab2844236c59e5dc",
       "path": "books/the-conversation/chapters/anne-carson-wins-nobel-prize-in-literature-how-she-discovered-new-possibi-293969.json"
@@ -136,7 +169,7 @@
       "author": "David Lees, Reader in French Studies, University of Warwick",
       "published": "2026-10-07T15:41:31Z",
       "url": "https://theconversation.com/french-student-protests-comparisons-with-1968-will-only-serve-the-political-extremes-293879",
-      "number": 11,
+      "number": 14,
       "wordCount": 981,
       "version": "183b8a70d60a8e0f",
       "path": "books/the-conversation/chapters/french-student-protests-comparisons-with-1968-will-only-serve-the-politic-293879.json"
@@ -147,7 +180,7 @@
       "author": "Josephine Bourner, Postdoctoral Research Associate, Faculty of Medicine and Dentistry, Queen Mary University of London",
       "published": "2026-10-07T15:20:48Z",
       "url": "https://theconversation.com/russian-plague-scare-an-expert-explains-what-we-know-so-far-and-why-theres-no-need-to-panic-293729",
-      "number": 12,
+      "number": 15,
       "wordCount": 1012,
       "version": "d0dda38e4fa91a2a",
       "path": "books/the-conversation/chapters/russian-plague-scare-an-expert-explains-what-we-know-so-far-and-why-there-293729.json"
@@ -158,7 +191,7 @@
       "author": "Birte Julia Gippert, Reader in International Relations, University of Liverpool; Theresa Squatrito, Associate Professor in International Organisations, Department of International Relations, London School of Economics and Political Science",
       "published": "2026-10-07T11:58:45Z",
       "url": "https://theconversation.com/prosecution-of-kosovan-leader-hashim-thaci-illustrates-the-challenges-of-bringing-war-criminals-to-justice-292534",
-      "number": 13,
+      "number": 16,
       "wordCount": 992,
       "version": "a49b45ede744997b",
       "path": "books/the-conversation/chapters/prosecution-of-kosovan-leader-hashim-thaci-illustrates-the-challenges-of-292534.json"
@@ -169,7 +202,7 @@
       "author": "Amin Saikal, Emeritus Professor of Middle Eastern Studies, Australian National University; The University of Western Australia; Victoria University",
       "published": "2026-10-07T02:49:39Z",
       "url": "https://theconversation.com/yemen-is-spiralling-into-another-civil-war-that-could-swiftly-engulf-in-the-entire-region-293104",
-      "number": 14,
+      "number": 17,
       "wordCount": 935,
       "version": "a51ab050e3dae15a",
       "path": "books/the-conversation/chapters/yemen-is-spiralling-into-another-civil-war-that-could-swiftly-engulf-in-t-293104.json"
@@ -180,7 +213,7 @@
       "author": "Jung Woo Lee, Senior Lecturer in Sport and Leisure Policy, University of Edinburgh",
       "published": "2026-10-06T15:26:44Z",
       "url": "https://theconversation.com/how-geopolitical-tensions-tainted-the-2026-asian-games-293279",
-      "number": 15,
+      "number": 18,
       "wordCount": 892,
       "version": "19eb5637f25b87da",
       "path": "books/the-conversation/chapters/how-geopolitical-tensions-tainted-the-2026-asian-games-293279.json"
@@ -191,7 +224,7 @@
       "author": "Paola Vesco, Senior Researcher, Peace Research Institute Oslo (PRIO); Amber Deniz, Senior Analyst, Uppsala University; David Randahl, Associate Senior Lecturer in War Studies, Swedish Defence University; Johan Brosché, Associate Professor, Department of Peace and Conflict Research, Uppsala University; Magnus Öberg, Director of the Uppsala Conflict Data Program, Uppsala University",
       "published": "2026-10-06T13:19:42Z",
       "url": "https://theconversation.com/sudans-death-toll-in-2025-could-be-as-high-as-100-000-how-we-did-the-count-292159",
-      "number": 16,
+      "number": 19,
       "wordCount": 1479,
       "version": "ccbd9af7086dcebb",
       "path": "books/the-conversation/chapters/sudans-death-toll-in-2025-could-be-as-high-as-100-000-how-we-did-the-coun-292159.json"
@@ -202,7 +235,7 @@
       "author": "Noelia Noël, Senior Lecturer, School of Mathematics and Physics, University of Surrey",
       "published": "2026-10-06T12:13:12Z",
       "url": "https://theconversation.com/nobel-physics-prize-awarded-for-discovery-of-ghostly-messengers-from-the-cosmos-293293",
-      "number": 17,
+      "number": 20,
       "wordCount": 1040,
       "version": "2c0f70f6697aba08",
       "path": "books/the-conversation/chapters/nobel-physics-prize-awarded-for-discovery-of-ghostly-messengers-from-the-293293.json"
@@ -213,7 +246,7 @@
       "author": "Julie Moreno, Associate Professor of Environmental and Radiological Health Sciences, Colorado State University",
       "published": "2026-10-06T09:02:25Z",
       "url": "https://theconversation.com/why-old-dogs-might-be-able-to-teach-alzheimers-researchers-new-tricks-291257",
-      "number": 18,
+      "number": 21,
       "wordCount": 790,
       "version": "eb1e493171b5a6a0",
       "path": "books/the-conversation/chapters/why-old-dogs-might-be-able-to-teach-alzheimers-researchers-new-tricks-291257.json"
@@ -224,7 +257,7 @@
       "author": "Emma L. Davies, PhD Researcher in English Literature, University of Bristol",
       "published": "2026-10-06T08:07:41Z",
       "url": "https://theconversation.com/taylor-swifts-new-video-marks-her-ghostly-return-to-daphne-du-mauriers-rebecca-293469",
-      "number": 19,
+      "number": 22,
       "wordCount": 859,
       "version": "69f3abc24772e7bb",
       "path": "books/the-conversation/chapters/taylor-swifts-new-video-marks-her-ghostly-return-to-daphne-du-mauriers-re-293469.json"
@@ -235,7 +268,7 @@
       "author": "Thomas Jeffries, Senior Lecturer in Microbiology, Western Sydney University",
       "published": "2026-10-06T06:41:38Z",
       "url": "https://theconversation.com/the-death-of-a-russian-plague-researcher-explained-by-a-microbiologist-293675",
-      "number": 20,
+      "number": 23,
       "wordCount": 756,
       "version": "9de23b5745034a92",
       "path": "books/the-conversation/chapters/the-death-of-a-russian-plague-researcher-explained-by-a-microbiologist-293675.json"
@@ -246,7 +279,7 @@
       "author": "Sergio Abranches, Ex-professor titular do IUPERJ/Uerj e ex-professor visitante no Departamento de Economia e Administração (FEA), Universidade Federal do Rio de Janeiro (UFRJ)",
       "published": "2026-10-05T21:22:24Z",
       "url": "https://theconversation.com/brazil-election-authoritarian-right-gain-an-edge-fueled-by-voter-apathy-and-discontent-293655",
-      "number": 21,
+      "number": 24,
       "wordCount": 1113,
       "version": "337845d6113bfcd6",
       "path": "books/the-conversation/chapters/brazil-election-authoritarian-right-gain-an-edge-fueled-by-voter-apathy-a-293655.json"
@@ -257,7 +290,7 @@
       "author": "Michelle Campbell-Ward, Associate Professor, Wildlife and Avian Medicine, University of Sydney",
       "published": "2026-10-05T19:10:38Z",
       "url": "https://theconversation.com/africas-rhinos-often-get-the-spotlight-but-indonesias-two-rhino-species-are-far-closer-to-extinction-292679",
-      "number": 22,
+      "number": 25,
       "wordCount": 978,
       "version": "907e1d843d6dbe34",
       "path": "books/the-conversation/chapters/africas-rhinos-often-get-the-spotlight-but-indonesias-two-rhino-species-a-292679.json"
@@ -268,7 +301,7 @@
       "author": "Eyal Mayroz, Senior Lecturer in Peace and Conflict Studies, University of Sydney",
       "published": "2026-10-05T19:09:30Z",
       "url": "https://theconversation.com/three-years-after-october-7-global-attention-on-gaza-has-receded-the-real-test-will-come-after-israels-election-292360",
-      "number": 23,
+      "number": 26,
       "wordCount": 1566,
       "version": "911f82fb47d5b853",
       "path": "books/the-conversation/chapters/three-years-after-october-7-global-attention-on-gaza-has-receded-the-real-292360.json"
@@ -279,7 +312,7 @@
       "author": "Guilherme Casarões, Associate Professor of Brazilian Studies, Florida International University",
       "published": "2026-10-05T04:34:47Z",
       "url": "https://theconversation.com/brazils-new-republic-is-dead-and-what-comes-next-has-not-yet-been-born-293545",
-      "number": 24,
+      "number": 27,
       "wordCount": 1317,
       "version": "454d0ef6a3987a51",
       "path": "books/the-conversation/chapters/brazils-new-republic-is-dead-and-what-comes-next-has-not-yet-been-born-293545.json"
@@ -290,7 +323,7 @@
       "author": "Jay Silverstein, Senior Lecturer in the Department of Chemistry and Forensics, Nottingham Trent University",
       "published": "2026-10-02T14:47:10Z",
       "url": "https://theconversation.com/secret-chambers-in-tutankhamuns-tomb-could-hold-the-burial-of-a-lost-egyptian-queen-we-may-get-answers-soon-292973",
-      "number": 25,
+      "number": 28,
       "wordCount": 1083,
       "version": "ca5c8c50489c6be2",
       "path": "books/the-conversation/chapters/secret-chambers-in-tutankhamuns-tomb-could-hold-the-burial-of-a-lost-egyp-292973.json"
@@ -301,7 +334,7 @@
       "author": "Catherine A. Sanderson, Poler Family Professor of Psychology, Amherst College",
       "published": "2026-10-01T19:05:51Z",
       "url": "https://theconversation.com/dozens-of-men-failed-to-stop-an-alleged-gang-rape-at-cornell-heres-the-misperception-that-keeps-bystanders-from-intervening-and-how-to-short-circuit-it-293321",
-      "number": 26,
+      "number": 29,
       "wordCount": 1061,
       "version": "cbf7283057ea623a",
       "path": "books/the-conversation/chapters/dozens-of-men-failed-to-stop-an-alleged-gang-rape-at-cornell-heres-the-mi-293321.json"
@@ -312,43 +345,10 @@
       "author": "Catherine Greenwood, Lecturer in Digital Marketing, University of Lancashire",
       "published": "2026-10-01T15:29:53Z",
       "url": "https://theconversation.com/social-media-hasnt-killed-personal-style-its-killed-how-we-communicate-it-292483",
-      "number": 27,
+      "number": 30,
       "wordCount": 965,
       "version": "ba65db53d02a61a5",
       "path": "books/the-conversation/chapters/social-media-hasnt-killed-personal-style-its-killed-how-we-communicate-it-292483.json"
-    },
-    {
-      "id": "one-in-three-ukrainian-civilians-estimated-to-meet-the-criteria-for-ptsd-293253",
-      "title": "One in three Ukrainian civilians estimated to meet the criteria for PTSD or complex PTSD – new study",
-      "author": "Gwendolyn Sasse, Einstein Professor for the Comparative Study of Democracy and Authoritarianism, Humboldt University Berlin, and Director, Centre for East European and International Studies (ZOiS); University of Oxford; Deirdre MacManus, Clinical Reader in Psychiatry, King's Centre for Military Health Research, King's College London",
-      "published": "2026-10-01T15:28:31Z",
-      "url": "https://theconversation.com/one-in-three-ukrainian-civilians-estimated-to-meet-the-criteria-for-ptsd-or-complex-ptsd-new-study-293253",
-      "number": 28,
-      "wordCount": 1385,
-      "version": "061570d80e50e5b0",
-      "path": "books/the-conversation/chapters/one-in-three-ukrainian-civilians-estimated-to-meet-the-criteria-for-ptsd-293253.json"
-    },
-    {
-      "id": "rising-co-is-making-african-savanna-grasses-grow-more-what-this-means-for-291313",
-      "title": "Rising CO₂ is making African savanna grasses grow more – what this means for grazing, fire and carbon storage",
-      "author": "Kimberley Simpson, Research Fellow, School of Biosciences, University of Sheffield",
-      "published": "2026-10-01T13:47:27Z",
-      "url": "https://theconversation.com/rising-co-is-making-african-savanna-grasses-grow-more-what-this-means-for-grazing-fire-and-carbon-storage-291313",
-      "number": 29,
-      "wordCount": 1216,
-      "version": "58eeeaf66a347550",
-      "path": "books/the-conversation/chapters/rising-co-is-making-african-savanna-grasses-grow-more-what-this-means-for-291313.json"
-    },
-    {
-      "id": "nina-simone-langston-hughes-and-their-forgotten-creative-collaboration-290878",
-      "title": "Nina Simone, Langston Hughes and their forgotten creative collaboration",
-      "author": "Jason Miller, Assistant Lecturer, North Carolina State University",
-      "published": "2026-10-01T12:42:09Z",
-      "url": "https://theconversation.com/nina-simone-langston-hughes-and-their-forgotten-creative-collaboration-290878",
-      "number": 30,
-      "wordCount": 1290,
-      "version": "b9024ab4300ccd54",
-      "path": "books/the-conversation/chapters/nina-simone-langston-hughes-and-their-forgotten-creative-collaboration-290878.json"
     }
   ]
 }
