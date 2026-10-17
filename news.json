@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-16T11:01:53.545Z",
+  "generatedAt": "2026-10-17T10:22:37.288Z",
   "sources": {
     "anthropic": [
       {
@@ -108,15 +108,15 @@
         "name": "morluto/rea",
         "url": "https://github.com/morluto/rea",
         "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
-        "stars": 281954,
+        "stars": 297635,
         "language": "TypeScript",
-        "updatedAt": "2026-10-16T10:50:49Z"
+        "updatedAt": "2026-10-17T10:09:33Z"
       },
       {
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 280832,
+        "stars": 281867,
         "language": "JavaScript",
         "updatedAt": "2026-10-15T19:17:01Z"
       },
@@ -124,63 +124,63 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 254284,
+        "stars": 254531,
         "language": "Python",
-        "updatedAt": "2026-10-16T10:56:36Z"
+        "updatedAt": "2026-10-17T09:16:43Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 192034,
+        "stars": 192326,
         "language": "TypeScript",
-        "updatedAt": "2026-10-16T04:57:31Z"
+        "updatedAt": "2026-10-17T09:05:40Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187607,
+        "stars": 187619,
         "language": "Python",
-        "updatedAt": "2026-10-16T10:59:15Z"
+        "updatedAt": "2026-10-17T09:01:38Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 183415,
+        "stars": 183555,
         "language": "Go",
-        "updatedAt": "2026-10-16T01:09:43Z"
+        "updatedAt": "2026-10-17T01:45:48Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 173135,
+        "stars": 173216,
         "language": "HTML",
-        "updatedAt": "2026-10-16T03:18:13Z"
+        "updatedAt": "2026-10-17T03:16:39Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 167757,
+        "stars": 167785,
         "language": "Python",
-        "updatedAt": "2026-10-16T10:59:13Z"
+        "updatedAt": "2026-10-17T07:59:45Z"
       },
       {
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 164816,
+        "stars": 165461,
         "language": "JavaScript",
-        "updatedAt": "2026-10-16T08:17:57Z"
+        "updatedAt": "2026-10-16T23:04:42Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 159071,
+        "stars": 159090,
         "language": "JavaScript",
         "updatedAt": "2026-10-16T06:30:59Z"
       },
@@ -188,17 +188,17 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 158637,
+        "stars": 158689,
         "language": "Python",
-        "updatedAt": "2026-10-16T10:47:30Z"
+        "updatedAt": "2026-10-17T09:18:01Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 155881,
+        "stars": 155947,
         "language": "Python",
-        "updatedAt": "2026-10-16T10:55:42Z"
+        "updatedAt": "2026-10-16T14:59:01Z"
       }
     ],
     "bbc": [
@@ -244,6 +244,12 @@
         "label": "SPY · S&P 500",
         "items": [
           {
+            "title": "Wall Street's fear gauge is ripping. Traders see it going even higher",
+            "url": "https://www.cnbc.com/2026/10/16/wall-streets-fear-gauge-is-ripping-traders-see-it-going-even-higher.html",
+            "publisher": "CNBC",
+            "date": "2026-10-16"
+          },
+          {
             "title": "Wall Street's latest AI spook, Netflix layoffs, 'good debt' and more in Morning Squawk",
             "url": "https://www.cnbc.com/2026/10/15/5-things-to-know-before-the-stock-market-opens.html",
             "publisher": "CNBC",
@@ -262,10 +268,10 @@
         "label": "QQQ · Nasdaq",
         "items": [
           {
-            "title": "Tokenization could unleash tens of billions of dollars in trapped capital, Nasdaq CEO says",
-            "url": "https://www.cnbc.com/2026/10/09/nasdaq-ceo-tokenization-could-unleash-billions-in-trapped-capital-.html",
+            "title": "Nasdaq slides 2% Friday to post worst week since June, pressured by AI sell-off and oil prices: Live updates",
+            "url": "https://www.cnbc.com/2026/10/15/stock-market-today-live-updates.html",
             "publisher": "CNBC",
-            "date": "2026-10-09"
+            "date": "2026-10-16"
           }
         ]
       },
@@ -274,21 +280,21 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
+            "title": "Nvidia, AMD, Dell sink in global tech rout on AI funding worries",
+            "url": "https://www.cnbc.com/2026/10/15/sk-hynix-samsung-softbank-stocks-asia-tech-rout-ai-funding-worries.html",
+            "publisher": "CNBC",
+            "date": "2026-10-15"
+          },
+          {
             "title": "TSMC chip capacity is ‘fierce’ battleground for AI customers, amid record quarter",
             "url": "https://www.cnbc.com/2026/10/15/nvidia-apple-broadcom-in-fierce-battle-to-make-chips-at-tsmc.html",
             "publisher": "CNBC",
             "date": "2026-10-15"
           },
           {
-            "title": "TSMC posts record profit for a sixth straight quarter, beating estimates on AI boom",
-            "url": "https://www.cnbc.com/2026/10/15/tsmc-third-quarter-profit-global-ai-.html",
-            "publisher": "CNBC",
-            "date": "2026-10-15"
-          },
-          {
-            "title": "Ricursive Intelligence is betting on AI-designed chips to help solve the compute crisis",
-            "url": "https://techcrunch.com/2026/10/14/ricursive-intelligence-is-betting-on-ai-designed-chips-to-help-solve-the-compute-crisis/",
-            "publisher": "TechCrunch",
+            "title": "Taiwan chipmaker TSMC explores Texas investment to expand production in the US",
+            "url": "https://apnews.com/article/taiwan-tsmc-chip-manufacturing-ai-us-arizona-d1fbfb0bec8a914b0365996b39ecc138",
+            "publisher": "AP News",
             "date": "2026-10-15"
           }
         ]
@@ -298,22 +304,22 @@
         "label": "NVDA · Nvidia",
         "items": [
           {
-            "title": "Nvidia CEO Jensen Huang urges U.S.-China dialogue on 'potentially dangerous' AI",
-            "url": "https://www.cnbc.com/2026/10/15/jensen-huang-nvidia-china-ai.html",
+            "title": "A week with RTX Spark: everything we’ve learned using Nvidia’s new laptops",
+            "url": "https://www.theverge.com/tech/1012748/nvidia-rtx-spark-windows-arm-laptops-asus-hp-lenovo-impressions",
+            "publisher": "The Verge",
+            "date": "2026-10-16"
+          },
+          {
+            "title": "I watched Nvidia's Jensen Huang work the room in London. He brought big checks — and a blunt message",
+            "url": "https://www.cnbc.com/2026/10/16/nvidia-jensen-huang-london.html",
             "publisher": "CNBC",
             "date": "2026-10-16"
           },
           {
-            "title": "Nvidia and Cisco confirm multimillion-dollar donations to Trump's White House ballroom",
-            "url": "https://www.cnbc.com/2026/10/15/trump-ballroom-nvidia-cisco-donations.html",
+            "title": "Nvidia CEO Jensen Huang urges U.S.-China dialogue on 'potentially dangerous' AI",
+            "url": "https://www.cnbc.com/2026/10/15/jensen-huang-nvidia-china-ai.html",
             "publisher": "CNBC",
-            "date": "2026-10-15"
-          },
-          {
-            "title": "Nvidia, AMD, Dell sink in global tech rout on AI funding worries",
-            "url": "https://www.cnbc.com/2026/10/15/sk-hynix-samsung-softbank-stocks-asia-tech-rout-ai-funding-worries.html",
-            "publisher": "CNBC",
-            "date": "2026-10-15"
+            "date": "2026-10-16"
           }
         ]
       },
@@ -346,22 +352,22 @@
         "label": "AAPL · Apple",
         "items": [
           {
-            "title": "Apple and Meta team up to make Muse AI model run on Mac computers",
-            "url": "https://www.cnbc.com/2026/10/15/apple-meta-partner-ai.html",
+            "title": "All the news about the iPhone Duo",
+            "url": "https://www.theverge.com/tech/1010131/apple-iphone-duo-news-announcements",
+            "publisher": "The Verge",
+            "date": "2026-10-16"
+          },
+          {
+            "title": "Apple’s $1,999 iPhone Duo puts the company's status-symbol power to the test",
+            "url": "https://www.cnbc.com/2026/10/16/apple-iphone-duo-demand-price.html",
             "publisher": "CNBC",
-            "date": "2026-10-15"
+            "date": "2026-10-16"
           },
           {
-            "title": "Quick question: Who exactly is iPhone Handoff for?",
-            "url": "https://www.theverge.com/tech/1011338/iphone-handoff-t-mobile-work-iphone",
+            "title": "The new Apple TV 4K just got its first (very small) discount",
+            "url": "https://www.theverge.com/gadgets/1012962/apple-tv-4k-fourth-generation-fanttik-s1-pro-deal-sale",
             "publisher": "The Verge",
-            "date": "2026-10-15"
-          },
-          {
-            "title": "The best feature of Apple’s HomeView might be its simplicity",
-            "url": "https://www.theverge.com/tech/1011431/apple-homeview-smart-display-best-feature",
-            "publisher": "The Verge",
-            "date": "2026-10-14"
+            "date": "2026-10-16"
           }
         ]
       },
@@ -370,9 +376,9 @@
         "label": "META · Meta",
         "items": [
           {
-            "title": "Was this Mark Zuckerberg’s first – and last – taste of Guinness?",
-            "url": "https://www.theguardian.com/food/2026/oct/14/mark-zuckerberg-guinness",
-            "publisher": "The Guardian",
+            "title": "Tesla's Roadster reveal, Apple and Meta team up, Nike's India push and more in Morning Squawk",
+            "url": "https://www.cnbc.com/2026/10/16/5-things-to-know-before-the-stock-market-opens.html",
+            "publisher": "CNBC",
             "date": "2026-10-16"
           },
           {
@@ -394,6 +400,12 @@
         "label": "Grok · xAI",
         "items": [
           {
+            "title": "SpaceX AI policy leader grilled by NYC Council on Grok safety, sexualized images",
+            "url": "https://www.cnbc.com/2026/10/16/spacex-policy-manger-to-testify-in-nyc-council-ai-safety-investigation.html",
+            "publisher": "CNBC",
+            "date": "2026-10-16"
+          },
+          {
             "title": "Elon Musk is promising to “make you whole” if Grok messes up a purchase or leaks your credit card.",
             "url": "https://www.theverge.com/ai-artificial-intelligence/1011847/elon-musk-is-promising-to-make-you-whole-if-grok-messes-up-a-purchase-or-leaks-your-credit-card",
             "publisher": "The Verge",
@@ -409,6 +421,18 @@
       }
     ],
     "china": [
+      {
+        "title": "China’s tourists flock to experience a pretend typhoon as ‘dark tourism’ flourishes",
+        "url": "https://www.theguardian.com/world/2026/oct/17/china-tourists-fake-typhoon-experience-dark-tourism",
+        "publisher": "The Guardian",
+        "date": "2026-10-16"
+      },
+      {
+        "title": "No 10 leaves option open to impose Chinese EV tariffs if UK joins EU scheme",
+        "url": "https://www.theguardian.com/politics/2026/oct/16/uk-chinese-electric-vehicle-ev-tariffs-eu-made-in-europe-scheme",
+        "publisher": "The Guardian",
+        "date": "2026-10-16"
+      },
       {
         "title": "China tells Israel to stop 'forced establishment' of West Bank settlements",
         "url": "https://www.bbc.co.uk/news/articles/cq1j3wdxy48ro",
@@ -428,21 +452,9 @@
         "date": "2026-10-16"
       },
       {
-        "title": "France drops opposition to UK being included in ‘Made in Europe’ legislation",
-        "url": "https://www.theguardian.com/world/2026/oct/15/france-drops-opposition-to-uk-being-included-in-made-in-europe-legislation",
-        "publisher": "The Guardian",
-        "date": "2026-10-15"
-      },
-      {
         "title": "North Korea and China open new bridge after 12-year delay",
         "url": "https://www.bbc.co.uk/news/articles/ck1exgw3j115o",
         "publisher": "BBC",
-        "date": "2026-10-15"
-      },
-      {
-        "title": "The global economy is muddling through against the odds. But a storm is coming | Larry Elliott",
-        "url": "https://www.theguardian.com/commentisfree/2026/oct/15/global-economy-multilateral-cooperation-crisis-imf",
-        "publisher": "The Guardian",
         "date": "2026-10-15"
       },
       {
