@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T10:22:37.288Z",
+  "generatedAt": "2026-10-18T10:40:09.776Z",
   "sources": {
     "anthropic": [
       {
@@ -108,15 +108,15 @@
         "name": "morluto/rea",
         "url": "https://github.com/morluto/rea",
         "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
-        "stars": 297635,
+        "stars": 314186,
         "language": "TypeScript",
-        "updatedAt": "2026-10-17T10:09:33Z"
+        "updatedAt": "2026-10-18T09:13:49Z"
       },
       {
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 281867,
+        "stars": 282907,
         "language": "JavaScript",
         "updatedAt": "2026-10-15T19:17:01Z"
       },
@@ -124,63 +124,63 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 254531,
+        "stars": 254804,
         "language": "Python",
-        "updatedAt": "2026-10-17T09:16:43Z"
+        "updatedAt": "2026-10-18T10:36:55Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 192326,
+        "stars": 192606,
         "language": "TypeScript",
-        "updatedAt": "2026-10-17T09:05:40Z"
+        "updatedAt": "2026-10-18T09:50:14Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187619,
+        "stars": 187636,
         "language": "Python",
-        "updatedAt": "2026-10-17T09:01:38Z"
+        "updatedAt": "2026-10-18T10:24:54Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 183555,
+        "stars": 183688,
         "language": "Go",
-        "updatedAt": "2026-10-17T01:45:48Z"
+        "updatedAt": "2026-10-18T06:06:02Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 173216,
+        "stars": 173294,
         "language": "HTML",
-        "updatedAt": "2026-10-17T03:16:39Z"
+        "updatedAt": "2026-10-18T03:17:54Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 167785,
+        "stars": 167809,
         "language": "Python",
-        "updatedAt": "2026-10-17T07:59:45Z"
+        "updatedAt": "2026-10-18T04:14:43Z"
       },
       {
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 165461,
+        "stars": 166547,
         "language": "JavaScript",
-        "updatedAt": "2026-10-16T23:04:42Z"
+        "updatedAt": "2026-10-18T01:55:14Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 159090,
+        "stars": 159108,
         "language": "JavaScript",
         "updatedAt": "2026-10-16T06:30:59Z"
       },
@@ -188,15 +188,15 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 158689,
+        "stars": 158764,
         "language": "Python",
-        "updatedAt": "2026-10-17T09:18:01Z"
+        "updatedAt": "2026-10-18T10:12:28Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 155947,
+        "stars": 156026,
         "language": "Python",
         "updatedAt": "2026-10-16T14:59:01Z"
       }
@@ -229,13 +229,6 @@
         "date": "2026-09-24",
         "description": "What makes you feel itchy?",
         "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/260924_6_minute_english_why_do_we_itch_download.mp3"
-      },
-      {
-        "title": "Is rejection good for us?",
-        "url": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-260917",
-        "date": "2026-09-17",
-        "description": "How do you feel about being rejected?",
-        "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/260917_6_minute_english_is_rejection_good_for_us_download.mp3"
       }
     ],
     "markets": [
@@ -243,12 +236,6 @@
         "key": "SPY",
         "label": "SPY · S&P 500",
         "items": [
-          {
-            "title": "Wall Street's fear gauge is ripping. Traders see it going even higher",
-            "url": "https://www.cnbc.com/2026/10/16/wall-streets-fear-gauge-is-ripping-traders-see-it-going-even-higher.html",
-            "publisher": "CNBC",
-            "date": "2026-10-16"
-          },
           {
             "title": "Wall Street's latest AI spook, Netflix layoffs, 'good debt' and more in Morning Squawk",
             "url": "https://www.cnbc.com/2026/10/15/5-things-to-know-before-the-stock-market-opens.html",
@@ -280,6 +267,12 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
+            "title": "Semiconductor market to remain solid ‘at least through next year,’ South Korea finance minister says",
+            "url": "https://www.cnbc.com/2026/10/17/south-korea-semiconductor-outlook-lee-hyoung-il.html",
+            "publisher": "CNBC",
+            "date": "2026-10-17"
+          },
+          {
             "title": "Nvidia, AMD, Dell sink in global tech rout on AI funding worries",
             "url": "https://www.cnbc.com/2026/10/15/sk-hynix-samsung-softbank-stocks-asia-tech-rout-ai-funding-worries.html",
             "publisher": "CNBC",
@@ -289,12 +282,6 @@
             "title": "TSMC chip capacity is ‘fierce’ battleground for AI customers, amid record quarter",
             "url": "https://www.cnbc.com/2026/10/15/nvidia-apple-broadcom-in-fierce-battle-to-make-chips-at-tsmc.html",
             "publisher": "CNBC",
-            "date": "2026-10-15"
-          },
-          {
-            "title": "Taiwan chipmaker TSMC explores Texas investment to expand production in the US",
-            "url": "https://apnews.com/article/taiwan-tsmc-chip-manufacturing-ai-us-arizona-d1fbfb0bec8a914b0365996b39ecc138",
-            "publisher": "AP News",
             "date": "2026-10-15"
           }
         ]
@@ -310,16 +297,16 @@
             "date": "2026-10-16"
           },
           {
-            "title": "I watched Nvidia's Jensen Huang work the room in London. He brought big checks — and a blunt message",
-            "url": "https://www.cnbc.com/2026/10/16/nvidia-jensen-huang-london.html",
-            "publisher": "CNBC",
-            "date": "2026-10-16"
-          },
-          {
             "title": "Nvidia CEO Jensen Huang urges U.S.-China dialogue on 'potentially dangerous' AI",
             "url": "https://www.cnbc.com/2026/10/15/jensen-huang-nvidia-china-ai.html",
             "publisher": "CNBC",
             "date": "2026-10-16"
+          },
+          {
+            "title": "Nvidia and Cisco confirm multimillion-dollar donations to Trump's White House ballroom",
+            "url": "https://www.cnbc.com/2026/10/15/trump-ballroom-nvidia-cisco-donations.html",
+            "publisher": "CNBC",
+            "date": "2026-10-15"
           }
         ]
       },
@@ -334,16 +321,16 @@
             "date": "2026-10-15"
           },
           {
+            "title": "Google launches its ‘universal’ online shopping cart ahead of the holidays",
+            "url": "https://www.theverge.com/tech/1011797/google-ai-universal-cart-shopping-tool-launch",
+            "publisher": "The Verge",
+            "date": "2026-10-15"
+          },
+          {
             "title": "Meta- and Google-backed Jio Platforms to raise up to $3.2 billion in historic IPO in India",
             "url": "https://www.cnbc.com/2026/10/15/jio-ipo-meta-google-ambani-musk.html",
             "publisher": "CNBC",
             "date": "2026-10-15"
-          },
-          {
-            "title": "Google Play now lets anyone build private, vibe-coded apps that run on Android",
-            "url": "https://techcrunch.com/2026/10/13/google-play-now-supports-private-vibe-coded-apps-built-just-for-you/",
-            "publisher": "TechCrunch",
-            "date": "2026-10-13"
           }
         ]
       },
@@ -364,8 +351,8 @@
             "date": "2026-10-16"
           },
           {
-            "title": "The new Apple TV 4K just got its first (very small) discount",
-            "url": "https://www.theverge.com/gadgets/1012962/apple-tv-4k-fourth-generation-fanttik-s1-pro-deal-sale",
+            "title": "iPhone Duo orders are already delayed into 2027",
+            "url": "https://www.theverge.com/tech/1012805/apple-iphone-duo-preorder-delay",
             "publisher": "The Verge",
             "date": "2026-10-16"
           }
@@ -376,22 +363,22 @@
         "label": "META · Meta",
         "items": [
           {
-            "title": "Tesla's Roadster reveal, Apple and Meta team up, Nike's India push and more in Morning Squawk",
-            "url": "https://www.cnbc.com/2026/10/16/5-things-to-know-before-the-stock-market-opens.html",
-            "publisher": "CNBC",
-            "date": "2026-10-16"
-          },
-          {
-            "title": "Meta releases Muse Spark Open, a new ‘open-weight’ AI model",
-            "url": "https://www.theguardian.com/technology/2026/oct/16/meta-releases-muse-spark-open-a-new-open-weight-ai-model",
-            "publisher": "The Guardian",
-            "date": "2026-10-16"
-          },
-          {
-            "title": "Meta launches an open-weight AI model that runs on Macs",
-            "url": "https://techcrunch.com/2026/10/15/meta-launches-an-open-weight-model-that-runs-on-macs/",
+            "title": "Meta removes language that raised scraping and AI training concerns",
+            "url": "https://techcrunch.com/2026/10/17/meta-removes-language-that-raised-scraping-and-ai-training-concerns/",
             "publisher": "TechCrunch",
-            "date": "2026-10-15"
+            "date": "2026-10-17"
+          },
+          {
+            "title": "Meta denies accusation of anti-Lula political bias in Brazil after electoral court ruling",
+            "url": "https://apnews.com/article/brazil-meta-political-bias-denial-lula-bolsonaro-954d26ac1eed94acd62c8156e7aa55d9",
+            "publisher": "AP News",
+            "date": "2026-10-16"
+          },
+          {
+            "title": "Meta’s new terms may allow it to train AI on news sites for free",
+            "url": "https://www.theverge.com/tech/1012846/meta-business-terms-scrape-news-publishers",
+            "publisher": "The Verge",
+            "date": "2026-10-16"
           }
         ]
       },
@@ -422,6 +409,12 @@
     ],
     "china": [
       {
+        "title": "Why Britain should reject the lure of cheap – and scary – Chinese AI",
+        "url": "https://www.theguardian.com/business/2026/oct/17/why-britain-should-reject-the-lure-of-cheap-and-scary-chinese-ai",
+        "publisher": "The Guardian",
+        "date": "2026-10-17"
+      },
+      {
         "title": "China’s tourists flock to experience a pretend typhoon as ‘dark tourism’ flourishes",
         "url": "https://www.theguardian.com/world/2026/oct/17/china-tourists-fake-typhoon-experience-dark-tourism",
         "publisher": "The Guardian",
@@ -442,12 +435,6 @@
       {
         "title": "Like dinosaur eggs in the sand: the pterosaur museum built to thrive in the Gobi desert",
         "url": "https://www.theguardian.com/environment/2026/oct/16/dinosaur-eggs-pterosaur-museum-built-gobi-desert",
-        "publisher": "The Guardian",
-        "date": "2026-10-16"
-      },
-      {
-        "title": "Meta releases Muse Spark Open, a new ‘open-weight’ AI model",
-        "url": "https://www.theguardian.com/technology/2026/oct/16/meta-releases-muse-spark-open-a-new-open-weight-ai-model",
         "publisher": "The Guardian",
         "date": "2026-10-16"
       },
