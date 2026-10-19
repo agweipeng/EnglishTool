@@ -15,18 +15,29 @@
   "recommendation": "New articles every day, written by university experts for general readers: current topics in natural, educated native English.",
   "sectionType": "article",
   "kind": "news",
-  "version": "853d9a727239629e",
+  "version": "9bec90f1c4b8d61a",
   "introduction": "",
-  "latestArticle": "2026-10-16T10:07:57Z",
-  "wordCount": 29891,
+  "latestArticle": "2026-10-18T12:05:35Z",
+  "wordCount": 29828,
   "chapters": [
+    {
+      "id": "alberta-and-quebec-referendums-test-canadian-unity-amid-hostility-from-th-294387",
+      "title": "Alberta and Québec referendums test Canadian unity amid hostility from the U.S.",
+      "author": "Donald Barry, Professor Emeritus, Political Science, University of Calgary",
+      "published": "2026-10-18T12:05:35Z",
+      "url": "https://theconversation.com/alberta-and-quebec-referendums-test-canadian-unity-amid-hostility-from-the-u-s-294387",
+      "number": 1,
+      "wordCount": 929,
+      "version": "4674325f79c4049e",
+      "path": "books/the-conversation/chapters/alberta-and-quebec-referendums-test-canadian-unity-amid-hostility-from-th-294387.json"
+    },
     {
       "id": "the-mafia-isnt-keeping-fentanyl-out-of-europe-the-lack-of-demand-is-294078",
       "title": "The mafia isn’t keeping fentanyl out of Europe – the lack of demand is",
       "author": "Anna Sergi, Professor of Sociology of Law and Deviance, Università di Bologna; University of Essex; The University of Melbourne",
       "published": "2026-10-16T10:07:57Z",
       "url": "https://theconversation.com/the-mafia-isnt-keeping-fentanyl-out-of-europe-the-lack-of-demand-is-294078",
-      "number": 1,
+      "number": 2,
       "wordCount": 863,
       "version": "a59ef1414ae031e1",
       "path": "books/the-conversation/chapters/the-mafia-isnt-keeping-fentanyl-out-of-europe-the-lack-of-demand-is-294078.json"
@@ -37,7 +48,7 @@
       "author": "Ahmed Honeini, Honorary Research Associate in American Literature, Royal Holloway, University of London",
       "published": "2026-10-16T09:31:46Z",
       "url": "https://theconversation.com/primes-carrie-miniseries-expands-stephen-kings-story-but-weakens-its-central-horror-294512",
-      "number": 2,
+      "number": 3,
       "wordCount": 824,
       "version": "3759165e16968ddb",
       "path": "books/the-conversation/chapters/primes-carrie-miniseries-expands-stephen-kings-story-but-weakens-its-cent-294512.json"
@@ -48,7 +59,7 @@
       "author": "Daniel Brown, Lecturer in Astronomy, Nottingham Trent University",
       "published": "2026-10-16T09:18:46Z",
       "url": "https://theconversation.com/japans-mmx-mission-aims-to-swipe-soil-samples-from-mars-moon-phobos-294129",
-      "number": 3,
+      "number": 4,
       "wordCount": 1033,
       "version": "92affe9b6f2e3bcd",
       "path": "books/the-conversation/chapters/japans-mmx-mission-aims-to-swipe-soil-samples-from-mars-moon-phobos-294129.json"
@@ -59,7 +70,7 @@
       "author": "Erikka Loftfield, Group Leader, QIMR Berghofer",
       "published": "2026-10-15T23:54:02Z",
       "url": "https://theconversation.com/replacing-just-10-of-ultra-processed-foods-with-whole-foods-linked-to-drop-in-bowel-cancer-rate-294469",
-      "number": 4,
+      "number": 5,
       "wordCount": 815,
       "version": "8eeeb42e041d1c71",
       "path": "books/the-conversation/chapters/replacing-just-10-of-ultra-processed-foods-with-whole-foods-linked-to-dro-294469.json"
@@ -70,7 +81,7 @@
       "author": "Heidi Jane Allen, Paleontologist, The University of Melbourne",
       "published": "2026-10-15T23:22:10Z",
       "url": "https://theconversation.com/earths-oldest-evidence-of-life-is-written-in-stone-but-its-at-risk-of-disappearing-293101",
-      "number": 5,
+      "number": 6,
       "wordCount": 847,
       "version": "fa681d9779c56192",
       "path": "books/the-conversation/chapters/earths-oldest-evidence-of-life-is-written-in-stone-but-its-at-risk-of-dis-293101.json"
@@ -81,7 +92,7 @@
       "author": "Anthony King, Professor of War Studies, Director of the Strategy and Security Institute., University of Exeter",
       "published": "2026-10-15T14:18:03Z",
       "url": "https://theconversation.com/is-the-us-limiting-starlink-in-ukraine-the-consequences-could-be-catastrophic-294496",
-      "number": 6,
+      "number": 7,
       "wordCount": 1112,
       "version": "e5521d6c07a2dacc",
       "path": "books/the-conversation/chapters/is-the-us-limiting-starlink-in-ukraine-the-consequences-could-be-catastro-294496.json"
@@ -92,7 +103,7 @@
       "author": "Alemayehu Fentaw Weldemariam, Adjunct Professor and Ph.D. Fellow, Center for Constitutional Democracy, Indiana University",
       "published": "2026-10-15T14:04:11Z",
       "url": "https://theconversation.com/can-ethiopia-ever-be-at-peace-four-reasons-conflict-keeps-flaring-up-294278",
-      "number": 7,
+      "number": 8,
       "wordCount": 1146,
       "version": "a2b32b8f8292df65",
       "path": "books/the-conversation/chapters/can-ethiopia-ever-be-at-peace-four-reasons-conflict-keeps-flaring-up-294278.json"
@@ -103,7 +114,7 @@
       "author": "Jillian Turanovic, Professor of Sociology, University of Colorado Boulder; Kristin Lloyd, Assistant Professor of Criminal Justice, Clemson University",
       "published": "2026-10-15T12:13:45Z",
       "url": "https://theconversation.com/young-voters-fear-mass-shootings-but-are-divided-on-gun-control-272235",
-      "number": 8,
+      "number": 9,
       "wordCount": 1042,
       "version": "f78405dc287ff48c",
       "path": "books/the-conversation/chapters/young-voters-fear-mass-shootings-but-are-divided-on-gun-control-272235.json"
@@ -114,7 +125,7 @@
       "author": "Emma Colven, Senior Lecturer in Environment and Society, King's College London; Zahratu Shabrina, Associate Professor (Senior Lecturer) in Spatial Data Science, King's College London",
       "published": "2026-10-15T10:47:21Z",
       "url": "https://theconversation.com/cities-are-sinking-but-citywide-averages-hide-the-real-problem-294213",
-      "number": 9,
+      "number": 10,
       "wordCount": 770,
       "version": "b6396db661dedf11",
       "path": "books/the-conversation/chapters/cities-are-sinking-but-citywide-averages-hide-the-real-problem-294213.json"
@@ -125,7 +136,7 @@
       "author": "Tracey German, Professor of Conflict and Security, King's College London",
       "published": "2026-10-15T10:05:12Z",
       "url": "https://theconversation.com/sodcit-after-battlefield-setbacks-russia-returns-to-destroying-ukraines-morale-294292",
-      "number": 10,
+      "number": 11,
       "wordCount": 814,
       "version": "9221f9c0c947cb14",
       "path": "books/the-conversation/chapters/sodcit-after-battlefield-setbacks-russia-returns-to-destroying-ukraines-m-294292.json"
@@ -136,7 +147,7 @@
       "author": "Laurent Bonnefoy, CNRS research fellow, Center for International Studies, Sciences Po",
       "published": "2026-10-14T17:57:45Z",
       "url": "https://theconversation.com/yemens-houthis-are-bringing-their-war-to-saudi-arabia-and-reframing-the-narrative-of-being-an-iranian-proxy-294208",
-      "number": 11,
+      "number": 12,
       "wordCount": 1380,
       "version": "8ad6be887b039bee",
       "path": "books/the-conversation/chapters/yemens-houthis-are-bringing-their-war-to-saudi-arabia-and-reframing-the-n-294208.json"
@@ -147,7 +158,7 @@
       "author": "Dolors Palau-Sampio, Full Professor of Journalism, Universitat de València",
       "published": "2026-10-14T14:36:25Z",
       "url": "https://theconversation.com/maricarmen-abascal-how-a-disabled-evicted-87-year-old-woman-became-a-political-football-in-spains-upcoming-election-294174",
-      "number": 12,
+      "number": 13,
       "wordCount": 1100,
       "version": "fd2a7ec6c2467db3",
       "path": "books/the-conversation/chapters/maricarmen-abascal-how-a-disabled-evicted-87-year-old-woman-became-a-poli-294174.json"
@@ -158,7 +169,7 @@
       "author": "Sohini Sarah Pillai, Assistant Professor of Religion, Kalamazoo College",
       "published": "2026-10-14T12:19:27Z",
       "url": "https://theconversation.com/from-a-little-princess-to-black-panther-how-hollywood-films-have-reimagined-the-south-asian-epic-ramayana-291232",
-      "number": 13,
+      "number": 14,
       "wordCount": 1191,
       "version": "27f4de5714799287",
       "path": "books/the-conversation/chapters/from-a-little-princess-to-black-panther-how-hollywood-films-have-reimagin-291232.json"
@@ -169,7 +180,7 @@
       "author": "Marina Yusupova-Ryder, Visiting Lecturer in Sociology, Edinburgh Napier University",
       "published": "2026-10-13T14:15:02Z",
       "url": "https://theconversation.com/how-the-geopolitical-stigma-associated-with-putins-russia-is-affecting-ordinary-russians-293260",
-      "number": 14,
+      "number": 15,
       "wordCount": 932,
       "version": "3f2a5cbac1670a64",
       "path": "books/the-conversation/chapters/how-the-geopolitical-stigma-associated-with-putins-russia-is-affecting-or-293260.json"
@@ -180,7 +191,7 @@
       "author": "Matt Rigby, Reader in Atmospheric Chemistry, University of Bristol; Lucy Carpenter, Professor of Atmospheric Chemistry, University of York",
       "published": "2026-10-13T10:33:43Z",
       "url": "https://theconversation.com/air-conditioners-contribute-to-climate-change-this-40-year-old-treaty-aims-to-limit-the-harm-293262",
-      "number": 15,
+      "number": 16,
       "wordCount": 972,
       "version": "ff3627f52083835f",
       "path": "books/the-conversation/chapters/air-conditioners-contribute-to-climate-change-this-40-year-old-treaty-aim-293262.json"
@@ -191,7 +202,7 @@
       "author": "Philip C. Almond, Emeritus Professor in the History of Religious Thought, The University of Queensland; Brendan C. Walsh, Honorary Research Fellow, The University of Queensland",
       "published": "2026-10-12T22:32:44Z",
       "url": "https://theconversation.com/possessed-nuns-and-sexual-deviance-the-history-behind-ken-russells-highly-censored-film-the-devils-294049",
-      "number": 16,
+      "number": 17,
       "wordCount": 1086,
       "version": "64c95cff804459f0",
       "path": "books/the-conversation/chapters/possessed-nuns-and-sexual-deviance-the-history-behind-ken-russells-highly-294049.json"
@@ -202,7 +213,7 @@
       "author": "Emma Elliott Smith, Research Associate in Anthropology, National Museum of Natural History, Smithsonian Institution; University of New Mexico; Torben Rick, Curator of North American Archaeology, Smithsonian Institution",
       "published": "2026-10-12T19:00:44Z",
       "url": "https://theconversation.com/hooked-on-tuna-people-have-been-harvesting-these-ocean-predators-for-44-000-years-292428",
-      "number": 17,
+      "number": 18,
       "wordCount": 1129,
       "version": "21ed44b79de5f112",
       "path": "books/the-conversation/chapters/hooked-on-tuna-people-have-been-harvesting-these-ocean-predators-for-44-0-292428.json"
@@ -213,7 +224,7 @@
       "author": "Andrew Fountain, Professor of Geography, Portland State University",
       "published": "2026-10-12T19:00:06Z",
       "url": "https://theconversation.com/300-glaciers-have-disappeared-from-the-american-west-since-the-mid-20th-century-the-survivors-have-a-few-things-in-common-294084",
-      "number": 18,
+      "number": 19,
       "wordCount": 800,
       "version": "cf7774fdd401e270",
       "path": "books/the-conversation/chapters/300-glaciers-have-disappeared-from-the-american-west-since-the-mid-20th-c-294084.json"
@@ -224,7 +235,7 @@
       "author": "Conor O'Kane, Senior Lecturer in Economics, Bournemouth University",
       "published": "2026-10-12T18:50:04Z",
       "url": "https://theconversation.com/economics-nobel-how-this-years-winners-helped-to-smooth-the-cycle-of-economic-peaks-and-troughs-294217",
-      "number": 19,
+      "number": 20,
       "wordCount": 861,
       "version": "c4505238c90c1879",
       "path": "books/the-conversation/chapters/economics-nobel-how-this-years-winners-helped-to-smooth-the-cycle-of-econ-294217.json"
@@ -235,7 +246,7 @@
       "author": "Sam Naidu, Professor, Department of Literary Studies in English, Rhodes University",
       "published": "2026-10-12T16:07:20Z",
       "url": "https://theconversation.com/who-is-navi-pillay-the-south-african-judge-who-won-the-nobel-prize-we-asked-her-biographer-294121",
-      "number": 20,
+      "number": 21,
       "wordCount": 1298,
       "version": "81fb7ce0d5eccd72",
       "path": "books/the-conversation/chapters/who-is-navi-pillay-the-south-african-judge-who-won-the-nobel-prize-we-ask-294121.json"
@@ -246,7 +257,7 @@
       "author": "Stefan Wolff, Professor of International Security, University of Birmingham",
       "published": "2026-10-12T13:56:31Z",
       "url": "https://theconversation.com/donald-trump-aligns-with-vladimir-putin-yet-again-leaving-ukraine-and-us-relations-with-europe-under-pressure-294119",
-      "number": 21,
+      "number": 22,
       "wordCount": 999,
       "version": "d534e79903bf1b42",
       "path": "books/the-conversation/chapters/donald-trump-aligns-with-vladimir-putin-yet-again-leaving-ukraine-and-us-294119.json"
@@ -257,7 +268,7 @@
       "author": "Dileepa Ediriweera, Health Data Scientist, Liverpool School of Tropical Medicine",
       "published": "2026-10-12T13:18:36Z",
       "url": "https://theconversation.com/snakebites-are-a-far-bigger-problem-than-we-knew-new-study-maps-the-hidden-dangers-292524",
-      "number": 22,
+      "number": 23,
       "wordCount": 780,
       "version": "d7ddba9385350aea",
       "path": "books/the-conversation/chapters/snakebites-are-a-far-bigger-problem-than-we-knew-new-study-maps-the-hidde-292524.json"
@@ -268,7 +279,7 @@
       "author": "Carolyn Strange, Professor of History, School of History, ANU, Australian National University",
       "published": "2026-10-12T05:14:06Z",
       "url": "https://theconversation.com/how-a-botched-execution-and-proposed-livestream-of-a-firing-squad-fit-in-to-the-us-death-penalty-history-294052",
-      "number": 23,
+      "number": 24,
       "wordCount": 945,
       "version": "528f13861d978821",
       "path": "books/the-conversation/chapters/how-a-botched-execution-and-proposed-livestream-of-a-firing-squad-fit-in-294052.json"
@@ -279,7 +290,7 @@
       "author": "Michelle Burgis-Kasthala, Professor of International Law, La Trobe University",
       "published": "2026-10-11T05:08:32Z",
       "url": "https://theconversation.com/trump-misses-out-on-nobel-prize-again-and-imposes-new-sanctions-on-the-international-criminal-court-what-does-it-mean-294115",
-      "number": 24,
+      "number": 25,
       "wordCount": 1188,
       "version": "ec94d65a074024b5",
       "path": "books/the-conversation/chapters/trump-misses-out-on-nobel-prize-again-and-imposes-new-sanctions-on-the-in-294115.json"
@@ -290,7 +301,7 @@
       "author": "Safiullah Taye, Researcher and sessional academic, Australian Catholic University; Farkhondeh Akbari, Research Fellow, ARC Centre of Excellence for the Elimination of Violence Against Women, Monash University; Niamatullah Ibrahimi, Senior Research Fellow, Initiative for Peacebuilding, The University of Melbourne",
       "published": "2026-10-09T05:35:48Z",
       "url": "https://theconversation.com/the-war-on-terror-failed-afghanistan-but-the-peoples-hopes-for-democracy-live-on-291143",
-      "number": 25,
+      "number": 26,
       "wordCount": 1271,
       "version": "b340c250c77c7b37",
       "path": "books/the-conversation/chapters/the-war-on-terror-failed-afghanistan-but-the-peoples-hopes-for-democracy-291143.json"
@@ -301,7 +312,7 @@
       "author": "Melissa Lee, Senior Lecturer, School of Mathematics, Monash University",
       "published": "2026-10-09T03:25:51Z",
       "url": "https://theconversation.com/is-this-the-mathocalypse-why-openais-latest-results-dump-has-left-mathematicians-in-shock-293837",
-      "number": 26,
+      "number": 27,
       "wordCount": 1033,
       "version": "7af7b8fb543d09f4",
       "path": "books/the-conversation/chapters/is-this-the-mathocalypse-why-openais-latest-results-dump-has-left-mathema-293837.json"
@@ -312,7 +323,7 @@
       "author": "Laura Jansen, Associate Professor in Classics & Comparative Literature, University of Bristol",
       "published": "2026-10-08T11:08:08Z",
       "url": "https://theconversation.com/anne-carson-wins-nobel-prize-in-literature-how-she-discovered-new-possibilities-within-language-293969",
-      "number": 27,
+      "number": 28,
       "wordCount": 675,
       "version": "ab2844236c59e5dc",
       "path": "books/the-conversation/chapters/anne-carson-wins-nobel-prize-in-literature-how-she-discovered-new-possibi-293969.json"
@@ -323,7 +334,7 @@
       "author": "David Lees, Reader in French Studies, University of Warwick",
       "published": "2026-10-07T15:41:31Z",
       "url": "https://theconversation.com/french-student-protests-comparisons-with-1968-will-only-serve-the-political-extremes-293879",
-      "number": 28,
+      "number": 29,
       "wordCount": 981,
       "version": "183b8a70d60a8e0f",
       "path": "books/the-conversation/chapters/french-student-protests-comparisons-with-1968-will-only-serve-the-politic-293879.json"
@@ -334,21 +345,10 @@
       "author": "Josephine Bourner, Postdoctoral Research Associate, Faculty of Medicine and Dentistry, Queen Mary University of London",
       "published": "2026-10-07T15:20:48Z",
       "url": "https://theconversation.com/russian-plague-scare-an-expert-explains-what-we-know-so-far-and-why-theres-no-need-to-panic-293729",
-      "number": 29,
+      "number": 30,
       "wordCount": 1012,
       "version": "d0dda38e4fa91a2a",
       "path": "books/the-conversation/chapters/russian-plague-scare-an-expert-explains-what-we-know-so-far-and-why-there-293729.json"
-    },
-    {
-      "id": "prosecution-of-kosovan-leader-hashim-thaci-illustrates-the-challenges-of-292534",
-      "title": "Prosecution of Kosovan leader Hashim Thaçi illustrates the challenges of bringing war criminals to justice",
-      "author": "Birte Julia Gippert, Reader in International Relations, University of Liverpool; Theresa Squatrito, Associate Professor in International Organisations, Department of International Relations, London School of Economics and Political Science",
-      "published": "2026-10-07T11:58:45Z",
-      "url": "https://theconversation.com/prosecution-of-kosovan-leader-hashim-thaci-illustrates-the-challenges-of-bringing-war-criminals-to-justice-292534",
-      "number": 30,
-      "wordCount": 992,
-      "version": "a49b45ede744997b",
-      "path": "books/the-conversation/chapters/prosecution-of-kosovan-leader-hashim-thaci-illustrates-the-challenges-of-292534.json"
     }
   ]
 }
