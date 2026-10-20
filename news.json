@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-19T12:38:28.855Z",
+  "generatedAt": "2026-10-20T11:11:08.434Z",
   "sources": {
     "anthropic": [
       {
@@ -37,6 +37,10 @@
     ],
     "openai": [
       {
+        "title": "Advancing coding in low‑resource programming languages Publication Oct 19, 2026",
+        "url": "https://openai.com/index/low-resource-programming-languages/"
+      },
+      {
         "title": "Introducing the Rosalind Academic Plan Research Oct 15, 2026",
         "url": "https://openai.com/index/introducing-the-rosalind-academic-plan/"
       },
@@ -63,10 +67,6 @@
       {
         "title": "Atlassian and OpenAI expand their partnership Company Oct 6, 2026",
         "url": "https://openai.com/index/atlassian-partnership/"
-      },
-      {
-        "title": "Our approach to EU text provenance rules Safety Oct 5, 2026",
-        "url": "https://openai.com/index/eu-text-provenance/"
       }
     ],
     "google": [
@@ -108,79 +108,79 @@
         "name": "morluto/rea",
         "url": "https://github.com/morluto/rea",
         "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
-        "stars": 330824,
+        "stars": 342472,
         "language": "TypeScript",
-        "updatedAt": "2026-10-19T12:16:21Z"
+        "updatedAt": "2026-10-20T11:06:16Z"
       },
       {
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 283676,
+        "stars": 284435,
         "language": "JavaScript",
-        "updatedAt": "2026-10-19T05:03:15Z"
+        "updatedAt": "2026-10-20T03:39:21Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 255135,
+        "stars": 255419,
         "language": "Python",
-        "updatedAt": "2026-10-19T12:34:47Z"
+        "updatedAt": "2026-10-20T11:05:08Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 192951,
+        "stars": 193234,
         "language": "TypeScript",
-        "updatedAt": "2026-10-19T12:11:52Z"
+        "updatedAt": "2026-10-20T10:48:40Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187649,
+        "stars": 187671,
         "language": "Python",
-        "updatedAt": "2026-10-19T12:36:47Z"
+        "updatedAt": "2026-10-20T11:09:01Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 183808,
+        "stars": 183957,
         "language": "Go",
-        "updatedAt": "2026-10-19T12:25:38Z"
+        "updatedAt": "2026-10-20T01:51:51Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 173526,
+        "stars": 173631,
         "language": "HTML",
-        "updatedAt": "2026-10-19T03:19:47Z"
-      },
-      {
-        "name": "huggingface/transformers",
-        "url": "https://github.com/huggingface/transformers",
-        "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 167852,
-        "language": "Python",
-        "updatedAt": "2026-10-19T12:37:01Z"
+        "updatedAt": "2026-10-20T06:48:50Z"
       },
       {
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 167566,
+        "stars": 168605,
         "language": "JavaScript",
         "updatedAt": "2026-10-18T01:55:14Z"
+      },
+      {
+        "name": "huggingface/transformers",
+        "url": "https://github.com/huggingface/transformers",
+        "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
+        "stars": 167895,
+        "language": "Python",
+        "updatedAt": "2026-10-20T11:08:43Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 159135,
+        "stars": 159159,
         "language": "JavaScript",
         "updatedAt": "2026-10-16T06:30:59Z"
       },
@@ -188,17 +188,17 @@
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 158885,
+        "stars": 159007,
         "language": "Python",
-        "updatedAt": "2026-10-19T12:33:11Z"
+        "updatedAt": "2026-10-20T11:06:07Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 156148,
+        "stars": 156239,
         "language": "Python",
-        "updatedAt": "2026-10-18T20:02:00Z"
+        "updatedAt": "2026-10-19T14:13:24Z"
       }
     ],
     "bbc": [
@@ -237,16 +237,10 @@
         "label": "SPY · S&P 500",
         "items": [
           {
-            "title": "Wall Street's latest AI spook, Netflix layoffs, 'good debt' and more in Morning Squawk",
-            "url": "https://www.cnbc.com/2026/10/15/5-things-to-know-before-the-stock-market-opens.html",
+            "title": "General Motors beats Wall Street's Q3 earnings expectations, narrows full-year guidance",
+            "url": "https://www.cnbc.com/2026/10/20/general-motors-gm-earnings-q3-2026.html",
             "publisher": "CNBC",
-            "date": "2026-10-15"
-          },
-          {
-            "title": "Earnings beats are now the norm. What the stock market needs to keep rallying",
-            "url": "https://www.cnbc.com/2026/10/07/here-comes-third-quarter-earnings-season-booming-profits-could-propel-the-sp-500-to-new-heights.html",
-            "publisher": "CNBC",
-            "date": "2026-10-12"
+            "date": "2026-10-20"
           }
         ]
       },
@@ -267,6 +261,12 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
+            "title": "Tenstorrent hits $6.2B valuation to scale open-weight AI chips",
+            "url": "https://techcrunch.com/2026/10/19/tenstorrent-hits-6-2b-valuation-to-scale-open-weight-ai-chips/",
+            "publisher": "TechCrunch",
+            "date": "2026-10-19"
+          },
+          {
             "title": "China's CXMT shares fall nearly 8% as investors look past chipmaker's profit turnaround",
             "url": "https://www.cnbc.com/2026/10/19/china-cxmt-profit-outlook-shares.html",
             "publisher": "CNBC",
@@ -277,12 +277,6 @@
             "url": "https://www.cnbc.com/2026/10/17/south-korea-semiconductor-outlook-lee-hyoung-il.html",
             "publisher": "CNBC",
             "date": "2026-10-17"
-          },
-          {
-            "title": "This semiconductor stock is not for the faint of heart. Here's why I see opportunity",
-            "url": "https://www.cnbc.com/2026/10/15/lam-research-stock-ai-chip-demand.html",
-            "publisher": "CNBC",
-            "date": "2026-10-15"
           }
         ]
       },
@@ -291,21 +285,21 @@
         "label": "NVDA · Nvidia",
         "items": [
           {
-            "title": "Here are Monday's biggest analyst calls: SpaceX, Nvidia, Apple, CoreWeave, Amazon, Meta, Eli Lilly & more",
-            "url": "https://www.cnbc.com/2026/10/19/mondays-biggest-analyst-calls-include-coreweave.html",
+            "title": "‘Open your doors for AI’: German chancellor urges businesses to embrace AI as Nvidia announces new investments",
+            "url": "https://www.cnbc.com/2026/10/20/german-chancellor-urges-businesses-to-embrace-ai.html",
             "publisher": "CNBC",
+            "date": "2026-10-20"
+          },
+          {
+            "title": "Amazon is taking its biggest shot at Nvidia yet with new TorchNeuron dev tool",
+            "url": "https://techcrunch.com/2026/10/19/amazon-is-taking-its-biggest-shot-at-nvidia-yet-with-new-torchneuron-dev-tool/",
+            "publisher": "TechCrunch",
             "date": "2026-10-19"
           },
           {
             "title": "A week with RTX Spark: everything we’ve learned using Nvidia’s new laptops",
             "url": "https://www.theverge.com/tech/1012748/nvidia-rtx-spark-windows-arm-laptops-asus-hp-lenovo-impressions",
             "publisher": "The Verge",
-            "date": "2026-10-16"
-          },
-          {
-            "title": "I watched Nvidia's Jensen Huang work the room in London. He brought big checks — and a blunt message",
-            "url": "https://www.cnbc.com/2026/10/16/nvidia-jensen-huang-london.html",
-            "publisher": "CNBC",
             "date": "2026-10-16"
           }
         ]
@@ -315,22 +309,22 @@
         "label": "GOOGL · Google",
         "items": [
           {
+            "title": "Googlebook review: Google’s new laptops are woefully underbaked",
+            "url": "https://www.theguardian.com/technology/2026/oct/20/googlebook-review-google-laptops-chromeos-android",
+            "publisher": "The Guardian",
+            "date": "2026-10-20"
+          },
+          {
             "title": "Google says it can build data centers the right way. Some experts and residents are skeptical",
             "url": "https://www.cnbc.com/2026/10/19/how-data-centers-are-reshaping-americas-aging-grid-pine-island-minnesota-google.html",
             "publisher": "CNBC",
             "date": "2026-10-19"
           },
           {
-            "title": "Trump says Google kisses his ass",
-            "url": "https://www.theverge.com/policy/1013485/trump-google-kiss-my-ass",
-            "publisher": "The Verge",
-            "date": "2026-10-18"
-          },
-          {
-            "title": "Google’s Universal Cart shopping tool launches in the US",
-            "url": "https://techcrunch.com/2026/10/15/googles-universal-cart-shopping-tool-launches-in-the-us/",
-            "publisher": "TechCrunch",
-            "date": "2026-10-15"
+            "title": "US teens can access ‘nudify’ apps despite Apple and Google’s parental controls, report finds",
+            "url": "https://www.theguardian.com/technology/2026/oct/19/us-teens-nudify-apps-apple-google-parental-controls",
+            "publisher": "The Guardian",
+            "date": "2026-10-19"
           }
         ]
       },
@@ -339,21 +333,21 @@
         "label": "AAPL · Apple",
         "items": [
           {
+            "title": "Apple gets a downgrade from Loop Capital on fears of slow iPhone sales",
+            "url": "https://www.cnbc.com/2026/10/20/apple-loop-capital-downgrade-iphone-sales.html",
+            "publisher": "CNBC",
+            "date": "2026-10-20"
+          },
+          {
+            "title": "Apple announces product launch event for Oct. 28. Analysts expect touchscreen laptop",
+            "url": "https://www.cnbc.com/2026/10/19/apple-product-launch-event-oct-28-analysts-expect-touchscreen-laptop.html",
+            "publisher": "CNBC",
+            "date": "2026-10-19"
+          },
+          {
             "title": "All the news about the iPhone Duo",
             "url": "https://www.theverge.com/tech/1010131/apple-iphone-duo-news-announcements",
             "publisher": "The Verge",
-            "date": "2026-10-16"
-          },
-          {
-            "title": "Apple’s $1,999 iPhone Duo puts the company's status-symbol power to the test",
-            "url": "https://www.cnbc.com/2026/10/16/apple-iphone-duo-demand-price.html",
-            "publisher": "CNBC",
-            "date": "2026-10-16"
-          },
-          {
-            "title": "Tesla's Roadster reveal, Apple and Meta team up, Nike's India push and more in Morning Squawk",
-            "url": "https://www.cnbc.com/2026/10/16/5-things-to-know-before-the-stock-market-opens.html",
-            "publisher": "CNBC",
             "date": "2026-10-16"
           }
         ]
@@ -409,6 +403,12 @@
     ],
     "china": [
       {
+        "title": "The Guardian view on Trump and Putin: Ukraine’s future is not theirs to bargain away | Editorial",
+        "url": "https://www.theguardian.com/commentisfree/2026/oct/19/the-guardian-view-on-trump-and-putin-ukraines-future-is-not-theirs-to-bargain-away",
+        "publisher": "The Guardian",
+        "date": "2026-10-19"
+      },
+      {
         "title": "China’s economy grows faster than forecast after AI boom boosts exports",
         "url": "https://www.theguardian.com/world/2026/oct/19/china-economy-grows-faster-than-forecast-after-ai-boom-boosted-exports",
         "publisher": "The Guardian",
@@ -425,12 +425,6 @@
         "url": "https://www.theguardian.com/business/2026/oct/17/why-britain-should-reject-the-lure-of-cheap-and-scary-chinese-ai",
         "publisher": "The Guardian",
         "date": "2026-10-17"
-      },
-      {
-        "title": "China’s tourists flock to experience a pretend typhoon as ‘dark tourism’ flourishes",
-        "url": "https://www.theguardian.com/world/2026/oct/17/china-tourists-fake-typhoon-experience-dark-tourism",
-        "publisher": "The Guardian",
-        "date": "2026-10-16"
       },
       {
         "title": "China tells Israel to stop 'forced establishment' of West Bank settlements",
