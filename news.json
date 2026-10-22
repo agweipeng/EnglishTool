@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T11:26:50.639Z",
+  "generatedAt": "2026-10-22T11:27:06.664Z",
   "sources": {
     "anthropic": [
       {
@@ -9,6 +9,10 @@
       {
         "title": "Expanding the Cyber Verification Program We’re launching a new, expanded version of our Cyber…",
         "url": "https://www.anthropic.com/news/cyber-verification-program"
+      },
+      {
+        "title": "Physicist Christopher Stubbs joins Anthropic's Long-Term Benefit Trust",
+        "url": "https://www.anthropic.com/news/christopher-stubbs-joins-long-term-benefit-trust"
       },
       {
         "title": "An update on independent evaluators",
@@ -29,44 +33,40 @@
       {
         "title": "Introducing the Anthropic Cyber Mission",
         "url": "https://www.anthropic.com/news/anthropic-cyber-mission"
-      },
-      {
-        "title": "2026 Usage Policy update",
-        "url": "https://www.anthropic.com/news/2026-usage-policy-update"
       }
     ],
     "openai": [
       {
+        "title": "Broad access through consistent standards Safety Oct 21, 2026",
+        "url": "https://openai.com/index/broad-access-through-consistent-standards/"
+      },
+      {
+        "title": "OpenAI models are coming to Google Cloud Company Oct 21, 2026",
+        "url": "https://openai.com/index/openai-models-google-cloud/"
+      },
+      {
+        "title": "Patch the Planet: global response coordination as agents uncover critical vulnerabilities Security…",
+        "url": "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities/"
+      },
+      {
+        "title": "ChatGPT Ads expands to 26 new countries Product Oct 21, 2026",
+        "url": "https://openai.com/index/chatgpt-ads-expands-26-new-countries/"
+      },
+      {
+        "title": "Using thousands of AI agents to uncover new leads in biological data Publication Oct 21, 2026",
+        "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data/"
+      },
+      {
+        "title": "How we built ChatGPT’s novel ad stack for user trust and relevance Engineering Oct 21, 2026",
+        "url": "https://openai.com/index/building-chatgpt-ad-stack/"
+      },
+      {
+        "title": "Democratic governance of frontier AI, part II: Empowering cyber defenders Global Affairs Oct 21,…",
+        "url": "https://openai.com/index/empowering-cyber-defenders/"
+      },
+      {
         "title": "OpenAI acquires Orchestra Bio Company Oct 20, 2026",
         "url": "https://openai.com/index/openai-to-acquire-orchestra-bio/"
-      },
-      {
-        "title": "Advancing coding in low‑resource programming languages Publication Oct 19, 2026",
-        "url": "https://openai.com/index/low-resource-programming-languages/"
-      },
-      {
-        "title": "Introducing the Rosalind Academic Plan Research Oct 15, 2026",
-        "url": "https://openai.com/index/introducing-the-rosalind-academic-plan/"
-      },
-      {
-        "title": "Teaching students to think and learn through questions Company Oct 15, 2026",
-        "url": "https://openai.com/index/teaching-students-to-think-and-learn-through-questions/"
-      },
-      {
-        "title": "Disrupting AI-enabled “false front” operations Safety Oct 8, 2026",
-        "url": "https://openai.com/index/disrupting-ai-enabled-false-front-operations/"
-      },
-      {
-        "title": "Helping teens learn, plan, and shape the future of AI Product Oct 7, 2026",
-        "url": "https://openai.com/index/teens-learn-and-plan/"
-      },
-      {
-        "title": "GPT-6 and Intelligent UI for everyone Product Oct 7, 2026",
-        "url": "https://openai.com/index/gpt-6-for-everyone/"
-      },
-      {
-        "title": "Sharing AI progress in mathematics Research Oct 6, 2026",
-        "url": "https://openai.com/index/sharing-ai-progress-in-mathematics/"
       }
     ],
     "google": [
@@ -108,15 +108,15 @@
         "name": "morluto/rea",
         "url": "https://github.com/morluto/rea",
         "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
-        "stars": 353118,
+        "stars": 362029,
         "language": "TypeScript",
-        "updatedAt": "2026-10-21T11:25:25Z"
+        "updatedAt": "2026-10-22T11:02:52Z"
       },
       {
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 285187,
+        "stars": 286069,
         "language": "JavaScript",
         "updatedAt": "2026-10-20T23:08:28Z"
       },
@@ -124,47 +124,47 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 255740,
+        "stars": 256111,
         "language": "Python",
-        "updatedAt": "2026-10-21T11:22:26Z"
+        "updatedAt": "2026-10-22T10:08:59Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 193658,
+        "stars": 194078,
         "language": "TypeScript",
-        "updatedAt": "2026-10-21T07:10:52Z"
+        "updatedAt": "2026-10-22T09:07:55Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187690,
+        "stars": 187699,
         "language": "Python",
-        "updatedAt": "2026-10-21T11:24:53Z"
+        "updatedAt": "2026-10-22T11:25:24Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 184127,
+        "stars": 184267,
         "language": "Go",
-        "updatedAt": "2026-10-21T03:20:37Z"
+        "updatedAt": "2026-10-22T02:25:02Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 173779,
+        "stars": 173892,
         "language": "HTML",
-        "updatedAt": "2026-10-21T03:18:47Z"
+        "updatedAt": "2026-10-22T03:18:17Z"
       },
       {
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 170636,
+        "stars": 172533,
         "language": "JavaScript",
         "updatedAt": "2026-10-18T01:55:14Z"
       },
@@ -172,36 +172,43 @@
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 167943,
+        "stars": 167974,
         "language": "Python",
-        "updatedAt": "2026-10-21T11:23:33Z"
-      },
-      {
-        "name": "Snailclimb/JavaGuide",
-        "url": "https://github.com/Snailclimb/JavaGuide",
-        "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 159172,
-        "language": "JavaScript",
-        "updatedAt": "2026-10-16T06:30:59Z"
+        "updatedAt": "2026-10-22T11:23:56Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 159120,
+        "stars": 159240,
         "language": "Python",
-        "updatedAt": "2026-10-21T11:06:40Z"
+        "updatedAt": "2026-10-22T11:26:42Z"
+      },
+      {
+        "name": "Snailclimb/JavaGuide",
+        "url": "https://github.com/Snailclimb/JavaGuide",
+        "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
+        "stars": 159203,
+        "language": "JavaScript",
+        "updatedAt": "2026-10-16T06:30:59Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 156348,
+        "stars": 156432,
         "language": "Python",
-        "updatedAt": "2026-10-21T07:44:12Z"
+        "updatedAt": "2026-10-22T04:00:57Z"
       }
     ],
     "bbc": [
+      {
+        "title": "What should you eat for a better night’s sleep?",
+        "url": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-261022",
+        "date": "2026-10-22",
+        "description": "How much sleep do you get each night?",
+        "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/261022_6_minute_english_what_should_you_eat_for_a_better_nights_sleep_download.mp3"
+      },
       {
         "title": "Why do people buy gold?",
         "url": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-261015",
@@ -237,14 +244,14 @@
         "label": "SPY · S&P 500",
         "items": [
           {
-            "title": "General Motors beats Wall Street's Q3 earnings expectations, narrows full-year guidance",
-            "url": "https://www.cnbc.com/2026/10/20/general-motors-gm-earnings-q3-2026.html",
+            "title": "China's stock market sinks into bear territory as CSI 300 extends 10-week rout",
+            "url": "https://www.cnbc.com/2026/10/22/chinas-stock-market-csi-300-bear-market.html",
             "publisher": "CNBC",
-            "date": "2026-10-20"
+            "date": "2026-10-22"
           },
           {
-            "title": "Investors look to earnings to reset the bull market. The key level to watch on the S&P 500",
-            "url": "https://www.cnbc.com/2026/10/20/santoli-key-sp-500-level-to-watch.html",
+            "title": "General Motors beats Wall Street's Q3 earnings expectations, narrows full-year guidance",
+            "url": "https://www.cnbc.com/2026/10/20/general-motors-gm-earnings-q3-2026.html",
             "publisher": "CNBC",
             "date": "2026-10-20"
           },
@@ -273,8 +280,8 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
-            "title": "Samsung, SK Hynix upgrading China plants to make more advanced chips, people say: Reuters",
-            "url": "https://www.cnbc.com/2026/10/21/samsung-sk-hynix-upgrading-china-plants-to-make-more-advanced-chips-people-say-reuters.html",
+            "title": "Intel hits construction milestone at Ohio chip fab that’s at least 5 years behind schedule",
+            "url": "https://www.cnbc.com/2026/10/21/intel-hits-construction-milestone-at-delayed-ohio-chip-fab-.html",
             "publisher": "CNBC",
             "date": "2026-10-21"
           },
@@ -285,10 +292,10 @@
             "date": "2026-10-19"
           },
           {
-            "title": "China's CXMT shares fall nearly 8% as investors look past chipmaker's profit turnaround",
-            "url": "https://www.cnbc.com/2026/10/19/china-cxmt-profit-outlook-shares.html",
+            "title": "Semiconductor market to remain solid ‘at least through next year,’ South Korea finance minister says",
+            "url": "https://www.cnbc.com/2026/10/17/south-korea-semiconductor-outlook-lee-hyoung-il.html",
             "publisher": "CNBC",
-            "date": "2026-10-19"
+            "date": "2026-10-17"
           }
         ]
       },
@@ -297,22 +304,22 @@
         "label": "NVDA · Nvidia",
         "items": [
           {
-            "title": "‘Open your doors for AI’: German chancellor urges businesses to embrace AI as Nvidia announces new investments",
-            "url": "https://www.cnbc.com/2026/10/20/german-chancellor-urges-businesses-to-embrace-ai.html",
+            "title": "Nvidia CEO Jensen Huang says neocloud demand is 'off the charts' but capital is scarce",
+            "url": "https://www.cnbc.com/2026/10/22/nvidia-jensen-huang-neocloud-demand-capital.html",
             "publisher": "CNBC",
-            "date": "2026-10-20"
+            "date": "2026-10-22"
           },
           {
-            "title": "Amazon is taking its biggest shot at Nvidia yet with new TorchNeuron dev tool",
-            "url": "https://techcrunch.com/2026/10/19/amazon-is-taking-its-biggest-shot-at-nvidia-yet-with-new-torchneuron-dev-tool/",
-            "publisher": "TechCrunch",
-            "date": "2026-10-19"
+            "title": "Nvidia CEO encourages Europe's lagging AI sector and offers tools to accelerate data center buildout",
+            "url": "https://apnews.com/article/jensen-huang-ai-gtc-berlin-nvidia-a320db64110d99297381912605ebdc57",
+            "publisher": "AP News",
+            "date": "2026-10-21"
           },
           {
-            "title": "Nvidia launches new open models to run agents in the enterprise and on PCs",
-            "url": "https://techcrunch.com/2026/10/19/nvidia-launches-new-open-models-to-run-agents-in-the-enterprise-and-on-pcs/",
-            "publisher": "TechCrunch",
-            "date": "2026-10-19"
+            "title": "Nvidia’s latest GPU driver brings a new way to speed up PC games",
+            "url": "https://www.theverge.com/news/1015299/nvidia-driver-microsoft-advanced-shader-delivery-support",
+            "publisher": "The Verge",
+            "date": "2026-10-21"
           }
         ]
       },
@@ -321,22 +328,22 @@
         "label": "GOOGL · Google",
         "items": [
           {
-            "title": "Google cloud failure hits millions as UK courts and banks knocked offline | Revolut",
-            "url": "https://www.theguardian.com/business/2026/oct/20/revolut-down-app-cards-service-disruption",
-            "publisher": "The Guardian",
-            "date": "2026-10-20"
+            "title": "Critical web security flaws spark global alarm as Google, OpenAI and Amazon respond",
+            "url": "https://www.cnbc.com/2026/10/22/php-google-openai-and-amazon-cyber.html",
+            "publisher": "CNBC",
+            "date": "2026-10-22"
           },
           {
-            "title": "Google’s more personalized Gemini AI is heading to your car",
-            "url": "https://www.theverge.com/tech/1014999/google-gemini-ai-cars-android-auto",
-            "publisher": "The Verge",
-            "date": "2026-10-20"
-          },
-          {
-            "title": "Google is bringing a more personal version of its Gemini AI assistant to your car",
-            "url": "https://techcrunch.com/2026/10/20/google-is-bringing-a-more-personal-version-of-its-gemini-ai-assistant-to-your-car/",
+            "title": "PHP Armageddon: OpenAI, Google’s Wiz find ancient holes, panicking the internet",
+            "url": "https://techcrunch.com/2026/10/21/php-armageddon-openai-googles-wiz-find-ancient-holes-panicking-the-internet/",
             "publisher": "TechCrunch",
-            "date": "2026-10-20"
+            "date": "2026-10-21"
+          },
+          {
+            "title": "Google staff resign in backlash over its AI contracts with military",
+            "url": "https://www.bbc.com/news/articles/cmreyvepnv0po",
+            "publisher": "BBC",
+            "date": "2026-10-21"
           }
         ]
       },
@@ -345,14 +352,14 @@
         "label": "AAPL · Apple",
         "items": [
           {
-            "title": "Apple adds U.S. titanium supplier for iPhone Duo as supply stays tight",
-            "url": "https://www.cnbc.com/2026/10/20/apple-adds-us-titanium-supplier-for-iphone-duo.html",
-            "publisher": "CNBC",
-            "date": "2026-10-20"
+            "title": "The iPhone Duo is a messy, expensive, good time",
+            "url": "https://www.theverge.com/tech/1015028/iphone-duo-review",
+            "publisher": "The Verge",
+            "date": "2026-10-21"
           },
           {
-            "title": "Apple gets a downgrade from Loop Capital on fears of slow iPhone sales",
-            "url": "https://www.cnbc.com/2026/10/20/apple-loop-capital-downgrade-iphone-sales.html",
+            "title": "Apple adds U.S. titanium supplier for iPhone Duo as supply stays tight",
+            "url": "https://www.cnbc.com/2026/10/20/apple-adds-us-titanium-supplier-for-iphone-duo.html",
             "publisher": "CNBC",
             "date": "2026-10-20"
           },
@@ -369,22 +376,22 @@
         "label": "META · Meta",
         "items": [
           {
-            "title": "Battle over Meta’s alleged Bolsonaro bias intensifies days before Brazil presidential runoff",
-            "url": "https://www.theguardian.com/world/2026/oct/21/battle-meta-alleged-bolsonaro-bias-intensifies-days-before-brazil-presidential-runoff",
-            "publisher": "The Guardian",
-            "date": "2026-10-21"
+            "title": "Stocks making the biggest moves premarket: Tesla, Meta, Aevex, Spotify & more",
+            "url": "https://www.cnbc.com/2026/10/22/stocks-making-the-biggest-moves-premarket-tsla-meta-avex-spot.html",
+            "publisher": "CNBC",
+            "date": "2026-10-22"
           },
           {
-            "title": "Meta’s Muse hits 10M US downloads in 40 days, a milestone reached by only 11 other apps",
-            "url": "https://techcrunch.com/2026/10/20/metas-muse-hits-10m-u-s-downloads-in-40-days-a-milestone-reached-by-only-11-other-apps/",
-            "publisher": "TechCrunch",
-            "date": "2026-10-20"
+            "title": "Meta strikes deal with Zuckerberg to protect him from California wealth tax",
+            "url": "https://www.theguardian.com/technology/2026/oct/22/meta-mark-zuckerberg-california-wealth-tax",
+            "publisher": "The Guardian",
+            "date": "2026-10-22"
           },
           {
-            "title": "Outrage after Meta suspends No Kings Instagram account during protests",
-            "url": "https://www.theguardian.com/us-news/2026/oct/18/no-kings-instagram-account-suspended-during-protests",
-            "publisher": "The Guardian",
-            "date": "2026-10-18"
+            "title": "Zuckerberg Wants To Build A Giant Online Network Of AI Agents",
+            "url": "https://gizmodo.com/zuckerberg-wants-to-build-a-giant-online-network-of-ai-agents-2000829145",
+            "publisher": "Gizmodo",
+            "date": "2026-10-22"
           }
         ]
       },
@@ -397,17 +404,23 @@
             "url": "https://www.cnbc.com/2026/10/16/spacex-policy-manger-to-testify-in-nyc-council-ai-safety-investigation.html",
             "publisher": "CNBC",
             "date": "2026-10-16"
-          },
-          {
-            "title": "Elon Musk is promising to “make you whole” if Grok messes up a purchase or leaks your credit card.",
-            "url": "https://www.theverge.com/ai-artificial-intelligence/1011847/elon-musk-is-promising-to-make-you-whole-if-grok-messes-up-a-purchase-or-leaks-your-credit-card",
-            "publisher": "The Verge",
-            "date": "2026-10-15"
           }
         ]
       }
     ],
     "china": [
+      {
+        "title": "No order, no seat: Starbucks China rolls out new store policy",
+        "url": "https://www.bbc.co.uk/news/articles/ckzd6rjmlzvmo",
+        "publisher": "BBC",
+        "date": "2026-10-22"
+      },
+      {
+        "title": "Taiwan charges five men over plot to run over comedian for his Xi Jinping jokes",
+        "url": "https://www.theguardian.com/world/2026/oct/21/taiwan-five-men-plot-run-over-comedian-huang-yi-hao-xi-jinping-jokes",
+        "publisher": "The Guardian",
+        "date": "2026-10-21"
+      },
       {
         "title": "US bans use of China’s DeepSeek AI tools by government agencies",
         "url": "https://www.theguardian.com/us-news/2026/oct/20/us-bans-china-deepseek-ai-tools-government-agencies",
@@ -427,12 +440,6 @@
         "date": "2026-10-19"
       },
       {
-        "title": "The Guardian view on plague in Russia: what is most worrying is the lack of information | Editorial",
-        "url": "https://www.theguardian.com/commentisfree/2026/oct/18/the-guardian-view-on-plague-in-russia-what-is-most-worrying-is-the-lack-of-information",
-        "publisher": "The Guardian",
-        "date": "2026-10-18"
-      },
-      {
         "title": "China tells Israel to stop 'forced establishment' of West Bank settlements",
         "url": "https://www.bbc.co.uk/news/articles/cq1j3wdxy48ro",
         "publisher": "BBC",
@@ -447,12 +454,6 @@
       {
         "title": "India and China aren't friends - but Nepal wants to unite them against climate threats",
         "url": "https://www.bbc.co.uk/news/articles/cvy0rd1j2kzlo",
-        "publisher": "BBC",
-        "date": "2026-10-14"
-      },
-      {
-        "title": "As Christmas rush looms, how do China-made toys find their way to the US?",
-        "url": "https://www.bbc.co.uk/news/articles/c5djvyde0y1jo",
         "publisher": "BBC",
         "date": "2026-10-14"
       }
