@@ -174,9 +174,9 @@
       "recommendation": "New articles every day, written by university experts for general readers: current topics in natural, educated native English.",
       "sectionType": "article",
       "kind": "news",
-      "version": "40fa264c28945209",
-      "latestArticle": "2026-10-22T00:43:33Z",
-      "wordCount": 30728,
+      "version": "229f1b60f3e3e326",
+      "latestArticle": "2026-10-23T09:03:28Z",
+      "wordCount": 32767,
       "sectionCount": 30,
       "manifestPath": "books/the-conversation/manifest.json"
     },

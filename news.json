@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T11:27:06.664Z",
+  "generatedAt": "2026-10-23T11:16:57.962Z",
   "sources": {
     "anthropic": [
       {
@@ -9,6 +9,14 @@
       {
         "title": "Expanding the Cyber Verification Program We’re launching a new, expanded version of our Cyber…",
         "url": "https://www.anthropic.com/news/cyber-verification-program"
+      },
+      {
+        "title": "Donating Agent Skills to the Agentic AI Foundation",
+        "url": "https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation"
+      },
+      {
+        "title": "Open call for guest investigators in the life sciences",
+        "url": "https://www.anthropic.com/news/open-call-guest-investigators-life-sciences"
       },
       {
         "title": "Physicist Christopher Stubbs joins Anthropic's Long-Term Benefit Trust",
@@ -25,17 +33,21 @@
       {
         "title": "Anthropic opens Singapore office and signs MOU with the Government of Singapore",
         "url": "https://www.anthropic.com/news/singapore-office-opening"
-      },
-      {
-        "title": "Strengthening our defenses against distillation attacks",
-        "url": "https://www.anthropic.com/news/distillation-defenses"
-      },
-      {
-        "title": "Introducing the Anthropic Cyber Mission",
-        "url": "https://www.anthropic.com/news/anthropic-cyber-mission"
       }
     ],
     "openai": [
+      {
+        "title": "Build more responsive apps with the Decisions API Product Oct 22, 2026",
+        "url": "https://openai.com/index/decisions-api/"
+      },
+      {
+        "title": "What forward deployed engineering means at OpenAI AI Adoption Oct 22, 2026",
+        "url": "https://openai.com/index/forward-deployed-engineering-means/"
+      },
+      {
+        "title": "Uber brings ChatGPT Work to all employees with OpenAI Company Oct 22, 2026",
+        "url": "https://openai.com/index/uber-chatgpt-work-rollout/"
+      },
       {
         "title": "Broad access through consistent standards Safety Oct 21, 2026",
         "url": "https://openai.com/index/broad-access-through-consistent-standards/"
@@ -55,18 +67,6 @@
       {
         "title": "Using thousands of AI agents to uncover new leads in biological data Publication Oct 21, 2026",
         "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data/"
-      },
-      {
-        "title": "How we built ChatGPT’s novel ad stack for user trust and relevance Engineering Oct 21, 2026",
-        "url": "https://openai.com/index/building-chatgpt-ad-stack/"
-      },
-      {
-        "title": "Democratic governance of frontier AI, part II: Empowering cyber defenders Global Affairs Oct 21,…",
-        "url": "https://openai.com/index/empowering-cyber-defenders/"
-      },
-      {
-        "title": "OpenAI acquires Orchestra Bio Company Oct 20, 2026",
-        "url": "https://openai.com/index/openai-to-acquire-orchestra-bio/"
       }
     ],
     "google": [
@@ -108,15 +108,15 @@
         "name": "morluto/rea",
         "url": "https://github.com/morluto/rea",
         "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
-        "stars": 362029,
+        "stars": 369886,
         "language": "TypeScript",
-        "updatedAt": "2026-10-22T11:02:52Z"
+        "updatedAt": "2026-10-23T11:15:37Z"
       },
       {
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 286069,
+        "stars": 286895,
         "language": "JavaScript",
         "updatedAt": "2026-10-20T23:08:28Z"
       },
@@ -124,81 +124,81 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 256111,
+        "stars": 256388,
         "language": "Python",
-        "updatedAt": "2026-10-22T10:08:59Z"
+        "updatedAt": "2026-10-23T10:45:23Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 194078,
+        "stars": 194466,
         "language": "TypeScript",
-        "updatedAt": "2026-10-22T09:07:55Z"
+        "updatedAt": "2026-10-23T09:12:26Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187699,
+        "stars": 187715,
         "language": "Python",
-        "updatedAt": "2026-10-22T11:25:24Z"
+        "updatedAt": "2026-10-23T10:37:34Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 184267,
+        "stars": 184412,
         "language": "Go",
-        "updatedAt": "2026-10-22T02:25:02Z"
-      },
-      {
-        "name": "f/prompts.chat",
-        "url": "https://github.com/f/prompts.chat",
-        "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 173892,
-        "language": "HTML",
-        "updatedAt": "2026-10-22T03:18:17Z"
+        "updatedAt": "2026-10-23T08:04:06Z"
       },
       {
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 172533,
+        "stars": 174325,
         "language": "JavaScript",
         "updatedAt": "2026-10-18T01:55:14Z"
+      },
+      {
+        "name": "f/prompts.chat",
+        "url": "https://github.com/f/prompts.chat",
+        "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
+        "stars": 174132,
+        "language": "HTML",
+        "updatedAt": "2026-10-23T03:17:31Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 167974,
+        "stars": 168020,
         "language": "Python",
-        "updatedAt": "2026-10-22T11:23:56Z"
+        "updatedAt": "2026-10-23T11:14:34Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 159240,
+        "stars": 159337,
         "language": "Python",
-        "updatedAt": "2026-10-22T11:26:42Z"
-      },
-      {
-        "name": "Snailclimb/JavaGuide",
-        "url": "https://github.com/Snailclimb/JavaGuide",
-        "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 159203,
-        "language": "JavaScript",
-        "updatedAt": "2026-10-16T06:30:59Z"
+        "updatedAt": "2026-10-23T11:11:28Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 156432,
+        "stars": 156543,
         "language": "Python",
-        "updatedAt": "2026-10-22T04:00:57Z"
+        "updatedAt": "2026-10-23T02:06:00Z"
+      },
+      {
+        "name": "langchain-ai/langchain",
+        "url": "https://github.com/langchain-ai/langchain",
+        "description": "The agent engineering platform.",
+        "stars": 148315,
+        "language": "Python",
+        "updatedAt": "2026-10-23T08:59:26Z"
       }
     ],
     "bbc": [
@@ -244,20 +244,8 @@
         "label": "SPY · S&P 500",
         "items": [
           {
-            "title": "China's stock market sinks into bear territory as CSI 300 extends 10-week rout",
-            "url": "https://www.cnbc.com/2026/10/22/chinas-stock-market-csi-300-bear-market.html",
-            "publisher": "CNBC",
-            "date": "2026-10-22"
-          },
-          {
             "title": "General Motors beats Wall Street's Q3 earnings expectations, narrows full-year guidance",
             "url": "https://www.cnbc.com/2026/10/20/general-motors-gm-earnings-q3-2026.html",
-            "publisher": "CNBC",
-            "date": "2026-10-20"
-          },
-          {
-            "title": "AI rally fades away from Wall Street as a tiny IPO makes big waves",
-            "url": "https://www.cnbc.com/2026/10/20/ai-rally-fades-elice-ipo-dives.html",
             "publisher": "CNBC",
             "date": "2026-10-20"
           }
@@ -280,6 +268,12 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
+            "title": "SK Hynix shares jump over 4% after early losses as chipmaker scraps Solidigm IPO plans",
+            "url": "https://www.cnbc.com/2026/10/23/sk-hynix-solidigm-ipo-.html",
+            "publisher": "CNBC",
+            "date": "2026-10-23"
+          },
+          {
             "title": "Intel hits construction milestone at Ohio chip fab that’s at least 5 years behind schedule",
             "url": "https://www.cnbc.com/2026/10/21/intel-hits-construction-milestone-at-delayed-ohio-chip-fab-.html",
             "publisher": "CNBC",
@@ -290,12 +284,6 @@
             "url": "https://techcrunch.com/2026/10/19/tenstorrent-hits-6-2b-valuation-to-scale-open-weight-ai-chips/",
             "publisher": "TechCrunch",
             "date": "2026-10-19"
-          },
-          {
-            "title": "Semiconductor market to remain solid ‘at least through next year,’ South Korea finance minister says",
-            "url": "https://www.cnbc.com/2026/10/17/south-korea-semiconductor-outlook-lee-hyoung-il.html",
-            "publisher": "CNBC",
-            "date": "2026-10-17"
           }
         ]
       },
@@ -304,22 +292,22 @@
         "label": "NVDA · Nvidia",
         "items": [
           {
-            "title": "Nvidia CEO Jensen Huang says neocloud demand is 'off the charts' but capital is scarce",
-            "url": "https://www.cnbc.com/2026/10/22/nvidia-jensen-huang-neocloud-demand-capital.html",
+            "title": "On the ground at Nvidia GTC Berlin: Jensen Huang, robot ducks and neocloud distress",
+            "url": "https://www.cnbc.com/2026/10/23/jensen-huang-gtc-robot-ducks-neocloud-distress.html",
+            "publisher": "CNBC",
+            "date": "2026-10-23"
+          },
+          {
+            "title": "Nvidia's Huang heads to Kazakhstan for the first time — and he's not the only one with big plans",
+            "url": "https://www.cnbc.com/2026/10/23/nvidia-huang-investment-kazakhstan-.html",
+            "publisher": "CNBC",
+            "date": "2026-10-23"
+          },
+          {
+            "title": "Nvidia's Jensen Huang says he sees no sign of a 2029 memory glut: 'You can always use more'",
+            "url": "https://www.cnbc.com/2026/10/22/jensen-huang-nvidia-memory-selloff-shortage.html",
             "publisher": "CNBC",
             "date": "2026-10-22"
-          },
-          {
-            "title": "Nvidia CEO encourages Europe's lagging AI sector and offers tools to accelerate data center buildout",
-            "url": "https://apnews.com/article/jensen-huang-ai-gtc-berlin-nvidia-a320db64110d99297381912605ebdc57",
-            "publisher": "AP News",
-            "date": "2026-10-21"
-          },
-          {
-            "title": "Nvidia’s latest GPU driver brings a new way to speed up PC games",
-            "url": "https://www.theverge.com/news/1015299/nvidia-driver-microsoft-advanced-shader-delivery-support",
-            "publisher": "The Verge",
-            "date": "2026-10-21"
           }
         ]
       },
@@ -328,22 +316,22 @@
         "label": "GOOGL · Google",
         "items": [
           {
-            "title": "Critical web security flaws spark global alarm as Google, OpenAI and Amazon respond",
+            "title": "Trump says he asked Google CEO to rename Atlantic Ocean on Maps",
+            "url": "https://www.theguardian.com/us-news/2026/oct/22/trump-atlantic-ocean-rename-google",
+            "publisher": "The Guardian",
+            "date": "2026-10-22"
+          },
+          {
+            "title": "Critical PHP web security flaws spark global alarm as Google, OpenAI and Amazon respond",
             "url": "https://www.cnbc.com/2026/10/22/php-google-openai-and-amazon-cyber.html",
             "publisher": "CNBC",
             "date": "2026-10-22"
           },
           {
-            "title": "PHP Armageddon: OpenAI, Google’s Wiz find ancient holes, panicking the internet",
-            "url": "https://techcrunch.com/2026/10/21/php-armageddon-openai-googles-wiz-find-ancient-holes-panicking-the-internet/",
-            "publisher": "TechCrunch",
-            "date": "2026-10-21"
-          },
-          {
-            "title": "Google staff resign in backlash over its AI contracts with military",
-            "url": "https://www.bbc.com/news/articles/cmreyvepnv0po",
-            "publisher": "BBC",
-            "date": "2026-10-21"
+            "title": "‘Pure arrogance’: anger in Finland as Google illegally fells 250,000 trees for datacentre | Environment",
+            "url": "https://www.theguardian.com/environment/ng-interactive/2026/oct/22/finland-google-felling-trees-datacentre",
+            "publisher": "The Guardian",
+            "date": "2026-10-22"
           }
         ]
       },
@@ -352,22 +340,22 @@
         "label": "AAPL · Apple",
         "items": [
           {
-            "title": "The iPhone Duo is a messy, expensive, good time",
-            "url": "https://www.theverge.com/tech/1015028/iphone-duo-review",
+            "title": "Personal agents like Meta's Muse could fuel AI’s growth — and challenge Amazon and Apple",
+            "url": "https://www.cnbc.com/2026/10/22/meta-muse-personal-ai-agents.html",
+            "publisher": "CNBC",
+            "date": "2026-10-22"
+          },
+          {
+            "title": "I can’t get enough of the iPhone Duo’s matte inner display",
+            "url": "https://www.theverge.com/tech/1014709/iphone-duo-inner-screen-nano-texture-matte",
             "publisher": "The Verge",
             "date": "2026-10-21"
           },
           {
-            "title": "Apple adds U.S. titanium supplier for iPhone Duo as supply stays tight",
-            "url": "https://www.cnbc.com/2026/10/20/apple-adds-us-titanium-supplier-for-iphone-duo.html",
-            "publisher": "CNBC",
-            "date": "2026-10-20"
-          },
-          {
-            "title": "Apple announces product launch event for Oct. 28. Analysts expect touchscreen laptop",
-            "url": "https://www.cnbc.com/2026/10/19/apple-product-launch-event-oct-28-analysts-expect-touchscreen-laptop.html",
-            "publisher": "CNBC",
-            "date": "2026-10-19"
+            "title": "The iPhone Duo is a messy, expensive, good time",
+            "url": "https://www.theverge.com/tech/1015028/iphone-duo-review",
+            "publisher": "The Verge",
+            "date": "2026-10-21"
           }
         ]
       },
@@ -376,21 +364,21 @@
         "label": "META · Meta",
         "items": [
           {
-            "title": "Stocks making the biggest moves premarket: Tesla, Meta, Aevex, Spotify & more",
-            "url": "https://www.cnbc.com/2026/10/22/stocks-making-the-biggest-moves-premarket-tsla-meta-avex-spot.html",
+            "title": "Meta’s deal to keep Zuckerberg in California adds fuel to wealth tax debate ahead of election",
+            "url": "https://www.cnbc.com/2026/10/22/meta-mark-zuckerberg-california-billionaire-tax.html",
             "publisher": "CNBC",
             "date": "2026-10-22"
           },
           {
-            "title": "Meta strikes deal with Zuckerberg to protect him from California wealth tax",
-            "url": "https://www.theguardian.com/technology/2026/oct/22/meta-mark-zuckerberg-california-wealth-tax",
-            "publisher": "The Guardian",
+            "title": "Zuckerberg makes deal with Meta to help him pay billionaire tax if it passes",
+            "url": "https://apnews.com/article/zuckerberg-california-billionaire-tax-meta-stock-shares-56be13ddd072b48578d14a8f9d7eb23f",
+            "publisher": "AP News",
             "date": "2026-10-22"
           },
           {
-            "title": "Zuckerberg Wants To Build A Giant Online Network Of AI Agents",
-            "url": "https://gizmodo.com/zuckerberg-wants-to-build-a-giant-online-network-of-ai-agents-2000829145",
-            "publisher": "Gizmodo",
+            "title": "Meta stock sinks nearly 7% as AI spend pushes free cash flow negative",
+            "url": "https://www.cnbc.com/2026/10/22/meta-stock-q3-earnings-free-cash-flow.html",
+            "publisher": "CNBC",
             "date": "2026-10-22"
           }
         ]
@@ -410,6 +398,18 @@
     ],
     "china": [
       {
+        "title": "Severe flooding in eastern Spain and UK hit by first named storm of winter",
+        "url": "https://www.theguardian.com/world/2026/oct/23/spain-floods-storm-adam-uk-storm-austen",
+        "publisher": "The Guardian",
+        "date": "2026-10-23"
+      },
+      {
+        "title": "Magnitude-7 earthquake hits Tibet, killing at least 16 and destroying hundreds of homes",
+        "url": "https://www.theguardian.com/world/2026/oct/23/magnitude-7-earthquake-hits-china-tibet",
+        "publisher": "The Guardian",
+        "date": "2026-10-23"
+      },
+      {
         "title": "No order, no seat: Starbucks China rolls out new store policy",
         "url": "https://www.bbc.co.uk/news/articles/ckzd6rjmlzvmo",
         "publisher": "BBC",
@@ -426,18 +426,6 @@
         "url": "https://www.theguardian.com/us-news/2026/oct/20/us-bans-china-deepseek-ai-tools-government-agencies",
         "publisher": "The Guardian",
         "date": "2026-10-20"
-      },
-      {
-        "title": "The Guardian view on Trump and Putin: Ukraine’s future is not theirs to bargain away | Editorial",
-        "url": "https://www.theguardian.com/commentisfree/2026/oct/19/the-guardian-view-on-trump-and-putin-ukraines-future-is-not-theirs-to-bargain-away",
-        "publisher": "The Guardian",
-        "date": "2026-10-19"
-      },
-      {
-        "title": "China’s economy grows faster than forecast after AI boom boosts exports",
-        "url": "https://www.theguardian.com/world/2026/oct/19/china-economy-grows-faster-than-forecast-after-ai-boom-boosted-exports",
-        "publisher": "The Guardian",
-        "date": "2026-10-19"
       },
       {
         "title": "China tells Israel to stop 'forced establishment' of West Bank settlements",
