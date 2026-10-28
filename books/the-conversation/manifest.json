@@ -15,18 +15,40 @@
   "recommendation": "New articles every day, written by university experts for general readers: current topics in natural, educated native English.",
   "sectionType": "article",
   "kind": "news",
-  "version": "1453ece6ea22c716",
+  "version": "f6b97f586825b5cc",
   "introduction": "",
-  "latestArticle": "2026-10-26T19:55:27Z",
-  "wordCount": 32989,
+  "latestArticle": "2026-10-27T12:15:22Z",
+  "wordCount": 33588,
   "chapters": [
+    {
+      "id": "putin-hopes-hardship-will-force-ukrainians-to-sue-for-peace-polling-sugge-294619",
+      "title": "Putin hopes hardship will force Ukrainians to sue for peace – polling suggests it won’t work",
+      "author": "John O’Loughlin, College Professor of Distinction in Geography and Fellow, Institute of Behavioral Science, University of Colorado Boulder; Gerard Toal, Professor of Government and International Affairs, Virginia Tech; Sarah Wilson Sokhey, Associate Professor of Political Science, University of Colorado Boulder",
+      "published": "2026-10-27T12:15:22Z",
+      "url": "https://theconversation.com/putin-hopes-hardship-will-force-ukrainians-to-sue-for-peace-polling-suggests-it-wont-work-294619",
+      "number": 1,
+      "wordCount": 1171,
+      "version": "18cfd4b78b3e418f",
+      "path": "books/the-conversation/chapters/putin-hopes-hardship-will-force-ukrainians-to-sue-for-peace-polling-sugge-294619.json"
+    },
+    {
+      "id": "anthropics-record-us-2-trillion-stock-market-listing-highlights-the-growi-295243",
+      "title": "Anthropic’s record US$2 trillion stock market listing highlights the growing risks for all of us",
+      "author": "Marta Khomyn, Senior Lecturer, Finance and Data Analytics, Adelaide University",
+      "published": "2026-10-27T05:26:46Z",
+      "url": "https://theconversation.com/anthropics-record-us-2-trillion-stock-market-listing-highlights-the-growing-risks-for-all-of-us-295243",
+      "number": 2,
+      "wordCount": 903,
+      "version": "9ba3e0a66c4dae55",
+      "path": "books/the-conversation/chapters/anthropics-record-us-2-trillion-stock-market-listing-highlights-the-growi-295243.json"
+    },
     {
       "id": "in-opting-for-lula-brazil-made-a-conservative-choice-to-elect-a-man-of-th-295217",
       "title": "In opting for Lula, Brazil made a conservative choice to elect a man of the left over one of the far right",
       "author": "João Gabriel de Lima, Jornalista, doutorando em Política Comparada, Universidade de Lisboa",
       "published": "2026-10-26T19:55:27Z",
       "url": "https://theconversation.com/in-opting-for-lula-brazil-made-a-conservative-choice-to-elect-a-man-of-the-left-over-one-of-the-far-right-295217",
-      "number": 1,
+      "number": 3,
       "wordCount": 924,
       "version": "448de6cdeff2dd24",
       "path": "books/the-conversation/chapters/in-opting-for-lula-brazil-made-a-conservative-choice-to-elect-a-man-of-th-295217.json"
@@ -37,7 +59,7 @@
       "author": "Jamal Abarashi, Lecturer, Marketing and International Business Department, Auckland University of Technology",
       "published": "2026-10-26T18:33:14Z",
       "url": "https://theconversation.com/the-upside-of-untidiness-why-a-little-mess-can-be-good-for-your-home-294343",
-      "number": 2,
+      "number": 4,
       "wordCount": 745,
       "version": "37cbcc8fbf8a9778",
       "path": "books/the-conversation/chapters/the-upside-of-untidiness-why-a-little-mess-can-be-good-for-your-home-294343.json"
@@ -48,7 +70,7 @@
       "author": "Amnon Aran, Professor of International Relations, City St George's, University of London",
       "published": "2026-10-26T16:46:46Z",
       "url": "https://theconversation.com/israeli-election-why-nobody-has-been-talking-about-palestinian-statehood-294888",
-      "number": 3,
+      "number": 5,
       "wordCount": 996,
       "version": "b143fed7baf8c67a",
       "path": "books/the-conversation/chapters/israeli-election-why-nobody-has-been-talking-about-palestinian-statehood-294888.json"
@@ -59,7 +81,7 @@
       "author": "Gavin Brent Sullivan, Professor of Social Psychology, International Psychoanalytic University Berlin; Tereza Capelos, Professor of Political Psychology, Department of Politics and International Relations, University of Southampton",
       "published": "2026-10-26T15:29:16Z",
       "url": "https://theconversation.com/we-changed-the-system-how-serbian-students-ended-alexander-vucics-12-years-in-power-295119",
-      "number": 4,
+      "number": 6,
       "wordCount": 1017,
       "version": "cb38db9f0651ae6c",
       "path": "books/the-conversation/chapters/we-changed-the-system-how-serbian-students-ended-alexander-vucics-12-year-295119.json"
@@ -70,10 +92,21 @@
       "author": "Guilherme Casarões, Associate Professor of Brazilian Studies, Florida International University",
       "published": "2026-10-26T03:55:20Z",
       "url": "https://theconversation.com/lula-wins-a-miracle-election-in-brazil-now-comes-the-hard-part-putting-the-country-back-on-the-right-track-295157",
-      "number": 5,
+      "number": 7,
       "wordCount": 1182,
       "version": "a454073a4077700f",
       "path": "books/the-conversation/chapters/lula-wins-a-miracle-election-in-brazil-now-comes-the-hard-part-putting-th-295157.json"
+    },
+    {
+      "id": "why-ultra-orthodox-parties-hold-so-much-sway-in-israeli-politics-294218",
+      "title": "Why ultra-Orthodox parties hold so much sway in Israeli politics",
+      "author": "Hannah Ridge, Assistant Professor of Political Science, Chapman University; Institute for Humane Studies",
+      "published": "2026-10-23T14:52:34Z",
+      "url": "https://theconversation.com/why-ultra-orthodox-parties-hold-so-much-sway-in-israeli-politics-294218",
+      "number": 8,
+      "wordCount": 1245,
+      "version": "27c3f7f9cb020f95",
+      "path": "books/the-conversation/chapters/why-ultra-orthodox-parties-hold-so-much-sway-in-israeli-politics-294218.json"
     },
     {
       "id": "unlocking-the-secrets-of-the-dragon-man-skull-and-what-it-reveals-about-h-291321",
@@ -81,7 +114,7 @@
       "author": "Chris Stringer, Honorary Professor, Institute of Archaeology, UCL; Natural History Museum",
       "published": "2026-10-23T09:03:28Z",
       "url": "https://theconversation.com/unlocking-the-secrets-of-the-dragon-man-skull-and-what-it-reveals-about-human-evolution-291321",
-      "number": 6,
+      "number": 9,
       "wordCount": 2557,
       "version": "44281085bc6d79b8",
       "path": "books/the-conversation/chapters/unlocking-the-secrets-of-the-dragon-man-skull-and-what-it-reveals-about-h-291321.json"
@@ -92,7 +125,7 @@
       "author": "Jan Machielsen, Reader in Early Modern History, History, Archaeology and Religion, Cardiff University",
       "published": "2026-10-23T09:03:12Z",
       "url": "https://theconversation.com/the-crucible-arthur-millers-morality-tale-was-as-much-a-reaction-to-his-own-marital-failings-as-it-was-to-the-red-scare-294832",
-      "number": 7,
+      "number": 10,
       "wordCount": 976,
       "version": "5f52c5bd1ab59f08",
       "path": "books/the-conversation/chapters/the-crucible-arthur-millers-morality-tale-was-as-much-a-reaction-to-his-o-294832.json"
@@ -103,7 +136,7 @@
       "author": "Guilherme Casarões, Associate Professor of Brazilian Studies, Florida International University; Carlos Ricaurte, Latin America and Caribbean Center, Florida International University",
       "published": "2026-10-22T23:58:36Z",
       "url": "https://theconversation.com/how-lula-turned-four-lessons-from-the-presidential-elections-in-colombia-into-a-comeback-in-brazils-sunday-runoff-295048",
-      "number": 8,
+      "number": 11,
       "wordCount": 1343,
       "version": "8813d7c89bb5f512",
       "path": "books/the-conversation/chapters/how-lula-turned-four-lessons-from-the-presidential-elections-in-colombia-295048.json"
@@ -114,7 +147,7 @@
       "author": "Dawisson Belém Lopes, Professor de Política Internacional e Comparada, Universidade Federal de Minas Gerais (UFMG)",
       "published": "2026-10-22T23:58:17Z",
       "url": "https://theconversation.com/brazils-election-puts-at-risk-countrys-role-as-a-bulwark-against-trump-interventionism-in-the-americas-295037",
-      "number": 9,
+      "number": 12,
       "wordCount": 1333,
       "version": "0a5c8d2cf5790ba4",
       "path": "books/the-conversation/chapters/brazils-election-puts-at-risk-countrys-role-as-a-bulwark-against-trump-in-295037.json"
@@ -125,7 +158,7 @@
       "author": "Theresa Larkin, Associate Professor of Medical Sciences, University of Wollongong; Megan Hammersley, Lecturer, Public Health, University of Wollongong",
       "published": "2026-10-22T18:34:01Z",
       "url": "https://theconversation.com/whats-the-difference-between-green-yellow-and-red-capsicums-its-more-than-what-you-see-292116",
-      "number": 10,
+      "number": 13,
       "wordCount": 862,
       "version": "f94e9b30ad7153ce",
       "path": "books/the-conversation/chapters/whats-the-difference-between-green-yellow-and-red-capsicums-its-more-than-292116.json"
@@ -136,7 +169,7 @@
       "author": "Osarugue Otebele, Assistant Professor, Cinema Studies Institute, University of Toronto",
       "published": "2026-10-22T15:05:39Z",
       "url": "https://theconversation.com/how-k-dramas-use-africa-as-a-backdrop-to-boost-south-koreas-image-292171",
-      "number": 11,
+      "number": 14,
       "wordCount": 1170,
       "version": "56e9da1a270adbd7",
       "path": "books/the-conversation/chapters/how-k-dramas-use-africa-as-a-backdrop-to-boost-south-koreas-image-292171.json"
@@ -147,7 +180,7 @@
       "author": "Alina Cosma, Assistant Professor of Psychology, Trinity College Dublin",
       "published": "2026-10-22T14:56:06Z",
       "url": "https://theconversation.com/youth-protests-across-europe-the-overlapping-crises-facing-gen-z-294754",
-      "number": 12,
+      "number": 15,
       "wordCount": 928,
       "version": "82131de314188fcb",
       "path": "books/the-conversation/chapters/youth-protests-across-europe-the-overlapping-crises-facing-gen-z-294754.json"
@@ -158,7 +191,7 @@
       "author": "Dominik Havsteen-Franklin, Professor of Arts Psychotherapies & Creative Health, Brunel University of London",
       "published": "2026-10-22T13:52:14Z",
       "url": "https://theconversation.com/hokusais-great-wave-is-one-of-46-prints-of-mount-fuji-seeing-them-together-changes-everything-294801",
-      "number": 13,
+      "number": 16,
       "wordCount": 759,
       "version": "1af3e53ccc4a526d",
       "path": "books/the-conversation/chapters/hokusais-great-wave-is-one-of-46-prints-of-mount-fuji-seeing-them-togethe-294801.json"
@@ -169,7 +202,7 @@
       "author": "Claire Warden, Professor of Performance and Physical Culture, Loughborough University; Conor Heffernan, Lecturer in the Sociology of Sport, Ulster University",
       "published": "2026-10-22T12:37:12Z",
       "url": "https://theconversation.com/napoleon-can-be-partly-blamed-for-gen-zs-weightlifting-obsession-heres-why-293288",
-      "number": 14,
+      "number": 17,
       "wordCount": 1030,
       "version": "ef1616e780689165",
       "path": "books/the-conversation/chapters/napoleon-can-be-partly-blamed-for-gen-zs-weightlifting-obsession-heres-wh-293288.json"
@@ -180,7 +213,7 @@
       "author": "Elena Grossfeld, Researcher at the King's Centre for the Study of Intelligence, King's College London; Swedish Defence University",
       "published": "2026-10-22T11:07:34Z",
       "url": "https://theconversation.com/from-elite-spies-to-gig-economy-operatives-the-changing-face-of-russian-sabotage-294285",
-      "number": 15,
+      "number": 18,
       "wordCount": 914,
       "version": "b598d5b2528a0af1",
       "path": "books/the-conversation/chapters/from-elite-spies-to-gig-economy-operatives-the-changing-face-of-russian-s-294285.json"
@@ -191,7 +224,7 @@
       "author": "Andrew Cullen, Guest Research Fellow, School of Computing and Information Systems, The University of Melbourne",
       "published": "2026-10-22T00:43:33Z",
       "url": "https://theconversation.com/a-critical-flaw-affecting-70-of-all-websites-has-the-cybersecurity-world-panicked-294941",
-      "number": 16,
+      "number": 19,
       "wordCount": 879,
       "version": "4fb659e5d813fd91",
       "path": "books/the-conversation/chapters/a-critical-flaw-affecting-70-of-all-websites-has-the-cybersecurity-world-294941.json"
@@ -202,7 +235,7 @@
       "author": "Carmen Logie, Full Professor, Factor-Inwentash Faculty of Social Work, University of Toronto; Kathleen Deering, Associate professor, Division of Social Medicine, University of British Columbia",
       "published": "2026-10-21T15:37:33Z",
       "url": "https://theconversation.com/the-problem-with-shane-gilliss-joke-isnt-just-sexism-its-sex-work-stigma-294529",
-      "number": 17,
+      "number": 20,
       "wordCount": 1058,
       "version": "3d26beca76a66743",
       "path": "books/the-conversation/chapters/the-problem-with-shane-gilliss-joke-isnt-just-sexism-its-sex-work-stigma-294529.json"
@@ -213,7 +246,7 @@
       "author": "Paolo Stuppia, Sociologue, membre du CESSP (Centre Européen de Sociologie et de Science Politique), Université Paris 1 Panthéon-Sorbonne",
       "published": "2026-10-21T13:58:15Z",
       "url": "https://theconversation.com/frances-casseurs-why-the-term-fails-to-do-justice-to-the-extent-of-looting-and-spiralling-unrest-294805",
-      "number": 18,
+      "number": 21,
       "wordCount": 1438,
       "version": "95861c4f88bc1688",
       "path": "books/the-conversation/chapters/frances-casseurs-why-the-term-fails-to-do-justice-to-the-extent-of-lootin-294805.json"
@@ -224,7 +257,7 @@
       "author": "Mariëtte van der Walt, Biodiversity Coordinator, Wilderness, University of the Witwatersrand",
       "published": "2026-10-21T13:27:45Z",
       "url": "https://theconversation.com/africas-bats-could-survive-climate-change-if-they-can-find-somewhere-to-live-293184",
-      "number": 19,
+      "number": 22,
       "wordCount": 963,
       "version": "b8844efa632effb3",
       "path": "books/the-conversation/chapters/africas-bats-could-survive-climate-change-if-they-can-find-somewhere-to-l-293184.json"
@@ -235,7 +268,7 @@
       "author": "Mimi Hanaoka, Associate Professor of Religious Studies, University of Richmond",
       "published": "2026-10-21T12:45:46Z",
       "url": "https://theconversation.com/japans-expensive-funerals-and-declining-birth-rates-are-transforming-ancestral-traditions-292861",
-      "number": 20,
+      "number": 23,
       "wordCount": 1200,
       "version": "73ebbb8821802d74",
       "path": "books/the-conversation/chapters/japans-expensive-funerals-and-declining-birth-rates-are-transforming-ance-292861.json"
@@ -246,7 +279,7 @@
       "author": "Tamir Sorek, Liberal Arts Professor of Middle East History, Penn State",
       "published": "2026-10-20T12:36:24Z",
       "url": "https://theconversation.com/palestinian-citizens-face-a-painful-choice-in-israels-election-to-vote-or-not-294000",
-      "number": 21,
+      "number": 24,
       "wordCount": 1511,
       "version": "f81c34a50632bcb1",
       "path": "books/the-conversation/chapters/palestinian-citizens-face-a-painful-choice-in-israels-election-to-vote-or-294000.json"
@@ -257,7 +290,7 @@
       "author": "Giles Gasper, Professor in High Medieval History, Durham University; Brian Tanner, Emeritus Professor of Physics at Durham University, Durham University",
       "published": "2026-10-20T10:25:29Z",
       "url": "https://theconversation.com/terror-of-kings-why-the-1066-appearance-of-halleys-comet-terrified-the-medieval-world-293296",
-      "number": 22,
+      "number": 25,
       "wordCount": 1055,
       "version": "0f79b666188d6a6f",
       "path": "books/the-conversation/chapters/terror-of-kings-why-the-1066-appearance-of-halleys-comet-terrified-the-me-293296.json"
@@ -268,7 +301,7 @@
       "author": "Filipe Mendonça, Associate Professor of International Relations, Universidade Federal de Uberlândia (UFU)",
       "published": "2026-10-19T19:20:41Z",
       "url": "https://theconversation.com/how-a-us-political-venture-capital-firm-is-trying-to-influence-brazils-election-294644",
-      "number": 23,
+      "number": 26,
       "wordCount": 1822,
       "version": "4230ffd3dea698f5",
       "path": "books/the-conversation/chapters/how-a-us-political-venture-capital-firm-is-trying-to-influence-brazils-el-294644.json"
@@ -279,7 +312,7 @@
       "author": "Peter McPhee, Emeritus professor, History, The University of Melbourne",
       "published": "2026-10-19T03:02:39Z",
       "url": "https://theconversation.com/as-french-protests-escalate-into-riots-they-may-prove-a-gift-for-marine-le-pens-right-wing-party-294673",
-      "number": 24,
+      "number": 27,
       "wordCount": 829,
       "version": "24c605bc27ee3911",
       "path": "books/the-conversation/chapters/as-french-protests-escalate-into-riots-they-may-prove-a-gift-for-marine-l-294673.json"
@@ -290,7 +323,7 @@
       "author": "Liam Burke, Associate Professor and Cinema and Screen Studies Discipline Leader, Swinburne University of Technology; Andrea Andiloro, Lecturer, Swinburne University of Technology; Steven Conway, Senior Lecturer - Games and Interactivity, Swinburne University of Technology",
       "published": "2026-10-18T19:12:53Z",
       "url": "https://theconversation.com/video-game-film-adaptations-used-to-be-huge-flops-now-studios-cant-get-enough-294354",
-      "number": 25,
+      "number": 28,
       "wordCount": 888,
       "version": "117e870795ffdab7",
       "path": "books/the-conversation/chapters/video-game-film-adaptations-used-to-be-huge-flops-now-studios-cant-get-en-294354.json"
@@ -301,7 +334,7 @@
       "author": "Donald Barry, Professor Emeritus, Political Science, University of Calgary",
       "published": "2026-10-18T12:05:35Z",
       "url": "https://theconversation.com/alberta-and-quebec-referendums-test-canadian-unity-amid-hostility-from-the-u-s-294387",
-      "number": 26,
+      "number": 29,
       "wordCount": 929,
       "version": "4674325f79c4049e",
       "path": "books/the-conversation/chapters/alberta-and-quebec-referendums-test-canadian-unity-amid-hostility-from-th-294387.json"
@@ -312,43 +345,10 @@
       "author": "Maya Tudor, Professor of Politics and Public Policy, University of Oxford",
       "published": "2026-10-16T11:44:29Z",
       "url": "https://theconversation.com/can-indias-cockroach-movement-reverse-its-democratic-decline-294515",
-      "number": 27,
+      "number": 30,
       "wordCount": 961,
       "version": "b4dd7f20e82349c9",
       "path": "books/the-conversation/chapters/can-indias-cockroach-movement-reverse-its-democratic-decline-294515.json"
-    },
-    {
-      "id": "the-mafia-isnt-keeping-fentanyl-out-of-europe-the-lack-of-demand-is-294078",
-      "title": "The mafia isn’t keeping fentanyl out of Europe – the lack of demand is",
-      "author": "Anna Sergi, Professor of Sociology of Law and Deviance, Università di Bologna; University of Essex; The University of Melbourne",
-      "published": "2026-10-16T10:07:57Z",
-      "url": "https://theconversation.com/the-mafia-isnt-keeping-fentanyl-out-of-europe-the-lack-of-demand-is-294078",
-      "number": 28,
-      "wordCount": 863,
-      "version": "a59ef1414ae031e1",
-      "path": "books/the-conversation/chapters/the-mafia-isnt-keeping-fentanyl-out-of-europe-the-lack-of-demand-is-294078.json"
-    },
-    {
-      "id": "primes-carrie-miniseries-expands-stephen-kings-story-but-weakens-its-cent-294512",
-      "title": "Prime’s Carrie miniseries expands Stephen King’s story – but weakens its central horror",
-      "author": "Ahmed Honeini, Honorary Research Associate in American Literature, Royal Holloway, University of London",
-      "published": "2026-10-16T09:31:46Z",
-      "url": "https://theconversation.com/primes-carrie-miniseries-expands-stephen-kings-story-but-weakens-its-central-horror-294512",
-      "number": 29,
-      "wordCount": 824,
-      "version": "3759165e16968ddb",
-      "path": "books/the-conversation/chapters/primes-carrie-miniseries-expands-stephen-kings-story-but-weakens-its-cent-294512.json"
-    },
-    {
-      "id": "japans-mmx-mission-aims-to-swipe-soil-samples-from-mars-moon-phobos-294129",
-      "title": "Japan’s MMX mission aims to swipe soil samples from Mars’ moon Phobos",
-      "author": "Daniel Brown, Lecturer in Astronomy, Nottingham Trent University",
-      "published": "2026-10-16T09:18:46Z",
-      "url": "https://theconversation.com/japans-mmx-mission-aims-to-swipe-soil-samples-from-mars-moon-phobos-294129",
-      "number": 30,
-      "wordCount": 1033,
-      "version": "92affe9b6f2e3bcd",
-      "path": "books/the-conversation/chapters/japans-mmx-mission-aims-to-swipe-soil-samples-from-mars-moon-phobos-294129.json"
     }
   ]
 }

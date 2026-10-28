@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-27T11:51:04.063Z",
+  "generatedAt": "2026-10-28T12:25:44.051Z",
   "sources": {
     "anthropic": [
       {
@@ -7,12 +7,12 @@
         "url": "https://www.anthropic.com/news/public-benefit-fund"
       },
       {
-        "title": "Expanding the Cyber Verification Program We’re launching a new, expanded version of our Cyber…",
-        "url": "https://www.anthropic.com/news/cyber-verification-program"
+        "title": "Anthropic files S-1 with the SEC for proposed initial public offering Today, Anthropic, PBC filed a…",
+        "url": "https://www.anthropic.com/news/s1-sec"
       },
       {
-        "title": "Anthropic files S-1 with the SEC for proposed initial public offering",
-        "url": "https://www.anthropic.com/news/s1-sec"
+        "title": "Expanding our partnership with GSA to bring Claude to all levels of government",
+        "url": "https://www.anthropic.com/news/expanding-partnership-gsa"
       },
       {
         "title": "Donating Agent Skills to the Agentic AI Foundation",
@@ -36,6 +36,10 @@
       }
     ],
     "openai": [
+      {
+        "title": "OpenAI expands partnership with Oracle to bring its apps to ChatGPT Company Oct 27, 2026",
+        "url": "https://openai.com/index/oracle-apps-in-chatgpt/"
+      },
       {
         "title": "Working with academic communities to build scientific understanding Research Oct 26, 2026",
         "url": "https://openai.com/index/building-scientific-understanding-with-academic-communities/"
@@ -63,10 +67,6 @@
       {
         "title": "Build more responsive apps with the Decisions API Product Oct 22, 2026",
         "url": "https://openai.com/index/decisions-api/"
-      },
-      {
-        "title": "What forward deployed engineering means at OpenAI AI Adoption Oct 22, 2026",
-        "url": "https://openai.com/index/forward-deployed-engineering-means/"
       }
     ],
     "google": [
@@ -108,15 +108,15 @@
         "name": "morluto/rea",
         "url": "https://github.com/morluto/rea",
         "description": "Reverse engineer anything with agents, from app behavior down to native binaries.",
-        "stars": 394626,
+        "stars": 400074,
         "language": "TypeScript",
-        "updatedAt": "2026-10-27T10:57:29Z"
+        "updatedAt": "2026-10-28T12:15:48Z"
       },
       {
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 290339,
+        "stars": 291343,
         "language": "JavaScript",
         "updatedAt": "2026-10-26T04:56:56Z"
       },
@@ -124,63 +124,63 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 257573,
+        "stars": 257929,
         "language": "Python",
-        "updatedAt": "2026-10-27T11:40:33Z"
+        "updatedAt": "2026-10-28T12:15:08Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 195866,
+        "stars": 196247,
         "language": "TypeScript",
-        "updatedAt": "2026-10-27T08:49:38Z"
+        "updatedAt": "2026-10-28T08:27:59Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187785,
+        "stars": 187802,
         "language": "Python",
-        "updatedAt": "2026-10-27T11:48:21Z"
+        "updatedAt": "2026-10-28T12:15:37Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 184963,
+        "stars": 185089,
         "language": "Go",
-        "updatedAt": "2026-10-27T02:18:32Z"
+        "updatedAt": "2026-10-28T01:56:22Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 174715,
+        "stars": 174907,
         "language": "HTML",
-        "updatedAt": "2026-10-27T07:26:25Z"
+        "updatedAt": "2026-10-28T11:04:36Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 168233,
+        "stars": 168269,
         "language": "Python",
-        "updatedAt": "2026-10-27T11:26:34Z"
+        "updatedAt": "2026-10-28T12:05:18Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 159681,
+        "stars": 159799,
         "language": "Python",
-        "updatedAt": "2026-10-27T10:49:58Z"
+        "updatedAt": "2026-10-28T12:21:13Z"
       },
       {
         "name": "Snailclimb/JavaGuide",
         "url": "https://github.com/Snailclimb/JavaGuide",
         "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 159294,
+        "stars": 159315,
         "language": "JavaScript",
         "updatedAt": "2026-10-25T11:47:10Z"
       },
@@ -188,17 +188,17 @@
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 156912,
+        "stars": 157028,
         "language": "Python",
-        "updatedAt": "2026-10-27T00:10:13Z"
+        "updatedAt": "2026-10-28T01:25:06Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 148550,
+        "stars": 148609,
         "language": "Python",
-        "updatedAt": "2026-10-27T08:54:25Z"
+        "updatedAt": "2026-10-28T08:58:08Z"
       }
     ],
     "bbc": [
@@ -241,12 +241,6 @@
             "url": "https://www.cnbc.com/2026/10/26/anthropic-ipo-might-trigger-tech-reset-if-ipo-underperforms.html",
             "publisher": "CNBC",
             "date": "2026-10-26"
-          },
-          {
-            "title": "General Motors beats Wall Street's Q3 earnings expectations, narrows full-year guidance",
-            "url": "https://www.cnbc.com/2026/10/20/general-motors-gm-earnings-q3-2026.html",
-            "publisher": "CNBC",
-            "date": "2026-10-20"
           }
         ]
       },
@@ -267,22 +261,22 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
-            "title": "As AI becomes more fractured, one names stands out: AMD",
-            "url": "https://www.cnbc.com/2026/10/26/-as-ai-becomes-more-fractured-one-names-stands-out-amd.html",
+            "title": "Oracle integrates ChatGPT, Codex into apps and expands cloud chip lineup",
+            "url": "https://www.cnbc.com/2026/10/27/oracle-openai-chatgpt-codex-google-tpus.html",
             "publisher": "CNBC",
-            "date": "2026-10-26"
+            "date": "2026-10-27"
+          },
+          {
+            "title": "Wall Street sees this chip stock as the big winner from the Anthropic IPO",
+            "url": "https://www.cnbc.com/2026/10/27/broadcom-anthropic-ipo-filing.html",
+            "publisher": "CNBC",
+            "date": "2026-10-27"
           },
           {
             "title": "SpaceX closes $40 billion debt deal for AI chips, Elon Musk says",
             "url": "https://www.cnbc.com/2026/10/26/spacex-closes-40-billion-debt-deal-for-ai-chips-elon-musk-.html",
             "publisher": "CNBC",
             "date": "2026-10-26"
-          },
-          {
-            "title": "SK Hynix shares jump over 4% after early losses as chipmaker scraps Solidigm IPO plans",
-            "url": "https://www.cnbc.com/2026/10/23/sk-hynix-solidigm-ipo-.html",
-            "publisher": "CNBC",
-            "date": "2026-10-23"
           }
         ]
       },
@@ -291,22 +285,22 @@
         "label": "NVDA · Nvidia",
         "items": [
           {
-            "title": "Nvidia to invest $3 billion in Meta as tech giants deepen AI partnership",
+            "title": "Here are Wednesday's biggest analyst calls: SpaceX, Nvidia, Apple, AMD, Meta, Amazon, Tesla, Boeing & more",
+            "url": "https://www.cnbc.com/2026/10/28/big-wall-street-stocks-covered-on-analyst-calls-include-spacex-boeing.html",
+            "publisher": "CNBC",
+            "date": "2026-10-28"
+          },
+          {
+            "title": "Indian investors rush to Nvidia, SpaceX, Apple as local trading apps roll out access to U.S. stocks",
+            "url": "https://www.cnbc.com/2026/10/28/india-us-stocks-retail-access.html",
+            "publisher": "CNBC",
+            "date": "2026-10-28"
+          },
+          {
+            "title": "Nvidia, AMD to invest $4 billion in Meta as tech giants deepen AI partnership",
             "url": "https://www.cnbc.com/2026/10/27/nvidia-invest-meta.html",
             "publisher": "CNBC",
             "date": "2026-10-27"
-          },
-          {
-            "title": "Nvidia's role as AI financier faces first big test as neoclouds take market hit",
-            "url": "https://www.cnbc.com/2026/10/24/nvidias-role-as-ai-financier-faces-first-big-test-as-neoclouds-take-market-hit.html",
-            "publisher": "CNBC",
-            "date": "2026-10-24"
-          },
-          {
-            "title": "Hottest toy for Christmas? Nvidia CEO plays with adorable Microduck robots, 20,000 sell",
-            "url": "https://techcrunch.com/2026/10/23/hottest-toy-for-christmas-nvidia-ceo-plays-with-adorable-microduck-robots-20000-sell/",
-            "publisher": "TechCrunch",
-            "date": "2026-10-23"
           }
         ]
       },
@@ -315,22 +309,22 @@
         "label": "GOOGL · Google",
         "items": [
           {
-            "title": "Google’s AI search changes upended online publishing",
-            "url": "https://www.theverge.com/column/1017983/google-ai-search-online-publishing",
-            "publisher": "The Verge",
-            "date": "2026-10-25"
-          },
-          {
-            "title": "Earnings playbook: Alphabet, Microsoft, Amazon and more report this week. Here's what to expect",
-            "url": "https://www.cnbc.com/2026/10/25/earnings-week-alphabet-microsoft-amazon.html",
+            "title": "Google alters its cloud playbook, enlisting partners to sell more AI chips",
+            "url": "https://www.cnbc.com/2026/10/28/google-alters-cloud-playbook-turning-to-partners-to-sell-more-ai-chips.html",
             "publisher": "CNBC",
-            "date": "2026-10-25"
+            "date": "2026-10-28"
           },
           {
-            "title": "Now Google says it might use your Gmail and Google Photos data to target ads",
-            "url": "https://www.theverge.com/tech/1017600/google-personal-intelligence-privacy-policy-ads-update",
-            "publisher": "The Verge",
-            "date": "2026-10-23"
+            "title": "Meta- and Google-backed Jio Platforms’ shares soar over 21% on trading debut after record IPO",
+            "url": "https://www.cnbc.com/2026/10/28/jio-ipo-india-listing-.html",
+            "publisher": "CNBC",
+            "date": "2026-10-28"
+          },
+          {
+            "title": "AI debt fears ease ahead of Oracle, Alphabet and Amazon updates. Here's what to watch.",
+            "url": "https://www.cnbc.com/2026/10/27/ai-debt-hyperscaler-earnings.html",
+            "publisher": "CNBC",
+            "date": "2026-10-27"
           }
         ]
       },
@@ -339,22 +333,22 @@
         "label": "AAPL · Apple",
         "items": [
           {
-            "title": "iPhone Duo: Apple says it will replace handsets with screen problems",
-            "url": "https://www.bbc.com/news/articles/c893zwlev2xpo",
-            "publisher": "BBC",
+            "title": "Here’s why the iPhone Duo’s hinge could be cracking the screen",
+            "url": "https://www.theverge.com/tech/1020145/iphone-duo-crackgate-broken-screen-hinge",
+            "publisher": "The Verge",
             "date": "2026-10-27"
           },
           {
-            "title": "iPhone Duo owners report cracks in Apple’s first foldable handset",
-            "url": "https://www.theguardian.com/technology/2026/oct/26/iphone-duo-owners-cracks-apple-first-foldable-handset",
-            "publisher": "The Guardian",
-            "date": "2026-10-26"
+            "title": "Apple unveils new 14-inch MacBook Pro with M6 chip",
+            "url": "https://techcrunch.com/2026/10/27/apple-unveils-new-14-inch-macbook-pro-with-m6-chip/",
+            "publisher": "TechCrunch",
+            "date": "2026-10-27"
           },
           {
-            "title": "iPhone Duo now supports Apple Pencil with iOS 27.2",
-            "url": "https://www.theverge.com/tech/1018827/ios-27-2-iphone-duo-apple-pencil",
-            "publisher": "The Verge",
-            "date": "2026-10-26"
+            "title": "Apple rolls out iOS 27.2 with new Siri AI languages and security fixes",
+            "url": "https://techcrunch.com/2026/10/27/apple-rolls-out-ios-27-2-with-new-siri-ai-languages-and-security-fixes/",
+            "publisher": "TechCrunch",
+            "date": "2026-10-27"
           }
         ]
       },
@@ -363,22 +357,22 @@
         "label": "META · Meta",
         "items": [
           {
+            "title": "Meta quietly launched an ‘AI pet journal’ app",
+            "url": "https://www.theverge.com/ai-artificial-intelligence/1020410/meta-launched-ai-pet-journal-app-waddle-world",
+            "publisher": "The Verge",
+            "date": "2026-10-28"
+          },
+          {
+            "title": "Exclusive: Meta director Rohit Patel departs after 8 years to take on Microsoft Office Suite",
+            "url": "https://techcrunch.com/2026/10/27/meta-ai-director-rohit-patel-leaves-to-take-on-microsoft-office-and-google-workspace/",
+            "publisher": "TechCrunch",
+            "date": "2026-10-27"
+          },
+          {
             "title": "Meta announces $95 billion stock offering to fund AI expansion",
             "url": "https://www.cnbc.com/2026/10/26/meta-stock-offering-ai.html",
             "publisher": "CNBC",
             "date": "2026-10-26"
-          },
-          {
-            "title": "Meta plans $95bn stock offering to help cover AI expansion",
-            "url": "https://www.theguardian.com/technology/2026/oct/26/meta-plans-95bn-stock-offering-to-help-cover-ai-expansion",
-            "publisher": "The Guardian",
-            "date": "2026-10-26"
-          },
-          {
-            "title": "Mark Zuckerberg's creative plan to pay California’s proposed billionaire tax without losing control of Meta",
-            "url": "https://techcrunch.com/2026/10/22/mark-zuckerbergs-creative-plan-to-pay-californias-proposed-billionaire-tax-without-losing-control-of-meta/",
-            "publisher": "TechCrunch",
-            "date": "2026-10-22"
           }
         ]
       },
@@ -386,6 +380,12 @@
         "key": "GROK",
         "label": "Grok · xAI",
         "items": [
+          {
+            "title": "‘Elonville’: Mississippi residents say Musk’s xAI is buying up homes if they don’t sue over noise",
+            "url": "https://www.theguardian.com/us-news/2026/oct/28/datacenter-noise-lawsuit-elon-musk-mississippi",
+            "publisher": "The Guardian",
+            "date": "2026-10-28"
+          },
           {
             "title": "Grok releases the first seven minutes of its AI-generated ‘Odyssey’",
             "url": "https://techcrunch.com/2026/10/25/grok-releases-the-first-seven-minutes-of-its-ai-generated-odyssey/",
@@ -403,13 +403,25 @@
     ],
     "china": [
       {
-        "title": "Mbappé dropped by major Chinese brands as backlash grows over Mao joke",
+        "title": "Kylian Mbappé’s China crisis shows how sensitive Mao’s legacy remains",
+        "url": "https://www.theguardian.com/football/2026/oct/28/kylian-mbappe-china-crisis-shows-how-sensitive-maos-legacy-remains",
+        "publisher": "The Guardian",
+        "date": "2026-10-28"
+      },
+      {
+        "title": "China's families are now supporting more old people than kids",
+        "url": "https://www.bbc.co.uk/news/articles/cr20wzwyzl1qo",
+        "publisher": "BBC",
+        "date": "2026-10-27"
+      },
+      {
+        "title": "Mbappé sorry for 'ill-judged' Mao remark after backlash in China",
         "url": "https://www.bbc.co.uk/news/articles/cv62yg0erp8zo",
         "publisher": "BBC",
         "date": "2026-10-27"
       },
       {
-        "title": "Kylian Mbappé dropped by Chinese brands for ‘offending national sentiments’",
+        "title": "Kylian Mbappé apologises after being dropped by Chinese brands for Mao Zedong comment",
         "url": "https://www.theguardian.com/football/2026/oct/27/kylian-mbappe-dropped-by-chinese-brands-for-offensive-mao-jokes",
         "publisher": "The Guardian",
         "date": "2026-10-27"
@@ -433,22 +445,10 @@
         "date": "2026-10-26"
       },
       {
-        "title": "Xi Jinping’s corruption crackdown in the spotlight as China prepares for meeting of top leaders",
-        "url": "https://www.theguardian.com/world/2026/oct/26/xi-jinping-corruption-crackdown-china-fifth-plenum",
-        "publisher": "The Guardian",
-        "date": "2026-10-26"
-      },
-      {
         "title": "No order, no seat: Starbucks China rolls out new store policy",
         "url": "https://www.bbc.co.uk/news/articles/ckzd6rjmlzvmo",
         "publisher": "BBC",
         "date": "2026-10-22"
-      },
-      {
-        "title": "China tells Israel to stop 'forced establishment' of West Bank settlements",
-        "url": "https://www.bbc.co.uk/news/articles/cq1j3wdxy48ro",
-        "publisher": "BBC",
-        "date": "2026-10-16"
       }
     ]
   }
