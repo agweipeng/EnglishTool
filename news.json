@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-31T11:55:54.046Z",
+  "generatedAt": "2026-11-01T12:55:46.529Z",
   "sources": {
     "anthropic": [
       {
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 293678,
+        "stars": 294423,
         "language": "JavaScript",
         "updatedAt": "2026-10-30T03:06:42Z"
       },
@@ -116,39 +116,39 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 259029,
+        "stars": 259361,
         "language": "Python",
-        "updatedAt": "2026-10-31T11:46:53Z"
+        "updatedAt": "2026-11-01T12:45:14Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 197260,
+        "stars": 197539,
         "language": "TypeScript",
-        "updatedAt": "2026-10-31T10:13:52Z"
+        "updatedAt": "2026-10-31T20:33:10Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187840,
+        "stars": 187853,
         "language": "Python",
-        "updatedAt": "2026-10-31T08:40:20Z"
+        "updatedAt": "2026-11-01T12:55:19Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 185432,
+        "stars": 185539,
         "language": "Go",
-        "updatedAt": "2026-10-30T21:34:59Z"
+        "updatedAt": "2026-10-31T22:46:17Z"
       },
       {
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 181240,
+        "stars": 181833,
         "language": "JavaScript",
         "updatedAt": "2026-10-29T11:59:31Z"
       },
@@ -156,49 +156,49 @@
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 175374,
-        "language": "HTML",
-        "updatedAt": "2026-10-31T10:38:09Z"
+        "stars": 175475,
+        "language": "MDX",
+        "updatedAt": "2026-11-01T11:38:28Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 168387,
+        "stars": 168407,
         "language": "Python",
-        "updatedAt": "2026-10-31T09:37:09Z"
+        "updatedAt": "2026-11-01T11:39:49Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 160072,
+        "stars": 160149,
         "language": "Python",
-        "updatedAt": "2026-10-31T10:59:40Z"
-      },
-      {
-        "name": "Snailclimb/JavaGuide",
-        "url": "https://github.com/Snailclimb/JavaGuide",
-        "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 159361,
-        "language": "JavaScript",
-        "updatedAt": "2026-10-25T11:47:10Z"
+        "updatedAt": "2026-11-01T12:44:03Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 157350,
+        "stars": 157450,
         "language": "Python",
-        "updatedAt": "2026-10-31T10:22:36Z"
+        "updatedAt": "2026-11-01T12:46:49Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 148763,
+        "stars": 148812,
         "language": "Python",
-        "updatedAt": "2026-10-31T08:15:40Z"
+        "updatedAt": "2026-11-01T09:10:04Z"
+      },
+      {
+        "name": "Graphify-Labs/graphify",
+        "url": "https://github.com/Graphify-Labs/graphify",
+        "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
+        "stars": 140291,
+        "language": "Python",
+        "updatedAt": "2026-11-01T00:53:07Z"
       }
     ],
     "bbc": [
@@ -229,13 +229,6 @@
         "date": "2026-10-08",
         "description": "Do you drink alcoholic drinks?",
         "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/261008_6_minute_english_are_people_drinking_less_alcohol_download.mp3"
-      },
-      {
-        "title": "Why does heartbreak hurt so much?",
-        "url": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-261001",
-        "date": "2026-10-01",
-        "description": "Have you ever had your heart broken?",
-        "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/261001_6_minute_english_why_does_heartbreak_hurt_so_much_download.mp3"
       }
     ],
     "markets": [
@@ -243,6 +236,12 @@
         "key": "SPY",
         "label": "SPY · S&P 500",
         "items": [
+          {
+            "title": "Top Wall Street analysts are bullish on these 3 stocks for the long haul",
+            "url": "https://www.cnbc.com/2026/11/01/top-analysts-are-bullish-on-these-3-stocks-for-the-long-haul.html",
+            "publisher": "CNBC",
+            "date": "2026-11-01"
+          },
           {
             "title": "Jim Cramer says Wall Street is punishing the wrong tech stocks",
             "url": "https://www.cnbc.com/2026/10/29/jim-cramer-earnings-guilt-by-association.html",
@@ -268,16 +267,16 @@
             "date": "2026-10-31"
           },
           {
-            "title": "Stock market rocked as investors dump tech shares; Nasdaq suffers worst day since June: Live updates",
-            "url": "https://www.cnbc.com/2026/10/29/stock-market-today-live-updates.html",
-            "publisher": "CNBC",
-            "date": "2026-10-30"
-          },
-          {
             "title": "Tech scare trade hits Nasdaq futures while crypto reels from its biggest-ever hack",
             "url": "https://www.cnbc.com/2026/10/30/tech-trade-nasdaq-futures-crypto-hack.html",
             "publisher": "CNBC",
             "date": "2026-10-30"
+          },
+          {
+            "title": "GM is shifting gears to the Nasdaq, trying to draft behind Walmart’s lead",
+            "url": "https://www.cnbc.com/2026/10/29/general-motors-nasdaq-listing.html",
+            "publisher": "CNBC",
+            "date": "2026-10-29"
           }
         ]
       },
@@ -334,10 +333,10 @@
         "label": "GOOGL · Google",
         "items": [
           {
-            "title": "Google’s first data center satellite is online and writing poetry",
-            "url": "https://techcrunch.com/2026/10/30/googles-first-data-center-satellite-is-online-and-writing-poetry/",
-            "publisher": "TechCrunch",
-            "date": "2026-10-30"
+            "title": "Why AI is boosting Meta's ad business while hurting Google search",
+            "url": "https://www.cnbc.com/2026/11/01/ai-meta-ads-google-search.html",
+            "publisher": "CNBC",
+            "date": "2026-11-01"
           },
           {
             "title": "Google lost nearly half a trillion this week. Here's how Mike Khouw is trading it",
@@ -358,22 +357,22 @@
         "label": "AAPL · Apple",
         "items": [
           {
-            "title": "Midterms, Apple earnings, jobs report. Wall Street faces a big week ahead just as investors dump tech",
-            "url": "https://www.cnbc.com/2026/10/30/stock-market-next-week-outlook-for-nov-2-6-2026.html",
-            "publisher": "CNBC",
-            "date": "2026-10-30"
+            "title": "Apple CEO says the company doesn’t ‘want to ship AI for AI’s sake’",
+            "url": "https://techcrunch.com/2026/10/31/apple-ceo-says-the-company-doesnt-want-to-ship-ai-for-ais-sake/",
+            "publisher": "TechCrunch",
+            "date": "2026-10-31"
           },
           {
-            "title": "The Apple Pencil turned the Duo into my new favorite notebook",
-            "url": "https://www.theverge.com/tech/1022894/iphone-duo-apple-pencil-hands-on",
+            "title": "All the news about the iPhone Duo",
+            "url": "https://www.theverge.com/tech/1010131/apple-iphone-duo-news-announcements",
             "publisher": "The Verge",
             "date": "2026-10-30"
           },
           {
-            "title": "South Korea fines Google and Apple over unfair app market practices",
-            "url": "https://apnews.com/article/korea-google-apple-app-tech-fine-aedd6061a785441380d4daaf7afbc43d",
-            "publisher": "AP News",
-            "date": "2026-10-28"
+            "title": "Apple Intelligence is finally coming to China with iOS 27.3",
+            "url": "https://www.theverge.com/tech/1023974/apple-intelligence-china-ios-27-3",
+            "publisher": "The Verge",
+            "date": "2026-10-30"
           }
         ]
       },
@@ -388,16 +387,16 @@
             "date": "2026-10-30"
           },
           {
-            "title": "Meta settles with teen during trial testing claims social media caused depression, eating disorders",
-            "url": "https://www.cnbc.com/2026/10/30/meta-settles-with-teen-during-trial-testing-claims-social-media-caused-depression-eating-disorders.html",
-            "publisher": "CNBC",
-            "date": "2026-10-30"
-          },
-          {
             "title": "Musk and Zuckerberg echo Trump's push to rebrand AI as 'super intelligence' on earnings calls. Others do not",
             "url": "https://www.cnbc.com/2026/10/30/trump-tech-allies-swap-ai-for-super-intelligence-in-earnings-calls.html",
             "publisher": "CNBC",
             "date": "2026-10-30"
+          },
+          {
+            "title": "Meta discussed ‘whisper strategy’ against social media critic Jonathan Haidt, files show",
+            "url": "https://www.theguardian.com/technology/2026/oct/29/meta-staff-us-social-media-critic-jonathan-haidt-court-documents",
+            "publisher": "The Guardian",
+            "date": "2026-10-29"
           }
         ]
       },
@@ -405,6 +404,12 @@
         "key": "GROK",
         "label": "Grok · xAI",
         "items": [
+          {
+            "title": "Judge allows NAACP lawsuit over xAI data center pollution to move forward",
+            "url": "https://techcrunch.com/2026/10/31/judge-allows-naacp-lawsuit-over-xai-data-center-pollution-to-move-forward/",
+            "publisher": "TechCrunch",
+            "date": "2026-10-31"
+          },
           {
             "title": "xAI is buying out homeowners who promise not to sue over data center noise",
             "url": "https://www.theverge.com/ai-artificial-intelligence/1020596/xai-mississippi-neighborhood-data-center-lawsuit",
@@ -416,17 +421,23 @@
             "url": "https://www.theguardian.com/us-news/2026/oct/28/datacenter-noise-lawsuit-elon-musk-mississippi",
             "publisher": "The Guardian",
             "date": "2026-10-28"
-          },
-          {
-            "title": "Grok releases the first seven minutes of its AI-generated ‘Odyssey’",
-            "url": "https://techcrunch.com/2026/10/25/grok-releases-the-first-seven-minutes-of-its-ai-generated-odyssey/",
-            "publisher": "TechCrunch",
-            "date": "2026-10-25"
           }
         ]
       }
     ],
     "china": [
+      {
+        "title": "The US-China trade war seems to have subsided – but the sense of calm is misleading",
+        "url": "https://www.theguardian.com/world/2026/nov/01/us-china-trade-war-trump-xi",
+        "publisher": "The Guardian",
+        "date": "2026-11-01"
+      },
+      {
+        "title": "It’s closer to Beijing than Washington – and residents of this Alaskan outpost are reeling from Trump’s policies",
+        "url": "https://www.theguardian.com/us-news/ng-interactive/2026/oct/31/alaska-unalaska-fishing-trump",
+        "publisher": "The Guardian",
+        "date": "2026-10-31"
+      },
       {
         "title": "Beijing Queer film festival cancelled after harassment from authorities",
         "url": "https://www.theguardian.com/world/2026/oct/30/beijing-queer-film-festival-cancelled-after-police-harassment",
@@ -458,21 +469,9 @@
         "date": "2026-10-29"
       },
       {
-        "title": "Nvidia CEO reportedly targeted by an alleged Chinese spy",
-        "url": "https://www.theguardian.com/technology/2026/oct/29/nvidia-ceo-targeted-chinese-spy",
-        "publisher": "The Guardian",
-        "date": "2026-10-29"
-      },
-      {
         "title": "Hong Kong's leader apologises for deadly high-rise fire",
         "url": "https://www.bbc.co.uk/news/articles/cr5yn9770pgvo",
         "publisher": "BBC",
-        "date": "2026-10-29"
-      },
-      {
-        "title": "Hello Kitty company cuts ties with Japanese spy show after China outcry",
-        "url": "https://www.theguardian.com/world/2026/oct/29/hello-kitty-japanese-spy-show-vivant-china-outcry",
-        "publisher": "The Guardian",
         "date": "2026-10-29"
       }
     ]
