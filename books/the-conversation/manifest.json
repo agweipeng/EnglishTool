@@ -15,18 +15,40 @@
   "recommendation": "New articles every day, written by university experts for general readers: current topics in natural, educated native English.",
   "sectionType": "article",
   "kind": "news",
-  "version": "90e68cdad710e59e",
+  "version": "5d890a93608f90b7",
   "introduction": "",
-  "latestArticle": "2026-10-30T11:33:54Z",
-  "wordCount": 33936,
+  "latestArticle": "2026-11-01T19:17:35Z",
+  "wordCount": 33488,
   "chapters": [
+    {
+      "id": "nearly-all-americans-believe-corruption-is-a-problem-but-will-it-decide-t-295075",
+      "title": "Nearly all Americans believe corruption is a problem. But will it decide the midterm elections?",
+      "author": "Jared Mondschein, Director of Research, US Studies Centre, University of Sydney",
+      "published": "2026-11-01T19:17:35Z",
+      "url": "https://theconversation.com/nearly-all-americans-believe-corruption-is-a-problem-but-will-it-decide-the-midterm-elections-295075",
+      "number": 1,
+      "wordCount": 1007,
+      "version": "a3d37a42c8d9ff8e",
+      "path": "books/the-conversation/chapters/nearly-all-americans-believe-corruption-is-a-problem-but-will-it-decide-t-295075.json"
+    },
+    {
+      "id": "from-18th-century-false-ballots-to-the-second-jfk-and-double-dan-sullivan-295504",
+      "title": "From 18th-century false ballots to the second JFK and double Dan Sullivans, a brief history of spoiler candidates and the unsuccessful legal challenges to them",
+      "author": "Drew Kurlowski, Associate Professor of Political Science, Coastal Carolina University",
+      "published": "2026-10-30T17:14:04Z",
+      "url": "https://theconversation.com/from-18th-century-false-ballots-to-the-second-jfk-and-double-dan-sullivans-a-brief-history-of-spoiler-candidates-and-the-unsuccessful-legal-challenges-to-them-295504",
+      "number": 2,
+      "wordCount": 1221,
+      "version": "d33959bd65c5aa68",
+      "path": "books/the-conversation/chapters/from-18th-century-false-ballots-to-the-second-jfk-and-double-dan-sullivan-295504.json"
+    },
     {
       "id": "how-the-sphinx-is-helping-answer-a-riddle-about-extinct-crocodiles-294007",
       "title": "How the Sphinx is helping answer a riddle about extinct crocodiles",
       "author": "Philip Mannion, Professor of Palaeobiology, UCL",
       "published": "2026-10-30T11:33:54Z",
       "url": "https://theconversation.com/how-the-sphinx-is-helping-answer-a-riddle-about-extinct-crocodiles-294007",
-      "number": 1,
+      "number": 3,
       "wordCount": 915,
       "version": "c532b144ead9b9fb",
       "path": "books/the-conversation/chapters/how-the-sphinx-is-helping-answer-a-riddle-about-extinct-crocodiles-294007.json"
@@ -37,7 +59,7 @@
       "author": "Chris Comerford, Senior Lecturer in Communication and Media, University of Wollongong",
       "published": "2026-10-30T01:15:11Z",
       "url": "https://theconversation.com/what-we-leave-behind-is-not-as-important-as-how-weve-lived-remembering-actor-patrick-stewart-295542",
-      "number": 2,
+      "number": 4,
       "wordCount": 887,
       "version": "3820664a8e2fd8a8",
       "path": "books/the-conversation/chapters/what-we-leave-behind-is-not-as-important-as-how-weve-lived-remembering-ac-295542.json"
@@ -48,7 +70,7 @@
       "author": "Alex Bertacchi, Engineer in Mass Spectrometry and Stable Isotope Research, University of Kiel; Jessica C. Thompson, Assistant Professor of Anthropology, Yale University",
       "published": "2026-10-29T14:03:33Z",
       "url": "https://theconversation.com/what-animal-bones-in-malawi-teach-us-about-the-social-lives-of-people-long-ago-281660",
-      "number": 3,
+      "number": 5,
       "wordCount": 1259,
       "version": "8476b2dcf5dc6420",
       "path": "books/the-conversation/chapters/what-animal-bones-in-malawi-teach-us-about-the-social-lives-of-people-lon-281660.json"
@@ -59,7 +81,7 @@
       "author": "Ciro Civile, Associate Professor, Psychology, University of Exeter",
       "published": "2026-10-29T14:03:06Z",
       "url": "https://theconversation.com/is-sexual-objectification-hard-wired-our-study-used-electrical-brain-stimulation-to-find-out-294925",
-      "number": 4,
+      "number": 6,
       "wordCount": 908,
       "version": "fdcbfec37c2a2304",
       "path": "books/the-conversation/chapters/is-sexual-objectification-hard-wired-our-study-used-electrical-brain-stim-294925.json"
@@ -70,7 +92,7 @@
       "author": "Eoin McLaughlin, Professor in Economics, University College Cork",
       "published": "2026-10-29T13:21:55Z",
       "url": "https://theconversation.com/70-years-ago-the-suez-crisis-exposed-british-relative-decline-today-the-iran-conflict-could-be-doing-the-same-for-the-us-292833",
-      "number": 5,
+      "number": 7,
       "wordCount": 1013,
       "version": "2a2ed23b884cb723",
       "path": "books/the-conversation/chapters/70-years-ago-the-suez-crisis-exposed-british-relative-decline-today-the-i-292833.json"
@@ -81,7 +103,7 @@
       "author": "Thomas J Bassett, Professor Emeritus, University of Illinois Urbana-Champaign",
       "published": "2026-10-29T12:24:00Z",
       "url": "https://theconversation.com/who-mapped-africa-debunking-the-myth-that-europeans-alone-plotted-the-continent-293657",
-      "number": 6,
+      "number": 8,
       "wordCount": 1162,
       "version": "dac6c930b527b792",
       "path": "books/the-conversation/chapters/who-mapped-africa-debunking-the-myth-that-europeans-alone-plotted-the-con-293657.json"
@@ -92,7 +114,7 @@
       "author": "Carlos Gutiérrez Hita, Profesor titular de Universidad. Economía industrial (transporte, energía, telecomunicaciones), Universidad Miguel Hernández",
       "published": "2026-10-29T11:52:36Z",
       "url": "https://theconversation.com/spains-high-speed-train-network-is-plagued-by-old-signalling-systems-they-may-have-caused-the-deadly-crash-295465",
-      "number": 7,
+      "number": 9,
       "wordCount": 862,
       "version": "73e100392e4d88a0",
       "path": "books/the-conversation/chapters/spains-high-speed-train-network-is-plagued-by-old-signalling-systems-they-295465.json"
@@ -103,7 +125,7 @@
       "author": "Alex Dittrich, Senior Lecturer in Zoology, Nottingham Trent University; Kat Hamill, Senior Lecturer in Zoology, Nottingham Trent University",
       "published": "2026-10-29T11:08:12Z",
       "url": "https://theconversation.com/werewolf-mice-ghostly-frogs-and-zombie-cockroaches-the-animal-versions-of-our-halloween-horrors-294284",
-      "number": 8,
+      "number": 10,
       "wordCount": 865,
       "version": "6ebb28761b04c9b2",
       "path": "books/the-conversation/chapters/werewolf-mice-ghostly-frogs-and-zombie-cockroaches-the-animal-versions-of-294284.json"
@@ -114,7 +136,7 @@
       "author": "Dov Waxman, Presidential Chair in Modern Jewish Studies, University of California, Los Angeles",
       "published": "2026-10-29T01:39:44Z",
       "url": "https://theconversation.com/israel-has-voted-but-what-comes-next-dissecting-a-messy-ballot-and-coalition-building-process-295404",
-      "number": 9,
+      "number": 11,
       "wordCount": 1446,
       "version": "a0d37c12a9d07863",
       "path": "books/the-conversation/chapters/israel-has-voted-but-what-comes-next-dissecting-a-messy-ballot-and-coalit-295404.json"
@@ -125,7 +147,7 @@
       "author": "Sergio Abranches, Ex-professor titular do IUPERJ/Uerj e ex-professor visitante no Departamento de Economia e Administração (FEA), Universidade Federal do Rio de Janeiro (UFRJ)",
       "published": "2026-10-28T17:31:44Z",
       "url": "https://theconversation.com/in-brazils-election-first-round-voting-was-driven-by-resentment-in-the-runoff-it-was-guided-by-fear-295242",
-      "number": 10,
+      "number": 12,
       "wordCount": 1270,
       "version": "6c9362f3930ebabd",
       "path": "books/the-conversation/chapters/in-brazils-election-first-round-voting-was-driven-by-resentment-in-the-ru-295242.json"
@@ -136,7 +158,7 @@
       "author": "Emilie Canova, Institute Affiliate at the Scott Polar Research Institute, University of Cambridge; Centre national de la recherche scientifique (CNRS)",
       "published": "2026-10-28T13:46:02Z",
       "url": "https://theconversation.com/eus-new-arctic-strategy-signals-shift-in-its-geopolitical-mindset-294978",
-      "number": 11,
+      "number": 13,
       "wordCount": 831,
       "version": "983dff9702336915",
       "path": "books/the-conversation/chapters/eus-new-arctic-strategy-signals-shift-in-its-geopolitical-mindset-294978.json"
@@ -147,7 +169,7 @@
       "author": "Alex Hinton, Distinguished Professor of Anthropology; Director, Center for the Study of Genocide and Human Rights, Rutgers University - Newark",
       "published": "2026-10-28T12:22:00Z",
       "url": "https://theconversation.com/ive-been-talking-to-maga-supporters-for-years-and-heres-why-some-are-sticking-with-trump-and-others-are-not-294771",
-      "number": 12,
+      "number": 14,
       "wordCount": 1265,
       "version": "96982553d68eed28",
       "path": "books/the-conversation/chapters/ive-been-talking-to-maga-supporters-for-years-and-heres-why-some-are-stic-294771.json"
@@ -158,7 +180,7 @@
       "author": "Yashaswini Singh, Thomas J. and Alice M. Tisch Assistant Professor of Health Services, Policy and Practice, Brown University",
       "published": "2026-10-28T12:19:23Z",
       "url": "https://theconversation.com/private-equity-is-buying-up-more-methadone-clinics-access-to-the-lifesaving-drug-isnt-getting-easier-286927",
-      "number": 13,
+      "number": 15,
       "wordCount": 2318,
       "version": "ec6bc54997ccbc31",
       "path": "books/the-conversation/chapters/private-equity-is-buying-up-more-methadone-clinics-access-to-the-lifesavi-286927.json"
@@ -169,7 +191,7 @@
       "author": "Alex Brown, Associate Professor of Medieval History, Durham University",
       "published": "2026-10-28T12:14:32Z",
       "url": "https://theconversation.com/medieval-ghost-stories-featured-rotten-flesh-the-walking-dead-and-spoon-stealing-spirits-294984",
-      "number": 14,
+      "number": 16,
       "wordCount": 805,
       "version": "0945f2b0d294a50a",
       "path": "books/the-conversation/chapters/medieval-ghost-stories-featured-rotten-flesh-the-walking-dead-and-spoon-s-294984.json"
@@ -180,7 +202,7 @@
       "author": "James Deaville, Professor of Music, Carleton University; Sara Beth Lyons, Graduate Research Assistant, Carleton University",
       "published": "2026-10-27T18:11:32Z",
       "url": "https://theconversation.com/the-female-scream-is-now-an-all-powerful-cry-in-horror-films-293273",
-      "number": 15,
+      "number": 17,
       "wordCount": 1058,
       "version": "b50ef54788b7fd3a",
       "path": "books/the-conversation/chapters/the-female-scream-is-now-an-all-powerful-cry-in-horror-films-293273.json"
@@ -191,7 +213,7 @@
       "author": "Gareth Roberts, Associate Professor, School of Geography and Environmental Science, University of Southampton; Martin Wooster, Professor of Earth Observation Science, King's College London",
       "published": "2026-10-27T16:52:57Z",
       "url": "https://theconversation.com/indonesias-el-nino-driven-peat-fires-are-choking-the-region-and-releasing-centuries-of-stored-carbon-294838",
-      "number": 16,
+      "number": 18,
       "wordCount": 845,
       "version": "59d67d448301b812",
       "path": "books/the-conversation/chapters/indonesias-el-nino-driven-peat-fires-are-choking-the-region-and-releasing-294838.json"
@@ -202,7 +224,7 @@
       "author": "Josh Bland, Postdoctoral researcher of football cultures and heritage, Department of Archaeology, University of Cambridge",
       "published": "2026-10-27T16:04:52Z",
       "url": "https://theconversation.com/harry-kane-wins-ballon-dor-a-victory-for-sportsmanship-over-celebrity-295281",
-      "number": 17,
+      "number": 19,
       "wordCount": 794,
       "version": "101f114bdc84ad49",
       "path": "books/the-conversation/chapters/harry-kane-wins-ballon-dor-a-victory-for-sportsmanship-over-celebrity-295281.json"
@@ -213,7 +235,7 @@
       "author": "Eric Gordy, Professor of Political and Cultural Sociology, UCL",
       "published": "2026-10-27T15:24:09Z",
       "url": "https://theconversation.com/serbias-leaderless-student-movement-has-won-a-historic-election-but-what-happens-next-295268",
-      "number": 18,
+      "number": 20,
       "wordCount": 1041,
       "version": "ef3c27101aca429e",
       "path": "books/the-conversation/chapters/serbias-leaderless-student-movement-has-won-a-historic-election-but-what-295268.json"
@@ -224,7 +246,7 @@
       "author": "John O’Loughlin, College Professor of Distinction in Geography and Fellow, Institute of Behavioral Science, University of Colorado Boulder; Gerard Toal, Professor of Government and International Affairs, Virginia Tech; Sarah Wilson Sokhey, Associate Professor of Political Science, University of Colorado Boulder",
       "published": "2026-10-27T12:15:22Z",
       "url": "https://theconversation.com/putin-hopes-hardship-will-force-ukrainians-to-sue-for-peace-polling-suggests-it-wont-work-294619",
-      "number": 19,
+      "number": 21,
       "wordCount": 1171,
       "version": "18cfd4b78b3e418f",
       "path": "books/the-conversation/chapters/putin-hopes-hardship-will-force-ukrainians-to-sue-for-peace-polling-sugge-294619.json"
@@ -235,7 +257,7 @@
       "author": "Marta Khomyn, Senior Lecturer, Finance and Data Analytics, Adelaide University",
       "published": "2026-10-27T05:26:46Z",
       "url": "https://theconversation.com/anthropics-record-us-2-trillion-stock-market-listing-highlights-the-growing-risks-for-all-of-us-295243",
-      "number": 20,
+      "number": 22,
       "wordCount": 903,
       "version": "9ba3e0a66c4dae55",
       "path": "books/the-conversation/chapters/anthropics-record-us-2-trillion-stock-market-listing-highlights-the-growi-295243.json"
@@ -246,7 +268,7 @@
       "author": "João Gabriel de Lima, Jornalista, doutorando em Política Comparada, Universidade de Lisboa",
       "published": "2026-10-26T19:55:27Z",
       "url": "https://theconversation.com/in-opting-for-lula-brazil-made-a-conservative-choice-to-elect-a-man-of-the-left-over-one-of-the-far-right-295217",
-      "number": 21,
+      "number": 23,
       "wordCount": 924,
       "version": "448de6cdeff2dd24",
       "path": "books/the-conversation/chapters/in-opting-for-lula-brazil-made-a-conservative-choice-to-elect-a-man-of-th-295217.json"
@@ -257,7 +279,7 @@
       "author": "Jamal Abarashi, Lecturer, Marketing and International Business Department, Auckland University of Technology",
       "published": "2026-10-26T18:33:14Z",
       "url": "https://theconversation.com/the-upside-of-untidiness-why-a-little-mess-can-be-good-for-your-home-294343",
-      "number": 22,
+      "number": 24,
       "wordCount": 745,
       "version": "37cbcc8fbf8a9778",
       "path": "books/the-conversation/chapters/the-upside-of-untidiness-why-a-little-mess-can-be-good-for-your-home-294343.json"
@@ -268,7 +290,7 @@
       "author": "Amnon Aran, Professor of International Relations, City St George's, University of London",
       "published": "2026-10-26T16:46:46Z",
       "url": "https://theconversation.com/israeli-election-why-nobody-has-been-talking-about-palestinian-statehood-294888",
-      "number": 23,
+      "number": 25,
       "wordCount": 996,
       "version": "b143fed7baf8c67a",
       "path": "books/the-conversation/chapters/israeli-election-why-nobody-has-been-talking-about-palestinian-statehood-294888.json"
@@ -279,7 +301,7 @@
       "author": "Gavin Brent Sullivan, Professor of Social Psychology, International Psychoanalytic University Berlin; Tereza Capelos, Professor of Political Psychology, Department of Politics and International Relations, University of Southampton",
       "published": "2026-10-26T15:29:16Z",
       "url": "https://theconversation.com/we-changed-the-system-how-serbian-students-ended-alexander-vucics-12-years-in-power-295119",
-      "number": 24,
+      "number": 26,
       "wordCount": 1017,
       "version": "cb38db9f0651ae6c",
       "path": "books/the-conversation/chapters/we-changed-the-system-how-serbian-students-ended-alexander-vucics-12-year-295119.json"
@@ -290,7 +312,7 @@
       "author": "Guilherme Casarões, Associate Professor of Brazilian Studies, Florida International University",
       "published": "2026-10-26T03:55:20Z",
       "url": "https://theconversation.com/lula-wins-a-miracle-election-in-brazil-now-comes-the-hard-part-putting-the-country-back-on-the-right-track-295157",
-      "number": 25,
+      "number": 27,
       "wordCount": 1182,
       "version": "a454073a4077700f",
       "path": "books/the-conversation/chapters/lula-wins-a-miracle-election-in-brazil-now-comes-the-hard-part-putting-th-295157.json"
@@ -301,7 +323,7 @@
       "author": "Hannah Ridge, Assistant Professor of Political Science, Chapman University; Institute for Humane Studies",
       "published": "2026-10-23T14:52:34Z",
       "url": "https://theconversation.com/why-ultra-orthodox-parties-hold-so-much-sway-in-israeli-politics-294218",
-      "number": 26,
+      "number": 28,
       "wordCount": 1245,
       "version": "27c3f7f9cb020f95",
       "path": "books/the-conversation/chapters/why-ultra-orthodox-parties-hold-so-much-sway-in-israeli-politics-294218.json"
@@ -312,7 +334,7 @@
       "author": "Chris Stringer, Honorary Professor, Institute of Archaeology, UCL; Natural History Museum",
       "published": "2026-10-23T09:03:28Z",
       "url": "https://theconversation.com/unlocking-the-secrets-of-the-dragon-man-skull-and-what-it-reveals-about-human-evolution-291321",
-      "number": 27,
+      "number": 29,
       "wordCount": 2557,
       "version": "44281085bc6d79b8",
       "path": "books/the-conversation/chapters/unlocking-the-secrets-of-the-dragon-man-skull-and-what-it-reveals-about-h-291321.json"
@@ -323,32 +345,10 @@
       "author": "Jan Machielsen, Reader in Early Modern History, History, Archaeology and Religion, Cardiff University",
       "published": "2026-10-23T09:03:12Z",
       "url": "https://theconversation.com/the-crucible-arthur-millers-morality-tale-was-as-much-a-reaction-to-his-own-marital-failings-as-it-was-to-the-red-scare-294832",
-      "number": 28,
+      "number": 30,
       "wordCount": 976,
       "version": "5f52c5bd1ab59f08",
       "path": "books/the-conversation/chapters/the-crucible-arthur-millers-morality-tale-was-as-much-a-reaction-to-his-o-294832.json"
-    },
-    {
-      "id": "how-lula-turned-four-lessons-from-the-presidential-elections-in-colombia-295048",
-      "title": "How Lula turned four lessons from the presidential elections in Colombia into a comeback in Brazil’s Sunday runoff",
-      "author": "Guilherme Casarões, Associate Professor of Brazilian Studies, Florida International University; Carlos Ricaurte, Latin America and Caribbean Center, Florida International University",
-      "published": "2026-10-22T23:58:36Z",
-      "url": "https://theconversation.com/how-lula-turned-four-lessons-from-the-presidential-elections-in-colombia-into-a-comeback-in-brazils-sunday-runoff-295048",
-      "number": 29,
-      "wordCount": 1343,
-      "version": "8813d7c89bb5f512",
-      "path": "books/the-conversation/chapters/how-lula-turned-four-lessons-from-the-presidential-elections-in-colombia-295048.json"
-    },
-    {
-      "id": "brazils-election-puts-at-risk-countrys-role-as-a-bulwark-against-trump-in-295037",
-      "title": "Brazil’s election puts at risk country’s role as a bulwark against Trump interventionism in the Americas",
-      "author": "Dawisson Belém Lopes, Professor de Política Internacional e Comparada, Universidade Federal de Minas Gerais (UFMG)",
-      "published": "2026-10-22T23:58:17Z",
-      "url": "https://theconversation.com/brazils-election-puts-at-risk-countrys-role-as-a-bulwark-against-trump-interventionism-in-the-americas-295037",
-      "number": 30,
-      "wordCount": 1333,
-      "version": "0a5c8d2cf5790ba4",
-      "path": "books/the-conversation/chapters/brazils-election-puts-at-risk-countrys-role-as-a-bulwark-against-trump-in-295037.json"
     }
   ]
 }
