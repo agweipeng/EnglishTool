@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-02T15:11:46.634Z",
+  "generatedAt": "2026-11-03T13:53:29.805Z",
   "sources": {
     "anthropic": [
       {
@@ -37,8 +37,28 @@
     ],
     "openai": [
       {
+        "title": "Scaling Git at OpenAI Engineering Nov 2, 2026",
+        "url": "https://openai.com/index/scaling-git-at-openai/"
+      },
+      {
         "title": "Introducing the Grid Protectors Program Global Affairs Nov 2, 2026",
         "url": "https://openai.com/index/grid-protectors-program/"
+      },
+      {
+        "title": "Preparing our next security sprint to harden OpenAI Security Nov 2, 2026",
+        "url": "https://openai.com/index/preparing-our-next-security-sprint-to-harden-openai/"
+      },
+      {
+        "title": "Rewarding defenders with bigger bug bounties Security Nov 2, 2026",
+        "url": "https://openai.com/index/rewarding-defenders-with-bigger-bug-bounties/"
+      },
+      {
+        "title": "LifeVal Research Nov 2, 2026",
+        "url": "https://openai.com/index/lifeval/"
+      },
+      {
+        "title": "Dan Driscoll joins OpenAI Company Nov 2, 2026",
+        "url": "https://openai.com/index/dan-driscoll-joins-openai/"
       },
       {
         "title": "Making it easier for websites to express AI training preferences Company Oct 30, 2026",
@@ -47,26 +67,6 @@
       {
         "title": "Community safety report and new protections for teens Safety Oct 30, 2026",
         "url": "https://openai.com/index/community-safety-report-and-new-protections-for-teens/"
-      },
-      {
-        "title": "Fair use benefits everyone Company Oct 30, 2026",
-        "url": "https://openai.com/index/fair-use-benefits-everyone/"
-      },
-      {
-        "title": "An updated Model Spec for more capable and beneficial AI Safety Oct 29, 2026",
-        "url": "https://openai.com/index/updated-model-spec/"
-      },
-      {
-        "title": "How we detect frontier model misalignment Security Oct 29, 2026",
-        "url": "https://openai.com/index/how-we-detect-frontier-model-misalignment/"
-      },
-      {
-        "title": "OpenAI and ServiceNow expand partnership across enterprise workflows Company Oct 28, 2026",
-        "url": "https://openai.com/index/openai-servicenow-partnership-expansion/"
-      },
-      {
-        "title": "The future of the firm Intelligence Age Oct 28, 2026",
-        "url": "https://openai.com/index/the-future-of-the-firm/"
       }
     ],
     "google": [
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 295289,
+        "stars": 296176,
         "language": "JavaScript",
         "updatedAt": "2026-11-02T04:56:08Z"
       },
@@ -116,39 +116,39 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 259709,
+        "stars": 260102,
         "language": "Python",
-        "updatedAt": "2026-11-02T15:10:44Z"
+        "updatedAt": "2026-11-03T13:45:08Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 197869,
+        "stars": 198189,
         "language": "TypeScript",
-        "updatedAt": "2026-11-02T14:59:00Z"
+        "updatedAt": "2026-11-03T12:51:59Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187870,
+        "stars": 187885,
         "language": "Python",
-        "updatedAt": "2026-11-02T15:01:35Z"
+        "updatedAt": "2026-11-03T13:52:36Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 185667,
+        "stars": 185778,
         "language": "Go",
-        "updatedAt": "2026-11-02T05:30:37Z"
+        "updatedAt": "2026-11-03T06:11:27Z"
       },
       {
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 182634,
+        "stars": 183380,
         "language": "JavaScript",
         "updatedAt": "2026-10-29T11:59:31Z"
       },
@@ -156,49 +156,49 @@
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 175606,
+        "stars": 175690,
         "language": "MDX",
-        "updatedAt": "2026-11-02T07:21:46Z"
+        "updatedAt": "2026-11-03T08:32:35Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 168447,
+        "stars": 168489,
         "language": "Python",
-        "updatedAt": "2026-11-02T15:07:04Z"
+        "updatedAt": "2026-11-03T13:50:28Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 160234,
+        "stars": 160318,
         "language": "Python",
-        "updatedAt": "2026-11-02T15:00:12Z"
+        "updatedAt": "2026-11-03T13:48:01Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 157543,
-        "language": "Python",
-        "updatedAt": "2026-11-02T11:42:01Z"
+        "stars": 157640,
+        "language": "Svelte",
+        "updatedAt": "2026-11-03T13:28:43Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 148880,
+        "stars": 148940,
         "language": "Python",
-        "updatedAt": "2026-11-02T14:56:28Z"
+        "updatedAt": "2026-11-03T08:27:25Z"
       },
       {
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 140925,
+        "stars": 141580,
         "language": "Python",
-        "updatedAt": "2026-11-01T16:02:01Z"
+        "updatedAt": "2026-11-02T19:38:53Z"
       }
     ],
     "bbc": [
@@ -237,14 +237,20 @@
         "label": "SPY · S&P 500",
         "items": [
           {
-            "title": "Jim Cramer says Wall Street is punishing the wrong tech stocks",
-            "url": "https://www.cnbc.com/2026/10/29/jim-cramer-earnings-guilt-by-association.html",
+            "title": "Stock market after midterm elections: What S&P 500 history shows",
+            "url": "https://www.cnbc.com/2026/11/02/stock-market-after-midterm-elections-sp-500-history.html",
             "publisher": "CNBC",
-            "date": "2026-10-29"
+            "date": "2026-11-03"
           },
           {
-            "title": "Analysis: Kevin Warsh is keeping Wall Street guessing. It may be his most powerful tool",
-            "url": "https://www.cnbc.com/2026/10/29/kevin-warsh-fed-october-rate-decision-december-hike.html",
+            "title": "Palantir is dropping on earnings. Wall Street analysts remain bullish",
+            "url": "https://www.cnbc.com/2026/11/03/palantir-stock-q3-earnings-analyst-ratings.html",
+            "publisher": "CNBC",
+            "date": "2026-11-03"
+          },
+          {
+            "title": "Jim Cramer says Wall Street is punishing the wrong tech stocks",
+            "url": "https://www.cnbc.com/2026/10/29/jim-cramer-earnings-guilt-by-association.html",
             "publisher": "CNBC",
             "date": "2026-10-29"
           }
@@ -279,22 +285,22 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
-            "title": "Sam Altman makes surprise South Korea visit as OpenAI builds on chip partnerships",
-            "url": "https://www.cnbc.com/2026/11/02/openai-sam-altman-samsung-sk-south-korea.html",
+            "title": "S&P 500 futures rebound as chip stocks bounce; Gains are muted amid midterm elections: Live updates",
+            "url": "https://www.cnbc.com/2026/11/02/stock-market-today-live-updates.html",
             "publisher": "CNBC",
+            "date": "2026-11-03"
+          },
+          {
+            "title": "Apple warns of ‘unprecedented’ rise in memory chip prices",
+            "url": "https://www.theguardian.com/technology/2026/nov/02/apple-third-quarter-revenue-earnings",
+            "publisher": "The Guardian",
             "date": "2026-11-02"
           },
           {
-            "title": "Indian AI infrastructure firm reportedly seeks to raise $3 billion of debt to buy Nvidia's next-generation chips",
-            "url": "https://www.cnbc.com/2026/10/30/nvidia-india-ai-chips-computing.html",
-            "publisher": "CNBC",
-            "date": "2026-10-30"
-          },
-          {
-            "title": "Intel stock plunges 21% as chipmaker blames PC slowdown for weak guidance",
-            "url": "https://www.cnbc.com/2026/10/29/intel-intc-q3-earnings-report-2026-.html",
-            "publisher": "CNBC",
-            "date": "2026-10-30"
+            "title": "Apple’s inventory surges 154% as memory chip costs climb",
+            "url": "https://techcrunch.com/2026/11/02/apples-inventory-surges-154-as-memory-chip-costs-climb/",
+            "publisher": "TechCrunch",
+            "date": "2026-11-02"
           }
         ]
       },
@@ -303,8 +309,14 @@
         "label": "NVDA · Nvidia",
         "items": [
           {
-            "title": "Here are Monday's biggest analyst calls: Nvidia, SpaceX, Apple, Rivian, Amazon, CrowdStrike, Broadcom & more",
-            "url": "https://www.cnbc.com/2026/11/02/biggest-stocks-by-analyst-calls-on-wall-street.html",
+            "title": "Here are Tuesday's biggest analyst calls of the day: Apple, SpaceX, Nvidia, Palantir, Marvell, Bloom Energy & more",
+            "url": "https://www.cnbc.com/2026/11/03/big-wall-street-analyst-calls-tuesday-include-apple-spacex-palantir.html",
+            "publisher": "CNBC",
+            "date": "2026-11-03"
+          },
+          {
+            "title": "CNBC's The China Connection newsletter: Nvidia's humanoid push relies on China-made robot hands",
+            "url": "https://www.cnbc.com/2026/11/02/cnbcs-the-china-connection-newsletter-nvidias-humanoid-push-relies-on-china-made-robot-hands.html",
             "publisher": "CNBC",
             "date": "2026-11-02"
           },
@@ -313,12 +325,6 @@
             "url": "https://techcrunch.com/2026/10/30/nvidia-weighs-playing-the-cosigner-for-nscales-ai-data-center-in-west-virginia/",
             "publisher": "TechCrunch",
             "date": "2026-10-31"
-          },
-          {
-            "title": "China denies allegations of spy operation targeting Nvidia CEO",
-            "url": "https://www.bbc.com/news/articles/ckgj9plnlxdeo",
-            "publisher": "BBC",
-            "date": "2026-10-30"
           }
         ]
       },
@@ -333,9 +339,9 @@
             "date": "2026-11-01"
           },
           {
-            "title": "Google’s first data center satellite is online and writing poetry",
-            "url": "https://techcrunch.com/2026/10/30/googles-first-data-center-satellite-is-online-and-writing-poetry/",
-            "publisher": "TechCrunch",
+            "title": "Google lost nearly half a trillion this week. Here's how Mike Khouw is trading it",
+            "url": "https://www.cnbc.com/2026/10/30/google-lost-about-half-a-trillion-this-week-how-mike-khouw-trades-it-.html",
+            "publisher": "CNBC",
             "date": "2026-10-30"
           },
           {
@@ -351,22 +357,22 @@
         "label": "AAPL · Apple",
         "items": [
           {
-            "title": "Apple earnings live updates: New CEO John Ternus faces first Wall Street test",
-            "url": "https://www.cnbc.com/2026/11/02/apple-aapl-q4-2026-earnings-live-updates.html",
+            "title": "Apple stock sinks as global memory crisis hurts profits, giving Ternus his first big test",
+            "url": "https://www.cnbc.com/2026/11/03/apple-earnings-john-ternus-faces-first-test-amid-high-memory-costs.html",
             "publisher": "CNBC",
-            "date": "2026-11-02"
+            "date": "2026-11-03"
           },
           {
-            "title": "You’ll Never Guess How Scalpers Are Reportedly Snagging Rare iPhone Duos",
-            "url": "https://gizmodo.com/youll-never-guess-how-scalpers-are-reportedly-snagging-rare-iphone-duos-2000833542",
-            "publisher": "Gizmodo",
-            "date": "2026-11-01"
+            "title": "Apple shares slide after weak margin outlook; Palantir slumps 6% after earnings",
+            "url": "https://www.cnbc.com/2026/11/03/apple-palantir-stock-earnings.html",
+            "publisher": "CNBC",
+            "date": "2026-11-03"
           },
           {
-            "title": "Apple’s HomeView could add security camera features",
-            "url": "https://www.theverge.com/tech/1024219/apples-homeview-could-add-security-camera-features",
-            "publisher": "The Verge",
-            "date": "2026-11-01"
+            "title": "Stocks making the biggest moves premarket: Pfizer, Apple, Palantir, Zebra Technologies & more",
+            "url": "https://www.cnbc.com/2026/11/03/stocks-making-the-biggest-moves-premarket-pfe-pltr-aapl-zbra.html",
+            "publisher": "CNBC",
+            "date": "2026-11-03"
           }
         ]
       },
@@ -375,22 +381,22 @@
         "label": "META · Meta",
         "items": [
           {
+            "title": "Meta will end Quest 2 OS updates in 2027",
+            "url": "https://www.theverge.com/tech/1024835/meta-vr-quest-2-pro-os-end-updates",
+            "publisher": "The Verge",
+            "date": "2026-11-02"
+          },
+          {
+            "title": "Meta delays new business terms after outcry over potential web scraping of news sites",
+            "url": "https://apnews.com/article/norway-media-meta-competition-european-union-united-kingdom-c15442c8e505e50e45ce3fd7bbaae1ba",
+            "publisher": "AP News",
+            "date": "2026-11-02"
+          },
+          {
             "title": "For JPMorgan, Amazon, fighting AI bots like Meta Muse may not be a winning long-term strategy",
             "url": "https://www.cnbc.com/2026/11/01/jpmorgan-amazon-ai-agents-meta-muse.html",
             "publisher": "CNBC",
             "date": "2026-11-01"
-          },
-          {
-            "title": "Meta outlook revised downward by S&P on cash flow and capex concerns",
-            "url": "https://www.cnbc.com/2026/10/30/meta-outlook-to-revised-to-negative-by-sp-after-cash-flow-negative.html",
-            "publisher": "CNBC",
-            "date": "2026-10-30"
-          },
-          {
-            "title": "Musk and Zuckerberg echo Trump's push to rebrand AI as 'super intelligence' on earnings calls. Others do not",
-            "url": "https://www.cnbc.com/2026/10/30/trump-tech-allies-swap-ai-for-super-intelligence-in-earnings-calls.html",
-            "publisher": "CNBC",
-            "date": "2026-10-30"
           }
         ]
       },
@@ -399,27 +405,33 @@
         "label": "Grok · xAI",
         "items": [
           {
+            "title": "Elon Musk Needs to Save Money on Grok, Days After Saying AI Makes Saving Money Pointless",
+            "url": "https://gizmodo.com/elon-musk-needs-to-save-money-on-grok-days-after-saying-ai-makes-saving-money-pointless-2000833812",
+            "publisher": "Gizmodo",
+            "date": "2026-11-02"
+          },
+          {
+            "title": "Elon Musk throttles Grok Bot limits due to ‘unsustainably high’ costs",
+            "url": "https://techcrunch.com/2026/11/02/elon-musk-throttles-grok-bot-limits-due-to-unsustainably-high-costs/",
+            "publisher": "TechCrunch",
+            "date": "2026-11-02"
+          },
+          {
             "title": "Judge allows NAACP lawsuit over xAI data center pollution to move forward",
             "url": "https://techcrunch.com/2026/10/31/judge-allows-naacp-lawsuit-over-xai-data-center-pollution-to-move-forward/",
             "publisher": "TechCrunch",
             "date": "2026-10-31"
-          },
-          {
-            "title": "xAI is buying out homeowners who promise not to sue over data center noise",
-            "url": "https://www.theverge.com/ai-artificial-intelligence/1020596/xai-mississippi-neighborhood-data-center-lawsuit",
-            "publisher": "The Verge",
-            "date": "2026-10-28"
-          },
-          {
-            "title": "‘Elonville’: US residents say Musk’s xAI offered to buy homes if they don’t sue over datacenter noise",
-            "url": "https://www.theguardian.com/us-news/2026/oct/28/datacenter-noise-lawsuit-elon-musk-mississippi",
-            "publisher": "The Guardian",
-            "date": "2026-10-28"
           }
         ]
       }
     ],
     "china": [
+      {
+        "title": "Trump’s troubles with Iran could open the door to China",
+        "url": "https://www.theguardian.com/world/2026/nov/03/trump-iran-middle-east-china-gulf-hormuz-xi-jinping",
+        "publisher": "The Guardian",
+        "date": "2026-11-03"
+      },
       {
         "title": "Chinese cigarettes and Bolivian beer: the Amazonian town transformed by a rampant mining boom",
         "url": "https://www.theguardian.com/global-development/2026/nov/02/chinese-cigarettes-and-bolivian-beer-the-amazonian-town-transformed-by-a-rampant-mining-boom",
@@ -437,12 +449,6 @@
         "url": "https://www.theguardian.com/world/2026/nov/01/us-china-trade-war-trump-xi",
         "publisher": "The Guardian",
         "date": "2026-11-01"
-      },
-      {
-        "title": "It’s closer to Beijing than Washington – and residents of this Alaskan outpost are reeling from Trump’s policies",
-        "url": "https://www.theguardian.com/us-news/ng-interactive/2026/oct/31/alaska-unalaska-fishing-trump",
-        "publisher": "The Guardian",
-        "date": "2026-10-31"
       },
       {
         "title": "Crypto giant Binance hit by $6.3bn hack suspected to be largest in history",
