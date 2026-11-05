@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-04T14:01:27.160Z",
+  "generatedAt": "2026-11-05T14:22:06.920Z",
   "sources": {
     "anthropic": [
       {
@@ -37,6 +37,22 @@
     ],
     "openai": [
       {
+        "title": "OpenAI to acquire Pierre Computer Company, Inc. Company Nov 4, 2026",
+        "url": "https://openai.com/index/openai-to-acquire-pierre/"
+      },
+      {
+        "title": "Daybreak Red is now available in AWS GovCloud (US-East) Product Nov 4, 2026",
+        "url": "https://openai.com/index/daybreak-red-aws-govcloud/"
+      },
+      {
+        "title": "A thousand fewer paths to root Security Nov 4, 2026",
+        "url": "https://openai.com/index/a-thousand-fewer-paths-to-root/"
+      },
+      {
+        "title": "Introducing Images 2.6 Product Nov 4, 2026",
+        "url": "https://openai.com/index/introducing-images-2-6/"
+      },
+      {
         "title": "Accelerating engineering for the physical world Research Nov 3, 2026",
         "url": "https://openai.com/index/accelerating-engineering-for-the-physical-world/"
       },
@@ -51,22 +67,6 @@
       {
         "title": "Introducing the Grid Protectors Program Global Affairs Nov 2, 2026",
         "url": "https://openai.com/index/grid-protectors-program/"
-      },
-      {
-        "title": "Preparing our next security sprint to harden OpenAI Security Nov 2, 2026",
-        "url": "https://openai.com/index/preparing-our-next-security-sprint-to-harden-openai/"
-      },
-      {
-        "title": "Rewarding defenders with bigger bug bounties Security Nov 2, 2026",
-        "url": "https://openai.com/index/rewarding-defenders-with-bigger-bug-bounties/"
-      },
-      {
-        "title": "LifeVal Research Nov 2, 2026",
-        "url": "https://openai.com/index/lifeval/"
-      },
-      {
-        "title": "Dan Driscoll joins OpenAI Company Nov 2, 2026",
-        "url": "https://openai.com/index/dan-driscoll-joins-openai/"
       }
     ],
     "google": [
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 296912,
+        "stars": 297613,
         "language": "JavaScript",
         "updatedAt": "2026-11-02T04:56:08Z"
       },
@@ -116,92 +116,99 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 260441,
+        "stars": 260758,
         "language": "Python",
-        "updatedAt": "2026-11-04T13:53:12Z"
+        "updatedAt": "2026-11-05T14:19:00Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 198511,
+        "stars": 198843,
         "language": "TypeScript",
-        "updatedAt": "2026-11-04T07:39:22Z"
+        "updatedAt": "2026-11-05T09:16:56Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187895,
+        "stars": 187909,
         "language": "Python",
-        "updatedAt": "2026-11-04T13:53:46Z"
+        "updatedAt": "2026-11-05T13:31:16Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 185889,
+        "stars": 185992,
         "language": "Go",
-        "updatedAt": "2026-11-04T01:39:55Z"
-      },
-      {
-        "name": "DietrichGebert/ponytail",
-        "url": "https://github.com/DietrichGebert/ponytail",
-        "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 184218,
-        "language": "JavaScript",
-        "updatedAt": "2026-10-29T11:59:31Z"
+        "updatedAt": "2026-11-05T01:32:18Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 175770,
+        "stars": 175876,
         "language": "MDX",
-        "updatedAt": "2026-11-04T08:24:13Z"
+        "updatedAt": "2026-11-05T07:16:47Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 168533,
+        "stars": 168569,
         "language": "Python",
-        "updatedAt": "2026-11-04T14:00:32Z"
+        "updatedAt": "2026-11-05T14:14:41Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 160395,
+        "stars": 160462,
         "language": "Python",
-        "updatedAt": "2026-11-04T13:36:07Z"
+        "updatedAt": "2026-11-05T14:18:24Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 157747,
+        "stars": 157839,
         "language": "Svelte",
-        "updatedAt": "2026-11-04T10:10:53Z"
+        "updatedAt": "2026-11-05T13:38:25Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 149004,
+        "stars": 149079,
         "language": "Python",
-        "updatedAt": "2026-11-04T08:36:24Z"
+        "updatedAt": "2026-11-05T12:46:48Z"
       },
       {
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 142178,
+        "stars": 142766,
         "language": "Python",
         "updatedAt": "2026-11-03T22:46:46Z"
+      },
+      {
+        "name": "TauricResearch/TradingAgents",
+        "url": "https://github.com/TauricResearch/TradingAgents",
+        "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+        "stars": 120753,
+        "language": "Python",
+        "updatedAt": "2026-11-04T10:13:58Z"
       }
     ],
     "bbc": [
+      {
+        "title": "Could vaccines cure cancer?",
+        "url": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-261105",
+        "date": "2026-11-05",
+        "description": "Can we train our own immune system to fight certain types of cancer?",
+        "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/261105_6_minute_english_could_vaccines_cure_cancer_download.mp3"
+      },
       {
         "title": "Is aircon the answer to a heating world?",
         "url": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-261029",
@@ -237,8 +244,14 @@
         "label": "SPY · S&P 500",
         "items": [
           {
-            "title": "Dow futures soar 1,000 points as big midterm wins by Democrats remove political uncertainty risk on Wall Street: Live updates",
-            "url": "https://www.cnbc.com/2026/11/03/stock-market-today-live-updates.html",
+            "title": "What Wall Street billionaires are saying about Democrats' midterm sweep",
+            "url": "https://www.cnbc.com/2026/11/04/billionaires-musk-branson-democrats-midterms-ai-wall-street.html",
+            "publisher": "CNBC",
+            "date": "2026-11-05"
+          },
+          {
+            "title": "Jim Cramer warns investors may be reading too much into Wall Street's post-election rally",
+            "url": "https://www.cnbc.com/2026/11/04/cramer-midterms-ai-stocks.html",
             "publisher": "CNBC",
             "date": "2026-11-04"
           },
@@ -247,12 +260,6 @@
             "url": "https://www.cnbc.com/2026/11/02/stock-market-after-midterm-elections-sp-500-history.html",
             "publisher": "CNBC",
             "date": "2026-11-03"
-          },
-          {
-            "title": "Jim Cramer says Wall Street is punishing the wrong tech stocks",
-            "url": "https://www.cnbc.com/2026/10/29/jim-cramer-earnings-guilt-by-association.html",
-            "publisher": "CNBC",
-            "date": "2026-10-29"
           }
         ]
       },
@@ -271,12 +278,6 @@
             "url": "https://www.cnbc.com/2026/10/29/general-motors-nasdaq-listing.html",
             "publisher": "CNBC",
             "date": "2026-10-29"
-          },
-          {
-            "title": "Alphabet drags on Nasdaq futures as the stock faces a record post-earnings loss",
-            "url": "https://www.cnbc.com/2026/10/29/alphabet-nasdaq-futures-record-post-earnings-loss.html",
-            "publisher": "CNBC",
-            "date": "2026-10-29"
           }
         ]
       },
@@ -285,22 +286,22 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
-            "title": "AMD earnings beat the Street. Here's what analysts are saying",
-            "url": "https://www.cnbc.com/2026/11/04/amd-earnings-analysts-ai-growth.html",
+            "title": "Semiconductor stocks are sliding. This one is a buy, BMO says",
+            "url": "https://www.cnbc.com/2026/11/05/astera-labs-bmo-ai-outperform.html",
             "publisher": "CNBC",
-            "date": "2026-11-04"
+            "date": "2026-11-05"
           },
           {
-            "title": "AMD stock jumps 8% on earnings as data center revenue nearly doubles",
+            "title": "Inside the chip talent war: Trade secrets and rising Chinese rivals",
+            "url": "https://www.cnbc.com/2026/11/05/semiconductor-china-korea-talents-rivalry.html",
+            "publisher": "CNBC",
+            "date": "2026-11-05"
+          },
+          {
+            "title": "AMD's data center revenue nearly doubles in Q3 and CEO Su expects growth to accelerate",
             "url": "https://www.cnbc.com/2026/11/03/amd-amd-q3-earnings-report-2026-.html",
             "publisher": "CNBC",
-            "date": "2026-11-03"
-          },
-          {
-            "title": "Apple warns of ‘unprecedented’ rise in memory chip prices",
-            "url": "https://www.theguardian.com/technology/2026/nov/02/apple-third-quarter-revenue-earnings",
-            "publisher": "The Guardian",
-            "date": "2026-11-02"
+            "date": "2026-11-04"
           }
         ]
       },
@@ -309,22 +310,22 @@
         "label": "NVDA · Nvidia",
         "items": [
           {
-            "title": "CNBC's The China Connection newsletter: Nvidia's humanoid push relies on China-made robot hands",
-            "url": "https://www.cnbc.com/2026/11/02/cnbcs-the-china-connection-newsletter-nvidias-humanoid-push-relies-on-china-made-robot-hands.html",
-            "publisher": "CNBC",
-            "date": "2026-11-02"
-          },
-          {
-            "title": "Nvidia weighs playing the cosigner for Nscale’s AI data center in West Virginia",
-            "url": "https://techcrunch.com/2026/10/30/nvidia-weighs-playing-the-cosigner-for-nscales-ai-data-center-in-west-virginia/",
+            "title": "Box taps Nvidia’s Nemotron for new agent-first content retrieval system",
+            "url": "https://techcrunch.com/2026/11/05/box-taps-nvidias-nemotron-for-new-agent-first-content-retrieval-system/",
             "publisher": "TechCrunch",
-            "date": "2026-10-31"
+            "date": "2026-11-05"
           },
           {
-            "title": "Indian AI infrastructure firm reportedly seeks to raise $3 billion of debt to buy Nvidia's next-generation chips",
-            "url": "https://www.cnbc.com/2026/10/30/nvidia-india-ai-chips-computing.html",
+            "title": "Chinese AI lab Moonshot turned to Europe for Nvidia Blackwell access amid U.S. China curbs, sources tell CNBC",
+            "url": "https://www.cnbc.com/2026/11/05/moonshot-ai-nvidia-chips-europe-china.html",
             "publisher": "CNBC",
-            "date": "2026-10-30"
+            "date": "2026-11-05"
+          },
+          {
+            "title": "Here are Thursday's biggest analyst calls: SpaceX, Nvidia, First Solar, Nike, JetBlue, Cisco, Cinemark & more",
+            "url": "https://www.cnbc.com/2026/11/05/here-are-thursdays-biggest-analyst-calls-of-the-day-more.html",
+            "publisher": "CNBC",
+            "date": "2026-11-05"
           }
         ]
       },
@@ -333,22 +334,22 @@
         "label": "GOOGL · Google",
         "items": [
           {
-            "title": "Google hasn’t figured out how to make AI pay like its search engine",
-            "url": "https://www.theverge.com/ai-artificial-intelligence/1024862/google-search-ai-overviews-alphabet-earnings-q3",
+            "title": "Google Tries to Walk Back Controversial School AI Policy Following Political Backlash",
+            "url": "https://gizmodo.com/google-tries-to-walk-back-controversial-school-ai-policy-following-political-backlash-2000834986",
+            "publisher": "Gizmodo",
+            "date": "2026-11-04"
+          },
+          {
+            "title": "DuckDuckGo pitches itself to schools amid backlash over Google’s AI policy",
+            "url": "https://techcrunch.com/2026/11/04/duckduckgo-pitches-itself-to-schools-amid-backlash-over-googles-ai-policy/",
+            "publisher": "TechCrunch",
+            "date": "2026-11-04"
+          },
+          {
+            "title": "Google’s Pixel 11 phones are up to 27 percent off",
+            "url": "https://www.theverge.com/gadgets/1025370/google-pixel-11-pro-phone-deal-sale",
             "publisher": "The Verge",
             "date": "2026-11-04"
-          },
-          {
-            "title": "Google responds to political backlash over removing search from schools that ban AI",
-            "url": "https://www.cnbc.com/2026/11/03/google-responds-to-outrage-over-removing-search-in-schools-that-ban-ai.html",
-            "publisher": "CNBC",
-            "date": "2026-11-04"
-          },
-          {
-            "title": "Google says there’s no way to use Search without using artificial intelligence",
-            "url": "https://www.theguardian.com/technology/2026/nov/03/google-search-artificial-intelligence",
-            "publisher": "The Guardian",
-            "date": "2026-11-03"
           }
         ]
       },
@@ -357,22 +358,22 @@
         "label": "AAPL · Apple",
         "items": [
           {
-            "title": "Here are Wednesday's biggest analyst calls: SpaceX, AMD, Apple, Adobe, CoreWeave & more",
-            "url": "https://www.cnbc.com/2026/11/04/wednesday-biggest-wall-street-analyst-calls-of-the-day.html",
+            "title": "Apple is reportedly cutting budgets for its internal AI usage",
+            "url": "https://techcrunch.com/2026/11/04/apple-is-reportedly-cutting-budgets-for-its-internal-ai-usage/",
+            "publisher": "TechCrunch",
+            "date": "2026-11-05"
+          },
+          {
+            "title": "Hyperscalers and Apple surge after election results remove investor uncertainty",
+            "url": "https://www.cnbc.com/2026/11/04/apple-and-other-big-tech-stocks-surge-after-2026-midterm-elections.html",
             "publisher": "CNBC",
             "date": "2026-11-04"
           },
           {
-            "title": "Apple stock sinks as global memory crisis hurts profits, giving Ternus his first big test",
-            "url": "https://www.cnbc.com/2026/11/03/apple-earnings-john-ternus-faces-first-test-amid-high-memory-costs.html",
-            "publisher": "CNBC",
-            "date": "2026-11-03"
-          },
-          {
-            "title": "Apple warns of risks related to AI agents behaving in 'unintended or unpredictable' ways",
-            "url": "https://www.cnbc.com/2026/11/03/apple-warns-of-ai-agents-behave-in-unintended-or-unpredictable-ways.html",
-            "publisher": "CNBC",
-            "date": "2026-11-03"
+            "title": "Apple will check shared iCloud links for ‘harmful content’",
+            "url": "https://www.theverge.com/tech/1026604/apple-icloud-links-harmful-content-27-3",
+            "publisher": "The Verge",
+            "date": "2026-11-04"
           }
         ]
       },
@@ -381,22 +382,22 @@
         "label": "META · Meta",
         "items": [
           {
+            "title": "Meta: Building Data Centers Will Be 'Harder' Post-Midterms",
+            "url": "https://gizmodo.com/metas-president-on-midterm-results-building-data-centers-is-going-to-be-harder-2000835444",
+            "publisher": "Gizmodo",
+            "date": "2026-11-05"
+          },
+          {
+            "title": "Meta acquires AI coding startup Conductor",
+            "url": "https://techcrunch.com/2026/11/04/meta-acquires-ai-coding-startup-conductor/",
+            "publisher": "TechCrunch",
+            "date": "2026-11-04"
+          },
+          {
             "title": "Meta seeks to raise up to $25 billion in debt sale as AI spending jumps",
             "url": "https://www.cnbc.com/2026/11/03/meta-bond-sale-ai-funding.html",
             "publisher": "CNBC",
             "date": "2026-11-03"
-          },
-          {
-            "title": "Meta Removed Disturbing AI Videos After Initially Saying They Didn’t Violate Its Rules",
-            "url": "https://gizmodo.com/meta-removed-disturbing-ai-videos-after-initially-saying-they-didnt-violate-its-rules-2000834430",
-            "publisher": "Gizmodo",
-            "date": "2026-11-03"
-          },
-          {
-            "title": "Meta will end Quest 2 OS updates in 2027",
-            "url": "https://www.theverge.com/tech/1024835/meta-vr-quest-2-pro-os-end-updates",
-            "publisher": "The Verge",
-            "date": "2026-11-02"
           }
         ]
       },
@@ -427,34 +428,40 @@
     ],
     "china": [
       {
-        "title": "Choke of the century? Chengdu collapse sets up thrilling Chinese Super League climax",
-        "url": "https://www.theguardian.com/football/2026/nov/04/choke-of-the-century-chengdu-collapse-sets-up-thrilling-chinese-super-league-climax",
+        "title": "Joshua Wong, face of Hong Kong's pro-democracy protests, jailed for 10 years",
+        "url": "https://www.bbc.co.uk/news/articles/cwp9g3rlp8jlo",
+        "publisher": "BBC",
+        "date": "2026-11-05"
+      },
+      {
+        "title": "Raise the Red Lantern review – Gong Li gives a decade-defining performance in an addictively ruthless masterpiece",
+        "url": "https://www.theguardian.com/film/2026/nov/05/raise-the-red-lantern-review",
         "publisher": "The Guardian",
-        "date": "2026-11-04"
+        "date": "2026-11-05"
+      },
+      {
+        "title": "Hong Kong pro-democracy activist Joshua Wong sentenced to 10 years in prison in national security case",
+        "url": "https://www.theguardian.com/world/2026/nov/05/hong-kong-joshua-wong-sentenced-national-security-case",
+        "publisher": "The Guardian",
+        "date": "2026-11-05"
+      },
+      {
+        "title": "‘I worry people will forget Hong Kong’: Joshua Wong laments city’s fate from inside maximum security prison",
+        "url": "https://www.theguardian.com/world/2026/nov/05/joshua-wong-hong-kong-prison-letters-sentenced-10-years",
+        "publisher": "The Guardian",
+        "date": "2026-11-05"
+      },
+      {
+        "title": "UK found to be ‘dangerously’ reliant on China for critical minerals needed for defence and AI",
+        "url": "https://www.theguardian.com/world/2026/nov/05/uk-dangerously-reliant-on-china-critical-minerals-military-ai-renewable-energy",
+        "publisher": "The Guardian",
+        "date": "2026-11-05"
       },
       {
         "title": "Weapon or wine bottle? China disputes reports of artillery shell in Papua New Guinea",
         "url": "https://www.bbc.co.uk/news/articles/cm0qkxzv3j99o",
         "publisher": "BBC",
         "date": "2026-11-04"
-      },
-      {
-        "title": "China’s first AI-generated film is a flop. Some still see it as the future of cinema",
-        "url": "https://www.theguardian.com/film/2026/nov/03/china-first-ai-generated-film-flops-cinema-future",
-        "publisher": "The Guardian",
-        "date": "2026-11-03"
-      },
-      {
-        "title": "Trump’s troubles with Iran could open the door to China",
-        "url": "https://www.theguardian.com/world/2026/nov/03/trump-iran-middle-east-china-gulf-hormuz-xi-jinping",
-        "publisher": "The Guardian",
-        "date": "2026-11-03"
-      },
-      {
-        "title": "Chinese cigarettes and Bolivian beer: the Amazonian town transformed by a rampant mining boom",
-        "url": "https://www.theguardian.com/global-development/2026/nov/02/chinese-cigarettes-and-bolivian-beer-the-amazonian-town-transformed-by-a-rampant-mining-boom",
-        "publisher": "The Guardian",
-        "date": "2026-11-02"
       },
       {
         "title": "Crypto giant Binance hit by $6.3bn hack suspected to be largest in history",
@@ -467,12 +474,6 @@
         "url": "https://www.bbc.co.uk/news/articles/cq5ynw94k7kzo",
         "publisher": "BBC",
         "date": "2026-10-30"
-      },
-      {
-        "title": "China made Mbappé apologise - but many don't know exactly what he said",
-        "url": "https://www.bbc.co.uk/news/articles/cm3wv36d603yo",
-        "publisher": "BBC",
-        "date": "2026-10-29"
       }
     ]
   }
