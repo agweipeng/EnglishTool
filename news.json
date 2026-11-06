@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-05T14:22:06.920Z",
+  "generatedAt": "2026-11-06T13:58:35.100Z",
   "sources": {
     "anthropic": [
       {
@@ -37,6 +37,14 @@
     ],
     "openai": [
       {
+        "title": "Australian universities are creating AI-native graduates Company Nov 5, 2026",
+        "url": "https://openai.com/index/australian-universities-ai-native-graduates/"
+      },
+      {
+        "title": "GPT‑6 Cyber: Advancing the frontier of aligned cybersecurity agents Product Nov 5, 2026",
+        "url": "https://openai.com/index/introducing-gpt-6-cyber/"
+      },
+      {
         "title": "OpenAI to acquire Pierre Computer Company, Inc. Company Nov 4, 2026",
         "url": "https://openai.com/index/openai-to-acquire-pierre/"
       },
@@ -59,14 +67,6 @@
       {
         "title": "Jill Hazelbaker joins OpenAI as Chief Corporate Affairs Officer Company Nov 3, 2026",
         "url": "https://openai.com/index/jill-hazelbaker-chief-corporate-affairs-officer/"
-      },
-      {
-        "title": "Scaling Git at OpenAI Engineering Nov 2, 2026",
-        "url": "https://openai.com/index/scaling-git-at-openai/"
-      },
-      {
-        "title": "Introducing the Grid Protectors Program Global Affairs Nov 2, 2026",
-        "url": "https://openai.com/index/grid-protectors-program/"
       }
     ],
     "google": [
@@ -108,97 +108,97 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 297613,
+        "stars": 298276,
         "language": "JavaScript",
-        "updatedAt": "2026-11-02T04:56:08Z"
+        "updatedAt": "2026-11-06T05:29:44Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 260758,
+        "stars": 261059,
         "language": "Python",
-        "updatedAt": "2026-11-05T14:19:00Z"
+        "updatedAt": "2026-11-06T13:37:37Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 198843,
+        "stars": 199130,
         "language": "TypeScript",
-        "updatedAt": "2026-11-05T09:16:56Z"
+        "updatedAt": "2026-11-06T02:57:01Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187909,
+        "stars": 187917,
         "language": "Python",
-        "updatedAt": "2026-11-05T13:31:16Z"
+        "updatedAt": "2026-11-06T13:57:23Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 185992,
+        "stars": 186096,
         "language": "Go",
-        "updatedAt": "2026-11-05T01:32:18Z"
+        "updatedAt": "2026-11-06T02:08:23Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 175876,
+        "stars": 175995,
         "language": "MDX",
-        "updatedAt": "2026-11-05T07:16:47Z"
+        "updatedAt": "2026-11-06T07:14:19Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 168569,
+        "stars": 168587,
         "language": "Python",
-        "updatedAt": "2026-11-05T14:14:41Z"
+        "updatedAt": "2026-11-06T13:56:37Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 160462,
+        "stars": 160542,
         "language": "Python",
-        "updatedAt": "2026-11-05T14:18:24Z"
+        "updatedAt": "2026-11-06T13:28:47Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 157839,
+        "stars": 157914,
         "language": "Svelte",
-        "updatedAt": "2026-11-05T13:38:25Z"
+        "updatedAt": "2026-11-06T13:47:08Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 149079,
+        "stars": 149120,
         "language": "Python",
-        "updatedAt": "2026-11-05T12:46:48Z"
+        "updatedAt": "2026-11-06T08:46:54Z"
+      },
+      {
+        "name": "Shubhamsaboo/awesome-llm-apps",
+        "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+        "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
+        "stars": 144012,
+        "language": "Python",
+        "updatedAt": "2026-11-06T05:53:36Z"
       },
       {
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 142766,
+        "stars": 143301,
         "language": "Python",
-        "updatedAt": "2026-11-03T22:46:46Z"
-      },
-      {
-        "name": "TauricResearch/TradingAgents",
-        "url": "https://github.com/TauricResearch/TradingAgents",
-        "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
-        "stars": 120753,
-        "language": "Python",
-        "updatedAt": "2026-11-04T10:13:58Z"
+        "updatedAt": "2026-11-05T16:35:09Z"
       }
     ],
     "bbc": [
@@ -244,12 +244,6 @@
         "label": "SPY · S&P 500",
         "items": [
           {
-            "title": "What Wall Street billionaires are saying about Democrats' midterm sweep",
-            "url": "https://www.cnbc.com/2026/11/04/billionaires-musk-branson-democrats-midterms-ai-wall-street.html",
-            "publisher": "CNBC",
-            "date": "2026-11-05"
-          },
-          {
             "title": "Jim Cramer warns investors may be reading too much into Wall Street's post-election rally",
             "url": "https://www.cnbc.com/2026/11/04/cramer-midterms-ai-stocks.html",
             "publisher": "CNBC",
@@ -268,16 +262,22 @@
         "label": "QQQ · Nasdaq",
         "items": [
           {
-            "title": "Anthropic's path to the Nasdaq just got a lot bumpier",
-            "url": "https://www.cnbc.com/2026/10/31/anthropic-ipo-ai-spending.html",
+            "title": "Nasdaq drops into correction territory — here’s what typically happens next",
+            "url": "https://www.cnbc.com/2026/11/05/nasdaq-drops-into-correction-territory-heres-what-typically-happens-next.html",
             "publisher": "CNBC",
-            "date": "2026-10-31"
+            "date": "2026-11-06"
           },
           {
-            "title": "GM is shifting gears to the Nasdaq, trying to draft behind Walmart’s lead",
-            "url": "https://www.cnbc.com/2026/10/29/general-motors-nasdaq-listing.html",
+            "title": "Nasdaq futures make a small comeback after the tech wreck sends it into correction territory",
+            "url": "https://www.cnbc.com/2026/11/06/morning-squawk-blue-wave-stocks.html",
             "publisher": "CNBC",
-            "date": "2026-10-29"
+            "date": "2026-11-06"
+          },
+          {
+            "title": "AI meltdown: Nvidia and Qualcomm drop more than 9%, pushing Nasdaq to worst day since April 2025",
+            "url": "https://www.cnbc.com/2026/11/05/qualcomm-earnings-chip-stocks-election.html",
+            "publisher": "CNBC",
+            "date": "2026-11-05"
           }
         ]
       },
@@ -286,9 +286,15 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
-            "title": "Semiconductor stocks are sliding. This one is a buy, BMO says",
-            "url": "https://www.cnbc.com/2026/11/05/astera-labs-bmo-ai-outperform.html",
+            "title": "Nasdaq sell-off batters Asian chip stocks as SK Hynix, Samsung, Softbank, TSMC tumble",
+            "url": "https://www.cnbc.com/2026/11/06/tech-stocks-sk-hynix-samsung-softbank.html",
             "publisher": "CNBC",
+            "date": "2026-11-06"
+          },
+          {
+            "title": "Community colleges rush to expand semiconductor training as labor shortage looms US chip industry",
+            "url": "https://apnews.com/article/chips-semiconductor-education-community-college-arizona-ef9cf98fcf9d4bfc48ccdc5177da03f0",
+            "publisher": "AP News",
             "date": "2026-11-05"
           },
           {
@@ -296,12 +302,6 @@
             "url": "https://www.cnbc.com/2026/11/05/semiconductor-china-korea-talents-rivalry.html",
             "publisher": "CNBC",
             "date": "2026-11-05"
-          },
-          {
-            "title": "AMD's data center revenue nearly doubles in Q3 and CEO Su expects growth to accelerate",
-            "url": "https://www.cnbc.com/2026/11/03/amd-amd-q3-earnings-report-2026-.html",
-            "publisher": "CNBC",
-            "date": "2026-11-04"
           }
         ]
       },
@@ -310,20 +310,20 @@
         "label": "NVDA · Nvidia",
         "items": [
           {
-            "title": "Box taps Nvidia’s Nemotron for new agent-first content retrieval system",
-            "url": "https://techcrunch.com/2026/11/05/box-taps-nvidias-nemotron-for-new-agent-first-content-retrieval-system/",
-            "publisher": "TechCrunch",
-            "date": "2026-11-05"
+            "title": "Here are Friday's biggest analyst calls: Nvidia, SpaceX, Netflix, Apple, TripAdvisor, Molson Coors & more",
+            "url": "https://www.cnbc.com/2026/11/06/biggest-friday-wall-street-analyst-calls-like-nvidia.html",
+            "publisher": "CNBC",
+            "date": "2026-11-06"
           },
           {
             "title": "Chinese AI lab Moonshot turned to Europe for Nvidia Blackwell access amid U.S. China curbs, sources tell CNBC",
             "url": "https://www.cnbc.com/2026/11/05/moonshot-ai-nvidia-chips-europe-china.html",
             "publisher": "CNBC",
-            "date": "2026-11-05"
+            "date": "2026-11-06"
           },
           {
-            "title": "Here are Thursday's biggest analyst calls: SpaceX, Nvidia, First Solar, Nike, JetBlue, Cisco, Cinemark & more",
-            "url": "https://www.cnbc.com/2026/11/05/here-are-thursdays-biggest-analyst-calls-of-the-day-more.html",
+            "title": "Nvidia's Huang is asked to brief Congress on reported Chinese spy relationship",
+            "url": "https://www.cnbc.com/2026/11/05/nvidia-jensen-huang-china-spy-congress.html",
             "publisher": "CNBC",
             "date": "2026-11-05"
           }
@@ -334,22 +334,22 @@
         "label": "GOOGL · Google",
         "items": [
           {
-            "title": "Google Tries to Walk Back Controversial School AI Policy Following Political Backlash",
-            "url": "https://gizmodo.com/google-tries-to-walk-back-controversial-school-ai-policy-following-political-backlash-2000834986",
-            "publisher": "Gizmodo",
-            "date": "2026-11-04"
-          },
-          {
-            "title": "DuckDuckGo pitches itself to schools amid backlash over Google’s AI policy",
-            "url": "https://techcrunch.com/2026/11/04/duckduckgo-pitches-itself-to-schools-amid-backlash-over-googles-ai-policy/",
+            "title": "Meta, Google, and TikTok sue California AG over teen social media law",
+            "url": "https://techcrunch.com/2026/11/05/meta-google-and-tiktok-sue-california-ag-over-teen-social-media-law/",
             "publisher": "TechCrunch",
-            "date": "2026-11-04"
+            "date": "2026-11-06"
           },
           {
-            "title": "Google’s Pixel 11 phones are up to 27 percent off",
-            "url": "https://www.theverge.com/gadgets/1025370/google-pixel-11-pro-phone-deal-sale",
-            "publisher": "The Verge",
-            "date": "2026-11-04"
+            "title": "Google, Meta and TikTok sue California over law designed to protect children from social media harms",
+            "url": "https://apnews.com/article/google-meta-tiktok-lawsuit-california-kids-589c0eabeabced2e07b8f9138ee2df79",
+            "publisher": "AP News",
+            "date": "2026-11-05"
+          },
+          {
+            "title": "Google, Meta and TikTok sue California to block law protecting children from addiction risk",
+            "url": "https://www.theguardian.com/technology/2026/nov/05/california-children-social-media-lawsuit-tiktok-google-meta",
+            "publisher": "The Guardian",
+            "date": "2026-11-05"
           }
         ]
       },
@@ -357,6 +357,12 @@
         "key": "AAPL",
         "label": "AAPL · Apple",
         "items": [
+          {
+            "title": "Apple iPad mini A20 Pro review: the best small tablet but with a big price",
+            "url": "https://www.theguardian.com/technology/2026/nov/05/apple-ipad-mini-a20-pro-review-best-small-tablet-but-big-price",
+            "publisher": "The Guardian",
+            "date": "2026-11-05"
+          },
           {
             "title": "Apple is reportedly cutting budgets for its internal AI usage",
             "url": "https://techcrunch.com/2026/11/04/apple-is-reportedly-cutting-budgets-for-its-internal-ai-usage/",
@@ -368,12 +374,6 @@
             "url": "https://www.cnbc.com/2026/11/04/apple-and-other-big-tech-stocks-surge-after-2026-midterm-elections.html",
             "publisher": "CNBC",
             "date": "2026-11-04"
-          },
-          {
-            "title": "Apple will check shared iCloud links for ‘harmful content’",
-            "url": "https://www.theverge.com/tech/1026604/apple-icloud-links-harmful-content-27-3",
-            "publisher": "The Verge",
-            "date": "2026-11-04"
           }
         ]
       },
@@ -382,22 +382,22 @@
         "label": "META · Meta",
         "items": [
           {
+            "title": "Meta says US users can now video chat with their Muse AI avatar",
+            "url": "https://techcrunch.com/2026/11/05/meta-says-us-users-can-now-video-chat-with-their-muse-ai-avatar/",
+            "publisher": "TechCrunch",
+            "date": "2026-11-05"
+          },
+          {
+            "title": "Meta warns that election backlash against data centers could make AI expansion harder",
+            "url": "https://techcrunch.com/2026/11/05/metas-warns-that-election-backlash-against-data-centers-could-make-ai-expansion-harder/",
+            "publisher": "TechCrunch",
+            "date": "2026-11-05"
+          },
+          {
             "title": "Meta: Building Data Centers Will Be 'Harder' Post-Midterms",
             "url": "https://gizmodo.com/metas-president-on-midterm-results-building-data-centers-is-going-to-be-harder-2000835444",
             "publisher": "Gizmodo",
             "date": "2026-11-05"
-          },
-          {
-            "title": "Meta acquires AI coding startup Conductor",
-            "url": "https://techcrunch.com/2026/11/04/meta-acquires-ai-coding-startup-conductor/",
-            "publisher": "TechCrunch",
-            "date": "2026-11-04"
-          },
-          {
-            "title": "Meta seeks to raise up to $25 billion in debt sale as AI spending jumps",
-            "url": "https://www.cnbc.com/2026/11/03/meta-bond-sale-ai-funding.html",
-            "publisher": "CNBC",
-            "date": "2026-11-03"
           }
         ]
       },
@@ -428,6 +428,18 @@
     ],
     "china": [
       {
+        "title": "EU charges TikTok with failing to protect users’ mental health",
+        "url": "https://www.theguardian.com/technology/2026/nov/06/eu-charges-tiktok-failure-to-protect-users-mental-health",
+        "publisher": "The Guardian",
+        "date": "2026-11-06"
+      },
+      {
+        "title": "UK and US condemn ‘cruel’ second jail term handed to Hong Kong activist Joshua Wong",
+        "url": "https://www.theguardian.com/world/2026/nov/05/uk-and-us-condemn-second-jail-term-handed-to-hong-kong-activist-joshua-wong",
+        "publisher": "The Guardian",
+        "date": "2026-11-05"
+      },
+      {
         "title": "Joshua Wong, face of Hong Kong's pro-democracy protests, jailed for 10 years",
         "url": "https://www.bbc.co.uk/news/articles/cwp9g3rlp8jlo",
         "publisher": "BBC",
@@ -442,18 +454,6 @@
       {
         "title": "Hong Kong pro-democracy activist Joshua Wong sentenced to 10 years in prison in national security case",
         "url": "https://www.theguardian.com/world/2026/nov/05/hong-kong-joshua-wong-sentenced-national-security-case",
-        "publisher": "The Guardian",
-        "date": "2026-11-05"
-      },
-      {
-        "title": "‘I worry people will forget Hong Kong’: Joshua Wong laments city’s fate from inside maximum security prison",
-        "url": "https://www.theguardian.com/world/2026/nov/05/joshua-wong-hong-kong-prison-letters-sentenced-10-years",
-        "publisher": "The Guardian",
-        "date": "2026-11-05"
-      },
-      {
-        "title": "UK found to be ‘dangerously’ reliant on China for critical minerals needed for defence and AI",
-        "url": "https://www.theguardian.com/world/2026/nov/05/uk-dangerously-reliant-on-china-critical-minerals-military-ai-renewable-energy",
         "publisher": "The Guardian",
         "date": "2026-11-05"
       },
