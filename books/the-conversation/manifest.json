@@ -15,18 +15,29 @@
   "recommendation": "New articles every day, written by university experts for general readers: current topics in natural, educated native English.",
   "sectionType": "article",
   "kind": "news",
-  "version": "d999555bbe263e5b",
+  "version": "1d9f524851267727",
   "introduction": "",
-  "latestArticle": "2026-11-06T03:15:42Z",
-  "wordCount": 30435,
+  "latestArticle": "2026-11-06T17:53:34Z",
+  "wordCount": 30370,
   "chapters": [
+    {
+      "id": "we-need-to-talk-about-meta-political-interference-and-interests-in-the-br-296102",
+      "title": "We need to talk about Meta: Political interference and interests in the Brazilian elections",
+      "author": "R. Marie Santini, Professora da Escola de Comunicação e diretora do NetLab (Internet and Social Media Research Lab), Universidade Federal do Rio de Janeiro (UFRJ); Bruno Mattos, Coordenador de projetos do NetLab, Universidade Federal do Rio de Janeiro (UFRJ); Debora Salles, Coordenadora geral de pesquisa do NetLab, Universidade Federal do Rio de Janeiro (UFRJ)",
+      "published": "2026-11-06T17:53:34Z",
+      "url": "https://theconversation.com/we-need-to-talk-about-meta-political-interference-and-interests-in-the-brazilian-elections-296102",
+      "number": 1,
+      "wordCount": 1156,
+      "version": "c3ae330d49c0b942",
+      "path": "books/the-conversation/chapters/we-need-to-talk-about-meta-political-interference-and-interests-in-the-br-296102.json"
+    },
     {
       "id": "justice-accountability-more-questions-what-russell-brands-guilty-verdict-296042",
       "title": "Justice, accountability, more questions: what Russell Brand’s guilty verdict means for victim-survivors",
       "author": "Anastasia Powell, Professor of Family and Sexual Violence, RMIT University",
       "published": "2026-11-06T03:15:42Z",
       "url": "https://theconversation.com/justice-accountability-more-questions-what-russell-brands-guilty-verdict-means-for-victim-survivors-296042",
-      "number": 1,
+      "number": 2,
       "wordCount": 981,
       "version": "ffeead0970e107e3",
       "path": "books/the-conversation/chapters/justice-accountability-more-questions-what-russell-brands-guilty-verdict-296042.json"
@@ -37,7 +48,7 @@
       "author": "Javed Ali, Associate Professor of Practice of Public Policy, University of Michigan",
       "published": "2026-11-06T00:31:57Z",
       "url": "https://theconversation.com/jd-vance-singled-out-iran-war-for-midterm-rout-he-didnt-say-what-should-happen-next-in-conflict-295938",
-      "number": 2,
+      "number": 3,
       "wordCount": 1164,
       "version": "a6709c1ae07153ef",
       "path": "books/the-conversation/chapters/jd-vance-singled-out-iran-war-for-midterm-rout-he-didnt-say-what-should-h-295938.json"
@@ -48,7 +59,7 @@
       "author": "Jesse Whitehead, Senior Research Fellow, Te Ngira Institute for Population Research, University of Waikato; Polly Atatoa Carr, Associate Professor of Population Health, University of Waikato",
       "published": "2026-11-06T00:20:24Z",
       "url": "https://theconversation.com/born-in-aussie-or-nz-playing-for-the-pacific-the-startling-demographics-of-the-rugby-league-world-cup-295966",
-      "number": 3,
+      "number": 4,
       "wordCount": 875,
       "version": "22ae5dc9a876cbc2",
       "path": "books/the-conversation/chapters/born-in-aussie-or-nz-playing-for-the-pacific-the-startling-demographics-o-295966.json"
@@ -59,7 +70,7 @@
       "author": "James Dyke, Assistant Director of the Global Systems Institute, University of Exeter",
       "published": "2026-11-06T00:19:23Z",
       "url": "https://theconversation.com/the-worse-climate-change-gets-the-harder-it-becomes-to-stop-it-293987",
-      "number": 4,
+      "number": 5,
       "wordCount": 973,
       "version": "51dbb492bf1abfd2",
       "path": "books/the-conversation/chapters/the-worse-climate-change-gets-the-harder-it-becomes-to-stop-it-293987.json"
@@ -70,7 +81,7 @@
       "author": "Didier Camilo Olarte Gonzalez, PhD Student in Experimental Psychology, Université du Québec à Montréal (UQAM); Pier-Luc de Chantal, Professeur en psychologie, Université du Québec à Montréal (UQAM)",
       "published": "2026-11-05T14:45:39Z",
       "url": "https://theconversation.com/why-ai-cannot-think-like-humans-do-293188",
-      "number": 5,
+      "number": 6,
       "wordCount": 985,
       "version": "57f6b8c0abcc6ae7",
       "path": "books/the-conversation/chapters/why-ai-cannot-think-like-humans-do-293188.json"
@@ -81,7 +92,7 @@
       "author": "Michael Cox, Founding Director of LSE IDEAS and Emeritus Professor of International Relations, London School of Economics and Political Science",
       "published": "2026-11-05T14:43:34Z",
       "url": "https://theconversation.com/what-the-us-midterms-result-means-for-the-ukraine-war-295705",
-      "number": 6,
+      "number": 7,
       "wordCount": 968,
       "version": "1da745817961323d",
       "path": "books/the-conversation/chapters/what-the-us-midterms-result-means-for-the-ukraine-war-295705.json"
@@ -92,7 +103,7 @@
       "author": "Gavin Furrey, Assistant Professor, Political Science, Université du Québec à Montréal (UQAM)",
       "published": "2026-11-05T14:31:48Z",
       "url": "https://theconversation.com/why-quebec-separatism-is-unlikely-despite-the-parti-quebecois-election-win-295646",
-      "number": 7,
+      "number": 8,
       "wordCount": 1116,
       "version": "69ded6a217c9ff0a",
       "path": "books/the-conversation/chapters/why-quebec-separatism-is-unlikely-despite-the-parti-quebecois-election-wi-295646.json"
@@ -103,7 +114,7 @@
       "author": "Katerina Sviderska, PhD Candidate in Politics, University of Cambridge",
       "published": "2026-11-05T14:25:55Z",
       "url": "https://theconversation.com/why-mark-carney-is-still-betting-big-on-europe-295647",
-      "number": 8,
+      "number": 9,
       "wordCount": 835,
       "version": "14a50972ea027710",
       "path": "books/the-conversation/chapters/why-mark-carney-is-still-betting-big-on-europe-295647.json"
@@ -114,7 +125,7 @@
       "author": "Olayinka Stephen Ilesanmi, Assistant Professor of Healthcare Administration, Fayetteville State University",
       "published": "2026-11-05T13:36:16Z",
       "url": "https://theconversation.com/delayed-international-support-has-hampered-efforts-to-contain-and-treat-ebola-in-the-democratic-republic-of-congo-295610",
-      "number": 9,
+      "number": 10,
       "wordCount": 1105,
       "version": "383694589e5fbf08",
       "path": "books/the-conversation/chapters/delayed-international-support-has-hampered-efforts-to-contain-and-treat-e-295610.json"
@@ -125,7 +136,7 @@
       "author": "Woon Ju Park, Assistant Professor of Psychology, Georgia Institute of Technology",
       "published": "2026-11-05T13:17:15Z",
       "url": "https://theconversation.com/why-do-blind-people-and-musicians-hear-pitch-better-new-research-suggests-they-have-less-internal-noise-294114",
-      "number": 10,
+      "number": 11,
       "wordCount": 787,
       "version": "e7280818be552c41",
       "path": "books/the-conversation/chapters/why-do-blind-people-and-musicians-hear-pitch-better-new-research-suggests-294114.json"
@@ -136,7 +147,7 @@
       "author": "Stacy Olive Jarvis, PhD Candidate in in Musicology, University of Birmingham",
       "published": "2026-11-05T13:10:49Z",
       "url": "https://theconversation.com/what-makes-music-truly-russian-the-forgotten-debate-between-tchaikovsky-and-his-star-pupil-295206",
-      "number": 11,
+      "number": 12,
       "wordCount": 1025,
       "version": "4da3394a2b73ea3c",
       "path": "books/the-conversation/chapters/what-makes-music-truly-russian-the-forgotten-debate-between-tchaikovsky-a-295206.json"
@@ -147,7 +158,7 @@
       "author": "Harsh Trivedi, Teaching Associate French, School of Languages, Arts and Societies., University of Sheffield",
       "published": "2026-11-05T08:26:26Z",
       "url": "https://theconversation.com/king-arthur-and-ramayana-ancient-stories-that-speak-to-the-moral-dilemmas-of-todays-leaders-294175",
-      "number": 12,
+      "number": 13,
       "wordCount": 1207,
       "version": "1b44f08ccf2a1591",
       "path": "books/the-conversation/chapters/king-arthur-and-ramayana-ancient-stories-that-speak-to-the-moral-dilemmas-294175.json"
@@ -158,7 +169,7 @@
       "author": "Bogdan Księżopolski, Head of the Institute of Computer Science, Head of Cybersecurity Department, Kozminski University",
       "published": "2026-11-05T08:24:35Z",
       "url": "https://theconversation.com/the-binance-hack-exploited-familiar-weaknesses-all-organisations-should-learn-from-it-295627",
-      "number": 13,
+      "number": 14,
       "wordCount": 1119,
       "version": "87a5ba9308c2c84f",
       "path": "books/the-conversation/chapters/the-binance-hack-exploited-familiar-weaknesses-all-organisations-should-l-295627.json"
@@ -169,7 +180,7 @@
       "author": "Markus Wagner, Professor of Law and Director of the UOW Transnational Law and Policy Centre, University of Wollongong",
       "published": "2026-11-05T05:12:50Z",
       "url": "https://theconversation.com/with-control-of-congress-heres-how-democrats-could-stop-trumps-war-in-iran-295954",
-      "number": 14,
+      "number": 15,
       "wordCount": 955,
       "version": "46f6f24e08b4bd07",
       "path": "books/the-conversation/chapters/with-control-of-congress-heres-how-democrats-could-stop-trumps-war-in-ira-295954.json"
@@ -180,7 +191,7 @@
       "author": "Alison Cole, Composer and Lecturer in Screen Composition, Sydney Conservatorium of Music, University of Sydney",
       "published": "2026-11-05T04:30:40Z",
       "url": "https://theconversation.com/godzilla-minus-zero-is-incredibly-loud-who-decides-on-the-cinema-volume-and-is-it-safe-295864",
-      "number": 15,
+      "number": 16,
       "wordCount": 953,
       "version": "73f887ea3ed46bfe",
       "path": "books/the-conversation/chapters/godzilla-minus-zero-is-incredibly-loud-who-decides-on-the-cinema-volume-a-295864.json"
@@ -191,7 +202,7 @@
       "author": "Ana Saggioro Garcia, Professora Adjunta de Relações Internacionais, Universidade Federal Rural do Rio de Janeiro (UFRRJ); PUC-Rio",
       "published": "2026-11-04T21:28:40Z",
       "url": "https://theconversation.com/lulas-victory-in-the-2026-brazilian-elections-was-far-from-inevitable-295930",
-      "number": 16,
+      "number": 17,
       "wordCount": 1764,
       "version": "f272c48b14ab8d59",
       "path": "books/the-conversation/chapters/lulas-victory-in-the-2026-brazilian-elections-was-far-from-inevitable-295930.json"
@@ -202,7 +213,7 @@
       "author": "Wanjiku Chebet Kanjumba, Ph.D. Candidate in Aerospace Engineering, University of Florida",
       "published": "2026-11-04T20:09:29Z",
       "url": "https://theconversation.com/nasas-swift-telescope-has-burned-up-months-after-a-robot-sent-to-save-it-failed-heres-why-its-so-hard-to-boost-a-satellite-295538",
-      "number": 17,
+      "number": 18,
       "wordCount": 934,
       "version": "18b920309747c246",
       "path": "books/the-conversation/chapters/nasas-swift-telescope-has-burned-up-months-after-a-robot-sent-to-save-it-295538.json"
@@ -213,7 +224,7 @@
       "author": "Veronica Le Nevez, Co-Director, Impact and Engagement, The George Institute for Global Health, George Institute for Global Health; Laura Emily Downey, Associate professor, George Institute for Global Health",
       "published": "2026-11-04T19:04:04Z",
       "url": "https://theconversation.com/climate-change-is-undermining-our-health-and-the-burden-falls-heaviest-on-women-295355",
-      "number": 18,
+      "number": 19,
       "wordCount": 770,
       "version": "83457674d9368ae6",
       "path": "books/the-conversation/chapters/climate-change-is-undermining-our-health-and-the-burden-falls-heaviest-on-295355.json"
@@ -224,7 +235,7 @@
       "author": "Nadia Atia, Head of English & Reader in Postcolonial and Global Literature, Queen Mary University of London",
       "published": "2026-11-04T16:17:47Z",
       "url": "https://theconversation.com/agatha-christie-a-world-of-mystery-is-a-brilliant-exploration-of-the-life-of-the-queen-of-crime-295778",
-      "number": 19,
+      "number": 20,
       "wordCount": 1143,
       "version": "e97f04a63d5cdb84",
       "path": "books/the-conversation/chapters/agatha-christie-a-world-of-mystery-is-a-brilliant-exploration-of-the-life-295778.json"
@@ -235,7 +246,7 @@
       "author": "Guus Kroonen, Associate Professor, Scandinavian, Germanic and Indo-European Comparative Linguistics, Leiden University; University of Copenhagen; Eske Willerslev, Professor, Globe Institute, Section for Geogenetics, University of Copenhagen; University of Cambridge; Hugh McColl, Assistant Professor, Globe Institute, Section for Geogenetics, University of Copenhagen",
       "published": "2026-11-04T16:12:40Z",
       "url": "https://theconversation.com/we-used-ancient-dna-to-track-the-origins-and-spread-of-the-germanic-and-celtic-languages-new-research-295786",
-      "number": 20,
+      "number": 21,
       "wordCount": 1013,
       "version": "a0548775a958eff4",
       "path": "books/the-conversation/chapters/we-used-ancient-dna-to-track-the-origins-and-spread-of-the-germanic-and-c-295786.json"
@@ -246,7 +257,7 @@
       "author": "Nicholas Westcott, Professor of Practice in Diplomacy, Dept of Politics and International Studies, SOAS, University of London",
       "published": "2026-11-04T14:31:29Z",
       "url": "https://theconversation.com/why-trump-xi-and-putin-cant-carve-up-the-world-like-the-big-three-leaders-of-1945-295632",
-      "number": 21,
+      "number": 22,
       "wordCount": 1121,
       "version": "209f3f1e00a9d2d3",
       "path": "books/the-conversation/chapters/why-trump-xi-and-putin-cant-carve-up-the-world-like-the-big-three-leaders-295632.json"
@@ -257,7 +268,7 @@
       "author": "Andrew Gawthorpe, Lecturer in History and International Studies, Leiden University",
       "published": "2026-11-04T06:36:59Z",
       "url": "https://theconversation.com/donald-trumps-republicans-suffer-landslide-defeat-what-this-means-for-the-world-295769",
-      "number": 22,
+      "number": 23,
       "wordCount": 838,
       "version": "aa5037e11979d9ea",
       "path": "books/the-conversation/chapters/donald-trumps-republicans-suffer-landslide-defeat-what-this-means-for-the-295769.json"
@@ -268,7 +279,7 @@
       "author": "Charlie Hunt, Associate Professor of Political Science, Boise State University",
       "published": "2026-11-04T05:48:52Z",
       "url": "https://theconversation.com/epic-blue-wave-helps-democrats-take-congress-in-overwhelming-rebuke-to-president-trump-295830",
-      "number": 23,
+      "number": 24,
       "wordCount": 1045,
       "version": "7c86c2729c522f4e",
       "path": "books/the-conversation/chapters/epic-blue-wave-helps-democrats-take-congress-in-overwhelming-rebuke-to-pr-295830.json"
@@ -279,7 +290,7 @@
       "author": "Kaisa Pankakoski, Research Associate in Sociolinguistics, Cardiff University",
       "published": "2026-11-03T16:19:00Z",
       "url": "https://theconversation.com/from-wales-to-finland-minority-language-speakers-still-face-prejudice-289007",
-      "number": 24,
+      "number": 25,
       "wordCount": 959,
       "version": "599fa13003b64ea7",
       "path": "books/the-conversation/chapters/from-wales-to-finland-minority-language-speakers-still-face-prejudice-289007.json"
@@ -290,7 +301,7 @@
       "author": "Jinkyung Baek, PhD Candidate in Politics Research, King's College London",
       "published": "2026-11-03T08:52:18Z",
       "url": "https://theconversation.com/how-north-korea-became-a-world-leader-in-state-sponsored-hacking-295597",
-      "number": 25,
+      "number": 26,
       "wordCount": 918,
       "version": "75fbd5abc2640d0d",
       "path": "books/the-conversation/chapters/how-north-korea-became-a-world-leader-in-state-sponsored-hacking-295597.json"
@@ -301,7 +312,7 @@
       "author": "Kliti Grice, Founding Director of WA-Organic & Isotope Geochemistry Centre, School of Earth and Planetary Sciences, Curtin University",
       "published": "2026-11-02T19:59:26Z",
       "url": "https://theconversation.com/traces-of-dinosaur-blood-found-in-world-first-discovery-286450",
-      "number": 26,
+      "number": 27,
       "wordCount": 1016,
       "version": "c1d5e3a25438f99a",
       "path": "books/the-conversation/chapters/traces-of-dinosaur-blood-found-in-world-first-discovery-286450.json"
@@ -312,7 +323,7 @@
       "author": "Jo Setchell, Professor of Anthropology, Durham University",
       "published": "2026-11-02T16:15:01Z",
       "url": "https://theconversation.com/when-a-bull-falls-for-a-donkey-what-an-unlikely-relationship-reveals-about-animal-sexuality-295306",
-      "number": 27,
+      "number": 28,
       "wordCount": 918,
       "version": "ae4f531fd27d674f",
       "path": "books/the-conversation/chapters/when-a-bull-falls-for-a-donkey-what-an-unlikely-relationship-reveals-abou-295306.json"
@@ -323,7 +334,7 @@
       "author": "Jared Mondschein, Director of Research, US Studies Centre, University of Sydney",
       "published": "2026-11-01T19:17:35Z",
       "url": "https://theconversation.com/nearly-all-americans-believe-corruption-is-a-problem-but-will-it-decide-the-midterm-elections-295075",
-      "number": 28,
+      "number": 29,
       "wordCount": 1007,
       "version": "a3d37a42c8d9ff8e",
       "path": "books/the-conversation/chapters/nearly-all-americans-believe-corruption-is-a-problem-but-will-it-decide-t-295075.json"
@@ -334,21 +345,10 @@
       "author": "Logan S. James, Postdoctoral Researcher in Biology, McGill University; The University of Texas at Austin; Jon Sakata, Professor, Department of Biology and Integrated Program in Neuroscience, McGill University; Kendra Oudyk, Master of Library and Information Studies student; Graduate Academic Assistant in Digital Scholarship, University of British Columbia",
       "published": "2026-11-01T12:54:58Z",
       "url": "https://theconversation.com/human-speech-follows-the-same-patterns-as-birdsong-new-research-295030",
-      "number": 29,
+      "number": 30,
       "wordCount": 720,
       "version": "46cb822b43abfd14",
       "path": "books/the-conversation/chapters/human-speech-follows-the-same-patterns-as-birdsong-new-research-295030.json"
-    },
-    {
-      "id": "from-18th-century-false-ballots-to-the-second-jfk-and-double-dan-sullivan-295504",
-      "title": "From 18th-century false ballots to the second JFK and double Dan Sullivans, a brief history of spoiler candidates and the unsuccessful legal challenges to them",
-      "author": "Drew Kurlowski, Associate Professor of Political Science, Coastal Carolina University",
-      "published": "2026-10-30T17:14:04Z",
-      "url": "https://theconversation.com/from-18th-century-false-ballots-to-the-second-jfk-and-double-dan-sullivans-a-brief-history-of-spoiler-candidates-and-the-unsuccessful-legal-challenges-to-them-295504",
-      "number": 30,
-      "wordCount": 1221,
-      "version": "d33959bd65c5aa68",
-      "path": "books/the-conversation/chapters/from-18th-century-false-ballots-to-the-second-jfk-and-double-dan-sullivan-295504.json"
     }
   ]
 }
