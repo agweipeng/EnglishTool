@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T12:42:38.760Z",
+  "generatedAt": "2026-11-08T12:59:46.055Z",
   "sources": {
     "anthropic": [
       {
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 298869,
+        "stars": 299435,
         "language": "JavaScript",
         "updatedAt": "2026-11-06T21:21:50Z"
       },
@@ -116,89 +116,89 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 261359,
+        "stars": 261622,
         "language": "Python",
-        "updatedAt": "2026-11-07T12:35:09Z"
+        "updatedAt": "2026-11-08T12:55:40Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 199389,
+        "stars": 199667,
         "language": "TypeScript",
-        "updatedAt": "2026-11-07T01:42:31Z"
+        "updatedAt": "2026-11-08T10:27:55Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187934,
+        "stars": 187938,
         "language": "Python",
-        "updatedAt": "2026-11-07T00:14:42Z"
+        "updatedAt": "2026-11-08T05:56:51Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 186223,
+        "stars": 186332,
         "language": "Go",
-        "updatedAt": "2026-11-07T02:44:07Z"
+        "updatedAt": "2026-11-08T00:36:55Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 176127,
+        "stars": 176393,
         "language": "MDX",
-        "updatedAt": "2026-11-07T11:14:57Z"
+        "updatedAt": "2026-11-08T07:36:39Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 168621,
+        "stars": 168653,
         "language": "Python",
-        "updatedAt": "2026-11-07T12:31:22Z"
+        "updatedAt": "2026-11-08T12:13:57Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 160607,
+        "stars": 160656,
         "language": "Python",
-        "updatedAt": "2026-11-07T12:11:32Z"
+        "updatedAt": "2026-11-08T12:07:41Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 157990,
+        "stars": 158085,
         "language": "Svelte",
-        "updatedAt": "2026-11-07T12:38:15Z"
+        "updatedAt": "2026-11-08T12:57:09Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 149152,
+        "stars": 149191,
         "language": "Python",
-        "updatedAt": "2026-11-07T09:18:20Z"
-      },
-      {
-        "name": "Shubhamsaboo/awesome-llm-apps",
-        "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
-        "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 144081,
-        "language": "Python",
-        "updatedAt": "2026-11-06T05:53:36Z"
+        "updatedAt": "2026-11-08T08:15:55Z"
       },
       {
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 143764,
+        "stars": 144227,
         "language": "Python",
-        "updatedAt": "2026-11-06T17:11:19Z"
+        "updatedAt": "2026-11-08T00:52:14Z"
+      },
+      {
+        "name": "Shubhamsaboo/awesome-llm-apps",
+        "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+        "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
+        "stars": 144156,
+        "language": "Python",
+        "updatedAt": "2026-11-06T05:53:36Z"
       }
     ],
     "bbc": [
@@ -229,13 +229,6 @@
         "date": "2026-10-15",
         "description": "Do you own anything made from real gold?",
         "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/261015_6_minute_english_why_do_people_buy_gold_download.mp3"
-      },
-      {
-        "title": "Are people drinking less alcohol?",
-        "url": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-261008",
-        "date": "2026-10-08",
-        "description": "Do you drink alcoholic drinks?",
-        "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/261008_6_minute_english_are_people_drinking_less_alcohol_download.mp3"
       }
     ],
     "markets": [
@@ -244,10 +237,16 @@
         "label": "SPY · S&P 500",
         "items": [
           {
-            "title": "Wall Street's fear gauge may be flashing a buy sign",
-            "url": "https://www.cnbc.com/2026/11/06/wall-streets-fear-gauge-may-be-flashing-a-buy-sign.html",
+            "title": "Top Wall Street analysts like these 3 dividend stocks for consistent income",
+            "url": "https://www.cnbc.com/2026/11/08/top-analysts-like-these-3-dividend-stocks-for-consistent-income.html",
             "publisher": "CNBC",
-            "date": "2026-11-06"
+            "date": "2026-11-08"
+          },
+          {
+            "title": "Berkshire shares surge as Wall Street swoons amid AI fears",
+            "url": "https://www.cnbc.com/2026/11/07/berkshire-shares-surge-as-wall-street-swoons-amid-ai-fears.html",
+            "publisher": "CNBC",
+            "date": "2026-11-07"
           },
           {
             "title": "Stock market after midterm elections: What S&P 500 history shows",
@@ -262,12 +261,6 @@
         "label": "QQQ · Nasdaq",
         "items": [
           {
-            "title": "Nasdaq rebounds 1% following worst session in 18 months as traders snap up tech shares: Live updates",
-            "url": "https://www.cnbc.com/2026/11/05/stock-market-today-live-updates.html",
-            "publisher": "CNBC",
-            "date": "2026-11-06"
-          },
-          {
             "title": "Nasdaq drops into correction territory — here’s what typically happens next",
             "url": "https://www.cnbc.com/2026/11/05/nasdaq-drops-into-correction-territory-heres-what-typically-happens-next.html",
             "publisher": "CNBC",
@@ -278,6 +271,12 @@
             "url": "https://www.cnbc.com/2026/11/06/morning-squawk-blue-wave-stocks.html",
             "publisher": "CNBC",
             "date": "2026-11-06"
+          },
+          {
+            "title": "AI meltdown: Nvidia and Qualcomm drop more than 9%, pushing Nasdaq to worst day since April 2025",
+            "url": "https://www.cnbc.com/2026/11/05/qualcomm-earnings-chip-stocks-election.html",
+            "publisher": "CNBC",
+            "date": "2026-11-05"
           }
         ]
       },
@@ -285,6 +284,12 @@
         "key": "SMH",
         "label": "SMH · Chip stocks",
         "items": [
+          {
+            "title": "Democrat shaping AI policy bought chip stocks despite backing congressional trading ban",
+            "url": "https://www.cnbc.com/2026/11/07/josh-gottheimer-ai-stocks-congress-trading-ban.html",
+            "publisher": "CNBC",
+            "date": "2026-11-07"
+          },
           {
             "title": "Nasdaq sell-off batters Asian chip stocks as SK Hynix, Samsung, Softbank, TSMC tumble",
             "url": "https://www.cnbc.com/2026/11/06/tech-stocks-sk-hynix-samsung-softbank.html",
@@ -296,12 +301,6 @@
             "url": "https://apnews.com/article/chips-semiconductor-education-community-college-arizona-ef9cf98fcf9d4bfc48ccdc5177da03f0",
             "publisher": "AP News",
             "date": "2026-11-05"
-          },
-          {
-            "title": "Inside the chip talent war: Trade secrets and rising Chinese rivals",
-            "url": "https://www.cnbc.com/2026/11/05/semiconductor-china-korea-talents-rivalry.html",
-            "publisher": "CNBC",
-            "date": "2026-11-05"
           }
         ]
       },
@@ -310,21 +309,21 @@
         "label": "NVDA · Nvidia",
         "items": [
           {
+            "title": "Megaspeed exec was recruited to spy on Nvidia CEO, according to US intelligence memo",
+            "url": "https://techcrunch.com/2026/11/07/chinese-exec-was-recruited-to-spy-on-nvidia-ceo-according-to-us-intelligence-memo/",
+            "publisher": "TechCrunch",
+            "date": "2026-11-07"
+          },
+          {
+            "title": "The US let Nvidia sell chips to an empty office in China",
+            "url": "https://www.theverge.com/ai-artificial-intelligence/1029483/nvidia-ai-chips-china-blacklist-government",
+            "publisher": "The Verge",
+            "date": "2026-11-07"
+          },
+          {
             "title": "Krispy Kreme Is Beating Nvidia, and That’s Not Even the Chip Giant’s Biggest Problem",
             "url": "https://gizmodo.com/krispy-kreme-is-beating-nvidia-and-thats-not-even-the-chip-giants-biggest-problem-2000836297",
             "publisher": "Gizmodo",
-            "date": "2026-11-06"
-          },
-          {
-            "title": "Here are Friday's biggest analyst calls: Nvidia, SpaceX, Netflix, Apple, TripAdvisor, Molson Coors & more",
-            "url": "https://www.cnbc.com/2026/11/06/biggest-friday-wall-street-analyst-calls-like-nvidia.html",
-            "publisher": "CNBC",
-            "date": "2026-11-06"
-          },
-          {
-            "title": "Chinese AI lab Moonshot turned to Europe for Nvidia Blackwell access amid U.S. China curbs, sources tell CNBC",
-            "url": "https://www.cnbc.com/2026/11/05/moonshot-ai-nvidia-chips-europe-china.html",
-            "publisher": "CNBC",
             "date": "2026-11-06"
           }
         ]
@@ -364,15 +363,15 @@
             "date": "2026-11-06"
           },
           {
-            "title": "The iPhone Duo has more than 100,000 optimized apps, Apple says",
-            "url": "https://www.theverge.com/tech/1028813/apple-iphone-duo-optimized-apps",
+            "title": "All the news about the iPhone Duo",
+            "url": "https://www.theverge.com/tech/1010131/apple-iphone-duo-news-announcements",
             "publisher": "The Verge",
             "date": "2026-11-06"
           },
           {
-            "title": "Struggling to spell ‘male chauvinist pig’? Apple’s grey list means your iPhone won’t help you",
-            "url": "https://www.theguardian.com/technology/2026/nov/06/struggling-to-spell-male-chauvinist-pig-apple-grey-list-means-your-iphone-wont-help-you",
-            "publisher": "The Guardian",
+            "title": "The iPhone Duo has more than 100,000 optimized apps, Apple says",
+            "url": "https://www.theverge.com/tech/1028813/apple-iphone-duo-optimized-apps",
+            "publisher": "The Verge",
             "date": "2026-11-06"
           }
         ]
@@ -382,6 +381,12 @@
         "label": "META · Meta",
         "items": [
           {
+            "title": "Meta chief strategy officer Dave Wehner leaves to join AI infrastructure startup Fireworks as CFO",
+            "url": "https://www.cnbc.com/2026/11/07/dave-wehner-meta-fireworks-cfo.html",
+            "publisher": "CNBC",
+            "date": "2026-11-07"
+          },
+          {
             "title": "Meta introduces Spaces, a new way to collaborate with your Muse agent",
             "url": "https://techcrunch.com/2026/11/06/meta-introduces-spaces-a-new-way-to-collaborate-with-your-muse-agent/",
             "publisher": "TechCrunch",
@@ -390,12 +395,6 @@
           {
             "title": "Meta’s Muse AI can create custom ‘spaces’ for the version of the app you need right now",
             "url": "https://www.theverge.com/tech/1028871/meta-muse-ai-spaces",
-            "publisher": "The Verge",
-            "date": "2026-11-06"
-          },
-          {
-            "title": "Meta’s refurbished Quest 3S headset is nearly $100 off right now",
-            "url": "https://www.theverge.com/gadgets/1028372/meta-quest-3s-headset-philips-hue-gradient-lightstrip-deal-sale",
             "publisher": "The Verge",
             "date": "2026-11-06"
           }
@@ -416,17 +415,17 @@
             "url": "https://techcrunch.com/2026/11/02/elon-musk-throttles-grok-bot-limits-due-to-unsustainably-high-costs/",
             "publisher": "TechCrunch",
             "date": "2026-11-02"
-          },
-          {
-            "title": "Judge allows NAACP lawsuit over xAI data center pollution to move forward",
-            "url": "https://techcrunch.com/2026/10/31/judge-allows-naacp-lawsuit-over-xai-data-center-pollution-to-move-forward/",
-            "publisher": "TechCrunch",
-            "date": "2026-10-31"
           }
         ]
       }
     ],
     "china": [
+      {
+        "title": "Uyghurs facing deportation by Thailand say they will be ‘like slaves’ in China",
+        "url": "https://www.theguardian.com/global-development/2026/nov/08/uyghurs-thailand-china-forced-deportation",
+        "publisher": "The Guardian",
+        "date": "2026-11-08"
+      },
       {
         "title": "Ukraine war briefing: Beijing confirms historic Xi-Trump-Putin meeting under discussion",
         "url": "https://www.theguardian.com/world/2026/nov/07/ukraine-war-briefing-beijing-confirms-historic-xi-trump-putin-meeting-under-discussion",
@@ -444,12 +443,6 @@
         "url": "https://www.theguardian.com/commentisfree/2026/nov/06/hong-kong-prisoners-china-signal-democracy-joshua-wong",
         "publisher": "The Guardian",
         "date": "2026-11-06"
-      },
-      {
-        "title": "UK and US condemn ‘cruel’ second jail term handed to Hong Kong activist Joshua Wong",
-        "url": "https://www.theguardian.com/world/2026/nov/05/uk-and-us-condemn-second-jail-term-handed-to-hong-kong-activist-joshua-wong",
-        "publisher": "The Guardian",
-        "date": "2026-11-05"
       },
       {
         "title": "Joshua Wong, face of Hong Kong's pro-democracy protests, jailed for 10 years",
