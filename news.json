@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-09T15:41:37.235Z",
+  "generatedAt": "2026-11-10T14:35:56.584Z",
   "sources": {
     "anthropic": [
       {
@@ -9,6 +9,10 @@
       {
         "title": "Anthropic files S-1 with the SEC for proposed initial public offering Today, Anthropic, PBC filed a…",
         "url": "https://www.anthropic.com/news/s1-sec"
+      },
+      {
+        "title": "Anthropic launches roadshow for proposed initial public offering",
+        "url": "https://www.anthropic.com/news/roadshow-launch"
       },
       {
         "title": "AI for Science expands to foundations and research institutions",
@@ -29,13 +33,25 @@
       {
         "title": "Physicist Christopher Stubbs joins Anthropic's Long-Term Benefit Trust",
         "url": "https://www.anthropic.com/news/christopher-stubbs-joins-long-term-benefit-trust"
-      },
-      {
-        "title": "An update on independent evaluators",
-        "url": "https://www.anthropic.com/news/an-update-on-independent-evaluators"
       }
     ],
     "openai": [
+      {
+        "title": "Helping caregivers use AI in everyday life Company Nov 10, 2026",
+        "url": "https://openai.com/index/helping-caregivers-use-ai-in-everyday-life/"
+      },
+      {
+        "title": "Closing the AI guidance gap in education Company Nov 10, 2026",
+        "url": "https://openai.com/index/closing-ai-guidance-gap-education/"
+      },
+      {
+        "title": "ChatGPT Enterprise now available in AWS Marketplace Product Nov 9, 2026",
+        "url": "https://openai.com/index/chatgpt-enterprise-aws-marketplace/"
+      },
+      {
+        "title": "Control Room: A new way to track and stop AI workloads Safety Nov 9, 2026",
+        "url": "https://openai.com/index/control-room/"
+      },
       {
         "title": "Partnering with Hacktron to strengthen OpenAI’s security Security Nov 6, 2026",
         "url": "https://openai.com/index/partnering-with-hacktron/"
@@ -51,22 +67,6 @@
       {
         "title": "OpenAI to acquire Pierre Computer Company, Inc. Company Nov 4, 2026",
         "url": "https://openai.com/index/openai-to-acquire-pierre/"
-      },
-      {
-        "title": "Daybreak Red is now available in AWS GovCloud (US-East) Product Nov 4, 2026",
-        "url": "https://openai.com/index/daybreak-red-aws-govcloud/"
-      },
-      {
-        "title": "A thousand fewer paths to root Security Nov 4, 2026",
-        "url": "https://openai.com/index/a-thousand-fewer-paths-to-root/"
-      },
-      {
-        "title": "Introducing Images 2.6 Product Nov 4, 2026",
-        "url": "https://openai.com/index/introducing-images-2-6/"
-      },
-      {
-        "title": "Accelerating engineering for the physical world Research Nov 3, 2026",
-        "url": "https://openai.com/index/accelerating-engineering-for-the-physical-world/"
       }
     ],
     "google": [
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 300015,
+        "stars": 300559,
         "language": "JavaScript",
         "updatedAt": "2026-11-09T04:56:24Z"
       },
@@ -116,89 +116,89 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 261992,
+        "stars": 262298,
         "language": "Python",
-        "updatedAt": "2026-11-09T15:41:09Z"
+        "updatedAt": "2026-11-10T14:35:35Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 200015,
+        "stars": 200368,
         "language": "TypeScript",
-        "updatedAt": "2026-11-09T15:35:40Z"
+        "updatedAt": "2026-11-10T14:33:14Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 187966,
+        "stars": 187977,
         "language": "Python",
-        "updatedAt": "2026-11-09T15:31:12Z"
+        "updatedAt": "2026-11-10T14:27:00Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 186441,
+        "stars": 186529,
         "language": "Go",
-        "updatedAt": "2026-11-09T15:23:39Z"
+        "updatedAt": "2026-11-10T01:49:34Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 176689,
+        "stars": 176821,
         "language": "MDX",
-        "updatedAt": "2026-11-09T09:54:34Z"
+        "updatedAt": "2026-11-10T14:05:26Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 168688,
+        "stars": 168735,
         "language": "Python",
-        "updatedAt": "2026-11-09T15:26:40Z"
+        "updatedAt": "2026-11-10T14:27:58Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 160760,
+        "stars": 160840,
         "language": "Python",
-        "updatedAt": "2026-11-09T15:14:08Z"
+        "updatedAt": "2026-11-10T14:31:54Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 158205,
+        "stars": 158297,
         "language": "Svelte",
-        "updatedAt": "2026-11-09T15:02:44Z"
+        "updatedAt": "2026-11-10T14:24:24Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 149263,
+        "stars": 149305,
         "language": "Python",
-        "updatedAt": "2026-11-09T08:20:32Z"
+        "updatedAt": "2026-11-10T08:28:09Z"
       },
       {
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 144844,
+        "stars": 145407,
         "language": "Python",
-        "updatedAt": "2026-11-08T00:52:14Z"
+        "updatedAt": "2026-11-09T17:04:04Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 144272,
+        "stars": 144347,
         "language": "Python",
-        "updatedAt": "2026-11-08T17:14:10Z"
+        "updatedAt": "2026-11-10T01:54:13Z"
       }
     ],
     "bbc": [
@@ -237,8 +237,8 @@
         "label": "SPY · S&P 500",
         "items": [
           {
-            "title": "The AI sell-off rocked Wall Street last week. Why it sets up the market for a big year-end rally",
-            "url": "https://www.cnbc.com/2026/11/09/ai-selloff-stock-market-year-end-rally.html",
+            "title": "Lucid misses Wall Street’s earnings expectations, expands loan from Saudi Arabia fund",
+            "url": "https://www.cnbc.com/2026/11/09/lucid-group-lcid-earnings-q3-2026.html",
             "publisher": "CNBC",
             "date": "2026-11-09"
           },
@@ -267,10 +267,10 @@
             "date": "2026-11-06"
           },
           {
-            "title": "Nasdaq sell-off batters Asian chip stocks as SK Hynix, Samsung, Softbank, TSMC tumble",
-            "url": "https://www.cnbc.com/2026/11/06/tech-stocks-sk-hynix-samsung-softbank.html",
+            "title": "AI meltdown: Nvidia and Qualcomm drop more than 9%, pushing Nasdaq to worst day since April 2025",
+            "url": "https://www.cnbc.com/2026/11/05/qualcomm-earnings-chip-stocks-election.html",
             "publisher": "CNBC",
-            "date": "2026-11-06"
+            "date": "2026-11-05"
           }
         ]
       },
@@ -279,22 +279,22 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
-            "title": "Key AI chip index just broke its long-term trendline. What history says happens next",
-            "url": "https://www.cnbc.com/2026/11/09/key-ai-chip-index-just-broke-its-long-term-trendline-what-history-says-happen-next.html",
+            "title": "'Markets bottom on bad news' maxim rings true as chip stocks rally amid Nvidia scandal",
+            "url": "https://www.cnbc.com/2026/11/10/chip-stocks-rally-nvidia-scandal.html",
             "publisher": "CNBC",
-            "date": "2026-11-09"
+            "date": "2026-11-10"
+          },
+          {
+            "title": "TSMC's October sales jump as global chip boom rolls on",
+            "url": "https://www.cnbc.com/2026/11/10/tsmcs-october-sales-.html",
+            "publisher": "CNBC",
+            "date": "2026-11-10"
           },
           {
             "title": "What is Megaspeed? The Nvidia chip buyer in the spotlight after Jensen Huang’s affair",
             "url": "https://www.cnbc.com/2026/11/09/megaspeed-nvidia-jensen-huang-alice-huang.html",
             "publisher": "CNBC",
-            "date": "2026-11-09"
-          },
-          {
-            "title": "Analysts say Huang scandal could hang over Nvidia and chips industry for a while. Here's why",
-            "url": "https://www.cnbc.com/2026/11/09/nvidia-stock-faces-huang-investigation-overhang-analysts.html",
-            "publisher": "CNBC",
-            "date": "2026-11-09"
+            "date": "2026-11-10"
           }
         ]
       },
@@ -303,22 +303,22 @@
         "label": "NVDA · Nvidia",
         "items": [
           {
-            "title": "Dow rallies 800 points as oil slides, tech stocks outside of Nvidia gain: Live updates",
-            "url": "https://www.cnbc.com/2026/11/08/stock-market-today-live-updates.html",
+            "title": "Nvidia stock edges lower as investors weigh potential fallout of CEO's affair with alleged spy",
+            "url": "https://www.cnbc.com/2026/11/10/nvidia-nvda-jensen-huang-affair-chinese-spy.html",
             "publisher": "CNBC",
-            "date": "2026-11-09"
+            "date": "2026-11-10"
           },
           {
-            "title": "Weekend trading of Nvidia scandal shines light on new financial products",
-            "url": "https://www.cnbc.com/2026/11/09/weekend-trading-of-nvidia-scandal-shines-light-on-new-financial-products.html",
+            "title": "Jensen Huang's affair with alleged Chinese spy further complicates Nvidia’s China problem",
+            "url": "https://www.cnbc.com/2026/11/10/jensen-huang-nvidia-china-ties.html",
             "publisher": "CNBC",
-            "date": "2026-11-09"
+            "date": "2026-11-10"
           },
           {
-            "title": "Stocks making the biggest moves in early trading: Nvidia, AMD, Eli Lilly, cruise lines — Live updates",
-            "url": "https://www.cnbc.com/2026/11/09/stock-market-movers-live-updates.html",
+            "title": "China panel chair Moolenaar demands answers on Nvidia CEO's alleged affair with a Chinese spy",
+            "url": "https://www.cnbc.com/2026/11/10/moolenaar-nvidia-jensen-huang-affair-chinese-spy.html",
             "publisher": "CNBC",
-            "date": "2026-11-09"
+            "date": "2026-11-10"
           }
         ]
       },
@@ -326,6 +326,12 @@
         "key": "GOOGL",
         "label": "GOOGL · Google",
         "items": [
+          {
+            "title": "Google Has Two New Weapons in Its Fight Against Nvidia",
+            "url": "https://gizmodo.com/google-has-two-new-weapons-in-its-fight-against-nvidia-2000837111",
+            "publisher": "Gizmodo",
+            "date": "2026-11-09"
+          },
           {
             "title": "Parents and teachers decry Google pledge to yank Search if schools block AI: ‘This threat is nothing but extortion’",
             "url": "https://www.theguardian.com/us-news/2026/nov/09/parents-teachers-google-search-schools-ai",
@@ -337,12 +343,6 @@
             "url": "https://techcrunch.com/2026/11/06/crusoe-sells-troubled-wyoming-data-center-project-to-google/",
             "publisher": "TechCrunch",
             "date": "2026-11-07"
-          },
-          {
-            "title": "SpaceX says Google exec Don Harrison has resigned from its board",
-            "url": "https://www.cnbc.com/2026/11/06/tesdonald-harrison.html",
-            "publisher": "CNBC",
-            "date": "2026-11-06"
           }
         ]
       },
@@ -351,22 +351,22 @@
         "label": "AAPL · Apple",
         "items": [
           {
-            "title": "Apple is racing to make Siri more agentic",
-            "url": "https://www.theverge.com/ai-artificial-intelligence/1029552/apple-siri-ai-agentic",
-            "publisher": "The Verge",
-            "date": "2026-11-08"
+            "title": "Apple MacBook Pro review: lighter, thinner and a stunning OLED touchscreen",
+            "url": "https://www.theguardian.com/technology/2026/nov/10/apple-macbook-pro-review-lighter-thinner-stunning-oled-touchscreen",
+            "publisher": "The Guardian",
+            "date": "2026-11-10"
           },
           {
-            "title": "Apple’s New CEO Is Reportedly Pushing to Stuff More AI into iPhones",
-            "url": "https://gizmodo.com/apples-new-ceo-is-reportedly-pushing-to-stuff-more-ai-into-iphones-2000836769",
+            "title": "Apple’s $50 Intelligence Usage Packs extend access to some AI features",
+            "url": "https://www.theverge.com/tech/1030084/apple-intelligence-usage-packs-ai-features-creator-studio-logic-pro",
+            "publisher": "The Verge",
+            "date": "2026-11-09"
+          },
+          {
+            "title": "M6 iMac Review: Apple’s All-in-One Can Do It All (if You Pay for It)",
+            "url": "https://gizmodo.com/m6-imac-review-2000836466",
             "publisher": "Gizmodo",
-            "date": "2026-11-08"
-          },
-          {
-            "title": "Apple’s M5 MacBook Air is down to its lowest price since July",
-            "url": "https://www.theverge.com/gadgets/1029019/apple-macbook-air-13-15-inch-m5-deal-sale",
-            "publisher": "The Verge",
-            "date": "2026-11-08"
+            "date": "2026-11-09"
           }
         ]
       },
@@ -375,8 +375,8 @@
         "label": "META · Meta",
         "items": [
           {
-            "title": "Meta expands Instagram’s AI age-guessing tech globally",
-            "url": "https://techcrunch.com/2026/11/09/meta-expands-instagrams-ai-age-guessing-tech-globally/",
+            "title": "Meta releases Muse Ember, a new lightweight model for agent execution",
+            "url": "https://techcrunch.com/2026/11/09/meta-releases-muse-ember-a-new-lightweight-model-for-agent-execution/",
             "publisher": "TechCrunch",
             "date": "2026-11-09"
           },
@@ -397,52 +397,45 @@
       {
         "key": "GROK",
         "label": "Grok · xAI",
-        "items": [
-          {
-            "title": "Elon Musk Needs to Save Money on Grok, Days After Saying AI Makes Saving Money Pointless",
-            "url": "https://gizmodo.com/elon-musk-needs-to-save-money-on-grok-days-after-saying-ai-makes-saving-money-pointless-2000833812",
-            "publisher": "Gizmodo",
-            "date": "2026-11-02"
-          },
-          {
-            "title": "Elon Musk throttles Grok Bot limits due to ‘unsustainably high’ costs",
-            "url": "https://techcrunch.com/2026/11/02/elon-musk-throttles-grok-bot-limits-due-to-unsustainably-high-costs/",
-            "publisher": "TechCrunch",
-            "date": "2026-11-02"
-          }
-        ]
+        "items": []
       }
     ],
     "china": [
       {
-        "title": "Nvidia launches investigation into CEO's affair with suspected Chinese spy",
-        "url": "https://www.bbc.co.uk/news/articles/c3dxw10rjn9no",
+        "title": "US and rest of world must follow China’s lead on green energy, says John Kerry",
+        "url": "https://www.theguardian.com/environment/2026/nov/10/china-green-energy-john-kerry-cop31",
+        "publisher": "The Guardian",
+        "date": "2026-11-10"
+      },
+      {
+        "title": "Traces of Justice review – ‘Chinese Sherlock Holmes’ at centre of arresting forensic cop thriller",
+        "url": "https://www.theguardian.com/film/2026/nov/10/traces-of-justice-review-arresting-forensic-cop-thriller-chases-the-science",
+        "publisher": "The Guardian",
+        "date": "2026-11-10"
+      },
+      {
+        "title": "EU manufacturers could give up on competing with China by 2030, warns commerce chief",
+        "url": "https://www.theguardian.com/business/2026/nov/10/eu-manufacturers-china-jens-eskelund",
+        "publisher": "The Guardian",
+        "date": "2026-11-10"
+      },
+      {
+        "title": "Zoe Kleinman: Nvidia CEO's affair will cause ripples across US and beyond",
+        "url": "https://www.bbc.co.uk/news/articles/cj3vqv3nee72o",
         "publisher": "BBC",
         "date": "2026-11-09"
       },
       {
-        "title": "Nvidia opens investigation after report CEO Jensen Huang was target of foreign intelligence",
-        "url": "https://www.theguardian.com/us-news/2026/nov/08/nvidia-jensen-huang-investigation",
+        "title": "Jensen Huang’s image has been shattered. Could he be pushed out at Nvidia?",
+        "url": "https://www.theguardian.com/technology/2026/nov/09/jensen-huang-image-nvidia",
         "publisher": "The Guardian",
         "date": "2026-11-09"
       },
       {
-        "title": "The Guardian view on a tale of two activists: Joshua Wong and Au Kam San should not be behind bars | Editorial",
-        "url": "https://www.theguardian.com/commentisfree/2026/nov/08/the-guardian-view-on-a-tale-of-two-activists-joshua-wong-and-au-kam-san-should-not-be-behind-bars",
-        "publisher": "The Guardian",
-        "date": "2026-11-08"
-      },
-      {
-        "title": "Chinese carmaker BYD’s offices in Netherlands raided over JLR ‘copycat car’ claim",
-        "url": "https://www.theguardian.com/business/2026/nov/08/chinese-carmaker-byd-offices-raided-netherlands-land-rover-copycat-claim",
-        "publisher": "The Guardian",
-        "date": "2026-11-08"
-      },
-      {
-        "title": "Uyghurs facing deportation by Thailand say they will be ‘like slaves’ in China",
-        "url": "https://www.theguardian.com/global-development/2026/nov/08/uyghurs-thailand-china-forced-deportation",
-        "publisher": "The Guardian",
-        "date": "2026-11-08"
+        "title": "Nvidia shares tumble over investigation into Huang's affair with alleged Chinese spy",
+        "url": "https://www.bbc.co.uk/news/articles/c6zxjx01vyleo",
+        "publisher": "BBC",
+        "date": "2026-11-09"
       },
       {
         "title": "He spent $50,000 on Labubus but now the craze is dying",
@@ -455,12 +448,6 @@
         "url": "https://www.bbc.co.uk/news/articles/cwp9g3rlp8jlo",
         "publisher": "BBC",
         "date": "2026-11-05"
-      },
-      {
-        "title": "Weapon or wine bottle? China disputes reports of artillery shell in Papua New Guinea",
-        "url": "https://www.bbc.co.uk/news/articles/cm0qkxzv3j99o",
-        "publisher": "BBC",
-        "date": "2026-11-04"
       }
     ]
   }
