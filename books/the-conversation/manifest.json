@@ -15,18 +15,117 @@
   "recommendation": "New articles every day, written by university experts for general readers: current topics in natural, educated native English.",
   "sectionType": "article",
   "kind": "news",
-  "version": "6e49bcca9e27c646",
+  "version": "f9f689966745fe42",
   "introduction": "",
-  "latestArticle": "2026-11-11T23:58:06Z",
-  "wordCount": 32013,
+  "latestArticle": "2026-11-13T12:09:36Z",
+  "wordCount": 30649,
   "chapters": [
+    {
+      "id": "could-you-survive-without-microsoft-inside-the-costs-of-digital-dependenc-296614",
+      "title": "Could you survive without Microsoft? Inside the costs of digital dependence",
+      "author": "Narmin Nahidi, Assistant Professor in Finance, University of Exeter",
+      "published": "2026-11-13T12:09:36Z",
+      "url": "https://theconversation.com/could-you-survive-without-microsoft-inside-the-costs-of-digital-dependence-296614",
+      "number": 1,
+      "wordCount": 820,
+      "version": "f3373b48ef03e6db",
+      "path": "books/the-conversation/chapters/could-you-survive-without-microsoft-inside-the-costs-of-digital-dependenc-296614.json"
+    },
+    {
+      "id": "young-turtles-find-refuge-in-both-natural-and-artificial-wetlands-in-uae-295707",
+      "title": "Young turtles find refuge in both natural and artificial wetlands in UAE – new study",
+      "author": "Owen Exeter, Postdoctoral Researcher, Marine Ecology, University of Exeter",
+      "published": "2026-11-13T10:16:11Z",
+      "url": "https://theconversation.com/young-turtles-find-refuge-in-both-natural-and-artificial-wetlands-in-uae-new-study-295707",
+      "number": 2,
+      "wordCount": 793,
+      "version": "c04ab3ed6e41b9f5",
+      "path": "books/the-conversation/chapters/young-turtles-find-refuge-in-both-natural-and-artificial-wetlands-in-uae-295707.json"
+    },
+    {
+      "id": "microsoft-has-suffered-a-global-outage-a-tech-expert-explains-what-went-w-296588",
+      "title": "Microsoft has suffered a global outage. A tech expert explains what went wrong",
+      "author": "Mahmoud Elkhodr, Senior Lecturer in Information and Communication Technologies, CQUniversity Australia",
+      "published": "2026-11-13T01:26:45Z",
+      "url": "https://theconversation.com/microsoft-has-suffered-a-global-outage-a-tech-expert-explains-what-went-wrong-296588",
+      "number": 3,
+      "wordCount": 878,
+      "version": "ce124901a2c116b0",
+      "path": "books/the-conversation/chapters/microsoft-has-suffered-a-global-outage-a-tech-expert-explains-what-went-w-296588.json"
+    },
+    {
+      "id": "from-ancient-asia-to-the-ai-age-has-chinas-beauty-stratagem-found-a-new-v-296393",
+      "title": "From ancient Asia to the AI age: Has China’s ‘beauty stratagem’ found a new victim in Nvidia’s Jensen Huang?",
+      "author": "Linggong Kong, Ph.D. Candidate in Political Science, Auburn University",
+      "published": "2026-11-12T20:25:32Z",
+      "url": "https://theconversation.com/from-ancient-asia-to-the-ai-age-has-chinas-beauty-stratagem-found-a-new-victim-in-nvidias-jensen-huang-296393",
+      "number": 4,
+      "wordCount": 1149,
+      "version": "7eeba03ef9ebb610",
+      "path": "books/the-conversation/chapters/from-ancient-asia-to-the-ai-age-has-chinas-beauty-stratagem-found-a-new-v-296393.json"
+    },
+    {
+      "id": "the-ss-united-states-has-been-deliberately-sunk-this-is-how-marine-life-w-294758",
+      "title": "The SS United States has been deliberately sunk – this is how marine life will colonise the world’s largest artificial reef",
+      "author": "Nicholas Ray, Doctoral Programmes Manager and Researcher in Aquatic Ecology, Nottingham Trent University",
+      "published": "2026-11-12T17:42:17Z",
+      "url": "https://theconversation.com/the-ss-united-states-has-been-deliberately-sunk-this-is-how-marine-life-will-colonise-the-worlds-largest-artificial-reef-294758",
+      "number": 5,
+      "wordCount": 947,
+      "version": "cd8a0f4e18c61947",
+      "path": "books/the-conversation/chapters/the-ss-united-states-has-been-deliberately-sunk-this-is-how-marine-life-w-294758.json"
+    },
+    {
+      "id": "how-groomers-operate-and-why-victims-become-trapped-296535",
+      "title": "How groomers operate – and why victims become trapped",
+      "author": "Emily Chiang, Research Associate, Aston Institute for Forensic Linguistics, Aston University",
+      "published": "2026-11-12T16:54:19Z",
+      "url": "https://theconversation.com/how-groomers-operate-and-why-victims-become-trapped-296535",
+      "number": 6,
+      "wordCount": 987,
+      "version": "0b8b7491e1f0cbd7",
+      "path": "books/the-conversation/chapters/how-groomers-operate-and-why-victims-become-trapped-296535.json"
+    },
+    {
+      "id": "the-uncomfortable-question-at-the-heart-of-europes-identity-crisis-293136",
+      "title": "The uncomfortable question at the heart of Europe’s identity crisis",
+      "author": "Kristoffer Bayer, PhD candidate, Department of Philosophy and History of Ideas, Aarhus University",
+      "published": "2026-11-12T15:19:34Z",
+      "url": "https://theconversation.com/the-uncomfortable-question-at-the-heart-of-europes-identity-crisis-293136",
+      "number": 7,
+      "wordCount": 913,
+      "version": "31d9d646b0b7dfff",
+      "path": "books/the-conversation/chapters/the-uncomfortable-question-at-the-heart-of-europes-identity-crisis-293136.json"
+    },
+    {
+      "id": "ukraine-peace-talks-end-with-no-breakthrough-but-europe-may-be-set-to-ret-296207",
+      "title": "Ukraine peace talks end with no breakthrough – but Europe may be set to return from the cold",
+      "author": "Bo Petersson, Professor of Political Science, Malmö University",
+      "published": "2026-11-12T13:38:57Z",
+      "url": "https://theconversation.com/ukraine-peace-talks-end-with-no-breakthrough-but-europe-may-be-set-to-return-from-the-cold-296207",
+      "number": 8,
+      "wordCount": 884,
+      "version": "304f47d07cacefed",
+      "path": "books/the-conversation/chapters/ukraine-peace-talks-end-with-no-breakthrough-but-europe-may-be-set-to-ret-296207.json"
+    },
+    {
+      "id": "how-the-fog-of-war-puts-journalism-in-the-frame-295855",
+      "title": "How the fog of war puts journalism in the frame",
+      "author": "Monica Attard, Co-Director, Centre For Media Transition, University of Technology Sydney; Alena Radina, Postdoctoral Research Fellow, Centre for Media Transition, University of Technology Sydney",
+      "published": "2026-11-12T02:54:21Z",
+      "url": "https://theconversation.com/how-the-fog-of-war-puts-journalism-in-the-frame-295855",
+      "number": 9,
+      "wordCount": 1015,
+      "version": "f4882928e24d4024",
+      "path": "books/the-conversation/chapters/how-the-fog-of-war-puts-journalism-in-the-frame-295855.json"
+    },
     {
       "id": "el-salvador-is-exporting-the-bukele-model-to-haiti-but-the-gang-offensive-296390",
       "title": "El Salvador is exporting the ‘Bukele model’ to Haiti – but the gang offensive is a gamble for both nations",
       "author": "Robert Muggah, Richard von Weizsäcker Fellow na Bosch Academy e Co-fundador, Instituto Igarapé; Princeton University",
       "published": "2026-11-11T23:58:06Z",
       "url": "https://theconversation.com/el-salvador-is-exporting-the-bukele-model-to-haiti-but-the-gang-offensive-is-a-gamble-for-both-nations-296390",
-      "number": 1,
+      "number": 10,
       "wordCount": 1469,
       "version": "86862650acd52b91",
       "path": "books/the-conversation/chapters/el-salvador-is-exporting-the-bukele-model-to-haiti-but-the-gang-offensive-296390.json"
@@ -37,9 +136,9 @@
       "author": "José Santana Pereira, associate professor, researcher, Universidade de Lisboa",
       "published": "2026-11-11T13:19:33Z",
       "url": "https://theconversation.com/cabo-verdes-presidential-election-the-stakes-in-one-of-africas-most-stable-democracies-295763",
-      "number": 2,
+      "number": 11,
       "wordCount": 883,
-      "version": "68d291612771b8a2",
+      "version": "b4db0b49c1e74bbb",
       "path": "books/the-conversation/chapters/cabo-verdes-presidential-election-the-stakes-in-one-of-africas-most-stabl-295763.json"
     },
     {
@@ -48,7 +147,7 @@
       "author": "Paul Snelgrove, Professor, Ocean Sciences and Biology, Memorial University of Newfoundland",
       "published": "2026-11-11T12:10:37Z",
       "url": "https://theconversation.com/what-lurks-below-newfoundland-waters-a-marine-biologist-explains-the-science-behind-the-show-295615",
-      "number": 3,
+      "number": 12,
       "wordCount": 1043,
       "version": "2f74574b8d6fabe7",
       "path": "books/the-conversation/chapters/what-lurks-below-newfoundland-waters-a-marine-biologist-explains-the-scie-295615.json"
@@ -59,7 +158,7 @@
       "author": "Eric Lob, Associate Professor of Politics and International Relations, Florida International University",
       "published": "2026-11-10T13:36:36Z",
       "url": "https://theconversation.com/economic-coercion-once-ousted-irans-leader-but-that-was-the-1950s-dont-expect-a-repeat-today-294628",
-      "number": 4,
+      "number": 13,
       "wordCount": 1097,
       "version": "97027ac74c20d4aa",
       "path": "books/the-conversation/chapters/economic-coercion-once-ousted-irans-leader-but-that-was-the-1950s-dont-ex-294628.json"
@@ -70,7 +169,7 @@
       "author": "Andrew Cullen, Guest Research Fellow, School of Computing and Information Systems, The University of Melbourne",
       "published": "2026-11-10T06:49:02Z",
       "url": "https://theconversation.com/why-is-nvidia-so-powerful-in-the-ai-world-and-what-could-jensen-huangs-scandal-really-cost-296257",
-      "number": 5,
+      "number": 14,
       "wordCount": 796,
       "version": "c6daa1af78d939c5",
       "path": "books/the-conversation/chapters/why-is-nvidia-so-powerful-in-the-ai-world-and-what-could-jensen-huangs-sc-296257.json"
@@ -81,7 +180,7 @@
       "author": "Benedict Moleta, PhD student, Department of International Relations, Australian National University",
       "published": "2026-11-09T18:41:47Z",
       "url": "https://theconversation.com/can-gadi-eisenkot-turn-the-disaster-bloc-into-israels-next-government-295859",
-      "number": 6,
+      "number": 15,
       "wordCount": 1042,
       "version": "f28e3c6a2dced4e3",
       "path": "books/the-conversation/chapters/can-gadi-eisenkot-turn-the-disaster-bloc-into-israels-next-government-295859.json"
@@ -92,7 +191,7 @@
       "author": "Joel E. Correia, Associate Professor in Human Dimensions of Natural Resources, Colorado State University",
       "published": "2026-11-09T13:43:39Z",
       "url": "https://theconversation.com/paraguays-bank-collapse-brought-down-a-president-and-exposed-as-myth-the-nations-status-as-a-dubai-of-south-america-296112",
-      "number": 7,
+      "number": 16,
       "wordCount": 1423,
       "version": "971012b66612ec26",
       "path": "books/the-conversation/chapters/paraguays-bank-collapse-brought-down-a-president-and-exposed-as-myth-the-296112.json"
@@ -103,7 +202,7 @@
       "author": "Shannon Gibson, Professor (Teaching) of Environmental Studies, Political Science and International Relations, USC Dornsife College of Letters, Arts and Sciences",
       "published": "2026-11-09T13:43:27Z",
       "url": "https://theconversation.com/5-ways-countries-stymie-climate-negotiations-without-actually-saying-no-295589",
-      "number": 8,
+      "number": 17,
       "wordCount": 1300,
       "version": "fdbaff1c2e8fef6f",
       "path": "books/the-conversation/chapters/5-ways-countries-stymie-climate-negotiations-without-actually-saying-no-295589.json"
@@ -114,7 +213,7 @@
       "author": "Wesley Morgan, Research Associate, Institute for Climate Risk and Response, UNSW",
       "published": "2026-11-08T18:43:54Z",
       "url": "https://theconversation.com/yes-the-cop-climate-talks-are-far-from-perfect-but-they-still-hold-the-power-for-change-295350",
-      "number": 9,
+      "number": 18,
       "wordCount": 954,
       "version": "a7ab6d6dd91b3d24",
       "path": "books/the-conversation/chapters/yes-the-cop-climate-talks-are-far-from-perfect-but-they-still-hold-the-po-295350.json"
@@ -125,7 +224,7 @@
       "author": "Umaima Miraj, PhD Candidate of Sociology with a Collaborative Specialization in Women and Gender Studies, University of Toronto",
       "published": "2026-11-08T15:29:34Z",
       "url": "https://theconversation.com/how-women-bore-the-consequences-of-the-first-world-war-in-british-india-289672",
-      "number": 10,
+      "number": 19,
       "wordCount": 972,
       "version": "2b3e34be782bcf07",
       "path": "books/the-conversation/chapters/how-women-bore-the-consequences-of-the-first-world-war-in-british-india-289672.json"
@@ -136,7 +235,7 @@
       "author": "Olasunkanmi Habeeb Okunola, Associate Academic Officer – Risk and Recovery Governance, United Nations University; Susan S. Ekoh, Senior Researcher in Environmental Governance, German Institute of Development and Sustainability (IDOS)",
       "published": "2026-11-08T09:29:57Z",
       "url": "https://theconversation.com/cop-31-west-africas-climate-plans-put-a-price-on-ruined-roads-and-crops-how-to-add-invisible-losses-294627",
-      "number": 11,
+      "number": 20,
       "wordCount": 1041,
       "version": "0c85e5813befce77",
       "path": "books/the-conversation/chapters/cop-31-west-africas-climate-plans-put-a-price-on-ruined-roads-and-crops-h-294627.json"
@@ -147,7 +246,7 @@
       "author": "Matthew Robert Anderson, Adjunct Professor, Theological Studies, Concordia University",
       "published": "2026-11-06T21:25:29Z",
       "url": "https://theconversation.com/10-years-after-leonard-cohens-passing-his-grappling-with-the-divine-lives-on-295955",
-      "number": 12,
+      "number": 21,
       "wordCount": 1075,
       "version": "328cd8a6baa796b8",
       "path": "books/the-conversation/chapters/10-years-after-leonard-cohens-passing-his-grappling-with-the-divine-lives-295955.json"
@@ -158,7 +257,7 @@
       "author": "R. Marie Santini, Professora da Escola de Comunicação e diretora do NetLab (Internet and Social Media Research Lab), Universidade Federal do Rio de Janeiro (UFRJ); Bruno Mattos, Coordenador de projetos do NetLab, Universidade Federal do Rio de Janeiro (UFRJ); Debora Salles, Coordenadora geral de pesquisa do NetLab, Universidade Federal do Rio de Janeiro (UFRJ)",
       "published": "2026-11-06T17:53:34Z",
       "url": "https://theconversation.com/we-need-to-talk-about-meta-political-interference-and-interests-in-the-brazilian-elections-296102",
-      "number": 13,
+      "number": 22,
       "wordCount": 1156,
       "version": "c3ae330d49c0b942",
       "path": "books/the-conversation/chapters/we-need-to-talk-about-meta-political-interference-and-interests-in-the-br-296102.json"
@@ -169,7 +268,7 @@
       "author": "Freddie Daley, Research Associate, Centre for Global Political Economy, University of Sussex; Peter Newell, Professor of International Relations, University of Sussex",
       "published": "2026-11-06T17:02:53Z",
       "url": "https://theconversation.com/the-cop31-climate-summit-is-betting-on-electrification-but-still-needs-a-plan-to-ditch-fossil-fuels-295493",
-      "number": 14,
+      "number": 23,
       "wordCount": 950,
       "version": "47e163dc77922403",
       "path": "books/the-conversation/chapters/the-cop31-climate-summit-is-betting-on-electrification-but-still-needs-a-295493.json"
@@ -180,7 +279,7 @@
       "author": "Anastasia Powell, Professor of Family and Sexual Violence, RMIT University",
       "published": "2026-11-06T03:15:42Z",
       "url": "https://theconversation.com/justice-accountability-more-questions-what-russell-brands-guilty-verdict-means-for-victim-survivors-296042",
-      "number": 15,
+      "number": 24,
       "wordCount": 981,
       "version": "ffeead0970e107e3",
       "path": "books/the-conversation/chapters/justice-accountability-more-questions-what-russell-brands-guilty-verdict-296042.json"
@@ -191,7 +290,7 @@
       "author": "Javed Ali, Associate Professor of Practice of Public Policy, University of Michigan",
       "published": "2026-11-06T00:31:57Z",
       "url": "https://theconversation.com/jd-vance-singled-out-iran-war-for-midterm-rout-he-didnt-say-what-should-happen-next-in-conflict-295938",
-      "number": 16,
+      "number": 25,
       "wordCount": 1164,
       "version": "a6709c1ae07153ef",
       "path": "books/the-conversation/chapters/jd-vance-singled-out-iran-war-for-midterm-rout-he-didnt-say-what-should-h-295938.json"
@@ -202,7 +301,7 @@
       "author": "Jesse Whitehead, Senior Research Fellow, Te Ngira Institute for Population Research, University of Waikato; Fiu Etike Penjueli, Senior Statistician (Fiji Bureau of Statistics) & Research Associate, University of Waikato; Polly Atatoa Carr, Associate Professor of Population Health, University of Waikato",
       "published": "2026-11-06T00:20:24Z",
       "url": "https://theconversation.com/born-in-aussie-or-nz-playing-for-the-pacific-the-startling-demographics-of-the-rugby-league-world-cup-295966",
-      "number": 17,
+      "number": 26,
       "wordCount": 875,
       "version": "ba716ca36c308796",
       "path": "books/the-conversation/chapters/born-in-aussie-or-nz-playing-for-the-pacific-the-startling-demographics-o-295966.json"
@@ -213,7 +312,7 @@
       "author": "James Dyke, Assistant Director of the Global Systems Institute, University of Exeter",
       "published": "2026-11-06T00:19:23Z",
       "url": "https://theconversation.com/the-worse-climate-change-gets-the-harder-it-becomes-to-stop-it-293987",
-      "number": 18,
+      "number": 27,
       "wordCount": 973,
       "version": "51dbb492bf1abfd2",
       "path": "books/the-conversation/chapters/the-worse-climate-change-gets-the-harder-it-becomes-to-stop-it-293987.json"
@@ -224,7 +323,7 @@
       "author": "Didier Camilo Olarte Gonzalez, PhD Student in Experimental Psychology, Université du Québec à Montréal (UQAM); Pier-Luc de Chantal, Professeur en psychologie, Université du Québec à Montréal (UQAM)",
       "published": "2026-11-05T14:45:39Z",
       "url": "https://theconversation.com/why-ai-cannot-think-like-humans-do-293188",
-      "number": 19,
+      "number": 28,
       "wordCount": 985,
       "version": "57f6b8c0abcc6ae7",
       "path": "books/the-conversation/chapters/why-ai-cannot-think-like-humans-do-293188.json"
@@ -235,7 +334,7 @@
       "author": "Michael Cox, Founding Director of LSE IDEAS and Emeritus Professor of International Relations, London School of Economics and Political Science",
       "published": "2026-11-05T14:43:34Z",
       "url": "https://theconversation.com/what-the-us-midterms-result-means-for-the-ukraine-war-295705",
-      "number": 20,
+      "number": 29,
       "wordCount": 968,
       "version": "1da745817961323d",
       "path": "books/the-conversation/chapters/what-the-us-midterms-result-means-for-the-ukraine-war-295705.json"
@@ -246,109 +345,10 @@
       "author": "Gavin Furrey, Assistant Professor, Political Science, Université du Québec à Montréal (UQAM)",
       "published": "2026-11-05T14:31:48Z",
       "url": "https://theconversation.com/why-quebec-separatism-is-unlikely-despite-the-parti-quebecois-election-win-295646",
-      "number": 21,
+      "number": 30,
       "wordCount": 1116,
       "version": "69ded6a217c9ff0a",
       "path": "books/the-conversation/chapters/why-quebec-separatism-is-unlikely-despite-the-parti-quebecois-election-wi-295646.json"
-    },
-    {
-      "id": "why-mark-carney-is-still-betting-big-on-europe-295647",
-      "title": "Why Mark Carney is still betting big on Europe",
-      "author": "Katerina Sviderska, PhD Candidate in Politics, University of Cambridge",
-      "published": "2026-11-05T14:25:55Z",
-      "url": "https://theconversation.com/why-mark-carney-is-still-betting-big-on-europe-295647",
-      "number": 22,
-      "wordCount": 835,
-      "version": "14a50972ea027710",
-      "path": "books/the-conversation/chapters/why-mark-carney-is-still-betting-big-on-europe-295647.json"
-    },
-    {
-      "id": "delayed-international-support-has-hampered-efforts-to-contain-and-treat-e-295610",
-      "title": "Delayed international support has hampered efforts to contain and treat Ebola in the Democratic Republic of Congo",
-      "author": "Olayinka Stephen Ilesanmi, Assistant Professor of Healthcare Administration, Fayetteville State University",
-      "published": "2026-11-05T13:36:16Z",
-      "url": "https://theconversation.com/delayed-international-support-has-hampered-efforts-to-contain-and-treat-ebola-in-the-democratic-republic-of-congo-295610",
-      "number": 23,
-      "wordCount": 1105,
-      "version": "383694589e5fbf08",
-      "path": "books/the-conversation/chapters/delayed-international-support-has-hampered-efforts-to-contain-and-treat-e-295610.json"
-    },
-    {
-      "id": "why-do-blind-people-and-musicians-hear-pitch-better-new-research-suggests-294114",
-      "title": "Why do blind people and musicians hear pitch better? New research suggests they have less internal noise",
-      "author": "Woon Ju Park, Assistant Professor of Psychology, Georgia Institute of Technology",
-      "published": "2026-11-05T13:17:15Z",
-      "url": "https://theconversation.com/why-do-blind-people-and-musicians-hear-pitch-better-new-research-suggests-they-have-less-internal-noise-294114",
-      "number": 24,
-      "wordCount": 787,
-      "version": "e7280818be552c41",
-      "path": "books/the-conversation/chapters/why-do-blind-people-and-musicians-hear-pitch-better-new-research-suggests-294114.json"
-    },
-    {
-      "id": "what-makes-music-truly-russian-the-forgotten-debate-between-tchaikovsky-a-295206",
-      "title": "What makes music truly ‘Russian’? The forgotten debate between Tchaikovsky and his star pupil",
-      "author": "Stacy Olive Jarvis, PhD Candidate in in Musicology, University of Birmingham",
-      "published": "2026-11-05T13:10:49Z",
-      "url": "https://theconversation.com/what-makes-music-truly-russian-the-forgotten-debate-between-tchaikovsky-and-his-star-pupil-295206",
-      "number": 25,
-      "wordCount": 1025,
-      "version": "4da3394a2b73ea3c",
-      "path": "books/the-conversation/chapters/what-makes-music-truly-russian-the-forgotten-debate-between-tchaikovsky-a-295206.json"
-    },
-    {
-      "id": "king-arthur-and-ramayana-ancient-stories-that-speak-to-the-moral-dilemmas-294175",
-      "title": "King Arthur and Ramayana: ancient stories that speak to the moral dilemmas of today’s leaders",
-      "author": "Harsh Trivedi, Teaching Associate French, School of Languages, Arts and Societies., University of Sheffield",
-      "published": "2026-11-05T08:26:26Z",
-      "url": "https://theconversation.com/king-arthur-and-ramayana-ancient-stories-that-speak-to-the-moral-dilemmas-of-todays-leaders-294175",
-      "number": 26,
-      "wordCount": 1207,
-      "version": "1b44f08ccf2a1591",
-      "path": "books/the-conversation/chapters/king-arthur-and-ramayana-ancient-stories-that-speak-to-the-moral-dilemmas-294175.json"
-    },
-    {
-      "id": "the-binance-hack-exploited-familiar-weaknesses-all-organisations-should-l-295627",
-      "title": "The Binance hack exploited familiar weaknesses – all organisations should learn from it",
-      "author": "Bogdan Księżopolski, Head of the Institute of Computer Science, Head of Cybersecurity Department, Kozminski University",
-      "published": "2026-11-05T08:24:35Z",
-      "url": "https://theconversation.com/the-binance-hack-exploited-familiar-weaknesses-all-organisations-should-learn-from-it-295627",
-      "number": 27,
-      "wordCount": 1119,
-      "version": "87a5ba9308c2c84f",
-      "path": "books/the-conversation/chapters/the-binance-hack-exploited-familiar-weaknesses-all-organisations-should-l-295627.json"
-    },
-    {
-      "id": "with-control-of-congress-heres-how-democrats-could-stop-trumps-war-in-ira-295954",
-      "title": "With control of Congress, here’s how Democrats could stop Trump’s war in Iran",
-      "author": "Markus Wagner, Professor of Law and Director of the UOW Transnational Law and Policy Centre, University of Wollongong",
-      "published": "2026-11-05T05:12:50Z",
-      "url": "https://theconversation.com/with-control-of-congress-heres-how-democrats-could-stop-trumps-war-in-iran-295954",
-      "number": 28,
-      "wordCount": 955,
-      "version": "46f6f24e08b4bd07",
-      "path": "books/the-conversation/chapters/with-control-of-congress-heres-how-democrats-could-stop-trumps-war-in-ira-295954.json"
-    },
-    {
-      "id": "godzilla-minus-zero-is-incredibly-loud-who-decides-on-the-cinema-volume-a-295864",
-      "title": "Godzilla Minus Zero is incredibly loud. Who decides on the cinema volume? And is it safe?",
-      "author": "Alison Cole, Composer and Lecturer in Screen Composition, Sydney Conservatorium of Music, University of Sydney",
-      "published": "2026-11-05T04:30:40Z",
-      "url": "https://theconversation.com/godzilla-minus-zero-is-incredibly-loud-who-decides-on-the-cinema-volume-and-is-it-safe-295864",
-      "number": 29,
-      "wordCount": 953,
-      "version": "73f887ea3ed46bfe",
-      "path": "books/the-conversation/chapters/godzilla-minus-zero-is-incredibly-loud-who-decides-on-the-cinema-volume-a-295864.json"
-    },
-    {
-      "id": "lulas-victory-in-the-2026-brazilian-elections-was-far-from-inevitable-295930",
-      "title": "Lula’s victory in the 2026 Brazilian elections was far from inevitable",
-      "author": "Ana Saggioro Garcia, Professora Adjunta de Relações Internacionais, Universidade Federal Rural do Rio de Janeiro (UFRRJ); PUC-Rio",
-      "published": "2026-11-04T21:28:40Z",
-      "url": "https://theconversation.com/lulas-victory-in-the-2026-brazilian-elections-was-far-from-inevitable-295930",
-      "number": 30,
-      "wordCount": 1764,
-      "version": "f272c48b14ab8d59",
-      "path": "books/the-conversation/chapters/lulas-victory-in-the-2026-brazilian-elections-was-far-from-inevitable-295930.json"
     }
   ]
 }
