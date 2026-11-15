@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T13:14:28.948Z",
+  "generatedAt": "2026-11-15T13:42:23.589Z",
   "sources": {
     "anthropic": [
       {
@@ -108,39 +108,39 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 302665,
+        "stars": 303532,
         "language": "JavaScript",
-        "updatedAt": "2026-11-09T04:56:24Z"
+        "updatedAt": "2026-11-15T06:48:46Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 263293,
+        "stars": 263546,
         "language": "Python",
-        "updatedAt": "2026-11-14T13:02:11Z"
+        "updatedAt": "2026-11-15T13:35:50Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 201688,
+        "stars": 201941,
         "language": "TypeScript",
-        "updatedAt": "2026-11-14T13:11:25Z"
+        "updatedAt": "2026-11-15T13:01:57Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 188024,
+        "stars": 188033,
         "language": "Python",
-        "updatedAt": "2026-11-14T13:12:56Z"
+        "updatedAt": "2026-11-15T09:27:17Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 186941,
+        "stars": 187041,
         "language": "Go",
         "updatedAt": "2026-11-14T00:00:10Z"
       },
@@ -148,57 +148,57 @@
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 177211,
+        "stars": 177495,
         "language": "MDX",
-        "updatedAt": "2026-11-14T07:10:54Z"
+        "updatedAt": "2026-11-15T07:04:27Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 168962,
+        "stars": 168992,
         "language": "Python",
-        "updatedAt": "2026-11-14T13:10:41Z"
+        "updatedAt": "2026-11-15T13:22:59Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 161148,
+        "stars": 161192,
         "language": "Python",
-        "updatedAt": "2026-11-14T12:33:43Z"
+        "updatedAt": "2026-11-15T13:39:27Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 158631,
+        "stars": 158705,
         "language": "Svelte",
-        "updatedAt": "2026-11-14T12:32:40Z"
+        "updatedAt": "2026-11-15T08:35:45Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 149494,
+        "stars": 149548,
         "language": "Python",
-        "updatedAt": "2026-11-14T08:44:18Z"
+        "updatedAt": "2026-11-15T09:02:02Z"
       },
       {
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 147496,
+        "stars": 148109,
         "language": "Python",
-        "updatedAt": "2026-11-12T21:47:45Z"
+        "updatedAt": "2026-11-14T21:28:08Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 144613,
+        "stars": 144694,
         "language": "Python",
-        "updatedAt": "2026-11-11T07:04:33Z"
+        "updatedAt": "2026-11-15T04:29:49Z"
       }
     ],
     "bbc": [
@@ -229,13 +229,6 @@
         "date": "2026-10-22",
         "description": "How much sleep do you get each night?",
         "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/261022_6_minute_english_what_should_you_eat_for_a_better_nights_sleep_download.mp3"
-      },
-      {
-        "title": "Why do people buy gold?",
-        "url": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-261015",
-        "date": "2026-10-15",
-        "description": "Do you own anything made from real gold?",
-        "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/261015_6_minute_english_why_do_people_buy_gold_download.mp3"
       }
     ],
     "markets": [
@@ -243,6 +236,18 @@
         "key": "SPY",
         "label": "SPY · S&P 500",
         "items": [
+          {
+            "title": "Top Wall Street analysts are bullish on these 3 stocks for the long term",
+            "url": "https://www.cnbc.com/2026/11/15/top-wall-street-analysts-are-bullish-on-these-3-stocks-for-the-long-term.html",
+            "publisher": "CNBC",
+            "date": "2026-11-15"
+          },
+          {
+            "title": "Rising rents draw Wall Street money to industrial outdoor storage lot investments across the U.S.",
+            "url": "https://www.cnbc.com/2026/11/14/real-estate-rental-income-industrial-storage-market.html",
+            "publisher": "CNBC",
+            "date": "2026-11-14"
+          },
           {
             "title": "Lucid misses Wall Street’s earnings expectations, expands loan from Saudi Arabia fund",
             "url": "https://www.cnbc.com/2026/11/09/lucid-group-lcid-earnings-q3-2026.html",
@@ -280,6 +285,12 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
+            "title": "Lutnick faces questions over Nvidia spy scandal. His sons' firm has deep ties to the chipmaker",
+            "url": "https://www.cnbc.com/2026/11/13/howard-lutnick-nvidia-jensen-huang-china-cantor-fitzgerald.html",
+            "publisher": "CNBC",
+            "date": "2026-11-13"
+          },
+          {
             "title": "Trump bought Nvidia stock as he helped chipmaker with change to export rule",
             "url": "https://www.theguardian.com/us-news/2026/nov/13/trump-nvidia-stock-jensen-huang-us-china",
             "publisher": "The Guardian",
@@ -290,12 +301,6 @@
             "url": "https://techcrunch.com/2026/11/13/export-banned-nvidia-chips-are-behind-chinas-most-powerful-ai-models-uh-oh-jensen/",
             "publisher": "TechCrunch",
             "date": "2026-11-13"
-          },
-          {
-            "title": "Chips, creek water and Take Me Home, Country Roads: how an Australian teenager survived six nights in the bush",
-            "url": "https://www.theguardian.com/australia-news/2026/nov/13/chips-creek-water-and-take-me-home-country-roads-how-an-australian-teenager-survived-six-nights-in-the-bush",
-            "publisher": "The Guardian",
-            "date": "2026-11-13"
           }
         ]
       },
@@ -304,22 +309,22 @@
         "label": "NVDA · Nvidia",
         "items": [
           {
-            "title": "Trump doesn’t plan to raise Nvidia, spy issue during China trip: U.S. officials",
-            "url": "https://www.cnbc.com/2026/11/13/trump-nvidia-huang-china.html",
-            "publisher": "CNBC",
+            "title": "Where was Nvidia’s security team?",
+            "url": "https://techcrunch.com/2026/11/14/where-was-nvidias-security-team/",
+            "publisher": "TechCrunch",
+            "date": "2026-11-15"
+          },
+          {
+            "title": "Elon Musk, other tech execs sign petition calling on Nvidia to reinstate Jensen Huang",
+            "url": "https://techcrunch.com/2026/11/14/elon-musk-other-tech-execs-sign-petition-calling-on-nvidia-to-reinstate-jensen-huang/",
+            "publisher": "TechCrunch",
             "date": "2026-11-14"
           },
           {
-            "title": "Nvidia is done with Jensen Huang. The fallout in Washington is just beginning",
-            "url": "https://www.cnbc.com/2026/11/13/nvidia-jensen-huang-washington-congress.html",
+            "title": "Nvidia board urged to consider 'potential return of Jensen Huang' by two major investors",
+            "url": "https://www.cnbc.com/2026/11/14/nvidia-investors-jensen-huang-return-board-letter.html",
             "publisher": "CNBC",
-            "date": "2026-11-13"
-          },
-          {
-            "title": "Lutnick faces questions over Nvidia spy scandal. His sons' firm has deep ties to the chipmaker",
-            "url": "https://www.cnbc.com/2026/11/13/howard-lutnick-nvidia-jensen-huang-china-cantor-fitzgerald.html",
-            "publisher": "CNBC",
-            "date": "2026-11-13"
+            "date": "2026-11-14"
           }
         ]
       },
@@ -352,6 +357,12 @@
         "label": "AAPL · Apple",
         "items": [
           {
+            "title": "Got an iPhone Duo? These 9 settings make it easier to use",
+            "url": "https://techcrunch.com/2026/11/14/got-an-iphone-duo-these-9-settings-make-it-easier-to-use/",
+            "publisher": "TechCrunch",
+            "date": "2026-11-14"
+          },
+          {
             "title": "The new Apple TV has a YouTube problem",
             "url": "https://www.theverge.com/tech/1033076/apple-tv-4k-youtube-error",
             "publisher": "The Verge",
@@ -362,12 +373,6 @@
             "url": "https://www.cnbc.com/2026/11/13/how-apple-became-the-safe-costco-of-tech-bernstein-says-keep-buying.html",
             "publisher": "CNBC",
             "date": "2026-11-13"
-          },
-          {
-            "title": "Trump floats Apple chairman Tim Cook as Jensen Huang’s successor",
-            "url": "https://techcrunch.com/2026/11/12/trump-floats-apple-chairman-tim-cook-as-jensen-huangs-successor/",
-            "publisher": "TechCrunch",
-            "date": "2026-11-12"
           }
         ]
       },
@@ -376,22 +381,22 @@
         "label": "META · Meta",
         "items": [
           {
+            "title": "Italy fines Meta $887m for accessing Android users’ photos and videos",
+            "url": "https://www.theguardian.com/technology/2026/nov/15/italy-fines-meta-887m-for-accessing-android-users-photos-and-videos",
+            "publisher": "The Guardian",
+            "date": "2026-11-15"
+          },
+          {
+            "title": "Italy fines Meta €805m over accessing users' photos",
+            "url": "https://www.bbc.com/news/articles/cwn83gxemk35o",
+            "publisher": "BBC",
+            "date": "2026-11-14"
+          },
+          {
             "title": "Meta discussed attacking Jonathan Haidt — now even his haters are annoyed",
             "url": "https://www.theverge.com/policy/1032645/jonathan-haidt-critics-response-meta",
             "publisher": "The Verge",
             "date": "2026-11-13"
-          },
-          {
-            "title": "Samsung and Google’s Smart Glasses Are Meta’s First Real Competition",
-            "url": "https://gizmodo.com/samsung-google-smart-glasses-hands-on-2000837833",
-            "publisher": "Gizmodo",
-            "date": "2026-11-12"
-          },
-          {
-            "title": "I tried Google’s AI glasses and Meta’s finally got real competition",
-            "url": "https://www.theverge.com/tech/1031647/google-android-xr-warby-parker-gentle-monster-hands-on",
-            "publisher": "The Verge",
-            "date": "2026-11-12"
           }
         ]
       },
@@ -410,6 +415,18 @@
     ],
     "china": [
       {
+        "title": "Anthony Albanese welcomes Trump-Xi-Putin summit – even as European leaders express reservations",
+        "url": "https://www.theguardian.com/australia-news/2026/nov/15/anthony-albanese-welcomes-trump-xi-putin-summit-even-as-european-leaders-express-reservations",
+        "publisher": "The Guardian",
+        "date": "2026-11-15"
+      },
+      {
+        "title": "World leaders head to Asia for back-to-back diplomatic summits",
+        "url": "https://www.theguardian.com/world/2026/nov/15/asia-diplomatic-summits-trump-xi-putin-apec-asean",
+        "publisher": "The Guardian",
+        "date": "2026-11-15"
+      },
+      {
         "title": "Yalta became a byword for betrayal. Will Trump, Xi and Putin enact another carve-up?",
         "url": "https://www.theguardian.com/world/2026/nov/14/yalta-trump-xi-putin-china-apec",
         "publisher": "The Guardian",
@@ -418,18 +435,6 @@
       {
         "title": "Nvidia scandal: US treasury chief blames Lutnick’s commerce department over alleged lack of action",
         "url": "https://www.theguardian.com/technology/2026/nov/13/nvidia-scandal-sparks-us-national-security-concerns-china",
-        "publisher": "The Guardian",
-        "date": "2026-11-13"
-      },
-      {
-        "title": "Trump bought Nvidia stock as he helped chipmaker with change to export rule",
-        "url": "https://www.theguardian.com/us-news/2026/nov/13/trump-nvidia-stock-jensen-huang-us-china",
-        "publisher": "The Guardian",
-        "date": "2026-11-13"
-      },
-      {
-        "title": "‘I spend less, that’s all that matters’: life in the world’s most electrified countries",
-        "url": "https://www.theguardian.com/environment/2026/nov/13/i-spend-less-thats-all-that-matters-life-in-the-worlds-most-electrified-countries",
         "publisher": "The Guardian",
         "date": "2026-11-13"
       },
