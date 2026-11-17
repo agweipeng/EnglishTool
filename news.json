@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T15:16:58.770Z",
+  "generatedAt": "2026-11-17T15:43:22.022Z",
   "sources": {
     "anthropic": [
       {
@@ -37,8 +37,24 @@
     ],
     "openai": [
       {
+        "title": "Broadening access to AI for scientists Research Nov 16, 2026",
+        "url": "https://openai.com/index/expanding-chatgpt-for-academic-researchers/"
+      },
+      {
+        "title": "Strengthening the fight against online child sexual abuse Safety Nov 16, 2026",
+        "url": "https://openai.com/index/strengthening-online-child-safety/"
+      },
+      {
+        "title": "Science at the Frontier: How Scientists Use ChatGPT Research Nov 16, 2026",
+        "url": "https://openai.com/index/science-at-the-frontier/"
+      },
+      {
         "title": "LVMH’s Media Division announces partnership with OpenAI Company Nov 16, 2026",
         "url": "https://openai.com/index/lvmh-media-division-partnership/"
+      },
+      {
+        "title": "Our first phase of embedded assessments Safety Nov 16, 2026",
+        "url": "https://openai.com/index/our-first-phase-of-embedded-assessments/"
       },
       {
         "title": "More ways to move care forward with ChatGPT for Healthcare Product Nov 16, 2026",
@@ -51,22 +67,6 @@
       {
         "title": "A step toward defining the Standard Model on a lattice Science Nov 15, 2026",
         "url": "https://openai.com/index/step-toward-defining-the-standard-model/"
-      },
-      {
-        "title": "Our new blog for science Science Nov 15, 2026",
-        "url": "https://openai.com/index/our-new-blog-for-science/"
-      },
-      {
-        "title": "Introducing ChatGPT Wallet Product Nov 13, 2026",
-        "url": "https://openai.com/index/introducing-chatgpt-wallet/"
-      },
-      {
-        "title": "ChatGPT Plus for veterans and servicemembers Company Nov 11, 2026",
-        "url": "https://openai.com/index/chatgpt-plus-for-veterans/"
-      },
-      {
-        "title": "Helping caregivers use AI in everyday life Company Nov 10, 2026",
-        "url": "https://openai.com/index/helping-caregivers-use-ai-in-everyday-life/"
       }
     ],
     "google": [
@@ -108,95 +108,95 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 304296,
+        "stars": 305146,
         "language": "JavaScript",
-        "updatedAt": "2026-11-16T04:55:46Z"
+        "updatedAt": "2026-11-17T06:41:46Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 263820,
+        "stars": 264124,
         "language": "Python",
-        "updatedAt": "2026-11-16T15:11:04Z"
+        "updatedAt": "2026-11-17T15:34:57Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Supercharge your AI agents with data from the web and beyond. Building the library for superintelligence. 🔥",
-        "stars": 202242,
+        "stars": 202544,
         "language": "TypeScript",
-        "updatedAt": "2026-11-16T14:23:08Z"
+        "updatedAt": "2026-11-17T15:39:30Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 188059,
+        "stars": 188074,
         "language": "Python",
-        "updatedAt": "2026-11-16T15:15:06Z"
+        "updatedAt": "2026-11-17T15:05:11Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 187217,
+        "stars": 187379,
         "language": "Go",
-        "updatedAt": "2026-11-16T15:11:10Z"
+        "updatedAt": "2026-11-17T04:54:35Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 177641,
+        "stars": 177735,
         "language": "MDX",
-        "updatedAt": "2026-11-16T03:14:07Z"
+        "updatedAt": "2026-11-17T03:12:36Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 169024,
+        "stars": 169259,
         "language": "Python",
-        "updatedAt": "2026-11-16T15:14:46Z"
+        "updatedAt": "2026-11-17T15:38:53Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 161271,
+        "stars": 161359,
         "language": "Python",
-        "updatedAt": "2026-11-16T15:09:04Z"
+        "updatedAt": "2026-11-17T15:39:52Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 158819,
+        "stars": 158925,
         "language": "Svelte",
-        "updatedAt": "2026-11-16T15:16:41Z"
+        "updatedAt": "2026-11-17T14:46:26Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 149653,
+        "stars": 149772,
         "language": "Python",
-        "updatedAt": "2026-11-16T11:36:37Z"
+        "updatedAt": "2026-11-17T15:40:03Z"
       },
       {
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 148811,
+        "stars": 149443,
         "language": "Python",
-        "updatedAt": "2026-11-16T13:58:50Z"
+        "updatedAt": "2026-11-17T15:41:40Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 144847,
+        "stars": 144945,
         "language": "Python",
         "updatedAt": "2026-11-15T20:56:20Z"
       }
@@ -237,10 +237,22 @@
         "label": "SPY · S&P 500",
         "items": [
           {
-            "title": "Lucid misses Wall Street’s earnings expectations, expands loan from Saudi Arabia fund",
-            "url": "https://www.cnbc.com/2026/11/09/lucid-group-lcid-earnings-q3-2026.html",
+            "title": "Nvidia earnings live updates: Wall Street braces for first report since Huang's ouster",
+            "url": "https://www.cnbc.com/2026/11/17/nvidia-nvda-earnings-report-q3-2027.html",
             "publisher": "CNBC",
-            "date": "2026-11-09"
+            "date": "2026-11-17"
+          },
+          {
+            "title": "Nvidia's Kress faces earnings test after stock drags Wall Street into the red",
+            "url": "https://www.cnbc.com/2026/11/17/nvidias-kress-faces-earnings-test-after-stock-drags-wall-street-into-the-red.html",
+            "publisher": "CNBC",
+            "date": "2026-11-17"
+          },
+          {
+            "title": "Anthropic’s Wall Street whisperer: Meet CFO Krishna Rao",
+            "url": "https://www.cnbc.com/2026/11/16/anthropic-cfo-krishna-rao-ipo.html",
+            "publisher": "CNBC",
+            "date": "2026-11-16"
           }
         ]
       },
@@ -267,21 +279,21 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
+            "title": "Nvidia warns chip buyers of legal risks tied to China AI access, sources tell CNBC",
+            "url": "https://www.cnbc.com/2026/11/17/nvidia-china-cloud-ai-chip-access.html",
+            "publisher": "CNBC",
+            "date": "2026-11-17"
+          },
+          {
+            "title": "Chips, Big Tech and more: What hedge funds bought and sold in the third quarter",
+            "url": "https://www.cnbc.com/2026/11/16/chips-big-tech-and-more-what-hedge-funds-bought-and-sold-in-the-third-quarter.html",
+            "publisher": "CNBC",
+            "date": "2026-11-16"
+          },
+          {
             "title": "US tightens AI chip export controls to deter Chinese companies from accessing compute remotely",
             "url": "https://techcrunch.com/2026/11/16/us-tightens-ai-chip-export-controls-to-deter-chinese-companies-from-accessing-compute-remotely/",
             "publisher": "TechCrunch",
-            "date": "2026-11-16"
-          },
-          {
-            "title": "Lutnick faces questions over Nvidia spy scandal. His sons' firm has ties to the chipmaker",
-            "url": "https://www.cnbc.com/2026/11/13/howard-lutnick-nvidia-jensen-huang-china-cantor-fitzgerald.html",
-            "publisher": "CNBC",
-            "date": "2026-11-16"
-          },
-          {
-            "title": "Cantwell urges Lutnick to stop AI chip sales to China ahead of Xi meeting",
-            "url": "https://www.cnbc.com/2026/11/16/cantwell-lutnick-ai-chip-china.html",
-            "publisher": "CNBC",
             "date": "2026-11-16"
           }
         ]
@@ -291,22 +303,22 @@
         "label": "NVDA · Nvidia",
         "items": [
           {
-            "title": "Nvidia stock falls as investors price in fallout from Jensen Huang's resignation",
-            "url": "https://www.cnbc.com/2026/11/16/nvidia-stock-price-jensen-huang.html",
+            "title": "Dow falls 600 points weighed by Home Depot; Nasdaq slides ahead of Nvidia earnings: Live updates",
+            "url": "https://www.cnbc.com/2026/11/16/stock-market-today-live-updates.html",
             "publisher": "CNBC",
-            "date": "2026-11-16"
+            "date": "2026-11-17"
           },
           {
-            "title": "Trump says Nvidia scandal did not put U.S. national security ‘at risk,’ defends Lutnick",
-            "url": "https://www.cnbc.com/2026/11/16/trump-lutnick-nvidia-national-security-jensen-huant.html",
+            "title": "Stocks making the biggest moves Tuesday: Disney, Home Depot, Nvidia & more",
+            "url": "https://www.cnbc.com/2026/11/17/stocks-moving-the-most-today-live-updates.html",
             "publisher": "CNBC",
-            "date": "2026-11-16"
+            "date": "2026-11-17"
           },
           {
-            "title": "Stocks slide as Nvidia leads AI names lower: Live updates",
-            "url": "https://www.cnbc.com/2026/11/15/stock-market-today-live-updates.html",
+            "title": "Jensen Huang slated to appear before House panels Dec. 1; Nvidia lawyer due to testify Dec. 2",
+            "url": "https://www.cnbc.com/2026/11/17/nvidia-jensen-huang-house-committee.html",
             "publisher": "CNBC",
-            "date": "2026-11-16"
+            "date": "2026-11-17"
           }
         ]
       },
@@ -314,6 +326,12 @@
         "key": "GOOGL",
         "label": "GOOGL · Google",
         "items": [
+          {
+            "title": "Demis Hassabis’ AI company raises $5 billion, months after he left as Google DeepMind CEO",
+            "url": "https://www.cnbc.com/2026/11/17/isomorphic-labs-series-c-ai-drug-discovery-.html",
+            "publisher": "CNBC",
+            "date": "2026-11-17"
+          },
           {
             "title": "Google Maps can now build trip itineraries with real-time details about each stop",
             "url": "https://techcrunch.com/2026/11/16/google-maps-can-now-build-trip-itineraries-with-real-time-details-about-each-stop/",
@@ -325,12 +343,6 @@
             "url": "https://www.theverge.com/tech/1034110/google-ask-maps-ai-trip-planning",
             "publisher": "The Verge",
             "date": "2026-11-16"
-          },
-          {
-            "title": "Apple, Alphabet and Uber survived major founder transitions. Nvidia will be a harder test",
-            "url": "https://www.cnbc.com/2026/11/13/nvidia-jensen-huang-founder-ceo-transition.html",
-            "publisher": "CNBC",
-            "date": "2026-11-13"
           }
         ]
       },
@@ -339,21 +351,21 @@
         "label": "AAPL · Apple",
         "items": [
           {
-            "title": "Apple MacBook Pro M6 review: probably the last of its generation",
-            "url": "https://www.theguardian.com/technology/2026/nov/16/apple-macbook-pro-m6-review-battery-laptop",
-            "publisher": "The Guardian",
-            "date": "2026-11-16"
-          },
-          {
-            "title": "Apple launches new app to study how people use AI for health",
-            "url": "https://techcrunch.com/2026/11/15/apple-launches-new-app-to-study-how-people-use-ai-for-health/",
-            "publisher": "TechCrunch",
-            "date": "2026-11-16"
-          },
-          {
-            "title": "Apple’s new study looks to improve the effectiveness of AI health tools",
-            "url": "https://www.theverge.com/tech/1033355/apples-new-study-looks-to-improve-the-effectiveness-of-ai-health-tools",
+            "title": "All the news about the iPhone Duo",
+            "url": "https://www.theverge.com/tech/1010131/apple-iphone-duo-news-announcements",
             "publisher": "The Verge",
+            "date": "2026-11-17"
+          },
+          {
+            "title": "U.S. companies from Nvidia to Apple face a growing China dilemma",
+            "url": "https://www.cnbc.com/2026/11/17/us-tech-firms-china-ties-political-pressure.html",
+            "publisher": "CNBC",
+            "date": "2026-11-17"
+          },
+          {
+            "title": "Apple reveals new Mac security controls as AI agents raise privacy risks",
+            "url": "https://techcrunch.com/2026/11/16/apple-reveals-new-mac-security-controls-as-ai-agents-raise-privacy-risks/",
+            "publisher": "TechCrunch",
             "date": "2026-11-16"
           }
         ]
@@ -363,22 +375,22 @@
         "label": "META · Meta",
         "items": [
           {
+            "title": "Meta launches Direct, a standalone messaging app for Instagram",
+            "url": "https://techcrunch.com/2026/11/17/meta-launches-direct-a-standalone-messaging-app-for-instagram/",
+            "publisher": "TechCrunch",
+            "date": "2026-11-17"
+          },
+          {
             "title": "‘Two dictators in my story – Duterte and Zuckerberg’: Nobel peace prize winner’s warning for democracy",
             "url": "https://www.theguardian.com/us-news/2026/nov/16/duterte-zuckerberg-maria-ressa-book",
             "publisher": "The Guardian",
-            "date": "2026-11-16"
+            "date": "2026-11-17"
           },
           {
             "title": "Italy fines Meta $887m for accessing Android users’ photos and videos",
             "url": "https://www.theguardian.com/technology/2026/nov/15/italy-fines-meta-887m-for-accessing-android-users-photos-and-videos",
             "publisher": "The Guardian",
             "date": "2026-11-15"
-          },
-          {
-            "title": "Italy fines Meta €805m over accessing users' photos",
-            "url": "https://www.bbc.com/news/articles/cwn83gxemk35o",
-            "publisher": "BBC",
-            "date": "2026-11-14"
           }
         ]
       },
@@ -397,6 +409,24 @@
     ],
     "china": [
       {
+        "title": "Jensen Huang’s departure as Nvidia CEO becomes a political proxy war",
+        "url": "https://www.theguardian.com/global/2026/nov/16/jensen-huang-nvidia-ceo-china",
+        "publisher": "The Guardian",
+        "date": "2026-11-17"
+      },
+      {
+        "title": "How new US chip restrictions on South East Asia will hit China",
+        "url": "https://www.bbc.co.uk/news/articles/cwq6e2qgvmlgo",
+        "publisher": "BBC",
+        "date": "2026-11-17"
+      },
+      {
+        "title": "Hi-tech Shenzhen takes centre stage as Xi sends ‘Chinamaxxing’ message at Apec summit",
+        "url": "https://www.theguardian.com/world/2026/nov/17/hi-tech-shenzhen-chinamaxxing-xi-apec-summit",
+        "publisher": "The Guardian",
+        "date": "2026-11-17"
+      },
+      {
         "title": "Xi, Trump and Putin to discuss ‘world peace’ at trilateral, says China",
         "url": "https://www.theguardian.com/world/2026/nov/16/xi-jinping-donald-trump-vladimir-putin-world-peace-trilateral-says-china",
         "publisher": "The Guardian",
@@ -409,22 +439,10 @@
         "date": "2026-11-16"
       },
       {
-        "title": "Canada could work with Chinese automakers if US trade talks fail, says Carney",
-        "url": "https://www.theguardian.com/world/2026/nov/16/canada-carney-cars-evs-tariffs-xi-jinping-china-trump-trade-talks",
-        "publisher": "The Guardian",
-        "date": "2026-11-16"
-      },
-      {
         "title": "Suspected China spy linked to Nvidia's ex-boss left in 2025, Megaspeed says",
         "url": "https://www.bbc.co.uk/news/articles/cmdx1vpprk9vo",
         "publisher": "BBC",
         "date": "2026-11-16"
-      },
-      {
-        "title": "Anthony Albanese welcomes Trump-Xi-Putin summit – even as European leaders express reservations",
-        "url": "https://www.theguardian.com/australia-news/2026/nov/15/anthony-albanese-welcomes-trump-xi-putin-summit-even-as-european-leaders-express-reservations",
-        "publisher": "The Guardian",
-        "date": "2026-11-15"
       },
       {
         "title": "What we know as Nvidia CEO Jensen Huang resigns over affair allegations",
@@ -437,12 +455,6 @@
         "url": "https://www.bbc.co.uk/news/articles/c98rzzvde1llo",
         "publisher": "BBC",
         "date": "2026-11-11"
-      },
-      {
-        "title": "Zoe Kleinman: Nvidia CEO's affair will cause ripples across US and beyond",
-        "url": "https://www.bbc.co.uk/news/articles/cj3vqv3nee72o",
-        "publisher": "BBC",
-        "date": "2026-11-09"
       }
     ]
   }
