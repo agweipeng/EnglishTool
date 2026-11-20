@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-19T15:29:00.187Z",
+  "generatedAt": "2026-11-20T15:06:47.569Z",
   "sources": {
     "anthropic": [
       {
@@ -9,6 +9,10 @@
       {
         "title": "Anthropic files S-1 with the SEC for proposed initial public offering Today, Anthropic, PBC filed a…",
         "url": "https://www.anthropic.com/news/s1-sec"
+      },
+      {
+        "title": "Anthropic announces closing of initial public offering, including full exercise of underwriters’…",
+        "url": "https://www.anthropic.com/news/ipo-close"
       },
       {
         "title": "Anthropic prices initial public offering",
@@ -29,13 +33,13 @@
       {
         "title": "Donating Agent Skills to the Agentic AI Foundation",
         "url": "https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation"
-      },
-      {
-        "title": "Open call for guest investigators in the life sciences",
-        "url": "https://www.anthropic.com/news/open-call-guest-investigators-life-sciences"
       }
     ],
     "openai": [
+      {
+        "title": "How OpenAI’s Performance Factory keeps ChatGPT fast Engineering Nov 19, 2026",
+        "url": "https://openai.com/index/how-openai-performance-factory-keeps-chatgpt-fast/"
+      },
       {
         "title": "The Silent Consensus Intelligence Age Nov 18, 2026",
         "url": "https://openai.com/index/the-silent-consensus/"
@@ -63,10 +67,6 @@
       {
         "title": "Introducing GPT-6.2 Astra and Sol Product Nov 17, 2026",
         "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/"
-      },
-      {
-        "title": "Introducing ChatGPT for Sales Product Nov 17, 2026",
-        "url": "https://openai.com/index/introducing-chatgpt-for-sales/"
       }
     ],
     "google": [
@@ -108,95 +108,95 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 307025,
+        "stars": 307608,
         "language": "JavaScript",
-        "updatedAt": "2026-11-17T06:41:46Z"
+        "updatedAt": "2026-11-20T01:13:45Z"
       },
       {
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 264681,
+        "stars": 264905,
         "language": "Python",
-        "updatedAt": "2026-11-19T15:28:22Z"
+        "updatedAt": "2026-11-20T14:47:35Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Knowledge infrastructure to make your agents smarter. Search, scrape and 550+ data providers through one API.",
-        "stars": 203760,
+        "stars": 204892,
         "language": "TypeScript",
-        "updatedAt": "2026-11-19T14:59:53Z"
+        "updatedAt": "2026-11-20T12:51:36Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 188103,
+        "stars": 188118,
         "language": "Python",
-        "updatedAt": "2026-11-19T15:28:16Z"
+        "updatedAt": "2026-11-20T15:04:39Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 187622,
+        "stars": 187743,
         "language": "Go",
-        "updatedAt": "2026-11-18T22:53:05Z"
+        "updatedAt": "2026-11-19T23:44:00Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 177884,
+        "stars": 177964,
         "language": "MDX",
-        "updatedAt": "2026-11-19T07:07:20Z"
+        "updatedAt": "2026-11-20T07:08:33Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 169260,
+        "stars": 169320,
         "language": "Python",
-        "updatedAt": "2026-11-19T15:27:59Z"
+        "updatedAt": "2026-11-20T15:03:22Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 161510,
+        "stars": 161566,
         "language": "Python",
-        "updatedAt": "2026-11-19T14:26:30Z"
+        "updatedAt": "2026-11-20T14:56:52Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 159085,
+        "stars": 159145,
         "language": "Svelte",
-        "updatedAt": "2026-11-19T15:27:46Z"
+        "updatedAt": "2026-11-20T10:43:54Z"
       },
       {
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 150463,
+        "stars": 150982,
         "language": "Python",
-        "updatedAt": "2026-11-17T21:21:11Z"
+        "updatedAt": "2026-11-20T02:40:11Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 149903,
+        "stars": 149967,
         "language": "Python",
-        "updatedAt": "2026-11-19T15:24:26Z"
+        "updatedAt": "2026-11-20T13:27:29Z"
       },
       {
         "name": "Shubhamsaboo/awesome-llm-apps",
         "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
         "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 145073,
+        "stars": 145168,
         "language": "Python",
         "updatedAt": "2026-11-18T05:25:32Z"
       }
@@ -244,22 +244,10 @@
         "label": "SPY · S&P 500",
         "items": [
           {
-            "title": "The key S&P 500 level Wall Street is watching",
-            "url": "https://www.cnbc.com/2026/11/18/sp-500-falls-below-200-day-moving-average.html",
+            "title": "The Tech Download: Anthropic charmed Wall Street. But one big uncertainty hangs over the business",
+            "url": "https://www.cnbc.com/2026/11/20/tech-download-anthropic-compute-access.html",
             "publisher": "CNBC",
-            "date": "2026-11-18"
-          },
-          {
-            "title": "CNBC Digital Finance Forum recap: Wall Street's AI and crypto future",
-            "url": "https://www.cnbc.com/2026/11/17/digital-finance-forum-2026-live-updates.html",
-            "publisher": "CNBC",
-            "date": "2026-11-18"
-          },
-          {
-            "title": "Nvidia's Kress faces earnings test after stock drags Wall Street into the red",
-            "url": "https://www.cnbc.com/2026/11/17/nvidias-kress-faces-earnings-test-after-stock-drags-wall-street-into-the-red.html",
-            "publisher": "CNBC",
-            "date": "2026-11-17"
+            "date": "2026-11-20"
           }
         ]
       },
@@ -268,22 +256,22 @@
         "label": "QQQ · Nasdaq",
         "items": [
           {
-            "title": "Anthropic’s Dario and Daniela Amodei join CNBC exclusively from the Nasdaq: IPO live updates",
-            "url": "https://www.cnbc.com/2026/11/19/anthropic-ipo-ant-live-updates.html",
+            "title": "Nasdaq drops as Anthropic falls, Dow bounces after nearing correction territory: Live updates",
+            "url": "https://www.cnbc.com/2026/11/19/stock-market-today-live-updates.html",
             "publisher": "CNBC",
+            "date": "2026-11-20"
+          },
+          {
+            "title": "Anthropic hits Nasdaq exchanges at $111, 33% above IPO price",
+            "url": "https://techcrunch.com/2026/11/19/anthropic-hits-nasdaq-exchanges-at-110-27-above-ipo-price/",
+            "publisher": "TechCrunch",
             "date": "2026-11-19"
           },
           {
-            "title": "Anthropic lifts Nasdaq futures and tech stocks ahead of its record-breaking IPO",
-            "url": "https://www.cnbc.com/2026/11/19/anthropic-lifts-nasdaq-futures-and-tech-stocks-ahead-of-its-record-breaking-ipo.html",
-            "publisher": "CNBC",
+            "title": "At Nasdaq opening bell, Anthropic CEO recommits to pacing AI development",
+            "url": "https://techcrunch.com/2026/11/19/at-nasdaq-opening-bell-anthropic-ceo-recommits-to-pacing-ai-development/",
+            "publisher": "TechCrunch",
             "date": "2026-11-19"
-          },
-          {
-            "title": "Nvidia's numbers and Anthropic anticipation drive Nasdaq futures up",
-            "url": "https://www.cnbc.com/2026/11/18/nvidias-numbers-and-anthropic-anticipation-drive-nasdaq-futures-up.html",
-            "publisher": "CNBC",
-            "date": "2026-11-18"
           }
         ]
       },
@@ -292,22 +280,22 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
-            "title": "Intel signs first external customer for advanced 18A chips",
-            "url": "https://www.cnbc.com/2026/11/18/intel-first-18a-foundry-customer.html",
+            "title": "Lagarde says EU funds should take first losses on chip plants, data centers",
+            "url": "https://www.cnbc.com/2026/11/20/lagarde-eu-data-center-funding.html",
             "publisher": "CNBC",
-            "date": "2026-11-19"
+            "date": "2026-11-20"
           },
           {
-            "title": "Remember the frontier AI pause? Chip companies don’t either",
-            "url": "https://www.theverge.com/ai-artificial-intelligence/1036549/nvidia-amd-earnings-fall-2026-chips-pause-frontier-models",
-            "publisher": "The Verge",
-            "date": "2026-11-18"
+            "title": "Commerce approved sales of more than 879,000 AI chips to Chinese companies, Rep. Mast says",
+            "url": "https://www.cnbc.com/2026/11/19/nvidia-amd-china-chip-sales-congress.html",
+            "publisher": "CNBC",
+            "date": "2026-11-20"
           },
           {
-            "title": "Nvidia isn’t selling any more AI chips to China",
-            "url": "https://www.theverge.com/tech/1036445/nvidia-h200-ai-chips-china-stop-selling",
-            "publisher": "The Verge",
-            "date": "2026-11-18"
+            "title": "AMD dives on short seller report of alleged China exposure",
+            "url": "https://www.cnbc.com/2026/11/19/amd-falls-on-short-seller-report-of-alleged-china-exposure.html",
+            "publisher": "CNBC",
+            "date": "2026-11-20"
           }
         ]
       },
@@ -316,21 +304,21 @@
         "label": "NVDA · Nvidia",
         "items": [
           {
-            "title": "Nvidia approaches Arm boss Rene Haas in search for new CEO",
-            "url": "https://www.theguardian.com/technology/2026/nov/19/nvidia-new-ceo-search-jensen-huang-arm-rene-haas",
-            "publisher": "The Guardian",
-            "date": "2026-11-19"
-          },
-          {
-            "title": "Nvidia interim CEO Kress tells employees ‘let’s move forward’ at first all-hands meeting since Jensen Huang exit",
-            "url": "https://www.cnbc.com/2026/11/18/nvidia-interim-ceo-kress-addresses-staff-after-jensen-huang-exit-.html",
+            "title": "Cramer says Nvidia’s woes are trumping Anthropic excitement for the rest of the AI trade",
+            "url": "https://www.cnbc.com/2026/11/19/nvidia-anthropic-ipo-ai-trade.html",
             "publisher": "CNBC",
             "date": "2026-11-19"
           },
           {
-            "title": "Jim Cramer says Nvidia has a new problem — and it has nothing to do with earnings",
-            "url": "https://www.cnbc.com/2026/11/18/nvidia-cramer-anthropic-ipo-ceo.html",
+            "title": "California attorney general issues Nvidia subpoena in probe of China chip diversion",
+            "url": "https://www.cnbc.com/2026/11/19/nvidia-california-bonta-subpoena-china-chips.html",
             "publisher": "CNBC",
+            "date": "2026-11-19"
+          },
+          {
+            "title": "A brief history of Nvidia’s recent stock fluctuations",
+            "url": "https://www.theverge.com/ai-artificial-intelligence/1038063/nvidia-stock-market-price-earnings",
+            "publisher": "The Verge",
             "date": "2026-11-19"
           }
         ]
@@ -340,21 +328,21 @@
         "label": "GOOGL · Google",
         "items": [
           {
+            "title": "Cramer: My favorite chartist sees two major signs of a rally brewing in Alphabet stock",
+            "url": "https://www.cnbc.com/2026/11/19/alphabet-stock-larry-williams-rally-signals.html",
+            "publisher": "CNBC",
+            "date": "2026-11-19"
+          },
+          {
             "title": "New law ‘may be needed’ after Google rejects call to remove Russell Brand’s YouTube prison message",
             "url": "https://www.theguardian.com/news/2026/nov/19/google-youtube-russell-brand-youtube-prison-message-jess-phillips-new-law",
             "publisher": "The Guardian",
             "date": "2026-11-19"
           },
           {
-            "title": "Blue Origin will launch Google’s AI server satellites in 2029",
-            "url": "https://www.theverge.com/tech/1037535/google-blue-origin-project-suncatcher-2029",
+            "title": "Google is putting AI chats right on the homepage",
+            "url": "https://www.theverge.com/tech/1038059/google-search-homepage-ai-chats",
             "publisher": "The Verge",
-            "date": "2026-11-19"
-          },
-          {
-            "title": "Google declines UK request for Russell Brand YouTube video to be removed, sources say",
-            "url": "https://www.bbc.com/news/articles/cmgrenln8p29o",
-            "publisher": "BBC",
             "date": "2026-11-19"
           }
         ]
@@ -364,22 +352,22 @@
         "label": "AAPL · Apple",
         "items": [
           {
-            "title": "I let Apple’s always-listening AI summarize my life for two weeks",
-            "url": "https://www.theverge.com/tech/1037100/apple-siri-recap-audio-intelligence-hands-on",
-            "publisher": "The Verge",
-            "date": "2026-11-19"
-          },
-          {
-            "title": "Is Apple the safe haven investors think it is? Here's a way to trade it with less risk",
-            "url": "https://www.cnbc.com/2026/11/18/is-apple-the-safe-haven-investors-think-it-is-heres-a-way-to-trade-it-with-less-risk.html",
+            "title": "Here are Friday's biggest analyst calls: Anthropic, SpaceX, Tesla, Apple, Netflix, MSG Rangers, UnitedHealth & more",
+            "url": "https://www.cnbc.com/2026/11/20/fridays-biggest-analyst-calls-like-anthropic.html",
             "publisher": "CNBC",
-            "date": "2026-11-18"
+            "date": "2026-11-20"
           },
           {
-            "title": "Apple joins a parade of technology hiccups in recent days",
-            "url": "https://apnews.com/article/apple-marriott-technology-outages-ff097d2a0bec767baf38a1bd8eff5829",
-            "publisher": "AP News",
-            "date": "2026-11-17"
+            "title": "Apple Is Reportedly Building Its Own Full-Featured AI Agent",
+            "url": "https://gizmodo.com/apple-is-reportedly-building-its-own-full-featured-ai-agent-2000842954",
+            "publisher": "Gizmodo",
+            "date": "2026-11-20"
+          },
+          {
+            "title": "Apple may be developing its own AI agent that runs your Mac",
+            "url": "https://techcrunch.com/2026/11/19/apple-may-be-developing-its-own-ai-agent-that-runs-your-mac/",
+            "publisher": "TechCrunch",
+            "date": "2026-11-20"
           }
         ]
       },
@@ -388,47 +376,66 @@
         "label": "META · Meta",
         "items": [
           {
-            "title": "Anti-vaccine group once led by RFK Jr says Meta removed posts after Guardian report",
-            "url": "https://www.theguardian.com/us-news/2026/nov/19/childrens-health-defense-meta-rfk-jr",
-            "publisher": "The Guardian",
+            "title": "Meta’s ‘Joyful’ Muse Charm May Cost a Not-So-Joyful $300",
+            "url": "https://gizmodo.com/muse-charm-price-2000842608",
+            "publisher": "Gizmodo",
             "date": "2026-11-19"
           },
           {
-            "title": "‘Two dictators in my story – Duterte and Zuckerberg’: Nobel peace prize winner’s warning for democracy",
-            "url": "https://www.theguardian.com/us-news/2026/nov/16/duterte-zuckerberg-maria-ressa-book",
-            "publisher": "The Guardian",
-            "date": "2026-11-17"
+            "title": "Meta’s new Muse Charm device may cost $300",
+            "url": "https://techcrunch.com/2026/11/19/metas-new-muse-charm-device-may-cost-300/",
+            "publisher": "TechCrunch",
+            "date": "2026-11-19"
           },
           {
-            "title": "Meta is testing a new standalone messaging app called Direct",
-            "url": "https://www.theverge.com/tech/1035740/meta-instagram-direct-messaging-app",
+            "title": "Meta now sells 3D movies on Quest VR headsets",
+            "url": "https://www.theverge.com/tech/1038157/meta-quest-vr-3d-movies-tv-app",
             "publisher": "The Verge",
-            "date": "2026-11-17"
+            "date": "2026-11-19"
           }
         ]
       },
       {
         "key": "GROK",
         "label": "Grok · xAI",
-        "items": []
+        "items": [
+          {
+            "title": "Suffolk MP says Grok was designed to make sexualised images",
+            "url": "https://www.bbc.com/news/articles/cq0k6gezp50vo",
+            "publisher": "BBC",
+            "date": "2026-11-20"
+          }
+        ]
       }
     ],
     "china": [
       {
-        "title": "‘Really making history’: five takeaways from the meeting between Trump, Xi and Putin",
-        "url": "https://www.theguardian.com/world/2026/nov/19/five-takeaways-from-putin-trump-xi-apec-shenzhen-summit",
+        "title": "California investigates Nvidia over whether chip exports ended up in China",
+        "url": "https://www.theguardian.com/technology/2026/nov/20/california-investigates-nvidia-over-whether-chip-exports-ended-up-in-china",
+        "publisher": "The Guardian",
+        "date": "2026-11-20"
+      },
+      {
+        "title": "Xi Jinping says a ‘full turnaround’ has been achieved in Australia-China relations, praising Anthony Albanese",
+        "url": "https://www.theguardian.com/world/2026/nov/20/xi-jinping-says-a-full-turnaround-has-been-achieved-in-australia-china-relations-praising-anthony-albanese",
+        "publisher": "The Guardian",
+        "date": "2026-11-20"
+      },
+      {
+        "title": "Analysis: Trilateral summit high on spectacle, short on substance",
+        "url": "https://www.bbc.co.uk/news/articles/cwn70vrjlg8ro",
+        "publisher": "BBC",
+        "date": "2026-11-19"
+      },
+      {
+        "title": "China, Russia and US agree peace declaration with no mention of Ukraine and Iran wars",
+        "url": "https://www.theguardian.com/world/2026/nov/19/china-russia-us-agree-peace-statement-no-mention-ukraine-iran-wars",
         "publisher": "The Guardian",
         "date": "2026-11-19"
       },
       {
-        "title": "In an authoritarian economy, Jensen Huang may be too big to fail | Robert Reich",
-        "url": "https://www.theguardian.com/commentisfree/2026/nov/19/jensen-huang-authoritarian-economy",
-        "publisher": "The Guardian",
-        "date": "2026-11-19"
-      },
-      {
-        "title": "Datacentres to create 70% more carbon emissions by 2030, IEA report warns",
-        "url": "https://www.theguardian.com/world/2026/nov/19/datacentres-to-create-70-more-carbon-emissions-by-2030-iea-report-warns",
+        "title": "Trump accused of falling asleep during Xi Jinping speech at Apec summit in China",
+        "url": "https://www.theguardian.com/us-news/2026/nov/19/trump-apec-asleep-china",
         "publisher": "The Guardian",
         "date": "2026-11-19"
       },
@@ -436,12 +443,6 @@
         "title": "This is a remarkable diplomatic moment for China's Xi - but it comes with pitfalls",
         "url": "https://www.bbc.co.uk/news/articles/cr9d75we51j1o",
         "publisher": "BBC",
-        "date": "2026-11-19"
-      },
-      {
-        "title": "China gives Japan PM frosty welcome at Apec amid fanfare for other leaders",
-        "url": "https://www.theguardian.com/world/2026/nov/19/china-gives-japan-pm-frosty-welcome-apec",
-        "publisher": "The Guardian",
         "date": "2026-11-19"
       },
       {
@@ -455,12 +456,6 @@
         "url": "https://www.bbc.co.uk/news/articles/cwq6e2qgvmlgo",
         "publisher": "BBC",
         "date": "2026-11-17"
-      },
-      {
-        "title": "Suspected China spy linked to Nvidia's ex-boss left in 2025, Megaspeed says",
-        "url": "https://www.bbc.co.uk/news/articles/cmdx1vpprk9vo",
-        "publisher": "BBC",
-        "date": "2026-11-16"
       }
     ]
   }
