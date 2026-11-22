@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-21T14:26:22.180Z",
+  "generatedAt": "2026-11-22T14:20:33.794Z",
   "sources": {
     "anthropic": [
       {
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 308149,
+        "stars": 308684,
         "language": "JavaScript",
         "updatedAt": "2026-11-20T01:13:45Z"
       },
@@ -116,89 +116,89 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 265118,
+        "stars": 265329,
         "language": "Python",
-        "updatedAt": "2026-11-21T13:30:30Z"
+        "updatedAt": "2026-11-22T14:15:41Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Knowledge infrastructure to make your agents smarter. Search, scrape and access 550+ data providers through one API.",
-        "stars": 205800,
+        "stars": 206655,
         "language": "TypeScript",
-        "updatedAt": "2026-11-21T14:21:55Z"
+        "updatedAt": "2026-11-22T06:23:11Z"
+      },
+      {
+        "name": "DietrichGebert/ponytail",
+        "url": "https://github.com/DietrichGebert/ponytail",
+        "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
+        "stars": 196676,
+        "language": "JavaScript",
+        "updatedAt": "2026-11-22T02:31:58Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 188123,
+        "stars": 188134,
         "language": "Python",
-        "updatedAt": "2026-11-21T14:17:56Z"
+        "updatedAt": "2026-11-22T14:17:54Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 187821,
+        "stars": 187845,
         "language": "Go",
-        "updatedAt": "2026-11-21T04:05:50Z"
+        "updatedAt": "2026-11-22T10:10:02Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 178135,
+        "stars": 178246,
         "language": "MDX",
-        "updatedAt": "2026-11-21T03:12:33Z"
+        "updatedAt": "2026-11-22T03:13:47Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 169342,
+        "stars": 169375,
         "language": "Python",
-        "updatedAt": "2026-11-21T13:43:14Z"
+        "updatedAt": "2026-11-22T13:21:57Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 161611,
+        "stars": 161671,
         "language": "Python",
-        "updatedAt": "2026-11-21T13:26:11Z"
+        "updatedAt": "2026-11-22T13:38:30Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 159198,
+        "stars": 159258,
         "language": "Svelte",
-        "updatedAt": "2026-11-21T13:07:24Z"
+        "updatedAt": "2026-11-22T14:19:10Z"
       },
       {
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 151448,
+        "stars": 151824,
         "language": "Python",
-        "updatedAt": "2026-11-20T22:49:07Z"
+        "updatedAt": "2026-11-21T21:27:31Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 149997,
+        "stars": 149979,
         "language": "Python",
-        "updatedAt": "2026-11-21T08:58:09Z"
-      },
-      {
-        "name": "Shubhamsaboo/awesome-llm-apps",
-        "url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
-        "description": "100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.",
-        "stars": 145279,
-        "language": "Python",
-        "updatedAt": "2026-11-18T05:25:32Z"
+        "updatedAt": "2026-11-22T08:30:04Z"
       }
     ],
     "bbc": [
@@ -229,13 +229,6 @@
         "date": "2026-10-29",
         "description": "Do you have air conditioning in your house?",
         "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/261029_6_minute_english_is_aircon_the_answer_to_a_heating_world_download.mp3"
-      },
-      {
-        "title": "What should you eat for a better night’s sleep?",
-        "url": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-261022",
-        "date": "2026-10-22",
-        "description": "How much sleep do you get each night?",
-        "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/261022_6_minute_english_what_should_you_eat_for_a_better_nights_sleep_download.mp3"
       }
     ],
     "markets": [
@@ -244,10 +237,10 @@
         "label": "SPY · S&P 500",
         "items": [
           {
-            "title": "Why Anthropic's blockbuster IPO couldn't escape the stock market correction",
-            "url": "https://www.cnbc.com/2026/11/20/anthropic-ipo-ai-stock-market-selloff.html",
+            "title": "Top Wall Street analysts favor these 3 dividend stocks for strong returns",
+            "url": "https://www.cnbc.com/2026/11/22/top-wall-street-analysts-favor-these-stocks-for-strong-returns.html",
             "publisher": "CNBC",
-            "date": "2026-11-21"
+            "date": "2026-11-22"
           },
           {
             "title": "Anthropic’s record IPO collides with tech’s worst week on Wall Street since 2020",
@@ -268,22 +261,22 @@
         "label": "QQQ · Nasdaq",
         "items": [
           {
+            "title": "The Nasdaq is in freefall. Here's one stock to look at",
+            "url": "https://www.cnbc.com/2026/11/22/the-nasdaq-is-in-freefall-heres-one-stock-to-look-at.html",
+            "publisher": "CNBC",
+            "date": "2026-11-22"
+          },
+          {
+            "title": "S&P 500 and Dow close in correction; Nasdaq erases 2026 gain as AI rout picks up steam",
+            "url": "https://www.cnbc.com/2026/11/19/stock-market-today-live-updates.html",
+            "publisher": "CNBC",
+            "date": "2026-11-20"
+          },
+          {
             "title": "S&P 500 sinks 3.7% and Nasdaq composite goes negative for the year as tech sell-off worsens",
             "url": "https://apnews.com/article/stock-markets-anthropic-ai-chips-boom-c4c3f4878b12989347f8a930ed813dad",
             "publisher": "AP News",
             "date": "2026-11-20"
-          },
-          {
-            "title": "Nasdaq erases all 2026 gains as AI sell-off dampens Anthropic’s second day of trading",
-            "url": "https://www.theguardian.com/business/2026/nov/20/global-stock-markets-slump-anthropic-ipo-ai-sell-off",
-            "publisher": "The Guardian",
-            "date": "2026-11-20"
-          },
-          {
-            "title": "Anthropic hits Nasdaq exchanges at $111, 33% above IPO price",
-            "url": "https://techcrunch.com/2026/11/19/anthropic-hits-nasdaq-exchanges-at-110-27-above-ipo-price/",
-            "publisher": "TechCrunch",
-            "date": "2026-11-19"
           }
         ]
       },
@@ -346,16 +339,16 @@
             "date": "2026-11-20"
           },
           {
-            "title": "Cramer: My favorite chartist sees two major signs of a rally brewing in Alphabet stock",
-            "url": "https://www.cnbc.com/2026/11/19/alphabet-stock-larry-williams-rally-signals.html",
-            "publisher": "CNBC",
-            "date": "2026-11-19"
+            "title": "Google Pixel 11 Pro Breaks Its Own Price Records for Black Friday, Hitting a True All-Time Low on Amazon",
+            "url": "https://gizmodo.com/google-pixel-11-pro-breaks-its-own-price-records-for-black-friday-hitting-a-true-all-time-low-on-amazon-2000842302",
+            "publisher": "Gizmodo",
+            "date": "2026-11-20"
           },
           {
-            "title": "New law ‘may be needed’ after Google rejects call to remove Russell Brand’s YouTube prison message",
-            "url": "https://www.theguardian.com/news/2026/nov/19/google-youtube-russell-brand-youtube-prison-message-jess-phillips-new-law",
-            "publisher": "The Guardian",
-            "date": "2026-11-19"
+            "title": "Google Employees Petition to Let Schools Use Search Without AI",
+            "url": "https://gizmodo.com/google-employees-petition-to-let-schools-use-search-without-ai-2000842549",
+            "publisher": "Gizmodo",
+            "date": "2026-11-20"
           }
         ]
       },
@@ -364,15 +357,15 @@
         "label": "AAPL · Apple",
         "items": [
           {
-            "title": "Startup sues Apple in India over tap-to-share contacts feature",
-            "url": "https://techcrunch.com/2026/11/20/startup-sues-apple-in-india-over-tap-to-share-contacts-feature/",
-            "publisher": "TechCrunch",
-            "date": "2026-11-21"
-          },
-          {
             "title": "Here are the Apple deals actually worth picking up ahead of Black Friday",
             "url": "https://www.theverge.com/gadgets/1035460/best-early-black-friday-apple-deals-2026",
             "publisher": "The Verge",
+            "date": "2026-11-20"
+          },
+          {
+            "title": "iPhone Air 2 and iPhone 18 Dummy Models Leak Months Before Spring Launch",
+            "url": "https://gizmodo.com/iphone-air-2-iphone-18-dummy-models-2000843085",
+            "publisher": "Gizmodo",
             "date": "2026-11-20"
           },
           {
@@ -388,6 +381,12 @@
         "label": "META · Meta",
         "items": [
           {
+            "title": "Indian opposition party’s youth wing warns of more Meta protests after police clashes",
+            "url": "https://www.theguardian.com/world/2026/nov/22/india-congress-meta-protests-police-hyderabad",
+            "publisher": "The Guardian",
+            "date": "2026-11-22"
+          },
+          {
             "title": "Meta's India offices hit by opposition protests over account removals",
             "url": "https://www.cnbc.com/2026/11/21/metas-india-offices-hit-by-opposition-protests-over-account-removals.html",
             "publisher": "CNBC",
@@ -398,12 +397,6 @@
             "url": "https://www.cnbc.com/2026/11/20/meta-is-stuck-in-a-trading-range-the-charts-show-where-to-buy.html",
             "publisher": "CNBC",
             "date": "2026-11-20"
-          },
-          {
-            "title": "Meta’s new Muse Charm device may cost $300",
-            "url": "https://techcrunch.com/2026/11/19/metas-new-muse-charm-device-may-cost-300/",
-            "publisher": "TechCrunch",
-            "date": "2026-11-19"
           }
         ]
       },
@@ -422,6 +415,12 @@
     ],
     "china": [
       {
+        "title": "Howard Lutnick has been Trump’s ally for decades. His ties to Nvidia may spell his downfall",
+        "url": "https://www.theguardian.com/us-news/2026/nov/22/howard-lutnick-nvidia-china",
+        "publisher": "The Guardian",
+        "date": "2026-11-22"
+      },
+      {
         "title": "China commits to low-carbon electrification and help for others to improve",
         "url": "https://www.theguardian.com/environment/2026/nov/21/china-commits-low-carbon-electrification-help-others-improve",
         "publisher": "The Guardian",
@@ -436,12 +435,6 @@
       {
         "title": "Friend zone: rejected by US voters, Trump enjoys autocrats’ warm embrace",
         "url": "https://www.theguardian.com/us-news/2026/nov/20/donald-trump-xi-jinping-vladimir-putin-summit",
-        "publisher": "The Guardian",
-        "date": "2026-11-20"
-      },
-      {
-        "title": "California investigates Nvidia over whether chip exports ended up in China",
-        "url": "https://www.theguardian.com/technology/2026/nov/20/california-investigates-nvidia-over-whether-chip-exports-ended-up-in-china",
         "publisher": "The Guardian",
         "date": "2026-11-20"
       },
