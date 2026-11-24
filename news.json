@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-23T17:43:49.619Z",
+  "generatedAt": "2026-11-24T17:16:01.227Z",
   "sources": {
     "anthropic": [
       {
@@ -37,6 +37,10 @@
     ],
     "openai": [
       {
+        "title": "OpenAI and Cisco introduce Shirudo Security Nov 23, 2026",
+        "url": "https://openai.com/index/introducing-shirudo/"
+      },
+      {
         "title": "Perplexity and Intelligence Research Nov 22, 2026",
         "url": "https://openai.com/index/perplexity-and-intelligence/"
       },
@@ -63,10 +67,6 @@
       {
         "title": "Managing frontier AI risk: From training to deployment Safety Nov 18, 2026",
         "url": "https://openai.com/index/managing-frontier-ai-risk/"
-      },
-      {
-        "title": "Le Groupe Figaro and OpenAI partner to bring Le Figaro journalism to ChatGPT Company Nov 18, 2026",
-        "url": "https://openai.com/index/le-groupe-figaro-and-openai-announce-partnership/"
       }
     ],
     "google": [
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 309419,
+        "stars": 310044,
         "language": "JavaScript",
         "updatedAt": "2026-11-23T04:55:48Z"
       },
@@ -116,23 +116,23 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 265615,
+        "stars": 265840,
         "language": "Python",
-        "updatedAt": "2026-11-23T17:29:23Z"
+        "updatedAt": "2026-11-24T17:09:02Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Knowledge infrastructure to make your agents smarter. Search, scrape and access 550+ data providers through one API.",
-        "stars": 207665,
+        "stars": 208650,
         "language": "TypeScript",
-        "updatedAt": "2026-11-23T17:41:39Z"
+        "updatedAt": "2026-11-24T17:15:28Z"
       },
       {
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 197395,
+        "stars": 197939,
         "language": "JavaScript",
         "updatedAt": "2026-11-22T02:31:58Z"
       },
@@ -140,65 +140,65 @@
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 188155,
+        "stars": 188163,
         "language": "Python",
-        "updatedAt": "2026-11-23T17:42:15Z"
+        "updatedAt": "2026-11-24T16:54:44Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 187906,
+        "stars": 187980,
         "language": "Go",
-        "updatedAt": "2026-11-23T17:22:45Z"
+        "updatedAt": "2026-11-24T07:31:41Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 178324,
+        "stars": 178386,
         "language": "MDX",
-        "updatedAt": "2026-11-23T06:57:48Z"
+        "updatedAt": "2026-11-24T07:22:34Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 169373,
+        "stars": 169248,
         "language": "Python",
-        "updatedAt": "2026-11-23T17:40:52Z"
+        "updatedAt": "2026-11-24T17:11:56Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 161749,
+        "stars": 161836,
         "language": "Python",
-        "updatedAt": "2026-11-23T17:11:23Z"
+        "updatedAt": "2026-11-24T17:12:46Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 159346,
+        "stars": 159432,
         "language": "Svelte",
-        "updatedAt": "2026-11-23T16:14:34Z"
+        "updatedAt": "2026-11-24T17:02:04Z"
       },
       {
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 152414,
+        "stars": 152876,
         "language": "Python",
-        "updatedAt": "2026-11-23T13:38:45Z"
+        "updatedAt": "2026-11-24T15:23:07Z"
       },
       {
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 149958,
+        "stars": 149939,
         "language": "Python",
-        "updatedAt": "2026-11-23T17:37:02Z"
+        "updatedAt": "2026-11-24T16:00:46Z"
       }
     ],
     "bbc": [
@@ -237,22 +237,10 @@
         "label": "SPY · S&P 500",
         "items": [
           {
-            "title": "Wall Street's 'Fear Gauge' just flashed a buy sign",
-            "url": "https://www.cnbc.com/2026/11/23/wall-streets-fear-gauge-just-flashed-a-buy-sign.html",
-            "publisher": "CNBC",
-            "date": "2026-11-23"
-          },
-          {
             "title": "Futures rally after Wall Street's nightmare week",
             "url": "https://www.cnbc.com/2026/11/23/futures-rally-after-wall-streets-nightmare-week-.html",
             "publisher": "CNBC",
             "date": "2026-11-23"
-          },
-          {
-            "title": "Anthropic’s record IPO collides with tech’s worst week on Wall Street since 2020",
-            "url": "https://www.cnbc.com/2026/11/21/anthropic-ipo-tech-selloff.html",
-            "publisher": "CNBC",
-            "date": "2026-11-21"
           }
         ]
       },
@@ -267,15 +255,15 @@
             "date": "2026-11-23"
           },
           {
-            "title": "The Nasdaq is in freefall. Here's one stock to look at",
-            "url": "https://www.cnbc.com/2026/11/22/the-nasdaq-is-in-freefall-heres-one-stock-to-look-at.html",
-            "publisher": "CNBC",
-            "date": "2026-11-22"
-          },
-          {
             "title": "S&P 500 sinks 3.7% and Nasdaq composite goes negative for the year as tech sell-off worsens",
             "url": "https://apnews.com/article/stock-markets-anthropic-ai-chips-boom-c4c3f4878b12989347f8a930ed813dad",
             "publisher": "AP News",
+            "date": "2026-11-20"
+          },
+          {
+            "title": "Nasdaq erases all 2026 gains as AI sell-off dampens Anthropic’s second day of trading",
+            "url": "https://www.theguardian.com/business/2026/nov/20/global-stock-markets-slump-anthropic-ipo-ai-sell-off",
+            "publisher": "The Guardian",
             "date": "2026-11-20"
           }
         ]
@@ -285,22 +273,22 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
-            "title": "U.S. probes Megaspeed, Alice Huang as new figure emerges in Nvidia chip case",
-            "url": "https://www.cnbc.com/2026/11/23/nvidia-megaspeed-chipmaker-us.html",
+            "title": "Rene Haas to remain CEO of chipmaker Arm through 2033 amid Nvidia top job chatter",
+            "url": "https://www.cnbc.com/2026/11/24/rene-haas-to-remain-ceo-of-chipmaker-arm-through-2033-amid-nvidia-top-job-chatter.html",
+            "publisher": "CNBC",
+            "date": "2026-11-24"
+          },
+          {
+            "title": "Amazon to acquire AI startup Decart's chip software, hire founders",
+            "url": "https://www.cnbc.com/2026/11/23/amazon-decarts-ai-acquisition.html",
             "publisher": "CNBC",
             "date": "2026-11-23"
           },
           {
-            "title": "Arm's Haas extends contract to lead chip firm through 2033 amid Nvidia top job chatter",
-            "url": "https://www.cnbc.com/2026/11/23/arms-haas-extends-contract-to-lead-chip-firm-through-2033-amid-nvidia-top-job-chatter.html",
+            "title": "I'm buying Texas Instruments after the chip sell-off. Here's why I see growth and income",
+            "url": "https://www.cnbc.com/2026/11/23/im-buying-texas-instruments-after-the-chip-sell-off-heres-why-i-see-growth-and-income.html",
             "publisher": "CNBC",
             "date": "2026-11-23"
-          },
-          {
-            "title": "Trump says he discussed Jensen Huang with Xi; Bessent tells CNBC Nvidia chip export policy is unchanged",
-            "url": "https://www.cnbc.com/2026/11/20/treasury-secretary-scott-bessent.html",
-            "publisher": "CNBC",
-            "date": "2026-11-20"
           }
         ]
       },
@@ -309,22 +297,22 @@
         "label": "NVDA · Nvidia",
         "items": [
           {
-            "title": "Stocks making the biggest moves midday: Boeing, Nvidia, CoreWeave & more",
-            "url": "https://www.cnbc.com/2026/11/23/stocks-moving-the-most-today-live-updates.html",
+            "title": "Stocks making the biggest moves midday: Dick's Sporting Goods, Analog Devices, Nvidia, Pinterest & more",
+            "url": "https://www.cnbc.com/2026/11/24/stocks-moving-the-most-today-live-updates.html",
             "publisher": "CNBC",
-            "date": "2026-11-23"
+            "date": "2026-11-24"
           },
           {
-            "title": "Jensen Huang reinstated as Nvidia CEO. Stock skyrockets 33%",
-            "url": "https://www.cnbc.com/2026/11/23/nvidia-jensen-huang-ceo.html",
+            "title": "Jensen Huang to face DC grilling the same day Nvidia releases new products at GTC",
+            "url": "https://www.cnbc.com/2026/11/24/jensen-huang-nvidia-congress-gtc.html",
             "publisher": "CNBC",
-            "date": "2026-11-23"
+            "date": "2026-11-24"
           },
           {
-            "title": "Nasdaq roars back by 6% as Nvidia soars on Huang’s return, S&P 500 rebounds 4%: Live updates",
-            "url": "https://www.cnbc.com/2026/11/22/stock-market-today-live-updates.html",
+            "title": "Nvidia shares fall 8% as Huang comeback rally cools",
+            "url": "https://www.cnbc.com/2026/11/24/nvidia-stock-jensen-huang-return.html",
             "publisher": "CNBC",
-            "date": "2026-11-23"
+            "date": "2026-11-24"
           }
         ]
       },
@@ -333,10 +321,22 @@
         "label": "GOOGL · Google",
         "items": [
           {
-            "title": "Maker of Privacy-Focused Mobile OS Say Google Is at War with Them",
-            "url": "https://gizmodo.com/maker-of-privacy-focused-mobile-os-says-google-is-threatening-its-device-partners-2000843669",
-            "publisher": "Gizmodo",
-            "date": "2026-11-23"
+            "title": "Cramer: My favorite chartist sees two major signs of a rally brewing in Alphabet stock",
+            "url": "https://www.cnbc.com/2026/11/19/alphabet-stock-larry-williams-rally-signals.html",
+            "publisher": "CNBC",
+            "date": "2026-11-19"
+          },
+          {
+            "title": "The nation’s largest school districts consider ditching Google Search",
+            "url": "https://www.theverge.com/ai-artificial-intelligence/1037151/school-districts-ditching-google",
+            "publisher": "The Verge",
+            "date": "2026-11-18"
+          },
+          {
+            "title": "Amazon and Google will together own nearly 30% of Anthropic after its IPO",
+            "url": "https://techcrunch.com/2026/11/17/amazon-and-google-will-together-own-nearly-30-of-anthropic-after-its-ipo/",
+            "publisher": "TechCrunch",
+            "date": "2026-11-17"
           }
         ]
       },
@@ -345,7 +345,13 @@
         "label": "AAPL · Apple",
         "items": [
           {
-            "title": "Apple’s AirPods Pro 3 are 40 percent off ahead of Black Friday",
+            "title": "Apple renews Ted Lasso for season 5",
+            "url": "https://www.theverge.com/entertainment/1040699/ted-lasso-season-5-apple-tv",
+            "publisher": "The Verge",
+            "date": "2026-11-23"
+          },
+          {
+            "title": "Apple’s AirPods Pro 3 are a whopping $100 off ahead of Black Friday",
             "url": "https://www.theverge.com/gadgets/1039978/airpods-pro-3-apple-earbuds-black-friday-2026-deal-sale",
             "publisher": "The Verge",
             "date": "2026-11-23"
@@ -355,12 +361,6 @@
             "url": "https://www.theguardian.com/technology/2026/nov/23/apple-iphone-duo-review-most-novel-interesting-iphone-in-almost-a-decade",
             "publisher": "The Guardian",
             "date": "2026-11-23"
-          },
-          {
-            "title": "The Galaxy Z Fold8 Is Basically the iPhone Duo for Android Fans, Only Lighter and Now Cheaper Than Ever",
-            "url": "https://gizmodo.com/the-galaxy-z-fold8-is-basically-the-iphone-duo-for-android-fans-only-lighter-and-now-cheaper-than-ever-2000843646",
-            "publisher": "Gizmodo",
-            "date": "2026-11-22"
           }
         ]
       },
@@ -393,6 +393,12 @@
         "label": "Grok · xAI",
         "items": [
           {
+            "title": "Oregon and Virginia sue SpaceX over Grok’s porn deepfakes",
+            "url": "https://www.theverge.com/ai-artificial-intelligence/1040255/x-grok-ai-deepfakes-oregon-virginia-lawsuit",
+            "publisher": "The Verge",
+            "date": "2026-11-23"
+          },
+          {
             "title": "SpaceX sued by Oregon and Virginia over AI deepfake porn, Grok safety claims",
             "url": "https://www.cnbc.com/2026/11/23/oregon-virginia-spacex-grok-deepfake-lawsuits.html",
             "publisher": "CNBC",
@@ -408,6 +414,12 @@
       }
     ],
     "china": [
+      {
+        "title": "What Jensen Huang's return teaches China's Xi about Trump",
+        "url": "https://www.bbc.co.uk/news/articles/c63rgpy50x98o",
+        "publisher": "BBC",
+        "date": "2026-11-24"
+      },
       {
         "title": "China issues Mount Fuji warning as family of missing climber offers reward",
         "url": "https://www.bbc.co.uk/news/articles/c61wr088jnzzo",
@@ -429,12 +441,6 @@
       {
         "title": "As Trump and Xi meet, China's AI dreams face an unexpected hurdle: the Nvidia spy scandal",
         "url": "https://www.bbc.co.uk/news/articles/c5vg23g92rj4o",
-        "publisher": "BBC",
-        "date": "2026-11-17"
-      },
-      {
-        "title": "How new US chip restrictions on South East Asia will hit China",
-        "url": "https://www.bbc.co.uk/news/articles/cwq6e2qgvmlgo",
         "publisher": "BBC",
         "date": "2026-11-17"
       },
