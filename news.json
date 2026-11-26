@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-25T16:58:17.089Z",
+  "generatedAt": "2026-11-26T16:38:16.594Z",
   "sources": {
     "anthropic": [
       {
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 310568,
+        "stars": 311138,
         "language": "JavaScript",
         "updatedAt": "2026-11-23T04:55:48Z"
       },
@@ -116,79 +116,79 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 266045,
+        "stars": 266314,
         "language": "Python",
-        "updatedAt": "2026-11-25T16:44:49Z"
+        "updatedAt": "2026-11-26T16:16:26Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Knowledge infrastructure to make your agents smarter. Search, scrape and access 550+ data providers through one API.",
-        "stars": 209732,
+        "stars": 210684,
         "language": "TypeScript",
-        "updatedAt": "2026-11-25T16:55:00Z"
+        "updatedAt": "2026-11-26T16:24:15Z"
       },
       {
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 198573,
+        "stars": 199220,
         "language": "JavaScript",
         "updatedAt": "2026-11-22T02:31:58Z"
-      },
-      {
-        "name": "Significant-Gravitas/AutoGPT",
-        "url": "https://github.com/Significant-Gravitas/AutoGPT",
-        "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 188186,
-        "language": "Python",
-        "updatedAt": "2026-11-25T13:33:46Z"
       },
       {
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 188108,
+        "stars": 188214,
         "language": "Go",
-        "updatedAt": "2026-11-25T16:56:03Z"
+        "updatedAt": "2026-11-26T06:27:01Z"
+      },
+      {
+        "name": "Significant-Gravitas/AutoGPT",
+        "url": "https://github.com/Significant-Gravitas/AutoGPT",
+        "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
+        "stars": 188200,
+        "language": "Python",
+        "updatedAt": "2026-11-26T15:52:34Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 178502,
+        "stars": 178573,
         "language": "MDX",
-        "updatedAt": "2026-11-25T08:21:50Z"
+        "updatedAt": "2026-11-26T07:09:14Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 169305,
+        "stars": 169362,
         "language": "Python",
-        "updatedAt": "2026-11-25T16:54:45Z"
+        "updatedAt": "2026-11-26T16:37:05Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 161893,
+        "stars": 161946,
         "language": "Python",
-        "updatedAt": "2026-11-25T16:46:50Z"
+        "updatedAt": "2026-11-26T15:15:47Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 159538,
+        "stars": 159628,
         "language": "Svelte",
-        "updatedAt": "2026-11-25T09:37:54Z"
+        "updatedAt": "2026-11-26T14:27:36Z"
       },
       {
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 153245,
+        "stars": 153727,
         "language": "Python",
         "updatedAt": "2026-11-25T13:52:46Z"
       },
@@ -196,12 +196,19 @@
         "name": "langchain-ai/langchain",
         "url": "https://github.com/langchain-ai/langchain",
         "description": "The agent engineering platform.",
-        "stars": 149983,
+        "stars": 150022,
         "language": "Python",
-        "updatedAt": "2026-11-25T16:46:46Z"
+        "updatedAt": "2026-11-26T10:36:59Z"
       }
     ],
     "bbc": [
+      {
+        "title": "Is Gen Z getting less intelligent?",
+        "url": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-261126",
+        "date": "2026-11-26",
+        "description": "Is technology making us worse at reading?",
+        "audioUrl": "https://downloads.bbc.co.uk/learningenglish/features/6min/261126_6_minute_english_is_gen_z_getting_less_intelligent_download_.mp3"
+      },
       {
         "title": "Learning from different generations",
         "url": "https://www.bbc.co.uk/learningenglish/english/features/6-minute-english_2026/ep-261122",
@@ -273,22 +280,22 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
-            "title": "Jensen Huang's Nvidia return shows the U.S.-China AI race is about more than chips",
-            "url": "https://www.cnbc.com/2026/11/25/jensen-huang-nvidia-ai-talent-race.html",
+            "title": "Semiconductor chips are the new oil. Here's why",
+            "url": "https://www.cnbc.com/2026/11/26/semiconductor-chips-are-the-new-oil-heres-why.html",
+            "publisher": "CNBC",
+            "date": "2026-11-26"
+          },
+          {
+            "title": "Nvidia sellers seek new buyers as U.S. curbs China AI chip access, sources tell CNBC",
+            "url": "https://www.cnbc.com/2026/11/25/nvidia-china-ai-chip-remote-access.html",
             "publisher": "CNBC",
             "date": "2026-11-25"
           },
           {
-            "title": "A massive bearish trade just happened in the chip stocks",
-            "url": "https://www.cnbc.com/2026/11/20/a-massive-bearish-trade-just-happened-in-the-chip-stocks.html",
+            "title": "Jensen Huang's Nvidia return shows the U.S.-China AI race is about more than chips",
+            "url": "https://www.cnbc.com/2026/11/25/jensen-huang-nvidia-ai-talent-race.html",
             "publisher": "CNBC",
-            "date": "2026-11-20"
-          },
-          {
-            "title": "California investigates Nvidia over whether chip exports ended up in China",
-            "url": "https://www.theguardian.com/technology/2026/nov/20/california-investigates-nvidia-over-whether-chip-exports-ended-up-in-china",
-            "publisher": "The Guardian",
-            "date": "2026-11-20"
+            "date": "2026-11-25"
           }
         ]
       },
@@ -297,22 +304,22 @@
         "label": "NVDA · Nvidia",
         "items": [
           {
-            "title": "Dow tumbles 700 points, Nasdaq loses 4% as Nvidia leads resumption of AI sell-off: Live updates",
-            "url": "https://www.cnbc.com/2026/11/24/stock-market-today-live-updates-.html",
+            "title": "Buyer beware? Nvidia's volatile swings expose risks of single-stock ETFs",
+            "url": "https://www.cnbc.com/2026/11/26/nvidias-volatile-swings-expose-risks-of-single-stock-etfs.html",
             "publisher": "CNBC",
-            "date": "2026-11-25"
+            "date": "2026-11-26"
           },
           {
-            "title": "Stocks making the biggest moves Wednesday: Nvidia, Urban Outfitters, Dell, Ambarella & more",
-            "url": "https://www.cnbc.com/2026/11/25/stocks-moving-the-most-today-live-updates.html",
+            "title": "Nvidia chip buyers told to rule out Chinese renters to buy GPUs, sources say",
+            "url": "https://www.cnbc.com/2026/11/26/neoclouds-nvidia-china-ai.html",
             "publisher": "CNBC",
-            "date": "2026-11-25"
+            "date": "2026-11-26"
           },
           {
-            "title": "What Jensen Huang’s return means for Nvidia’s Colette Kress",
-            "url": "https://www.cnbc.com/2026/11/23/nvidia-jensen-huang-returns-colette-kress-cfo.html",
+            "title": "S&P warns Nvidia credit rating could be cut over 'rising' management and governance risk",
+            "url": "https://www.cnbc.com/2026/11/26/nvidia-market-governance-risk.html",
             "publisher": "CNBC",
-            "date": "2026-11-25"
+            "date": "2026-11-26"
           }
         ]
       },
@@ -320,6 +327,12 @@
         "key": "GOOGL",
         "label": "GOOGL · Google",
         "items": [
+          {
+            "title": "Google’s patent for custom AI video feeds paints a bleak picture of entertainment’s future",
+            "url": "https://www.theverge.com/entertainment/1042221/google-my-channel-ai-video-patent",
+            "publisher": "The Verge",
+            "date": "2026-11-25"
+          },
           {
             "title": "Google alternative Kagi launches an email service",
             "url": "https://www.theverge.com/tech/1041000/kagi-mail-email-google-gmail-alternative",
@@ -331,12 +344,6 @@
             "url": "https://techcrunch.com/2026/11/23/google-searchs-ai-mode-can-now-tap-into-drive-and-wallet-for-more-personalized-responses/",
             "publisher": "TechCrunch",
             "date": "2026-11-23"
-          },
-          {
-            "title": "Google gives Gemini the ability to use your Mac for you",
-            "url": "https://techcrunch.com/2026/11/19/google-gives-gemini-the-ability-to-use-your-mac-for-you/",
-            "publisher": "TechCrunch",
-            "date": "2026-11-19"
           }
         ]
       },
@@ -344,12 +351,6 @@
         "key": "AAPL",
         "label": "AAPL · Apple",
         "items": [
-          {
-            "title": "Amazon is knocking almost $50 off six months of Apple TV",
-            "url": "https://www.theverge.com/gadgets/1040046/apple-tv-subscription-streaming-sale-deal-black-friday",
-            "publisher": "The Verge",
-            "date": "2026-11-24"
-          },
           {
             "title": "Apple iPhone Duo review: the most novel and interesting iPhone in almost a decade",
             "url": "https://www.theguardian.com/technology/2026/nov/23/apple-iphone-duo-review-most-novel-interesting-iphone-in-almost-a-decade",
@@ -361,6 +362,12 @@
             "url": "https://techcrunch.com/2026/11/20/startup-sues-apple-in-india-over-tap-to-share-contacts-feature/",
             "publisher": "TechCrunch",
             "date": "2026-11-21"
+          },
+          {
+            "title": "Apple is hiring engineers to build its own AI agent",
+            "url": "https://www.theverge.com/tech/1038227/apple-ai-agent-engineer-job-listing",
+            "publisher": "The Verge",
+            "date": "2026-11-19"
           }
         ]
       },
@@ -369,22 +376,22 @@
         "label": "META · Meta",
         "items": [
           {
-            "title": "Amazon and Meta reportedly in talks to lift blockade on AI agent Muse",
-            "url": "https://techcrunch.com/2026/11/25/amazon-and-meta-reportedly-in-talks-to-lift-blockade-on-ai-agent-muse/",
-            "publisher": "TechCrunch",
-            "date": "2026-11-25"
+            "title": "Meta Ray-Ban 2 AI Glasses Lose Their Premium Price Tag, Undercutting Even Some Ordinary Sunglasses This Black Friday",
+            "url": "https://gizmodo.com/meta-ray-ban-2-ai-glasses-lose-their-premium-price-tag-undercutting-even-some-ordinary-sunglasses-this-black-friday-2000845742",
+            "publisher": "Gizmodo",
+            "date": "2026-11-26"
           },
           {
-            "title": "‘It’s been really a mess’: Meta insiders concerned over push to AI content moderation",
-            "url": "https://www.theguardian.com/technology/2026/nov/25/meta-insiders-concerned-push-to-ai-content-moderation",
+            "title": "Have you downloaded Meta’s AI assistant Muse or do you plan to?",
+            "url": "https://www.theguardian.com/technology/2026/nov/24/have-you-downloaded-metas-ai-assistant-muse-or-do-you-plan-to",
             "publisher": "The Guardian",
             "date": "2026-11-25"
           },
           {
-            "title": "Walmart teams up with Meta to bring Black Friday deals to AI agent Muse",
-            "url": "https://techcrunch.com/2026/11/24/walmart-teams-up-with-meta-to-bring-black-friday-deals-to-ai-agent-muse/",
+            "title": "Amazon and Meta reportedly in talks to lift blockade on AI agent Muse",
+            "url": "https://techcrunch.com/2026/11/25/amazon-and-meta-reportedly-in-talks-to-lift-blockade-on-ai-agent-muse/",
             "publisher": "TechCrunch",
-            "date": "2026-11-24"
+            "date": "2026-11-25"
           }
         ]
       },
@@ -392,12 +399,6 @@
         "key": "GROK",
         "label": "Grok · xAI",
         "items": [
-          {
-            "title": "States sue Musk companies over flood of sexualized images made with AI chatbot Grok",
-            "url": "https://apnews.com/article/grok-lawsuit-elon-musk-ai-abuse-images-452cc64e7169a55868f797982d0e8238",
-            "publisher": "AP News",
-            "date": "2026-11-23"
-          },
           {
             "title": "Oregon and Virginia sue SpaceX over Grok’s porn deepfakes",
             "url": "https://www.theverge.com/ai-artificial-intelligence/1040255/x-grok-ai-deepfakes-oregon-virginia-lawsuit",
@@ -409,14 +410,26 @@
             "url": "https://www.cnbc.com/2026/11/23/oregon-virginia-spacex-grok-deepfake-lawsuits.html",
             "publisher": "CNBC",
             "date": "2026-11-23"
+          },
+          {
+            "title": "Suffolk MP says Grok was designed to make sexualised images",
+            "url": "https://www.bbc.com/news/articles/cq0k6gezp50vo",
+            "publisher": "BBC",
+            "date": "2026-11-20"
           }
         ]
       }
     ],
     "china": [
       {
-        "title": "Huawei found guilty of stealing US trade secrets but acquitted of racketeering",
-        "url": "https://www.bbc.co.uk/news/articles/cmy49ngydqzpo",
+        "title": "US announces new tariffs on host of countries including China",
+        "url": "https://www.bbc.co.uk/news/articles/c893r9ke5p97o",
+        "publisher": "BBC",
+        "date": "2026-11-26"
+      },
+      {
+        "title": "A renovation was meant to improve these Hong Kong homes - it ended in a blaze that killed 168",
+        "url": "https://www.bbc.co.uk/news/articles/cqx2wrkyrdn8o",
         "publisher": "BBC",
         "date": "2026-11-25"
       },
@@ -425,6 +438,12 @@
         "url": "https://www.bbc.co.uk/news/articles/c6y80kk4zmdno",
         "publisher": "BBC",
         "date": "2026-11-25"
+      },
+      {
+        "title": "Is China behind a wave of AI fake videos targeting Taiwan?",
+        "url": "https://www.bbc.co.uk/news/articles/cv702rw7dzx5o",
+        "publisher": "BBC",
+        "date": "2026-11-24"
       },
       {
         "title": "What Jensen Huang's return teaches China's Xi about Trump",
@@ -449,18 +468,6 @@
         "url": "https://www.bbc.co.uk/news/articles/c5vg23g92rj4o",
         "publisher": "BBC",
         "date": "2026-11-17"
-      },
-      {
-        "title": "What we know as Nvidia CEO Jensen Huang resigns over affair allegations",
-        "url": "https://www.bbc.co.uk/news/articles/ckgel338xql3o",
-        "publisher": "BBC",
-        "date": "2026-11-12"
-      },
-      {
-        "title": "He spent $50,000 on Labubus but now the craze is dying",
-        "url": "https://www.bbc.co.uk/news/articles/cmvg652l927lo",
-        "publisher": "BBC",
-        "date": "2026-11-07"
       }
     ]
   }
