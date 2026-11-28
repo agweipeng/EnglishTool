@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-27T16:23:14.744Z",
+  "generatedAt": "2026-11-28T15:16:26.943Z",
   "sources": {
     "anthropic": [
       {
@@ -108,7 +108,7 @@
         "name": "affaan-m/ECC",
         "url": "https://github.com/affaan-m/ECC",
         "description": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
-        "stars": 311658,
+        "stars": 312224,
         "language": "JavaScript",
         "updatedAt": "2026-11-23T04:55:48Z"
       },
@@ -116,23 +116,23 @@
         "name": "NousResearch/hermes-agent",
         "url": "https://github.com/NousResearch/hermes-agent",
         "description": "The agent that grows with you",
-        "stars": 266582,
+        "stars": 266690,
         "language": "Python",
-        "updatedAt": "2026-11-27T16:13:56Z"
+        "updatedAt": "2026-11-28T15:14:53Z"
       },
       {
         "name": "firecrawl/firecrawl",
         "url": "https://github.com/firecrawl/firecrawl",
         "description": "Knowledge infrastructure to make your agents smarter. Search, scrape and access 550+ data providers through one API.",
-        "stars": 211460,
+        "stars": 212055,
         "language": "TypeScript",
-        "updatedAt": "2026-11-27T16:12:42Z"
+        "updatedAt": "2026-11-28T13:04:53Z"
       },
       {
         "name": "DietrichGebert/ponytail",
         "url": "https://github.com/DietrichGebert/ponytail",
         "description": "Makes your AI agent think like the laziest senior dev in the room. The best code is the code you never wrote.",
-        "stars": 199850,
+        "stars": 200560,
         "language": "JavaScript",
         "updatedAt": "2026-11-22T02:31:58Z"
       },
@@ -140,65 +140,65 @@
         "name": "ollama/ollama",
         "url": "https://github.com/ollama/ollama",
         "description": "Get up and running with Kimi, GLM, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
-        "stars": 188309,
+        "stars": 188386,
         "language": "Go",
-        "updatedAt": "2026-11-27T10:05:28Z"
+        "updatedAt": "2026-11-28T04:13:22Z"
       },
       {
         "name": "Significant-Gravitas/AutoGPT",
         "url": "https://github.com/Significant-Gravitas/AutoGPT",
         "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
-        "stars": 188209,
+        "stars": 188206,
         "language": "Python",
-        "updatedAt": "2026-11-27T14:31:17Z"
+        "updatedAt": "2026-11-28T14:18:13Z"
       },
       {
         "name": "f/prompts.chat",
         "url": "https://github.com/f/prompts.chat",
         "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
-        "stars": 178682,
+        "stars": 178755,
         "language": "MDX",
-        "updatedAt": "2026-11-27T03:13:20Z"
+        "updatedAt": "2026-11-28T06:59:45Z"
       },
       {
         "name": "huggingface/transformers",
         "url": "https://github.com/huggingface/transformers",
         "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
-        "stars": 169407,
+        "stars": 169312,
         "language": "Python",
-        "updatedAt": "2026-11-27T16:16:03Z"
+        "updatedAt": "2026-11-28T14:18:40Z"
       },
       {
         "name": "langgenius/dify",
         "url": "https://github.com/langgenius/dify",
         "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack.",
-        "stars": 162018,
+        "stars": 162044,
         "language": "Python",
-        "updatedAt": "2026-11-27T14:56:03Z"
-      },
-      {
-        "name": "Snailclimb/JavaGuide",
-        "url": "https://github.com/Snailclimb/JavaGuide",
-        "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
-        "stars": 159694,
-        "language": "JavaScript",
-        "updatedAt": "2026-11-27T13:17:09Z"
+        "updatedAt": "2026-11-28T11:53:21Z"
       },
       {
         "name": "open-webui/open-webui",
         "url": "https://github.com/open-webui/open-webui",
         "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
-        "stars": 159686,
+        "stars": 159722,
         "language": "Svelte",
         "updatedAt": "2026-11-27T16:00:01Z"
+      },
+      {
+        "name": "Snailclimb/JavaGuide",
+        "url": "https://github.com/Snailclimb/JavaGuide",
+        "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
+        "stars": 159695,
+        "language": "JavaScript",
+        "updatedAt": "2026-11-27T13:17:09Z"
       },
       {
         "name": "Graphify-Labs/graphify",
         "url": "https://github.com/Graphify-Labs/graphify",
         "description": "Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store.",
-        "stars": 154152,
+        "stars": 154476,
         "language": "Python",
-        "updatedAt": "2026-11-27T02:53:36Z"
+        "updatedAt": "2026-11-28T04:04:49Z"
       }
     ],
     "bbc": [
@@ -244,7 +244,7 @@
         "label": "SPY · S&P 500",
         "items": [
           {
-            "title": "Dow rallies 500 points as benchmark heads for best week since April 2025: Live updates",
+            "title": "Dow rallies nearly 600 points to close out best week since 2022: Live updates",
             "url": "https://www.cnbc.com/2026/11/26/stock-market-today-live-updates.html",
             "publisher": "CNBC",
             "date": "2026-11-27"
@@ -280,16 +280,16 @@
         "label": "SMH · Chip stocks",
         "items": [
           {
+            "title": "Nvidia’s Advanced AI Chips Are Being Used at Chinese Data Center Tied to Alice Huang",
+            "url": "https://gizmodo.com/nvidias-advanced-ai-chips-being-used-at-chinese-data-center-tied-to-alice-huang-2000846169",
+            "publisher": "Gizmodo",
+            "date": "2026-11-27"
+          },
+          {
             "title": "Chinese chip stocks notch biggest ever one-day gains as Beijing signals broader market support",
             "url": "https://www.cnbc.com/2026/11/27/china-chip-stocks-beijing-market-support.html",
             "publisher": "CNBC",
             "date": "2026-11-27"
-          },
-          {
-            "title": "Nvidia hits pause on chip shipments to Southeast Asia",
-            "url": "https://techcrunch.com/2026/11/26/nvidia-hits-pause-on-chip-shipments-to-southeast-asia/",
-            "publisher": "TechCrunch",
-            "date": "2026-11-26"
           },
           {
             "title": "Semiconductor chips are the new oil. Here's why",
@@ -310,14 +310,14 @@
             "date": "2026-11-27"
           },
           {
-            "title": "Nvidia chip buyers told to rule out Chinese renters to purchase GPUs, sources say",
-            "url": "https://www.cnbc.com/2026/11/26/neoclouds-nvidia-china-ai.html",
-            "publisher": "CNBC",
+            "title": "Nvidia hits pause on chip shipments to Southeast Asia",
+            "url": "https://techcrunch.com/2026/11/26/nvidia-hits-pause-on-chip-shipments-to-southeast-asia/",
+            "publisher": "TechCrunch",
             "date": "2026-11-26"
           },
           {
-            "title": "Buyer beware? Nvidia's volatile swings expose risks of single-stock ETFs",
-            "url": "https://www.cnbc.com/2026/11/26/nvidias-volatile-swings-expose-risks-of-single-stock-etfs.html",
+            "title": "Nvidia chip buyers told to rule out Chinese renters to purchase GPUs, sources say",
+            "url": "https://www.cnbc.com/2026/11/26/neoclouds-nvidia-china-ai.html",
             "publisher": "CNBC",
             "date": "2026-11-26"
           }
@@ -328,22 +328,22 @@
         "label": "GOOGL · Google",
         "items": [
           {
-            "title": "Google’s patent for custom AI video feeds paints a bleak picture of entertainment’s future",
-            "url": "https://www.theverge.com/entertainment/1042221/google-my-channel-ai-video-patent",
-            "publisher": "The Verge",
-            "date": "2026-11-25"
+            "title": "Musk says Google is interested in renting more computing capacity from SpaceX",
+            "url": "https://www.cnbc.com/2026/11/28/musk-says-google-wants-to-rent-more-computing-capacity-from-spacex.html",
+            "publisher": "CNBC",
+            "date": "2026-11-28"
           },
           {
-            "title": "Google Tried to Patent Personalized AI-Generated TV Shows, Filing Reveals",
-            "url": "https://gizmodo.com/google-wants-to-make-ai-tv-shows-starring-you-2000844299",
-            "publisher": "Gizmodo",
-            "date": "2026-11-24"
+            "title": "Los Angeles schools block Google’s AI features, consider dropping tech giant’s products",
+            "url": "https://apnews.com/article/google-artificial-intelligence-schools-search-engine-lausd-762a613b11bd316384430112cc223ed1",
+            "publisher": "AP News",
+            "date": "2026-11-27"
           },
           {
-            "title": "Google Search's AI Mode can now tap into Drive and Wallet for more personalized responses",
-            "url": "https://techcrunch.com/2026/11/23/google-searchs-ai-mode-can-now-tap-into-drive-and-wallet-for-more-personalized-responses/",
-            "publisher": "TechCrunch",
-            "date": "2026-11-23"
+            "title": "Google told to halt Belgium datacentre construction over lack of planning permit",
+            "url": "https://www.theguardian.com/world/2026/nov/27/belgian-authorities-order-google-to-halt-datacentre-construction-over-lack-of-permits",
+            "publisher": "The Guardian",
+            "date": "2026-11-27"
           }
         ]
       },
@@ -352,16 +352,22 @@
         "label": "AAPL · Apple",
         "items": [
           {
-            "title": "The Apple Watch Series 12 is cheaper than ever ahead of Black Friday",
-            "url": "https://www.theverge.com/gadgets/1034512/apple-watch-series-12-black-friday-deal-sale",
+            "title": "The M5 MacBook Air just got its biggest discount since Apple raised the price",
+            "url": "https://www.theverge.com/gadgets/1044771/m5-macbook-air-black-friday-2026-deal-sale",
             "publisher": "The Verge",
-            "date": "2026-11-23"
+            "date": "2026-11-28"
           },
           {
-            "title": "Apple iPhone Duo review: the most novel and interesting iPhone in almost a decade",
-            "url": "https://www.theguardian.com/technology/2026/nov/23/apple-iphone-duo-review-most-novel-interesting-iphone-in-almost-a-decade",
-            "publisher": "The Guardian",
-            "date": "2026-11-23"
+            "title": "OpenAI countersues Apple for stealing trade secrets",
+            "url": "https://www.cnbc.com/2026/11/27/openai-countersues-apple-for-stealing-trade-secrets-ft-reports.html",
+            "publisher": "CNBC",
+            "date": "2026-11-27"
+          },
+          {
+            "title": "Apple’s latest AirTags have dropped to just $18 a pop for Black Friday",
+            "url": "https://www.theverge.com/gadgets/1042841/apple-airtag-2-black-friday-deal-2026-sale",
+            "publisher": "The Verge",
+            "date": "2026-11-27"
           }
         ]
       },
@@ -376,15 +382,15 @@
             "date": "2026-11-27"
           },
           {
-            "title": "Amazon and Meta reportedly in talks to lift blockade on AI agent Muse",
-            "url": "https://techcrunch.com/2026/11/25/amazon-and-meta-reportedly-in-talks-to-lift-blockade-on-ai-agent-muse/",
-            "publisher": "TechCrunch",
+            "title": "All the latest news on Meta’s cute, creepy Muse AI agent",
+            "url": "https://www.theverge.com/ai-artificial-intelligence/1002671/meta-muse-ai",
+            "publisher": "The Verge",
             "date": "2026-11-25"
           },
           {
-            "title": "‘It’s been really a mess’: Meta insiders concerned over push to AI content moderation",
-            "url": "https://www.theguardian.com/technology/2026/nov/25/meta-insiders-concerned-push-to-ai-content-moderation",
-            "publisher": "The Guardian",
+            "title": "Amazon and Meta reportedly in talks to lift blockade on AI agent Muse",
+            "url": "https://techcrunch.com/2026/11/25/amazon-and-meta-reportedly-in-talks-to-lift-blockade-on-ai-agent-muse/",
+            "publisher": "TechCrunch",
             "date": "2026-11-25"
           }
         ]
@@ -415,6 +421,12 @@
       }
     ],
     "china": [
+      {
+        "title": "Behind China's spectacular rise, voices who defied it say they are being drowned out",
+        "url": "https://www.bbc.co.uk/news/articles/cme3d4y094x7o",
+        "publisher": "BBC",
+        "date": "2026-11-27"
+      },
       {
         "title": "US announces new tariffs on host of countries including China",
         "url": "https://www.bbc.co.uk/news/articles/c893r9ke5p97o",
@@ -456,12 +468,6 @@
         "url": "https://www.bbc.co.uk/news/articles/cr9d75we51j1o",
         "publisher": "BBC",
         "date": "2026-11-19"
-      },
-      {
-        "title": "As Trump and Xi meet, China's AI dreams face an unexpected hurdle: the Nvidia spy scandal",
-        "url": "https://www.bbc.co.uk/news/articles/c5vg23g92rj4o",
-        "publisher": "BBC",
-        "date": "2026-11-17"
       }
     ]
   }
